@@ -139,11 +139,25 @@ _PROTOCOL_PATH = Path(__file__).resolve().parent / "protocol.md"
 
 # ----------------------------------------------------------------------------- env / config
 
-def load_env_file(path: Path = _REPO_ROOT / ".env") -> None:
+# The research subagents authenticate the local ``claude`` CLI via the user's Claude.ai
+# subscription (``claude login``), NOT an Anthropic API key. Loading ANTHROPIC_API_KEY here
+# would make the CLI bill API credit and shadow the subscription (the SDK warns
+# "claude.ai connectors are disabled because ANTHROPIC_API_KEY … takes precedence"). So the
+# research env deliberately EXCLUDES the API key; the literature keys (NCBI/OpenAlex/PUBMED)
+# still load because the in-process literature server needs them. Batch steps (executor 3)
+# set ANTHROPIC_API_KEY themselves — research runs on the subscription, batch on API credit.
+_RESEARCH_ENV_SKIP = frozenset({"ANTHROPIC_API_KEY"})
+
+
+def load_env_file(
+    path: Path = _REPO_ROOT / ".env", skip: frozenset = _RESEARCH_ENV_SKIP
+) -> None:
     """Populate ``os.environ`` from a repo ``.env`` (only keys not already set).
 
     Deliberately minimal (no dependency on python-dotenv). Never overwrites a key that is
-    already present in the environment, so an explicitly-exported value wins.
+    already present in the environment, so an explicitly-exported value wins. Keys in
+    ``skip`` are never loaded (default: ANTHROPIC_API_KEY, so the research CLI uses the
+    Claude.ai subscription rather than API credit).
     """
     if not path.exists():
         return
@@ -154,7 +168,7 @@ def load_env_file(path: Path = _REPO_ROOT / ".env") -> None:
         key, _, val = line.partition("=")
         key = key.strip()
         val = val.strip().strip('"').strip("'")
-        if key and key not in os.environ:
+        if key and key not in os.environ and key not in skip:
             os.environ[key] = val
 
 
@@ -218,8 +232,9 @@ def _make_submit_tool(holder: Dict[str, Any]):
     off-schema submission is still captured (and then validated / flagged), never dropped.
     """
 
-    @tool(SUBMIT_TOOL_NAME, "Submit your findings for this program (call exactly once). Cite "
-          "papers inline on each claim/mechanism; do not assign ids or status.",
+    @tool(SUBMIT_TOOL_NAME, "Submit your findings for this program (call exactly once). Attach "
+          "the papers that establish each mechanism inline in that mechanism's papers[]; do not "
+          "assign evidence ids or status, and return at most 3 mechanisms.",
           submit_result_tool_schema())
     async def submit_result(args: Dict[str, Any]) -> Dict[str, Any]:
         # Backup capture; the authoritative payload is read from the ToolUseBlock stream in
@@ -572,6 +587,21 @@ async def _handle_one_program(
                 else:
                     last_error = "session ended without calling submit_result"
                 continue  # transient-ish; retry once then fall back
+
+            # Belt-and-suspenders: warn on a LEGACY payload shape (claims[]/inline citations).
+            # Pydantic ignores unknown keys, so a legacy submission would silently normalize to
+            # empty evidence — surface it instead of failing silently.
+            if isinstance(payload, dict):
+                _mechs = payload.get("candidate_mechanisms") or []
+                if "claims" in payload or any(
+                    isinstance(m, dict) and "citations" in m for m in _mechs
+                ):
+                    logger.warning(
+                        "Program %s: submit_result payload uses the LEGACY claims/citations shape; "
+                        "the current schema attaches papers[] to each mechanism — legacy fields are "
+                        "ignored and evidence may be empty.",
+                        program_id,
+                    )
 
             # Validate the flat agent payload, then normalize to the canonical schema
             # (build the dedup'd evidence pool + assign ids). The verifier resolves it later.

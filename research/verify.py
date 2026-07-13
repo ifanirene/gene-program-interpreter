@@ -8,8 +8,9 @@ artifacts written by the research subagents and annotates them **in place**:
   * resolves every ``Evidence`` DOI (CrossRef + doi.org, keyless) and/or PMID
     (NCBI E-utilities ``esummary``), reconciling PMID<->DOI when one is missing;
   * flags retractions (CrossRef ``update-to`` / subtype);
-  * downgrades any ``Claim`` whose cited evidence does not resolve (or is
-    retracted) to ``status="unsupported"`` — never invents support;
+  * recomputes each ``CandidateMechanism.status`` from its evidence resolvability
+    ('supported' if >=1 resolvable non-retracted paper, 'partial' if only
+    unverified, else 'unsupported') — never invents support;
   * dedups evidence across programs (same DOI/PMID -> one canonical record,
     keeping per-program ``evidence_id`` references intact);
   * writes each annotated ``ResearchResult`` back to its file (same schema), and
@@ -40,13 +41,16 @@ from typing import Optional
 import requests
 
 from research.schema import (
+    AgentPaper,
     AgentResearchResult,
     CandidateMechanism,
-    Citation,
-    Claim,
     Evidence,
     ResearchResult,
 )
+
+# RESERVED (see the reserved section at the end of this file): kept importable for the
+# preserved, unwired claim-vs-paper entailment logic. Not used by the active pipeline.
+from research.schema import Citation, Claim  # noqa: F401
 
 # ---------------------------------------------------------------------------
 # Robustly load literature-review/kernel.py (NOT a package) by repo-relative path
@@ -181,95 +185,167 @@ def _norm_doi(doi: Optional[str]) -> Optional[str]:
     return d.strip().lower() or None
 
 
-def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
-    """Turn a flat ``AgentResearchResult`` (inline citations) into a canonical
-    ``ResearchResult``: dedup the cited papers into one ``Evidence`` pool (by DOI/PMID),
-    assign ``EV-NNN`` ids, and rewrite each claim/mechanism to reference those ids.
+MAX_MECHANISMS = 3  # hard cap enforced during normalization (schema documents 1-3)
 
-    Citations without any identifier are dropped (they cannot be verified). Claim
-    ``status`` is left ``"partial"`` here and finalized by the resolution pass.
+
+def _derive_mechanism_status(mech: CandidateMechanism, ev_by_id: dict[str, Evidence]) -> str:
+    """Per-mechanism support, from its linked evidence's resolvability. Used for BOTH the
+    provisional status in ``normalize_agent_result`` (evidence unresolved -> 'partial') and the
+    post-resolution recompute in verify — identical semantics either way:
+
+      * 'supported'   -> >=1 linked evidence resolves (``resolved is True``) and is not retracted,
+      * 'partial'     -> has linked evidence but none resolved yet (some ``resolved is None``),
+      * 'unsupported' -> no linked evidence, or all resolved False / retracted.
+    """
+    present = [ev for eid in mech.evidence_ids if (ev := ev_by_id.get(eid)) is not None]
+    if not present:
+        return "unsupported"
+    if any(ev.resolved is True and ev.retracted is not True for ev in present):
+        return "supported"
+    if any(ev.resolved is None for ev in present):
+        return "partial"
+    return "unsupported"
+
+
+def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
+    """Turn a flat ``AgentResearchResult`` (papers attached per mechanism) into a canonical
+    ``ResearchResult``: keep only the first ``MAX_MECHANISMS`` mechanisms, dedup their papers
+    into one ``Evidence`` pool (by DOI/PMID), assign ``EV-NNN`` ids, and reference those ids
+    from each mechanism. Papers without any identifier are dropped (they cannot be verified). A
+    provisional per-mechanism ``status`` is set here and finalized by the resolution pass.
     """
     pool: list[Evidence] = []
     id_by_key: dict[tuple, str] = {}
+    alias: dict[str, str] = {}  # a merged-away evidence id -> the surviving canonical id
 
-    def _keys(c: Citation) -> list[tuple]:
+    def _canon(eid: str) -> str:
+        while eid in alias:
+            eid = alias[eid]
+        return eid
+
+    def _find(eid: str) -> Evidence:
+        return next(e for e in pool if e.evidence_id == eid)
+
+    def _keys(p: AgentPaper) -> list[tuple]:
         ks: list[tuple] = []
-        nd = _norm_doi(c.doi)
+        nd = _norm_doi(p.doi)
         if nd:
             ks.append(("doi", nd))
-        if c.pmid and str(c.pmid).strip():
-            ks.append(("pmid", str(c.pmid).strip()))
+        if p.pmid and str(p.pmid).strip():
+            ks.append(("pmid", str(p.pmid).strip()))
         return ks
 
-    def _intern(c: Citation) -> Optional[str]:
-        ks = _keys(c)
+    def _absorb_paper(ev: Evidence, p: AgentPaper) -> None:  # first-seen wins
+        if not ev.pmid and p.pmid:
+            ev.pmid = str(p.pmid).strip()
+        if not ev.doi and p.doi:
+            ev.doi = str(p.doi).strip()
+        ev.title = ev.title or p.title
+        ev.year = ev.year or p.year
+        ev.study_type = ev.study_type or p.study_type
+        ev.context_match = ev.context_match or p.context_match
+        ev.relevance_note = ev.relevance_note or p.note
+
+    def _absorb_evidence(ev: Evidence, other: Evidence) -> None:
+        if not ev.pmid and other.pmid:
+            ev.pmid = other.pmid
+        if not ev.doi and other.doi:
+            ev.doi = other.doi
+        ev.title = ev.title or other.title
+        ev.year = ev.year or other.year
+        ev.study_type = ev.study_type or other.study_type
+        ev.context_match = ev.context_match or other.context_match
+        ev.relevance_note = ev.relevance_note or other.relevance_note
+
+    def _intern(p: AgentPaper) -> Optional[str]:
+        ks = _keys(p)
         if not ks:
             return None  # no identifier -> cannot verify -> drop
-        eid = next((id_by_key[k] for k in ks if k in id_by_key), None)
-        if eid is None:
+        # Every distinct existing record that any of this paper's ids already points at. A paper
+        # carrying BOTH a pmid and a doi that were first interned on two SEPARATE records unifies
+        # them here (order-independent) — so identical inputs always yield the same pool size.
+        existing: list[str] = []
+        for k in ks:
+            if k in id_by_key:
+                c = _canon(id_by_key[k])
+                if c not in existing:
+                    existing.append(c)
+        if not existing:
             eid = f"EV-{len(pool) + 1:03d}"
             pool.append(
                 Evidence(
                     evidence_id=eid,
-                    pmid=(str(c.pmid).strip() if c.pmid else None),
-                    doi=(str(c.doi).strip() if c.doi else None),
-                    title=c.title,
-                    year=c.year,
-                    study_type=c.study_type,
-                    relevance_note=c.note,
+                    pmid=(str(p.pmid).strip() if p.pmid else None),
+                    doi=(str(p.doi).strip() if p.doi else None),
+                    title=p.title,
+                    year=p.year,
+                    study_type=p.study_type,
+                    context_match=p.context_match,
+                    relevance_note=p.note,
                 )
             )
         else:
-            ev = next(e for e in pool if e.evidence_id == eid)
-            if not ev.pmid and c.pmid:
-                ev.pmid = str(c.pmid).strip()
-            if not ev.doi and c.doi:
-                ev.doi = str(c.doi).strip()
-            ev.title = ev.title or c.title
-            ev.year = ev.year or c.year
-            ev.study_type = ev.study_type or c.study_type
-            ev.relevance_note = ev.relevance_note or c.note
+            eid = min(existing, key=lambda x: int(x.split("-")[1]))  # lowest-numbered = canonical
+            ev = _find(eid)
+            _absorb_paper(ev, p)
+            for other in existing:
+                if other != eid:
+                    _absorb_evidence(ev, _find(other))
+                    alias[other] = eid  # union the co-cited record into the canonical one
         for k in ks:
-            id_by_key.setdefault(k, eid)
+            id_by_key[k] = eid
         return eid
 
-    def _ids(citations: list[Citation]) -> list[str]:
+    def _ids(papers: list[AgentPaper]) -> list[str]:
         seen: list[str] = []
-        for c in citations:
-            eid = _intern(c)
+        for p in papers:
+            eid = _intern(p)
             if eid and eid not in seen:
                 seen.append(eid)
         return seen
 
+    # Hard 3-cap: truncate FIRST, then build the pool only from the kept mechanisms
+    # (so no orphan evidence from dropped 4th+ mechanisms enters the pool).
+    kept = agent.candidate_mechanisms[:MAX_MECHANISMS]
     mechanisms = [
         CandidateMechanism(
             name=m.name,
             summary=m.summary,
             supporting_genes=m.supporting_genes,
-            evidence_ids=_ids(m.citations),
+            supporting_regulators=m.supporting_regulators,
+            evidence_ids=_ids(m.papers),
         )
-        for m in agent.candidate_mechanisms
+        for m in kept
     ]
-    claims = [
-        Claim(
-            statement=c.statement,
-            supporting_genes=c.supporting_genes,
-            evidence_ids=_ids(c.citations),
-            context_match=c.context_match,
-            status="partial",
-        )
-        for c in agent.claims
-    ]
+
+    # Collapse any records unified mid-build: drop the aliased pool entries and remap every
+    # mechanism's evidence_ids onto their canonical id (order-preserving, deduped).
+    if alias:
+        pool[:] = [e for e in pool if _canon(e.evidence_id) == e.evidence_id]
+        for mech in mechanisms:
+            remapped: list[str] = []
+            for eid in mech.evidence_ids:
+                c = _canon(eid)
+                if c not in remapped:
+                    remapped.append(c)
+            mech.evidence_ids = remapped
+
+    ev_by_id = {e.evidence_id: e for e in pool}
+    for mech in mechanisms:
+        mech.status = _derive_mechanism_status(mech, ev_by_id)  # provisional (pre-resolution)
+
+    meta: dict = {"normalized_from_agent": True}
+    if len(agent.candidate_mechanisms) > MAX_MECHANISMS:
+        meta["mechanisms_truncated"] = len(agent.candidate_mechanisms) - MAX_MECHANISMS
     return ResearchResult(
         program_id=agent.program_id,
         queries=agent.queries,
         candidate_mechanisms=mechanisms,
-        claims=claims,
         evidence=pool,
         contradictions=agent.contradictions,
         evidence_gaps=agent.evidence_gaps,
         agent_summary=agent.agent_summary,
-        meta={"normalized_from_agent": True},
+        meta=meta,
     )
 
 
@@ -456,12 +532,13 @@ def _canonicalize_across(rrs: list[ResearchResult]) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Claim downgrade + meta summary (pure; assumes evidence already annotated)
+# Per-mechanism status recompute + meta summary (pure; assumes evidence annotated)
 # ---------------------------------------------------------------------------
-def _apply_claims_and_meta(rr: ResearchResult) -> None:
+def _apply_mechanism_status_and_meta(rr: ResearchResult) -> None:
+    """Recompute each ``CandidateMechanism.status`` from its (now-resolved) evidence and write
+    the verify meta summary. Pure: assumes ``_resolve_evidence`` already annotated the pool."""
     ev_by_id = rr.evidence_by_id()
     notes: list[str] = []
-    n_downgraded = 0
 
     # audit: duplicate evidence_ids within this program
     seen: set[str] = set()
@@ -470,36 +547,28 @@ def _apply_claims_and_meta(rr: ResearchResult) -> None:
             notes.append(f"duplicate evidence_id within program: {e.evidence_id!r}")
         seen.add(e.evidence_id)
 
-    for i, claim in enumerate(rr.claims):
-        refs = [ev_by_id.get(eid) for eid in claim.evidence_ids]
-        missing = [eid for eid, ev in zip(claim.evidence_ids, refs) if ev is None]
+    n_unsupported = 0
+    for i, mech in enumerate(rr.candidate_mechanisms):
+        missing = [eid for eid in mech.evidence_ids if eid not in ev_by_id]
         if missing:
-            notes.append(f"claim[{i}] references unknown evidence_id(s): {missing}")
-        present = [ev for ev in refs if ev is not None]
-
-        # Status is DERIVED from resolution (the agent does not set it):
-        #   all cited papers resolve & none retracted -> supported
-        #   some resolve                              -> partial
-        #   none resolve / all retracted / no cites   -> unsupported
-        n_ok = sum(1 for ev in present if ev.resolved is True and ev.retracted is not True)
-        retracted_any = any(ev.retracted is True for ev in present)
-        if not present or n_ok == 0:
-            claim.status = "unsupported"
-        elif n_ok == len(present):
-            claim.status = "supported"
-        else:
-            claim.status = "partial"
-        if retracted_any:
-            notes.append(f"claim[{i}] cites retracted evidence")
-        if claim.status == "unsupported":
-            n_downgraded += 1
+            notes.append(f"mechanism[{i}] references unknown evidence_id(s): {missing}")
+        if any(
+            (ev := ev_by_id.get(eid)) is not None and ev.retracted is True
+            for eid in mech.evidence_ids
+        ):
+            notes.append(f"mechanism[{i}] cites retracted evidence")
+        mech.status = _derive_mechanism_status(mech, ev_by_id)
+        if mech.status == "unsupported":
+            n_unsupported += 1
 
     verify_meta = {
         "n_evidence": len(rr.evidence),
         "n_resolved": sum(1 for e in rr.evidence if e.resolved is True),
         "n_unresolved": sum(1 for e in rr.evidence if e.resolved is False),
         "n_retracted": sum(1 for e in rr.evidence if e.retracted is True),
-        "n_claims_downgraded": n_downgraded,
+        "n_mechanisms": len(rr.candidate_mechanisms),
+        "n_mechanisms_unsupported": n_unsupported,
+        "mechanism_status": [m.status for m in rr.candidate_mechanisms],
     }
     if notes:
         verify_meta["notes"] = notes
@@ -511,7 +580,7 @@ def _apply_claims_and_meta(rr: ResearchResult) -> None:
 # ---------------------------------------------------------------------------
 def verify_research_result(result) -> ResearchResult:
     """Verify one result: normalize the flat agent output if needed, resolve every
-    evidence identifier, reconcile PMID<->DOI, flag retractions, derive each claim's
+    evidence identifier, reconcile PMID<->DOI, flag retractions, recompute each mechanism's
     status from resolution, and populate ``meta['verify']``. Accepts either a flat
     ``AgentResearchResult`` or a canonical ``ResearchResult``; returns the canonical one."""
     if isinstance(result, AgentResearchResult):
@@ -521,18 +590,18 @@ def verify_research_result(result) -> ResearchResult:
     else:
         raise TypeError(f"expected ResearchResult or AgentResearchResult, got {type(result)!r}")
     _resolve_evidence(rr)
-    _apply_claims_and_meta(rr)
+    _apply_mechanism_status_and_meta(rr)
     return rr
 
 
 def _load_result(raw: str) -> ResearchResult:
-    """Load a result file as either the flat ``AgentResearchResult`` (agent output) or
-    the canonical ``ResearchResult``, returning the canonical form. A flat file has no
-    top-level ``evidence`` array; its claims/mechanisms carry inline ``citations``."""
+    """Load a result file as either the flat ``AgentResearchResult`` (agent output) or the
+    canonical ``ResearchResult``, returning the canonical form. A flat file has no top-level
+    ``evidence`` array; its mechanisms carry inline ``papers`` (rather than ``evidence_ids``)."""
     data = json.loads(raw)
-    entries = (data.get("claims") or []) + (data.get("candidate_mechanisms") or [])
+    mechs = data.get("candidate_mechanisms") or []
     is_flat = "evidence" not in data or any(
-        isinstance(x, dict) and "citations" in x for x in entries
+        isinstance(m, dict) and "papers" in m for m in mechs
     )
     if is_flat:
         return normalize_agent_result(AgentResearchResult.model_validate(data))
@@ -573,9 +642,9 @@ def verify_directory(directory: Path, audit_dir: Optional[Path] = None) -> dict:
         _resolve_evidence(rr)
     # 2) dedup evidence across programs (unify canonical verification fields)
     dedup = _canonicalize_across(rrs)
-    # 3) apply claim downgrade + meta after cross-program merge
+    # 3) recompute per-mechanism status + meta after cross-program merge
     for rr in rrs:
-        _apply_claims_and_meta(rr)
+        _apply_mechanism_status_and_meta(rr)
 
     # 4) write annotated ResearchResults back in place
     programs: dict[str, dict] = {}
@@ -588,12 +657,63 @@ def verify_directory(directory: Path, audit_dir: Optional[Path] = None) -> dict:
         "audit_dir": str(audit_dir),
         "n_programs": len(rrs),
         **dedup,
-        "n_claims_downgraded_total": sum(
-            p["n_claims_downgraded"] for p in programs.values()
+        "n_mechanisms_unsupported_total": sum(
+            p["n_mechanisms_unsupported"] for p in programs.values()
         ),
         "n_retracted_total": sum(p["n_retracted"] for p in programs.values()),
         "programs": programs,
     }
+
+
+# ---------------------------------------------------------------------------
+# RESERVED — claim-vs-paper entailment verification (NOT WIRED INTO THE ACTIVE PIPELINE)
+#
+# The active pipeline attaches papers directly to mechanisms and derives a per-mechanism
+# status from evidence RESOLUTION only (see _apply_mechanism_status_and_meta). The function
+# below is the retired per-claim variant, preserved verbatim for a FUTURE step that actually
+# checks claim-vs-paper ENTAILMENT (an adjudicator that reads the paper and confirms the
+# claim). It operates on the reserved research.schema.Claim layer (ResearchResult no longer
+# carries `claims`), so it is dead code today — do NOT call it. See
+# docs/FUTURE_claim_verification.md.
+# ---------------------------------------------------------------------------
+def _reserved_apply_claims_and_meta(rr) -> None:  # pragma: no cover - reserved, unused
+    ev_by_id = rr.evidence_by_id()
+    notes: list[str] = []
+    n_downgraded = 0
+    seen: set[str] = set()
+    for e in rr.evidence:
+        if e.evidence_id in seen:
+            notes.append(f"duplicate evidence_id within program: {e.evidence_id!r}")
+        seen.add(e.evidence_id)
+    for i, claim in enumerate(getattr(rr, "claims", [])):
+        refs = [ev_by_id.get(eid) for eid in claim.evidence_ids]
+        missing = [eid for eid, ev in zip(claim.evidence_ids, refs) if ev is None]
+        if missing:
+            notes.append(f"claim[{i}] references unknown evidence_id(s): {missing}")
+        present = [ev for ev in refs if ev is not None]
+        # NOTE: this only checks citation RESOLUTION, not paper->claim entailment.
+        n_ok = sum(1 for ev in present if ev.resolved is True and ev.retracted is not True)
+        retracted_any = any(ev.retracted is True for ev in present)
+        if not present or n_ok == 0:
+            claim.status = "unsupported"
+        elif n_ok == len(present):
+            claim.status = "supported"
+        else:
+            claim.status = "partial"
+        if retracted_any:
+            notes.append(f"claim[{i}] cites retracted evidence")
+        if claim.status == "unsupported":
+            n_downgraded += 1
+    verify_meta = {
+        "n_evidence": len(rr.evidence),
+        "n_resolved": sum(1 for e in rr.evidence if e.resolved is True),
+        "n_unresolved": sum(1 for e in rr.evidence if e.resolved is False),
+        "n_retracted": sum(1 for e in rr.evidence if e.retracted is True),
+        "n_claims_downgraded": n_downgraded,
+    }
+    if notes:
+        verify_meta["notes"] = notes
+    rr.meta["verify"] = verify_meta
 
 
 def main(argv: Optional[list[str]] = None) -> int:

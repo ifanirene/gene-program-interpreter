@@ -1,11 +1,8 @@
-# Gene Program Interpreter — real hepatocyte dataset run config.
+# Gene Program Interpreter — end-to-end test run for programs 10 + 22.
 #
-# Points at the real mouse-hepatocyte program set under
-# /Volumes/IF_PHAGE/Hepatocyte/Programs0617. As with liver_demo.yaml, nothing
-# tissue-specific is hard-coded in the code: the biology lives entirely in the
-# `context:` block (a gpi.context_profile.ContextProfile). These values match the
-# lean, disease-neutral ContextProfile.liver_demo() exactly (role "hepatocyte
-# biologist"; the assay is intentionally NOT surfaced to the research agent).
+# Same real mouse-hepatocyte program set as hepatocyte.yaml, but selects TWO
+# programs (10 and 22) and writes to its own output_dir. Nothing tissue-specific
+# is hard-coded in code: the biology lives entirely in the `context:` block.
 
 context:                       # -> ContextProfile.from_dict
   organism: mouse
@@ -23,29 +20,26 @@ context:                       # -> ContextProfile.from_dict
     - membrane transport and solute carriers
     - lipid metabolism
   # annotation_role / annotation_context / keyword_query / condition_context are
-  # auto-derived (lean/neutral) from the fields above when left blank. The assay
-  # is deliberately omitted here so it never leaks into the research brief.
+  # auto-derived (lean/neutral) from the fields above when left blank.
 
 inputs:
-  # Gene loading: columns are Name,Score,RowID. RowID is the PROGRAM ID (1..50);
-  # there is no separate program_id/source_program/rank column here, so downstream
-  # (bundle build) must treat RowID as program_id when resolving the program column.
+  # Gene loading: columns Name,Score,RowID. RowID is the PROGRAM ID (1..50).
   gene_loading: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/gene_loading_K50_0_5_top300.csv
 
-  # Regulators are CONDITION-KEYED (young + aged), tab-separated, with columns
+  # Condition-keyed regulators (young + aged), tab-separated:
   # target_name,program_name,log2FC,p-value,adj_pval (program_name is the program id).
-  # The bundle step should build a condition-keyed regulator context (i.e. the
-  # regulator_validation_by_condition path), one block per condition below.
+  # Consumed by gpi.gene_summaries --regulator-condition-file -> regulator_validation_by_condition,
+  # then surfaced by research.bundle as each bundle's perturbation_regulators (search targets).
   regulators_by_condition:
     young: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_young_F.txt
     aged: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_aged_F.txt
 
   celltype_enrichment: null
 
-output_dir: runs/hepatocyte_p10
+output_dir: runs/hepatocyte_p10_p22
 
-# Single program for this run. null = all programs.
-programs: [10]
+# Two programs for this end-to-end test. null = all programs.
+programs: [10, 22]
 
 settings:
   n_top_genes: 300
@@ -56,7 +50,7 @@ settings:
 
 research:                      # executor 2 — parallel literature agents
   enabled: true
-  concurrency: 4               # asyncio.Semaphore(k), k = 3-5
+  concurrency: 2               # 2 programs -> run both at once
   model: claude-sonnet-4-5-20250929
   max_turns: 30
   max_budget_usd: 1.0          # per-program cost cap (SDK-native)

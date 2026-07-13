@@ -36,6 +36,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import logging
+import os
 import shlex
 import subprocess
 import sys
@@ -49,6 +50,33 @@ from .context_profile import ContextProfile
 from . import pipeline_state as ps
 
 logger = logging.getLogger("gpi.pipeline")
+
+# Repo root = parent of this package dir (gpi/..). Used to locate the repo .env.
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+
+
+def load_env_file(path: Path = _REPO_ROOT / ".env") -> None:
+    """Populate ``os.environ`` from the repo ``.env`` (only keys not already set).
+
+    The runner spawns most steps as subprocesses (``python -m gpi.theme_representation``,
+    ``gpi.evidence_context``, ``gpi.anthropic_batch``, ...) that read ``ANTHROPIC_API_KEY``
+    /``NCBI_API_KEY``/``OPENALEX_API_KEY`` from their inherited environment. Load the repo
+    ``.env`` here — at the top of every run — so those keys are present for EVERY step,
+    including a resumed run that starts *after* the research step (previously only the
+    research step loaded ``.env``, so ``--start-from theme`` in a fresh process failed).
+    Mirrors ``research.research_parallel.load_env_file`` without importing the Agent SDK.
+    """
+    if not path.exists():
+        return
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, val = line.partition("=")
+        key = key.strip()
+        val = val.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = val
 
 # The one canonical step order. (pipeline_state.STEP_NAMES is the legacy ProgExplorer
 # list; we drive our own order here and let mark_step lazily create entries.)
@@ -108,6 +136,9 @@ class PipelineConfig:
     # --- Inputs ---
     gene_loading: Path
     regulators: Optional[Path]
+    # Condition-keyed regulators (e.g. {"young": path, "aged": path}); feed the
+    # gene_summaries regulator_validation_by_condition path (bundle perturbation_regulators).
+    regulators_by_condition: Dict[str, Path]
     celltype_enrichment: Optional[Path]
 
     # --- Output ---
@@ -180,10 +211,20 @@ class PipelineConfig:
         if programs is not None:
             programs = [int(p) for p in programs]
 
+        # Condition-keyed regulator files, e.g. inputs.regulators_by_condition:
+        #   {young: <path>, aged: <path>}. Each resolves relative to cwd like other inputs.
+        reg_by_cond_raw = inputs.get("regulators_by_condition") or {}
+        regulators_by_condition = {
+            str(cond): _resolve(path, base)
+            for cond, path in reg_by_cond_raw.items()
+            if _resolve(path, base) is not None
+        }
+
         return cls(
             profile=profile,
             gene_loading=gene_loading,
             regulators=_resolve(inputs.get("regulators"), base),
+            regulators_by_condition=regulators_by_condition,
             celltype_enrichment=_resolve(inputs.get("celltype_enrichment"), base),
             output_dir=output_dir,
             programs=programs,
@@ -333,12 +374,16 @@ def run_gene_summaries(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[
         "--csv-out", paths.ncbi_summary,
         "--keyword", cfg.profile.resolved_keyword_query(),
         "--species", cfg.species_taxid,
-        "--top-loading", cfg.setting("top_loading", 20),
-        "--top-unique", cfg.setting("top_unique", 10),
+        "--top-loading", cfg.setting("top_loading", 15),
+        "--top-unique", cfg.setting("top_unique", 8),
         *_topics_args(cfg),
     )
     if cfg.regulators:
         argv += ["--regulator-file", str(cfg.regulators)]
+    # Condition-keyed regulators -> regulator_validation_by_condition (bundle
+    # perturbation_regulators). One repeatable --regulator-condition-file cond=path.
+    for cond, path in cfg.regulators_by_condition.items():
+        argv += ["--regulator-condition-file", f"{cond}={path}"]
     # PubTator stays OFF by default (no --use-pubtator).
     _run_subprocess(argv, flags.dry_run)
     return {"ncbi_context": str(paths.ncbi_context)}
@@ -352,7 +397,7 @@ def run_bundle(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
         f"gene_loading_csv={cfg.gene_loading}, profile=<{cfg.profile.resolved_annotation_role()}>, "
         f"enrichment_csv={enrichment_csv}, ncbi_context_json={ncbi_json}, "
         f"out_dir={paths.bundles_dir}, program_ids={cfg.programs}, "
-        f"top_loading={cfg.setting('top_loading', 20)}, "
+        f"top_loading={cfg.setting('top_loading', 15)}, "
         f"top_enrichment={cfg.setting('top_enrichment', 7)})"
     )
     if flags.dry_run:
@@ -366,7 +411,7 @@ def run_bundle(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
         ncbi_context_json=ncbi_json,
         out_dir=paths.bundles_dir,
         program_ids=cfg.programs,
-        top_loading=int(cfg.setting("top_loading", 20)),
+        top_loading=int(cfg.setting("top_loading", 15)),
         top_enrichment=int(cfg.setting("top_enrichment", 7)),
     )
     return {"n_bundles": len(written), "bundles": [str(p) for p in written]}
@@ -395,19 +440,38 @@ def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
     # is only installed when actually doing research.
     from research.research_parallel import run_research as _run_research
 
-    written = asyncio.run(
-        _run_research(
-            bundle_paths,
-            out_dir=paths.research_dir,
-            audit_dir=paths.audit_dir,
-            concurrency=int(cfg.research.get("concurrency", 4)),
-            model=cfg.research.get("model", "claude-sonnet-4-5-20250929"),
-            max_turns=int(cfg.research.get("max_turns", 30)),
-            max_budget_usd=float(cfg.research.get("max_budget_usd", 1.0)),
-            mcp_config_path=str(mcp_config),
-            per_program_timeout=float(cfg.research.get("per_program_timeout", 600)),
+    # Auth split: the research subagents run the local ``claude`` CLI on the user's
+    # Claude.ai subscription (``research.auth: subscription``, the default), NOT API credit.
+    # The CLI uses the subscription only when ANTHROPIC_API_KEY is absent from its
+    # environment, so withhold the key for the duration of the research step, then restore
+    # it for the API-billed batch steps (theme/annotate/presentation). Set
+    # ``research.auth: api`` to bill research to the API key instead.
+    auth = str(cfg.research.get("auth", "subscription")).lower()
+    saved_key: Optional[str] = None
+    if auth != "api":
+        saved_key = os.environ.pop("ANTHROPIC_API_KEY", None)
+        if saved_key is not None:
+            logger.info(
+                "research: using Claude.ai subscription for the Agent-SDK CLI "
+                "(ANTHROPIC_API_KEY withheld; restored afterward for batch steps)."
+            )
+    try:
+        written = asyncio.run(
+            _run_research(
+                bundle_paths,
+                out_dir=paths.research_dir,
+                audit_dir=paths.audit_dir,
+                concurrency=int(cfg.research.get("concurrency", 4)),
+                model=cfg.research.get("model", "claude-sonnet-4-5-20250929"),
+                max_turns=int(cfg.research.get("max_turns", 30)),
+                max_budget_usd=float(cfg.research.get("max_budget_usd", 1.0)),
+                mcp_config_path=str(mcp_config),
+                per_program_timeout=float(cfg.research.get("per_program_timeout", 600)),
+            )
         )
-    )
+    finally:
+        if saved_key is not None:
+            os.environ["ANTHROPIC_API_KEY"] = saved_key
     return {"n_results": len(written)}
 
 
@@ -435,8 +499,8 @@ def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]
         "gpi.theme_representation",
         "--gene-file", cfg.gene_loading,
         "--species", cfg.species_taxid,
-        "--top-loading", cfg.setting("top_loading", 20),
-        "--top-unique", cfg.setting("top_unique", 10),
+        "--top-loading", cfg.setting("top_loading", 15),
+        "--top-unique", cfg.setting("top_unique", 8),
         "--top-enrichment", cfg.setting("top_enrichment", 7),
         "--enrichment-gene-count", cfg.setting("n_top_genes", 300),
         "--min-generic-program-count", cfg.theme.get("min_generic_program_count", 4),
@@ -472,8 +536,8 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         "--model", cfg.annotation.get("model", "claude-sonnet-4-5-20250929"),
         "--max-tokens", cfg.annotation.get("max_tokens", 8192),
         "--research-evidence-dir", paths.research_dir,
-        "--top-loading", cfg.setting("top_loading", 20),
-        "--top-unique", cfg.setting("top_unique", 10),
+        "--top-loading", cfg.setting("top_loading", 15),
+        "--top-unique", cfg.setting("top_unique", 8),
         "--top-enrichment", cfg.setting("top_enrichment", 7),
         "--genes-per-term", cfg.setting("genes_per_term", 10),
         "--output-file", paths.batch_request,
@@ -487,6 +551,14 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         prepare += ["--theme-dictionary-file", str(paths.theme_dict)]
     if cfg.regulators:
         prepare += ["--regulator-file", str(cfg.regulators)]
+    # Condition-keyed regulators -> the annotation prompt's "Regulator perturbation
+    # evidence" section (evidence_context supports --regulator-condition-file cond=path).
+    for cond, path in cfg.regulators_by_condition.items():
+        prepare += ["--regulator-condition-file", f"{cond}={path}"]
+    # Mask promiscuous, non-program-specific regulators from the annotation regulator
+    # evidence (annotation.mask_regulators in the config), both conditions.
+    for gene in cfg.annotation.get("mask_regulators", []) or []:
+        prepare += ["--mask-regulator", str(gene)]
     _run_subprocess(prepare, flags.dry_run)
 
     # (b) submit the batch and wait for results (Anthropic Batch API — spends money)
@@ -536,13 +608,23 @@ def run_html_report(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str
         "--gene-loading-csv", cfg.gene_loading,
         "--output-html", paths.report_html,
         "--dataset-crumb", cfg.profile.resolved_report_dataset_crumb(),
+        "--top-loading", cfg.setting("top_loading", 15),
+        "--top-unique", cfg.setting("top_unique", 8),
     )
+    # Deterministic pathway list + "Top pathway" chip come from the STRING
+    # enrichment CSV (enrichment was dropped from the annotation LLM output).
+    if paths.enrichment_filtered.exists():
+        argv += ["--enrichment-filtered-csv", str(paths.enrichment_filtered)]
     if paths.presentation_json.exists():
         argv += ["--presentation-json", str(paths.presentation_json)]
     if paths.research_dir.is_dir():
         argv += ["--research-results-dir", str(paths.research_dir)]
     if cfg.regulators:
         argv += ["--volcano-csv", str(cfg.regulators)]
+    # Per-condition regulator matrices drive the interactive perturbation-effect
+    # plots (one panel per condition). Without these the section renders empty.
+    for cond, path in cfg.regulators_by_condition.items():
+        argv += ["--volcano-condition-csv", f"{cond}={path}"]
     _run_subprocess(argv, flags.dry_run)
     return {"report_html": str(paths.report_html)}
 
@@ -700,6 +782,9 @@ def run_pipeline(
     stop_after: Optional[str] = None,
     force_restart: bool = False,
 ) -> int:
+    # Load the repo .env FIRST so every step (including a resume that starts after the
+    # research step) inherits ANTHROPIC_API_KEY / NCBI_API_KEY / OPENALEX_API_KEY.
+    load_env_file()
     paths = Paths(cfg.output_dir)
     active_steps = _slice_steps(start_from, stop_after)
     state = _load_or_init_state(cfg, paths, force_restart)

@@ -1,11 +1,9 @@
-# Gene Program Interpreter — real hepatocyte dataset run config.
+# Gene Program Interpreter — end-to-end verification run for programs 10, 11, 12.
 #
-# Points at the real mouse-hepatocyte program set under
-# /Volumes/IF_PHAGE/Hepatocyte/Programs0617. As with liver_demo.yaml, nothing
-# tissue-specific is hard-coded in the code: the biology lives entirely in the
-# `context:` block (a gpi.context_profile.ContextProfile). These values match the
-# lean, disease-neutral ContextProfile.liver_demo() exactly (role "hepatocyte
-# biologist"; the assay is intentionally NOT surfaced to the research agent).
+# Same real mouse-hepatocyte program set as hepatocyte.yaml, selecting programs
+# 10, 11 and 12 to a dedicated output_dir. Uses the corrected gene counts
+# (Top 15 loading + Top 8 unique) and the deterministic report wiring
+# (unique genes, top-pathway chip, per-condition perturbation plots).
 
 context:                       # -> ContextProfile.from_dict
   organism: mouse
@@ -22,30 +20,25 @@ context:                       # -> ContextProfile.from_dict
     - oxidative and mitochondrial metabolism
     - membrane transport and solute carriers
     - lipid metabolism
-  # annotation_role / annotation_context / keyword_query / condition_context are
-  # auto-derived (lean/neutral) from the fields above when left blank. The assay
-  # is deliberately omitted here so it never leaks into the research brief.
 
 inputs:
-  # Gene loading: columns are Name,Score,RowID. RowID is the PROGRAM ID (1..50);
-  # there is no separate program_id/source_program/rank column here, so downstream
-  # (bundle build) must treat RowID as program_id when resolving the program column.
+  # Gene loading: columns Name,Score,RowID. RowID is the PROGRAM ID (1..50).
   gene_loading: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/gene_loading_K50_0_5_top300.csv
 
-  # Regulators are CONDITION-KEYED (young + aged), tab-separated, with columns
+  # Condition-keyed regulators (young + aged), tab-separated:
   # target_name,program_name,log2FC,p-value,adj_pval (program_name is the program id).
-  # The bundle step should build a condition-keyed regulator context (i.e. the
-  # regulator_validation_by_condition path), one block per condition below.
+  # Feeds gene_summaries regulator_validation_by_condition -> bundle perturbation_regulators,
+  # AND the report's per-condition interactive perturbation-effect plots.
   regulators_by_condition:
     young: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_young_F.txt
     aged: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_aged_F.txt
 
   celltype_enrichment: null
 
-output_dir: runs/hepatocyte_p10
+output_dir: runs/hepatocyte_p10_12
 
-# Single program for this run. null = all programs.
-programs: [10]
+# Three programs for this verification run. null = all programs.
+programs: [10, 11, 12]
 
 settings:
   n_top_genes: 300
@@ -54,24 +47,27 @@ settings:
   top_enrichment: 7
   genes_per_term: 10
 
-research:                      # executor 2 — parallel literature agents
+research:                      # executor 2 — parallel literature agents (subscription auth)
   enabled: true
-  concurrency: 4               # asyncio.Semaphore(k), k = 3-5
+  concurrency: 3               # 3 programs -> run all at once
   model: claude-sonnet-4-5-20250929
   max_turns: 30
   max_budget_usd: 1.0          # per-program cost cap (SDK-native)
   per_program_timeout: 600
   mcp_config: research/mcp_servers.json
 
-annotation:                    # executor 3 — Anthropic Batch synthesis + labels
+annotation:                    # executor 3 — Anthropic Batch synthesis + labels (API credit)
   model: claude-sonnet-4-5-20250929
   max_tokens: 8192
   batch: true
+  # Promiscuous, non-program-specific regulators masked from the annotation
+  # regulator evidence (both conditions), so program-specific regulators surface.
+  mask_regulators: [Dgat2, Flcn, Insig1, Insr, Scap, Mlxipl]
 
 theme:                         # executor 3 — generic-theme down-weighting (M6)
   enabled: true
   model: claude-sonnet-4-5-20250929
-  min_generic_program_count: 4
+  min_generic_program_count: 3
 
 presentation:                  # executor 3 (+ 4 fallback)
   model: claude-haiku-4-5-20251001

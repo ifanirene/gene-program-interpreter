@@ -23,6 +23,7 @@ import pandas as pd
 from markdown import markdown
 from .column_mapper import (
     standardize_condition_regulator_results,
+    standardize_gene_loading,
     standardize_regulator_results,
 )
 
@@ -79,8 +80,9 @@ def extract_program_stats(annotation_md: str) -> dict:
 
 def split_pathway_enrichment(annotation_md: str) -> tuple[str, str]:
     """Remove a Pathway Enrichment section so the report can place it by figures."""
+    # Case-insensitive: the live model varies the casing ("Pathway enrichment").
     heading_pattern = re.compile(
-        r"(?ms)^#{2,3}\s*(?:\d+\.\s*)?Pathway Enrichment\s*\n"
+        r"(?msi)^#{2,3}\s*(?:\d+\.\s*)?Pathway Enrichment\s*\n"
         r"(?P<body>.*?)(?=^#{2,3}\s*(?:\d+\.\s*)?"
         r"(?:High-level overview|Functional modules|Distinctive features|"
         r"Regulator analysis)\b|\Z)"
@@ -157,8 +159,14 @@ def _extract_dois(text: str) -> list[str]:
     return dois
 
 
+def _demarkup(line: str) -> str:
+    """Strip leading heading markers (``###``) and bold ``**`` from a line so field-label
+    matching is agnostic to the model's markdown style (plain / bold-labeled / H3)."""
+    return re.sub(r"^\s*#{1,6}\s*", "", line).replace("**", "").strip()
+
+
 def _parse_module_block(block: str) -> dict[str, object] | None:
-    lines = [line.strip() for line in block.strip().splitlines() if line.strip()]
+    lines = [_demarkup(line) for line in block.strip().splitlines() if line.strip()]
     if len(lines) < 2:
         return None
 
@@ -200,6 +208,105 @@ def _parse_module_block(block: str) -> dict[str, object] | None:
     return module
 
 
+def _fenced_blocks(text: str) -> list[str]:
+    """Return the contents of every ```fenced``` code block in ``text``."""
+    return re.findall(r"```(?:[a-zA-Z0-9_-]+)?\s*\n(.*?)```", text, flags=re.S)
+
+
+def _bold_header_blocks(section_md: str, header_re: "re.Pattern[str]") -> list[str]:
+    """Split ``section_md`` into blocks that each begin at a bold-header line.
+
+    Fallback for annotations that use ``**Header ...**`` bold headers instead of the
+    canonical ``` fenced blocks (the live model does this consistently). A block runs
+    from one header line up to the next; the ``**`` markers are stripped so the
+    downstream per-block parsers (which expect plain ``Module 1: ...`` /
+    ``gene (role ...)`` lines) see clean text. Returns [] if no header matches.
+    """
+    lines = section_md.splitlines()
+    starts = [i for i, ln in enumerate(lines) if header_re.match(ln.replace("**", ""))]
+    if not starts:
+        return []
+    starts.append(len(lines))
+    blocks: list[str] = []
+    for i in range(len(starts) - 1):
+        block = "\n".join(lines[starts[i]:starts[i + 1]]).replace("**", "").strip()
+        if block:
+            blocks.append(block)
+    return blocks
+
+
+def _extract_section_body(annotation_md: str, section_name: str) -> str:
+    """Return the body of a ``## <section_name>`` / ``### <section_name>`` section
+    (case-insensitive), up to the next heading, or '' if absent. Also handles the
+    numbered-bold ``N. **<section_name>**`` heading variant."""
+    esc = re.escape(section_name)
+    for pat in (
+        re.compile(rf"(?ims)^#{{2,3}}\s*(?:\d+\.\s*)?{esc}\s*\n(?P<body>.*?)(?=^#{{2,3}}\s|\Z)"),
+        re.compile(rf"(?ims)^\d+\.\s+\*\*{esc}\*\*\s*\n(?P<body>.*?)(?=^\d+\.\s+\*\*|\Z)"),
+    ):
+        m = pat.search(annotation_md)
+        if m:
+            return m.group("body").strip()
+    return ""
+
+
+# A final-module head: "Module 1: ...", tolerant of a leading list marker.
+_MODULE_HEAD_RE = re.compile(r"^\s*(?:[-*]\s*)?Module\s+\d+\s*:", re.I)
+
+# A whole-line-bold header (the module NAME on its own line). Covers BOTH module-header
+# formats the live model emits: "**Module 1: Name**" and just "**Name**".
+_BOLD_LINE_RE = re.compile(r"^\s*\*\*.+\*\*\s*$")
+
+
+def _bold_line_blocks(section_md: str) -> list[str]:
+    """Split a functional-modules section into blocks headed by a whole-line-bold line
+    (the module name). Fallback for annotations whose module headers are just the bold
+    name, with no 'Module N:' prefix. Bold markers are stripped so the per-block parser
+    sees a clean title line. Fields (Key genes:, Supporting PMIDs:, ...) are not bold, so
+    only the module names split."""
+    lines = section_md.splitlines()
+    starts = [i for i, ln in enumerate(lines) if _BOLD_LINE_RE.match(ln)]
+    if not starts:
+        return []
+    starts.append(len(lines))
+    blocks: list[str] = []
+    for i in range(len(starts) - 1):
+        block = "\n".join(lines[starts[i]:starts[i + 1]]).replace("**", "").strip()
+        if block:
+            blocks.append(block)
+    return blocks
+
+
+# An H3 heading line (module NAME as ``### Name``) — another format the live model
+# emits. Excludes horizontal rules and empty headings.
+_H3_HEAD_RE = re.compile(r"^\s*###\s+\S")
+
+
+def _h3_header_blocks(section_md: str) -> list[str]:
+    """Split a functional-modules section into blocks headed by an H3 (``### Name``) line.
+
+    Fallback for annotations whose module headers are markdown H3 headings and whose
+    fields are bold-labeled (``**Key genes:**`` ...). The ``###`` marker on the header
+    line and all ``**`` bold markers are stripped so the per-block parser sees a clean
+    title line and plain ``Key genes:``/``Supporting PMIDs:``/``Evidence used:`` labels.
+    Horizontal-rule lines (``---``) are dropped so a trailing separator before the next
+    section does not leak into the last module's text."""
+    lines = section_md.splitlines()
+    starts = [i for i, ln in enumerate(lines) if _H3_HEAD_RE.match(ln)]
+    if not starts:
+        return []
+    starts.append(len(lines))
+    blocks: list[str] = []
+    for i in range(len(starts) - 1):
+        chunk = list(lines[starts[i]:starts[i + 1]])
+        chunk[0] = re.sub(r"^\s*#{2,6}\s*", "", chunk[0])  # strip the '### ' heading marker
+        kept = [ln for ln in chunk if ln.strip() not in {"---", "***", "___"}]
+        block = "\n".join(kept).replace("**", "").strip()
+        if block:
+            blocks.append(block)
+    return blocks
+
+
 def split_final_modules(annotation_md: str) -> tuple[str, list[dict[str, object]]]:
     """Extract final functional modules so the report can render them as cards."""
     patterns = [
@@ -219,11 +326,17 @@ def split_final_modules(annotation_md: str) -> tuple[str, list[dict[str, object]
         return annotation_md, []
 
     section_body = match.group("body")
-    modules = [
-        parsed
-        for block in re.findall(r"```(?:[a-zA-Z0-9_-]+)?\s*\n(.*?)```", section_body, flags=re.S)
-        if (parsed := _parse_module_block(block))
-    ]
+    # Canonical: each module in a ``` fenced block. Fallbacks (the live model varies its
+    # header style run-to-run): "Module N:" headers, then "### Name" H3 headings, then a
+    # whole-line-bold module name (**Name** or **Module 1: Name**). Try the more specific
+    # H3 splitter before the bold-line one.
+    blocks = (
+        _fenced_blocks(section_body)
+        or _bold_header_blocks(section_body, _MODULE_HEAD_RE)
+        or _h3_header_blocks(section_body)
+        or _bold_line_blocks(section_body)
+    )
+    modules = [parsed for block in blocks if (parsed := _parse_module_block(block))]
     remaining_md = (annotation_md[:match.start()] + annotation_md[match.end():]).strip()
     return remaining_md, modules
 
@@ -248,53 +361,63 @@ _PATHWAY_LINE_RE = re.compile(
 )
 
 
+def _parse_regulator_block(block: str) -> dict[str, str] | None:
+    """Parse one regulator block ("gene (role, log2FC=...): [Confidence: ...]" + a
+    mechanistic-hypothesis paragraph) into a card, or None if the head doesn't match."""
+    lines = [line.rstrip() for line in block.strip("\n").splitlines() if line.strip()]
+    if not lines:
+        return None
+    head = _REG_HEAD_RE.match(lines[0])
+    if not head:
+        return None
+    fc_match = _REG_FC_RE.search(lines[0])
+    fc = re.sub(r"\s+", " ", fc_match.group("fc").strip()).rstrip(":").strip() if fc_match else ""
+    conf_match = _REG_CONF_RE.search(lines[0])
+    confidence = conf_match.group("conf").strip() if conf_match else ""
+
+    mechanism_parts: list[str] = []
+    capturing = False
+    for line in lines[1:]:
+        field = _REG_MECH_RE.match(line)
+        if field:
+            capturing = True
+            if field.group("text").strip():
+                mechanism_parts.append(field.group("text").strip())
+        elif capturing:
+            mechanism_parts.append(line.strip())
+    mechanism = " ".join(mechanism_parts).strip()
+    # Fallback when the mechanism label is absent: use the remaining prose.
+    if not mechanism and len(lines) > 1:
+        mechanism = " ".join(line.strip() for line in lines[1:]).strip()
+
+    return {
+        "gene": head.group("gene").strip(),
+        "role": head.group("role").lower(),
+        "fc": fc,
+        "confidence": confidence or "—",
+        "mechanism": mechanism,
+    }
+
+
 def parse_regulators_detailed(annotation_md: str) -> list[dict[str, str]]:
-    """Parse Regulator-analysis fenced blocks into structured cards.
+    """Parse the Regulator-analysis section into structured cards.
 
     Each card carries gene, role (repressor/activator), the raw fold-change
     string (e.g. "+1.831 young / +0.359 aged"), a confidence label, and the
-    mechanistic hypothesis prose. Module/pathway blocks are skipped because they
-    do not match the regulator head pattern. The role clause and mechanism label
-    vary between annotations, so matching is intentionally permissive.
+    mechanistic hypothesis prose. The role clause and mechanism label vary between
+    annotations, so matching is intentionally permissive.
+
+    Canonical annotations wrap each regulator in a ``` fenced block; the live model
+    instead emits ``**gene (role, ...): [Confidence: ...]**`` bold headers. Try the
+    fenced blocks first, then fall back to bold-header blocks scoped to the
+    "Regulator analysis" section (so module/pathway prose is never misread).
     """
-    regulators: list[dict[str, str]] = []
-    for block in re.findall(r"```(?:[a-zA-Z0-9_-]+)?\s*\n(.*?)```", annotation_md, flags=re.S):
-        lines = [line.rstrip() for line in block.strip("\n").splitlines() if line.strip()]
-        if not lines:
-            continue
-        head = _REG_HEAD_RE.match(lines[0])
-        if not head:
-            continue
-        fc_match = _REG_FC_RE.search(lines[0])
-        fc = re.sub(r"\s+", " ", fc_match.group("fc").strip()).rstrip(":").strip() if fc_match else ""
-        conf_match = _REG_CONF_RE.search(lines[0])
-        confidence = conf_match.group("conf").strip() if conf_match else ""
-
-        mechanism_parts: list[str] = []
-        capturing = False
-        for line in lines[1:]:
-            field = _REG_MECH_RE.match(line)
-            if field:
-                capturing = True
-                if field.group("text").strip():
-                    mechanism_parts.append(field.group("text").strip())
-            elif capturing:
-                mechanism_parts.append(line.strip())
-        mechanism = " ".join(mechanism_parts).strip()
-        # Fallback when the mechanism label is absent: use the remaining prose.
-        if not mechanism and len(lines) > 1:
-            mechanism = " ".join(line.strip() for line in lines[1:]).strip()
-
-        regulators.append(
-            {
-                "gene": head.group("gene").strip(),
-                "role": head.group("role").lower(),
-                "fc": fc,
-                "confidence": confidence or "—",
-                "mechanism": mechanism,
-            }
-        )
-    return regulators
+    blocks = [b for b in _fenced_blocks(annotation_md) if _REG_HEAD_RE.match(b.strip().splitlines()[0] if b.strip() else "")]
+    if not blocks:
+        section = _extract_section_body(annotation_md, "Regulator analysis")
+        if section:
+            blocks = _bold_header_blocks(section, _REG_HEAD_RE)
+    return [card for block in blocks if (card := _parse_regulator_block(block))]
 
 
 def parse_pathways(annotation_md: str) -> list[dict[str, object]]:
@@ -377,12 +500,30 @@ def add_global_uniqueness_scores(df: pd.DataFrame) -> pd.DataFrame:
     return updated
 
 
-def build_panel_stats(summary_df: pd.DataFrame, gene_loading_csv: str) -> dict[int, dict]:
-    """Build report top-panel data without relying on LLM output sections."""
+def build_panel_stats(
+    summary_df: pd.DataFrame,
+    gene_loading_csv: str,
+    top_loading: int = 15,
+    top_unique: int = 8,
+) -> dict[int, dict]:
+    """Build report top-panel data without relying on LLM output sections.
+
+    The gene loading CSV is standardized to expose a ``program_id`` column
+    (mouse-hepatocyte inputs carry the program id in ``RowID``); without this
+    the uniqueness block below is silently skipped and the report shows no
+    program-unique genes. ``top_loading``/``top_unique`` mirror the same
+    settings the annotation pipeline uses so the report displays exactly the
+    genes that were fed to the LLM.
+    """
     panel_stats: dict[int, dict] = {}
     gene_df = pd.DataFrame()
     if gene_loading_csv and os.path.exists(gene_loading_csv):
         gene_df = pd.read_csv(gene_loading_csv)
+        if "program_id" not in gene_df.columns:
+            try:
+                gene_df = standardize_gene_loading(gene_df)
+            except Exception:
+                pass
         if "UniquenessScore" not in gene_df.columns or gene_df["UniquenessScore"].isna().all():
             gene_df = add_global_uniqueness_scores(gene_df)
 
@@ -415,48 +556,84 @@ def build_panel_stats(summary_df: pd.DataFrame, gene_loading_csv: str) -> dict[i
                     program_genes['_score'] = pd.to_numeric(
                         program_genes['Score'], errors='coerce'
                     )
-                    top_loading = program_genes.sort_values(
+                    top_loading_df = program_genes.sort_values(
                         '_score', ascending=False
                     )
                 else:
-                    top_loading = program_genes
-                computed_top_loading_names = top_loading['Name'].astype(str).head(20).tolist()
+                    top_loading_df = program_genes
 
-                top_loading_names = [
-                    gene.strip()
-                    for gene in stats['top_loading'].split(',')
-                    if gene.strip()
-                ]
-                if len(top_loading_names) < 20:
-                    seen_top = set(top_loading_names)
-                    top_loading_names.extend(
-                        gene
-                        for gene in computed_top_loading_names
-                        if gene not in seen_top
-                    )
-                    top_loading_names = top_loading_names[:20]
-                    stats['top_loading'] = ', '.join(top_loading_names)
+                # Recompute the top-loading list from the loading CSV (Score
+                # order) so it matches the annotation pipeline exactly, rather
+                # than trusting summary.csv Top_Genes which may carry a
+                # different count.
+                top_loading_names = (
+                    top_loading_df['Name'].astype(str).head(top_loading).tolist()
+                )
+                stats['top_loading'] = ', '.join(top_loading_names)
 
                 if 'UniquenessScore' in program_genes.columns:
                     program_genes['_uniqueness'] = pd.to_numeric(
                         program_genes['UniquenessScore'], errors='coerce'
                     )
-                    top_unique = program_genes.sort_values(
+                    top_unique_df = program_genes.sort_values(
                         '_uniqueness', ascending=False
                     )
                     top_loading_set = set(top_loading_names)
                     unique_names = [
                         gene
-                        for gene in top_unique['Name'].astype(str).tolist()
+                        for gene in top_unique_df['Name'].astype(str).tolist()
                         if gene not in top_loading_set
                     ]
                     stats['unique'] = ', '.join(
-                        unique_names[:10]
+                        unique_names[:top_unique]
                     )
 
         panel_stats[topic_id] = stats
 
     return panel_stats
+
+
+def build_pathways_by_program(
+    enrichment_filtered_csv: str | None,
+    top_n: int = 12,
+) -> dict[int, list[dict[str, object]]]:
+    """Build per-program pathway lists directly from the STRING enrichment CSV.
+
+    Enrichment was removed from the annotation LLM output, so the report's
+    "Top pathway" chip and pathway list are now sourced deterministically from
+    ``string_enrichment/enrichment_filtered.csv`` (columns: program_id,
+    category, description, fdr, inputGenes). Terms are ranked by FDR ascending
+    and capped at ``top_n`` per program.
+    """
+    pathways_by_program: dict[int, list[dict[str, object]]] = {}
+    if not enrichment_filtered_csv or not os.path.exists(enrichment_filtered_csv):
+        return pathways_by_program
+    df = pd.read_csv(enrichment_filtered_csv)
+    if df.empty or "program_id" not in df.columns:
+        return pathways_by_program
+    df = df.copy()
+    df["_fdr"] = pd.to_numeric(df.get("fdr"), errors="coerce")
+    for pid, group in df.groupby("program_id"):
+        try:
+            program_id = int(pid)
+        except (TypeError, ValueError):
+            continue
+        ordered = group.sort_values("_fdr", na_position="last").head(top_n)
+        terms: list[dict[str, object]] = []
+        for _, row in ordered.iterrows():
+            raw_genes = str(row.get("inputGenes", "") or "")
+            genes = [g.strip() for g in raw_genes.split("|") if g.strip()]
+            fdr = row.get("fdr")
+            terms.append(
+                {
+                    "source": str(row.get("category", "") or "").strip(),
+                    "term": str(row.get("description", "") or "").strip(),
+                    "fdr": "" if pd.isna(fdr) else str(fdr),
+                    "genes": genes,
+                }
+            )
+        pathways_by_program[program_id] = terms
+    return pathways_by_program
 
 
 def build_condition_volcano_by_program(
@@ -777,12 +954,18 @@ def generate_report(
     presentation_json: str | None = None,
     dataset_crumb: str = "",
     research_results_dir: str | None = None,
+    top_loading: int = 15,
+    top_unique: int = 8,
+    enrichment_filtered_csv: str | None = None,
 ):
     """Generate the Program Explorer HTML report."""
-    
+
     # Load data
     summary_df = pd.read_csv(summary_csv)
-    panel_stats = build_panel_stats(summary_df, gene_loading_csv)
+    panel_stats = build_panel_stats(
+        summary_df, gene_loading_csv, top_loading=top_loading, top_unique=top_unique
+    )
+    pathways_by_program = build_pathways_by_program(enrichment_filtered_csv)
     presentation = load_presentation(presentation_json)
     volcano_df = None
     if volcano_csv and os.path.exists(volcano_csv):
@@ -877,7 +1060,7 @@ def generate_report(
             'evidence_gaps': research.get('evidence_gaps', []),
             'distinctive': extract_distinctive(annotation_md),
             'regulators': parse_regulators_detailed(annotation_md),
-            'pathways': parse_pathways(annotation_md),
+            'pathways': pathways_by_program.get(topic_id) or parse_pathways(annotation_md),
             'annotation_text': annotation_md,  # For full-text search
             'kegg_fig': f"{enr_rel}/program_{topic_id}_kegg_enrichment.png",
             'process_fig': f"{enr_rel}/program_{topic_id}_process_enrichment.png",
@@ -1116,39 +1299,6 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             padding: 1.5px 7px; border-radius: 5px; background: var(--surface-soft); border: 1px solid var(--border); color: var(--accent-text); }
         .doi a:hover { border-color: var(--accent); }
 
-        /* Per-module evidence-status badge (spec 10). */
-        .mbadge { font-size: 9.5px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
-            padding: 2px 8px; border-radius: 999px; border: 1px solid transparent; white-space: nowrap; align-self: center; }
-        .mbadge.supported { background: var(--ok-soft); color: var(--ok); border-color: color-mix(in srgb, var(--ok) 40%, transparent); }
-        .mbadge.partial { background: var(--warn-soft); color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); }
-        .mbadge.contradictory { background: var(--bad-soft); color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
-        .mbadge.missing { background: var(--gap-soft); color: var(--gap); border-color: var(--border-strong); }
-
-        /* Evidence legend: four visually distinct states. */
-        .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 2px 0 16px; font-size: 11px; color: var(--muted); }
-        .legend .lg { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; }
-        .legend .sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; border: 1px solid transparent; }
-        .legend .sw.supported { background: var(--ok); }
-        .legend .sw.partial { background: var(--warn); }
-        .legend .sw.contradictory { background: var(--bad); }
-        .legend .sw.missing { background: var(--gap); }
-
-        /* Program-level contradictions / evidence-gaps sub-sections. */
-        .evblock { margin-top: 4px; }
-        .evblock + .evblock { margin-top: 18px; }
-        .evblock .evhead { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; }
-        .evblock .evhead .sw { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
-        .evblock.contrad .evhead { color: var(--bad); }
-        .evblock.contrad .evhead .sw { background: var(--bad); }
-        .evblock.gaps .evhead { color: var(--gap); }
-        .evblock.gaps .evhead .sw { background: var(--gap); }
-        .evlist { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-        .evlist li { font-size: 13.5px; color: var(--text-soft); line-height: 1.55; padding: 9px 12px;
-            border-radius: var(--radius-sm); border: 1px solid var(--border); border-left-width: 3px; }
-        .evlist.contrad li { border-left-color: var(--bad); background: var(--bad-soft); }
-        .evlist.gaps li { border-left-color: var(--gap); background: var(--surface-soft); }
-
         .distinctive p { font-size: 15px; color: var(--text-soft); line-height: 1.7; }
         .distinctive p i { color: var(--text); font-style: italic; }
 
@@ -1239,18 +1389,6 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
     const asArray = v => Array.isArray(v) ? v : (v ? String(v).split(/,\s*/).filter(Boolean) : []);
     const cap = s => String(s).charAt(0).toUpperCase() + String(s).slice(1);
 
-    // --- Evidence status + DOI helpers (spec 10) ---
-    // Module status -> CSS class. {supported, partial, contradictory} pass
-    // through; {unsupported} and anything unknown map to the grey "missing"
-    // swatch so the four legend states stay visually distinct.
-    const statusCls = s => {
-        const k = String(s||"").toLowerCase();
-        return (k==="supported"||k==="partial"||k==="contradictory") ? k : "missing";
-    };
-    const statusLabel = s => {
-        const k = String(s||"").toLowerCase();
-        return k==="unsupported" ? "missing" : (k || "");
-    };
     // Split a module's evidence identifiers into PMIDs and DOIs. Accepts legacy
     // m.pmids, new m.dois, and prefixed entries ("PMID:123" / "DOI:10.x/y")
     // mixed into either list (or an optional m.evidence_ids list).
@@ -1271,21 +1409,6 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         (m.evidence_ids||[]).forEach(push);
         return { pmids: [...new Set(pmids)], dois: [...new Set(dois)] };
     }
-    // Build a doi.org URL, URL-encoding parens (%28/%29) which are legal in DOIs
-    // but ambiguous in URLs.
-    const doiHref = d => "https://doi.org/" + encodeURI(String(d)).replace(/\(/g,"%28").replace(/\)/g,"%29");
-
-    const EVIDENCE_LEGEND = [
-        ["supported", "supported"],
-        ["partial", "partial"],
-        ["contradictory", "contradictory"],
-        ["missing", "missing / gap"],
-    ];
-    function legendHtml(){
-        return `<div class="legend">` + EVIDENCE_LEGEND.map(([c,label]) =>
-            `<span class="lg"><span class="sw ${c}"></span>${esc(label)}</span>`).join("") + `</div>`;
-    }
-
     function fmtFDR(fdr){
         const parts = String(fdr).split(/e-?/i);
         if(parts.length < 2) return "FDR " + fdr;
@@ -1345,7 +1468,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         history.replaceState(null, "", "#program-" + id);
         window.scrollTo(0,0);
 
-        const topGenes = asArray(p.top_loading).slice(0,18);
+        const topGenes = asArray(p.top_loading).slice(0,15);
         const uniq = asArray(p.unique).slice(0,8);
         const modules = p.modules || [];
         const regs = p.regulators || [];
@@ -1354,10 +1477,6 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         const topPw = sortedPw[0];
         const maxNl = sortedPw.length ? Math.max(...sortedPw.map(x => negLog(x.fdr))) : 1;
         const conds = Object.keys(p.condition_volcano || {}).sort();
-        const contradictions = p.contradictions || [];
-        const gaps = p.evidence_gaps || [];
-        const hasStatus = modules.some(m => m.status);
-        const showLegend = hasStatus || contradictions.length || gaps.length;
 
         const regGlance = regs.length
             ? regs.map(r => `<span class="rg" style="color:var(--${r.role==="activator"?"down":"up"})">${esc(r.gene)}</span>`).join("")
@@ -1409,39 +1528,19 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 <span class="htitle">Functional modules</span>
                 <span class="hmeta">${modules.length} mechanistic module${modules.length===1?"":"s"}</span>
                 <span class="chev">\u203a</span></button>
-            <div class="body">${showLegend ? legendHtml() : ""}<div class="modules">${modules.map((m,i) => {
+            <div class="body"><div class="modules">${modules.map((m,i) => {
                 const ev = evidenceIds(m);
                 return `
                 <article class="mod">
-                    <div class="mhead"><span class="mnum">${i+1}</span><h3>${esc(m.title)}</h3>${m.status ? `<span class="mbadge ${statusCls(m.status)}">${esc(statusLabel(m.status))}</span>` : ""}</div>
+                    <div class="mhead"><span class="mnum">${i+1}</span><h3>${esc(m.title)}</h3></div>
                     ${m.summary ? `<p class="msum">${esc(m.summary)}</p>` : ""}
                     ${(m.key_genes||[]).length ? `<div class="genes">${m.key_genes.map(g => `<span class="gene">${esc(g)}</span>`).join("")}</div>` : ""}
                     ${ev.pmids.length ? `<div class="pmidrow"><span class="pmidlabel">PMID</span><div class="pmids">${ev.pmids.map(x => `<a href="https://pubmed.ncbi.nlm.nih.gov/${esc(x)}/" target="_blank" rel="noopener">${esc(x)}</a>`).join("")}</div></div>` : ""}
-                    ${ev.dois.length ? `<div class="doirow"><span class="pmidlabel">DOI</span><div class="doi">${ev.dois.map(d => `<a href="${doiHref(d)}" target="_blank" rel="noopener">${esc(d)}</a>`).join("")}</div></div>` : ""}
-                    ${(m.evidence||m.mechanism) ? `<details><summary>Evidence &amp; proposed mechanism</summary><div class="disc">
-                        ${m.evidence ? `<div class="field"><div class="flabel">Evidence used</div><p>${esc(m.evidence)}</p></div>` : ""}
-                        ${m.mechanism ? `<div class="field"><div class="flabel">Proposed mechanism</div><p>${esc(m.mechanism)}</p></div>` : ""}
+                    ${m.evidence ? `<details><summary>Evidence used</summary><div class="disc">
+                        <div class="field"><p>${esc(m.evidence)}</p></div>
                     </div></details>` : ""}
                 </article>`;}).join("")}</div></div>
         </section>
-
-        ${(contradictions.length || gaps.length) ? `<section class="section open" id="sec-evidence">
-            <button class="head" onclick="toggleSection('sec-evidence')">
-                <span class="htitle">Evidence status</span>
-                <span class="hmeta">${contradictions.length} contradiction${contradictions.length===1?"":"s"} &middot; ${gaps.length} evidence gap${gaps.length===1?"":"s"}</span>
-                <span class="chev">›</span></button>
-            <div class="body">
-                ${legendHtml()}
-                ${contradictions.length ? `<div class="evblock contrad">
-                    <div class="evhead"><span class="sw"></span>Contradictions</div>
-                    <ul class="evlist contrad">${contradictions.map(c => `<li>${esc(c)}</li>`).join("")}</ul>
-                </div>` : ""}
-                ${gaps.length ? `<div class="evblock gaps">
-                    <div class="evhead"><span class="sw"></span>Evidence gaps</div>
-                    <ul class="evlist gaps">${gaps.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
-                </div>` : ""}
-            </div>
-        </section>` : ""}
 
         ${p.distinctive ? `<section class="section open distinctive" id="sec-distinct">
             <button class="head" onclick="toggleSection('sec-distinct')">
@@ -1680,6 +1779,13 @@ if __name__ == '__main__':
         help="Condition-specific regulator matrix as condition=path; repeatable",
     )
     parser.add_argument("--gene-loading-csv")
+    parser.add_argument(
+        "--enrichment-filtered-csv",
+        help="STRING enrichment_filtered.csv; sources the deterministic "
+        "per-program pathway list and 'Top pathway' chip",
+    )
+    parser.add_argument("--top-loading", type=int, default=15)
+    parser.add_argument("--top-unique", type=int, default=8)
     parser.add_argument("--output-html")
     parser.add_argument(
         "--presentation-json",
@@ -1728,4 +1834,7 @@ if __name__ == '__main__':
         presentation_json=getattr(args, "presentation_json", None),
         dataset_crumb=getattr(args, "dataset_crumb", "") or "",
         research_results_dir=getattr(args, "research_results_dir", None),
+        top_loading=int(getattr(args, "top_loading", 15) or 15),
+        top_unique=int(getattr(args, "top_unique", 8) or 8),
+        enrichment_filtered_csv=getattr(args, "enrichment_filtered_csv", None),
     )

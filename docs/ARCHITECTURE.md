@@ -15,8 +15,13 @@ Agent SDK literature agents** (one per program) + a **deterministic evidence ver
 1. **Literature research happens ONLY in the research agents, via MCP.** Deterministic
    code may *validate* identifiers (does this PMID/DOI resolve?) but must not *research*.
 2. **Parallelism is controlled in Python (`asyncio` + `Semaphore`)**, never by a manager agent.
-3. **Anthropic API only.** No Vertex, no AI-gateway, no Bedrock, no OAuth. Live calls for
-   subagents; **Batch API** (`client.messages.batches.*`) for annotation/presentation/theme.
+3. **Anthropic only** (no Vertex / AI-gateway / Bedrock). **Auth is split by executor:**
+   the research subagents (②) run the local `claude` CLI on the user's **Claude.ai
+   subscription** (`claude login`) — `ANTHROPIC_API_KEY` is *withheld* from the research
+   step so the CLI uses the subscription, not API credit. The batch transforms (③,
+   annotation/presentation/theme) use the **Batch API** (`client.messages.batches.*`) on
+   the **API key**. So: **research → subscription, batch → API credit.** (Override via
+   `research.auth: api` in the config to bill research to the API key too.)
 4. The Agent SDK runs **locally**.
 5. **Source is read-only.** Vendor FROM `/Volumes/IF_PHAGE/ProgExplorer/` (never mutate it).
    **Never** read/touch `/Volumes/IF_PHAGE/GeneScope/` — off-limits.
@@ -91,12 +96,19 @@ See `gpi/context_profile.py` for the authoritative dataclass and derivations. Ke
 `run_pipeline.PipelineConfig`, and each program bundle's `context` block.
 
 ## `research.schema` (canonical research contract, spec §5)
-Pydantic v2 models — authoritative definition in `research/schema.py`:
+Pydantic v2 models — authoritative definition in `research/schema.py`. Papers attach
+**directly to each mechanism** (no separate claims layer):
 `ResearchResult{program_id, queries[], candidate_mechanisms[CandidateMechanism],
-claims[Claim], evidence[Evidence], contradictions[], evidence_gaps[], agent_summary, meta}`.
-`Claim.context_match ∈ {direct,partial,indirect}`, `direction_match ∈ {consistent,conflicting,unknown}`,
-`status ∈ {supported,partial,unsupported}`. `Evidence` carries verifier-added fields
-(`resolved`, `registry`, `retracted`, `verify_error`) annotated **in place** (no second schema).
+evidence[Evidence], contradictions[], evidence_gaps[], agent_summary, meta}`.
+`CandidateMechanism{name, summary, supporting_genes[], supporting_regulators[], evidence_ids[],
+status ∈ {supported,partial,unsupported}}` — `status` is per-mechanism, derived by the verifier
+from evidence resolvability. The agent submits the flat `AgentResearchResult` whose
+`AgentMechanism.papers[AgentPaper{pmid,doi,title,year,study_type,context_match,note}]` are
+normalized into the deduplicated `Evidence` pool (hard-capped to 3 mechanisms). `Evidence`
+carries `context_match` plus verifier-added fields (`resolved`, `registry`, `retracted`,
+`verify_error`) annotated **in place** (no second schema). The claim-level models
+(`Claim`/`AgentClaim`/`Citation`) are RESERVED for a future entailment-verification step and are
+NOT wired into the active pipeline — see `docs/FUTURE_claim_verification.md`.
 
 ## Key data contracts (verbatim from ProgExplorer recon)
 - **Gene loading CSV:** `Name,Score,program_id,source_program,rank`. Top-loading via
@@ -120,12 +132,12 @@ claims[Claim], evidence[Evidence], contradictions[], evidence_gaps[], agent_summ
   distinctive,regulators[],pathways[],annotation_text,kegg_fig,process_fig,volcano,condition_volcano`.
   Each `modules[]`: `{title,summary,key_genes[],pmids[],evidence,mechanism}`. **Extend for evidence
   status:** add DOI links (recon: current renderer does PMID-only) and visually separate
-  supported/partial/contradictory/missing (spec §10), driven by claim `status`/`contradictions`/`evidence_gaps`.
+  supported/partial/contradictory/missing (spec §10), driven by mechanism `status`/`contradictions`/`evidence_gaps`.
 - **The `modules[]` prompt-context shape** the annotation prompt consumes (via
   `evidence_context.format_research_evidence_context`, renamed from `format_manual_literature_context`):
   `{module_rank, module_name, supporting_genes[], evidence_ids[] (PMID and/or DOI),
   literature_summary, status}`. `research_evidence_adapter.py` maps each `ResearchResult`
-  `candidate_mechanism` + its supported `claims`/`evidence` into this shape.
+  `candidate_mechanism` (reading `mechanism.status` directly) + its linked `evidence` into this shape.
 
 ## Verification expectations (every component)
 Actually exercise it: import it, run its CLI on a fixture (`tests/fixtures/`), or unit-test it.

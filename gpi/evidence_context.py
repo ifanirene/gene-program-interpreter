@@ -37,7 +37,7 @@ import logging
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
 import numpy as np
 import pandas as pd
@@ -521,8 +521,9 @@ def format_research_evidence_context(ctx: Dict[str, Any]) -> str:
 
     Reads the `modules[]` shape produced by `research_evidence_adapter`:
     `{module_rank, module_name, supporting_genes[], evidence_ids[] (PMID and/or
-    DOI), literature_summary, status}`. The per-module `status`
-    (supported/partial/unsupported) is rendered explicitly.
+    DOI), literature_summary, status}`. The per-module `status` is NOT surfaced to
+    the LLM (it still drives the report's badges) so it does not bias final-module
+    selection; the modules are framed as verified candidates, not fixed boundaries.
     """
     research = ctx.get("research_evidence_modules", {})
     if not isinstance(research, dict):
@@ -549,13 +550,11 @@ def format_research_evidence_context(ctx: Dict[str, Any]) -> str:
         genes = ", ".join(module.get("supporting_genes", [])) or "None listed"
         evidence_ids = ", ".join(module.get("evidence_ids", [])) or "None listed"
         summary = str(module.get("literature_summary", "")).strip()
-        status = str(module.get("status", "")).strip() or "unspecified"
         lines.extend(
             [
                 f"Module {rank}: {module_name}",
-                f"- Status: {status}",
                 f"- Supporting genes: {genes}",
-                f"- Supporting evidence (PMID/DOI): {evidence_ids}",
+                f"- Supporting evidence (PMID): {evidence_ids}",
                 f"- Literature summary: {summary}",
                 "",
             ]
@@ -779,8 +778,15 @@ def select_top_condition_regulators(
     program_id: int,
     top_positive_regulators: int = 3,
     top_negative_regulators: int = 3,
+    masked_regulators: Optional[Iterable[str]] = None,
 ) -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
-    """Select nonredundant top activators/repressors by adjusted p-value."""
+    """Select nonredundant top activators/repressors by adjusted p-value.
+
+    ``masked_regulators`` (case-insensitive gene symbols) are dropped BEFORE the top-N
+    cut so promiscuous, non-program-specific regulators do not consume activator/repressor
+    slots — the top-N is filled from the remaining program-specific regulators instead.
+    """
+    mask = {str(m).strip().lower() for m in (masked_regulators or []) if str(m).strip()}
     selected: Dict[str, Dict[str, List[Dict[str, Any]]]] = {}
     for condition, by_program in regulator_data.items():
         reg_df = by_program.get(program_id)
@@ -788,6 +794,12 @@ def select_top_condition_regulators(
             selected[condition] = {"positive": [], "negative": []}
             continue
         collapsed = collapse_regulator_guides(reg_df, significant_only=True)
+        if mask and not collapsed.empty:
+            gene_col = "target_gene" if "target_gene" in collapsed.columns else "grna_target"
+            if gene_col in collapsed.columns:
+                collapsed = collapsed[
+                    ~collapsed[gene_col].astype(str).str.strip().str.lower().isin(mask)
+                ]
         positive = sort_regulator_rows_by_significance(
             collapsed[collapsed["log_2_fold_change"] < 0]
         ).head(top_positive_regulators)
@@ -826,12 +838,15 @@ def format_regulator_analysis_context(
     top_positive_regulators: int = 3,
     top_negative_regulators: int = 3,
     min_score: int = 400,
+    masked_regulators: Optional[Iterable[str]] = None,
 ) -> str:
     """Format comprehensive regulator analysis with compact STRING interactions.
 
     Dispatches to the condition-specific formatter when `regulator_data` is a
-    condition-keyed mapping.
+    condition-keyed mapping. ``masked_regulators`` (case-insensitive gene symbols) are
+    excluded from selection so promiscuous regulators never fill a top-N slot.
     """
+    mask = {str(m).strip().lower() for m in (masked_regulators or []) if str(m).strip()}
     if regulator_data and all(
         isinstance(value, dict) for value in regulator_data.values()
     ):
@@ -842,6 +857,7 @@ def format_regulator_analysis_context(
             top_positive_regulators=top_positive_regulators,
             top_negative_regulators=top_negative_regulators,
             min_score=min_score,
+            masked_regulators=masked_regulators,
         )
 
     reg_df = regulator_data.get(program_id)
@@ -857,8 +873,10 @@ def format_regulator_analysis_context(
     lines = ["#### Regulator perturbation evidence"]
     lines.append(
         f"(Top {top_positive_regulators} activators + "
-        f"{top_negative_regulators} repressors by adjusted p-value; "
-        "STRING-DB interactions shown)"
+        f"{top_negative_regulators} repressors by adjusted p-value. Arrows (->) list the "
+        "regulator's STRING functional-association partners among the program genes; the "
+        "number in parentheses is the STRING v12 combined score (0-1000: >=400 medium, "
+        ">=700 high confidence), queried live per regulator against the program genes.)"
     )
     lines.append("")
 
@@ -878,6 +896,11 @@ def format_regulator_analysis_context(
 
     activators = validation.get("positive_regulators", []) if validation else []
     repressors = validation.get("negative_regulators", []) if validation else []
+    if mask:
+        activators = [r for r in activators
+                      if str(r.get("regulator", r.get("gene", ""))).strip().lower() not in mask]
+        repressors = [r for r in repressors
+                      if str(r.get("regulator", r.get("gene", ""))).strip().lower() not in mask]
     n_activators = min(len(activators), top_positive_regulators)
     n_repressors = min(len(repressors), top_negative_regulators)
 
@@ -915,6 +938,7 @@ def format_condition_regulator_analysis_context(
     top_positive_regulators: int = 3,
     top_negative_regulators: int = 3,
     min_score: int = 400,
+    masked_regulators: Optional[Iterable[str]] = None,
 ) -> str:
     """Format per-condition regulator evidence for annotation prompts."""
     selected = select_top_condition_regulators(
@@ -922,6 +946,7 @@ def format_condition_regulator_analysis_context(
         program_id=program_id,
         top_positive_regulators=top_positive_regulators,
         top_negative_regulators=top_negative_regulators,
+        masked_regulators=masked_regulators,
     )
     if not selected or all(
         not groups["positive"] and not groups["negative"]
@@ -981,8 +1006,16 @@ def format_condition_regulator_analysis_context(
     lines.append(
         f"(Top {top_positive_regulators} activators and "
         f"{top_negative_regulators} repressors per condition; duplicate guides "
-        "collapsed and ranked by adjusted p-value.)"
+        "collapsed and ranked by adjusted p-value. Arrows (->) list the regulator's "
+        "STRING functional-association partners among the program genes; the number in "
+        "parentheses is the STRING v12 combined score (0-1000: >=400 medium, >=700 high "
+        "confidence), queried live per regulator against the program genes.)"
     )
+    _mask = sorted({str(m).strip() for m in (masked_regulators or []) if str(m).strip()})
+    if _mask:
+        lines.append(
+            f"(Promiscuous, non-program-specific regulators masked from selection: {', '.join(_mask)}.)"
+        )
     lines.append("")
     for condition in sorted(selected.keys()):
         condition_label = condition[:1].upper() + condition[1:]
@@ -1109,6 +1142,7 @@ def generate_prompt(
     top_positive_regulators: int = 3,
     top_negative_regulators: int = 3,
     theme_dictionary: Optional[Dict[str, Any]] = None,
+    masked_regulators: Optional[Iterable[str]] = None,
 ) -> Optional[str]:
     """Assemble the annotation prompt for one program.
 
@@ -1147,17 +1181,17 @@ def generate_prompt(
     context_phrase = _context_phrase(profile)
     if research_evidence_context:
         evidence_guidance = (
-            "- Primary evidence: program genes and regulator perturbation evidence.\n"
-            "- Supporting evidence: research-evidence modules, top KEGG/GO enrichment, "
-            f"gene summaries, cell-type enrichment, and {context_phrase} context.\n"
+            "- Primary evidence: program genes and research-evidence modules\n"
+            "- Supporting evidence: top KEGG/GO enrichment, regulator perturbation "
+            f"evidence, gene summaries, cell-type enrichment, and {context_phrase} context.\n"
             "- Refine final module labels, boundaries, and gene membership using "
             "all supplied evidence, with primary evidence carrying the most weight."
         )
     else:
         evidence_guidance = (
-            "- Primary evidence: program genes and regulator perturbation evidence.\n"
-            "- Supporting evidence: top KEGG/GO enrichment, literature evidence, "
-            f"gene summaries, cell-type enrichment, and {context_phrase} context.\n"
+            "- Primary evidence: program genes\n"
+            "- Supporting evidence: top KEGG/GO enrichment, regulator perturbation "
+            f"evidence, gene summaries, cell-type enrichment, and {context_phrase} context.\n"
             "- Refine final module labels, boundaries, and gene membership using "
             "all supplied evidence, with primary evidence carrying the most weight."
         )
@@ -1174,6 +1208,7 @@ def generate_prompt(
         program_id,
         top_positive_regulators=top_positive_regulators,
         top_negative_regulators=top_negative_regulators,
+        masked_regulators=masked_regulators,
     )
     theme_contrast_context = format_theme_contrast_context(
         theme_dictionary or {},
@@ -1221,6 +1256,7 @@ def build_annotation_requests(
     top_negative_regulators: int = 3,
     thinking: Optional[str] = None,
     effort: Optional[str] = None,
+    masked_regulators: Optional[Iterable[str]] = None,
 ) -> List[dict]:
     """Build Anthropic-batch request dicts for a set of programs.
 
@@ -1249,6 +1285,7 @@ def build_annotation_requests(
             top_positive_regulators=top_positive_regulators,
             top_negative_regulators=top_negative_regulators,
             theme_dictionary=theme_dictionary,
+            masked_regulators=masked_regulators,
         )
         if not prompt:
             continue
@@ -1276,25 +1313,25 @@ You are a {annotation_role}. Interpret Program {program_id}, {annotation_context
 
 ### Primary evidence
 {gene_context}
-{regulator_analysis}
-
-### Supporting evidence
 {research_evidence_context}
 {condition_context}
 {functional_context}
+
+### Supporting evidence
+{ncbi_context}
 {enrichment_context}
 {celltype_context}
-{ncbi_context}
+{regulator_analysis}
 
 ### Interpretation rules
 - Cite genes and supplied evidence for biological claims.
 - Treat research-evidence modules as candidate modules, not fixed final boundaries.
-- Add 1-2 de novo functional theme candidates when primary genes, regulators, or enrichments support them.
-- Do not automatically select all research-evidence candidates; a de novo candidate may replace a research-evidence candidate when it is more specific or better supported by primary evidence.
+- Add 1-2 de novo functional theme candidates when primary gene descriptions, regulators, or enrichments support them.
+- Do not automatically select all research-evidence candidates; a de novo candidate may replace a research-evidence candidate when it is more specific or clearly supported by evidence.
 - Do not refer to upstream labels such as "research-evidence Module 1", "research module", or "candidate module" anywhere in the final output, including the evidence used field; use genes, pathways, regulator evidence, and Supporting PMIDs to trace evidence instead.
-- For each selected final module, choose claim-relevant PMIDs from the supplied literature evidence only when they directly support that final module. If a final module strongly overlaps a research-evidence module, include all supplied PMIDs that support the retained module biology.
-- Select exactly 3 final modules from this candidate pool, ranked by specificity and reasoning; generic-theme-dominated modules should be down-weighted (refer to generic themes to down-weight section).
-- Final program label should be decided after considering all 3 modules and should be a coherent, human-readable biological phrase; If the 3 modules are distinct and do not naturally relate, pick a label based on the most representative module. avoid generic dictionary terms, cell-type filler such as "state/identity" unless necessary.
+- Include all supplied PMIDs, only if a final module strongly overlaps a research-evidence module.
+- Select 1-3 final modules from this candidate pool, ranked by specificity and reasoning; generic-theme-dominated modules should be down-weighted (refer to generic themes to down-weight section).
+- Final program label should be decided after considering all selected modules and should be a coherent, human-readable biological phrase; If the selected modules are distinct and do not naturally relate, pick a label based on the most representative module. Avoid generic dictionary terms, cell-type filler such as "state/identity" unless necessary.
 
 ### Generic themes to down-weight
 {theme_contrast_context}
@@ -1313,14 +1350,13 @@ Then provide the following sections:
    - Connect to {context_phrase} context only when supported by the supplied genes and curated literature evidence.
 
 2. **Functional modules and mechanisms**
-   Group genes into exactly 3 final modules. For each module, use this exact format:
+   Group genes into 1-3 final modules. For each module, use this exact format:
    ```
    Module name
-   1-sentence summary
+   A 2-4 sentence summary — directly reuse or refine the matching research-evidence module's literature summary, folding in notable additional evidence (regulator perturbation, gene summaries, or {context_phrase} context) only when it adds specificity. For a de novo module with no literature summary, write a concise evidence-anchored summary.
    Key genes: list 2-10
    Supporting PMIDs: comma-separated PMIDs directly supporting this final module, or None
-   evidence used: genes and literature, if any.
-   Proposed mechanism: 1-2 sentences, backed by primary program genes, regulator evidence, gene summaries, pathway enrichment, or {context_phrase} context.
+   evidence used: cite any of the supplied evidence that supports this module — program genes, regulator perturbations, enrichment terms, cell-type context, NCBI gene summaries, and/or literature — not only genes and PMIDs. Refer to evidence by its content (gene names, term/pathway names, regulator names), never by upstream labels.
    ```
 
 3. **Distinctive features**
@@ -1332,12 +1368,6 @@ Then provide the following sections:
    ```
    regulator_name (role, log2FC=X): [Confidence: High/Medium/Low]
    Propose a mechanistic hypothesis: How might this regulator control the program's genes/pathways? Cite program genes and evidence.
-   ```
-
-5. **Pathway Enrichment**
-   List 5-7 KEGG/GO enrichment terms with member genes only. Use this exact format and do not add explanatory prose:
-   ```
-   - KEGG/GO category: term (FDR=value) - member genes: gene1, gene2, ...
    ```
 """
 
@@ -1436,6 +1466,7 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         top_negative_regulators=args.top_negative_regulators,
         thinking=args.thinking,
         effort=args.effort,
+        masked_regulators=list(getattr(args, "mask_regulator", None) or []),
     )
 
     if not batch_requests:
@@ -1535,6 +1566,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument("--top-positive-regulators", type=int, default=3)
     p.add_argument("--top-negative-regulators", type=int, default=3)
+    p.add_argument(
+        "--mask-regulator", action="append", metavar="GENE",
+        help="Regulator gene to mask from the annotation's regulator evidence (promiscuous, "
+             "non-program-specific); repeatable. Masked before top-N selection, both conditions.",
+    )
     p.add_argument("--regulator-significance-threshold", type=float, default=0.05)
     p.set_defaults(func=cmd_prepare)
     return parser

@@ -21,7 +21,8 @@ Mapping (per `ResearchResult`):
                             for the mechanism's linked `Evidence` (a paper is included
                             only if its `Evidence` carries a pmid or doi; both are
                             emitted when present).
-  * `status`              = aggregate of linked claims' statuses (see `_module_status`).
+  * `status`              = `mechanism.status` — the verifier's per-mechanism status,
+                            derived from evidence resolvability (see `_mechanism_status`).
 
 @dependencies
 - research.schema.ResearchResult: the canonical, verified evidence contract.
@@ -40,7 +41,6 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
 from research.schema import (
     CandidateMechanism,
-    Claim,
     Evidence,
     ResearchResult,
 )
@@ -51,9 +51,6 @@ from research.schema import (
 from gpi.context_profile import DEFAULT_EVIDENCE_CONTEXT_TYPES
 
 VALID_EVIDENCE_CONTEXT_TYPES: List[str] = list(DEFAULT_EVIDENCE_CONTEXT_TYPES)
-
-# Fixed vocabulary for a module's aggregated status (mirrors research.schema.ClaimStatus).
-_STATUS_PRIORITY = {"supported": 3, "partial": 2, "unsupported": 1}
 
 
 # ----------------------------------------------------------------------------- helpers
@@ -138,78 +135,60 @@ def _evidence_id_strings(
     evidence_ids: Iterable[str],
     evidence_by_id: Dict[str, Evidence],
 ) -> List[str]:
-    """Resolve a mechanism/claim's local evidence ids to 'PMID:<pmid>'/'DOI:<doi>' strings.
+    """Resolve a mechanism's local evidence ids to 'PMID:<pmid>' strings (PMID-only).
 
-    A paper contributes only if its linked `Evidence` carries a pmid or doi. Both are
-    emitted when present. Order follows the input evidence-id order.
+    A paper contributes only if its linked `Evidence` carries a pmid or doi AND is not
+    definitively unresolvable (``resolved is False``). Skipping proven-unresolvable papers keeps
+    a fabricated/deleted identifier from ever surfacing as a clickable citation in the annotation
+    prompt or the report — even when the mechanism is 'supported' by its OTHER (resolved) papers.
+    Papers that are merely unverified (``resolved is None``, e.g. network-unreachable) are kept.
+    Identifiers are **PMID-only** for consistent PubMed hyperlinks; a paper's DOI is emitted only
+    as a fallback when it has no PMID (so a verified DOI-only paper is never silently dropped).
+    Order follows the input evidence-id order.
     """
     resolved: List[str] = []
     for eid in evidence_ids or []:
         evidence = evidence_by_id.get(str(eid).strip())
         if evidence is None:
             continue
+        if evidence.resolved is False:
+            continue  # proven-unresolvable (fabricated/deleted) — never surface as a citation
         pmid = _normalize_pmid(evidence.pmid)
         doi = _normalize_doi(evidence.doi)
         if pmid:
             resolved.append(f"PMID:{pmid}")
-        if doi:
-            resolved.append(f"DOI:{doi}")
+        elif doi:
+            resolved.append(f"DOI:{doi}")  # fallback only when no PMID exists
     return _dedupe_preserve_order(resolved)
 
 
-def _has_resolvable_evidence(
-    evidence_ids: Iterable[str],
-    evidence_by_id: Dict[str, Evidence],
-) -> bool:
-    """True if any linked Evidence carries a pmid or doi (i.e. a resolvable identifier)."""
-    return bool(_evidence_id_strings(evidence_ids, evidence_by_id))
-
-
-def _linked_claims(
+def _mechanism_status(
     mechanism: CandidateMechanism,
-    claims: Sequence[Claim],
-) -> List[Claim]:
-    """Claims linked to a mechanism by shared local evidence-id overlap."""
-    mech_evidence = {str(e).strip() for e in mechanism.evidence_ids if str(e).strip()}
-    if not mech_evidence:
-        return []
-    linked: List[Claim] = []
-    for claim in claims:
-        claim_evidence = {str(e).strip() for e in claim.evidence_ids if str(e).strip()}
-        if mech_evidence & claim_evidence:
-            linked.append(claim)
-    return linked
-
-
-def _aggregate_status(statuses: Iterable[str]) -> Optional[str]:
-    """Aggregate claim statuses: any 'supported' > any 'partial' > 'unsupported'."""
-    best: Optional[str] = None
-    best_rank = 0
-    for status in statuses:
-        rank = _STATUS_PRIORITY.get(status, 0)
-        if rank > best_rank:
-            best_rank = rank
-            best = status
-    return best
-
-
-def _module_status(
-    mechanism: CandidateMechanism,
-    claims: Sequence[Claim],
     evidence_by_id: Dict[str, Evidence],
 ) -> str:
-    """Aggregate module status from linked claims, with an evidence-resolvability fallback.
+    """Per-mechanism status, derived from its evidence's resolvability.
 
-    If any linked claim is 'supported' -> 'supported'; else if any 'partial' -> 'partial';
-    else 'unsupported'. If no claim shares evidence with the mechanism, default from the
-    mechanism's own evidence resolvability: any resolvable (pmid/doi) evidence -> 'partial',
-    none -> 'unsupported'.
+    This applies the SAME rule as ``research/verify._derive_mechanism_status`` (keep the two in
+    sync), recomputed from the on-file ``Evidence.resolved``/``retracted`` flags rather than
+    trusting the stored ``mechanism.status``. For a file produced by the verifier this is
+    byte-identical to the stored status; recomputing also keeps the adapter correct for a file
+    that carries no written status (a pre-refactor file, or a normalized-but-not-yet-verified
+    result), where pydantic would otherwise hand back the default 'partial'.
+
+      * 'supported'   -> >=1 linked evidence resolved (True) and not retracted,
+      * 'partial'     -> has linked evidence but none resolved yet (some resolved is None),
+      * 'unsupported' -> no linked evidence, or all resolved False / retracted.
     """
-    linked = _linked_claims(mechanism, claims)
-    aggregated = _aggregate_status(c.status for c in linked)
-    if aggregated is not None:
-        return aggregated
-    if _has_resolvable_evidence(mechanism.evidence_ids, evidence_by_id):
+    present = [
+        ev
+        for eid in mechanism.evidence_ids
+        if (ev := evidence_by_id.get(str(eid).strip())) is not None
+    ]
+    if not present:
+        return "unsupported"
+    if any(ev.resolved is True and ev.retracted is not True for ev in present):
+        return "supported"
+    if any(ev.resolved is None for ev in present):
         return "partial"
     return "unsupported"
 
@@ -241,12 +220,12 @@ def _map_research_result(
                     mechanism.evidence_ids, evidence_by_id
                 ),
                 "literature_summary": literature_summary,
-                "status": _module_status(mechanism, result.claims, evidence_by_id),
+                "status": _mechanism_status(mechanism, evidence_by_id),
                 "source_file": source_file.name,
             }
         )
 
-    genes_with_limited_literature = _compute_limited_genes(modules, result.claims)
+    genes_with_limited_literature = _compute_limited_genes(modules)
 
     unique_evidence_ids = sorted(
         {eid for module in modules for eid in module.get("evidence_ids", [])}
@@ -264,17 +243,12 @@ def _map_research_result(
     return program_id, context
 
 
-def _compute_limited_genes(
-    modules: Sequence[Dict[str, Any]],
-    claims: Sequence[Claim],
-) -> List[str]:
-    """Genes that appear only in unsupported evidence.
+def _compute_limited_genes(modules: Sequence[Dict[str, Any]]) -> List[str]:
+    """Genes that appear only in 'unsupported' mechanisms.
 
-    Collect supporting_genes from modules with status 'unsupported' and from claims with
-    status 'unsupported', then drop any gene that also appears in a 'supported'/'partial'
-    module. The adapter does not have the full program gene list, so this is a best-effort
-    proxy for "genes with limited literature" (renamed from the old
-    `genes_with_limited_hepatocyte_literature`).
+    Collect supporting_genes from modules whose status is 'unsupported', then drop any gene
+    that also appears in a 'supported'/'partial' module. The adapter does not have the full
+    program gene list, so this is a best-effort proxy for "genes with limited literature".
     """
     supported_or_partial: Set[str] = set()
     for module in modules:
@@ -286,9 +260,6 @@ def _compute_limited_genes(
     for module in modules:
         if module.get("status") == "unsupported":
             limited_candidates.extend(module.get("supporting_genes", []))
-    for claim in claims:
-        if claim.status == "unsupported":
-            limited_candidates.extend(claim.supporting_genes)
 
     limited = [
         gene
