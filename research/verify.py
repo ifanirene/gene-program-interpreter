@@ -39,7 +39,14 @@ from typing import Optional
 
 import requests
 
-from research.schema import Claim, Evidence, ResearchResult
+from research.schema import (
+    AgentResearchResult,
+    CandidateMechanism,
+    Citation,
+    Claim,
+    Evidence,
+    ResearchResult,
+)
 
 # ---------------------------------------------------------------------------
 # Robustly load literature-review/kernel.py (NOT a package) by repo-relative path
@@ -159,6 +166,111 @@ def resolve_pmids(pmids: list[str]) -> dict[str, dict]:
             rec["doi"] = doi
         out[p] = rec
     return out
+
+
+# ---------------------------------------------------------------------------
+# Flat (agent) -> canonical: build the deduplicated Evidence pool + assign ids
+# ---------------------------------------------------------------------------
+def _norm_doi(doi: Optional[str]) -> Optional[str]:
+    """Canonicalize a DOI for keying: strip a doi.org/ prefix, lower-case."""
+    if not doi:
+        return None
+    d = str(doi).strip()
+    d = re.sub(r"^https?://(dx\.)?doi\.org/", "", d, flags=re.I)
+    d = re.sub(r"^doi:\s*", "", d, flags=re.I)
+    return d.strip().lower() or None
+
+
+def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
+    """Turn a flat ``AgentResearchResult`` (inline citations) into a canonical
+    ``ResearchResult``: dedup the cited papers into one ``Evidence`` pool (by DOI/PMID),
+    assign ``EV-NNN`` ids, and rewrite each claim/mechanism to reference those ids.
+
+    Citations without any identifier are dropped (they cannot be verified). Claim
+    ``status`` is left ``"partial"`` here and finalized by the resolution pass.
+    """
+    pool: list[Evidence] = []
+    id_by_key: dict[tuple, str] = {}
+
+    def _keys(c: Citation) -> list[tuple]:
+        ks: list[tuple] = []
+        nd = _norm_doi(c.doi)
+        if nd:
+            ks.append(("doi", nd))
+        if c.pmid and str(c.pmid).strip():
+            ks.append(("pmid", str(c.pmid).strip()))
+        return ks
+
+    def _intern(c: Citation) -> Optional[str]:
+        ks = _keys(c)
+        if not ks:
+            return None  # no identifier -> cannot verify -> drop
+        eid = next((id_by_key[k] for k in ks if k in id_by_key), None)
+        if eid is None:
+            eid = f"EV-{len(pool) + 1:03d}"
+            pool.append(
+                Evidence(
+                    evidence_id=eid,
+                    pmid=(str(c.pmid).strip() if c.pmid else None),
+                    doi=(str(c.doi).strip() if c.doi else None),
+                    title=c.title,
+                    year=c.year,
+                    study_type=c.study_type,
+                    relevance_note=c.note,
+                )
+            )
+        else:
+            ev = next(e for e in pool if e.evidence_id == eid)
+            if not ev.pmid and c.pmid:
+                ev.pmid = str(c.pmid).strip()
+            if not ev.doi and c.doi:
+                ev.doi = str(c.doi).strip()
+            ev.title = ev.title or c.title
+            ev.year = ev.year or c.year
+            ev.study_type = ev.study_type or c.study_type
+            ev.relevance_note = ev.relevance_note or c.note
+        for k in ks:
+            id_by_key.setdefault(k, eid)
+        return eid
+
+    def _ids(citations: list[Citation]) -> list[str]:
+        seen: list[str] = []
+        for c in citations:
+            eid = _intern(c)
+            if eid and eid not in seen:
+                seen.append(eid)
+        return seen
+
+    mechanisms = [
+        CandidateMechanism(
+            name=m.name,
+            summary=m.summary,
+            supporting_genes=m.supporting_genes,
+            evidence_ids=_ids(m.citations),
+        )
+        for m in agent.candidate_mechanisms
+    ]
+    claims = [
+        Claim(
+            statement=c.statement,
+            supporting_genes=c.supporting_genes,
+            evidence_ids=_ids(c.citations),
+            context_match=c.context_match,
+            status="partial",
+        )
+        for c in agent.claims
+    ]
+    return ResearchResult(
+        program_id=agent.program_id,
+        queries=agent.queries,
+        candidate_mechanisms=mechanisms,
+        claims=claims,
+        evidence=pool,
+        contradictions=agent.contradictions,
+        evidence_gaps=agent.evidence_gaps,
+        agent_summary=agent.agent_summary,
+        meta={"normalized_from_agent": True},
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -359,32 +471,28 @@ def _apply_claims_and_meta(rr: ResearchResult) -> None:
         seen.add(e.evidence_id)
 
     for i, claim in enumerate(rr.claims):
-        if not claim.evidence_ids:
-            continue  # no evidence cited -> do not invent support, leave as-is
         refs = [ev_by_id.get(eid) for eid in claim.evidence_ids]
         missing = [eid for eid, ev in zip(claim.evidence_ids, refs) if ev is None]
         if missing:
             notes.append(f"claim[{i}] references unknown evidence_id(s): {missing}")
         present = [ev for ev in refs if ev is not None]
 
-        resolved_any = any(ev.resolved is True for ev in present)
+        # Status is DERIVED from resolution (the agent does not set it):
+        #   all cited papers resolve & none retracted -> supported
+        #   some resolve                              -> partial
+        #   none resolve / all retracted / no cites   -> unsupported
+        n_ok = sum(1 for ev in present if ev.resolved is True and ev.retracted is not True)
         retracted_any = any(ev.retracted is True for ev in present)
-        old = claim.status
-
-        if not resolved_any:
+        if not present or n_ok == 0:
             claim.status = "unsupported"
+        elif n_ok == len(present):
+            claim.status = "supported"
+        else:
+            claim.status = "partial"
         if retracted_any:
-            claim.status = "unsupported"
-            notes.append(f"claim[{i}] cites retracted evidence; forced unsupported")
-        if claim.status == "unsupported" and old != "unsupported":
+            notes.append(f"claim[{i}] cites retracted evidence")
+        if claim.status == "unsupported":
             n_downgraded += 1
-
-        # leave context/direction as the agent set them; only flag inconsistency
-        if claim.status == "supported" and claim.direction_match == "conflicting":
-            notes.append(
-                f"claim[{i}] status=supported but direction_match=conflicting "
-                "(left as agent set)"
-            )
 
     verify_meta = {
         "n_evidence": len(rr.evidence),
@@ -401,15 +509,34 @@ def _apply_claims_and_meta(rr: ResearchResult) -> None:
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
-def verify_research_result(rr: ResearchResult) -> ResearchResult:
-    """Annotate one ``ResearchResult`` in place: resolve evidence identifiers,
-    reconcile PMID<->DOI, flag retractions, downgrade unsupported claims, and
-    populate ``rr.meta['verify']``. Returns the same object."""
-    if not isinstance(rr, ResearchResult):
-        raise TypeError(f"expected ResearchResult, got {type(rr)!r}")
+def verify_research_result(result) -> ResearchResult:
+    """Verify one result: normalize the flat agent output if needed, resolve every
+    evidence identifier, reconcile PMID<->DOI, flag retractions, derive each claim's
+    status from resolution, and populate ``meta['verify']``. Accepts either a flat
+    ``AgentResearchResult`` or a canonical ``ResearchResult``; returns the canonical one."""
+    if isinstance(result, AgentResearchResult):
+        rr = normalize_agent_result(result)
+    elif isinstance(result, ResearchResult):
+        rr = result
+    else:
+        raise TypeError(f"expected ResearchResult or AgentResearchResult, got {type(result)!r}")
     _resolve_evidence(rr)
     _apply_claims_and_meta(rr)
     return rr
+
+
+def _load_result(raw: str) -> ResearchResult:
+    """Load a result file as either the flat ``AgentResearchResult`` (agent output) or
+    the canonical ``ResearchResult``, returning the canonical form. A flat file has no
+    top-level ``evidence`` array; its claims/mechanisms carry inline ``citations``."""
+    data = json.loads(raw)
+    entries = (data.get("claims") or []) + (data.get("candidate_mechanisms") or [])
+    is_flat = "evidence" not in data or any(
+        isinstance(x, dict) and "citations" in x for x in entries
+    )
+    if is_flat:
+        return normalize_agent_result(AgentResearchResult.model_validate(data))
+    return ResearchResult.model_validate(data)
 
 
 def verify_directory(directory: Path, audit_dir: Optional[Path] = None) -> dict:
@@ -433,9 +560,9 @@ def verify_directory(directory: Path, audit_dir: Optional[Path] = None) -> dict:
     for f in files:
         raw = f.read_text()
         try:
-            rr = ResearchResult.model_validate_json(raw)
+            rr = _load_result(raw)  # accepts flat agent output OR canonical form
         except Exception as e:  # noqa: BLE001 - fail loudly with the offending file
-            raise ValueError(f"{f} is not a valid ResearchResult: {e}") from e
+            raise ValueError(f"{f} is not a valid research result: {e}") from e
         rrs.append(rr)
         file_of[id(rr)] = f
         # raw record kept separate from summaries (spec P1): pre-verify snapshot
@@ -495,6 +622,7 @@ def main(argv: Optional[list[str]] = None) -> int:
 __all__ = [
     "verify_research_result",
     "verify_directory",
+    "normalize_agent_result",
     "resolve_pmids",
     "verify_dois",
     "crossref_lookup",

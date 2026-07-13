@@ -102,14 +102,64 @@ class ResearchResult(BaseModel):
         return {e.evidence_id: e for e in self.evidence}
 
 
-def submit_result_tool_schema() -> dict:
-    """JSON Schema for the agent's required `submit_result` tool input.
+# =====================================================================================
+# Agent-facing (flat) schema — what the research agent actually submits.
+#
+# The agent cites papers INLINE on each claim/mechanism (`citations`); it does NOT
+# assign evidence ids, maintain a separate `evidence[]` pool, or set claim `status`.
+# `research/verify.py` deterministically normalizes this into the canonical
+# `ResearchResult` above — building the deduplicated Evidence pool, assigning ids,
+# resolving every identifier, and deriving each claim's status from resolution.
+# This keeps id/dedup/verification bookkeeping out of the LLM (where it is error-prone)
+# and in deterministic code (where it is reliable).
+# =====================================================================================
 
-    The runner registers a tool that accepts exactly a `ResearchResult` (minus the
-    verifier/audit fields the agent must not author).
-    """
-    schema = ResearchResult.model_json_schema()
-    return schema
+
+class Citation(BaseModel):
+    """A paper cited inline by a claim/mechanism. At least one of pmid/doi must be set."""
+
+    pmid: Optional[str] = None
+    doi: Optional[str] = None
+    title: Optional[str] = None
+    year: Optional[int] = None
+    study_type: Optional[str] = None
+    note: Optional[str] = Field(default=None, description="Why this paper supports the point.")
+
+
+class AgentClaim(BaseModel):
+    statement: str
+    supporting_genes: List[str] = Field(default_factory=list)
+    citations: List[Citation] = Field(default_factory=list)
+    context_match: ContextMatch = Field(
+        default="indirect", description="How directly the evidence fits the cell-type context."
+    )
+
+
+class AgentMechanism(BaseModel):
+    """A proposed functional theme (1-3 per program). Maps to one annotation module."""
+
+    name: str
+    summary: str = ""
+    supporting_genes: List[str] = Field(default_factory=list)
+    citations: List[Citation] = Field(default_factory=list)
+
+
+class AgentResearchResult(BaseModel):
+    """What the research agent submits (flat). Verify normalizes it to `ResearchResult`."""
+
+    program_id: str
+    queries: List[str] = Field(default_factory=list)
+    candidate_mechanisms: List[AgentMechanism] = Field(default_factory=list)
+    claims: List[AgentClaim] = Field(default_factory=list)
+    contradictions: List[str] = Field(default_factory=list)
+    evidence_gaps: List[str] = Field(default_factory=list)
+    agent_summary: str = ""
+
+
+def submit_result_tool_schema() -> dict:
+    """JSON Schema for the agent's required `submit_result` tool input — the FLAT
+    `AgentResearchResult`. The agent cites papers inline; verify.py does the rest."""
+    return AgentResearchResult.model_json_schema()
 
 
 __all__ = [
@@ -117,6 +167,10 @@ __all__ = [
     "Claim",
     "CandidateMechanism",
     "ResearchResult",
+    "Citation",
+    "AgentClaim",
+    "AgentMechanism",
+    "AgentResearchResult",
     "ContextMatch",
     "DirectionMatch",
     "ClaimStatus",

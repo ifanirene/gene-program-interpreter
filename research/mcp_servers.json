@@ -1,17 +1,18 @@
 {
-  "_comment": "Read-only literature MCP servers handed to each Claude Agent SDK research session (research happens ONLY in agents via MCP; Anthropic-only; Agent SDK runs locally). Server names are fixed to pubmed/biorxiv/openalex so the allowlist mcp__pubmed__*, mcp__biorxiv__*, mcp__openalex__* matches. The loader substitutes ${ENV_VAR} placeholders from os.environ (repo .env) at launch; no secret values are stored here.",
+  "_comment": "OPTIONAL external-stdio literature-server config, used ONLY when research/research_parallel.py runs with lit_mode='external' (--external-mcp). The DEFAULT is lit_mode='inprocess', which serves PubMed/OpenAlex/Crossref from an in-process SDK MCP server (research/literature.py) and does NOT read this file — nothing to install. In external mode the server names pubmed / biorxiv / openalex are required (EXPECTED_EXTERNAL_SERVERS) and the read-only allowlist is derived from them as mcp__pubmed__*, mcp__biorxiv__*, mcp__openalex__*. ${VAR} placeholders are substituted from os.environ (loaded from the repo .env); no secret values are stored here. These are the third-party community servers pinned in docs/INSTALL_MCP.md (Option B) — they run with your local privileges, so review/pin them and CONFIRM each server's exact env-var names against its README before use, then verify with `claude mcp list` / `/mcp`. The interactive-only plugin path (lit_mode='plugin', --plugin) also does NOT read this file.",
   "mcpServers": {
     "pubmed": {
       "command": "uvx",
       "args": ["--from", "mcp-simple-pubmed", "mcp-simple-pubmed"],
       "env": {
         "PUBMED_EMAIL": "${PUBMED_EMAIL}",
-        "NCBI_API_KEY": "${NCBI_API_KEY}"
+        "PUBMED_API_KEY": "${NCBI_API_KEY}"
       }
     },
     "biorxiv": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/JackKuo666/bioRxiv-MCP-Server", "biorxiv-mcp-server"]
+      "args": ["--from", "git+https://github.com/JackKuo666/bioRxiv-MCP-Server", "biorxiv-mcp-server"],
+      "env": {}
     },
     "openalex": {
       "command": "npx",

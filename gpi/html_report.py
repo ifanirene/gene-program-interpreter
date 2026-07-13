@@ -572,6 +572,84 @@ def _coerce_evidence_note(item: object) -> str:
     return str(item)
 
 
+def _normalize_module_entry(entry: object) -> dict[str, object]:
+    """Carry across verbatim ``status``/``dois``/``pmids``/``title`` from a
+    *pre-shaped* module (or a bare ``candidate_mechanism``). Non-dict entries and
+    unknown shapes yield ``{}`` so nothing downstream breaks."""
+    if not isinstance(entry, dict):
+        return {}
+    norm: dict[str, object] = {}
+    status = entry.get("status")
+    if isinstance(status, str) and status.strip():
+        norm["status"] = status.strip().lower()
+    dois = entry.get("dois")
+    if isinstance(dois, list):
+        norm["dois"] = [str(d).strip() for d in dois if str(d).strip()]
+    pmids = entry.get("pmids")
+    if isinstance(pmids, list):
+        norm["pmids"] = [str(x).strip() for x in pmids if str(x).strip()]
+    title = entry.get("title") or entry.get("name") or entry.get("mechanism")
+    if isinstance(title, str) and title.strip():
+        norm["title"] = title.strip()
+    return norm
+
+
+def _derive_modules_from_research_result(data: dict) -> list[dict[str, object]]:
+    """Derive per-module ``{title, status, pmids, dois}`` from a *raw*
+    ``ResearchResult`` (``research/schema.py``), whose ``candidate_mechanisms`` +
+    ``claims`` + ``evidence`` are NOT pre-joined.
+
+    Reuses the research adapter's mechanism→claims/evidence join
+    (``research_evidence_adapter._map_research_result``) so the DOI/status logic
+    lives in exactly one place. The adapter emits ``evidence_ids`` as
+    ``"PMID:<pmid>"`` / ``"DOI:<doi>"`` strings and a claims-aggregated ``status``;
+    here we split those back into ``pmids``/``dois`` lists for rendering.
+
+    Defensive: any import or validation failure yields ``[]`` so an unfamiliar
+    shape still renders gracefully.
+    """
+    try:
+        from research.schema import ResearchResult
+        from gpi.research_evidence_adapter import _map_research_result
+    except Exception:
+        return []
+    try:
+        result = ResearchResult.model_validate(data)
+        _, context = _map_research_result(
+            result, source_file=Path(f"P{result.program_id}.json")
+        )
+    except Exception:
+        return []
+
+    modules: list[dict[str, object]] = []
+    for mod in context.get("modules", []):
+        pmids: list[str] = []
+        dois: list[str] = []
+        for eid in mod.get("evidence_ids", []):
+            text = str(eid).strip()
+            if text.upper().startswith("PMID:"):
+                value = text.split(":", 1)[1].strip()
+                if value:
+                    pmids.append(value)
+            elif text.upper().startswith("DOI:"):
+                value = text.split(":", 1)[1].strip()
+                if value:
+                    dois.append(value)
+        norm: dict[str, object] = {}
+        title = mod.get("module_name")
+        if isinstance(title, str) and title.strip():
+            norm["title"] = title.strip()
+        status = mod.get("status")
+        if isinstance(status, str) and status.strip():
+            norm["status"] = status.strip().lower()
+        if pmids:
+            norm["pmids"] = pmids
+        if dois:
+            norm["dois"] = dois
+        modules.append(norm)
+    return modules
+
+
 def _normalize_research_results(data: dict) -> dict:
     """Normalize a companion ``research_results/{id}.json`` into card fields.
 
@@ -587,10 +665,12 @@ def _normalize_research_results(data: dict) -> dict:
 
     ``modules`` is used to *augment* (never replace) the annotation-derived
     modules: only the ``status``/``dois``/``pmids`` fields are carried across,
-    matched positionally (by module rank). Both a pre-shaped ``modules`` list and
-    a ``ResearchResult``-style ``candidate_mechanisms`` list are accepted; only
-    fields present verbatim on each entry are used (module ``status`` is not
-    *derived* from claims here — that mapping belongs to the research adapter).
+    matched positionally (by module rank). Three input shapes are handled:
+      * a pre-shaped ``modules`` list -> fields copied verbatim;
+      * a *raw* ``ResearchResult`` (has ``candidate_mechanisms`` + ``evidence``,
+        with no pre-joined ``modules``) -> ``status``/``pmids``/``dois`` are
+        *derived* by reusing the research adapter's join;
+      * a bare ``candidate_mechanisms`` list (no evidence) -> title-only, verbatim.
     """
     if not isinstance(data, dict):
         return {"contradictions": [], "evidence_gaps": [], "modules": []}
@@ -607,27 +687,19 @@ def _normalize_research_results(data: dict) -> dict:
     ]
 
     raw_modules = data.get("modules")
-    if not isinstance(raw_modules, list):
-        raw_modules = data.get("candidate_mechanisms")
-    modules: list[dict[str, object]] = []
-    for entry in raw_modules or []:
-        if not isinstance(entry, dict):
-            modules.append({})
-            continue
-        norm: dict[str, object] = {}
-        status = entry.get("status")
-        if isinstance(status, str) and status.strip():
-            norm["status"] = status.strip().lower()
-        dois = entry.get("dois")
-        if isinstance(dois, list):
-            norm["dois"] = [str(d).strip() for d in dois if str(d).strip()]
-        pmids = entry.get("pmids")
-        if isinstance(pmids, list):
-            norm["pmids"] = [str(x).strip() for x in pmids if str(x).strip()]
-        title = entry.get("title") or entry.get("name") or entry.get("mechanism")
-        if isinstance(title, str) and title.strip():
-            norm["title"] = title.strip()
-        modules.append(norm)
+    if isinstance(raw_modules, list):
+        modules = [_normalize_module_entry(entry) for entry in raw_modules]
+    elif "candidate_mechanisms" in data and "evidence" in data:
+        # Raw ResearchResult: mechanisms/claims/evidence are not pre-joined, so
+        # derive status + real pmids/dois via the adapter's join.
+        modules = _derive_modules_from_research_result(data)
+    else:
+        candidate = data.get("candidate_mechanisms")
+        modules = (
+            [_normalize_module_entry(entry) for entry in candidate]
+            if isinstance(candidate, list)
+            else []
+        )
 
     return {
         "contradictions": contradictions,
