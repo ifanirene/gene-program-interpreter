@@ -120,12 +120,8 @@ def test_research_wiring_inprocess_default_is_sandboxed(
     pytest.importorskip("claude_agent_sdk")
     from research.research_parallel import DISALLOWED_TOOLS, dry_run, resolve_allowed_tools
 
-    # Allowlist by mode.
-    assert resolve_allowed_tools({}, "inprocess")[:1] == ["mcp__literature__*"]
-    assert {"mcp__pubmed__*", "mcp__openalex__*"}.issubset(
-        set(resolve_allowed_tools({"pubmed": {}, "openalex": {}}, "external"))
-    )
-    assert "mcp__plugin_bio-research_pubmed__*" in resolve_allowed_tools({}, "plugin")
+    # The allowlist is the single in-process literature family + Read + submit.
+    assert resolve_allowed_tools()[0] == "mcp__literature__*"
 
     paths = build_all_bundles(
         str(gene_loading_csv),
@@ -134,25 +130,16 @@ def test_research_wiring_inprocess_default_is_sandboxed(
         out_dir=str(tmp_path / "program_bundles"),
         program_ids=[10],
     )
-    summary = dry_run(paths, out_dir=str(tmp_path / "out"))  # lit_mode defaults to inprocess
+    summary = dry_run(paths, out_dir=str(tmp_path / "out"))
 
-    assert summary["lit_mode"] == "inprocess"
-    assert summary["mcp_servers_loaded"] == []  # nothing external loaded
     assert summary["allowed_tools"][0] == "mcp__literature__*"
     pp = summary["per_program"][0]
-    assert set(pp["mcp_server_names"]) == {"literature", "gpi"}
+    assert set(pp["mcp_server_names"]) == {"literature", "gpi"}  # in-process only
     assert pp["setting_sources"] == []  # sandboxed
     assert pp["strict_mcp_config"] is True  # ignore any settings-file MCP servers
     assert "Bash" in pp["disallowed_tools"] and "WebSearch" in pp["disallowed_tools"]
     assert set(DISALLOWED_TOOLS).issubset(set(pp["disallowed_tools"]))
     assert pp["options_ok"] is True
-
-    # External mode still wires correctly from the repo config.
-    repo_mcp = Path(__file__).resolve().parent.parent / "research" / "mcp_servers.json"
-    ext = dry_run(paths, out_dir=str(tmp_path / "ext"), lit_mode="external", mcp_config_path=str(repo_mcp))
-    assert ext["lit_mode"] == "external"
-    assert {"pubmed", "biorxiv", "openalex"}.issubset(set(ext["mcp_servers_loaded"]))
-    assert "mcp__pubmed__*" in ext["per_program"][0]["allowed_tools"]
 
 
 def test_adapter_maps_research_result_to_modules(tmp_path):

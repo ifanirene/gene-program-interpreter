@@ -9,28 +9,26 @@ agent — parallelism is controlled entirely here, in Python. Each session:
     (``<workspaces>/{program_id}/program_bundles/{program_id}.json``), so the agent's
     ``Read`` tool can never see another program's bundle;
   * is given the shared research protocol (``research/protocol.md``) as its system prompt;
-  * is wired to the read-only literature tools (default ``lit_mode="inprocess"``: an
-    in-process ``literature`` MCP server, ``research/literature.py``, whose tools call
-    PubMed / OpenAlex / Crossref via ``httpx`` — nothing external is launched or inherited,
-    so it works identically headless and interactive; ``"external"`` uses stdio servers from
-    ``research/mcp_servers.json`` instead, ``"plugin"`` the interactive BioResearch plugin)
-    plus an in-process ``gpi`` MCP server exposing a single ``submit_result`` tool;
+  * is wired to the read-only literature tools via an in-process ``literature`` MCP server
+    (``research/literature.py``) whose tools call PubMed / OpenAlex / Crossref via ``httpx``
+    — nothing external is launched or inherited, so it works identically headless and
+    interactive — plus an in-process ``gpi`` MCP server exposing a single ``submit_result`` tool;
   * is sandboxed (``setting_sources=[]`` + ``strict_mcp_config=True`` + a side-effect
-    ``disallowed_tools`` denylist) except in the interactive ``plugin`` mode;
+    ``disallowed_tools`` denylist);
   * is capped by SDK-native ``max_turns`` and ``max_budget_usd`` (per-session cost cap),
     and by a Python ``asyncio`` per-program wall-clock timeout.
 
 The AGENT decides every query; deterministic code never researches on its own initiative.
-In ``inprocess`` mode the literature tools execute their HTTP calls inside this process
-(which holds the API keys) when the agent invokes them — the SDK bridges the in-process
-server to the subprocess. This module captures the agent's single ``submit_result``
+The literature tools execute their HTTP calls inside this process (which holds the API
+keys) when the agent invokes them — the SDK bridges the in-process server to the
+subprocess. This module captures the agent's single ``submit_result``
 payload, records an audit trace, and — on any failure — writes a deterministic minimal
 ``ResearchResult`` so downstream stages stay whole.
 
 Run:
     python -m research.research_parallel --bundles program_bundles/ \
         --out-dir research_results/ --concurrency 4 \
-        --model claude-sonnet-4-5-20250929 --max-turns 30 --max-budget-usd 1.0
+        --model claude-sonnet-4-6 --max-turns 30 --max-budget-usd 1.0
     python -m research.research_parallel ... --dry-run   # build+validate config, no API spend
 """
 
@@ -41,10 +39,9 @@ import asyncio
 import json
 import logging
 import os
-import re
 import shutil
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from claude_agent_sdk import (
     AssistantMessage,
@@ -71,16 +68,10 @@ logger = logging.getLogger(__name__)
 
 # --------------------------------------------------------------------------- constants
 
-# Literature-server source for a session (``lit_mode``):
-#   "inprocess" (DEFAULT) — an in-process SDK MCP server (research/literature.py) whose tools
-#       call PubMed / OpenAlex / Crossref directly via httpx. Nothing external is launched or
-#       inherited, so the literature tools are available IDENTICALLY headless and interactive.
-#       This is the reliable default and needs no server install.
-#   "external"  — external stdio literature servers loaded from research/mcp_servers.json
-#       (community uvx/npx servers). Headless-correct too, but requires those servers installed.
-#   "plugin"    — INTERACTIVE ONLY: the user's installed BioResearch plugin servers, inherited
-#       via setting_sources=["user"]. Inline/hosted; they do NOT reach a headless subprocess.
-LIT_MODES = ("inprocess", "external", "plugin")
+# The literature tools are served by a single in-process SDK MCP server
+# (research/literature.py) whose tools call PubMed / OpenAlex / Crossref directly via httpx.
+# Nothing external is launched or inherited, so the tools are available IDENTICALLY headless
+# and interactive, and no server install / MCP config is required.
 
 # Tools every session may use regardless of source (exact matches). ``Read`` stays allowed so
 # the agent can read its own bundle from the session cwd.
@@ -94,43 +85,15 @@ DISALLOWED_TOOLS: List[str] = [
     "Agent", "Task", "Skill", "SendMessage", "KillShell", "TodoWrite",
 ]
 
-# Plugin (interactive) path allowlist — the installed BioResearch plugin tools
-# (pubmed / consensus / biorxiv; there is NO OpenAlex in the plugin).
-PLUGIN_ALLOWED_TOOLS: List[str] = [
-    "mcp__plugin_bio-research_pubmed__*",
-    "mcp__plugin_bio-research_consensus__*",
-    "mcp__plugin_bio-research_biorxiv__*",
-]
 
-# Server names required in mcp_servers.json for ``lit_mode="external"``; the allowlist is
-# derived from the loaded server names so it can never drift from the config.
-EXPECTED_EXTERNAL_SERVERS = ("pubmed", "biorxiv", "openalex")
-
-
-def resolve_allowed_tools(external_servers: Dict[str, Any], lit_mode: str) -> List[str]:
-    """The read-only allowlist for one session, keyed on the literature-server source.
-
-    inprocess: the single in-process ``literature`` server family. external: one
-    ``mcp__{server}__*`` family per stdio server loaded from mcp_servers.json (matches the
-    config exactly). plugin: the fixed BioResearch plugin families. All include ``Read`` +
-    the submit tool.
-    """
-    if lit_mode == "plugin":
-        families = list(PLUGIN_ALLOWED_TOOLS)
-    elif lit_mode == "external":
-        families = [f"mcp__{name}__*" for name in sorted(external_servers)]
-    else:  # inprocess
-        families = [f"mcp__{LITERATURE_SERVER_NAME}__*"]
-    return families + list(BASE_ALLOWED_TOOLS)
+def resolve_allowed_tools() -> List[str]:
+    """The read-only allowlist for one session: the single in-process ``literature`` server
+    family, plus ``Read`` and the submit tool."""
+    return [f"mcp__{LITERATURE_SERVER_NAME}__*"] + list(BASE_ALLOWED_TOOLS)
 
 # In-process SDK MCP server that hosts the submit_result tool.
 SUBMIT_SERVER_NAME = "gpi"
 SUBMIT_TOOL_NAME = "submit_result"
-
-# Env placeholders the loader substitutes into the external MCP config.
-ENV_PLACEHOLDER_KEYS = ("NCBI_API_KEY", "OPENALEX_API_KEY", "PUBMED_EMAIL")
-
-_ENV_PLACEHOLDER_RE = re.compile(r"\$\{([A-Z0-9_]+)\}")
 
 # Repo root = parent of this package dir (research/..). Used to resolve .env + protocol.
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -170,55 +133,6 @@ def load_env_file(
         val = val.strip().strip('"').strip("'")
         if key and key not in os.environ and key not in skip:
             os.environ[key] = val
-
-
-def _substitute_env(obj: Any, missing: set) -> Any:
-    """Recursively replace ``${VAR}`` placeholders in strings using ``os.environ``.
-
-    Records any unresolved variable name in ``missing`` (used to warn, not to crash — a
-    missing key is a launch-time risk to surface, not a config parse error)."""
-    if isinstance(obj, str):
-        def repl(m: "re.Match") -> str:
-            var = m.group(1)
-            if var not in os.environ:
-                missing.add(var)
-                return ""
-            return os.environ[var]
-
-        return _ENV_PLACEHOLDER_RE.sub(repl, obj)
-    if isinstance(obj, dict):
-        return {k: _substitute_env(v, missing) for k, v in obj.items()}
-    if isinstance(obj, list):
-        return [_substitute_env(v, missing) for v in obj]
-    return obj
-
-
-def load_mcp_servers(mcp_config_path: Path) -> Tuple[Dict[str, Any], set]:
-    """Load the external MCP stdio configs from ``mcp_servers.json``.
-
-    Returns ``(servers, missing_env)`` where ``servers`` is the ``mcpServers`` block with
-    ``${ENV}`` placeholders substituted from ``os.environ`` and any non-mcpServers keys
-    (e.g. ``_comment``) dropped, and ``missing_env`` is the set of unresolved placeholders.
-    """
-    mcp_config_path = Path(mcp_config_path)
-    if not mcp_config_path.exists():
-        raise FileNotFoundError(f"MCP config not found: {mcp_config_path}")
-    raw = json.loads(mcp_config_path.read_text(encoding="utf-8"))
-    block = raw.get("mcpServers")
-    if not isinstance(block, dict) or not block:
-        raise ValueError(f"{mcp_config_path} has no non-empty 'mcpServers' object")
-
-    missing: set = set()
-    servers = _substitute_env(block, missing)
-
-    # Fail loudly if the server names the allowlist depends on are absent.
-    for name in EXPECTED_EXTERNAL_SERVERS:
-        if name not in servers:
-            raise ValueError(
-                f"MCP config is missing required server '{name}'; the allowlist "
-                f"mcp__{name}__* would match nothing. Present: {sorted(servers)}"
-            )
-    return servers, missing
 
 
 # ------------------------------------------------------------------- submit_result tool
@@ -297,48 +211,31 @@ def build_options(
     *,
     workspace: Path,
     system_prompt: str,
-    external_servers: Dict[str, Any],
     submit_holder: Dict[str, Any],
     model: str,
     max_turns: int,
     max_budget_usd: float,
-    lit_mode: str = "inprocess",
     literature_client: Optional[LiteratureClient] = None,
 ) -> ClaudeAgentOptions:
     """Construct the per-program ``ClaudeAgentOptions`` (one isolated session).
 
-    Wires the literature tools (per ``lit_mode``) + a fresh in-process ``gpi`` server
-    holding this program's ``submit_result`` tool, the read-only allowlist, deny-by-default
-    permissions + a side-effect denylist, and the SDK-native turn/budget caps.
-
-    ``lit_mode`` (default **"inprocess"**): register the in-process ``literature`` server
-    (research/literature.py) alongside ``gpi``; the agent's literature tools run in THIS
-    process — nothing external is launched or inherited, so retrieval works identically
-    headless and interactive. ``"external"``: register the stdio servers loaded from
-    ``mcp_servers.json`` instead. Both sandbox the session (``setting_sources=[]`` +
-    ``strict_mcp_config=True``), so no user allow-rule can shadow the deny callback.
-    ``"plugin"`` (interactive only): inherit the installed BioResearch plugin via
-    ``setting_sources=["user"]`` (cannot be strict, and does not reach a headless run).
+    Registers the in-process ``literature`` server (research/literature.py) alongside a fresh
+    in-process ``gpi`` server holding this program's ``submit_result`` tool — the agent's
+    literature tools run in THIS process, so retrieval works identically headless and
+    interactive with nothing external to install. The session is sandboxed
+    (``setting_sources=[]`` + ``strict_mcp_config=True``), so no user allow-rule can shadow
+    the deny callback. Also applies the read-only allowlist, a side-effect denylist, and the
+    SDK-native turn/budget caps.
     """
     submit_tool = _make_submit_tool(submit_holder)
     gpi_server = create_sdk_mcp_server(name=SUBMIT_SERVER_NAME, version="1.0.0", tools=[submit_tool])
 
-    mcp_servers: Dict[str, Any] = {SUBMIT_SERVER_NAME: gpi_server}
-    if lit_mode == "plugin":
-        # Literature tools inherited from the user's Claude install (interactive only);
-        # only the in-process submit server is registered explicitly. Cannot be strict.
-        setting_sources: List[str] = ["user"]
-        strict = False
-    elif lit_mode == "external":
-        mcp_servers.update(external_servers)
-        setting_sources = []          # sandbox: isolate from user/project settings
-        strict = True
-    else:  # inprocess (default)
-        mcp_servers[LITERATURE_SERVER_NAME] = build_literature_mcp_server(literature_client)
-        setting_sources = []
-        strict = True
+    mcp_servers: Dict[str, Any] = {
+        SUBMIT_SERVER_NAME: gpi_server,
+        LITERATURE_SERVER_NAME: build_literature_mcp_server(literature_client),
+    }
 
-    allowed = resolve_allowed_tools(external_servers, lit_mode)
+    allowed = resolve_allowed_tools()
     return ClaudeAgentOptions(
         system_prompt=system_prompt,
         mcp_servers=mcp_servers,
@@ -346,8 +243,8 @@ def build_options(
         disallowed_tools=list(DISALLOWED_TOOLS),   # explicit denylist (belt-and-suspenders)
         can_use_tool=_make_can_use_tool(allowed),
         permission_mode="default",          # deny-by-default via can_use_tool; no blanket bypass
-        setting_sources=setting_sources,
-        strict_mcp_config=strict,           # ignore any settings-file MCP servers when sandboxed
+        setting_sources=[],                 # sandbox: isolate from user/project settings
+        strict_mcp_config=True,             # ignore any settings-file MCP servers when sandboxed
         max_turns=max_turns,
         max_budget_usd=max_budget_usd,      # per-session cost cap (spec 8 gate)
         model=model,
@@ -481,11 +378,18 @@ async def _drive_once(
     options: ClaudeAgentOptions,
     submit_holder: Dict[str, Any],
     per_program_timeout: float,
+    program_id: str = "",
+    progress_cb: Optional[Callable[[str, dict], None]] = None,
 ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     """Run ONE query() session to completion (or timeout). Returns (tool_trace, result_info).
 
     ``result_info`` carries the terminal ResultMessage fields (cost/turns/subtype/is_error).
     Raises ``asyncio.TimeoutError`` on wall-clock overrun; propagates SDK exceptions.
+
+    ``progress_cb`` (if given) is called with (event_type, payload) on each literature tool
+    call — the authoritative live signal (``can_use_tool`` is shadowed for whole ``mcp__*``
+    tools, so this ToolUseBlock loop is the only place that sees every query). It is a bare
+    callable (no ``gpi`` import here) and each call is a single small append downstream.
     """
     tool_trace: List[Dict[str, Any]] = []
     result_info: Dict[str, Any] = {}
@@ -503,6 +407,16 @@ async def _drive_once(
                         if block.name == submit_tool_fullname:
                             submit_holder["payload"] = block.input
                             submit_holder["calls"] = submit_holder.get("calls", 0) + 1
+                        elif progress_cb is not None:
+                            # A literature query — surface it live (fire-and-forget).
+                            try:
+                                progress_cb("agent_tool_call", {
+                                    "program_id": program_id,
+                                    "tool": block.name.replace("mcp__", "").replace("__", "."),
+                                    "turn": len(tool_trace),
+                                })
+                            except Exception:
+                                pass
             elif isinstance(msg, ResultMessage):
                 result_info.update(
                     {
@@ -524,14 +438,13 @@ async def _handle_one_program(
     out_dir: Path,
     audit_dir: Path,
     workspaces_root: Path,
-    external_servers: Dict[str, Any],
     system_prompt: str,
     model: str,
     max_turns: int,
     max_budget_usd: float,
     per_program_timeout: float,
-    lit_mode: str = "inprocess",
     literature_client: Optional[LiteratureClient] = None,
+    progress_cb: Optional[Callable[[str, dict], None]] = None,
     max_attempts: int = 2,
 ) -> Path:
     """Drive one program end-to-end: prepare workspace, run the session (retry once on
@@ -540,12 +453,7 @@ async def _handle_one_program(
     failure. Returns the path to the written ``research_results/{program_id}.json``."""
     program_id = _read_bundle_program_id(bundle_path)
     prompt = build_prompt(program_id)
-    if lit_mode == "inprocess":
-        server_names = sorted([LITERATURE_SERVER_NAME, SUBMIT_SERVER_NAME])
-    elif lit_mode == "external":
-        server_names = sorted(list(external_servers.keys()) + [SUBMIT_SERVER_NAME])
-    else:  # plugin
-        server_names = [SUBMIT_SERVER_NAME]
+    server_names = sorted([LITERATURE_SERVER_NAME, SUBMIT_SERVER_NAME])
 
     last_error: Optional[str] = None
     last_trace: List[Dict[str, Any]] = []
@@ -560,12 +468,10 @@ async def _handle_one_program(
             options = build_options(
                 workspace=workspace,
                 system_prompt=system_prompt,
-                external_servers=external_servers,
                 submit_holder=submit_holder,
                 model=model,
                 max_turns=max_turns,
                 max_budget_usd=max_budget_usd,
-                lit_mode=lit_mode,
                 literature_client=literature_client,
             )
             tool_trace, result_info = await _drive_once(
@@ -573,6 +479,8 @@ async def _handle_one_program(
                 options=options,
                 submit_holder=submit_holder,
                 per_program_timeout=per_program_timeout,
+                program_id=program_id,
+                progress_cb=progress_cb,
             )
             last_trace, last_result_info = tool_trace, result_info
 
@@ -650,6 +558,17 @@ async def _handle_one_program(
                 program_id, result_info.get("num_turns"), result_info.get("total_cost_usd"),
                 len(rr.candidate_mechanisms), len(rr.evidence),
             )
+            if progress_cb is not None:
+                try:
+                    progress_cb("agent_finished", {
+                        "program_id": program_id, "status": "ok",
+                        "num_turns": result_info.get("num_turns"),
+                        "cost_usd": result_info.get("total_cost_usd"),
+                        "n_mechanisms": len(rr.candidate_mechanisms),
+                        "n_evidence": len(rr.evidence),
+                    })
+                except Exception:
+                    pass
             return result_path
 
         except asyncio.TimeoutError:
@@ -680,6 +599,16 @@ async def _handle_one_program(
         status="incomplete", attempts=attempts, error=last_error,
     )
     logger.error("Program %s: fallback written (reason: %s)", program_id, last_error)
+    if progress_cb is not None:
+        try:
+            progress_cb("agent_finished", {
+                "program_id": program_id, "status": "incomplete",
+                "num_turns": last_result_info.get("num_turns"),
+                "cost_usd": last_result_info.get("total_cost_usd"),
+                "error": last_error,
+            })
+        except Exception:
+            pass
     return result_path
 
 
@@ -691,12 +620,11 @@ async def run_research(
     out_dir: str | Path = "research_results",
     audit_dir: str | Path = "research_audit",
     concurrency: int = 4,
-    model: str = "claude-sonnet-4-5-20250929",
+    model: str = "claude-sonnet-4-6",
     max_turns: int = 30,
     max_budget_usd: float = 1.0,
-    mcp_config_path: str | Path = "research/mcp_servers.json",
     per_program_timeout: float = 600,
-    lit_mode: str = "inprocess",
+    progress_cb: Optional[Callable[[str, dict], None]] = None,
 ) -> List[Path]:
     """Run per-program research sessions concurrently, bounded by ``Semaphore(concurrency)``.
 
@@ -704,19 +632,19 @@ async def run_research(
     ``research_results/{program_id}.json`` (real result or deterministic fallback) and an
     ``research_audit/{program_id}.audit.json`` record. Returns the result paths.
 
-    ``lit_mode`` (default **"inprocess"**): serve the literature tools from an in-process
-    SDK MCP server (research/literature.py) — nothing external to install, works headless.
-    ``"external"`` loads the stdio servers from ``mcp_servers.json``; ``"plugin"`` inherits
-    the interactive BioResearch plugin (does not reach a headless subprocess). A single
-    ``LiteratureClient`` is shared across concurrent sessions so its rate limiters honour
-    the global NCBI/OpenAlex limits.
+    The literature tools are served by an in-process SDK MCP server (research/literature.py)
+    — nothing external to install, works headless. A single ``LiteratureClient`` is shared
+    across concurrent sessions so its rate limiters honour the global NCBI/OpenAlex limits.
+
+    ``progress_cb`` (optional, a bare ``(event_type, payload)`` callable — no ``gpi`` import
+    here) receives ``agent_queued`` / ``agent_started`` / ``agent_tool_call`` /
+    ``agent_finished`` events so the caller can render a live per-agent view. Each call is a
+    single cheap append downstream and is fire-and-forget.
     """
     if not bundle_paths:
         raise ValueError("run_research received no bundle paths.")
     if not (1 <= concurrency <= 16):
         raise ValueError(f"concurrency must be in [1,16], got {concurrency}")
-    if lit_mode not in LIT_MODES:
-        raise ValueError(f"lit_mode must be one of {LIT_MODES}, got {lit_mode!r}")
 
     load_env_file()
     out_dir = Path(out_dir)
@@ -725,46 +653,46 @@ async def run_research(
     audit_dir.mkdir(parents=True, exist_ok=True)
     workspaces_root = out_dir.parent / "workspaces"
 
-    external_servers: Dict[str, Any] = {}
-    if lit_mode == "external":
-        external_servers, missing_env = load_mcp_servers(Path(mcp_config_path))
-        if missing_env:
-            logger.warning(
-                "MCP config has unresolved env placeholders (sessions may fail to authenticate): %s",
-                sorted(missing_env),
-            )
     system_prompt = read_protocol()
 
-    # One shared literature client for the whole run (inprocess mode) so per-service rate
-    # limiters coordinate across concurrent sessions. Closed in the finally below.
-    lit_client = LiteratureClient() if lit_mode == "inprocess" else None
+    # One shared literature client for the whole run so per-service rate limiters coordinate
+    # across concurrent sessions. Closed in the finally below.
+    lit_client = LiteratureClient()
 
     # Deterministic order so runs are reproducible / auditable.
     bundle_paths = sorted(Path(b) for b in bundle_paths)
     sem = asyncio.Semaphore(concurrency)
 
+    def _emit(event_type: str, payload: dict) -> None:
+        if progress_cb is not None:
+            try:
+                progress_cb(event_type, payload)
+            except Exception:
+                pass
+
     async def _guarded(bundle_path: Path) -> Path:
+        pid = _read_bundle_program_id(bundle_path)
+        _emit("agent_queued", {"program_id": pid})  # waiting on the semaphore
         async with sem:
+            _emit("agent_started", {"program_id": pid})  # a slot opened → session begins
             return await _handle_one_program(
                 bundle_path,
                 out_dir=out_dir,
                 audit_dir=audit_dir,
                 workspaces_root=workspaces_root,
-                external_servers=external_servers,
                 system_prompt=system_prompt,
                 model=model,
                 max_turns=max_turns,
                 max_budget_usd=max_budget_usd,
                 per_program_timeout=per_program_timeout,
-                lit_mode=lit_mode,
                 literature_client=lit_client,
+                progress_cb=progress_cb,
             )
 
     try:
         results = await asyncio.gather(*(_guarded(b) for b in bundle_paths))
     finally:
-        if lit_client is not None:
-            await lit_client.aclose()
+        await lit_client.aclose()
     logger.info("run_research complete: %d program(s) -> %s", len(results), out_dir)
     return list(results)
 
@@ -775,27 +703,18 @@ def dry_run(
     bundle_paths: List[Path],
     *,
     out_dir: str | Path = "research_results",
-    model: str = "claude-sonnet-4-5-20250929",
+    model: str = "claude-sonnet-4-6",
     max_turns: int = 30,
     max_budget_usd: float = 1.0,
-    mcp_config_path: str | Path = "research/mcp_servers.json",
-    lit_mode: str = "inprocess",
 ) -> Dict[str, Any]:
     """Build + validate the full launch config for each bundle WITHOUT launching sessions.
 
     No API spend, no external process is started, no literature tool is ever called.
     Verifies the submit_result tool + schema construct and that a valid ``ClaudeAgentOptions``
-    is built per program. For ``lit_mode="external"`` it also loads/substitutes
-    ``mcp_servers.json``; for ``"inprocess"`` the in-process ``literature`` server is built
-    (never called) and mcp_servers.json is not consulted. Returns a summary dict.
+    is built per program. The in-process ``literature`` server is built (never called).
+    Returns a summary dict.
     """
-    if lit_mode not in LIT_MODES:
-        raise ValueError(f"lit_mode must be one of {LIT_MODES}, got {lit_mode!r}")
     load_env_file()
-    external_servers: Dict[str, Any] = {}
-    missing_env: set = set()
-    if lit_mode == "external":
-        external_servers, missing_env = load_mcp_servers(Path(mcp_config_path))
     system_prompt = read_protocol()
     schema = submit_result_tool_schema()
     workspaces_root = Path(out_dir).parent / "workspaces"
@@ -807,12 +726,10 @@ def dry_run(
         options = build_options(
             workspace=workspaces_root / program_id,   # not created in dry-run
             system_prompt=system_prompt,
-            external_servers=external_servers,
             submit_holder=holder,
             model=model,
             max_turns=max_turns,
             max_budget_usd=max_budget_usd,
-            lit_mode=lit_mode,
         )
         per_program.append(
             {
@@ -834,12 +751,9 @@ def dry_run(
 
     summary = {
         "n_bundles": len(per_program),
-        "lit_mode": lit_mode,
-        "mcp_servers_loaded": sorted(external_servers.keys()),
-        "missing_env_placeholders": sorted(missing_env),
         "submit_tool_schema_title": schema.get("title"),
         "submit_tool_schema_type": schema.get("type"),
-        "allowed_tools": resolve_allowed_tools(external_servers, lit_mode),
+        "allowed_tools": resolve_allowed_tools(),
         "permission_mode": "default",
         "per_program": per_program,
     }
@@ -870,23 +784,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--out-dir", default="research_results", help="Output dir for ResearchResult JSONs.")
     parser.add_argument("--audit-dir", default="research_audit", help="Output dir for per-program audit JSONs.")
     parser.add_argument("--concurrency", type=int, default=4, help="Max concurrent sessions (k=3-5 recommended).")
-    parser.add_argument("--model", default="claude-sonnet-4-5-20250929", help="Anthropic model for the subagents.")
+    parser.add_argument("--model", default="claude-sonnet-4-6", help="Anthropic model for the subagents.")
     parser.add_argument("--max-turns", type=int, default=30, help="SDK max_turns per session.")
     parser.add_argument("--max-budget-usd", type=float, default=1.0, help="SDK per-session cost cap (USD).")
-    parser.add_argument("--mcp-config", default="research/mcp_servers.json", help="External MCP servers config.")
     parser.add_argument("--per-program-timeout", type=float, default=600, help="Wall-clock timeout per program (s).")
     parser.add_argument("--dry-run", action="store_true", help="Build+validate config only; no sessions, no spend.")
-    parser.add_argument(
-        "--lit-mode", choices=list(LIT_MODES), default="inprocess",
-        help="Literature-tool source: 'inprocess' (default; in-process PubMed/OpenAlex/Crossref "
-             "server — works headless, no install), 'external' (stdio servers from --mcp-config), "
-             "or 'plugin' (interactive-only BioResearch plugin; does not reach a headless run).",
-    )
-    # Back-compat aliases for the old boolean flags.
-    parser.add_argument("--plugin", dest="lit_mode", action="store_const", const="plugin",
-                        help="Alias for --lit-mode plugin (interactive only).")
-    parser.add_argument("--external-mcp", "--no-plugin", dest="lit_mode", action="store_const",
-                        const="external", help="Alias for --lit-mode external (stdio servers).")
     return parser
 
 
@@ -901,8 +803,6 @@ def main(argv: Optional[List[str]] = None) -> None:
             model=args.model,
             max_turns=args.max_turns,
             max_budget_usd=args.max_budget_usd,
-            mcp_config_path=args.mcp_config,
-            lit_mode=args.lit_mode,
         )
         print(json.dumps(summary, indent=2))
         return
@@ -916,9 +816,7 @@ def main(argv: Optional[List[str]] = None) -> None:
             model=args.model,
             max_turns=args.max_turns,
             max_budget_usd=args.max_budget_usd,
-            mcp_config_path=args.mcp_config,
             per_program_timeout=args.per_program_timeout,
-            lit_mode=args.lit_mode,
         )
     )
     logger.info("Wrote %d result file(s) to %s", len(paths), args.out_dir)

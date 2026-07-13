@@ -49,6 +49,7 @@ if str(repo_root) not in sys.path:
 
 from .ncbi_api import NcbiClient
 from .harmonizome_api import HarmonizomeClient
+from .progress import emit_step_progress
 from .string_api import (
     get_regulator_program_interactions,
     batch_validate_regulators,
@@ -569,9 +570,12 @@ def resolve_gene_summaries(
             "Resolving Entrez IDs for %d unique driver genes...",
             len(all_drivers),
         )
+        # Two bulk NCBI phases; surface them as coarse sub-progress (the fetch is one call).
+        emit_step_progress(0, 2, f"resolving Entrez IDs ({len(all_drivers)} genes)")
         symbol_to_id = ncbi_client.normalize_genes(list(all_drivers))
         valid_ids = sorted({gid for gid in symbol_to_id.values() if gid})
         logger.info("Fetching summaries for %d gene IDs...", len(valid_ids))
+        emit_step_progress(1, 2, f"fetching {len(valid_ids)} gene summaries")
         id_to_summary = ncbi_client.get_gene_summaries(valid_ids)
 
         for pid in program_ids:
@@ -596,6 +600,7 @@ def resolve_gene_summaries(
             summary_type,
             len(all_drivers),
         )
+        emit_step_progress(0, 1, f"fetching {len(all_drivers)} gene summaries")
         symbol_to_summary = harmonizome_client.get_gene_summaries(
             sorted(all_drivers)
         )

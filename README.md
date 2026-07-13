@@ -25,24 +25,33 @@ original ProgExplorer behavior; a CD8 T-cell profile works with zero code change
 
 **Guardrails:** literature research happens *only* in ② via MCP; parallelism is controlled
 in Python (asyncio + semaphore), never by a manager agent; the Agent SDK runs locally;
-**Anthropic API only** (no Vertex / gateway).
+inference goes to Anthropic — **research on the Claude.ai subscription, batch on API credit**
+(no Vertex / gateway).
 
 ## Install
 
-Python **3.10+**. Uses the Anthropic API + the Claude Agent SDK (which shells out to the
-local `claude` CLI).
+Python **3.10+**. Uses the Claude Agent SDK (which shells out to the local `claude` CLI)
+for the research agents, and the Anthropic Batch API for the synthesis steps.
 
 ```bash
 pip install -e .            # or: pip install -e ".[dev]" for tests
-# required env (a repo .env is auto-loaded by the runner):
-export ANTHROPIC_API_KEY=...   # all LLM + Batch calls
-export NCBI_API_KEY=...         # PubMed E-utilities (verifier + gene summaries)
-export OPENALEX_API_KEY=...     # OpenAlex (required since 2026-02-13; keyless calls fail)
-export PUBMED_EMAIL=you@example.com   # NCBI wants a contact email
 ```
 
-Then connect the literature MCP servers (PubMed / OpenAlex / bioRxiv) — see
-[`docs/INSTALL_MCP.md`](docs/INSTALL_MCP.md). Confirm with `/mcp` before a research run.
+**Auth is split by executor.** The parallel research agents (executor ②) run the local
+`claude` CLI on your **Claude.ai subscription** — run `claude login` (no subscription? set
+`research.auth: api` to bill research to the API key instead). The Batch synthesis steps
+(executor ③) use `ANTHROPIC_API_KEY`.
+
+The literature layer is **in-process** (`research/literature.py` calls PubMed / OpenAlex /
+Crossref directly) — there is **no external MCP server to install or connect**. Set these
+in a repo `.env` (auto-loaded by the runner):
+
+```bash
+ANTHROPIC_API_KEY=...          # executor ③ Batch steps (theme / annotate / presentation)
+PUBMED_EMAIL=you@example.com   # NCBI Entrez courtesy + Crossref polite pool
+OPENALEX_API_KEY=...           # required for the OpenAlex tool (PubMed + Crossref still work without it)
+NCBI_API_KEY=...               # recommended; lifts the PubMed rate limit 3→9 rps
+```
 
 ## Quickstart
 
@@ -50,15 +59,15 @@ Then connect the literature MCP servers (PubMed / OpenAlex / bioRxiv) — see
 # See the plan and resolved context without spending anything:
 python -m gpi.run_pipeline --config configs/liver_demo.yaml --dry-run
 
-# Deterministic-only (no API, no MCP): enrichment + bundles, literature marked incomplete:
+# Deterministic-only (no LLM): enrichment + bundles, literature marked incomplete:
 python -m gpi.run_pipeline --config configs/liver_demo.yaml --no-research
 
-# Full run (spends API; needs MCP connected):
+# Full run (research on your subscription, batch on API credit):
 python -m gpi.run_pipeline --config configs/liver_demo.yaml
 ```
 
 Output (bundles, research results + audit, annotations, `report.html`) lands in the
-config's `output_dir/`. Runs **resume from cache**, so a network/MCP/API failure is
+config's `output_dir/`. Runs **resume from cache**, so a network/API failure is
 re-runnable.
 
 ## Configuring your own dataset
@@ -75,7 +84,7 @@ regulator CSV, and **replace the `context:` block** with your biology.
 gpi/          deterministic core + Anthropic-batch transforms (vendored/generalized from ProgExplorer)
 research/     the parallel-research subsystem: schema, bundle, protocol, research_parallel, verify
 configs/      run configs (liver_demo, example_generic)
-docs/         ARCHITECTURE.md (build contract), INSTALL_MCP.md
+docs/         ARCHITECTURE.md (build contract)
 examples/     liver demo inputs;  tests/  pytest suite + fixtures
 ```
 

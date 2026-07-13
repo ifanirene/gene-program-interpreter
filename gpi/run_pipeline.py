@@ -48,6 +48,17 @@ import yaml
 
 from .context_profile import ContextProfile
 from . import pipeline_state as ps
+from .progress import (
+    RESEARCH_DONE,
+    RESEARCH_START,
+    RUN_DONE,
+    RUN_START,
+    STEP_DONE,
+    STEP_START,
+    get_emitter,
+    make_emitter,
+    set_emitter,
+)
 
 logger = logging.getLogger("gpi.pipeline")
 
@@ -288,6 +299,7 @@ class Flags:
     dry_run: bool = False
     no_research: bool = False
     deterministic_presentation: bool = False
+    progress: str = "auto"  # auto | rich | plain | off (see gpi.progress)
 
 
 # ---------------------------------------------------------------------------
@@ -419,16 +431,14 @@ def run_bundle(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
 
 def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
     bundle_paths = sorted(paths.bundles_dir.glob("*.json"))
-    mcp_config = _resolve(cfg.research.get("mcp_config", "research/mcp_servers.json"), cfg.base_dir)
     _log_call(
         "asyncio.run(research.research_parallel.run_research("
         f"bundle_paths=<{len(bundle_paths)} bundles>, out_dir={paths.research_dir}, "
         f"audit_dir={paths.audit_dir}, concurrency={cfg.research.get('concurrency', 4)}, "
         f"model={cfg.research.get('model')}, max_turns={cfg.research.get('max_turns', 30)}, "
         f"max_budget_usd={cfg.research.get('max_budget_usd', 1.0)}, "
-        f"mcp_config_path={mcp_config}, "
         f"per_program_timeout={cfg.research.get('per_program_timeout', 600)}))  "
-        "[LIVE Agent SDK + MCP; spends money]"
+        "[LIVE Agent SDK; in-process literature MCP; spends money]"
     )
     if flags.dry_run:
         return {}
@@ -455,23 +465,30 @@ def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
                 "research: using Claude.ai subscription for the Agent-SDK CLI "
                 "(ANTHROPIC_API_KEY withheld; restored afterward for batch steps)."
             )
+    # Bridge live per-agent progress up to the pipeline emitter (opaque asyncio.run otherwise).
+    emitter = get_emitter()
+    concurrency = int(cfg.research.get("concurrency", 4))
+    if emitter is not None:
+        emitter.emit(RESEARCH_START, {"n_programs": len(bundle_paths), "concurrency": concurrency})
     try:
         written = asyncio.run(
             _run_research(
                 bundle_paths,
                 out_dir=paths.research_dir,
                 audit_dir=paths.audit_dir,
-                concurrency=int(cfg.research.get("concurrency", 4)),
-                model=cfg.research.get("model", "claude-sonnet-4-5-20250929"),
+                concurrency=concurrency,
+                model=cfg.research.get("model", "claude-sonnet-4-6"),
                 max_turns=int(cfg.research.get("max_turns", 30)),
                 max_budget_usd=float(cfg.research.get("max_budget_usd", 1.0)),
-                mcp_config_path=str(mcp_config),
                 per_program_timeout=float(cfg.research.get("per_program_timeout", 600)),
+                progress_cb=(emitter.emit if emitter is not None else None),
             )
         )
     finally:
         if saved_key is not None:
             os.environ["ANTHROPIC_API_KEY"] = saved_key
+    if emitter is not None:
+        emitter.emit(RESEARCH_DONE, {"n_results": len(written)})
     return {"n_results": len(written)}
 
 
@@ -505,7 +522,7 @@ def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]
         "--enrichment-gene-count", cfg.setting("n_top_genes", 300),
         "--min-generic-program-count", cfg.theme.get("min_generic_program_count", 4),
         "--llm-backend", "anthropic",
-        "--llm-model", cfg.theme.get("model", "claude-sonnet-4-5-20250929"),
+        "--llm-model", cfg.theme.get("model", "claude-sonnet-4-6"),
         "--evidence-source-dir", paths.out,
         "--evidence-pack-output", paths.theme_dir / "evidence_pack.json",
         "--prompt-output", paths.theme_dir / "theme_prompt.md",
@@ -533,7 +550,7 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         "gpi.evidence_context", "prepare",
         "--gene-file", cfg.gene_loading,
         "--profile", profile_yaml,
-        "--model", cfg.annotation.get("model", "claude-sonnet-4-5-20250929"),
+        "--model", cfg.annotation.get("model", "claude-sonnet-4-6"),
         "--max-tokens", cfg.annotation.get("max_tokens", 8192),
         "--research-evidence-dir", paths.research_dir,
         "--top-loading", cfg.setting("top_loading", 15),
@@ -564,7 +581,7 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
     # (b) submit the batch and wait for results (Anthropic Batch API — spends money)
     submit = _pymod(
         "gpi.anthropic_batch", "submit", paths.batch_request,
-        "--model", cfg.annotation.get("model", "claude-sonnet-4-5-20250929"),
+        "--model", cfg.annotation.get("model", "claude-sonnet-4-6"),
         "--max-tokens", cfg.annotation.get("max_tokens", 8192),
         "--wait",
     )
@@ -798,41 +815,72 @@ def run_pipeline(
     write_profile_yaml(cfg, paths, dry_run=False)
     ps.save_state(paths.state_path, state)
 
-    logger.info("Run plan: %s", active_steps)
-    for step in active_steps:
-        reason = step_is_gated(step, cfg, flags)
-        if reason:
-            logger.info("[%s] SKIP (%s) — downstream degrades.", step, reason)
-            ps.mark_step(state, step, "skipped", {"reason": reason})
-            ps.save_state(paths.state_path, state)
-            continue
-
-        if not force_restart and state.steps.get(step, ps.StepState()).status == "completed":
-            logger.info("[%s] already completed — skipping (resume).", step)
-            continue
-
-        logger.info("[%s] starting (executor %s)...", step, STEP_EXECUTOR.get(step, "?"))
-        ps.mark_step(state, step, "in_progress")
-        ps.save_state(paths.state_path, state)
-        try:
-            info = STEP_RUNNERS[step](cfg, paths, flags) or {}
-        except Exception as exc:  # noqa: BLE001 — report loudly, decide degrade vs stop
-            ps.mark_step(state, step, "failed", {"error": str(exc)})
-            ps.save_state(paths.state_path, state)
-            if step in DEGRADABLE_STEPS:
-                logger.error(
-                    "[%s] FAILED but is degradable — continuing with literature "
-                    "marked incomplete. Error: %s", step, exc,
-                )
+    # Progress telemetry (opt-in via --progress; 'off' → zero-overhead no-op). The emitter
+    # owns a background tailer that renders a live view to the terminal (rich on a TTY, clean
+    # ASCII otherwise) and writes progress.json for the Claude skill to poll. set_emitter()
+    # exposes it to the research step (executor ②) so per-agent events flow to the same log.
+    n_steps = len(active_steps)
+    emitter = make_emitter(paths.out, mode=flags.progress, stdout=sys.stdout)
+    set_emitter(emitter)
+    # Subprocess step modules (enrichment, gene_summaries, anthropic_batch) emit sub-progress
+    # into the same log via env the children inherit; per-step name is set in the loop.
+    if flags.progress != "off":
+        os.environ["GPI_PROGRESS_JSON"] = str(paths.out / "progress.jsonl")
+    else:
+        os.environ.pop("GPI_PROGRESS_JSON", None)
+    emitter.emit(RUN_START, {"run_id": paths.out.name, "steps": list(active_steps), "n_steps": n_steps})
+    final_status = "done"
+    try:
+        logger.info("Run plan: %s", active_steps)
+        for index, step in enumerate(active_steps, start=1):
+            executor = STEP_EXECUTOR.get(step, "?")
+            os.environ["GPI_PROGRESS_STEP"] = step  # subprocess sub-progress → this step
+            reason = step_is_gated(step, cfg, flags)
+            if reason:
+                logger.info("[%s] SKIP (%s) — downstream degrades.", step, reason)
+                ps.mark_step(state, step, "skipped", {"reason": reason})
+                ps.save_state(paths.state_path, state)
+                emitter.emit(STEP_DONE, {"step": step, "status": "skipped"})
                 continue
-            logger.error("[%s] FAILED — stopping pipeline. Error: %s", step, exc)
-            return 1
-        ps.mark_step(state, step, "completed", info)
-        ps.save_state(paths.state_path, state)
-        logger.info("[%s] completed.", step)
 
-    logger.info("Pipeline finished. State: %s", paths.state_path)
-    return 0
+            if not force_restart and state.steps.get(step, ps.StepState()).status == "completed":
+                logger.info("[%s] already completed — skipping (resume).", step)
+                # Show it as done in the progress view even though it isn't re-run.
+                emitter.emit(STEP_START, {"step": step, "executor": executor,
+                                          "index": index, "n_steps": n_steps})
+                emitter.emit(STEP_DONE, {"step": step, "status": "completed"})
+                continue
+
+            logger.info("[%s] starting (executor %s)...", step, executor)
+            emitter.emit(STEP_START, {"step": step, "executor": executor,
+                                      "index": index, "n_steps": n_steps})
+            ps.mark_step(state, step, "in_progress")
+            ps.save_state(paths.state_path, state)
+            try:
+                info = STEP_RUNNERS[step](cfg, paths, flags) or {}
+            except Exception as exc:  # noqa: BLE001 — report loudly, decide degrade vs stop
+                ps.mark_step(state, step, "failed", {"error": str(exc)})
+                ps.save_state(paths.state_path, state)
+                emitter.emit(STEP_DONE, {"step": step, "status": "failed", "error": str(exc)})
+                if step in DEGRADABLE_STEPS:
+                    logger.error(
+                        "[%s] FAILED but is degradable — continuing with literature "
+                        "marked incomplete. Error: %s", step, exc,
+                    )
+                    continue
+                logger.error("[%s] FAILED — stopping pipeline. Error: %s", step, exc)
+                final_status = "failed"
+                return 1
+            ps.mark_step(state, step, "completed", info)
+            ps.save_state(paths.state_path, state)
+            emitter.emit(STEP_DONE, {"step": step, "status": "completed"})
+            logger.info("[%s] completed.", step)
+
+        logger.info("Pipeline finished. State: %s", paths.state_path)
+        return 0
+    finally:
+        emitter.emit(RUN_DONE, {"status": final_status})
+        emitter.close()
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
@@ -840,7 +888,27 @@ def build_arg_parser() -> argparse.ArgumentParser:
         prog="gpi",
         description="Config-driven orchestrator for the Gene Program Interpreter.",
     )
-    parser.add_argument("--config", required=True, help="Run config YAML (see configs/liver_demo.yaml).")
+    parser.add_argument("--config", help="Run config YAML (see configs/liver_demo.yaml). Required to run the pipeline.")
+    # --- Pre-flight helpers (read-only; do not run the pipeline) ---
+    parser.add_argument(
+        "--check-inputs", action="store_true",
+        help="Validate the input CSV(s) (column mapping, program count, row count) and exit. "
+             "Reads paths from --config or the direct --gene-loading/--regulators flags.",
+    )
+    parser.add_argument(
+        "--emit-config", action="store_true",
+        help="Assemble a complete run config from a context stub (--context-file) + input paths, "
+             "print the resolved framing, and write/print the config. Does not run the pipeline.",
+    )
+    parser.add_argument("--context-file", help="[--emit-config] Context-only YAML stub (a bare or nested `context:` block).")
+    parser.add_argument("--gene-loading", help="[--check-inputs/--emit-config] Gene-loading CSV path.")
+    parser.add_argument("--regulators", help="[--check-inputs/--emit-config] Single regulator CSV path.")
+    parser.add_argument("--regulators-by-condition", action="append", default=None,
+                        help="[--emit-config] Condition-keyed regulator file as cond=path (repeatable).")
+    parser.add_argument("--celltype-enrichment", help="[--check-inputs] Cell-type enrichment CSV path.")
+    parser.add_argument("--output-dir", help="[--emit-config] output_dir to write into the config.")
+    parser.add_argument("--programs", help="[--emit-config] Comma-separated program ids (default: all).")
+    parser.add_argument("-o", "--output", help="[--emit-config] Write the config here (default: stdout).")
     parser.add_argument("--start-from", help=f"Begin at this step {STEP_ORDER}.")
     parser.add_argument("--stop-after", help="Stop after this step (inclusive).")
     parser.add_argument(
@@ -859,8 +927,150 @@ def build_arg_parser() -> argparse.ArgumentParser:
         "--dry-run", action="store_true",
         help="Print the resolved plan (framing + per-step commands) WITHOUT executing.",
     )
+    parser.add_argument(
+        "--progress", choices=["auto", "rich", "plain", "off"], default="auto",
+        help="Live progress view: 'auto' (rich on a TTY, clean ASCII when piped/captured), "
+             "'rich', 'plain' (one ASCII line per event), or 'off' (no progress files/output).",
+    )
+    parser.add_argument(
+        "--no-progress", dest="progress", action="store_const", const="off",
+        help="Alias for --progress off.",
+    )
     parser.add_argument("--verbose", action="store_true", help="Debug-level logging.")
     return parser
+
+
+def _parse_cond_args(values: Optional[List[str]]) -> Dict[str, str]:
+    """Parse repeated ``cond=path`` args into an ordered {cond: path} dict."""
+    out: Dict[str, str] = {}
+    for v in values or []:
+        if "=" not in v:
+            raise SystemExit(f"--regulators-by-condition expects cond=path, got {v!r}")
+        cond, path = v.split("=", 1)
+        out[cond.strip()] = path.strip()
+    return out
+
+
+def cmd_check_inputs(args: argparse.Namespace) -> int:
+    """Read-only pre-flight: map columns + count programs/rows for the input CSV(s). Spends
+    nothing. Reuses gpi.column_mapper so the alias table and error messages match the pipeline."""
+    import pandas as pd
+
+    from .column_mapper import (
+        extract_program_id,
+        standardize_celltype_enrichment,
+        standardize_gene_loading,
+        standardize_regulator_results,
+    )
+
+    gene_loading = args.gene_loading
+    regulators = args.regulators
+    celltype = args.celltype_enrichment
+    if args.config:
+        cfg = PipelineConfig.from_yaml(args.config)
+        gene_loading = gene_loading or str(cfg.gene_loading)
+        regulators = regulators or (str(cfg.regulators) if cfg.regulators else None)
+        celltype = celltype or (str(cfg.celltype_enrichment) if cfg.celltype_enrichment else None)
+
+    print("Input pre-flight (read-only; nothing is spent):")
+    ok = True
+    if not gene_loading:
+        print("  ✗ no gene-loading CSV provided (use --gene-loading or --config).")
+        return 2
+    try:
+        df = pd.read_csv(gene_loading)
+        std = standardize_gene_loading(df)
+        pids = sorted({p for p in (extract_program_id(v) for v in std["program_id"]) if p is not None})
+        preview = pids[:10] + (["..."] if len(pids) > 10 else [])
+        print(f"  ✓ gene loading: {gene_loading}")
+        print(f"      columns {list(df.columns)} → Name/Score/program_id")
+        print(f"      programs: {len(pids)}  {preview}")
+        print(f"      rows: {len(df)}")
+    except Exception as exc:  # noqa: BLE001 — surface the mapper's found-vs-expected message
+        print(f"  ✗ gene loading: {gene_loading}\n      {exc}")
+        ok = False
+
+    if regulators:
+        try:
+            rdf = standardize_regulator_results(pd.read_csv(regulators))
+            sig = int(rdf["significant"].sum()) if "significant" in rdf.columns else "n/a"
+            print(f"  ✓ regulators: {regulators}  (rows: {len(rdf)}, significant: {sig})")
+        except Exception as exc:  # noqa: BLE001
+            print(f"  ✗ regulators: {regulators}\n      {exc}")
+            ok = False
+
+    if celltype:
+        try:
+            cdf = standardize_celltype_enrichment(pd.read_csv(celltype))
+            print(f"  ✓ cell-type enrichment: {celltype}  (rows: {len(cdf)})")
+        except Exception as exc:  # noqa: BLE001
+            print(f"  ✗ cell-type enrichment: {celltype}\n      {exc}")
+            ok = False
+
+    print("\nPre-flight OK — safe to build a config and run." if ok
+          else "\nPre-flight FAILED — fix the inputs above before running.")
+    return 0 if ok else 1
+
+
+def cmd_emit_config(args: argparse.Namespace) -> int:
+    """Assemble a complete, schema-correct run config from a context-only stub + input paths.
+
+    The `context:` block comes from the stub (via ContextProfile, so the derived framing is
+    consistent); the settings/research/annotation/theme/presentation blocks are copied from
+    configs/example_generic.yaml (the canonical skeleton). Also prints the auto-derived framing
+    so the user reviews what the research agents will actually see."""
+    if not args.context_file:
+        raise SystemExit("--emit-config requires --context-file (a context-only YAML stub).")
+    if not args.gene_loading or not args.output_dir:
+        raise SystemExit("--emit-config requires --gene-loading and --output-dir.")
+
+    profile = ContextProfile.from_yaml(Path(args.context_file))
+    skel = yaml.safe_load((_REPO_ROOT / "configs" / "example_generic.yaml").read_text(encoding="utf-8"))
+
+    inputs: Dict[str, Any] = {"gene_loading": args.gene_loading}
+    if args.regulators:
+        inputs["regulators"] = args.regulators
+    cond = _parse_cond_args(args.regulators_by_condition)
+    if cond:
+        inputs["regulators_by_condition"] = cond
+    inputs["celltype_enrichment"] = None
+
+    programs: Optional[List[int]] = None
+    if args.programs:
+        programs = [int(x) for x in str(args.programs).split(",") if x.strip()]
+
+    config = {
+        "context": {
+            "organism": profile.organism,
+            "species_taxid": profile.species_taxid,
+            "tissue": profile.tissue,
+            "cell_type": profile.cell_type,
+            "conditions": list(profile.conditions),
+            "context_terms": list(profile.context_terms),
+            "assay": profile.assay,
+        },
+        "inputs": inputs,
+        "output_dir": args.output_dir,
+        "programs": programs,
+        "settings": skel["settings"],
+        "research": skel["research"],
+        "annotation": skel["annotation"],
+        "theme": skel["theme"],
+        "presentation": skel["presentation"],
+    }
+    rendered = yaml.safe_dump(config, sort_keys=False, allow_unicode=True)
+    if args.output:
+        Path(args.output).write_text(rendered, encoding="utf-8")
+        print(f"Wrote config: {args.output}")
+    else:
+        print(rendered)
+
+    print("Resolved framing (auto-derived from the context — this is what the pipeline uses):")
+    print(f"  annotation_role  : {profile.resolved_annotation_role()}")
+    print(f"  keyword_query    : {profile.resolved_keyword_query()}")
+    print(f"  condition_context: {profile.resolved_condition_context()}")
+    print(f"  report crumb     : {profile.resolved_report_dataset_crumb()}")
+    return 0
 
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -871,11 +1081,21 @@ def main(argv: Optional[List[str]] = None) -> int:
         stream=sys.stdout,
     )
 
+    # Read-only pre-flight helpers (do not run the pipeline).
+    if args.check_inputs:
+        return cmd_check_inputs(args)
+    if args.emit_config:
+        return cmd_emit_config(args)
+
+    if not args.config:
+        raise SystemExit("--config is required to run the pipeline "
+                         "(or use --check-inputs / --emit-config).")
     cfg = PipelineConfig.from_yaml(args.config)
     flags = Flags(
         dry_run=args.dry_run,
         no_research=args.no_research,
         deterministic_presentation=args.deterministic_presentation,
+        progress=args.progress,
     )
     return run_pipeline(
         cfg,

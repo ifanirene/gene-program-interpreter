@@ -14,7 +14,6 @@ dependencies = [
     "pandas",
     "numpy",
     "requests",
-    "tqdm",
     "matplotlib",
     "seaborn",
     "pillow",
@@ -33,6 +32,12 @@ dev = [
     "pytest",
     "pytest-asyncio",
     "ruff",
+]
+# Live terminal progress view (rich step-tree + parallel-agent table). Optional: without it
+# --progress degrades to clean one-line-per-event ASCII, and the skill's in-conversation
+# markdown/progress.json path is unaffected.
+progress = [
+    "rich>=13",
 ]
 
 [project.scripts]

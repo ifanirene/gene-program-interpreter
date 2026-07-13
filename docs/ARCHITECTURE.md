@@ -74,7 +74,7 @@ Agent SDK literature agents** (one per program) + a **deterministic evidence ver
 | `research/bundle.py` | NEW | ④ builds `program_bundles/{id}.json` |
 | `research/research_parallel.py` | NEW | ② asyncio + Agent SDK fan-out |
 | `research/verify.py` | NEW | ④ verifier; reuses `literature-review/kernel.py::verify_dois` + `gpi/ncbi_api.py` |
-| `research/mcp_servers.json` | NEW | external MCP config for each SDK session |
+| `research/literature.py` | NEW | ② in-process literature MCP server (PubMed/OpenAlex/Crossref) wired into each SDK session |
 
 ### DROP entirely (never vendor)
 Vertex/GCS/gateway everything: `convert_to_vertex_jsonl`, `cmd_submit_vertex*`, `upload_to_gcs`,

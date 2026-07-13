@@ -67,6 +67,7 @@ from .column_mapper import (
     standardize_gene_loading,
     standardize_celltype_enrichment,
 )
+from .progress import emit_step_progress
 
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -906,6 +907,7 @@ def cmd_enrich(args: argparse.Namespace) -> int:
     program_to_results: Dict[str, List[Dict[str, Any]]] = {}
     total = len(program_to_genes)
     for idx, program_id in enumerate(sorted(program_to_genes.keys(), key=lambda x: int(x)), start=1):
+        emit_step_progress(idx, total, f"program {program_id}")
         program_id_int = int(program_id)
         genes = [g for g in program_to_genes[program_id] if isinstance(g, str) and g.strip()]
         skip_enrichment = (

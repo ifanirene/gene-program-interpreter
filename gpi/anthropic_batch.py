@@ -33,6 +33,8 @@ import time
 from pathlib import Path
 from typing import Optional
 
+from .progress import emit_step_progress
+
 # Anthropic imports (direct Anthropic Batch API - the only supported backend).
 try:
     import anthropic
@@ -44,7 +46,7 @@ except ImportError:
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
-MODEL = "claude-sonnet-4-5-20250929"  # Anthropic model name
+MODEL = "claude-sonnet-4-6"  # Anthropic model name
 DEFAULT_MAX_TOKENS = 8192
 POLL_INTERVAL_SECONDS = 30
 
@@ -263,6 +265,7 @@ def cmd_submit(args: argparse.Namespace) -> int:
             done = c["succeeded"]
             total = c["processing"] + c["succeeded"]
             print(f"  Status: {status['processing_status']} | Completed: {done}/{total}")
+            emit_step_progress(done, total, "batch")
 
         print(f"\nFinal status: {status['processing_status']}")
         if status["processing_status"] == "ended":
