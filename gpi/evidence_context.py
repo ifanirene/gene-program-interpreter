@@ -64,7 +64,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 # Default Anthropic model stored in prepared batch requests.
-MODEL = "claude-sonnet-4-5-20250929"
+MODEL = "claude-sonnet-4-6"
 DEFAULT_MAX_TOKENS = 8192
 
 

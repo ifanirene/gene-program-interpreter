@@ -51,20 +51,19 @@ settings:
 research:                      # executor 2 — parallel literature agents
   enabled: true
   concurrency: 2               # 2 programs -> run both at once
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   max_turns: 30
   max_budget_usd: 1.0          # per-program cost cap (SDK-native)
   per_program_timeout: 600
-  mcp_config: research/mcp_servers.json
 
 annotation:                    # executor 3 — Anthropic Batch synthesis + labels
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   max_tokens: 8192
   batch: true
 
 theme:                         # executor 3 — generic-theme down-weighting (M6)
   enabled: true
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   min_generic_program_count: 4
 
 presentation:                  # executor 3 (+ 4 fallback)

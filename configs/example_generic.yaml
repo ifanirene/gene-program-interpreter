@@ -35,28 +35,27 @@ programs: [10, 12, 14]
 
 settings:
   n_top_genes: 300
-  top_loading: 20
-  top_unique: 10
+  top_loading: 15
+  top_unique: 8
   top_enrichment: 7
   genes_per_term: 10
 
 research:
   enabled: true
   concurrency: 4
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   max_turns: 30
   max_budget_usd: 1.0
   per_program_timeout: 600
-  mcp_config: research/mcp_servers.json
 
 annotation:
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   max_tokens: 8192
   batch: true
 
 theme:
   enabled: true
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   min_generic_program_count: 4
 
 presentation:

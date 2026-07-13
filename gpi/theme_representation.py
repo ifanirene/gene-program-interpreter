@@ -1420,7 +1420,7 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["anthropic", "none"],
         default="anthropic",
     )
-    parser.add_argument("--llm-model", default="claude-sonnet-4-5-20250929")
+    parser.add_argument("--llm-model", default="claude-sonnet-4-6")
     parser.add_argument("--llm-max-tokens", type=int, default=8192)
     parser.add_argument("--extraction-response-file", type=Path)
     parser.add_argument(

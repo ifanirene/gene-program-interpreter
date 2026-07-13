@@ -43,14 +43,13 @@ settings:
 research:                      # executor 2 — parallel literature agents
   enabled: true
   concurrency: 5               # 5 programs -> all in parallel
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   max_turns: 30
   max_budget_usd: 1.0
   per_program_timeout: 600
-  mcp_config: research/mcp_servers.json
 
 annotation:                    # executor 3 — Anthropic Batch synthesis + labels
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   max_tokens: 8192
   batch: true
   # Promiscuous global regulators masked from the annotation regulator evidence
@@ -59,7 +58,7 @@ annotation:                    # executor 3 — Anthropic Batch synthesis + labe
 
 theme:                         # executor 3 — generic-theme dictionary (M6)
   enabled: true
-  model: claude-sonnet-4-5-20250929
+  model: claude-sonnet-4-6
   # 5 programs: a theme in >=3 of 5 counts as generic (majority) so the
   # "Generic themes to down-weight" section is actually populated.
   min_generic_program_count: 3
