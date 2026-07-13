@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gene Program Interpreter — Research Agent Configuration</title>
+<style>
+/* ============================ Theme tokens ============================ */
+:root{
+  --bg:#f4f6f9;
+  --bg-grad-a:#eef2f7;
+  --bg-grad-b:#f7f9fc;
+  --panel:#ffffff;
+  --panel-2:#f8fafc;
+  --panel-3:#eef2f7;
+  --ink:#1f2733;
+  --ink-soft:#4b5666;
+  --ink-mute:#77839a;
+  --line:#dde3ec;
+  --line-strong:#c6cfdd;
+  --brand:#4f46e5;
+  --brand-soft:#e8e7fb;
+  --brand-ink:#3b34c4;
+  --accent:#c2620a;          /* PROPOSED accent (warm amber) */
+  --accent-soft:#fdeedd;
+  --accent-ink:#9a4d06;
+  --accent-line:#f0c48a;
+  --ok:#137a52;
+  --ok-soft:#dbf1e7;
+  --bad:#b4293b;
+  --bad-soft:#fbe1e4;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.05);
+  --shadow-soft:0 1px 2px rgba(16,24,40,.05);
+  --radius:14px;
+  --radius-sm:9px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0d1117;
+    --bg-grad-a:#0b0f16;
+    --bg-grad-b:#121722;
+    --panel:#161b25;
+    --panel-2:#1b212d;
+    --panel-3:#212837;
+    --ink:#e6ebf2;
+    --ink-soft:#b7c1d1;
+    --ink-mute:#8a95a8;
+    --line:#28303e;
+    --line-strong:#3a4456;
+    --brand:#8b83ff;
+    --brand-soft:#25233f;
+    --brand-ink:#b3adff;
+    --accent:#f2a24e;
+    --accent-soft:#33260f;
+    --accent-ink:#f6bd77;
+    --accent-line:#5c4212;
+    --ok:#4fd6a0;
+    --ok-soft:#12312a;
+    --bad:#ff8493;
+    --bad-soft:#3a1c22;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    --shadow-soft:0 1px 2px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--ink);
+  background:linear-gradient(180deg,var(--bg-grad-a),var(--bg-grad-b)) fixed;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  font-size:15px;
+}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+code,.mono{font-family:var(--mono);font-size:.86em}
+
+/* ============================ Layout ============================ */
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.hero{
+  padding:40px 0 26px;
+  border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(1200px 260px at 12% -40%, var(--brand-soft), transparent 60%),
+    radial-gradient(900px 240px at 90% -60%, var(--accent-soft), transparent 55%);
+}
+.hero .kicker{
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-mute);margin:0 0 10px;
+}
+.hero h1{font-size:30px;line-height:1.18;margin:0 0 10px;letter-spacing:-.01em}
+.hero p.lede{margin:0;color:var(--ink-soft);max-width:74ch;font-size:15.5px}
+.hero .draft{
+  display:inline-flex;align-items:center;gap:8px;margin-top:16px;
+  padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600;
+  background:var(--accent-soft);color:var(--accent-ink);
+  border:1px solid var(--accent-line);
+}
+.hero .draft .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+/* ============================ Sticky nav ============================ */
+nav.toc{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--panel) 88%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav.toc .inner{display:flex;gap:2px;overflow-x:auto;padding:8px 20px;max-width:1180px;margin:0 auto;
+  scrollbar-width:thin}
+nav.toc a{
+  white-space:nowrap;font-size:12.5px;font-weight:600;color:var(--ink-soft);
+  padding:7px 11px;border-radius:8px;letter-spacing:.01em;
+}
+nav.toc a:hover{background:var(--panel-3);text-decoration:none;color:var(--ink)}
+nav.toc a .n{font-family:var(--mono);color:var(--ink-mute);margin-right:6px;font-size:11px}
+
+/* ============================ Sections ============================ */
+section{padding:38px 0 8px;scroll-margin-top:60px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.sec-head .sn{
+  font-family:var(--mono);font-size:13px;font-weight:700;color:#fff;background:var(--brand);
+  width:30px;height:30px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;
+  flex:none;box-shadow:var(--shadow-soft);
+}
+.sec-head h2{font-size:20px;margin:0;letter-spacing:-.01em}
+.sec-sub{color:var(--ink-soft);margin:2px 0 20px;max-width:82ch;font-size:14px}
+
+/* ============================ Cards ============================ */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 18px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.card::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--brand)}
+.card.fix::before{background:var(--accent)}
+.card h3{margin:0 0 8px;font-size:15.5px;display:flex;align-items:center;gap:8px}
+.card p{margin:0 0 9px;color:var(--ink-soft);font-size:13.6px}
+.card p:last-child{margin-bottom:0}
+.tag{
+  display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 8px;border-radius:6px;margin-bottom:10px;
+}
+.tag.fixed{background:var(--ok-soft);color:var(--ok)}
+.tag.cause{background:var(--brand-soft);color:var(--brand-ink)}
+.tag.split{background:var(--accent-soft);color:var(--accent-ink)}
+.fixline{
+  margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-strong);
+  font-size:13px;color:var(--ink);
+}
+.fixline b{color:var(--accent-ink)}
+
+/* genes / mono chips */
+.genes{font-family:var(--mono);font-size:12px;background:var(--panel-3);border:1px solid var(--line);
+  border-radius:8px;padding:8px 10px;color:var(--ink);word-spacing:1px;line-height:1.7}
+.reg-repress{color:var(--bad)}
+.reg-activate{color:var(--ok)}
+
+/* ============================ Flow diagram ============================ */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px;margin:6px 0 14px}
+.step{
+  flex:1 1 150px;min-width:140px;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--radius-sm);padding:12px 12px 11px;box-shadow:var(--shadow-soft);
+  display:flex;flex-direction:column;gap:7px;position:relative;
+}
+.step .st-name{font-size:13px;font-weight:700;line-height:1.3}
+.step .st-desc{font-size:11.5px;color:var(--ink-soft);line-height:1.35}
+.step .exec{
+  font-family:var(--mono);font-size:10px;letter-spacing:.02em;padding:3px 7px;border-radius:6px;
+  align-self:flex-start;margin-top:auto;background:var(--panel-3);color:var(--ink-mute);border:1px solid var(--line)
+}
+.step.det .exec{background:var(--panel-3);color:var(--ink-mute)}
+.step.anth .exec{background:var(--brand-soft);color:var(--brand-ink);border-color:transparent}
+.step.research{
+  border:2px solid var(--accent);background:linear-gradient(180deg,var(--accent-soft),var(--panel));
+  flex:1.4 1 190px;box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 16%,transparent),var(--shadow);
+}
+.step.research .st-name{color:var(--accent-ink)}
+.step.research .exec{background:var(--accent);color:#fff;border-color:transparent}
+.step.research .pin{
+  position:absolute;top:-10px;right:10px;font-size:9.5px;font-weight:800;letter-spacing:.08em;
+  text-transform:uppercase;background:var(--accent);color:#fff;padding:2px 8px;border-radius:999px;
+  box-shadow:var(--shadow-soft)
+}
+.arrow{display:flex;align-items:center;justify-content:center;color:var(--line-strong);flex:0 0 16px;
+  font-size:18px;font-weight:700}
+@media (max-width:720px){
+  .arrow{flex-basis:100%;transform:rotate(90deg);height:14px}
+}
+.caption{
+  font-size:12.6px;color:var(--ink-soft);background:var(--panel-2);border:1px solid var(--line);
+  border-left:3px solid var(--brand);border-radius:8px;padding:11px 14px;margin-top:6px;
+}
+.caption b{color:var(--ink)}
+
+/* ============================ Tables ============================ */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:680px;font-size:13.2px}
+thead th{
+  text-align:left;background:var(--panel-3);color:var(--ink);font-weight:700;font-size:11.5px;
+  letter-spacing:.05em;text-transform:uppercase;padding:11px 14px;border-bottom:1px solid var(--line-strong);
+  position:sticky;top:0;
+}
+tbody td{padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--panel-2)}
+td.param{font-family:var(--mono);font-size:12.4px;color:var(--ink);font-weight:600;white-space:nowrap}
+td.cur .mono,td.cur code{color:var(--ink)}
+td.prop{background:color-mix(in srgb,var(--accent-soft) 55%,transparent)}
+td.prop .pchip{
+  display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--accent-ink);background:var(--accent-soft);border:1px solid var(--accent-line);
+  padding:1px 6px;border-radius:5px;margin-right:6px;vertical-align:1px
+}
+td.prop.same{background:transparent}
+td.prop.same .keepchip{
+  display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink-mute);background:var(--panel-3);border:1px solid var(--line);
+  padding:1px 6px;border-radius:5px;margin-right:6px;vertical-align:1px
+}
+td.notes{font-size:12.4px;color:var(--ink-mute)}
+.arrow-i{color:var(--accent);font-weight:800;padding:0 2px}
+.chk{color:var(--ok);font-weight:800}
+.x{color:var(--bad);font-weight:800}
+
+/* ============================ Two-column compare ============================ */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:760px){.compare{grid-template-columns:1fr}}
+.col{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column
+}
+.col .col-head{
+  padding:12px 16px;font-weight:700;font-size:13.5px;display:flex;align-items:center;gap:9px;
+  border-bottom:1px solid var(--line);
+}
+.col.current .col-head{background:var(--panel-3);color:var(--ink-soft)}
+.col.proposed .col-head{background:var(--accent-soft);color:var(--accent-ink)}
+.col .col-head .badge{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:6px;font-weight:800;
+  letter-spacing:.06em}
+.col.current .badge{background:var(--panel);color:var(--ink-mute);border:1px solid var(--line)}
+.col.proposed .badge{background:var(--accent);color:#fff}
+.col .col-body{padding:14px 16px}
+.itemlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.itemlist li{font-size:13.2px;display:flex;gap:9px;align-items:flex-start}
+.itemlist li .lead{font-family:var(--mono);font-size:11.6px;font-weight:700;color:var(--ink);
+  background:var(--panel-3);padding:1px 7px;border-radius:6px;flex:none;border:1px solid var(--line)}
+.itemlist li .txt{color:var(--ink-soft)}
+.itemlist li.demote{opacity:.72}
+.itemlist li.demote .lead{background:transparent;color:var(--ink-mute);border-style:dashed}
+.itemlist li.star .lead{background:var(--accent-soft);color:var(--accent-ink);border-color:var(--accent-line)}
+.itemlist li.star .txt{color:var(--ink)}
+.mini-note{margin-top:12px;font-size:12px;color:var(--ink-mute);border-top:1px dashed var(--line-strong);
+  padding-top:10px}
+
+/* example input box */
+.example{
+  margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  background:var(--panel);box-shadow:var(--shadow)
+}
+.example .ex-head{background:var(--panel-3);padding:10px 15px;font-size:12px;font-weight:700;
+  display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line);color:var(--ink)}
+.example .ex-head .lab{font-family:var(--mono);font-size:10px;background:var(--brand);color:#fff;
+  padding:2px 8px;border-radius:6px}
+.example .ex-body{padding:14px 15px;display:flex;flex-direction:column;gap:12px}
+.example .kv{font-size:12.5px}
+.example .kv .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--ink-mute);display:block;margin-bottom:4px}
+.example .ctx-note{font-size:11.5px;color:var(--ink-mute);font-style:italic}
+
+/* ============================ Protocol side-by-side ============================ */
+.q{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:none}
+.q .qn{font-family:var(--mono);font-weight:800;font-size:12px;color:#fff;background:var(--ink-mute);
+  width:22px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.q .qbody{font-size:13.2px}
+.q .qbody b{color:var(--ink)}
+.q.drop{opacity:.6}
+.q.drop .qn{background:var(--bad)}
+.q.drop .qbody{text-decoration:line-through;text-decoration-color:var(--bad);text-decoration-thickness:1px}
+.q.keep .qn{background:var(--accent)}
+.nonneg{
+  margin-top:14px;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:12px 15px
+}
+.nonneg h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-mute)}
+.nonneg ul{margin:0;padding-left:18px;font-size:12.8px;color:var(--ink-soft)}
+.nonneg li{margin:4px 0}
+.nonneg b{color:var(--ink)}
+
+/* ============================ Code block (schema) ============================ */
+.codeblock{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;margin-bottom:16px
+}
+.codeblock .cb-head{
+  display:flex;align-items:center;gap:9px;padding:9px 15px;border-bottom:1px solid var(--line);
+  background:var(--panel-3);font-family:var(--mono);font-size:11.5px;color:var(--ink-soft)
+}
+.codeblock .cb-head .dot{width:10px;height:10px;border-radius:50%}
+.cb-head .d1{background:#f2665a}.cb-head .d2{background:#f4bd4f}.cb-head .d3{background:#61c454}
+.codeblock pre{margin:0;padding:15px 16px;overflow-x:auto;font-family:var(--mono);font-size:12.4px;
+  line-height:1.65;color:var(--ink)}
+.codeblock pre .k{color:var(--brand)}
+.codeblock pre .c{color:var(--ink-mute);font-style:italic}
+.codeblock pre .v{color:var(--accent-ink)}
+.codeblock pre .lean{color:var(--accent);font-weight:700}
+
+.fieldnotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;margin-top:2px}
+.fnote{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px;
+  box-shadow:var(--shadow-soft)}
+.fnote .fn-k{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--brand-ink);margin-bottom:3px}
+.fnote .fn-v{font-size:12.5px;color:var(--ink-soft)}
+.fnote .fn-v .arrow-i{margin:0 3px}
+
+/* example evidence table */
+.ex-caption{font-size:12.5px;color:var(--accent-ink);background:var(--accent-soft);
+  border:1px solid var(--accent-line);border-radius:9px;padding:10px 14px;margin:14px 0 12px;
+  display:flex;gap:9px;align-items:flex-start}
+.ex-caption .i{font-weight:800}
+table.ev{min-width:560px}
+table.ev td{font-family:var(--mono);font-size:12px;color:var(--ink)}
+table.ev td.resolved{color:var(--ok);font-weight:700}
+.stat-row{display:flex;flex-wrap:wrap;gap:12px;margin:2px 0 4px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;
+  box-shadow:var(--shadow-soft);flex:1 1 130px;min-width:120px}
+.stat .num{font-size:22px;font-weight:800;font-family:var(--mono);color:var(--ink);line-height:1}
+.stat .num.ok{color:var(--ok)}
+.stat .lbl{font-size:11.5px;color:var(--ink-mute);margin-top:5px}
+
+/* ============================ Checklist (section 8) ============================ */
+.checklist{display:flex;flex-direction:column;gap:11px}
+.check{
+  display:flex;gap:13px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:14px 16px;box-shadow:var(--shadow-soft)
+}
+.check .box{
+  width:20px;height:20px;border-radius:6px;border:2px solid var(--line-strong);flex:none;margin-top:1px;
+  background:var(--panel-2)
+}
+.check .q-txt{font-size:13.6px;color:var(--ink)}
+.check .q-txt .sub{display:block;font-size:12.3px;color:var(--ink-mute);margin-top:3px}
+.check .q-txt b{color:var(--accent-ink)}
+
+/* ============================ Footer ============================ */
+footer{padding:30px 0 46px;text-align:center;color:var(--ink-mute);font-size:12.6px}
+footer .fnote-line{display:inline-flex;align-items:center;gap:9px;padding:9px 16px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent-ink);border:1px solid var(--accent-line);font-weight:600}
+footer .meta{margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--ink-mute)}
+
+/* legend */
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 2px;font-size:12px;color:var(--ink-mute)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend .sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+.legend .sw.cur{background:var(--panel-3);border:1px solid var(--line-strong)}
+.legend .sw.prop{background:var(--accent-soft);border:1px solid var(--accent-line)}
+.legend .sw.res{background:var(--accent);border:1px solid var(--accent)}
+</style>
+</head>
+<body>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Gene Program Interpreter · Pipeline overview</p>
+    <h1>Research Agent Configuration</h1>
+    <p class="lede">A discussion aid for reviewing and adjusting the literature-research agent. It captures what the
+      program-10 test taught us, the current pipeline wiring, and the concrete configuration changes proposed for a
+      leaner, genes-first research pass. Current values are shown in a neutral tone; <strong style="color:var(--accent-ink)">proposed
+      changes are highlighted</strong>.</p>
+    <span class="draft"><span class="dot"></span> Draft for discussion — nothing here is applied yet</span>
+    <div class="legend">
+      <span><span class="sw cur"></span> current</span>
+      <span><span class="sw prop"></span> proposed change</span>
+      <span><span class="sw res"></span> the box we're tuning</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ STICKY NAV ============================ -->
+<nav class="toc">
+  <div class="inner">
+    <a href="#s1"><span class="n">01</span>Test lessons</a>
+    <a href="#s2"><span class="n">02</span>Pipeline flow</a>
+    <a href="#s3"><span class="n">03</span>Control panel</a>
+    <a href="#s4"><span class="n">04</span>Program bundle</a>
+    <a href="#s5"><span class="n">05</span>Protocol rules</a>
+    <a href="#s6"><span class="n">06</span>ContextProfile</a>
+    <a href="#s7"><span class="n">07</span>ResearchResult</a>
+    <a href="#s8"><span class="n">08</span>Open questions</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============================ SECTION 1 ============================ -->
+<section id="s1">
+  <div class="sec-head"><span class="sn">01</span><h2>What the program-10 test taught us</h2></div>
+  <p class="sec-sub">Three findings from the first end-to-end run, each with the fix it points to.</p>
+  <div class="cards">
+
+    <div class="card fix">
+      <span class="tag fixed">✓ Now fixed</span>
+      <h3>Wrong dataset</h3>
+      <p>The first test ran on shipped demo data. The correct dataset is
+        <code>/Volumes/IF_PHAGE/Hepatocyte/Programs0617</code> (K=50 cNMF programs).</p>
+      <p><code>gene_loading_K50_0_5_top300.csv</code> = <span class="mono">Name, Score, RowID</span>. Young &amp; aged
+        perturbation files = <span class="mono">target_name, program_name, log2FC, p-value, adj_pval</span>.</p>
+      <div class="fixline">Correct <b>program 10</b> = a zonated hepatocyte metabolism / detox program
+        (<span class="mono">Rhbg, Glul, Oat, Cyp2e1, Cyp1a2, Slc22a1, Slco1b2, Gstm2, Axin2, Pon1</span>), repressed by
+        lipogenic regulators (<span class="mono">Dgat2, Scap, Mlxipl, Insig1</span>), with <b>larger effects in young than aged</b>.</div>
+    </div>
+
+    <div class="card">
+      <span class="tag cause">Self-inflicted</span>
+      <h3>Too many conflicts — because we asked for them</h3>
+      <p>The protocol explicitly told the agent to investigate <em>"perturbation-direction consistency"</em> and
+        <em>"competing / contradictory explanations"</em> — 2 of its 4 questions.</p>
+      <p>It obediently returned <b>5 contradictions + 4 direction conflicts</b>, some of them artifacts of mismatched
+        regulators.</p>
+      <div class="fixline">Fix: <b>flag contradictions only if they surface</b> — don't hunt for them.</div>
+    </div>
+
+    <div class="card fix">
+      <span class="tag split">Two causes</span>
+      <h3>Empty areas</h3>
+      <p><b>(a) Three integration bugs.</b> STRING enrichment never ran (empty enrichment block); the report's
+        per-module DOI/status merge didn't fire; the presentation lexicon is liver-metabolic only (empty tags for
+        other biology).</p>
+      <p><b>(b) Effort spread thin.</b> A heavy 4-question protocol + broad output schema diluted the work.</p>
+      <div class="fixline">Fix: <b>lean protocol</b> + <b>fix the 3 bugs</b>.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ SECTION 2 ============================ -->
+<section id="s2">
+  <div class="sec-head"><span class="sn">02</span><h2>Pipeline flow</h2></div>
+  <p class="sec-sub">Eight stages, left to right. Each box is labelled with its executor. The
+    <strong style="color:var(--accent-ink)">RESEARCH</strong> box is the one this document tunes.</p>
+
+  <div class="flow">
+    <div class="step det">
+      <div class="st-name">inputs</div>
+      <div class="st-desc">gene loading + young / aged perturbation</div>
+      <span class="exec">deterministic</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step det">
+      <div class="st-name">bundle</div>
+      <div class="st-desc">one immutable JSON per program</div>
+      <span class="exec">deterministic</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step research">
+      <span class="pin">tuning this</span>
+      <div class="st-name">RESEARCH</div>
+      <div class="st-desc">1 Agent-SDK session per program, run in parallel</div>
+      <span class="exec">Claude agent + MCP</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step det">
+      <div class="st-name">verify</div>
+      <div class="st-desc">resolve every PMID / DOI</div>
+      <span class="exec">deterministic</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step anth">
+      <div class="st-name">theme</div>
+      <div class="st-desc">generic-theme down-weighting</div>
+      <span class="exec">Anthropic</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step anth">
+      <div class="st-name">annotate</div>
+      <div class="st-desc">assigns the label</div>
+      <span class="exec">Anthropic Batch</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step anth">
+      <div class="st-name">present</div>
+      <div class="st-desc">final wording</div>
+      <span class="exec">Anthropic / deterministic</span>
+    </div>
+    <div class="arrow">→</div>
+    <div class="step det">
+      <div class="st-name">report.html</div>
+      <div class="st-desc">interactive, cited report</div>
+      <span class="exec">deterministic</span>
+    </div>
+  </div>
+
+  <div class="caption"><b>How parallelism works:</b> it is controlled in Python (<span class="mono">asyncio</span> +
+    <span class="mono">Semaphore</span>), <b>never by a manager agent</b>. Literature research happens <b>only in the
+    research agents, via MCP</b> — no other stage queries a literature source.</div>
+</section>
+
+<!-- ============================ SECTION 3 ============================ -->
+<section id="s3">
+  <div class="sec-head"><span class="sn">03</span><h2>The Research Agent — control panel</h2></div>
+  <p class="sec-sub">Every knob on the per-program research session. <span class="mono">Current</span> is what runs today;
+    <span style="color:var(--accent-ink);font-weight:600">Proposed</span> is the change to discuss.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:14%">Parameter</th><th style="width:30%">Current</th><th style="width:30%">Proposed</th><th style="width:26%">Notes to discuss</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="param">system_prompt</td>
+          <td class="cur"><code>research/protocol.md</code> — heavy, 4 questions, ~1,500 words</td>
+          <td class="prop"><span class="pchip">Proposed</span><b>LEAN</b>: 1 question (program function), ~half length</td>
+          <td class="notes">biggest lever</td>
+        </tr>
+        <tr>
+          <td class="param">model</td>
+          <td class="cur"><code>claude-sonnet-4-5-20250929</code> (on subscription)</td>
+          <td class="prop"><span class="pchip">Discuss</span>a lighter model may suffice for a genes-only function task</td>
+          <td class="notes">cost / quality knob</td>
+        </tr>
+        <tr>
+          <td class="param">tools<br><span style="font-weight:400;color:var(--ink-mute)">(mcp_servers)</span></td>
+          <td class="cur">PubMed, bioRxiv, Consensus, Open Targets (via the installed <b>BioResearch</b> plugin) + a local
+            <code>submit_result</code> tool</td>
+          <td class="prop"><span class="pchip">Proposed</span>keep <b>PubMed + Consensus</b> as primary; genes-only needs
+            less bioRxiv / OT</td>
+          <td class="notes">Consensus is strong for gene-function synthesis</td>
+        </tr>
+        <tr>
+          <td class="param">allowed_tools</td>
+          <td class="cur">read-only allowlist: pubmed / biorxiv / consensus search + <code>submit_result</code> + <code>Read</code></td>
+          <td class="prop same"><span class="keepchip">→ unchanged</span></td>
+          <td class="notes">safety</td>
+        </tr>
+        <tr>
+          <td class="param">permission_mode</td>
+          <td class="cur"><code>"default"</code> + deny-by-default <code>can_use_tool</code> callback</td>
+          <td class="prop same"><span class="keepchip">→ unchanged</span></td>
+          <td class="notes">safety</td>
+        </tr>
+        <tr>
+          <td class="param">max_turns</td>
+          <td class="cur"><code>30</code></td>
+          <td class="prop"><span class="pchip">Proposed</span>consider <b>12–15</b> for the leaner task</td>
+          <td class="notes">fewer questions ⇒ fewer turns</td>
+        </tr>
+        <tr>
+          <td class="param">max_budget_usd</td>
+          <td class="cur"><code>1.0</code> per program</td>
+          <td class="prop"><span class="pchip">Discuss</span>revisit alongside model + turns</td>
+          <td class="notes">cost cap (SDK-native)</td>
+        </tr>
+        <tr>
+          <td class="param">per_program_timeout</td>
+          <td class="cur"><code>600 s</code></td>
+          <td class="prop"><span class="pchip">Proposed</span>maybe <b>300 s</b></td>
+          <td class="notes">leaner task</td>
+        </tr>
+        <tr>
+          <td class="param">retries + fallback</td>
+          <td class="cur">2 retries, then deterministic fallback (literature marked <em>incomplete</em>)</td>
+          <td class="prop same"><span class="keepchip">→ unchanged</span></td>
+          <td class="notes">resilience</td>
+        </tr>
+        <tr>
+          <td class="param">concurrency</td>
+          <td class="cur"><code>asyncio.Semaphore(4)</code></td>
+          <td class="prop"><span class="pchip">Discuss</span>for scale (<b>3–5</b>)</td>
+          <td class="notes">throughput vs rate limits</td>
+        </tr>
+        <tr>
+          <td class="param">workspace isolation<br><span style="font-weight:400;color:var(--ink-mute)">(cwd)</span></td>
+          <td class="cur">each session <code>Read</code>s <b>only</b> its own bundle</td>
+          <td class="prop same"><span class="keepchip">→ unchanged</span></td>
+          <td class="notes">context isolation</td>
+        </tr>
+        <tr>
+          <td class="param">setting_sources</td>
+          <td class="cur"><code>[]</code> (isolated)</td>
+          <td class="prop"><span class="pchip">Wiring</span>may need to inherit the plugin's MCP servers for the SDK subprocess</td>
+          <td class="notes">wiring detail</td>
+        </tr>
+        <tr>
+          <td class="param">structured output</td>
+          <td class="cur">required <code>submit_result</code> tool → validated <code>ResearchResult</code></td>
+          <td class="prop same"><span class="keepchip">→ unchanged</span></td>
+          <td class="notes">reliability</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================ SECTION 4 ============================ -->
+<section id="s4">
+  <div class="sec-head"><span class="sn">04</span><h2>What the agent reads — the program bundle</h2></div>
+  <p class="sec-sub">The single JSON handed to each session. The proposal keeps the same fields but shifts emphasis:
+    genes to the front, regulators to the background.</p>
+
+  <div class="compare">
+    <div class="col current">
+      <div class="col-head"><span class="badge">CURRENT</span> bundle contents</div>
+      <div class="col-body">
+        <ul class="itemlist">
+          <li><span class="lead">context</span><span class="txt">the <code>ContextProfile</code> (see §6)</span></li>
+          <li><span class="lead">top_weighted_genes</span><span class="txt">top 20 by score</span></li>
+          <li><span class="lead">unique genes</span><span class="txt">program-distinctive genes</span></li>
+          <li><span class="lead">enrichment</span><span class="txt">pathway / process terms</span></li>
+          <li><span class="lead">regulators</span><span class="txt">young / aged activators + repressors</span></li>
+          <li><span class="lead">effect_direction</span><span class="txt">observed activation vs. repression</span></li>
+          <li><span class="lead">qc</span><span class="txt">counts, has_enrichment, has_regulators</span></li>
+          <li><span class="lead">research_brief</span><span class="txt">generated text the agent reads</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col proposed">
+      <div class="col-head"><span class="badge">PROPOSED</span> emphasis</div>
+      <div class="col-body">
+        <ul class="itemlist">
+          <li class="star"><span class="lead">PROGRAM GENES</span><span class="txt">front-and-centre — the primary object of study</span></li>
+          <li class="star"><span class="lead">UNIQUE GENES</span><span class="txt">front-and-centre — what makes this program distinct</span></li>
+          <li><span class="lead">enrichment</span><span class="txt">supporting signal (once STRING runs — see §8)</span></li>
+          <li class="demote"><span class="lead">regulators</span><span class="txt">light background only — <b>do not</b> ask the agent to investigate regulator mechanism</span></li>
+          <li class="demote"><span class="lead">effect_direction</span><span class="txt">de-emphasized — direction is no longer a research question</span></li>
+          <li><span class="lead">context</span><span class="txt">rebalanced framing (see §6)</span></li>
+          <li><span class="lead">qc · research_brief</span><span class="txt">retained</span></li>
+        </ul>
+        <div class="mini-note">Same bundle schema — the shift is in <b>what the agent is told to focus on</b>, not in
+          which fields exist.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="ex-head"><span class="lab">example input</span> Program 10 — correct dataset</div>
+    <div class="ex-body">
+      <div class="kv">
+        <span class="k">program genes (focus)</span>
+        <div class="genes">Rhbg · Lhpp · Gulo · Glul · Lect2 · Oat · Slc22a1 · Slc1a2 · Cyp2e1 · Slc13a3 · Cyp1a2 · Slco1b2 · Gstm2 · Tbx3 · Axin2 · Pon1 …</div>
+      </div>
+      <div class="kv">
+        <span class="k">regulators (context only — not investigated)</span>
+        <div class="genes"><span class="reg-repress">repressors: Dgat2 · Mttp · Scap · Mlxipl</span> &nbsp;·&nbsp; <span class="reg-activate">activators: Insig1 · Trib1 · Fgfr4</span></div>
+      </div>
+      <div class="ctx-note">Effect magnitude: young effects &#8811; aged.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SECTION 5 ============================ -->
+<section id="s5">
+  <div class="sec-head"><span class="sn">05</span><h2>The rules (protocol) — current vs proposed</h2></div>
+  <p class="sec-sub">The system prompt sets what the agent investigates. The proposal narrows four questions to one.</p>
+
+  <div class="compare">
+    <div class="col current">
+      <div class="col-head"><span class="badge">CURRENT</span> investigate FOUR questions</div>
+      <div class="col-body">
+        <div class="q keep"><span class="qn">1</span><div class="qbody"><b>Program function</b> — what do the program
+          genes do together?</div></div>
+        <div class="q"><span class="qn">2</span><div class="qbody"><b>Regulator mechanism</b> — how do the perturbation
+          regulators control this gene set?</div></div>
+        <div class="q"><span class="qn">3</span><div class="qbody"><b>Perturbation-direction consistency</b> — does the
+          literature agree with the observed direction?</div></div>
+        <div class="q"><span class="qn">4</span><div class="qbody"><b>Competing / contradictory explanations</b> —
+          actively look for the paper that disagrees.</div></div>
+      </div>
+    </div>
+
+    <div class="col proposed">
+      <div class="col-head"><span class="badge">PROPOSED</span> investigate ONE question</div>
+      <div class="col-body">
+        <div class="q keep"><span class="qn">1</span><div class="qbody"><b>Program function</b> — what do the program
+          genes + unique genes do <em>together</em>? <span style="color:var(--accent-ink);font-weight:600">(the only task)</span></div></div>
+        <div class="q drop"><span class="qn">2</span><div class="qbody">Regulator mechanism — <b>dropped as a task</b></div></div>
+        <div class="q drop"><span class="qn">3</span><div class="qbody">Direction consistency — <b>dropped as a task</b></div></div>
+        <div class="q drop"><span class="qn">4</span><div class="qbody">Competing explanations — <b>dropped as a task</b></div></div>
+        <div style="margin-top:12px;font-size:13px;color:var(--ink-soft)">Flag a contradiction <b>only if it surfaces
+          naturally</b> — do not go looking for one.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nonneg">
+    <h4>Non-negotiables — kept either way</h4>
+    <ul>
+      <li><b>Retrieve first, then write</b> — never from memory.</li>
+      <li><b>Reference only tool-returned PMIDs / DOIs</b> — never fabricate an identifier, title, year, or quotation.</li>
+      <li><b>Do not assign the final label</b> — the downstream synthesis does that.</li>
+      <li>The <b>deterministic verifier still resolves every identifier</b> afterward, regardless of protocol length.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ SECTION 6 ============================ -->
+<section id="s6">
+  <div class="sec-head"><span class="sn">06</span><h2>ContextProfile — current vs proposed</h2></div>
+  <p class="sec-sub">The structured biology block. After the assay and persona are removed, <b>these fields become the only
+    biological framing the agent sees.</b></p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:16%">Field</th><th style="width:40%">Current</th><th style="width:44%">Proposed</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="param">organism</td>
+          <td class="cur"><code>mouse</code></td>
+          <td class="prop same"><span class="keepchip">keep</span><code>mouse</code></td>
+        </tr>
+        <tr>
+          <td class="param">cell_type</td>
+          <td class="cur"><code>hepatocyte</code></td>
+          <td class="prop same"><span class="keepchip">keep</span><code>hepatocyte</code></td>
+        </tr>
+        <tr>
+          <td class="param">tissue</td>
+          <td class="cur"><code>liver</code></td>
+          <td class="prop same"><span class="keepchip">keep</span><code>liver</code></td>
+        </tr>
+        <tr>
+          <td class="param">assay</td>
+          <td class="cur"><code>"in vivo Perturb-seq"</code></td>
+          <td class="prop"><span class="pchip">✗ Remove</span>do <b>not</b> expose the assay / Perturb-seq to the agent
+            anywhere</td>
+        </tr>
+        <tr>
+          <td class="param">annotation_role</td>
+          <td class="cur"><code>"hepatocyte aging and MASLD biologist"</code> (auto-derived)</td>
+          <td class="prop"><span class="pchip">✗ Neutralize</span>don't hard-code a disease-biologist persona</td>
+        </tr>
+        <tr>
+          <td class="param">conditions</td>
+          <td class="cur"><code>[aging, MASLD]</code></td>
+          <td class="prop same"><span class="keepchip">keep</span><code>[aging, MASLD]</code></td>
+        </tr>
+        <tr>
+          <td class="param">context_terms</td>
+          <td class="cur"><code>[steatosis, lipid metabolism, insulin resistance, cellular stress/senescence,
+            inflammation, fibrosis]</code> — very disease-heavy</td>
+          <td class="prop"><span class="pchip">→ Rebalance</span>toward normal hepatocyte cellular functions.
+            <b>Keep</b> <code>[aging, MASLD, lipid metabolism]</code>; <b>add</b> normal functions e.g.
+            <code>[metabolic zonation, xenobiotic/drug metabolism, bile-acid metabolism, gluconeogenesis/glycogen,
+            nitrogen/urea metabolism, oxidative metabolism, membrane transport]</code></td>
+        </tr>
+        <tr>
+          <td class="param">condition_context<br><span style="font-weight:400;color:var(--ink-mute)">(derived block)</span></td>
+          <td class="cur">disease-first sentence</td>
+          <td class="prop"><span class="pchip">→ Rebuild</span>lead with <b>normal hepatocyte cellular functions</b>,
+            then keep aging / MASLD / lipid-metabolism as secondary</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="caption" style="border-left-color:var(--accent)"><b>Why it matters:</b> with the assay and persona removed,
+    the agent's entire sense of "what biology is this?" comes from these fields. A disease-heavy vocabulary steers a
+    normal-metabolism program toward disease framing — hence the rebalance.</div>
+</section>
+
+<!-- ============================ SECTION 7 ============================ -->
+<section id="s7">
+  <div class="sec-head"><span class="sn">07</span><h2>The formatted output — <span style="font-family:var(--mono);font-size:.86em">ResearchResult</span></h2></div>
+  <p class="sec-sub">The single structured payload each session submits, validated against the Pydantic schema. Below:
+    the schema, how the lean protocol changes each field, and a program-10 shape illustration.</p>
+
+  <div class="codeblock">
+    <div class="cb-head"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+      &nbsp;ResearchResult&nbsp;·&nbsp;submit_result tool schema</div>
+<pre><span class="k">ResearchResult</span> {
+  program_id,
+  queries[],
+  candidate_mechanisms[ { name, summary, supporting_genes[], evidence_ids[] } ],
+  claims[ {
+      statement,
+      supporting_genes[],
+      evidence_ids[],
+      context_match(<span class="v">direct</span> | <span class="v">partial</span> | <span class="v">indirect</span>),
+      status(<span class="v">supported</span> | <span class="v">partial</span> | <span class="v">unsupported</span>)
+  } ],
+  evidence[ {
+      evidence_id, pmid, doi, title, year, study_type, relevance_note,
+      <span class="c">// verifier-added:</span> resolved, registry, retracted
+  } ],
+  contradictions[],
+  evidence_gaps[],
+  agent_summary
+}</pre>
+  </div>
+
+  <div class="fieldnotes">
+    <div class="fnote"><div class="fn-k">candidate_mechanisms</div><div class="fn-v"><span class="arrow-i">→</span>1–3 tight
+      <b>function</b> mechanisms</div></div>
+    <div class="fnote"><div class="fn-k">claims</div><div class="fn-v"><span class="arrow-i">→</span><b>function</b>
+      claims; drop direction / regulator claims</div></div>
+    <div class="fnote"><div class="fn-k">contradictions</div><div class="fn-v"><span class="arrow-i">→</span>usually
+      <b>empty</b> (flag-only)</div></div>
+    <div class="fnote"><div class="fn-k">evidence</div><div class="fn-v"><span class="arrow-i">→</span>concentrated on
+      <b>gene function</b></div></div>
+    <div class="fnote"><div class="fn-k">evidence_gaps</div><div class="fn-v"><span class="arrow-i">→</span><b>lighter</b>
+      — fewer questions, fewer gaps</div></div>
+  </div>
+
+  <div class="ex-caption"><span class="i">▹</span><div><b>Program-10 example — shape illustration only.</b> Numbers are
+    from the earlier run on the demo data; they will be <b>re-generated on the correct dataset with the lean protocol.</b>
+    The earlier run returned <b>22 evidence records, all with real PMID + DOI, verified 22 / 22, 0 fabricated.</b></div></div>
+
+  <div class="stat-row">
+    <div class="stat"><div class="num">22</div><div class="lbl">evidence records</div></div>
+    <div class="stat"><div class="num ok">22 / 22</div><div class="lbl">verified &amp; resolved</div></div>
+    <div class="stat"><div class="num ok">0</div><div class="lbl">fabricated identifiers</div></div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:12px">
+    <table class="ev">
+      <thead>
+        <tr><th>evidence_id</th><th>pmid</th><th>doi</th><th>resolved</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>EV-001</td><td>3&hairsp;xxxxxxx</td><td>10.1038/s41&hairsp;xxxxx</td><td class="resolved">true ✓</td></tr>
+        <tr><td>EV-002</td><td>3&hairsp;xxxxxxx</td><td>10.1016/j.cell&hairsp;xxxxx</td><td class="resolved">true ✓</td></tr>
+        <tr><td>EV-003</td><td>3&hairsp;xxxxxxx</td><td>10.1172/JCI&hairsp;xxxxx</td><td class="resolved">true ✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11.5px;color:var(--ink-mute);margin-top:8px">Identifiers shown generically; every real record
+    carried a tool-returned PMID and/or DOI that the deterministic verifier resolved against PubMed / CrossRef / doi.org.</p>
+</section>
+
+<!-- ============================ SECTION 8 ============================ -->
+<section id="s8">
+  <div class="sec-head"><span class="sn">08</span><h2>Open questions for us to decide</h2></div>
+  <p class="sec-sub">The decisions that turn this draft into an applied configuration.</p>
+
+  <div class="checklist">
+    <div class="check"><span class="box"></span><div class="q-txt"><b>Model for genes-only research</b> — keep Sonnet, or
+      move to a lighter model?<span class="sub">Genes-only function synthesis may not need the full model — a cost/quality
+      call.</span></div></div>
+    <div class="check"><span class="box"></span><div class="q-txt"><b>Regulators in the bundle</b> — drop entirely, or keep
+      as light context only?<span class="sub">Proposal keeps them as background but removes them as a research target.</span></div></div>
+    <div class="check"><span class="box"></span><div class="q-txt"><b>max_turns / budget / timeout</b> for the leaner task
+      <span class="sub">Candidate values: turns 12–15, timeout ~300 s; budget to revisit.</span></div></div>
+    <div class="check"><span class="box"></span><div class="q-txt"><b>Fix the 3 integration bugs</b> + refresh the
+      presentation lexicon<span class="sub">(1) <span class="mono">gene_summaries</span> <span class="mono">pd.NA</span>
+      crash · (2) <span class="mono">P{id}.json</span> vs <span class="mono">{id}.json</span> filename mismatch ·
+      (3) report DOI / status merge that didn't fire.</span></div></div>
+    <div class="check"><span class="box"></span><div class="q-txt"><b>STRING enrichment</b> — run it to fill the (currently
+      empty) enrichment block, or skip it?<span class="sub">Enrichment is a supporting signal for the genes-first read.</span></div></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <span class="fnote-line"><span style="font-size:14px">✎</span> Draft for discussion — nothing here is applied yet</span>
+  <div class="meta">Gene Program Interpreter · research-agent configuration review · program-10 post-mortem</div>
+</footer>
+
+</body>
+</html>

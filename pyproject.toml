@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gene-program-interpreter"
+version = "0.1.0"
+description = "Tissue-agnostic Claude Skill that interprets weighted gene programs with parallel, auditable literature research."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = [
+    # Deterministic front-end (vendored from ProgExplorer)
+    "pandas",
+    "numpy",
+    "requests",
+    "tqdm",
+    "matplotlib",
+    "seaborn",
+    "pillow",
+    "markdown",
+    "pyyaml",
+    "jinja2",
+    "beautifulsoup4",
+    # Schema + LLM
+    "pydantic>=2",
+    "anthropic>=0.40",        # Message Batches API: client.messages.batches.*
+    "claude-agent-sdk",       # parallel literature research fan-out (executor 2)
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "ruff",
+]
+
+[project.scripts]
+gpi = "gpi.run_pipeline:main"
+
+[tool.setuptools]
+packages = ["gpi", "research"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

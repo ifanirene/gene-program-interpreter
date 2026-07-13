@@ -1,0 +1,78 @@
+# Gene Program Interpreter — real hepatocyte dataset run config.
+#
+# Points at the real mouse-hepatocyte program set under
+# /Volumes/IF_PHAGE/Hepatocyte/Programs0617. As with liver_demo.yaml, nothing
+# tissue-specific is hard-coded in the code: the biology lives entirely in the
+# `context:` block (a gpi.context_profile.ContextProfile). These values match the
+# lean, disease-neutral ContextProfile.liver_demo() exactly (role "hepatocyte
+# biologist"; the assay is intentionally NOT surfaced to the research agent).
+
+context:                       # -> ContextProfile.from_dict
+  organism: mouse
+  species_taxid: 10090         # NCBI taxid (STRING enrichment + NCBI gene)
+  tissue: liver
+  cell_type: hepatocyte
+  conditions: [aging, MASLD]
+  context_terms:
+    - metabolic zonation
+    - xenobiotic and drug metabolism
+    - bile acid metabolism
+    - gluconeogenesis and glycogen storage
+    - nitrogen and urea metabolism
+    - oxidative and mitochondrial metabolism
+    - membrane transport and solute carriers
+    - lipid metabolism
+  # annotation_role / annotation_context / keyword_query / condition_context are
+  # auto-derived (lean/neutral) from the fields above when left blank. The assay
+  # is deliberately omitted here so it never leaks into the research brief.
+
+inputs:
+  # Gene loading: columns are Name,Score,RowID. RowID is the PROGRAM ID (1..50);
+  # there is no separate program_id/source_program/rank column here, so downstream
+  # (bundle build) must treat RowID as program_id when resolving the program column.
+  gene_loading: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/gene_loading_K50_0_5_top300.csv
+
+  # Regulators are CONDITION-KEYED (young + aged), tab-separated, with columns
+  # target_name,program_name,log2FC,p-value,adj_pval (program_name is the program id).
+  # The bundle step should build a condition-keyed regulator context (i.e. the
+  # regulator_validation_by_condition path), one block per condition below.
+  regulators_by_condition:
+    young: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_young_F.txt
+    aged: /Volumes/IF_PHAGE/Hepatocyte/Programs0617/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_aged_F.txt
+
+  celltype_enrichment: null
+
+output_dir: runs/hepatocyte_p10
+
+# Single program for this run. null = all programs.
+programs: [10]
+
+settings:
+  n_top_genes: 300
+  top_loading: 20
+  top_unique: 10
+  top_enrichment: 7
+  genes_per_term: 10
+
+research:                      # executor 2 — parallel literature agents
+  enabled: true
+  concurrency: 4               # asyncio.Semaphore(k), k = 3-5
+  model: claude-sonnet-4-5-20250929
+  max_turns: 30
+  max_budget_usd: 1.0          # per-program cost cap (SDK-native)
+  per_program_timeout: 600
+  mcp_config: research/mcp_servers.json
+
+annotation:                    # executor 3 — Anthropic Batch synthesis + labels
+  model: claude-sonnet-4-5-20250929
+  max_tokens: 8192
+  batch: true
+
+theme:                         # executor 3 — generic-theme down-weighting (M6)
+  enabled: true
+  model: claude-sonnet-4-5-20250929
+  min_generic_program_count: 4
+
+presentation:                  # executor 3 (+ 4 fallback)
+  model: claude-haiku-4-5-20251001
+  deterministic_fallback: true

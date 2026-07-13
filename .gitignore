@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Env / secrets
+.env
+
+# OS
+.DS_Store
+
+# Caches
+.pytest_cache/
+.ruff_cache/
+*.cache
+
+# Run outputs (regenerated; keep small curated fixtures under tests/fixtures)
+runs/
+program_bundles/
+research_results/
+research_audit/
+*.batch_id
+*_results.jsonl
+
+# Regenerable fetch caches
+data/cache/
+
+# Large saved reference pages (kept on disk, not in repo)
+*.mhtml

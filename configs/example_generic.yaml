@@ -1,0 +1,64 @@
+# Gene Program Interpreter — non-liver example config (generalization proof).
+#
+# Same pipeline, a completely different biological context: human CD8 T-cell
+# exhaustion instead of mouse hepatocyte/MASLD. NOTHING about liver appears in
+# the code — only in the `context:` block. Point `inputs` at your own dataset.
+#
+# NOTE: for a runnable end-to-end generalization check (spec test 8: "no
+# liver/MASLD text leaks into prompts, evidence-type enum, theme call, or
+# report"), this example reuses the liver demo gene table purely as arbitrary
+# gene symbols under a T-cell context. Replace with your own gene loadings.
+
+context:                       # -> ContextProfile.from_dict
+  organism: human
+  species_taxid: 9606
+  tissue: ""
+  cell_type: CD8 T cell
+  conditions: [chronic infection, exhaustion]
+  context_terms:
+    - tumor microenvironment
+    - immune checkpoint
+    - TOX
+    - interferon signaling
+    - effector-to-exhausted transition
+  assay: CRISPR Perturb-seq
+  report_dataset_crumb: Human CD8 T-cell CRISPR Perturb-seq
+
+inputs:
+  gene_loading: examples/generic_demo/gene_loading.csv   # placeholder symbols; replace with your data
+  regulators: examples/generic_demo/regulators.csv
+  celltype_enrichment: null
+
+output_dir: runs/tcell_example
+
+programs: [10, 12, 14]
+
+settings:
+  n_top_genes: 300
+  top_loading: 20
+  top_unique: 10
+  top_enrichment: 7
+  genes_per_term: 10
+
+research:
+  enabled: true
+  concurrency: 4
+  model: claude-sonnet-4-5-20250929
+  max_turns: 30
+  max_budget_usd: 1.0
+  per_program_timeout: 600
+  mcp_config: research/mcp_servers.json
+
+annotation:
+  model: claude-sonnet-4-5-20250929
+  max_tokens: 8192
+  batch: true
+
+theme:
+  enabled: true
+  model: claude-sonnet-4-5-20250929
+  min_generic_program_count: 4
+
+presentation:
+  model: claude-haiku-4-5-20251001
+  deterministic_fallback: true

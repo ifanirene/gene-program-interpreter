@@ -1,0 +1,65 @@
+# Gene Program Interpreter — liver demo run config.
+#
+# The vendored ProgExplorer liver/MASLD dataset, expressed the tissue-agnostic
+# way: nothing here is hard-coded in the code — the biology lives entirely in the
+# `context:` block (a gpi.context_profile.ContextProfile). Swap that block for any
+# other tissue/condition and the same pipeline runs (see example_generic.yaml).
+
+context:                       # -> ContextProfile.from_dict
+  organism: mouse
+  species_taxid: 10090         # NCBI taxid (STRING enrichment + NCBI gene)
+  tissue: liver
+  cell_type: hepatocyte
+  conditions: [aging, MASLD]
+  context_terms:
+    - steatosis
+    - lipid metabolism
+    - insulin resistance
+    - cellular stress/senescence
+    - inflammation
+    - fibrosis
+  assay: in vivo Perturb-seq
+  report_dataset_crumb: Mouse hepatocyte in vivo Perturb-seq
+  # annotation_role / annotation_context / keyword_query / condition_context are
+  # auto-derived from the fields above when left blank (override here to pin them).
+
+inputs:
+  gene_loading: examples/liver_demo/gene_loading.csv    # Name,Score,program_id,source_program,rank
+  regulators: examples/liver_demo/regulators.csv        # program_id,target_gene,log2_fc,significant,source_program
+  celltype_enrichment: null
+
+output_dir: runs/liver_demo
+
+# MVP: demo 3-5 representative programs (one strong, one ambiguous, one
+# direction counterfactual) rather than the full dataset. null = all programs.
+programs: [10, 12, 14]
+
+settings:
+  n_top_genes: 300
+  top_loading: 20
+  top_unique: 10
+  top_enrichment: 7
+  genes_per_term: 10
+
+research:                      # executor 2 — parallel literature agents
+  enabled: true
+  concurrency: 4               # asyncio.Semaphore(k), k = 3-5
+  model: claude-sonnet-4-5-20250929
+  max_turns: 30
+  max_budget_usd: 1.0          # per-program cost cap (SDK-native)
+  per_program_timeout: 600
+  mcp_config: research/mcp_servers.json
+
+annotation:                    # executor 3 — Anthropic Batch synthesis + labels
+  model: claude-sonnet-4-5-20250929
+  max_tokens: 8192
+  batch: true
+
+theme:                         # executor 3 — generic-theme down-weighting (M6)
+  enabled: true
+  model: claude-sonnet-4-5-20250929
+  min_generic_program_count: 4
+
+presentation:                  # executor 3 (+ 4 fallback)
+  model: claude-haiku-4-5-20251001
+  deterministic_fallback: true

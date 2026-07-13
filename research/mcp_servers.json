@@ -1,0 +1,24 @@
+{
+  "_comment": "Read-only literature MCP servers handed to each Claude Agent SDK research session (research happens ONLY in agents via MCP; Anthropic-only; Agent SDK runs locally). Server names are fixed to pubmed/biorxiv/openalex so the allowlist mcp__pubmed__*, mcp__biorxiv__*, mcp__openalex__* matches. The loader substitutes ${ENV_VAR} placeholders from os.environ (repo .env) at launch; no secret values are stored here.",
+  "mcpServers": {
+    "pubmed": {
+      "command": "uvx",
+      "args": ["--from", "mcp-simple-pubmed", "mcp-simple-pubmed"],
+      "env": {
+        "PUBMED_EMAIL": "${PUBMED_EMAIL}",
+        "NCBI_API_KEY": "${NCBI_API_KEY}"
+      }
+    },
+    "biorxiv": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/JackKuo666/bioRxiv-MCP-Server", "biorxiv-mcp-server"]
+    },
+    "openalex": {
+      "command": "npx",
+      "args": ["openalex-mcp"],
+      "env": {
+        "OPENALEX_API_KEY": "${OPENALEX_API_KEY}"
+      }
+    }
+  }
+}

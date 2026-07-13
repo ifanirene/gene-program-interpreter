@@ -1,0 +1,2160 @@
+{
+  "2": {
+    "meta": {
+      "query_mode": "manual_literature",
+      "total_hits": 3,
+      "source_files": [
+        "result_02.json"
+      ],
+      "literature_audit": {
+        "query_mode": "manual_literature",
+        "manual_modules": 3,
+        "manual_unique_pmids": 28,
+        "manual_limited_genes": 15,
+        "manual_source_files": [
+          "result_02.json"
+        ]
+      }
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Abcb11": "The membrane-associated protein encoded by this gene is a member of the superfamily of ATP-binding cassette (ABC) transporters. ABC proteins transport various molecules across extra- and intra-cellular membranes. ABC genes are divided into seven distinct subfamilies (ABC1, MDR/TAP, MRP, ALD, OABP, GCN20, White). This protein is a member of the MDR/TAP subfamily. Members of the MDR/TAP subfamily are involved in multidrug resistance. The protein encoded by this gene is the major canalicular bile salt transporter in humans and mice. Mutations in the human gene cause a form of progressive familial intrahepatic cholestases which are a group of inherited disorders with severe cholestatic liver disease from early infancy. [provided by RefSeq, Jul 2008]",
+      "Sult2a5": "Predicted to enable 3'-phosphoadenosine 5'-phosphosulfate binding activity and sulfotransferase activity. Predicted to be involved in several processes, including 3'-phosphoadenosine 5'-phosphosulfate metabolic process; ethanol catabolic process; and sulfation. Predicted to be located in cytosol. Predicted to be active in cytoplasm. Human ortholog(s) of this gene implicated in prostate cancer. Orthologous to human SULT2A1 (sulfotransferase family 2A member 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Igfbp2": "The protein encoded by this gene is one of several similar proteins that bind insulin-like growth factors I and II (Igf-I and Igf-II). The encoded protein can be secreted into the bloodstream, where it binds Igf-I and Igf-II with high affinity, or it can remain intracellular, interacting with many different ligands. Two transcript variants, one encoding a secreted isoform and the other encoding a nonsecreted isoform, have been found for this gene. [provided by RefSeq, Sep 2015]",
+      "Rnase4": "This gene encodes a member of the pancreatic ribonuclease A superfamily. The encoded enzyme is sereted and has unique uridine specificity. This gene resides in a cluster of highly related genes. It shares dual promoters and 5' exons with the angiogenin, ribonuclease, RNase A family, 5 gene. Each gene splices to a unique downstream exon that contains its complete coding region. Two alternatively spliced variants, with different 5' exons but the same coding exon, have been identified. [provided by RefSeq, Jun 2009]",
+      "Ugdh": "Enables UDP-glucose 6-dehydrogenase activity. Involved in UDP-glucuronate biosynthetic process; gastrulation with mouth forming second; and proteoglycan biosynthetic process. Predicted to be located in nucleoplasm. Predicted to be active in cytosol and nucleus. Is expressed in several structures, including alimentary system; brain; heart; respiratory system; and sensory organ. Human ortholog(s) of this gene implicated in developmental and epileptic encephalopathy 84. Orthologous to human UGDH (UDP-glucose 6-dehydrogenase). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Wdtc1": "Enables enzyme inhibitor activity; histone binding activity; and histone deacetylase binding activity. Acts upstream of or within several processes, including cellular response to insulin stimulus; glucose metabolic process; and negative regulation of biosynthetic process. Located in cytosol and nucleus. Is expressed in cerebral cortex; heart ventricle; lung; and pancreas. Orthologous to human WDTC1 (WD and tetratricopeptide repeats 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Aldh2": "Predicted to enable several functions, including NADH binding activity; carboxylesterase activity; and phenylacetaldehyde dehydrogenase (NAD+) activity. Involved in regulation of dopamine biosynthetic process and regulation of serotonin biosynthetic process. Located in mitochondrion. Is expressed in several structures, including alimentary system; genitourinary system; nervous system; respiratory system; and sensory organ. Human ortholog(s) of this gene implicated in several diseases, including alcohol dependence; alcohol use disorder; artery disease (multiple); diabetes mellitus (multiple); and liver disease (multiple). Orthologous to human ALDH2 (aldehyde dehydrogenase 2 family member). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Hnf4a": "The protein encoded by this gene is a transcription factor involved in the development of the pancreas, liver, kidney, and intestines. The encoded protein also functions to maintain glucose homeostasis. Several transcript variants encoding different isoforms have been found for this gene. [provided by RefSeq, Aug 2015]",
+      "Mtus1": "Predicted to enable microtubule binding activity. Acts upstream of or within regulation of macrophage chemotaxis. Located in cytoplasm. Is expressed in several structures, including extraembryonic component; eye; genitourinary system; heart; and nervous system. Orthologous to human MTUS1 (microtubule associated scaffold protein 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Pkp4": "Predicted to enable cadherin binding activity. Involved in cell-cell junction assembly. Located in postsynaptic density. Is expressed in several structures, including alimentary system; brain; cardiovascular system; genitourinary system; and respiratory system. Orthologous to human PKP4 (plakophilin 4). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Mars1": "The encoded protein belongs to the class I family of tRNA synthetases, a class of enzymes that charge tRNAs with their cognate amino acids. The related human gene product is essential for the translation initiation of mRNAs. This gene has an overlapping 3' UTR tail-to-tail arrangement with an adjacent gene on the opposite strand that encodes an inhibitor of the CCAAT/enhancer-binding protein's DNA binding activity. This arrangement, conserved in human and mouse, may be involved in mRNA stability and possible functional and regulatory interaction of these adjacent overlapping genes. Alternative splicing results in multiple transcript variants.[provided by RefSeq, Jan 2010]",
+      "Ppm1a": "Enables phosphoprotein phosphatase activity. Involved in N-terminal protein myristoylation. Acts upstream of or within several processes, including cellular response to transforming growth factor beta stimulus; negative regulation of BMP signaling pathway; and positive regulation of protein export from nucleus. Located in cytosol; membrane; and nucleus. Is expressed in several structures, including Peyer's patch; brain; ganglia; male reproductive gland or organ; and white fat. Orthologous to human PPM1A (protein phosphatase, Mg2+/Mn2+ dependent 1A). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Dus1l": "Predicted to enable tRNA-dihydrouridine16 synthase activity and tRNA-dihydrouridine17 synthase activity. Predicted to be involved in tRNA dihydrouridine synthesis. Predicted to be located in cytoplasm and nucleus. Orthologous to human DUS1L (dihydrouridine synthase 1 like). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Gclm": "Enables glutamate-cysteine ligase catalytic subunit binding activity. Acts upstream of or within several processes, including cellular response to leukemia inhibitory factor; glutathione biosynthetic process; and positive regulation of glutamate-cysteine ligase activity. Part of glutamate-cysteine ligase complex. Is expressed in several structures, including alimentary system; genitourinary system; liver; nervous system; and vibrissa. Human ortholog(s) of this gene implicated in myocardial infarction and vascular dementia. Orthologous to human GCLM (glutamate-cysteine ligase modifier subunit). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Mia3": "Predicted to enable cargo receptor activity. Acts upstream of or within chondrocyte development; collagen fibril organization; and positive regulation of bone mineralization. Located in endoplasmic reticulum membrane. Is expressed in several structures, including branchial arch; embryo mesenchyme; heart; nervous system; and nose. Orthologous to human MIA3 (MIA SH3 domain ER export factor 3). [provided by Alliance of Genome Resources, Jul 2025]",
+      "C77080": "Predicted to be involved in cell differentiation. Orthologous to human NHSL3 (NHS like 3). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Slc6a6": "Enables beta-alanine transmembrane transporter activity; gamma-aminobutyric acid:sodium:chloride symporter activity; and taurine:sodium symporter activity. Involved in modulation of chemical synaptic transmission. Acts upstream of or within beta-alanine transport and taurine transmembrane transport. Is active in GABA-ergic synapse and postsynaptic membrane. Is expressed in several structures, including brain; cardiovascular system; retina; spinal cord mantle layer; and tooth. Used to study retinitis pigmentosa. Orthologous to human SLC6A6 (solute carrier family 6 member 6). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Serpine2": "Enables serine-type endopeptidase inhibitor activity and signaling receptor binding activity. Involved in negative regulation of plasminogen activation and negative regulation of platelet aggregation. Acts upstream of or within several processes, including modulation of chemical synaptic transmission; negative regulation of protein metabolic process; and negative regulation of signal transduction. Located in extracellular region and neuromuscular junction. Is expressed in several structures, including alimentary system; central nervous system; embryo mesenchyme; musculoskeletal system; and reproductive system. Human ortholog(s) of this gene implicated in Alzheimer's disease. Orthologous to human SERPINE2 (serpin family E member 2). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Glud1": "Enables glutamate dehydrogenase (NAD+) activity. Involved in glutamine metabolic process and tricarboxylic acid metabolic process. Acts upstream of or within positive regulation of insulin secretion. Located in mitochondrial matrix. Is expressed in several structures, including alimentary system; central nervous system; metanephros; respiratory system; and sensory organ. Human ortholog(s) of this gene implicated in familial hyperinsulinemic hypoglycemia 6; hyperinsulinism; and hypoglycemia. Orthologous to several human genes including GLUD1 (glutamate dehydrogenase 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Mia2": "This gene encodes a protein that is involved in endoplasmic reticulum-to-Golgi trafficking and regulation of cholesterol metabolism. Three major classes of transcripts are generated from this gene- melanoma inhibitory activity 2-specific transcripts, cTAGE family member 5-specific transcripts and transcripts that include exons from both these transcript species. Additionally, alternative splicing in these transcripts results in multiple transcript variants encoding diverse isoforms. A mutation in this gene (couch-potato or cpto) may result in low levels of plasma cholesterol and triglycerides. [provided by RefSeq, Sep 2016]",
+      "Hipk3": "Enables protein serine/threonine kinase activity. Involved in negative regulation of JUN kinase activity; peptidyl-serine phosphorylation; and peptidyl-threonine phosphorylation. Located in PML body and cytoplasm. Is expressed in diaphragm; heart; limb segment; paraxial mesenchyme; and skeletal musculature. Orthologous to human HIPK3 (homeodomain interacting protein kinase 3). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Zfp91": "The protein encoded by this gene is a member of the zinc finger family of proteins. The gene product contains C2H2-type domains, which are the classical zinc finger domains found in numerous nucleic acid-binding proteins. The homologous human protein has been shown to function as a regulator of the non-canonical NF-kappaB pathway in lymphotoxin-beta receptor signaling. A read-through transcript variant composed of Zfp91 and the downstream Cntf gene sequence has been identified, but it is thought to be non-coding. Read-through transcription of Zfp91 and Cntf has been observed in both human and mouse. A Zfp91-related pseudogene has also been identified on chromosome 17. [provided by RefSeq, Oct 2010]",
+      "Erbin": "Predicted to enable signaling receptor binding activity. Involved in negative regulation of monocyte chemotactic protein-1 production; negative regulation of nucleotide-binding activity oligomerization domain containing 2 signaling pathway; and regulation of postsynaptic membrane neurotransmitter receptor levels. Acts upstream of or within protein targeting. Located in basolateral plasma membrane. Is active in glutamatergic synapse and postsynapse. Is expressed in cerebral cortex and retina nuclear layer. Orthologous to human ERBIN (erbb2 interacting protein). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Larp1": "Predicted to enable several functions, including RNA binding activity; eukaryotic initiation factor 4E binding activity; and ribosomal small subunit binding activity. Predicted to be involved in several processes, including TORC1 signaling; cellular response to rapamycin; and post-transcriptional regulation of gene expression. Predicted to be located in cytoplasm. Predicted to be part of TORC1 complex. Predicted to be active in cytoplasmic stress granule and cytosol. Is expressed in several structures, including branchial arch; cranial ganglion; epithelium; future spinal cord; and limb bud. Orthologous to human LARP1 (La ribonucleoprotein 1, translational regulator). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Dync1h1": "Enables dynein light intermediate chain binding activity. Involved in P-body assembly; positive regulation of cold-induced thermogenesis; and stress granule assembly. Located in cytoplasm and filopodium. Is expressed in several structures, including central nervous system; early conceptus; neural retina; placenta; and trigeminal nerve. Used to study Charcot-Marie-Tooth disease axonal type 2O. Human ortholog(s) of this gene implicated in Charcot-Marie-Tooth disease axonal type 2O; autosomal dominant intellectual developmental disorder 13; and spinal muscular atrophy with lower extremity predominant 1. Orthologous to human DYNC1H1 (dynein cytoplasmic 1 heavy chain 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Eif4b": "Predicted to enable RNA strand annealing activity; RNA strand-exchange activity; and ribosomal small subunit binding activity. Predicted to be involved in eukaryotic translation initiation factor 4F complex assembly and formation of translation preinitiation complex. Predicted to be located in cytosol; dendrite; and neuronal cell body. Orthologous to human EIF4B (eukaryotic translation initiation factor 4B). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Alkbh5": "Enables mRNA N6-methyladenosine dioxygenase activity. Involved in mRNA destabilization and spermatogenesis. Located in nuclear speck. Is expressed in brain; intestine; and liver. Orthologous to human ALKBH5 (alkB homolog 5, RNA demethylase). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Ahctf1": "Predicted to enable DNA binding activity. Predicted to be involved in nuclear pore complex assembly and regulation of cytokinesis. Located in cytoplasm and nuclear matrix. Is expressed in several structures, including cardiovascular system; central nervous system; early conceptus; genitourinary system; and hemolymphoid system. Orthologous to human AHCTF1 (AT-hook containing transcription factor 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Spata13": "Predicted to enable guanyl-nucleotide exchange factor activity and identical protein binding activity. Predicted to be involved in cell migration; plasma membrane bounded cell projection assembly; and regulation of cell migration. Located in podosome. Is expressed in brain; liver; testis; thymus primordium; and vertebral cartilage condensation. Orthologous to human SPATA13 (spermatogenesis associated 13). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Wrnip1": "Predicted to enable several functions, including ATP hydrolysis activity; identical protein binding activity; and single-stranded DNA helicase activity. Predicted to be involved in DNA synthesis involved in DNA repair; DNA-templated DNA replication; and regulation of DNA-templated DNA replication initiation. Located in nucleus. Is expressed in several structures, including alimentary system; cranial ganglion; cranium; limb; and naris. Orthologous to human WRNIP1 (WRN helicase interacting protein 1). [provided by Alliance of Genome Resources, Jul 2025]"
+    },
+    "gene_summaries_source": "ncbi",
+    "evidence_snippets": {},
+    "manual_literature_modules": {
+      "modules": [
+        {
+          "module_rank": 1,
+          "module_name": "Insulin\u2013mTORC1\u2013SREBP nutrient signaling and steatosis control",
+          "supporting_genes": [
+            "Insr",
+            "Irs1",
+            "Insig1",
+            "Flcn",
+            "Mtor",
+            "Igfbp2",
+            "Alkbh5",
+            "Larp1",
+            "Eif4b"
+          ],
+          "supporting_pmids": [
+            "15711641",
+            "27708333",
+            "15085196",
+            "33722690",
+            "35420934",
+            "34711912",
+            "27126637",
+            "34524971",
+            "40014709",
+            "28434145",
+            "24532714",
+            "16763566"
+          ],
+          "evidence_type": "mixed",
+          "literature_summary": "The strongest recurring theme is hepatocyte nutrient signaling that couples INSR/IRS1 to PI3K\u2013mTORC1, SREBP/INSIG lipid regulation, and steatosis susceptibility. Direct liver evidence supports INSR/IRS1 effects on hepatic insulin resistance and steatosis, INSIG1 control of SREBP-driven lipogenesis and NASH, FLCN-dependent mTORC1 control of NAFLD and fibrosis/inflammation, and IGFBP2/ALKBH5 links to hepatic glucose/lipid homeostasis; LARP1 and EIF4B are weaker pathway-level support for mTOR-dependent translational output, including insulin-stimulated hepatocyte EIF4B regulation. Perturbation context strongly reinforces this module: Insr and Insig1 are repressors in both young and aged hepatocytes, Irs1 becomes a notable aged repressor, and Flcn appears as a strong young activator, consistent with age-dependent reweighting of insulin/IRS/INSIG and FLCN\u2013mTOR regulation.",
+          "source_file": "result_02.json"
+        },
+        {
+          "module_rank": 2,
+          "module_name": "HNF4A-linked bile-acid canalicular export and conjugation/detoxification",
+          "supporting_genes": [
+            "Hnf4a",
+            "Abcb11",
+            "Sult2a5",
+            "Ugdh",
+            "Slc6a6",
+            "Aldh2",
+            "Gclm"
+          ],
+          "supporting_pmids": [
+            "19239393",
+            "16264197",
+            "23685087",
+            "22619174",
+            "19131563",
+            "31201272",
+            "37169760",
+            "16421246",
+            "37657657",
+            "29718361",
+            "20548286",
+            "29552625"
+          ],
+          "evidence_type": "mixed",
+          "literature_summary": "This module captures differentiated hepatocyte biliary/excretory metabolism, anchored by HNF4A and ABCB11/BSEP. Direct evidence supports HNF4A as a regulator of bile acid/drug metabolism and ABCB11 as the canalicular bile salt export pump; SULT2A5 is assigned by mouse SULT2-family bile-acid sulfation/detoxification evidence, while UGDH, SLC6A6, ALDH2 and GCLM add glucuronate, taurine, aldehyde and glutathione detoxification or liver-injury protection. Perturbation regulators do not specifically prioritize bile-acid export, so this module is chosen mostly from convergent program-gene biology rather than regulator context.",
+          "source_file": "result_02.json"
+        },
+        {
+          "module_rank": 3,
+          "module_name": "Hepatocyte injury-defense, oxidative/ER stress, and fibrogenic remodeling",
+          "supporting_genes": [
+            "Ugdh",
+            "Aldh2",
+            "Gclm",
+            "Slc6a6",
+            "Flcn",
+            "Mia3",
+            "Ppm1a"
+          ],
+          "supporting_pmids": [
+            "37169760",
+            "37657657",
+            "29718361",
+            "20548286",
+            "16421246",
+            "34711912",
+            "28039913",
+            "23996730",
+            "16751101",
+            "21384408"
+          ],
+          "evidence_type": "mixed",
+          "literature_summary": "A weaker but recurring theme links hepatocyte-injury defenses to stress/fibrosis biology. UGDH, ALDH2, GCLM and SLC6A6 have direct liver-disease or mouse-liver evidence for protection from NASH-associated hepatocyte apoptosis, aldehyde/oxidative stress, glutathione imbalance, and chronic liver injury; FLCN also has direct fatty-liver inflammation/fibrosis evidence. MIA3/TANGO1 and PPM1A are weaker or non-hepatocyte/inferential support: MIA3/TANGO1 is supported mainly in hepatic stellate-cell collagen secretion/fibrosis, while PPM1A is supported by TGF\u03b2/Smad dephosphorylation plus hepatocyte TGF\u03b2 steatohepatitis evidence rather than direct hepatocyte PPM1A studies.",
+          "source_file": "result_02.json"
+        }
+      ],
+      "genes_with_limited_hepatocyte_literature": [
+        "C77080",
+        "Rnase4",
+        "Wdtc1",
+        "Mtus1",
+        "Pkp4",
+        "Mars1",
+        "Ppm1a",
+        "Dus1l",
+        "Mia3",
+        "Serpine2",
+        "Hipk3",
+        "Zfp91",
+        "Erbin",
+        "Dync1h1",
+        "Ahctf1"
+      ],
+      "source_summary": {
+        "source_files": [
+          "result_02.json"
+        ],
+        "n_modules": 3,
+        "n_unique_pmids": 28,
+        "n_limited_genes": 15
+      }
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [
+          {
+            "regulator": "Flcn",
+            "log2fc": -0.5865232699401097,
+            "adj_pvalue": 2.981191433451658e-07,
+            "pvalue": 2.759485659913135e-09,
+            "n_program_targets": 3,
+            "string_interactions": [
+              {
+                "target": "Pkp4",
+                "score": 674
+              },
+              {
+                "target": "Nr3c1",
+                "score": 415
+              },
+              {
+                "target": "Deptor",
+                "score": 412
+              }
+            ]
+          },
+          {
+            "regulator": "Acvr2a",
+            "log2fc": -0.6918327798329326,
+            "adj_pvalue": 0.0013017667913201,
+            "pvalue": 2.419553189307332e-05,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Smad4",
+                "score": 905
+              },
+              {
+                "target": "Hamp",
+                "score": 440
+              }
+            ]
+          },
+          {
+            "regulator": "Alkbh5",
+            "log2fc": -0.5589446780540891,
+            "adj_pvalue": 0.0078816965453484,
+            "pvalue": 0.0001797623307615,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Ddx3x",
+                "score": 612
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insr",
+            "log2fc": 0.8092592161092438,
+            "adj_pvalue": 5.8046094204333556e-15,
+            "pvalue": 2.0632055796558538e-17,
+            "n_program_targets": 11,
+            "string_interactions": [
+              {
+                "target": "Ptpn11",
+                "score": 960
+              },
+              {
+                "target": "Pik3ca",
+                "score": 950
+              },
+              {
+                "target": "Sos1",
+                "score": 657
+              },
+              {
+                "target": "Nr3c1",
+                "score": 551
+              },
+              {
+                "target": "Smad4",
+                "score": 547
+              },
+              {
+                "target": "Ppp2r5a",
+                "score": 502
+              },
+              {
+                "target": "Pck1",
+                "score": 487
+              },
+              {
+                "target": "Ppp2cb",
+                "score": 465
+              },
+              {
+                "target": "Igfbp2",
+                "score": 448
+              },
+              {
+                "target": "Stat3",
+                "score": 447
+              },
+              {
+                "target": "Foxo4",
+                "score": 436
+              }
+            ]
+          },
+          {
+            "regulator": "Mtor",
+            "log2fc": 0.3474369120506958,
+            "adj_pvalue": 0.0001259557587555,
+            "pvalue": 1.8467730397855316e-06,
+            "n_program_targets": 28,
+            "string_interactions": [
+              {
+                "target": "Deptor",
+                "score": 999
+              },
+              {
+                "target": "Ulk1",
+                "score": 998
+              },
+              {
+                "target": "Pik3ca",
+                "score": 967
+              },
+              {
+                "target": "Prkaa2",
+                "score": 964
+              },
+              {
+                "target": "Larp1",
+                "score": 886
+              },
+              {
+                "target": "Stat3",
+                "score": 846
+              },
+              {
+                "target": "Fkbp5",
+                "score": 826
+              },
+              {
+                "target": "Map1lc3a",
+                "score": 811
+              },
+              {
+                "target": "Ubc",
+                "score": 807
+              },
+              {
+                "target": "Eif4b",
+                "score": 678
+              },
+              {
+                "target": "Trrap",
+                "score": 664
+              },
+              {
+                "target": "Pink1",
+                "score": 590
+              },
+              {
+                "target": "Foxo4",
+                "score": 551
+              },
+              {
+                "target": "Keap1",
+                "score": 547
+              },
+              {
+                "target": "Sos1",
+                "score": 527
+              },
+              {
+                "target": "Gabarapl1",
+                "score": 524
+              },
+              {
+                "target": "Sod2",
+                "score": 519
+              },
+              {
+                "target": "Raf1",
+                "score": 516
+              },
+              {
+                "target": "Bax",
+                "score": 511
+              },
+              {
+                "target": "Csnk2a2",
+                "score": 509
+              },
+              {
+                "target": "Scd1",
+                "score": 507
+              },
+              {
+                "target": "Smad4",
+                "score": 493
+              },
+              {
+                "target": "Crebbp",
+                "score": 482
+              },
+              {
+                "target": "Ptpn11",
+                "score": 478
+              },
+              {
+                "target": "Zfyve1",
+                "score": 476
+              },
+              {
+                "target": "Ppp2cb",
+                "score": 453
+              },
+              {
+                "target": "Scarb1",
+                "score": 442
+              },
+              {
+                "target": "Lmna",
+                "score": 410
+              }
+            ]
+          },
+          {
+            "regulator": "Insig1",
+            "log2fc": 0.4063565316496185,
+            "adj_pvalue": 0.0002483920647809,
+            "pvalue": 3.881042841751697e-06,
+            "n_program_targets": 3,
+            "string_interactions": [
+              {
+                "target": "Scd1",
+                "score": 720
+              },
+              {
+                "target": "Acsl1",
+                "score": 453
+              },
+              {
+                "target": "Scarb1",
+                "score": 442
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Ilrun",
+            "log2fc": -0.1493584132290447,
+            "adj_pvalue": 0.0058428838168143,
+            "pvalue": 0.0002496325994798,
+            "n_program_targets": 0,
+            "string_interactions": []
+          },
+          {
+            "regulator": "Acvr2a",
+            "log2fc": -0.1509998324485267,
+            "adj_pvalue": 0.0059029869392908,
+            "pvalue": 0.0002526540558962,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Smad4",
+                "score": 905
+              },
+              {
+                "target": "Hamp",
+                "score": 440
+              }
+            ]
+          },
+          {
+            "regulator": "Cnot3",
+            "log2fc": -0.137537150428052,
+            "adj_pvalue": 0.0066910748972402,
+            "pvalue": 0.000292554925635,
+            "n_program_targets": 5,
+            "string_interactions": [
+              {
+                "target": "Cnot1",
+                "score": 999
+              },
+              {
+                "target": "Tada2b",
+                "score": 662
+              },
+              {
+                "target": "Rc3h1",
+                "score": 618
+              },
+              {
+                "target": "Eif4b",
+                "score": 468
+              },
+              {
+                "target": "Pum2",
+                "score": 451
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insr",
+            "log2fc": 0.3659131822902783,
+            "adj_pvalue": 1.9488832769049395e-46,
+            "pvalue": 3.893663660513505e-49,
+            "n_program_targets": 11,
+            "string_interactions": [
+              {
+                "target": "Ptpn11",
+                "score": 960
+              },
+              {
+                "target": "Pik3ca",
+                "score": 950
+              },
+              {
+                "target": "Sos1",
+                "score": 657
+              },
+              {
+                "target": "Nr3c1",
+                "score": 551
+              },
+              {
+                "target": "Smad4",
+                "score": 547
+              },
+              {
+                "target": "Ppp2r5a",
+                "score": 502
+              },
+              {
+                "target": "Pck1",
+                "score": 487
+              },
+              {
+                "target": "Ppp2cb",
+                "score": 465
+              },
+              {
+                "target": "Igfbp2",
+                "score": 448
+              },
+              {
+                "target": "Stat3",
+                "score": 447
+              },
+              {
+                "target": "Foxo4",
+                "score": 436
+              }
+            ]
+          },
+          {
+            "regulator": "Irs1",
+            "log2fc": 0.1499101851542906,
+            "adj_pvalue": 1.089468990880067e-06,
+            "pvalue": 1.9924667725539052e-08,
+            "n_program_targets": 13,
+            "string_interactions": [
+              {
+                "target": "Ptpn11",
+                "score": 998
+              },
+              {
+                "target": "Pik3ca",
+                "score": 997
+              },
+              {
+                "target": "Sos1",
+                "score": 890
+              },
+              {
+                "target": "Pck1",
+                "score": 648
+              },
+              {
+                "target": "Stat3",
+                "score": 630
+              },
+              {
+                "target": "Scd1",
+                "score": 542
+              },
+              {
+                "target": "Scarb1",
+                "score": 542
+              },
+              {
+                "target": "Cebpa",
+                "score": 529
+              },
+              {
+                "target": "Deptor",
+                "score": 508
+              },
+              {
+                "target": "Prkaa2",
+                "score": 503
+              },
+              {
+                "target": "Foxo4",
+                "score": 492
+              },
+              {
+                "target": "Dyrk2",
+                "score": 457
+              },
+              {
+                "target": "Igfbp2",
+                "score": 415
+              }
+            ]
+          },
+          {
+            "regulator": "Insig1",
+            "log2fc": 0.1129714113466679,
+            "adj_pvalue": 3.851006397442775e-05,
+            "pvalue": 9.469422092645676e-07,
+            "n_program_targets": 3,
+            "string_interactions": [
+              {
+                "target": "Scd1",
+                "score": 720
+              },
+              {
+                "target": "Acsl1",
+                "score": 453
+              },
+              {
+                "target": "Scarb1",
+                "score": 442
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "10": {
+    "meta": {
+      "query_mode": "manual_literature",
+      "total_hits": 3,
+      "source_files": [
+        "result_10.json"
+      ],
+      "literature_audit": {
+        "query_mode": "manual_literature",
+        "manual_modules": 3,
+        "manual_unique_pmids": 34,
+        "manual_limited_genes": 7,
+        "manual_source_files": [
+          "result_10.json"
+        ]
+      }
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Inmt": "Enables thioether S-methyltransferase activity. Predicted to be involved in amine metabolic process and methylation. Located in cytosol. Is expressed in several structures, including alimentary system; central nervous system; eye; heart; and skeleton. Orthologous to human INMT (indolethylamine N-methyltransferase). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Ndufa6": "Predicted to be involved in mitochondrial respiratory chain complex I assembly and response to oxidative stress. Located in mitochondrion. Part of respiratory chain complex I. Is active in mitochondrial inner membrane. Is expressed in several structures, including alimentary system; genitourinary system; nervous system; respiratory system; and sensory organ. Human ortholog(s) of this gene implicated in nuclear type mitochondrial complex I deficiency 33. Orthologous to human NDUFA6 (NADH:ubiquinone oxidoreductase subunit A6). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Tle5": "This gene encodes a protein that belongs to the Aes (amino-terminal enhancer of split) subgroup of the Groucho/transducin-like Enhancer of split (TLE) family of proteins that function as transcriptional corepressors. The encoded protein plays a role in neurological development and cell-fate determination. Alternatively spliced transcript variants have been observed for this gene. [provided by RefSeq, Jan 2013]",
+      "Ptms": "Predicted to enable histone binding activity and zinc ion binding activity. Predicted to be involved in negative regulation of apoptotic process and positive regulation of transcription by RNA polymerase II. Predicted to be active in nucleus. Is expressed in several structures, including alimentary system; brain; genitourinary system; hemolymphoid system; and integumental system. Orthologous to human PTMS (parathymosin). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Got2": "Enables L-aspartate:2-oxoglutarate aminotransferase activity. Involved in malate-aspartate shuttle. Acts upstream of or within aspartate biosynthetic process; glutamate catabolic process to aspartate; and oxaloacetate metabolic process. Located in mitochondrion. Is active in mitochondrial matrix. Is expressed in several structures, including alimentary system; nervous system; respiratory system; sensory organ; and urinary system. Used to study early infantile epileptic encephalopathy. Human ortholog(s) of this gene implicated in developmental and epileptic encephalopathy 82. Orthologous to human GOT2 (glutamic-oxaloacetic transaminase 2). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Pcbd1": "This gene encodes a member of the pterin-4-alpha-carbinolamine dehydratase family. The encoded protein has been identified as a moonlighting protein based on its ability to perform mechanistically distinct functions. The encoded protein functions as both a dehydratase involved in tetrahydrobiopterin biosynthesis, and as a cofactor for HNF1A-dependent transcription. [provided by RefSeq, Apr 2015]",
+      "Fbp1": "Enables folic acid receptor activity. Involved in several processes, including circulatory system development; nervous system development; and regulation of signal transduction. Acts upstream of or within folic acid metabolic process. Is active in plasma membrane. Is expressed in several structures, including brain; early conceptus; genitourinary system; gut; and retina. Human ortholog(s) of this gene implicated in cerebral folate receptor alpha deficiency. Orthologous to human FOLR1 (folate receptor alpha). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Ak3": "Predicted to enable adenylate kinase activity; nucleoside diphosphate kinase activity; and nucleoside triphosphate adenylate kinase activity. Predicted to be involved in nucleoside phosphate metabolic process and regulation of oxidative phosphorylation. Located in mitochondrial matrix. Is expressed in several structures, including alimentary system; genitourinary system; nervous system; respiratory system; and sensory organ. Orthologous to several human genes including AK4 (adenylate kinase 4). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Tpi1": "Enables triose-phosphate isomerase activity. Involved in canonical glycolysis; gluconeogenesis; and glyceraldehyde-3-phosphate metabolic process. Acts upstream of or within glucose metabolic process. Is active in cytosol. Is expressed in several structures, including alimentary system; genitourinary system; nervous system; respiratory system; and sensory organ. Used to study triosephosphate isomerase deficiency. Human ortholog(s) of this gene implicated in carbohydrate metabolic disorder and triosephosphate isomerase deficiency. Orthologous to human TPI1 (triosephosphate isomerase 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Fau": "A structural constituent of ribosome. Involved in antimicrobial humoral immune response mediated by antimicrobial peptide and defense response to Gram-positive bacterium. Part of cytosolic small ribosomal subunit. Is expressed in decidua; embryo; and uterus. Orthologous to human FAU (FAU ubiquitin like and ribosomal protein S30 fusion). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Gamt": "Predicted to enable guanidinoacetate N-methyltransferase activity and identical protein binding activity. Acts upstream of or within several processes, including creatine biosynthetic process; regulation of growth; and spermatogenesis. Predicted to be located in cytosol. Predicted to be active in cytoplasm and nucleus. Is expressed in brain; foregut-midgut junction; future brain; lens; and liver. Used to study guanidinoacetate methyltransferase deficiency. Human ortholog(s) of this gene implicated in amino acid metabolic disorder and guanidinoacetate methyltransferase deficiency. Orthologous to human GAMT (guanidinoacetate N-methyltransferase). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Sult2a1": "Enables alcohol sulfotransferase activity and steroid sulfotransferase activity. Involved in steroid metabolic process. Acts upstream of or within sulfation. Predicted to be located in cytosol. Predicted to be active in cytoplasm. Is expressed in several structures, including alimentary system; central nervous system; facial prominence; hemolymphoid system gland; and reproductive system. Human ortholog(s) of this gene implicated in prostate cancer. Orthologous to human SULT2A1 (sulfotransferase family 2A member 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Mdh1": "Enables malate dehydrogenase (decarboxylating) (NADP+) activity. Predicted to be involved in several processes, including malate metabolic process; nicotinamide nucleotide metabolic process; and protein homotetramerization. Located in mitochondrion. Is expressed in several structures, including alimentary system; cardiovascular system; genitourinary system; hemolymphoid system gland; and nervous system. Orthologous to human ME1 (malic enzyme 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Atp5o": "Predicted to enable estradiol binding activity. Predicted to contribute to ATP hydrolysis activity and proton-transporting ATP synthase activity, rotational mechanism. Predicted to be involved in proton motive force-driven mitochondrial ATP synthesis. Located in mitochondrion and myelin sheath. Is expressed in several structures, including alimentary system; cardiovascular system; genitourinary system; integumental system; and nervous system. Human ortholog(s) of this gene implicated in mitochondrial complex V (ATP synthase) deficiency nuclear type 7. Orthologous to human ATP5PO (ATP synthase peripheral stalk subunit OSCP). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Sdhb": "Predicted to enable iron-sulfur cluster binding activity; succinate dehydrogenase (quinone) activity; and ubiquinone binding activity. Predicted to be involved in aerobic respiration; respiratory electron transport chain; and succinate metabolic process. Located in mitochondrion. Part of respiratory chain complex II (succinate dehydrogenase). Is expressed in several structures, including alimentary system; brain; genitourinary system; respiratory system; and sensory organ. Used to study type 2 diabetes mellitus. Human ortholog(s) of this gene implicated in Carney-Stratakis syndrome; gastrointestinal stromal tumor; mitochondrial complex II deficiency; paraganglioma; and pheochromocytoma. Orthologous to human SDHB (succinate dehydrogenase complex iron sulfur subunit B). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Etfb": "Predicted to enable electron transfer activity. Involved in fatty acid beta-oxidation using acyl-CoA dehydrogenase. Located in mitochondrion. Is expressed in several structures, including alimentary system; cranium; eye; nervous system; and urinary system. Human ortholog(s) of this gene implicated in multiple acyl-CoA dehydrogenase deficiency. Orthologous to human ETFB (electron transfer flavoprotein subunit beta). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Ndufv1": "This gene encodes a subunit of the NADH-ubiquinone oxidoreductase (complex I) enzyme, which is a large, multimeric protein. It is the first enzyme complex in the mitochondrial electron transport chain and catalyzes the transfer of electrons from NADH to the electron acceptor ubiquinone. The proton gradient created by electron transfer drives the conversion of ADP to ATP. This gene is a core subunit and is conserved in prokaryotes and eukaryotes. The human ortholog of this protein has been characterized. It has consensus motifs for NADH, flavin mononucleotide, and iron-sulfur binding sites and participates in the oxidation of NADH as part of the dehydrogenase module of complex I. In humans, deficiencies in complex I are associated with myopathies, encephalomyopathies, and neurodegenerative disorders. [provided by RefSeq, Jun 2013]",
+      "Hspa8": "Enables ATP hydrolysis activity; phosphatidylserine binding activity; and unfolded protein binding activity. Involved in several processes, including clathrin coat disassembly; late endosomal microautophagy; and positive regulation by host of viral genome replication. Acts upstream of or within chaperone cofactor-dependent protein refolding; positive regulation of mRNA splicing, via spliceosome; and regulation of cell cycle. Located in several cellular components, including extracellular exosome; late endosome; and perinuclear region of cytoplasm. Is active in several cellular components, including glycinergic synapse; photoreceptor ribbon synapse; and postsynaptic specialization membrane. Is expressed in several structures, including 1st branchial arch mandibular component; alimentary system; brain; eye; and forelimb long bone. Human ortholog(s) of this gene implicated in Parkinson's disease and renal hypertension. Orthologous to human HSPA8 (heat shock protein family A (Hsp70) member 8). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Pgm1": "Enables phosphoglucomutase activity. Involved in glycogen biosynthetic process and glycogen catabolic process. Acts upstream of or within glucose metabolic process. Predicted to be located in cytosol. Is expressed in several structures, including alimentary system; liver; oocyte; respiratory system; and telencephalon. Orthologous to human PGM2 (phosphoglucomutase 2). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Cox7a2": "Predicted to enable oxidoreductase activity. Predicted to be involved in mitochondrial respirasome assembly. Located in mitochondrion. Part of respiratory chain complex IV. Is active in mitochondrial inner membrane. Is expressed in several structures, including alimentary system; heart; hemolymphoid system; integumental system; and nervous system. Orthologous to human COX7A2 (cytochrome c oxidase subunit 7A2) and COX7A2P2 (cytochrome c oxidase subunit 7A2 pseudogene 2). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Eef2": "Enables GTPase activity and lncRNA binding activity. Acts upstream of or within hematopoietic progenitor cell differentiation and translational elongation. Located in cytoplasm and ribosome. Is active in synapse. Is expressed in brain; liver; and neocortex. Human ortholog(s) of this gene implicated in glaucoma; spinocerebellar ataxia type 26; and stomach cancer. Orthologous to human EEF2 (eukaryotic translation elongation factor 2). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Vdac1": "This gene encodes a voltage-dependent anion channel protein that is a major component of the outer mitochondrial membrane. The encoded protein facilitates the exchange of metabolites and ions across the outer mitochondrial membrane and may regulate mitochondrial functions. This protein also forms channels in the plasma membrane and may be involved in transmembrane electron transport. Multiple pseudogenes of this gene are found on chromosomes 1, 2, 3, 6, 8, 9, and X. [provided by RefSeq, Sep 2015]",
+      "Suclg1": "Predicted to enable GDP binding activity; succinate-CoA ligase (ADP-forming) activity; and succinate-CoA ligase (GDP-forming) activity. Predicted to be involved in succinate metabolic process; succinyl-CoA metabolic process; and tricarboxylic acid cycle. Located in mitochondrial inner membrane. Is expressed in several structures, including alimentary system; brain; genitourinary system; respiratory system; and sensory organ. Human ortholog(s) of this gene implicated in mitochondrial DNA depletion syndrome 9. Orthologous to human SUCLG1 (succinate-CoA ligase GDP/ADP-forming subunit alpha). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Dynll2": "Predicted to enable dynein intermediate chain binding activity; identical protein binding activity; and scaffold protein binding activity. Predicted to be involved in microtubule-based process. Part of cytoplasmic dynein complex and myosin V complex. Is expressed in several structures, including central nervous system; dorsal root ganglion; node; sensory organ; and thymus primordium. Orthologous to human DYNLL2 (dynein light chain LC8-type 2). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Ap2m1": "This gene encodes the mu subunit of the clathrin adaptor protein complex AP-2. It mediates sorting of cargo proteins harboring Y-X-X-Phi motifs into clathrin-coated vesicles. Alternate splicing of this gene results in multiple transcript variants. Pseudogenes of this gene are found on chromosomes 2, 8 and 19. [provided by RefSeq, Dec 2014]",
+      "Atp5a1": "Enables ATP binding activity and proton-transporting ATP synthase activity, rotational mechanism. Acts upstream of or within lipid metabolic process. Located in membrane and mitochondrion. Is expressed in several structures, including alimentary system; heart; nervous system; respiratory system; and sensory organ. Human ortholog(s) of this gene implicated in combined oxidative phosphorylation deficiency 22; mitochondrial complex V (ATP synthase) deficiency nuclear type 4A; and mitochondrial complex V (ATP synthase) deficiency nuclear type 4B. Orthologous to human ATP5F1A (ATP synthase F1 subunit alpha). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Ndufs6": "Acts upstream of or within several processes, including DNA damage response, signal transduction by p53 class mediator; mesenchymal stem cell proliferation; and mitochondrial respiratory chain complex I assembly. Part of respiratory chain complex I. Is active in mitochondrial inner membrane. Is expressed in limb; respiratory system; and skeleton. Used to study mitochondrial complex I deficiency. Human ortholog(s) of this gene implicated in cervical cancer and nuclear type mitochondrial complex I deficiency 9. Orthologous to human NDUFS6 (NADH:ubiquinone oxidoreductase subunit S6). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Eif5a": "This gene encodes an elongation initiation factor, which participates in protein synthesis. The encoded protein also plays roles in mRNA metabolism, cell proliferation, and cell cycle control. This protein contains a modified lysine residue called hypusine, which appears to be necessary for its function. Alternatively spliced transcript variants have been described. Related pseudogenes exist on chromosomes 2, 5, and 19. [provided by RefSeq, Oct 2009]",
+      "Adk": "Enables adenosine kinase activity and deoxyadenosine kinase activity. Involved in AMP salvage; GMP salvage; and dAMP salvage. Acts upstream of or within dATP biosynthetic process and purine ribonucleoside salvage. Located in nucleus. Is active in cytosol. Is expressed in several structures, including alimentary system; brain; genitourinary system; sensory organ; and skeleton. Used to study steatotic liver disease. Human ortholog(s) of this gene implicated in hypermethioninemia due to adenosine kinase deficiency. Orthologous to human ADK (adenosine kinase). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Akr7a5": "Predicted to enable aldose reductase (NADPH) activity; identical protein binding activity; and phenanthrene-9,10-epoxide hydrolase activity. Predicted to be involved in lipid metabolic process. Located in mitochondrion. Is expressed in cerebral cortex ventricular layer. Orthologous to several human genes including AKR7A2 (aldo-keto reductase family 7 member A2). [provided by Alliance of Genome Resources, Apr 2025]"
+    },
+    "gene_summaries_source": "ncbi",
+    "evidence_snippets": {},
+    "manual_literature_modules": {
+      "modules": [
+        {
+          "module_rank": 1,
+          "module_name": "Mitochondrial oxidative phosphorylation, TCA coupling, and redox/ATP shuttling",
+          "supporting_genes": [
+            "Ndufv1",
+            "Ndufa6",
+            "Atp5a1",
+            "Atp5o",
+            "Sdhb",
+            "Cox7a2",
+            "Etfb",
+            "Suclg1",
+            "Vdac1",
+            "Ak3",
+            "Got2",
+            "Mdh1",
+            "Tpi1"
+          ],
+          "supporting_pmids": [
+            "30171159",
+            "25261569",
+            "25933096",
+            "27174364",
+            "23915028",
+            "18186554",
+            "37286128",
+            "35457131"
+          ],
+          "evidence_type": "mixed",
+          "literature_summary": "This is the strongest program-wide theme because many genes encode respiratory-chain, ATP synthase, TCA/succinyl-CoA, electron-transfer flavoprotein, mitochondrial metabolite exchange, and adenylate-kinase components. Direct liver-disease evidence supports mitochondrial/OXPHOS impairment in mouse NAFLD/NASH and supports hepatic OXPHOS/NAD+ capacity as a determinant of fatty-acid oxidation, whereas most individual subunit assignments are pathway-level rather than gene-specific hepatocyte perturbation evidence. Got2, Mdh1, Ak3, and Tpi1 provide weaker but coherent support for mitochondrial-cytosolic carbon, redox, and nucleotide-energy coupling.",
+          "source_file": "result_10.json"
+        },
+        {
+          "module_rank": 2,
+          "module_name": "Hepatic lipid storage, desaturation/cholesterol synthesis, lipoprotein output, and insulin-coupled lipogenesis",
+          "supporting_genes": [
+            "Dgat2",
+            "Scd1",
+            "Sqle",
+            "Apoc3",
+            "Insr",
+            "Hspa8",
+            "Sult2a1"
+          ],
+          "supporting_pmids": [
+            "16001399",
+            "18054317",
+            "32324591",
+            "33647280",
+            "29669855",
+            "21793029",
+            "20335584",
+            "21274868",
+            "27238637",
+            "31805015",
+            "20133650",
+            "25961502",
+            "25043815",
+            "12637555",
+            "15198932"
+          ],
+          "evidence_type": "direct liver disease",
+          "literature_summary": "Dgat2, Scd1, Sqle, Apoc3, and Insr make a directly liver-relevant lipid module spanning triglyceride synthesis, monounsaturated-fatty-acid production, cholesterol biosynthesis, VLDL/apolipoprotein biology, and insulin-driven lipogenesis. Direct mouse and human liver-disease evidence links DGAT2, SCD1, SQLE, APOC3, and hepatocyte insulin signaling to steatosis, NASH biology, dyslipidemia, and insulin resistance, although APOC3 human variant associations with hepatic triglyceride have mixed replication. The perturbation regulators reinforce this module: young activators include Dgat2 and Scd1, while aged regulators prioritize Sqle and Apoc3, suggesting a shift from triglyceride/MUFA storage toward cholesterol and lipoprotein-linked lipid stress. Hspa8 and Sult2a1 are weaker but liver-supported extensions through chaperone-mediated lipid-droplet turnover and bile-acid/steroid sulfation/detoxification.",
+          "source_file": "result_10.json"
+        },
+        {
+          "module_rank": 3,
+          "module_name": "Hepatic glucose-carbon flux, gluconeogenesis/glycogen handling, and metabolic plasticity",
+          "supporting_genes": [
+            "Fbp1",
+            "Pgm1",
+            "Got2",
+            "Mdh1",
+            "Tpi1",
+            "Gamt",
+            "Pcbd1"
+          ],
+          "supporting_pmids": [
+            "32367049",
+            "39743585",
+            "28731034",
+            "24692138",
+            "11557972",
+            "37286128",
+            "11319724",
+            "30335765",
+            "19017728",
+            "24848070",
+            "9092652",
+            "8001680"
+          ],
+          "evidence_type": "mixed",
+          "literature_summary": "This weaker but coherent module is anchored by Fbp1, which has direct liver evidence linking loss of hepatic gluconeogenic control to metabolic disruption, steatosis/MASH-associated senescence programs, and liver tumor progression. Pgm1, Tpi1, Got2, and Mdh1 support glucose trafficking, glycolysis/gluconeogenesis, glycogen handling, and malate-aspartate carbon transfer; these are core hepatocyte pathways, but much of the support is pathway-level rather than gene-specific perturbation evidence in MASLD. Gamt and Pcbd1 add more limited direct hepatic creatine/guanidinoacetate metabolism and HNF1/cofactor-diabetes biology, respectively. The Insr/Irs1/Mtor repressor pattern is consistent with nutrient-state regulation, but it more strongly reinforces the lipid-lipogenesis module than this glucose-carbon module.",
+          "source_file": "result_10.json"
+        }
+      ],
+      "genes_with_limited_hepatocyte_literature": [
+        "Inmt",
+        "Tle5",
+        "Ptms",
+        "Fau",
+        "Eef2",
+        "Dynll2",
+        "Ap2m1"
+      ],
+      "source_summary": {
+        "source_files": [
+          "result_10.json"
+        ],
+        "n_modules": 3,
+        "n_unique_pmids": 34,
+        "n_limited_genes": 7
+      }
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [
+          {
+            "regulator": "Dgat2",
+            "log2fc": -0.3809098956713424,
+            "adj_pvalue": 2.0539167502397665e-05,
+            "pvalue": 2.616010889926196e-07,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Cebpa",
+                "score": 565
+              },
+              {
+                "target": "Got2",
+                "score": 482
+              },
+              {
+                "target": "Acadvl",
+                "score": 458
+              },
+              {
+                "target": "Apoa1",
+                "score": 422
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 409
+              },
+              {
+                "target": "Angptl3",
+                "score": 407
+              },
+              {
+                "target": "Vcp",
+                "score": 402
+              }
+            ]
+          },
+          {
+            "regulator": "Scd1",
+            "log2fc": -0.2385943737896518,
+            "adj_pvalue": 0.0004890169608847,
+            "pvalue": 8.220117839422198e-06,
+            "n_program_targets": 11,
+            "string_interactions": [
+              {
+                "target": "Hmgcs2",
+                "score": 683
+              },
+              {
+                "target": "Cebpa",
+                "score": 669
+              },
+              {
+                "target": "Got2",
+                "score": 552
+              },
+              {
+                "target": "Acadvl",
+                "score": 496
+              },
+              {
+                "target": "Apoa1",
+                "score": 483
+              },
+              {
+                "target": "Acaa1b",
+                "score": 481
+              },
+              {
+                "target": "Acaa2",
+                "score": 438
+              },
+              {
+                "target": "Acaa1a",
+                "score": 430
+              },
+              {
+                "target": "Slc25a1",
+                "score": 426
+              },
+              {
+                "target": "Echs1",
+                "score": 410
+              },
+              {
+                "target": "Hadha",
+                "score": 401
+              }
+            ]
+          },
+          {
+            "regulator": "Scap",
+            "log2fc": -0.1886027019662008,
+            "adj_pvalue": 0.0018954596520716,
+            "pvalue": 3.663391348593739e-05,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Hmgcs2",
+                "score": 412
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insr",
+            "log2fc": 1.1580924541249635,
+            "adj_pvalue": 1.2451853878985583e-11,
+            "pvalue": 6.546672689667293e-14,
+            "n_program_targets": 4,
+            "string_interactions": [
+              {
+                "target": "Igf1",
+                "score": 999
+              },
+              {
+                "target": "Sqstm1",
+                "score": 528
+              },
+              {
+                "target": "Atp6v1g1",
+                "score": 505
+              },
+              {
+                "target": "Hras",
+                "score": 499
+              }
+            ]
+          },
+          {
+            "regulator": "Mtor",
+            "log2fc": 0.7698123325546755,
+            "adj_pvalue": 0.0023785647703737,
+            "pvalue": 4.6499381141700425e-05,
+            "n_program_targets": 20,
+            "string_interactions": [
+              {
+                "target": "Rhoa",
+                "score": 960
+              },
+              {
+                "target": "Hsp90ab1",
+                "score": 918
+              },
+              {
+                "target": "Sqstm1",
+                "score": 905
+              },
+              {
+                "target": "Hras",
+                "score": 817
+              },
+              {
+                "target": "Fkbp4",
+                "score": 795
+              },
+              {
+                "target": "Igf1",
+                "score": 792
+              },
+              {
+                "target": "Eif4a1",
+                "score": 686
+              },
+              {
+                "target": "Etf1",
+                "score": 674
+              },
+              {
+                "target": "Eef2",
+                "score": 673
+              },
+              {
+                "target": "Ywhab",
+                "score": 632
+              },
+              {
+                "target": "Mapk1",
+                "score": 610
+              },
+              {
+                "target": "H3f3b",
+                "score": 528
+              },
+              {
+                "target": "Atp6v1g1",
+                "score": 525
+              },
+              {
+                "target": "Gabarapl1",
+                "score": 524
+              },
+              {
+                "target": "Phb",
+                "score": 469
+              },
+              {
+                "target": "Pdcd4",
+                "score": 467
+              },
+              {
+                "target": "Arg1",
+                "score": 454
+              },
+              {
+                "target": "Pabpc1",
+                "score": 451
+              },
+              {
+                "target": "Idh1",
+                "score": 438
+              },
+              {
+                "target": "Hspa8",
+                "score": 433
+              }
+            ]
+          },
+          {
+            "regulator": "Irs1",
+            "log2fc": 0.7412679989087161,
+            "adj_pvalue": 0.0123177244049635,
+            "pvalue": 0.0003010042910324,
+            "n_program_targets": 10,
+            "string_interactions": [
+              {
+                "target": "Igf1",
+                "score": 995
+              },
+              {
+                "target": "Hras",
+                "score": 861
+              },
+              {
+                "target": "Ap2m1",
+                "score": 639
+              },
+              {
+                "target": "Ywhab",
+                "score": 628
+              },
+              {
+                "target": "Mapk1",
+                "score": 624
+              },
+              {
+                "target": "Cebpa",
+                "score": 529
+              },
+              {
+                "target": "Npm1",
+                "score": 518
+              },
+              {
+                "target": "Sqstm1",
+                "score": 474
+              },
+              {
+                "target": "Ywhae",
+                "score": 465
+              },
+              {
+                "target": "Hsp90ab1",
+                "score": 434
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Sqle",
+            "log2fc": -0.2282504746516511,
+            "adj_pvalue": 4.7779483349376696e-11,
+            "pvalue": 5.470499399044231e-13,
+            "n_program_targets": 4,
+            "string_interactions": [
+              {
+                "target": "Hmgcs2",
+                "score": 904
+              },
+              {
+                "target": "Hmbs",
+                "score": 543
+              },
+              {
+                "target": "Hgd",
+                "score": 495
+              },
+              {
+                "target": "Sdhb",
+                "score": 419
+              }
+            ]
+          },
+          {
+            "regulator": "Dgat2",
+            "log2fc": -0.1280070800590323,
+            "adj_pvalue": 0.0014708116035026,
+            "pvalue": 5.142421857583582e-05,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Cebpa",
+                "score": 565
+              },
+              {
+                "target": "Got2",
+                "score": 482
+              },
+              {
+                "target": "Acadvl",
+                "score": 458
+              },
+              {
+                "target": "Apoa1",
+                "score": 422
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 409
+              },
+              {
+                "target": "Angptl3",
+                "score": 407
+              },
+              {
+                "target": "Vcp",
+                "score": 402
+              }
+            ]
+          },
+          {
+            "regulator": "Cobll1",
+            "log2fc": -0.0939618181471308,
+            "adj_pvalue": 0.0041631782247765,
+            "pvalue": 0.0001692310045106,
+            "n_program_targets": 0,
+            "string_interactions": []
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insr",
+            "log2fc": 0.5182277479215011,
+            "adj_pvalue": 2.057041956355821e-24,
+            "pvalue": 9.800180989027342e-27,
+            "n_program_targets": 4,
+            "string_interactions": [
+              {
+                "target": "Igf1",
+                "score": 999
+              },
+              {
+                "target": "Sqstm1",
+                "score": 528
+              },
+              {
+                "target": "Atp6v1g1",
+                "score": 505
+              },
+              {
+                "target": "Hras",
+                "score": 499
+              }
+            ]
+          },
+          {
+            "regulator": "Apoc3",
+            "log2fc": 0.3195905610549865,
+            "adj_pvalue": 0.0003892940645351,
+            "pvalue": 1.1427215090762852e-05,
+            "n_program_targets": 9,
+            "string_interactions": [
+              {
+                "target": "Apoa1",
+                "score": 999
+              },
+              {
+                "target": "Angptl3",
+                "score": 804
+              },
+              {
+                "target": "Hdlbp",
+                "score": 734
+              },
+              {
+                "target": "Aldob",
+                "score": 702
+              },
+              {
+                "target": "Mat1a",
+                "score": 556
+              },
+              {
+                "target": "Otc",
+                "score": 553
+              },
+              {
+                "target": "Hpd",
+                "score": 535
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 499
+              },
+              {
+                "target": "Acaa1b",
+                "score": 473
+              }
+            ]
+          },
+          {
+            "regulator": "Irs2",
+            "log2fc": 0.2398345631589403,
+            "adj_pvalue": 0.0136977299612739,
+            "pvalue": 0.0006789027561595,
+            "n_program_targets": 4,
+            "string_interactions": [
+              {
+                "target": "Igf1",
+                "score": 924
+              },
+              {
+                "target": "Hras",
+                "score": 675
+              },
+              {
+                "target": "Ap2m1",
+                "score": 653
+              },
+              {
+                "target": "Mapk1",
+                "score": 521
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "18": {
+    "meta": {
+      "query_mode": "manual_literature",
+      "total_hits": 3,
+      "source_files": [
+        "result_18.json"
+      ],
+      "literature_audit": {
+        "query_mode": "manual_literature",
+        "manual_modules": 3,
+        "manual_unique_pmids": 35,
+        "manual_limited_genes": 6,
+        "manual_source_files": [
+          "result_18.json"
+        ]
+      }
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Phlda3": "Predicted to enable phosphatidylinositol phosphate binding activity and phosphatidylinositol-3,4-bisphosphate binding activity. Predicted to be involved in intrinsic apoptotic signaling pathway in response to DNA damage by p53 class mediator; negative regulation of phosphatidylinositol 3-kinase/protein kinase B signal transduction; and positive regulation of apoptotic process. Predicted to be located in cytoplasm. Predicted to be active in plasma membrane. Is expressed in several structures, including extraembryonic component; genitourinary system; hemolymphoid system; intestine; and liver. Orthologous to human PHLDA3 (pleckstrin homology like domain family A member 3). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Ccng1": "Predicted to enable cyclin-dependent protein serine/threonine kinase regulator activity. Predicted to be involved in several processes, including G1/S transition of mitotic cell cycle; mitotic G2 DNA damage checkpoint signaling; and syncytium formation. Predicted to be located in dendrite; neuronal cell body; and perinuclear region of cytoplasm. Predicted to be part of cyclin-dependent protein kinase holoenzyme complex. Predicted to be active in cytoplasm and nucleus. Is expressed in several structures, including alimentary system; central nervous system; genitourinary system; immune system; and liver and biliary system. Human ortholog(s) of this gene implicated in endocrine gland cancer (multiple); localized osteosarcoma; ovarian cancer (multiple); and sarcoma. Orthologous to human CCNG1 (cyclin G1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Ddit4l": "Predicted to be involved in negative regulation of signal transduction. Predicted to be located in cytoplasm. Is expressed in several structures, including brain; eye; frenulum; jaw; and reproductive system. Orthologous to human DDIT4L (DNA damage inducible transcript 4 like). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Cdkn1a": "This gene encodes a potent cyclin-dependent kinase inhibitor. The encoded protein binds to and inhibits the activity of cyclin-cyclin-dependent kinase2 or cyclin-dependent kinase4 complexes, and thus functions as a regulator of cell cycle progression at the G1 pahse. The expression of this gene is tightly controlled by the tumor suppressor protein p53, through which this protein mediates the p53-dependent cell cycle G1 phase arrest in response to a variety of stress stimuli. This protein can interact with proliferating cell nuclear antigen, a DNA polymerase accessory factor, and plays a regulatory role in S phase DNA replication and DNA damage repair. This protein was reported to be specifically cleaved by CASP3-like caspases, which thus leads to a dramatic activation of cyclin-dependent kinase2, and may be instrumental in the execution of apoptosis following caspase activation. Mice that lack this gene have the ability to regenerate damaged or missing tissue. Alternative splicing results in multiple transcript variants. [provided by RefSeq, Sep 2015]",
+      "Ces2e": "Enables carboxylesterase activity. Predicted to be involved in prostaglandin metabolic process. Predicted to be located in endoplasmic reticulum. Predicted to be active in intracellular membrane-bounded organelle. Is expressed in alimentary system; liver; and liver lobe. Orthologous to human CES2 (carboxylesterase 2). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Ephx1": "Enables oxysterol binding activity. Acts upstream of or within hydrocarbon catabolic process. Predicted to be located in intracellular membrane-bounded organelle and membrane. Is expressed in several structures, including brain ventricle and choroid plexus; exocrine system; integumental system; nervous system; and nose. Human ortholog(s) of this gene implicated in several diseases, including Leber hereditary optic neuropathy; anemia (multiple); hematologic cancer (multiple); respiratory system disease (multiple); and toxic encephalopathy. Orthologous to human EPHX1 (epoxide hydrolase 1). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Bax": "Enables Hsp70 protein binding activity and identical protein binding activity. Involved in positive regulation of neuron apoptotic process. Acts upstream of or within several processes, including apoptotic signaling pathway; mitochondrion organization; and regulation of apoptotic process. Located in cytosol; endoplasmic reticulum; and mitochondrial outer membrane. Part of BAX complex. Is expressed in several structures, including alimentary system; branchial arch; central nervous system; genitourinary system; and sensory organ. Human ortholog(s) of this gene implicated in acute lymphoblastic leukemia; ataxia telangiectasia; colon adenocarcinoma; and colorectal cancer. Orthologous to human BAX (BCL2 associated X, apoptosis regulator). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Notch1": "Enables several functions, including Notch binding activity; transcription coactivator activity; and transcription regulator activator activity. Involved in several processes, including circulatory system development; negative regulation of cell differentiation; and regulation of signal transduction. Acts upstream of or within several processes, including circulatory system development; epithelial cell differentiation; and regulation of epithelial cell differentiation. Located in several cellular components, including adherens junction; apical plasma membrane; and cell surface. Is active in Schaffer collateral - CA1 synapse; glutamatergic synapse; and postsynaptic density membrane. Is expressed in several structures, including alimentary system; cardiovascular system; central nervous system; genitourinary system; and sensory organ. Human ortholog(s) of this gene implicated in Adams-Oliver syndrome; adult T-cell leukemia/lymphoma; aortic valve disease 1; and congenital heart disease. Orthologous to human NOTCH1 (notch receptor 1). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Eda2r": "Predicted to enable transmembrane signaling receptor activity. Acts upstream of or within intrinsic apoptotic signaling pathway by p53 class mediator. Predicted to be active in plasma membrane. Is expressed in several structures, including adrenal gland; genitourinary system; gut; hemolymphoid system gland; and integumental system. Orthologous to human EDA2R (ectodysplasin A2 receptor). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Plk2": "Enables protein serine/threonine kinase activity. Involved in several processes, including negative regulation of apoptotic process in bone marrow cell; negative regulation of cellular senescence; and positive regulation of cell migration involved in sprouting angiogenesis. Acts upstream of or within mitotic cell cycle. Located in chromatin. Is expressed in several structures, including alimentary system; hindlimb interdigital region; integumental system; nervous system; and skeleton. Orthologous to human PLK2 (polo like kinase 2). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Serpina3n": "Predicted to enable serine-type endopeptidase inhibitor activity. Acts upstream of or within response to bacterium; response to cytokine; and response to peptide hormone. Located in extracellular region. Is expressed in nervous system; sensory organ; skeleton; thymus primordium; and urinary system. Human ortholog(s) of this gene implicated in adult respiratory distress syndrome; chronic obstructive pulmonary disease; cystic fibrosis; and vasculitis. Orthologous to human SERPINA3 (serpin family A member 3). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Aen": "Predicted to enable DNA exonuclease activity. Predicted to be involved in RNA processing; intrinsic apoptotic signaling pathway in response to DNA damage by p53 class mediator; and response to ionizing radiation. Predicted to be located in nuclear membrane; nucleolus; and nucleoplasm. Predicted to be active in nucleus. Is expressed in cerebral cortex and telencephalon. Orthologous to human AEN (apoptosis enhancing nuclease). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Aldh2": "Predicted to enable several functions, including NADH binding activity; carboxylesterase activity; and phenylacetaldehyde dehydrogenase (NAD+) activity. Involved in regulation of dopamine biosynthetic process and regulation of serotonin biosynthetic process. Located in mitochondrion. Is expressed in several structures, including alimentary system; genitourinary system; nervous system; respiratory system; and sensory organ. Human ortholog(s) of this gene implicated in several diseases, including alcohol dependence; alcohol use disorder; artery disease (multiple); diabetes mellitus (multiple); and liver disease (multiple). Orthologous to human ALDH2 (aldehyde dehydrogenase 2 family member). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Gria3": "This gene encodes a multi-pass transmembrane protein that forms a homotetramer or heterotetramer in neuronal cells. The encoded protein is a ligand-gated ion channel that responds to the neurotransmitter L-glutamate to promote synaptic transmission. Deficiency of this gene leads to behavioral phenotypes. The transcript is subject to RNA editing at codon 769 (AGA->GGA; R->G). Alternative splicing results in multiple transcript variants. [provided by RefSeq, Aug 2013]",
+      "Ugt2b34": "Predicted to enable glucuronosyltransferase activity. Is expressed in several structures, including alimentary system; metanephros; nervous system; respiratory system; and sensory organ. Orthologous to human UGT2B4 (UDP glucuronosyltransferase family 2 member B4). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Dglucy": "Enables D-glutamate cyclase activity. Involved in glutamate metabolic process. Located in mitochondrial matrix. Is expressed in several structures, including adipose tissue; heart; liver; lung; and spleen. Orthologous to human DGLUCY (D-glutamate cyclase). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Cd81": "Predicted to enable cholesterol binding activity; signaling receptor binding activity; and virus receptor activity. Involved in several processes, including positive regulation of immune response; positive regulation of receptor clustering; and syncytium formation by plasma membrane fusion. Acts upstream of or within regulation of cell motility. Located in membrane. Is expressed in several structures, including alimentary system; extraembryonic component; genitourinary system; nervous system; and sensory organ. Human ortholog(s) of this gene implicated in common variable immunodeficiency 6. Orthologous to human CD81 (CD81 molecule). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Mdm2": "Enables p53 binding activity and ubiquitin protein ligase activity. Involved in apoptotic process and positive regulation of muscle cell differentiation. Acts upstream of or within several processes, including blood vessel remodeling; circulatory system development; and traversing start control point of mitotic cell cycle. Located in cytoplasm and nucleolus. Is expressed in several structures, including alimentary system; central nervous system; genitourinary system; respiratory system; and sensory organ. Human ortholog(s) of this gene implicated in chronic myeloid leukemia; endocrine gland cancer (multiple); glioblastoma; ichthyosis; and sarcoma. Orthologous to human MDM2 (MDM2 proto-oncogene). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Tnfrsf10b": "Predicted to enable TRAIL receptor activity; identical protein binding activity; and protease binding activity. Predicted to be involved in TRAIL-activated apoptotic signaling pathway; intrinsic apoptotic signaling pathway in response to endoplasmic reticulum stress; and positive regulation of apoptotic process. Predicted to act upstream of or within apoptotic process and regulation of apoptotic process. Predicted to be located in Golgi apparatus; cytosol; and membrane raft. Predicted to be active in cell surface and plasma membrane. Is expressed in bladder; liver; renal vasculature; urethra of female; and urethra of male. Human ortholog(s) of this gene implicated in carcinoma (multiple); cervical cancer; hematologic cancer (multiple); and urinary bladder cancer. Orthologous to several human genes including TNFRSF10A (TNF receptor superfamily member 10a) and TNFRSF10B (TNF receptor superfamily member 10b). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Ugt2b5": "Predicted to enable glucuronosyltransferase activity. Predicted to be involved in estrogen metabolic process. Located in mitochondrial inner membrane. Orthologous to several human genes including UGT2B10 (UDP glucuronosyltransferase family 2 member B10); UGT2B11 (UDP glucuronosyltransferase family 2 member B11); and UGT2B15 (UDP glucuronosyltransferase family 2 member B15). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Zmat3": "Predicted to enable RNA binding activity and zinc ion binding activity. Predicted to be involved in positive regulation of apoptotic process. Predicted to act upstream of or within negative regulation of cell growth. Predicted to be located in nucleoplasm and plasma membrane. Is expressed in several structures, including early conceptus; genitourinary system; and heart. Orthologous to human ZMAT3 (zinc finger matrin-type 3). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Polk": "Enables molecular adaptor activity. Acts upstream of or within DNA repair. Located in nucleus. Is expressed in several structures, including adrenal gland; eye; gonad; lung; and stomach. Orthologous to human POLK (DNA polymerase kappa). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Inka2": "Predicted to enable protein kinase binding activity and protein serine/threonine kinase inhibitor activity. Predicted to be located in nucleolus and nucleoplasm. Predicted to be active in nucleus. Is expressed in central nervous system; dorsal root ganglion; heart; and olfactory epithelium. Orthologous to human INKA2 (inka box actin regulator 2). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Ddias": "Acts upstream of or within several processes, including cellular response to hydroperoxide; cellular response to radiation; and negative regulation of fibroblast apoptotic process. Located in cytoplasm and nucleus. Orthologous to human DDIAS (DNA damage induced apoptosis suppressor). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Lif": "Enables cytokine activity and growth factor activity. Acts upstream of or within several processes, including cell differentiation involved in embryonic placenta development; lung development; and positive regulation of macromolecule biosynthetic process. Located in extracellular space. Is expressed in several structures, including alimentary system; early conceptus; hemolymphoid system; nervous system; and reproductive system. Orthologous to human LIF (LIF interleukin 6 family cytokine). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Mgmt": "Enables methyltransferase activity. Acts upstream of or within DNA alkylation repair. Predicted to be active in nucleoplasm. Is expressed in embryo and forelimb bud. Human ortholog(s) of this gene implicated in several diseases, including carcinoma (multiple); endocrine gland cancer (multiple); granulosa cell tumor; high grade glioma (multiple); and retinoblastoma. Orthologous to human MGMT (O-6-methylguanine-DNA methyltransferase). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Aaas": "Acts upstream of or within several processes, including glutathione metabolic process; learning; and response to oxidative stress. Predicted to be located in cytosol; microtubule cytoskeleton; and nucleus. Predicted to be part of nuclear pore. Human ortholog(s) of this gene implicated in achalasia and triple-A syndrome. Orthologous to human AAAS (aladin WD repeat nucleoporin). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Tmem43": "Enables identical protein binding activity. Acts upstream of or within nuclear membrane organization. Located in endoplasmic reticulum lumen and nuclear inner membrane. Is expressed in several structures, including aorta; cartilage; future spinal cord; genitourinary system; and oral epithelium. Human ortholog(s) of this gene implicated in arrhythmogenic right ventricular cardiomyopathy; arrhythmogenic right ventricular dysplasia 5; autosomal dominant Emery-Dreifuss muscular dystrophy 7; and autosomal dominant auditory neuropathy 3. Orthologous to human TMEM43 (transmembrane protein 43). [provided by Alliance of Genome Resources, Apr 2025]",
+      "Sesn2": "Enables GDP-dissociation inhibitor activity and PH domain binding activity. Involved in several processes, including DNA damage response, signal transduction by p53 class mediator; negative regulation of TORC1 signaling; and negative regulation of translation in response to endoplasmic reticulum stress. Acts upstream of or within several processes, including D-glucose import; positive regulation of metabolic process; and regulation of intracellular signal transduction. Part of TORC2 complex and nucleotide-activated protein kinase complex. Is expressed in central nervous system; heart; and retina. Orthologous to human SESN2 (sestrin 2). [provided by Alliance of Genome Resources, Jul 2025]",
+      "Sulf2": "Enables N-acetylglucosamine-6-sulfatase activity. Involved in several processes, including esophagus smooth muscle contraction; glomerular filtration; and skeletal system development. Acts upstream of or within several processes, including liver regeneration; positive regulation of canonical Wnt signaling pathway; and regulation of hepatocyte proliferation. Located in plasma membrane. Is expressed in several structures, including central nervous system; embryo mesenchyme; genitourinary system; limb; and sensory organ. Orthologous to human SULF2 (sulfatase 2). [provided by Alliance of Genome Resources, Jul 2025]"
+    },
+    "gene_summaries_source": "ncbi",
+    "evidence_snippets": {},
+    "manual_literature_modules": {
+      "modules": [
+        {
+          "module_rank": 1,
+          "module_name": "Hepatocyte p53 DNA-damage checkpoint, senescence, and apoptosis",
+          "supporting_genes": [
+            "Trp53",
+            "Cdkn1a",
+            "Mdm2",
+            "Bax",
+            "Aen",
+            "Ccng1",
+            "Plk2",
+            "Zmat3",
+            "Phlda3",
+            "Eda2r",
+            "Tnfrsf10b",
+            "Mgmt",
+            "Polk",
+            "Ddit4l",
+            "Ddias"
+          ],
+          "supporting_pmids": [
+            "23142622",
+            "21747166",
+            "19226377",
+            "28288132",
+            "18264133",
+            "12897130",
+            "33157015",
+            "19203586",
+            "25966993",
+            "20434500",
+            "20501644",
+            "7784084",
+            "35361964",
+            "9872359",
+            "36072934",
+            "28608850"
+          ],
+          "evidence_type": "mixed",
+          "literature_summary": "This is the strongest and most internally coherent theme: the program is dominated by a canonical p53 response centered on Trp53, Cdkn1a/p21, Mdm2, Bax, Ccng1, Plk2, Aen, Zmat3, Phlda3, Eda2r, and Tnfrsf10b. Direct liver evidence links hepatocyte p21/senescence with NAFLD progression, p53 activation with TRAIL-receptor expression in experimental NASH, and hepatocyte p53 with CTGF-driven fibrosis; the individual target-gene evidence for Aen, Ccng1, Plk2, Zmat3, Phlda3, and Eda2r is strong p53 biology but mostly not liver-specific. Mgmt, Polk, Ddit4l, and Ddias provide weaker DNA-repair, replication-stress, stress-mTOR, or apoptosis-survival support. The perturbation context strongly reinforces this module because Trp53 is the top activator in both young and aged hepatocytes, with a stronger aged effect.",
+          "source_file": "result_18.json"
+        },
+        {
+          "module_rank": 2,
+          "module_name": "Hepatocyte lipid storage, SCAP/SREBP lipogenesis, and steatosis remodeling",
+          "supporting_genes": [
+            "Dgat2",
+            "Scap",
+            "Ces2e",
+            "Ilrun",
+            "Aldh2",
+            "Phlda3",
+            "Cdkn1a",
+            "Trp53",
+            "Ddit4l",
+            "Ephx1",
+            "Ugt2b34"
+          ],
+          "supporting_pmids": [
+            "31081165",
+            "38340721",
+            "22326225",
+            "11358865",
+            "28116873",
+            "35380992",
+            "26806650",
+            "33325808",
+            "32912065",
+            "24492981",
+            "28608850",
+            "36072934",
+            "33722690",
+            "31776293",
+            "35354614"
+          ],
+          "evidence_type": "mixed",
+          "literature_summary": "This secondary module is driven by direct hepatocyte/liver lipid evidence for Dgat2 and Scap: hepatic DGAT2 loss or inhibition reduces steatosis, while SCAP is required for hepatic SREBP activation, lipid synthesis, and diabetic fatty liver, although broad SREBP blockade can worsen liver injury and fibrosis. Ces2e is supported by mouse and human CES2 liver studies showing protection from steatosis/NASH through lipid catabolism and reduced lipogenesis, and Ilrun has direct mouse liver evidence for hepatic lipoprotein production. Aldh2 supports aldehyde/oxidative lipid-stress handling, while Phlda3, Cdkn1a/Trp53, and Ddit4l connect p53/senescence or stress-mTOR signaling to steatosis; Ephx1 and Ugt2b34 are weaker detoxification or xenobiotic-metabolism fits. Perturbation evidence reinforces this module because Dgat2 is the strongest repressor in both ages, young Insig1 and aged Mlxipl/Ilrun regulators point to SREBP/ChREBP/lipoprotein circuitry, and p53-senescence biology can secondarily promote steatosis.",
+          "source_file": "result_18.json"
+        },
+        {
+          "module_rank": 3,
+          "module_name": "Maladaptive hepatocyte injury-to-inflammatory and fibrogenic signaling",
+          "supporting_genes": [
+            "Notch1",
+            "Serpina3n",
+            "Tnfrsf10b",
+            "Trp53",
+            "Cdkn1a",
+            "Bax",
+            "Mdm2",
+            "Ilrun",
+            "Ces2e",
+            "Aldh2"
+          ],
+          "supporting_pmids": [
+            "30463916",
+            "34162749",
+            "36752206",
+            "36625462",
+            "40744994",
+            "19226377",
+            "21747166",
+            "24086266",
+            "23142622",
+            "36072934",
+            "26806650",
+            "33325808",
+            "24492981"
+          ],
+          "evidence_type": "direct liver disease",
+          "literature_summary": "This module captures hepatocyte-derived stress signals that link cell injury to inflammation and fibrosis rather than lipid accumulation alone. Direct NASH/fibrosis evidence is strongest for Notch1-related signaling: hepatocyte Notch activity tracks with NASH severity and treatment response, and hepatocyte Jagged1/Notch/MCP-1 signaling promotes monocyte recruitment and fibrosis; Serpina3n has direct fatty-liver evidence for steatosis/inflammation and recent MASH-fibrosis evidence. Tnfrsf10b, Bax, Trp53, Cdkn1a, and Mdm2 connect death-receptor apoptosis and senescence to hepatocyte injury, TRAIL-receptor expression in experimental NASH, p53-CTGF fibrosis, and p21-associated fibrosis/outcomes. This module is reinforced secondarily by aged Trp53 activation; Ilrun, Ces2e, and Aldh2 are included as weaker modulators of inflammatory lipid or liver-injury tone rather than primary fibrosis drivers.",
+          "source_file": "result_18.json"
+        }
+      ],
+      "genes_with_limited_hepatocyte_literature": [
+        "Aaas",
+        "Gria3",
+        "Dglucy",
+        "Inka2",
+        "Cd81",
+        "Lif"
+      ],
+      "source_summary": {
+        "source_files": [
+          "result_18.json"
+        ],
+        "n_modules": 3,
+        "n_unique_pmids": 35,
+        "n_limited_genes": 6
+      }
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [
+          {
+            "regulator": "Trp53",
+            "log2fc": -0.7111552794151972,
+            "adj_pvalue": 2.8056904577923846e-06,
+            "pvalue": 3.199548810247974e-08,
+            "n_program_targets": 56,
+            "string_interactions": [
+              {
+                "target": "Mdm2",
+                "score": 999
+              },
+              {
+                "target": "Bcl2l1",
+                "score": 999
+              },
+              {
+                "target": "Rchy1",
+                "score": 996
+              },
+              {
+                "target": "Cdkn1a",
+                "score": 996
+              },
+              {
+                "target": "Gadd45a",
+                "score": 988
+              },
+              {
+                "target": "Ccng1",
+                "score": 983
+              },
+              {
+                "target": "Bax",
+                "score": 979
+              },
+              {
+                "target": "Jun",
+                "score": 971
+              },
+              {
+                "target": "Cdkn2c",
+                "score": 959
+              },
+              {
+                "target": "Polk",
+                "score": 917
+              },
+              {
+                "target": "Bbc3",
+                "score": 885
+              },
+              {
+                "target": "Apaf1",
+                "score": 878
+              },
+              {
+                "target": "Nqo1",
+                "score": 861
+              },
+              {
+                "target": "Tnfrsf10b",
+                "score": 812
+              },
+              {
+                "target": "Gtse1",
+                "score": 802
+              },
+              {
+                "target": "Zfp385a",
+                "score": 793
+              },
+              {
+                "target": "Trp53inp1",
+                "score": 781
+              },
+              {
+                "target": "Fas",
+                "score": 766
+              },
+              {
+                "target": "Lmna",
+                "score": 765
+              },
+              {
+                "target": "Notch1",
+                "score": 760
+              },
+              {
+                "target": "Mgmt",
+                "score": 728
+              },
+              {
+                "target": "Nfe2l2",
+                "score": 726
+              },
+              {
+                "target": "Msh6",
+                "score": 719
+              },
+              {
+                "target": "Tnfrsf1a",
+                "score": 715
+              },
+              {
+                "target": "Ubc",
+                "score": 676
+              },
+              {
+                "target": "Ptk2b",
+                "score": 672
+              },
+              {
+                "target": "Gas6",
+                "score": 658
+              },
+              {
+                "target": "Sesn2",
+                "score": 653
+              },
+              {
+                "target": "Gclc",
+                "score": 653
+              },
+              {
+                "target": "Icam1",
+                "score": 627
+              },
+              {
+                "target": "Gdf15",
+                "score": 594
+              },
+              {
+                "target": "Ddit4",
+                "score": 581
+              },
+              {
+                "target": "Plk2",
+                "score": 578
+              },
+              {
+                "target": "Fat1",
+                "score": 566
+              },
+              {
+                "target": "Zmat3",
+                "score": 561
+              },
+              {
+                "target": "Aldh1a1",
+                "score": 553
+              },
+              {
+                "target": "Btg2",
+                "score": 523
+              },
+              {
+                "target": "Phlda3",
+                "score": 514
+              },
+              {
+                "target": "Gstp1",
+                "score": 512
+              },
+              {
+                "target": "Endog",
+                "score": 489
+              },
+              {
+                "target": "Ctsb",
+                "score": 482
+              },
+              {
+                "target": "Mybl1",
+                "score": 480
+              },
+              {
+                "target": "Jund",
+                "score": 471
+              },
+              {
+                "target": "Rev1",
+                "score": 469
+              },
+              {
+                "target": "Lamp2",
+                "score": 466
+              },
+              {
+                "target": "Dusp6",
+                "score": 452
+              },
+              {
+                "target": "Lif",
+                "score": 451
+              },
+              {
+                "target": "Ercc5",
+                "score": 450
+              },
+              {
+                "target": "Psmf1",
+                "score": 448
+              },
+              {
+                "target": "Ctsd",
+                "score": 442
+              },
+              {
+                "target": "Eef1a1",
+                "score": 437
+              },
+              {
+                "target": "Nt5e",
+                "score": 430
+              },
+              {
+                "target": "Esrra",
+                "score": 425
+              },
+              {
+                "target": "Ei24",
+                "score": 425
+              },
+              {
+                "target": "Nrg1",
+                "score": 412
+              },
+              {
+                "target": "Cd81",
+                "score": 405
+              }
+            ]
+          },
+          {
+            "regulator": "Insig1",
+            "log2fc": -0.3721609417702221,
+            "adj_pvalue": 0.0070059952248889,
+            "pvalue": 0.0001571957244017,
+            "n_program_targets": 3,
+            "string_interactions": [
+              {
+                "target": "Pgrmc1",
+                "score": 831
+              },
+              {
+                "target": "Fdft1",
+                "score": 816
+              },
+              {
+                "target": "Lpin1",
+                "score": 506
+              }
+            ]
+          },
+          {
+            "regulator": "Acaca",
+            "log2fc": -0.1824238188007958,
+            "adj_pvalue": 0.0196195378095438,
+            "pvalue": 0.0005230214939582,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Lpin1",
+                "score": 642
+              },
+              {
+                "target": "Tkt",
+                "score": 590
+              },
+              {
+                "target": "Scarb2",
+                "score": 556
+              },
+              {
+                "target": "Abcb4",
+                "score": 450
+              },
+              {
+                "target": "Fdft1",
+                "score": 450
+              },
+              {
+                "target": "Acox2",
+                "score": 420
+              },
+              {
+                "target": "Glud1",
+                "score": 419
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Dgat2",
+            "log2fc": 0.8254969061491237,
+            "adj_pvalue": 6.285501368186278e-11,
+            "pvalue": 3.537380532937403e-13,
+            "n_program_targets": 5,
+            "string_interactions": [
+              {
+                "target": "Lpin1",
+                "score": 970
+              },
+              {
+                "target": "Bscl2",
+                "score": 624
+              },
+              {
+                "target": "Pemt",
+                "score": 552
+              },
+              {
+                "target": "Scarb2",
+                "score": 538
+              },
+              {
+                "target": "Fdft1",
+                "score": 426
+              }
+            ]
+          },
+          {
+            "regulator": "Scap",
+            "log2fc": 0.5064486830713412,
+            "adj_pvalue": 2.660374409400664e-06,
+            "pvalue": 2.9747328735891938e-08,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Pgrmc1",
+                "score": 695
+              },
+              {
+                "target": "Fdft1",
+                "score": 555
+              }
+            ]
+          },
+          {
+            "regulator": "Rps9",
+            "log2fc": 0.6273632376736811,
+            "adj_pvalue": 1.222190534423068e-05,
+            "pvalue": 1.4571124060215466e-07,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Eef1a1",
+                "score": 909
+              },
+              {
+                "target": "Eif2d",
+                "score": 899
+              },
+              {
+                "target": "Ubc",
+                "score": 655
+              },
+              {
+                "target": "Cars",
+                "score": 517
+              },
+              {
+                "target": "Prps2",
+                "score": 456
+              },
+              {
+                "target": "Mybl1",
+                "score": 416
+              },
+              {
+                "target": "Hsd3b3",
+                "score": 416
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Trp53",
+            "log2fc": -1.061808259923395,
+            "adj_pvalue": 1.984806854671572e-37,
+            "pvalue": 5.338085829743885e-40,
+            "n_program_targets": 56,
+            "string_interactions": [
+              {
+                "target": "Mdm2",
+                "score": 999
+              },
+              {
+                "target": "Bcl2l1",
+                "score": 999
+              },
+              {
+                "target": "Rchy1",
+                "score": 996
+              },
+              {
+                "target": "Cdkn1a",
+                "score": 996
+              },
+              {
+                "target": "Gadd45a",
+                "score": 988
+              },
+              {
+                "target": "Ccng1",
+                "score": 983
+              },
+              {
+                "target": "Bax",
+                "score": 979
+              },
+              {
+                "target": "Jun",
+                "score": 971
+              },
+              {
+                "target": "Cdkn2c",
+                "score": 959
+              },
+              {
+                "target": "Polk",
+                "score": 917
+              },
+              {
+                "target": "Bbc3",
+                "score": 885
+              },
+              {
+                "target": "Apaf1",
+                "score": 878
+              },
+              {
+                "target": "Nqo1",
+                "score": 861
+              },
+              {
+                "target": "Tnfrsf10b",
+                "score": 812
+              },
+              {
+                "target": "Gtse1",
+                "score": 802
+              },
+              {
+                "target": "Zfp385a",
+                "score": 793
+              },
+              {
+                "target": "Trp53inp1",
+                "score": 781
+              },
+              {
+                "target": "Fas",
+                "score": 766
+              },
+              {
+                "target": "Lmna",
+                "score": 765
+              },
+              {
+                "target": "Notch1",
+                "score": 760
+              },
+              {
+                "target": "Mgmt",
+                "score": 728
+              },
+              {
+                "target": "Nfe2l2",
+                "score": 726
+              },
+              {
+                "target": "Msh6",
+                "score": 719
+              },
+              {
+                "target": "Tnfrsf1a",
+                "score": 715
+              },
+              {
+                "target": "Ubc",
+                "score": 676
+              },
+              {
+                "target": "Ptk2b",
+                "score": 672
+              },
+              {
+                "target": "Gas6",
+                "score": 658
+              },
+              {
+                "target": "Sesn2",
+                "score": 653
+              },
+              {
+                "target": "Gclc",
+                "score": 653
+              },
+              {
+                "target": "Icam1",
+                "score": 627
+              },
+              {
+                "target": "Gdf15",
+                "score": 594
+              },
+              {
+                "target": "Ddit4",
+                "score": 581
+              },
+              {
+                "target": "Plk2",
+                "score": 578
+              },
+              {
+                "target": "Fat1",
+                "score": 566
+              },
+              {
+                "target": "Zmat3",
+                "score": 561
+              },
+              {
+                "target": "Aldh1a1",
+                "score": 553
+              },
+              {
+                "target": "Btg2",
+                "score": 523
+              },
+              {
+                "target": "Phlda3",
+                "score": 514
+              },
+              {
+                "target": "Gstp1",
+                "score": 512
+              },
+              {
+                "target": "Endog",
+                "score": 489
+              },
+              {
+                "target": "Ctsb",
+                "score": 482
+              },
+              {
+                "target": "Mybl1",
+                "score": 480
+              },
+              {
+                "target": "Jund",
+                "score": 471
+              },
+              {
+                "target": "Rev1",
+                "score": 469
+              },
+              {
+                "target": "Lamp2",
+                "score": 466
+              },
+              {
+                "target": "Dusp6",
+                "score": 452
+              },
+              {
+                "target": "Lif",
+                "score": 451
+              },
+              {
+                "target": "Ercc5",
+                "score": 450
+              },
+              {
+                "target": "Psmf1",
+                "score": 448
+              },
+              {
+                "target": "Ctsd",
+                "score": 442
+              },
+              {
+                "target": "Eef1a1",
+                "score": 437
+              },
+              {
+                "target": "Nt5e",
+                "score": 430
+              },
+              {
+                "target": "Esrra",
+                "score": 425
+              },
+              {
+                "target": "Ei24",
+                "score": 425
+              },
+              {
+                "target": "Nrg1",
+                "score": 412
+              },
+              {
+                "target": "Cd81",
+                "score": 405
+              }
+            ]
+          },
+          {
+            "regulator": "Ilrun",
+            "log2fc": -0.4502736933144279,
+            "adj_pvalue": 1.6019506198734553e-12,
+            "pvalue": 1.5756449120656177e-14,
+            "n_program_targets": 0,
+            "string_interactions": []
+          },
+          {
+            "regulator": "Mlxipl",
+            "log2fc": -0.2552946495393889,
+            "adj_pvalue": 5.9265917127226704e-08,
+            "pvalue": 9.700271051328558e-10,
+            "n_program_targets": 3,
+            "string_interactions": [
+              {
+                "target": "Khk",
+                "score": 579
+              },
+              {
+                "target": "Lpin1",
+                "score": 462
+              },
+              {
+                "target": "Pemt",
+                "score": 445
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Dgat2",
+            "log2fc": 0.4985287461550813,
+            "adj_pvalue": 1.1619730317507296e-11,
+            "pvalue": 1.276824898654442e-13,
+            "n_program_targets": 5,
+            "string_interactions": [
+              {
+                "target": "Lpin1",
+                "score": 970
+              },
+              {
+                "target": "Bscl2",
+                "score": 624
+              },
+              {
+                "target": "Pemt",
+                "score": 552
+              },
+              {
+                "target": "Scarb2",
+                "score": 538
+              },
+              {
+                "target": "Fdft1",
+                "score": 426
+              }
+            ]
+          },
+          {
+            "regulator": "Ulk1",
+            "log2fc": 0.4047337680493677,
+            "adj_pvalue": 1.798498610063933e-09,
+            "pvalue": 2.446147437182157e-11,
+            "n_program_targets": 3,
+            "string_interactions": [
+              {
+                "target": "Sesn2",
+                "score": 945
+              },
+              {
+                "target": "Nrbf2",
+                "score": 888
+              },
+              {
+                "target": "Lamp2",
+                "score": 481
+              }
+            ]
+          },
+          {
+            "regulator": "Rps9",
+            "log2fc": 0.4057625450934914,
+            "adj_pvalue": 2.403292976893894e-07,
+            "pvalue": 4.1366996787977135e-09,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Eef1a1",
+                "score": 909
+              },
+              {
+                "target": "Eif2d",
+                "score": 899
+              },
+              {
+                "target": "Ubc",
+                "score": 655
+              },
+              {
+                "target": "Cars",
+                "score": 517
+              },
+              {
+                "target": "Prps2",
+                "score": 456
+              },
+              {
+                "target": "Mybl1",
+                "score": 416
+              },
+              {
+                "target": "Hsd3b3",
+                "score": 416
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
