@@ -1,0 +1,245 @@
+1
+00:00:00,583 --> 00:00:04,021
+Every single-cell or Perturb-seq screen
+hands you the same puzzle: dozens
+
+2
+00:00:04,021 --> 00:00:07,458
+of gene programs, each just a ranked list,
+none of them
+
+3
+00:00:07,458 --> 00:00:07,771
+labeled.
+
+4
+00:00:07,771 --> 00:00:11,208
+Working out what one program actually does
+can eat a whole
+
+5
+00:00:11,208 --> 00:00:12,146
+afternoon on PubMed.
+
+6
+00:00:12,146 --> 00:00:15,583
+Enrichment gives you a vague heading; a
+raw language model gives
+
+7
+00:00:15,583 --> 00:00:18,708
+you a confident guess that sails right
+past the biology.
+
+8
+00:00:18,708 --> 00:00:22,146
+So we built the Gene Program Interpreter —
+a Claude Skill
+
+9
+00:00:22,146 --> 00:00:25,583
+that reads your programs the way an expert
+would, in context,
+
+10
+00:00:25,583 --> 00:00:26,833
+and shows its work.
+
+11
+00:00:27,125 --> 00:00:31,006
+Two inputs go in: your weighted program
+genes, and any regulators
+
+12
+00:00:31,006 --> 00:00:32,417
+from a Perturb-seq screen.
+
+13
+00:00:32,708 --> 00:00:36,031
+First it gives each program an identity —
+organism, tissue, cell
+
+14
+00:00:36,031 --> 00:00:38,750
+type, your conditions, and what these
+cells normally do.
+
+15
+00:00:38,750 --> 00:00:42,073
+The perturbed regulators keep their
+direction, and STRING adds a conventional
+
+16
+00:00:42,073 --> 00:00:45,396
+layer: enrichment, plus an interaction
+network wiring each regulator to its
+
+17
+00:00:45,396 --> 00:00:45,698
+targets.
+
+18
+00:00:45,698 --> 00:00:49,021
+Now it's a regulatory response in a real
+system, not a
+
+19
+00:00:49,021 --> 00:00:49,625
+nameless list.
+
+20
+00:00:49,917 --> 00:00:50,740
+Here's the engine.
+
+21
+00:00:50,740 --> 00:00:53,757
+For every program, we spin up a separate
+Claude agent —
+
+22
+00:00:53,757 --> 00:00:56,226
+all in parallel — to dig through the
+literature.
+
+23
+00:00:56,226 --> 00:00:59,243
+Each one searches PubMed, OpenAlex, and
+Crossref with its own tools,
+
+24
+00:00:59,243 --> 00:01:01,163
+and only ever sees its own brief.
+
+25
+00:01:01,163 --> 00:01:04,181
+Python runs the fan-out, so a whole screen
+researches itself at
+
+26
+00:01:04,181 --> 00:01:06,375
+once instead of one program at a time.
+
+27
+00:01:06,667 --> 00:01:09,841
+Then every reference the agents bring back
+is checked automatically —
+
+28
+00:01:09,841 --> 00:01:12,728
+does it resolve, is it retracted, is it a
+duplicate.
+
+29
+00:01:12,728 --> 00:01:15,902
+Anything that doesn't hold up is dropped,
+and disagreements and gaps
+
+30
+00:01:15,902 --> 00:01:18,500
+are kept in plain sight rather than
+smoothed over.
+
+31
+00:01:18,792 --> 00:01:22,175
+Now it all comes together — the verified
+papers, the context,
+
+32
+00:01:22,175 --> 00:01:25,558
+the genes and regulators, the database
+evidence — through Anthropic's Batch
+
+33
+00:01:25,558 --> 00:01:28,942
+API, which writes each program up as clean
+functional modules with
+
+34
+00:01:28,942 --> 00:01:31,402
+a name that fits across the whole set.
+
+35
+00:01:31,402 --> 00:01:32,325
+It's candid, too.
+
+36
+00:01:32,325 --> 00:01:35,708
+Click any claim and the real paper opens
+in one tap.
+
+37
+00:01:36,000 --> 00:01:37,878
+And here's a real result.
+
+38
+00:01:37,878 --> 00:01:42,010
+Program 22 comes back as fructose-driven
+lipogenesis — and the giveaway
+
+39
+00:01:42,010 --> 00:01:43,136
+is its regulator.
+
+40
+00:01:43,136 --> 00:01:47,268
+Mlxipl, or ChREBP, the master carbohydrate-response
+transcription factor, switches the program
+
+41
+00:01:47,268 --> 00:01:51,400
+on, and the evidence connects it directly
+to Khk for fructose,
+
+42
+00:01:51,400 --> 00:01:54,405
+Pklr for glycolysis, and Fasn for fat
+synthesis.
+
+43
+00:01:54,405 --> 00:01:58,536
+So this isn't a vague "lipid metabolism"
+label — it's the
+
+44
+00:01:58,536 --> 00:02:01,917
+fructose-to-fat pathway, pinned down by
+what actually drives it.
+
+45
+00:02:02,208 --> 00:02:04,952
+And the best part is how little it asks of
+you.
+
+46
+00:02:04,952 --> 00:02:07,696
+A few minutes to set up, and then it runs
+itself.
+
+47
+00:02:07,696 --> 00:02:10,440
+Describe your biology once — a short
+context block — and
+
+48
+00:02:10,440 --> 00:02:12,935
+the same Skill handles the whole pipeline
+without touching code.
+
+49
+00:02:12,935 --> 00:02:15,679
+It works through a whole screen in
+parallel while you step
+
+50
+00:02:15,679 --> 00:02:15,929
+away.
+
+51
+00:02:15,929 --> 00:02:18,673
+The days you'd spend chasing references
+become a hands-off pass —
+
+52
+00:02:18,673 --> 00:02:21,417
+so your time goes back to the science, not
+the searching.

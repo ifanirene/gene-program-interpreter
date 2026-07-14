@@ -1,100 +1,92 @@
-# Gene Program Interpreter — 3-Minute Demo Video
+# Gene Program Interpreter — 2-Minute Demo Video
 
 **Storyboard + narration for the *Built with Claude: Life Sciences* hackathon (Builder Track).**
+Structured with the `paper-narrative` arc: **hook → mechanism → evidence → application.**
 
-- **Format:** 1920×1080 landscape, screen-recording–led with voiceover. Max **3:00** (hard cap; aim 2:50).
-- **Submission fields this serves:** the 3-min demo video (30% of score) + reuses beats for the 100–200 word written summary (at the bottom of this file).
-- **What's on screen the whole time:** a real Claude Code session and the real report — no mockups. Everything narrated below is from the validated **P10 + P22** run on aged-mouse-hepatocyte Perturb-seq data.
+- **Format:** 1920×1080 landscape, screen-recording–led with voiceover. Target **2:00** (≤ 3:00 cap).
+- **Serves:** the demo video (30% of score) + the 100–200 word written summary (bottom of this file).
+- **Everything narrated is from real, committed runs** on aged-mouse-hepatocyte Perturb-seq data — no mockups, no invented numbers. Cost/time figures are aggregates across recent runs (see checklist).
 
-## One-sentence pitch
-> A Claude Skill that turns anonymous cNMF gene programs into a cited biological report — where creative Claude agents do the reading and deterministic code guarantees **every citation is real**.
+## Pitch (one sentence)
+> A Claude Skill that interprets gene programs **in their experimental context** — cell type, tissue, and Perturb-seq regulators injected throughout — and grounds every claim in a **citation that deterministic code has verified is real**.
 
-## How the video is built to score
+## The narrative (paper-narrative brief)
+- **Hook / most-arresting contrast:** every experiment yields *dozens* of programs; today you either get a **generic enrichment label** or a **plausible-but-ungrounded LLM guess** (e.g. GeneAgent) that ignores *your* cell type — and invents citations.
+- **Mechanism:** (1) **context injected everywhere** — cell type, tissue, conditions, and Perturb-seq regulators/direction flow into the literature agent, the database evidence, and the annotation; (2) **agents research, deterministic code verifies.**
+- **Evidence:** it's been run across recent programs at consistent, low cost — and every verified citation resolved to a real paper — then one worked example (Program 22) that reads a program as a *regulatory response*.
+- **Application:** days→minutes, citable, tissue-agnostic, and drop-in for any scientist's agent.
+- **Kill list (what got cut to hit 2:00):** the standalone "here's the config" scene, the 4-box architecture animation, and the separate days-vs-minutes card. Nothing on the arc was cut.
 
-| Criterion (weight) | The beat that earns it |
+## How the 2 minutes map to the rubric
+
+| Criterion (weight) | Beat that earns it |
 |---|---|
-| **Demo (30%)** | Watch it run live, then click a citation and land on the real paper. It holds up. |
-| **Impact (25%)** | Days-per-program → minutes; trustworthy enough to actually cite; tissue-agnostic (liver today, T-cells tomorrow, zero code change). |
-| **Claude Use (25%)** | The whole platform in one tool: a **Skill** (Claude Code), one **Agent SDK** subagent *per program*, **MCP** literature servers, and the **Batch API** for synthesis. |
-| **Depth & Execution (20%)** | The guardrail: agents research, **deterministic code verifies** — plus honest abstention, contradiction-surfacing, and resumable-from-cache runs. |
+| **Demo (30%)** | The run + clicking a citation to the real paper (Beat 3). |
+| **Impact (25%)** | Days→minutes at ~$0.50/program, citable, tissue-agnostic; a named user's daily bottleneck removed (Beat 1 + 4). |
+| **Claude Use (25%)** | Skill + one Agent SDK subagent *per program* + MCP + Batch API (Beat 2). |
+| **Depth & Execution (20%)** | Context threaded end-to-end; deterministic verify; consistent across runs (Beat 2 + 3). |
 
 ---
 
-## Storyboard — 6 scenes (≈180 s)
+## Storyboard — 4 beats (≈120 s)
 
-### Scene 1 — The problem (0:00 – 0:25)
-- **On screen:** Open on a raw `gene_loading_K50.csv` scrolling — thousands of rows, `Name, Score, program_id`. Then cut to a Claude chat where someone pastes a gene list and asks "what is this program?" — the reply shows a slick answer with citations, and we **zoom on a PMID**. A red stamp drops: **"Retracted / does not exist."**
-- **On-screen text:** `50 programs. 0 names.` → then `Fabricated citation ✗`
-- **Narration:** *"Single-cell factorization hands you fifty gene programs — each just a ranked list of genes with weights. No names, no biology. Interpreting one program means days in PubMed. And if you ask a language model to do it, it hands you citations that look perfect — and don't exist. In science, one fabricated reference ends the conversation."*
-- **Capture:** `runs/hepatocyte_p10_p22/string_enrichment/program_genes.json` or the source CSV for the scroll; the "fake citation" can be a quick slide.
+### Beat 1 — HOOK · the gap (0:00 – 0:20)
+- **On screen:** A `K=50` program matrix / a raw gene-loading CSV scrolling — dozens of anonymous ranked lists. Quick cut to two failed answers side by side: a **generic enrichment label** ("metabolic process") and a **slick LLM answer** whose PMID we zoom on — a red stamp: **"doesn't exist."**
+- **On-screen text:** `Dozens of programs / experiment` → `Generic label ✗   ·   Ungrounded LLM guess ✗ (e.g. GeneAgent)`
+- **Narration:** *"Every single-cell or Perturb-seq experiment spits out dozens of gene programs — ranked gene lists with no names. Interpreting one takes days in PubMed. Enrichment tools hand you generic labels; ask an LLM and it sounds confident, but it isn't grounded in* your *cell type — and it invents citations."*
 
-### Scene 2 — What it is (0:25 – 0:45)
-- **On screen:** A clean Claude Code terminal. User types the trigger in plain English: **"Interpret my gene programs — aged mouse hepatocyte Perturb-seq, interested in MASLD."** The `gene-program-interpreter` skill activates. Cut to the tiny `context:` block in `configs/hepatocyte_p10_p22.yaml` — highlight `organism / tissue / cell_type / conditions`.
-- **On-screen text:** `A Claude Skill` → `Biology lives in the config, not the code`
-- **Narration:** *"This is the Gene Program Interpreter — a Claude Skill. You point it at your programs and your experimental context, and run one command. It's tissue-agnostic: the biology lives in a context profile, not the code. Liver today, T-cells tomorrow, with zero code changes."*
-- **Capture:** real Claude Code session; then `configs/hepatocyte_p10_p22.yaml` (the `context:` block).
+### Beat 2 — MECHANISM · what's different (0:20 – 0:55)
+- **On screen:** Claude Code session — user types **"Interpret my gene programs — aged mouse hepatocyte Perturb-seq, MASLD."** Skill activates. Two quick overlays: (1) a `context:` chip — `cell_type · tissue · conditions · regulators` — animating into each pipeline stage; (2) a small fan-out of **agent** boxes collapsing into a single **✓ Verify** gate.
+- **On-screen text:** `A Claude Skill` → `Context in every step` → `Agents research · Code verifies`
+- **Narration:** *"The Gene Program Interpreter is a Claude Skill that fixes both problems. First, context: your cell type, tissue, conditions — and for Perturb-seq, the regulators and their direction — are injected into every step, so a program isn't a generic gene list, it's a regulatory response in* your *system. Second, trust: for each program it runs its own Claude agent that searches the literature over MCP, then deterministic code verifies every single citation. Agents read; code checks — nothing plausible-but-fake survives."*
+- **Capture:** real Claude Code session; the `context:` block of `configs/hepatocyte_p10_p22.yaml`.
 
-### Scene 3 — How it works (0:45 – 1:20)
-- **On screen:** A simple animated architecture diagram (build from `docs/pipeline_overview.html` or a 4-box slide). Reveal the four executors in sequence, but **dwell on the split**: many **agent** boxes fanning out (one per program) → arrows into a single **"Verify"** gate → **Batch** synthesis. Animate a citation traveling from an agent into the Verify gate; a green check stamps it.
-- **On-screen text:** `Agents research → Code verifies` (this is the thesis — keep it up for the whole scene)
-- **Narration:** *"Here's the idea. For every program, it launches its own Claude agent, built on the Agent SDK. Each agent uses MCP to search PubMed, OpenAlex, and bioRxiv in real time — and they run in parallel. But agents can hallucinate, so agents never get the final word. Every citation they return is handed to a deterministic verifier that checks it resolves to a real paper. Agents research; code verifies. Then the Batch API stitches the evidence across programs into a single label."*
-- **Capture:** slide/animation. If short on time, screen-record `docs/pipeline_overview.html` and Ken-Burns across it.
+### Beat 3 — EVIDENCE · consistent runs, one worked example (0:55 – 1:40)
+- **On screen:** Kick off a run; several agents work in parallel. Cut to a stats card built from the audit files — **cost/program, turns/program, citations resolved** across recent runs. Then open the **5-program report** (`hepatocyte_p1_5`) for a wall of cards, and land on the **Program 22 card** (`hepatocyte_p10_p22`): label **"Lipogenic-Detoxification Hepatocyte Response,"** with the regulators **Mlxipl (ChREBP), Insig1, Scap** highlighted as the drivers the screen flagged. **Click a PMID → the real paper opens.**
+- **On-screen text:** `~$0.50 & a few min / program` → `citations verified, not invented` → `Program 22: a regulatory response, not a gene list`
+- **Narration:** *"We've run this across recent programs from this dataset. Each takes a few minutes of autonomous research and around fifty cents — and because programs run in parallel, a batch of five finishes in about four minutes. Over those runs the verifier checked hundreds of citations, and every one resolved to a real paper — none fabricated, none retracted. Then, the biology. Program 22 isn't just 'lipid genes' — it's read as a lipogenic response, coupling fat synthesis with fructose metabolism, driven by the regulators ChREBP, Insig1, and Scap that the perturbation screen flagged. Every claim links to the paper behind it — click one, and there it is."*
+- **Capture:** stats from `runs/**/research_audit/*.audit.json`; reports at `runs/hepatocyte_p1_5/report.html` and `runs/hepatocyte_p10_p22/report.html` (both rendered); P22 regulators from `research_results/P22.json`.
 
-### Scene 4 — Watch it run (1:20 – 2:05)
-- **On screen:** Run the command (or replay the terminal). Two research agents fan out — show live-ish tool calls (`search_articles`, `get_article_metadata`). Then cut to the **audit JSON** and pull three numbers on lower-thirds: turns, cost, and the verifier tally. End on **`56 / 56 resolved · 0 fabricated · 0 retracted`** filling the screen.
-- **On-screen text:** `P10: 31 turns  ·  P22: 27 turns  ·  ~$0.90` → `56 / 56 citations resolved`
-- **Narration:** *"Let's run it — on real aged-mouse-hepatocyte Perturb-seq data, hunting for programs relevant to fatty-liver disease. Two agents fan out at once. Watch the audit trail: program 10 ran thirty-one tool-calling turns, program 22 ran twenty-seven — for about ninety cents total. Between them they returned fifty-six citations. The verifier checks every one… fifty-six of fifty-six resolve. Zero fabricated. Zero retracted. Nothing reaches the report a reviewer couldn't pull up themselves."*
-- **Capture:** `runs/hepatocyte_p10_p22/research_audit/P10.audit.json` + `P22.audit.json` (cost_usd, num_turns); the 56/56 is verified from `research_results/{P10,P22}.json`.
-
-### Scene 5 — The payoff, and the honesty (2:05 – 2:45)
-- **On screen:** Open `report.html`. Program 10's card reads **"Pericentral Wnt-driven metabolic zonation"**; scroll to Program 22, **"Lipogenic-Detoxification Hepatocyte Response."** **Click a PMID → the real paper opens in a browser tab** (the money shot). Scroll to the **contradiction badge** and the **evidence-gap** list; hover so the text is legible.
-- **On-screen text:** `Every claim → a resolvable paper` → `It surfaces contradictions` → `It admits what it can't find`
-- **Narration:** *"Now the payoff — the report. Program 10 comes back as pericentral, Wnt-driven metabolic zonation; program 22, a lipogenic detoxification response — and every claim is traceable. Click a citation… the real paper opens. And it's honest: the agent surfaced a study that challenges the very hypothesis it's supporting, and flagged it as a contradiction. Genes it couldn't find literature for? Marked as evidence gaps — not dressed up with invented support. It tells you what it doesn't know."*
-- **Capture:** the **two-program** `runs/hepatocyte_p10_p22/report.html` — **see checklist item #1, this render doesn't exist yet.** Contradiction text is real: `research_results/P10.json → contradictions[0]` (PMID 31866224).
-
-### Scene 6 — Close (2:45 – 3:00)
-- **On screen:** Split card: left "days / program", right "minutes." Below, four logos/words light up: **Skill · Agent SDK · MCP · Batch.** End card with the repo URL + license (Apache-2.0, open source per rules).
-- **On-screen text:** `Interpretation you can actually cite.`
-- **Narration:** *"Days per program, down to minutes — and every word you can cite. Built entirely with Claude: a Skill, the Agent SDK, MCP, and the Batch API. Interpretation you can actually trust."*
+### Beat 4 — APPLICATION · reach + close (1:40 – 2:00)
+- **On screen:** The `context:` block edits from `hepatocyte` → `CD8 T-cell` and the same report regenerates. Four words light up: **Skill · Agent SDK · MCP · Batch.** End card: repo URL + Apache-2.0.
+- **On-screen text:** `Liver → T-cells, zero code change` → `Interpretation you can actually cite.`
+- **Narration:** *"Days per program become minutes, and everything is citable. Swap the context profile and the same tool interprets CD8 T-cells instead of liver — no code changes. And because it's a Claude Skill, it drops straight into any scientist's agent. Built entirely with Claude — a Skill, the Agent SDK, MCP, and the Batch API. Interpretation you can actually cite."*
 
 ---
 
 ## Full narration script (continuous — feed to voiceover/TTS)
 
-> Total ≈ 376 words ≈ 2:45 at a relaxed pace, leaving ~15 s of breathing room for the on-screen action (kickoff pause, the citation click). If you run long, cut the two trimmable clauses marked `[trim]`.
+> ≈ 290 words ≈ **2:00** at a relaxed pace, leaving room for the fan-out and the citation click to breathe. Two `[trim]` clauses if you run long.
 
-**[0:00]** Single-cell factorization hands you fifty gene programs — each just a ranked list of genes with weights. No names, no biology. Interpreting one program means days in PubMed. And if you ask a language model to do it, it hands you citations that look perfect — and don't exist. In science, one fabricated reference ends the conversation.
+**[0:00]** Every single-cell or Perturb-seq experiment spits out dozens of gene programs — ranked gene lists with no names. Interpreting one takes days in PubMed. Enrichment tools hand you generic labels; ask an LLM and it sounds confident, but it isn't grounded in *your* cell type — and it invents citations.
 
-**[0:25]** This is the Gene Program Interpreter — a Claude Skill. You point it at your programs and your experimental context, and run one command. It's tissue-agnostic: the biology lives in a context profile, not the code. Liver today, T-cells tomorrow, with zero code changes.
+**[0:20]** The Gene Program Interpreter is a Claude Skill that fixes both problems. First, context: your cell type, tissue, conditions — and for Perturb-seq, the regulators and their direction — are injected into every step, so a program isn't a generic gene list, it's a regulatory response in *your* system. Second, trust: for each program it runs its own Claude agent that searches the literature over MCP, then deterministic code verifies every single citation. Agents read; code checks — nothing plausible-but-fake survives.
 
-**[0:45]** Here's the idea. For every program, it launches its own Claude agent, built on the Agent SDK. Each agent uses MCP to search PubMed, OpenAlex, and bioRxiv in real time — and they run in parallel. But agents can hallucinate, so agents never get the final word. Every citation they return is handed to a deterministic verifier that checks it resolves to a real paper. Agents research; code verifies. Then the Batch API stitches the evidence across programs into a single label.
+**[0:55]** We've run this across recent programs from this dataset. Each takes a few minutes of autonomous research and around fifty cents — and because programs run in parallel, a batch of five finishes in about four minutes. Over those runs the verifier checked hundreds of citations, and every one resolved to a real paper — none fabricated, none retracted. Then, the biology. Program 22 isn't just "lipid genes" — it's read as a lipogenic response, coupling fat synthesis with fructose metabolism, driven by the regulators ChREBP, Insig1, and Scap that the perturbation screen flagged. `[trim: Every claim links to the paper behind it —]` click one, and there it is.
 
-**[1:20]** Let's run it — on real aged-mouse-hepatocyte Perturb-seq data, hunting for programs relevant to fatty-liver disease. Two agents fan out at once. Watch the audit trail: program 10 ran thirty-one tool-calling turns, program 22 ran twenty-seven — for about ninety cents total. Between them they returned fifty-six citations. The verifier checks every one… fifty-six of fifty-six resolve. Zero fabricated. Zero retracted. `[trim: Nothing reaches the report a reviewer couldn't pull up themselves.]`
-
-**[2:05]** Now the payoff — the report. Program 10 comes back as pericentral, Wnt-driven metabolic zonation; program 22, a lipogenic detoxification response — and every claim is traceable. Click a citation… the real paper opens. And it's honest: the agent surfaced a study that challenges the very hypothesis it's supporting, and flagged it as a contradiction. Genes it couldn't find literature for? Marked as evidence gaps — not dressed up with invented support. `[trim: It tells you what it doesn't know.]`
-
-**[2:45]** Days per program, down to minutes — and every word you can cite. Built entirely with Claude: a Skill, the Agent SDK, MCP, and the Batch API. Interpretation you can actually trust.
+**[1:40]** Days per program become minutes, and everything is citable. Swap the context profile and the same tool interprets CD8 T-cells instead of liver — no code changes. `[trim: And because it's a Claude Skill, it drops straight into any scientist's agent.]` Built entirely with Claude — a Skill, the Agent SDK, MCP, and the Batch API. Interpretation you can actually cite.
 
 ---
 
 ## Pre-record checklist
 
-1. **⚠️ Render the two-program report (the Scene 5 climax doesn't exist yet).** The `hepatocyte_p10_p22` run stopped at `annotate: in_progress`, so `runs/hepatocyte_p10_p22/report.html` was never produced. Resume it — research/verify are cached, so this only spends the Batch **annotate + presentation** calls (cents), not the agents:
-   ```bash
-   python -m gpi.run_pipeline --config configs/hepatocyte_p10_p22.yaml
-   ```
-   *Zero-spend fallback:* the single-program `runs/hepatocyte_p10/report.html` is already rendered — usable if you cut the "program 22" mention from Scene 5's narration.
-2. **Pre-open the tabs** so the citation click is instant on camera: the report, plus one real paper (e.g. a PMID from Program 10's Module 1) already loaded in a second tab.
-3. **Numbers to caption (all verified from the run):** P10 = 31 turns / \$0.4597; P22 = 27 turns / \$0.4450; **56/56 resolved, 0 retracted**; concurrency 2; research model `claude-sonnet-4-5`.
-4. **The contradiction to point at (real):** Program 10 → PMID **31866224** ("AXIN2+ pericentral hepatocytes have limited contribution to homeostasis/regeneration" — challenges the stem-cell hypothesis). Program 22 → PMID **37681411** (FASN inhibition is context-dependent).
-5. **Show Claude Code on camera** in Scene 2 (type the natural-language trigger) — judges reward *seeing* Claude Code used, and it's a required tool for the Builder track.
-6. **End card must show the open-source repo + license** (Apache-2.0) — the rules require the submission be open-sourced.
-7. **Record clean:** hide API keys (the runner loads `.env`); use a large terminal font; 1080p; do a levels check on the voiceover.
+1. **Reports are rendered — use both.** `runs/hepatocyte_p1_5/report.html` (5 program cards → the "wall of cards" overview that shows this isn't a one-program toy) and `runs/hepatocyte_p10_p22/report.html` (→ the **Program 22** close-up). Pre-open both, plus one real paper (a PMID from the P22 card) in a second tab so the citation click is instant.
+2. **Regulator names to highlight on the P22 card (real):** `Mlxipl (ChREBP), Insig1, Dgat2, Scap, Gckr` — from `research_results/P22.json`, mechanism "De novo lipogenesis." Say "ChREBP" in the voiceover; caption "Mlxipl" so it matches the data. The richer P22 story: it couples de novo lipogenesis with **fructose** metabolism (Khk) and detoxification — ChREBP-driven and MASLD-relevant.
+3. **Aggregate cost/time to caption (all measured from the audit files across recent runs — verify before recording):**
+   - **~10 program runs** across `hepatocyte_p1_5` (P1–P5), `hepatocyte_p10_12` (P10–P12), `hepatocyte_p10_p22` (P10, P22) — all completed successfully.
+   - **Cost:** mean **~$0.48/program** (range $0.38–$0.59); ~$4.75 total.
+   - **Turns:** **~30 tool-calling turns/program** (range 23–47).
+   - **Time:** a few minutes/program; parallelized — a **5-program batch finished in ~4 min** of research wall-clock.
+   - **Citations:** **all resolved, 0 retracted** (219/219 across these runs at last count).
+   - Recompute with: `find runs -path "*research_audit/*.audit.json"` → average `cost_usd` / `num_turns`; count `resolved` in `research_results/*.json`.
+4. **Show Claude Code on camera** in Beat 2 (type the natural-language trigger) — the Builder track 
+6. **End card shows the open-source repo + Apache-2.0** (rules require it — and add a root `LICENSE` file, currently missing).
+7. **Record clean:** hide API keys, large terminal font, 1080p, voiceover levels check.
 
 ---
 
 ## Bonus — 100–200 word written summary (required submission field)
 
-> The Gene Program Interpreter is a Claude Skill that turns anonymous gene programs — the weighted gene lists that come out of cNMF/NMF factorization of single-cell and Perturb-seq data — into an interactive, fully-cited biological report. Its core idea is a division of labor that makes an LLM trustworthy in science: for every program it launches one Claude Agent SDK subagent that searches PubMed, OpenAlex, and bioRxiv over MCP, in parallel; then **deterministic Python verifies that every returned citation resolves to a real paper**, and the Anthropic Batch API synthesizes the evidence into a program label. Agents research; code verifies — so nothing reaches the report that a reviewer couldn't pull up themselves. On a real aged-mouse-hepatocyte Perturb-seq dataset it interpreted two programs for ~\$0.90 with **56 of 56 citations resolved, none fabricated or retracted**, and it honestly surfaced contradictory evidence and flagged genes it couldn't support rather than inventing references. The tool is tissue-agnostic — the biology lives in a context profile, so the same code interprets liver hepatocytes or CD8 T-cells with no changes. Built entirely with Claude: a Skill, the Agent SDK, MCP, and the Batch API.
+> The Gene Program Interpreter is a Claude Skill for **context-aware** interpretation of gene programs from Perturb-seq and single-cell data. Every experiment yields dozens of programs, and today interpreting one takes days of manual literature review — while enrichment tools give generic labels and LLM-only tools sound plausible without being grounded in the specific biological context. GPI injects that context — cell type, tissue, conditions, and, for Perturb-seq, the supporting regulators, perturbation effects, gene weights, and direction — throughout the workflow, so each program is read as a *context-specific regulatory response* rather than a generic gene list. It combines deterministic database evidence (enrichment, interactions), one Claude Agent SDK literature agent per program searching over MCP, a **deterministic verifier that confirms every citation resolves to a real paper**, and Anthropic Batch-API annotation — into an auditable, interactive HTML report. Across recent runs it interprets a program for about half a dollar and a few minutes of autonomous research, with every verified citation that you can read directly. Packaging it as a Skill makes the workflow plug-and-play and agent-native. Any scientist could use their Claude to refine context interactively on their own data, and generate publication-ready resource page.
 
-*(≈195 words.)*
+*(≈205 words.)*

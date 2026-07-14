@@ -1,0 +1,6 @@
+{
+  "model": "gpt-4o-mini-tts",
+  "voice": "marin",
+  "response_format": "wav",
+  "instructions": "Speak as a patient scientific teacher explaining a sophisticated method to working biologists. Sound warm, grounded, clear, and conversational—never salesy. Use an unhurried pace with natural sentence-level pauses and gentle emphasis on contrasts. Pronounce Perturb-seq as 'perturb seek', Mlxipl as 'M L X I P L', ChREBP as 'kreb', Khk as 'K H K', Pklr as 'P K L R', Fasn as 'F A S N', and PMID as 'P M I D'."
+}

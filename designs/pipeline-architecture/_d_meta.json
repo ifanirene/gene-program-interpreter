@@ -1,0 +1,36 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "Gene Program Interpreter Pipeline": {
+      "versions": [
+        {
+          "path": "Gene Program Interpreter Pipeline.html",
+          "createdAt": "2026-07-13T22:22:46.522Z",
+          "status": "needs-review"
+        }
+      ]
+    },
+    "Pipeline Architecture Narration.md": {
+      "versions": [
+        {
+          "path": "Pipeline Architecture Narration.md",
+          "createdAt": "2026-07-13T22:30:54.366Z",
+          "status": "needs-review"
+        }
+      ]
+    },
+    "Pipeline Architecture": {
+      "versions": [
+        {
+          "path": "Pipeline Architecture.html",
+          "createdAt": "2026-07-13T22:33:02.103Z",
+          "status": "needs-review"
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-07-13T22:22:46.523Z",
+  "updatedAt": "2026-07-13T22:33:02.104Z"
+}

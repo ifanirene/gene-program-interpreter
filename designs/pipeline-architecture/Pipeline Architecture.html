@@ -1,0 +1,1131 @@
+<!--
+  Gene Program Interpreter — pipeline architecture illustration
+  Editorial-science interactive figure. Palette + evidence-status colours are
+  lifted verbatim from gpi/html_report.py so this figure reads as continuous
+  with the report it produces. The worked example (Program 10) uses REAL,
+  verified data from runs/hepatocyte_p10_p22 — every PMID resolves.
+-->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gene Program Interpreter — Pipeline Architecture</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------------------------------------------------------------- tokens */
+  :root {
+    /* Real product palette (gpi/html_report.py, light theme) */
+    --bg: #f6f7f8;
+    --surface: #ffffff;
+    --surface-soft: #f3f5f5;
+    --surface-sunk: #eef1f1;
+    --text: #14201d;
+    --text-soft: #43504c;
+    --muted: #6b7672;
+    --border: #e4e7e6;
+    --border-strong: #d2d7d5;
+
+    --accent: #0d9488;
+    --accent-strong: #0f766e;
+    --accent-soft: #e6f6f3;
+    --accent-text: #0b6b61;
+
+    --up: #b8615a;        /* activating regulators */
+    --up-soft: #f4ebe9;
+    --down: #3d7d9e;      /* repressing regulators */
+    --down-soft: #e8eff2;
+
+    /* Evidence status: supported / partial / contradictory / missing */
+    --ok: #15803d;   --ok-soft: #e7f6ec;
+    --warn: #b45309; --warn-soft: #fbf1e3;
+    --bad: #b91c1c;  --bad-soft: #fbeaea;
+    --gap: #6b7672;  --gap-soft: #eef1f1;
+
+    --shadow: 0 1px 2px rgba(20,32,29,.04), 0 8px 24px -12px rgba(20,32,29,.18);
+    --shadow-lift: 0 2px 6px rgba(20,32,29,.06), 0 18px 40px -18px rgba(20,32,29,.28);
+    --radius: 14px;
+
+    --font-serif: "Spectral", "Iowan Old Style", Georgia, "Times New Roman", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, "Helvetica Neue", sans-serif;
+    --font-mono: "IBM Plex Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+    --rail-w: 58px;
+    --maxw: 1120px;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c0f0e;
+    --surface: #141917;
+    --surface-soft: #1a201e;
+    --surface-sunk: #0f1413;
+    --text: #e8ecea;
+    --text-soft: #b7c0bc;
+    --muted: #8a938f;
+    --border: #262d2a;
+    --border-strong: #333b37;
+
+    --accent: #0d9488;
+    --accent-strong: #14b8a6;
+    --accent-soft: #0e2a27;
+    --accent-text: #5eead4;
+
+    --up: #d98e86;   --up-soft: #271815;
+    --down: #7fb0c9; --down-soft: #13222a;
+
+    --ok: #4ade80;   --ok-soft: #10281a;
+    --warn: #fbbf24; --warn-soft: #2a2110;
+    --bad: #f87171;  --bad-soft: #2a1414;
+    --gap: #8a938f;  --gap-soft: #1a201e;
+
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.7);
+    --shadow-lift: 0 2px 8px rgba(0,0,0,.5), 0 22px 48px -18px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--accent-text); text-underline-offset: 2px; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* ---------------------------------------------------------------- masthead */
+  .masthead { padding: 72px 0 26px; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--accent-text); font-weight: 500;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ""; height: 1px; flex: 1; background: var(--border-strong); }
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(38px, 6vw, 60px);
+    line-height: 1.04;
+    letter-spacing: -.015em;
+    margin: 18px 0 0;
+  }
+  .lede {
+    font-family: var(--font-serif);
+    font-size: clamp(19px, 2.4vw, 23px);
+    line-height: 1.5;
+    color: var(--text-soft);
+    max-width: 40em;
+    margin: 20px 0 0;
+    text-wrap: pretty;
+  }
+  .lede b { color: var(--text); font-weight: 600; }
+  .example-note {
+    margin-top: 18px; font-size: 14px; color: var(--muted);
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .example-note .mono { font-family: var(--font-mono); color: var(--text-soft); }
+  .dotsep { width: 3px; height: 3px; border-radius: 50%; background: var(--border-strong); }
+
+  /* ---------------------------------------------------------------- controls */
+  .controls {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--border);
+    margin-top: 30px;
+  }
+  .controls-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 12px 28px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--font-sans); font-size: 14px; font-weight: 550;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 15px; border-radius: 9px; cursor: pointer;
+    border: 1px solid var(--border-strong); background: var(--surface); color: var(--text);
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s ease;
+  }
+  .btn:hover { border-color: var(--muted); box-shadow: var(--shadow); }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--accent); border-color: var(--accent-strong); color: #fff; }
+  :root[data-theme="dark"] .btn-primary { color: #04110f; }
+  .btn-primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+  .btn .play-glyph { font-size: 11px; }
+  .btn[disabled] { opacity: .4; cursor: default; box-shadow: none; transform: none; }
+  .spacer { flex: 1; }
+  .tourstate {
+    font-family: var(--font-mono); font-size: 12.5px; color: var(--muted);
+    display: none; align-items: center; gap: 10px;
+  }
+  body.touring .tourstate { display: inline-flex; }
+  .tourstate b { color: var(--accent-text); font-weight: 600; }
+  .toggle {
+    display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+    font-size: 13px; color: var(--text-soft); user-select: none;
+    padding: 8px 12px; border-radius: 9px; border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .toggle:hover { border-color: var(--border-strong); }
+
+  /* ---------------------------------------------------------------- pipeline */
+  .pipeline { padding: 40px 0 20px; }
+
+  .stage {
+    display: grid;
+    grid-template-columns: var(--rail-w) 1fr;
+    column-gap: 22px;
+    position: relative;
+  }
+  /* rail: node + the connector line that drops to the next node */
+  .rail { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .node {
+    width: 46px; height: 46px; flex: 0 0 46px; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer;
+    background: var(--surface); border: 1.5px solid var(--border-strong);
+    color: var(--muted); font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    box-shadow: var(--shadow);
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+    z-index: 2;
+  }
+  .node:hover { transform: scale(1.06); border-color: var(--muted); }
+  .stage.hl .node { border-color: var(--accent); color: var(--accent-text); background: var(--accent-soft); }
+  .stage.is-active .node {
+    background: var(--accent); border-color: var(--accent-strong); color: #fff;
+    box-shadow: 0 0 0 6px var(--accent-soft), var(--shadow-lift);
+    transform: scale(1.08);
+  }
+  :root[data-theme="dark"] .stage.is-active .node { color: #04110f; }
+
+  .conn { flex: 1 1 auto; width: 2px; background: var(--border); position: relative; margin: 4px 0 0; overflow: hidden; min-height: 34px; }
+  .stage:last-child .conn { display: none; }
+  .pulse {
+    position: absolute; left: -2px; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); opacity: .0;
+    animation: fall 2.6s linear infinite;
+  }
+  .pulse:nth-child(2) { animation-delay: .9s; }
+  .pulse:nth-child(3) { animation-delay: 1.75s; }
+  @keyframes fall {
+    0% { top: -8px; opacity: 0; }
+    12% { opacity: .9; }
+    88% { opacity: .9; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  /* card */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px 26px 26px;
+    margin-bottom: 26px; box-shadow: var(--shadow);
+    transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+    scroll-margin-top: 90px;
+  }
+  .stage:hover .card { box-shadow: var(--shadow-lift); }
+  .stage.is-active .card { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent-soft), var(--shadow-lift); }
+
+  .card-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .exec-tag {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    padding: 3px 8px; border-radius: 6px; color: var(--text-soft);
+    background: var(--surface-sunk); border: 1px solid var(--border);
+    letter-spacing: .02em; white-space: nowrap;
+  }
+  .hl-badge {
+    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 6px;
+    color: var(--accent-text); background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .stage-title {
+    font-family: var(--font-serif); font-weight: 600; font-size: clamp(21px, 2.5vw, 26px);
+    line-height: 1.15; letter-spacing: -.01em; margin: 4px 0 2px; width: 100%;
+  }
+  .stage.hl .stage-title { color: var(--accent-text); }
+  .module { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin: 0 0 14px; }
+  .desc { color: var(--text-soft); margin: 0 0 18px; max-width: 54em; text-wrap: pretty; }
+  .desc b { color: var(--text); font-weight: 600; }
+
+  /* p10 callout — reveals when a stage is active during the walkthrough */
+  .p10 {
+    margin-top: 16px; border-top: 1px dashed var(--border-strong); padding-top: 14px;
+    display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start;
+    max-height: 0; opacity: 0; overflow: hidden;
+    transition: max-height .5s ease, opacity .4s ease, padding .4s ease, margin .4s ease;
+    padding-bottom: 0;
+  }
+  .stage.is-active .p10 { max-height: 260px; opacity: 1; }
+  .p10-tag {
+    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: #fff; background: var(--accent); padding: 4px 8px; border-radius: 6px;
+    white-space: nowrap;
+  }
+  :root[data-theme="dark"] .p10-tag { color: #04110f; }
+  .p10-body { font-size: 14px; color: var(--text-soft); }
+  .p10-body b { color: var(--text); font-weight: 600; }
+  .p10-body .mono { font-family: var(--font-mono); font-size: 13px; color: var(--accent-text); }
+
+  /* ---------------------------------------------------------------- viz bits */
+  .viz { margin-top: 4px; }
+  .viz-cap {
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--muted);
+    margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  }
+  .viz-cap .chip-mono {
+    background: var(--surface-sunk); border: 1px solid var(--border); border-radius: 5px;
+    padding: 2px 7px; color: var(--text-soft);
+  }
+
+  /* input: loading matrix */
+  .matrix { display: grid; gap: 7px; max-width: 420px; }
+  .matrix-row { display: grid; grid-template-columns: 82px 1fr; align-items: center; gap: 12px; }
+  .matrix-row .g { font-family: var(--font-mono); font-size: 13px; color: var(--text); }
+  .bar { height: 9px; border-radius: 5px; background: var(--accent); opacity: .85; }
+  .bar.dim { background: var(--accent); opacity: .4; }
+  .matrix-note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+  /* chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip {
+    font-size: 12.5px; padding: 4px 10px; border-radius: 999px;
+    background: var(--surface-sunk); border: 1px solid var(--border); color: var(--text-soft);
+  }
+  .chip.term { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent-text); }
+  .chip.enr { background: var(--surface-sunk); border-color: var(--border-strong); color: var(--text-soft); font-size: 12px; display: inline-flex; align-items: baseline; }
+  .chip.enr .cat { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; letter-spacing: .06em; margin-right: 6px; }
+  .chip.enr .cat.go { color: var(--accent-strong); }
+  .chip.enr .cat.kegg { color: var(--down); }
+  .chip.up { background: var(--up-soft); border-color: color-mix(in srgb, var(--up) 30%, transparent); color: var(--up); font-family: var(--font-mono); font-size: 12px; }
+  .chip.down { background: var(--down-soft); border-color: color-mix(in srgb, var(--down) 30%, transparent); color: var(--down); font-family: var(--font-mono); font-size: 12px; }
+
+  .brief {
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden; max-width: 560px;
+    background: var(--surface-soft);
+  }
+  .brief-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 9px 14px; background: var(--surface-sunk); border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-soft);
+  }
+  .brief-head .id { color: var(--accent-text); font-weight: 600; }
+  .brief-sec { padding: 12px 14px; }
+  .brief-sec + .brief-sec { border-top: 1px solid var(--border); }
+  .brief-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .fieldrow { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; }
+  .fieldrow .k { color: var(--muted); }
+  .fieldrow .v { color: var(--text); font-weight: 550; }
+  .reg-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .reg-split .rl { font-family: var(--font-mono); font-size: 11px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .reg-split .rl.a { color: var(--up); }
+  .reg-split .rl.r { color: var(--down); }
+
+  /* box 01 — weighted genes (left) + context brief (right) */
+  .inject-grid { display: grid; grid-template-columns: minmax(168px, .82fr) 1.3fr; gap: 22px; align-items: start; }
+  .inject-genes .matrix { max-width: none; }
+  .inject-genes .brief-label { margin-bottom: 12px; }
+
+  /* box 02 — STRING protein-interaction network (real regulator→target edges) */
+  .stringnet { border: 1px solid var(--border); border-radius: 12px; background: var(--surface-soft); padding: 8px 6px; max-width: 620px; }
+  .stringnet svg { display: block; width: 100%; height: auto; }
+  .sedge { stroke: var(--muted); fill: none; }
+  .snode { stroke: var(--surface); stroke-width: 1.5px; }
+  .snode.act { fill: var(--up); }
+  .snode.rep { fill: var(--down); }
+  .snode.tgt { fill: var(--accent); }
+  .slabel { font-family: var(--font-mono); font-size: 10px; fill: var(--text-soft); }
+  .slabel.reg { fill: var(--text); font-weight: 600; }
+  .netkey { display: inline-flex; align-items: center; gap: 6px; }
+  .netkey .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .netkey .dot.act { background: var(--up); }
+  .netkey .dot.rep { background: var(--down); }
+  .netkey .dot.tgt { background: var(--accent); }
+
+  /* research: parallel agent lanes */
+  .lanes { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+  .lane {
+    border: 1px solid var(--border); border-radius: 11px; background: var(--surface-soft);
+    padding: 12px 13px; position: relative; overflow: hidden;
+  }
+  .lane.lead { border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); box-shadow: 0 0 0 1px var(--accent-soft); }
+  .lane-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .lane-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .lane-dot.busy { animation: blink 1.1s ease-in-out infinite; }
+  @keyframes blink { 50% { opacity: .3; } }
+  .lane-title { font-family: var(--font-mono); font-size: 12px; color: var(--text); font-weight: 500; }
+  .lane-title span { color: var(--muted); }
+  .tools { display: grid; gap: 4px; }
+  .tool {
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--muted);
+    display: flex; align-items: center; gap: 7px; padding: 2px 0;
+    transition: color .2s ease;
+  }
+  .tool::before { content: ""; width: 5px; height: 5px; border-radius: 1px; background: var(--border-strong); transition: background .2s ease, transform .2s ease; }
+  .tool.done { color: var(--text-soft); }
+  .tool.done::before { background: var(--ok); }
+  .tool.active { color: var(--accent-text); font-weight: 600; }
+  .tool.active::before { background: var(--accent); transform: scale(1.5); }
+  .tool.submit.active { color: var(--accent-text); }
+  .sema {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 2px;
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--text-soft);
+    background: var(--surface-sunk); border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px;
+  }
+  .sema b { color: var(--accent-text); }
+  .authsplit { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; max-width: 560px; }
+  .authcard { border: 1px solid var(--border); border-radius: 10px; padding: 11px 13px; background: var(--surface-soft); }
+  .authcard .h { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; margin-bottom: 4px; }
+  .authcard.sub .h { color: var(--accent-text); }
+  .authcard.api .h { color: var(--down); }
+  .authcard .d { font-size: 12.5px; color: var(--text-soft); }
+
+  /* verify: resolve gate */
+  .gate { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pmidchip {
+    font-family: var(--font-mono); font-size: 12px; padding: 4px 9px; border-radius: 7px;
+    display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border);
+  }
+  .pmidchip .ic { font-weight: 700; }
+  .pmidchip.ok { background: var(--ok-soft); color: var(--ok); border-color: color-mix(in srgb, var(--ok) 26%, transparent); }
+  .pmidchip.bad { background: var(--bad-soft); color: var(--bad); border-color: color-mix(in srgb, var(--bad) 26%, transparent); }
+  .pmidchip.gap { background: var(--gap-soft); color: var(--gap); border-color: var(--border); }
+
+  /* batch: collector */
+  .batch-flow { display: grid; grid-template-columns: auto auto auto; gap: 14px; align-items: center; max-width: 560px; }
+  .stack { display: grid; gap: 5px; }
+  .stack .b {
+    font-family: var(--font-mono); font-size: 11px; color: var(--text-soft);
+    background: var(--surface-soft); border: 1px solid var(--border); border-radius: 7px; padding: 6px 10px;
+  }
+  .batch-arrow { color: var(--muted); font-size: 20px; text-align: center; }
+  .batch-box {
+    border: 1.5px solid var(--accent); background: var(--accent-soft); color: var(--accent-text);
+    border-radius: 10px; padding: 12px 14px; text-align: center; font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  }
+
+  /* report card (the payoff) */
+  .report {
+    border: 1px solid var(--border-strong); border-radius: 14px; overflow: hidden;
+    background: var(--surface); box-shadow: var(--shadow); max-width: 640px;
+  }
+  .report-head { padding: 16px 18px; background: var(--surface-soft); border-bottom: 1px solid var(--border); }
+  .report-kicker { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+  .prog-badge { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: #fff; background: var(--accent); border-radius: 6px; padding: 3px 8px; }
+  :root[data-theme="dark"] .prog-badge { color: #04110f; }
+  .path-chip { font-family: var(--font-mono); font-size: 11px; color: var(--text-soft); background: var(--surface-sunk); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; }
+  .report-title { font-family: var(--font-serif); font-weight: 600; font-size: 20px; line-height: 1.2; margin: 0; }
+  .report-lead { font-size: 13.5px; color: var(--text-soft); margin: 8px 0 0; text-wrap: pretty; }
+
+  .module-row { padding: 14px 18px; border-bottom: 1px solid var(--border); }
+  .module-row:last-child { border-bottom: 0; }
+  .module-top { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; margin-bottom: 8px; }
+  .status {
+    font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; }
+  .status.ok { background: var(--ok-soft); color: var(--ok); } .status.ok::before { background: var(--ok); }
+  .status.bad { background: var(--bad-soft); color: var(--bad); } .status.bad::before { background: var(--bad); }
+  .status.gap { background: var(--gap-soft); color: var(--gap); } .status.gap::before { background: var(--gap); }
+  .module-name { font-weight: 600; font-size: 14.5px; color: var(--text); }
+  .module-genes { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+  .gene { font-family: var(--font-mono); font-size: 11.5px; color: var(--accent-text); background: var(--accent-soft); border-radius: 5px; padding: 1px 6px; }
+  .cites { display: flex; flex-wrap: wrap; gap: 7px; }
+  .cite {
+    font-family: var(--font-mono); font-size: 12px; cursor: pointer;
+    border: 1px solid var(--border-strong); background: var(--surface); color: var(--text-soft);
+    border-radius: 7px; padding: 4px 9px; display: inline-flex; align-items: center; gap: 6px;
+    transition: border-color .12s ease, color .12s ease, background .12s ease;
+  }
+  .cite:hover { border-color: var(--accent); color: var(--accent-text); background: var(--accent-soft); }
+  .cite .link-ic { opacity: .55; }
+  .cite.open { border-color: var(--accent); color: var(--accent-text); background: var(--accent-soft); }
+  .cite-detail {
+    margin-top: 9px; border-left: 2px solid var(--accent); background: var(--surface-soft);
+    border-radius: 0 8px 8px 0; padding: 10px 13px; font-size: 13px; color: var(--text-soft);
+    display: none;
+  }
+  .cite-detail.show { display: block; animation: fadein .25s ease; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+  .cite-detail .t { color: var(--text); font-weight: 550; font-style: italic; font-family: var(--font-serif); font-size: 14.5px; }
+  .cite-detail .meta { font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); margin: 5px 0 8px; }
+  .cite-detail .links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .cite-detail .links a {
+    font-family: var(--font-mono); font-size: 12px; text-decoration: none; color: var(--accent-text);
+    border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent); border-radius: 6px; padding: 3px 9px;
+    display: inline-flex; align-items: center; gap: 5px; background: var(--surface);
+  }
+  .cite-detail .links a:hover { background: var(--accent-soft); }
+
+  .honesty { padding: 13px 18px; background: var(--surface-soft); }
+  .honesty + .honesty { border-top: 1px solid var(--border); }
+  .honesty-top { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; }
+  .honesty p { margin: 0; font-size: 13px; color: var(--text-soft); }
+  .honesty .cite { margin-top: 8px; }
+
+  /* ---------------------------------------------------------------- legend / footer */
+  .legend { border-top: 1px solid var(--border); margin-top: 26px; padding: 34px 0 12px; }
+  .legend-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px 34px; }
+  .legend-block h3 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; font-weight: 600; }
+  .legend-item { display: flex; align-items: baseline; gap: 10px; font-size: 13.5px; color: var(--text-soft); margin-bottom: 8px; }
+  .legend-item .sw { width: 11px; height: 11px; border-radius: 3px; flex: 0 0 11px; position: relative; top: 1px; }
+  .legend-item .tag { font-family: var(--font-mono); font-size: 12px; color: var(--text); flex: 0 0 auto; }
+  .legend-item b { color: var(--text); font-weight: 600; }
+
+  .provenance {
+    margin-top: 26px; padding: 16px 0 80px; border-top: 1px solid var(--border);
+    font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center;
+  }
+  .provenance .mono { font-family: var(--font-mono); color: var(--text-soft); }
+  .provenance .ok { color: var(--ok); font-weight: 600; }
+
+  /* ---------------------------------------------------------------- responsive */
+  @media (max-width: 680px) {
+    :root { --rail-w: 40px; }
+    .node { width: 36px; height: 36px; flex-basis: 36px; font-size: 11px; }
+    .card { padding: 18px 16px 20px; }
+    .masthead { padding: 48px 0 20px; }
+    .reg-split, .authsplit, .batch-flow, .inject-grid { grid-template-columns: 1fr; }
+    .batch-arrow { transform: rotate(90deg); }
+    .p10 { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pulse, .lane-dot.busy { animation: none; }
+    .pulse { display: none; }
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+
+<div class="controls">
+  <div class="controls-inner">
+    <button class="btn btn-primary" id="tourBtn"><span class="play-glyph">▶</span>&nbsp;Follow Program 10</button>
+    <button class="btn" id="prevBtn" disabled>← Prev</button>
+    <button class="btn" id="nextBtn" disabled>Next →</button>
+    <span class="tourstate" id="tourState">step <b id="stepNum">1</b> / 6 · <span id="stepName">input</span></span>
+    <span class="spacer"></span>
+    <button class="btn" id="resetBtn" style="display:none">Reset</button>
+    <label class="toggle" id="themeToggle"><span id="themeGlyph">◐</span> <span id="themeLabel">Dark</span></label>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="eyebrow">Pipeline architecture</div>
+    <h1>Gene&nbsp;Program&nbsp;Interpreter</h1>
+    <p class="lede">A tissue-agnostic pipeline that turns weighted gene programs into biological interpretation — where every claim links to a <b>real, verified citation</b>, never a fabricated one.</p>
+    <div class="example-note">
+      <span>Walkthrough grounded in a real run:</span>
+      <span class="mono">mouse hepatocyte Perturb-seq</span>
+      <span class="dotsep"></span>
+      <span class="mono">Program 10</span>
+      <span class="dotsep"></span>
+      <span>press <b>Follow Program 10</b> to trace one program end-to-end.</span>
+    </div>
+  </header>
+
+  <section class="pipeline" id="pipeline">
+
+    <!-- 01 · CONTEXT & REGULATOR INJECTION (weighted program + declared biology) -->
+    <div class="stage hl" data-i="0" id="s0">
+      <div class="rail">
+        <button class="node" data-jump="0" aria-label="stage 1">01</button>
+        <div class="conn"><span class="pulse"></span><span class="pulse"></span><span class="pulse"></span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="exec-tag">input · executor ④</span>
+          <span class="hl-badge">Highlight</span>
+          <h2 class="stage-title">Context &amp; regulator injection</h2>
+        </div>
+        <p class="module">gene_loading.csv · research/bundle.py · gpi/context_profile.py</p>
+        <p class="desc">One weighted gene list per program — from cNMF / NMF / Perturb-seq — is packaged into a self-contained <b>research brief</b>: its marker genes framed with a structured <b>ContextProfile</b>, the high-leverage <b>context_terms</b> that define normal cell function, and its <b>activating / repressing</b> perturbation regulators. <b>Capturing biological context for real data;</b> this brief is the <b>only</b> thing each research agent sees.</p>
+        <div class="viz">
+          <div class="inject-grid">
+            <div class="inject-genes">
+              <div class="brief-label">weighted program · top genes (of 300)</div>
+              <div class="matrix" id="matrix"></div>
+            </div>
+            <div class="brief">
+              <div class="brief-head"><span>program_bundles/<span class="id">P10</span>.json</span><span>research brief</span></div>
+              <div class="brief-sec">
+                <div class="brief-label">ContextProfile</div>
+                <div class="fieldrow">
+                  <span><span class="k">organism</span> <span class="v">mouse</span></span>
+                  <span><span class="k">tissue</span> <span class="v">liver</span></span>
+                  <span><span class="k">cell type</span> <span class="v">hepatocyte</span></span>
+                  <span><span class="k">conditions</span> <span class="v">aging · MASLD</span></span>
+                </div>
+              </div>
+              <div class="brief-sec">
+                <div class="brief-label">context_terms — normal cell-type function</div>
+                <div class="chips">
+                  <span class="chip term">metabolic zonation</span>
+                  <span class="chip term">xenobiotic &amp; drug metabolism</span>
+                  <span class="chip term">bile-acid metabolism</span>
+                  <span class="chip term">gluconeogenesis &amp; glycogen</span>
+                  <span class="chip term">nitrogen &amp; urea metabolism</span>
+                  <span class="chip term">oxidative / mitochondrial</span>
+                  <span class="chip term">membrane transport &amp; SLCs</span>
+                  <span class="chip term">lipid metabolism</span>
+                </div>
+              </div>
+              <div class="brief-sec">
+                <div class="brief-label">perturbation regulators (Perturb-seq)</div>
+                <div class="reg-split">
+                  <div>
+                    <div class="rl a">↑ activating</div>
+                    <div class="chips">
+                      <span class="chip up">Insig1</span><span class="chip up">Fgfr4</span><span class="chip up">Trib1</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="rl r">↓ repressing</div>
+                    <div class="chips">
+                      <span class="chip down">Dgat2</span><span class="chip down">Scap</span><span class="chip down">Mlxipl</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="viz-cap"><span class="chip-mono">context_terms</span> reach the agent verbatim &amp; fold into the PubMed keyword query</div>
+        </div>
+        <div class="p10">
+          <span class="p10-tag">P10</span>
+          <div class="p10-body">A 300-gene program led by <span class="mono">Rhbg, Glul, Cyp2e1, Axin2</span> — raw loadings, now framed as a <b>mouse hepatocyte</b> program an agent can actually research.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 · STRING EVIDENCE COLLECTION (enrichment + interaction network) -->
+    <div class="stage" data-i="1" id="s1">
+      <div class="rail">
+        <button class="node" data-jump="1" aria-label="stage 2">02</button>
+        <div class="conn"><span class="pulse"></span><span class="pulse"></span><span class="pulse"></span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="exec-tag">executor ④ · deterministic</span>
+          <h2 class="stage-title">STRING evidence collection</h2>
+        </div>
+        <p class="module">gpi/enrichment.py · gpi/string_api.py</p>
+        <p class="desc">Before any model sees the program, the pipeline gathers <b>conventional STRING evidence</b>: <b>GO &amp; KEGG functional enrichment</b> over the marker genes, and the <b>protein–protein interaction network</b> that links each perturbation regulator to its confidence-scored targets. Bundled into the brief, this evidence anchors the literature search and the final annotation.</p>
+        <div class="viz">
+          <div class="brief-label" style="margin-bottom:8px">STRING functional enrichment — GO process &amp; KEGG pathways</div>
+          <div class="chips" style="margin-bottom:18px">
+            <span class="chip enr"><span class="cat go">GO</span>fatty-acid metabolic process</span>
+            <span class="chip enr"><span class="cat go">GO</span>xenobiotic metabolic process</span>
+            <span class="chip enr"><span class="cat kegg">KEGG</span>drug metabolism — CYP450</span>
+            <span class="chip enr"><span class="cat kegg">KEGG</span>retinol metabolism</span>
+            <span class="chip enr"><span class="cat go">GO</span>steroid metabolic process</span>
+          </div>
+          <div class="brief-label" style="margin-bottom:8px">STRING interaction network — regulator → target, confidence-scored</div>
+          <div class="stringnet" id="stringnet"></div>
+          <div class="viz-cap">
+            <span class="netkey"><span class="dot act"></span>activating</span>
+            <span class="netkey"><span class="dot rep"></span>repressing regulator</span>
+            <span class="netkey"><span class="dot tgt"></span>target gene</span>
+            <span class="chip-mono">edge width ∝ STRING confidence (0–1000)</span>
+          </div>
+        </div>
+        <div class="p10">
+          <span class="p10-tag">P10</span>
+          <div class="p10-body">STRING ties P10's lipid-metabolism regulators to a shared <span class="mono">Ppara</span> / cholesterol-synthesis hub — real associations (scores 413–941), not guesses.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 · PARALLEL LITERATURE RESEARCH -->
+    <div class="stage hl" data-i="2" id="s2">
+      <div class="rail">
+        <button class="node" data-jump="2" aria-label="stage 3">03</button>
+        <div class="conn"><span class="pulse"></span><span class="pulse"></span><span class="pulse"></span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="exec-tag">executor ② · Agent SDK</span>
+          <span class="hl-badge">Highlight</span>
+          <h2 class="stage-title">Parallel literature research</h2>
+        </div>
+        <p class="module">research/research_parallel.py · research/literature.py</p>
+        <p class="desc">One isolated <b>Claude Agent-SDK session per program</b>, fanned out under a Python <b>asyncio&nbsp;Semaphore</b> — there is no manager agent. Each session is sandboxed to see only its own brief and queries <b>PubMed, OpenAlex &amp; Crossref</b> through an in-process literature server. <b>The agent decides every search;</b> deterministic code never researches on its own.</p>
+        <div class="viz">
+          <div class="lanes" id="lanes"></div>
+          <div class="sema">Python controls fan-out · <b>asyncio.Semaphore(k)</b> · k = 3–5</div>
+          <div class="viz-cap">
+            <span class="chip-mono">Claude Agent SDK</span>
+            <span class="chip-mono">in-process MCP: PubMed · OpenAlex · Crossref</span>
+            <span class="chip-mono">sandboxed · Read-only</span>
+            <span class="chip-mono">Claude.ai subscription</span>
+          </div>
+        </div>
+        <div class="p10">
+          <span class="p10-tag">P10</span>
+          <div class="p10-body">P10's agent ran <b>31 turns</b>, searched zonation / ammonia-transport / xenobiotic literature, and submitted <b>3 candidate mechanisms</b> with <span class="mono">30</span> attached papers — for <span class="mono">$0.46</span>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 · VERIFY -->
+    <div class="stage" data-i="3" id="s3">
+      <div class="rail">
+        <button class="node" data-jump="3" aria-label="stage 4">04</button>
+        <div class="conn"><span class="pulse"></span><span class="pulse"></span><span class="pulse"></span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="exec-tag">executor ④ · deterministic</span>
+          <h2 class="stage-title">Deterministic verification</h2>
+        </div>
+        <p class="module">research/verify.py</p>
+        <p class="desc">Before anything is shown, <b>every PMID and DOI the agents returned is resolved</b> against CrossRef and NCBI, checked for retraction, and de-duplicated. Identifiers that don't resolve are dropped and the run degrades honestly — the pipeline never invents an identifier to fill a gap.</p>
+        <div class="viz">
+          <div class="gate">
+            <span class="pmidchip ok"><span class="ic">✓</span> PMID 29059455</span>
+            <span class="pmidchip ok"><span class="ic">✓</span> PMID 26655896</span>
+            <span class="pmidchip ok"><span class="ic">✓</span> DOI 10.1016/j.stem.2021.05.013</span>
+            <span class="pmidchip ok"><span class="ic">✓</span> PMID 39052834</span>
+            <span class="pmidchip bad"><span class="ic">⚠</span> PMID 31866224 · contradicts</span>
+            <span class="pmidchip gap"><span class="ic">○</span> Tbx3 · no paper</span>
+          </div>
+          <div class="viz-cap"><span class="chip-mono">CrossRef + NCBI</span> resolvability · retraction · dedup</div>
+        </div>
+        <div class="p10">
+          <span class="p10-tag">P10</span>
+          <div class="p10-body"><b>30 / 30</b> identifiers resolved · <b>0</b> retracted. One paper is kept precisely because it <b>disagrees</b>; six genes are logged as <b>gaps</b>, not glossed over.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 · BATCH ANNOTATION -->
+    <div class="stage hl" data-i="4" id="s4">
+      <div class="rail">
+        <button class="node" data-jump="4" aria-label="stage 5">05</button>
+        <div class="conn"><span class="pulse"></span><span class="pulse"></span><span class="pulse"></span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="exec-tag">executor ③ · Anthropic Batch</span>
+          <span class="hl-badge">Highlight</span>
+          <h2 class="stage-title">Batch annotation &amp; synthesis</h2>
+        </div>
+        <p class="module">gpi/evidence_context.py · gpi/anthropic_batch.py</p>
+        <p class="desc">Verified evidence is folded back into a per-program prompt and synthesized through the <b>Anthropic Batch API</b> — functional modules, a lead sentence, and a cross-program label. Research bills the <b>subscription</b>; batch synthesis bills <b>API credit</b> — a clean auth split by executor.</p>
+        <div class="viz">
+          <div class="batch-flow">
+            <div class="stack">
+              <div class="b">P10 · brief + evidence</div>
+              <div class="b">P22 · brief + evidence</div>
+              <div class="b">… per program</div>
+            </div>
+            <div class="batch-arrow">→</div>
+            <div class="batch-box">Anthropic&nbsp;Batch<br />one request · many programs</div>
+          </div>
+          <div class="authsplit">
+            <div class="authcard sub"><div class="h">② research → subscription</div><div class="d">Agent-SDK CLI on Claude.ai; API key withheld.</div></div>
+            <div class="authcard api"><div class="h">③ batch → API credit</div><div class="d">Batch synthesis on <span style="font-family:var(--font-mono)">ANTHROPIC_API_KEY</span>.</div></div>
+          </div>
+        </div>
+        <div class="p10">
+          <span class="p10-tag">P10</span>
+          <div class="p10-body">Synthesis names the program: <b>"Pericentral Hepatocyte Zonation &amp; Detoxification"</b> — a label chosen across programs, not by P10's agent alone.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 · ONE-CLICK REPORT -->
+    <div class="stage hl" data-i="5" id="s5">
+      <div class="rail">
+        <button class="node" data-jump="5" aria-label="stage 6">06</button>
+        <div class="conn"><span class="pulse"></span><span class="pulse"></span><span class="pulse"></span></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="exec-tag">executor ④ · deterministic</span>
+          <span class="hl-badge">Highlight</span>
+          <h2 class="stage-title">One-click evidence report</h2>
+        </div>
+        <p class="module">gpi/html_report.py → report.html</p>
+        <p class="desc">A single interactive HTML report. Each functional module carries an <b>evidence-status colour</b>, and every supporting claim is <b>one click from the resolvable paper</b> — PMID, DOI, out to PubMed. Disagreement and gaps are shown, not hidden. <span style="color:var(--muted)">Click any citation below.</span></p>
+        <div class="viz">
+          <div class="report">
+            <div class="report-head">
+              <div class="report-kicker">
+                <span class="prog-badge">Program 10</span>
+                <span class="path-chip">STRING top pathway · drug metabolism (CYP450)</span>
+              </div>
+              <h3 class="report-title">Pericentral Hepatocyte Zonation &amp; Detoxification</h3>
+              <p class="report-lead">The pericentral (zone 3) compartment — Wnt/β-catenin zonation, ammonia detoxification via glutamine synthesis, and pericentral xenobiotic metabolism.</p>
+            </div>
+
+            <div class="module-row">
+              <div class="module-top">
+                <span class="status ok">supported</span>
+                <span class="module-name">Pericentral zonation via Wnt/β-catenin</span>
+              </div>
+              <div class="module-genes"><span class="gene">Glul</span><span class="gene">Axin2</span><span class="gene">Cyp2e1</span><span class="gene">Cyp1a2</span><span class="gene">Tbx3</span></div>
+              <div class="cites" data-cites></div>
+            </div>
+
+            <div class="module-row">
+              <div class="module-top">
+                <span class="status ok">supported</span>
+                <span class="module-name">Pericentral ammonia detoxification &amp; nitrogen metabolism</span>
+              </div>
+              <div class="module-genes"><span class="gene">Glul</span><span class="gene">Rhbg</span><span class="gene">Oat</span><span class="gene">Slc1a2</span></div>
+              <div class="cites" data-cites></div>
+            </div>
+
+            <div class="module-row">
+              <div class="module-top">
+                <span class="status ok">supported</span>
+                <span class="module-name">Xenobiotic &amp; drug metabolism + hepatic uptake transport</span>
+              </div>
+              <div class="module-genes"><span class="gene">Cyp2e1</span><span class="gene">Gstm2</span><span class="gene">Slc22a1</span><span class="gene">Slco1b2</span></div>
+              <div class="cites" data-cites></div>
+            </div>
+
+            <div class="honesty">
+              <div class="honesty-top"><span class="status bad">contradictory</span></div>
+              <p>An AXIN2⁺ lineage-tracing study argues pericentral hepatocytes contribute little to homeostatic turnover — challenging the pericentral stem-cell hypothesis. Surfaced, not suppressed.</p>
+              <div class="cites" data-cites-contra></div>
+            </div>
+            <div class="honesty">
+              <div class="honesty-top"><span class="status gap">evidence gap</span></div>
+              <p>No hepatocyte-specific functional papers were retrieved for <span style="font-family:var(--font-mono);font-size:12.5px">Tbx3, Lhpp, Gulo, Lect2</span> — recorded as open questions.</p>
+            </div>
+          </div>
+          <div class="viz-cap"><span class="chip-mono">report.html</span> every claim → resolvable PMID / DOI · supported · partial · contradictory · missing</div>
+        </div>
+        <div class="p10">
+          <span class="p10-tag">P10</span>
+          <div class="p10-body">From 300 anonymous genes to a named, colour-graded interpretation where a collaborator reaches the primary literature in <b>one click</b>. That is the whole point.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ---------------------------------------------------------------- legend -->
+  <section class="legend">
+    <div class="legend-grid">
+      <div class="legend-block">
+        <h3>Executors — who runs each step</h3>
+        <div class="legend-item"><span class="tag">②</span><span><b>Research agents.</b> Claude Agent SDK, one isolated session per program, real-time, MCP tool-using.</span></div>
+        <div class="legend-item"><span class="tag">③</span><span><b>Anthropic Batch.</b> Batched per-program LLM synthesis — annotation, labels, themes.</span></div>
+        <div class="legend-item"><span class="tag">④</span><span><b>Deterministic.</b> Parsing, bundling, citation verification, HTML render — no model.</span></div>
+      </div>
+      <div class="legend-block">
+        <h3>Evidence status</h3>
+        <div class="legend-item"><span class="sw" style="background:var(--ok)"></span><span><b>Supported</b> — mechanism backed by resolvable papers.</span></div>
+        <div class="legend-item"><span class="sw" style="background:var(--warn)"></span><span><b>Partial</b> — some support, some gaps.</span></div>
+        <div class="legend-item"><span class="sw" style="background:var(--bad)"></span><span><b>Contradictory</b> — literature disagrees; shown deliberately.</span></div>
+        <div class="legend-item"><span class="sw" style="background:var(--gap)"></span><span><b>Missing</b> — no paper found; logged as a gap.</span></div>
+      </div>
+      <div class="legend-block">
+        <h3>Regulators</h3>
+        <div class="legend-item"><span class="sw" style="background:var(--up)"></span><span><b>↑ Activating</b> perturbation regulators.</span></div>
+        <div class="legend-item"><span class="sw" style="background:var(--down)"></span><span><b>↓ Repressing</b> perturbation regulators.</span></div>
+        <div class="legend-item"><span class="sw" style="background:var(--accent)"></span><span><b>context_terms</b> — normal cell-type function vocabulary.</span></div>
+      </div>
+    </div>
+    <div class="provenance">
+      <span>Worked example:</span>
+      <span class="mono">runs/hepatocyte_p10_p22</span>
+      <span class="dotsep"></span>
+      <span class="mono">claude-sonnet</span>
+      <span class="dotsep"></span>
+      <span class="ok">30 / 30 citations resolved</span>
+      <span class="dotsep"></span>
+      <span>0 retracted · 0 fabricated</span>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* -------------------------------------------------- theme */
+    var root = document.documentElement;
+    var themeToggle = document.getElementById("themeToggle");
+    var themeLabel = document.getElementById("themeLabel");
+    function applyTheme(t) {
+      root.setAttribute("data-theme", t);
+      themeLabel.textContent = t === "dark" ? "Light" : "Dark";
+      try { localStorage.setItem("gpi-theme", t); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem("gpi-theme"); } catch (e) {}
+    applyTheme(saved || "dark");
+    themeToggle.addEventListener("click", function () {
+      applyTheme(root.getAttribute("data-theme") === "dark" ? "light" : "dark");
+    });
+
+    /* -------------------------------------------------- input loading matrix */
+    var genes = [
+      ["Rhbg", 1.0], ["Lhpp", 0.86], ["Gulo", 0.78],
+      ["Glul", 0.72], ["Lect2", 0.64], ["Oat", 0.58], ["Cyp2e1", 0.5]
+    ];
+    var mx = document.getElementById("matrix");
+    genes.forEach(function (g, i) {
+      var row = document.createElement("div");
+      row.className = "matrix-row";
+      var name = document.createElement("span");
+      name.className = "g"; name.textContent = g[0];
+      var track = document.createElement("div");
+      var bar = document.createElement("div");
+      bar.className = "bar" + (i > 3 ? " dim" : "");
+      bar.style.width = Math.round(g[1] * 100) + "%";
+      track.appendChild(bar);
+      row.appendChild(name); row.appendChild(track);
+      mx.appendChild(row);
+    });
+
+    /* -------------------------------------------------- STRING interaction network
+       Real regulator→target edges (+STRING confidence) from Program 10's
+       regulator_validation_by_condition. Deterministic layered layout, no physics. */
+    (function buildStringNet() {
+      var host = document.getElementById("stringnet");
+      if (!host) return;
+      var W = 560, H = 300;
+      var regX = 76;
+      var regs = [
+        { id: "Insig1", cls: "act", y: 56 },
+        { id: "Fgfr4", cls: "act", y: 104 },
+        { id: "Scap", cls: "rep", y: 158 },
+        { id: "Dgat2", cls: "rep", y: 212 },
+        { id: "Mlxipl", cls: "rep", y: 262 }
+      ];
+      var edges = [
+        ["Insig1", "Dhcr24", 826], ["Insig1", "Msmo1", 768], ["Insig1", "Ppara", 491],
+        ["Fgfr4", "Cyp7a1", 810], ["Fgfr4", "Cyp27a1", 588],
+        ["Scap", "Msmo1", 490], ["Scap", "Dhcr24", 460], ["Scap", "Cyp7a1", 456], ["Scap", "Ppara", 427], ["Scap", "Cyp27a1", 413],
+        ["Dgat2", "Plpp3", 941], ["Dgat2", "Acsl1", 803], ["Dgat2", "Ppara", 726], ["Dgat2", "Acox1", 676],
+        ["Mlxipl", "Ppara", 742], ["Mlxipl", "Acox1", 545], ["Mlxipl", "Cyp7a1", 448]
+      ];
+      var regY = {}; regs.forEach(function (r) { regY[r.id] = r.y; });
+      var tgt = {};
+      edges.forEach(function (e) {
+        if (!tgt[e[1]]) tgt[e[1]] = { id: e[1], ys: [], deg: 0 };
+        tgt[e[1]].ys.push(regY[e[0]]); tgt[e[1]].deg++;
+      });
+      var targets = Object.keys(tgt).map(function (k) {
+        var o = tgt[k];
+        o.pref = o.ys.reduce(function (a, b) { return a + b; }, 0) / o.ys.length;
+        return o;
+      });
+      targets.sort(function (a, b) { return a.pref - b.pref; });
+      var tX = 404, top = 50, bot = 272, n = targets.length;
+      var tPos = {};
+      targets.forEach(function (o, i) {
+        o.x = tX; o.y = top + (bot - top) * (i / (n - 1));
+        tPos[o.id] = o;
+      });
+      var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="STRING regulator-to-target interaction network for Program 10">';
+      edges.forEach(function (e) {
+        var ay = regY[e[0]], b = tPos[e[1]], s = e[2];
+        var w = (0.5 + s / 300).toFixed(2), op = (0.22 + s / 1500).toFixed(2);
+        var mx = (regX + b.x) / 2;
+        svg += '<path class="sedge" d="M' + regX + ' ' + ay + ' C' + mx + ' ' + ay + ' ' + mx + ' ' + b.y + ' ' + b.x + ' ' + b.y + '" stroke-width="' + w + '" stroke-opacity="' + op + '"/>';
+      });
+      targets.forEach(function (o) {
+        var r = 4 + o.deg;
+        svg += '<circle class="snode tgt" cx="' + o.x + '" cy="' + o.y.toFixed(1) + '" r="' + r + '"/>';
+        svg += '<text class="slabel" x="' + (o.x + r + 5) + '" y="' + (o.y + 3.5).toFixed(1) + '">' + o.id + '</text>';
+      });
+      regs.forEach(function (r) {
+        svg += '<circle class="snode ' + r.cls + '" cx="' + regX + '" cy="' + r.y + '" r="8"/>';
+        svg += '<text class="slabel reg" x="' + (regX - 13) + '" y="' + (r.y + 3.5) + '" text-anchor="end">' + r.id + '</text>';
+      });
+      svg += "</svg>";
+      host.innerHTML = svg;
+    })();
+
+    /* -------------------------------------------------- parallel research lanes */
+    var TOOLS = ["search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi", "submit_result"];
+    var laneDefs = [
+      { id: "Program 10", lead: true, phase: 0 },
+      { id: "Program 22", lead: false, phase: 2 },
+      { id: "Program …", lead: false, phase: 1 }
+    ];
+    var lanesEl = document.getElementById("lanes");
+    var laneNodes = [];
+    laneDefs.forEach(function (d) {
+      var lane = document.createElement("div");
+      lane.className = "lane" + (d.lead ? " lead" : "");
+      var head = document.createElement("div");
+      head.className = "lane-head";
+      head.innerHTML = '<span class="lane-dot busy"></span><span class="lane-title">agent · <span>' + d.id + "</span></span>";
+      var tools = document.createElement("div");
+      tools.className = "tools";
+      var toolEls = TOOLS.map(function (t) {
+        var el = document.createElement("div");
+        el.className = "tool" + (t === "submit_result" ? " submit" : "");
+        el.textContent = t + (t === "submit_result" ? " ⤒" : "()");
+        tools.appendChild(el);
+        return el;
+      });
+      lane.appendChild(head); lane.appendChild(tools);
+      lanesEl.appendChild(lane);
+      laneNodes.push({ def: d, toolEls: toolEls, phase: d.phase });
+    });
+    function paintLane(l) {
+      l.toolEls.forEach(function (el, i) {
+        el.classList.toggle("done", i < l.phase);
+        el.classList.toggle("active", i === l.phase);
+      });
+    }
+    laneNodes.forEach(paintLane);
+    if (!reduced) {
+      setInterval(function () {
+        laneNodes.forEach(function (l) {
+          l.phase = (l.phase + 1) % (TOOLS.length + 1); // +1 = brief idle gap
+          if (l.phase > TOOLS.length - 1) { paintLane({ toolEls: l.toolEls, phase: -1 }); return; }
+          paintLane(l);
+        });
+      }, 1400);
+    }
+
+    /* -------------------------------------------------- citations (real, verified P10 evidence) */
+    var CITES = {
+      m1: [
+        { pmid: "29059455", doi: "10.1002/hep.29613", year: 2018, journal: "Hepatology", type: "research", title: "Angiocrine Wnt signaling controls liver growth and metabolic maturation in mice." },
+        { pmid: "26655896", doi: "10.1016/j.celrep.2015.10.049", year: 2015, journal: "Cell Reports", type: "research", title: "The Angiocrine Factor Rspondin3 Is a Key Determinant of Liver Zonation." },
+        { pmid: "34129813", doi: "10.1016/j.stem.2021.05.013", year: 2021, journal: "Cell Stem Cell", type: "research", title: "ZNRF3 and RNF43 cooperate to safeguard metabolic liver zonation and hepatocyte proliferation." }
+      ],
+      m2: [
+        { pmid: "39052834", doi: "10.1073/pnas.2314760121", year: 2024, journal: "PNAS", type: "research", title: "Ammonia transporter RhBG initiates downstream signaling and functional responses by activating NFκB." },
+        { pmid: "14656370", doi: "10.1046/j.0001-6772.2003.01210.x", year: 2003, journal: "Acta Physiol Scand", type: "review", title: "Renal and hepatic expression of the ammonium transporter proteins, Rh B Glycoprotein and Rh C Glycoprotein." }
+      ],
+      m3: [
+        { pmid: "39068198", doi: "10.1038/s41598-024-67192-6", year: 2024, journal: "Sci Reports", type: "research", title: "OCT1 (SLC22A1) transporter kinetics and regulation in primary human hepatocyte 3D spheroids." },
+        { pmid: "38402618", doi: "10.1016/j.stem.2024.01.013", year: 2024, journal: "Cell Stem Cell", type: "research", title: "Region-specific cellular and molecular basis of liver regeneration after acute pericentral injury." }
+      ],
+      contra: [
+        { pmid: "31866224", doi: null, year: 2020, journal: "lineage tracing", type: "contradiction", title: "AXIN2⁺ pericentral hepatocytes show limited contribution to homeostatic turnover and regeneration." }
+      ]
+    };
+    function pubmedUrl(p) { return "https://pubmed.ncbi.nlm.nih.gov/" + p + "/"; }
+    function doiUrl(d) { return "https://doi.org/" + d; }
+
+    function buildCite(c) {
+      var wrap = document.createElement("span");
+      var btn = document.createElement("button");
+      btn.className = "cite";
+      btn.type = "button";
+      btn.innerHTML = "PMID " + c.pmid + ' <span class="link-ic">↗</span>';
+      var detail = document.createElement("div");
+      detail.className = "cite-detail";
+      var links = '<a href="' + pubmedUrl(c.pmid) + '" target="_blank" rel="noopener">PubMed ↗</a>';
+      if (c.doi) links += '<a href="' + doiUrl(c.doi) + '" target="_blank" rel="noopener">DOI ↗</a>';
+      detail.innerHTML =
+        '<div class="t">' + c.title + "</div>" +
+        '<div class="meta">' + c.journal + " · " + c.year + " · " + c.type + " · verified ✓</div>" +
+        '<div class="links">' + links + "</div>";
+      btn.addEventListener("click", function () {
+        var open = detail.classList.toggle("show");
+        btn.classList.toggle("open", open);
+      });
+      wrap.appendChild(btn);
+      wrap.appendChild(detail);
+      return wrap;
+    }
+    var moduleCites = document.querySelectorAll("[data-cites]");
+    ["m1", "m2", "m3"].forEach(function (k, i) {
+      if (!moduleCites[i]) return;
+      CITES[k].forEach(function (c) { moduleCites[i].appendChild(buildCite(c)); });
+    });
+    var contraHost = document.querySelector("[data-cites-contra]");
+    if (contraHost) CITES.contra.forEach(function (c) { contraHost.appendChild(buildCite(c)); });
+
+    /* -------------------------------------------------- walkthrough stepper */
+    var stages = Array.prototype.slice.call(document.querySelectorAll(".stage"));
+    var names = ["context injection", "STRING evidence", "parallel research", "verification", "batch synthesis", "one-click report"];
+    var N = stages.length;
+    var step = -1, playing = false, timer = null;
+
+    var tourBtn = document.getElementById("tourBtn");
+    var prevBtn = document.getElementById("prevBtn");
+    var nextBtn = document.getElementById("nextBtn");
+    var resetBtn = document.getElementById("resetBtn");
+    var stepNum = document.getElementById("stepNum");
+    var stepName = document.getElementById("stepName");
+
+    function render() {
+      stages.forEach(function (s, i) { s.classList.toggle("is-active", i === step); });
+      var touring = step >= 0;
+      document.body.classList.toggle("touring", touring);
+      resetBtn.style.display = touring ? "" : "none";
+      prevBtn.disabled = !touring || step === 0;
+      nextBtn.disabled = !touring || step === N - 1;
+      if (touring) {
+        stepNum.textContent = step + 1;
+        stepName.textContent = names[step];
+      }
+    }
+    function scrollToStage(i) {
+      if (i < 0 || i >= N) return;
+      stages[i].querySelector(".card").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+    }
+    function goTo(i, doScroll) {
+      step = Math.max(0, Math.min(N - 1, i));
+      render();
+      if (doScroll !== false) scrollToStage(step);
+    }
+    function stopPlay() {
+      playing = false;
+      if (timer) { clearTimeout(timer); timer = null; }
+      tourBtn.innerHTML = step >= N - 1 ? '<span class="play-glyph">↺</span>&nbsp;Replay' : '<span class="play-glyph">▶</span>&nbsp;Resume';
+    }
+    function scheduleNext() {
+      if (!playing) return;
+      timer = setTimeout(function () {
+        if (step >= N - 1) { stopPlay(); return; }
+        goTo(step + 1);
+        scheduleNext();
+      }, 3200);
+    }
+    function play() {
+      playing = true;
+      tourBtn.innerHTML = '<span class="play-glyph">❚❚</span>&nbsp;Pause';
+      scheduleNext();
+    }
+    function startTour() {
+      if (step >= N - 1) step = -1;   // replay from top
+      goTo(step < 0 ? 0 : step);
+      play();
+    }
+
+    tourBtn.addEventListener("click", function () {
+      if (playing) { stopPlay(); } else { startTour(); }
+    });
+    nextBtn.addEventListener("click", function () { stopPlay(); goTo(step + 1); });
+    prevBtn.addEventListener("click", function () { stopPlay(); goTo(step - 1); });
+    resetBtn.addEventListener("click", function () {
+      stopPlay(); step = -1; render();
+      tourBtn.innerHTML = '<span class="play-glyph">▶</span>&nbsp;Follow Program 10';
+      window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" });
+    });
+    // click any node to jump to that stage
+    document.querySelectorAll(".node[data-jump]").forEach(function (n) {
+      n.addEventListener("click", function () {
+        stopPlay();
+        goTo(parseInt(n.getAttribute("data-jump"), 10));
+      });
+    });
+    // keyboard: left/right steps the tour when active
+    document.addEventListener("keydown", function (e) {
+      if (step < 0) return;
+      if (e.key === "ArrowRight") { e.preventDefault(); stopPlay(); goTo(step + 1); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); stopPlay(); goTo(step - 1); }
+      else if (e.key === "Escape") { resetBtn.click(); }
+    });
+
+    render();
+  })();
+</script>

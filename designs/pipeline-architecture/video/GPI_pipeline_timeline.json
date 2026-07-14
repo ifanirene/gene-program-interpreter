@@ -1,0 +1,78 @@
+{
+  "fps": 24,
+  "duration": 143.50000000000003,
+  "timeline": [
+    {
+      "id": "opening",
+      "view": "intro_problem",
+      "text": "Every single-cell or Perturb-seq screen hands you the same puzzle: dozens of gene programs, each just a ranked list, none of them labeled. Working out what one program actually does can eat a whole afternoon on PubMed. Enrichment gives you a vague heading; a raw language model gives you a confident guess that sails right past the biology. So we built the Gene Program Interpreter — a Claude Skill that reads your programs the way an expert would, in context, and shows its work.",
+      "index": 0,
+      "start": 0.5833333333333334,
+      "end": 26.833333333333332,
+      "duration": 26.25
+    },
+    {
+      "id": "input",
+      "view": "stage1",
+      "text": "Two inputs go in: your weighted program genes, and any regulators from a Perturb-seq screen.",
+      "index": 1,
+      "start": 27.125,
+      "end": 32.416666666666664,
+      "duration": 5.291666666666667
+    },
+    {
+      "id": "context",
+      "view": "stage2",
+      "text": "First it gives each program an identity — organism, tissue, cell type, your conditions, and what these cells normally do. The perturbed regulators keep their direction, and STRING adds a conventional layer: enrichment, plus an interaction network wiring each regulator to its targets. Now it's a regulatory response in a real system, not a nameless list.",
+      "index": 2,
+      "start": 32.70833333333333,
+      "end": 49.625,
+      "duration": 16.916666666666668
+    },
+    {
+      "id": "research",
+      "view": "stage3",
+      "text": "Here's the engine. For every program, we spin up a separate Claude agent — all in parallel — to dig through the literature. Each one searches PubMed, OpenAlex, and Crossref with its own tools, and only ever sees its own brief. Python runs the fan-out, so a whole screen researches itself at once instead of one program at a time.",
+      "index": 3,
+      "start": 49.916666666666664,
+      "end": 66.375,
+      "duration": 16.458333333333336
+    },
+    {
+      "id": "verification",
+      "view": "stage4",
+      "text": "Then every reference the agents bring back is checked automatically — does it resolve, is it retracted, is it a duplicate. Anything that doesn't hold up is dropped, and disagreements and gaps are kept in plain sight rather than smoothed over.",
+      "index": 4,
+      "start": 66.66666666666667,
+      "end": 78.5,
+      "duration": 11.833333333333334
+    },
+    {
+      "id": "synthesis",
+      "view": "stage5",
+      "text": "Now it all comes together — the verified papers, the context, the genes and regulators, the database evidence — through Anthropic's Batch API, which writes each program up as clean functional modules with a name that fits across the whole set. It's candid, too. Click any claim and the real paper opens in one tap.",
+      "index": 5,
+      "start": 78.79166666666667,
+      "end": 95.70833333333334,
+      "duration": 16.916666666666668
+    },
+    {
+      "id": "report_biology",
+      "view": "program22_report",
+      "text": "And here's a real result. Program 22 comes back as fructose-driven lipogenesis — and the giveaway is its regulator. Mlxipl, or ChREBP, the master carbohydrate-response transcription factor, switches the program on, and the evidence connects it directly to Khk for fructose, Pklr for glycolysis, and Fasn for fat synthesis. So this isn't a vague \"lipid metabolism\" label — it's the fructose-to-fat pathway, pinned down by what actually drives it.",
+      "index": 6,
+      "start": 96.00000000000001,
+      "end": 121.91666666666669,
+      "duration": 25.916666666666668
+    },
+    {
+      "id": "summary",
+      "view": "summary_end",
+      "text": "And the best part is how little it asks of you. A few minutes to set up, and then it runs itself. Describe your biology once — a short context block — and the same Skill handles the whole pipeline without touching code. It works through a whole screen in parallel while you step away. The days you'd spend chasing references become a hands-off pass — so your time goes back to the science, not the searching.",
+      "index": 7,
+      "start": 122.20833333333336,
+      "end": 141.41666666666669,
+      "duration": 19.208333333333336
+    }
+  ]
+}

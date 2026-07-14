@@ -226,9 +226,3 @@ complete module map.
 
 Gene Program Interpreter is open-source software under the OSI-approved
 [Apache License 2.0](LICENSE).
-
-## Provenance
-
-The deterministic front end and HTML renderer are generalized from ProgExplorer and
-standardized on the Anthropic API. Demo fixtures are used only to exercise the pipeline;
-the report screenshots above come from a live demo run with 123 of 123 citations resolved.
