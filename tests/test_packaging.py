@@ -120,6 +120,28 @@ def test_no_shipped_module_references_the_unpackageable_directory() -> None:
     )
 
 
+def test_the_three_version_strings_agree() -> None:
+    """``.claude-plugin/plugin.json`` is what a plugin user's cache is keyed on.
+
+    If it stays at an old version while the code changes, an existing install can keep serving
+    the cached copy — so a shipped fix reaches nobody who already had the plugin. The three
+    declarations must move together.
+    """
+    import json as _json
+    import re as _re
+
+    pyproject = (REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    init = (REPO_ROOT / "gpi" / "__init__.py").read_text(encoding="utf-8")
+    manifest = _json.loads((REPO_ROOT / ".claude-plugin" / "plugin.json").read_text("utf-8"))
+
+    versions = {
+        "pyproject.toml": _re.search(r'(?m)^version = "([^"]+)"', pyproject).group(1),
+        "gpi/__init__.py": _re.search(r'__version__ = "([^"]+)"', init).group(1),
+        ".claude-plugin/plugin.json": manifest["version"],
+    }
+    assert len(set(versions.values())) == 1, f"version strings disagree: {versions}"
+
+
 def test_no_shipped_module_manipulates_sys_path() -> None:
     """A shipped module that edits ``sys.path`` is papering over a packaging problem.
 
