@@ -41,12 +41,9 @@ from pathlib import Path
 from typing import List, Dict, Set, Any, Optional
 from collections import Counter
 
-# Add repo root to sys.path for consistent imports
-current_file = Path(__file__).resolve()
-repo_root = current_file.parents[1]  # pipeline/ -> repo root
-if str(repo_root) not in sys.path:
-    sys.path.append(str(repo_root))
-
+# (No sys.path manipulation. The imports below are relative, so they never needed it — and
+# putting the source tree on sys.path is precisely what let a wheel-missing module resolve in
+# development and fail for every installed user.)
 from .ncbi_api import NcbiClient
 from .harmonizome_api import HarmonizomeClient
 from .progress import emit_step_progress
@@ -62,7 +59,14 @@ from .column_mapper import (
     standardize_regulator_results,
 )
 
+from gpi.log_redaction import install_log_redaction
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# This module runs as its own subprocess and configures the root logger itself, so it does
+# NOT inherit the driver's redaction. httpx logs every request URL at INFO, and the NCBI /
+# STRING calls carry api_key and email in the query string — this is where the key actually
+# leaked into runs/*.log. Install here, at import, before any record can be emitted.
+install_log_redaction()
 logger = logging.getLogger(__name__)
 
 

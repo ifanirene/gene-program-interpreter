@@ -1,8 +1,8 @@
 # Gene Program Interpreter — runnable demo config.
 #
 # Points at the dataset shipped in examples/brain_endothelial_demo: a mouse brain
-# endothelial Perturb-seq screen (cNMF, k=100) targeting vascular signalling
-# regulators (TGF-beta/BMP, Notch, VEGF, mechanotransduction).
+# endothelial Perturb-seq screen (cNMF, k=100) from postnatal brain, targeting
+# vascular signalling regulators.
 #
 # Nothing about brain or endothelium appears in the code — the biology lives
 # entirely in the `context:` block below. To interpret your own dataset, repoint
@@ -13,27 +13,43 @@ context:                       # -> ContextProfile.from_dict
   species_taxid: 10090
   tissue: brain
   cell_type: brain endothelial cell
-  conditions: [CRISPR perturbation]   # goes into the literature query — keep it searchable
-  context_terms:               # normal biology of the cell type — the key research control
-    - blood-brain barrier integrity
+  conditions: [postnatal development]
+
+  # The single highest-leverage control in this file. These terms are OR'd into a
+  # literal PubMed query, so shape them for a search engine, not for a reader:
+  #
+  #   * 1-3 words. A long term is phrase-quoted whole and matches almost nothing.
+  #   * No conjunctions. "tip and stalk cell specification" splits into a bare
+  #     "tip" — a dead, noisy slot — because splitting cannot recover the elided
+  #     head noun. Write the two concepts out, or pick one.
+  #   * US spelling. "signalling" will not phrase-match "signaling".
+  #
+  # `gpi --dry-run` prints the derived keyword_query. Read it before you pay.
+  context_terms:
+    - blood-brain barrier
     - arteriovenous zonation
-    - tight junctions and paracellular permeability
-    - tip and stalk cell specification
-    - angiogenesis and vascular remodelling
-    - TGF-beta and BMP signalling in endothelium
-    - Notch and VEGF signalling
-    - shear-stress mechanotransduction
+    - tight junctions
+    - angiogenesis
+    - tip cells
+    - Notch signaling
+    - VEGF signaling
+    - mechanotransduction
+
   assay: Perturb-seq
   report_dataset_crumb: Mouse brain endothelial Perturb-seq
 
 inputs:
   gene_loading: examples/brain_endothelial_demo/FB_moi15_seq2_loading_gene_k100_top300.csv
   regulators: examples/brain_endothelial_demo/Discovery_FP_moi15_seq2_thresh10_k100_default.csv
-  celltype_enrichment: null    # requires cell_type/program/log2_fc/fdr columns
+  celltype_enrichment: examples/brain_endothelial_demo/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv
 
 output_dir: runs/brain_endothelial_example
 
-programs: [57, 63, 65]         # three artery-specific programs; a cheap first run
+# Three programs with distinct cell-type signals; a cheap first run.
+#   9  — capillary-enriched, but more strongly depleted in arterial types
+#   48 — tip-like, angiogenic
+#   70 — large-artery identity
+programs: [9, 48, 70]
 
 settings:
   n_top_genes: 300
@@ -44,9 +60,11 @@ settings:
 
 research:
   enabled: true
-  concurrency: 4
+  concurrency: 3
   model: claude-sonnet-4-6
   max_turns: 30
+  # PER-PROGRAM cap, not a total. Worst case for this run is 1.0 x 3 programs = $3.00.
+  # Multiply by len(programs) before quoting a number to anyone.
   max_budget_usd: 1.0
   per_program_timeout: 600
 

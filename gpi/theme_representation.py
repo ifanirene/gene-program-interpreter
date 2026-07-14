@@ -55,7 +55,14 @@ import pandas as pd
 from .column_mapper import extract_program_id, standardize_regulator_results
 
 
+from gpi.log_redaction import install_log_redaction
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# This module runs as its own subprocess and configures the root logger itself, so it does
+# NOT inherit the driver's redaction. httpx logs every request URL at INFO, and the NCBI /
+# STRING calls carry api_key and email in the query string — this is where the key actually
+# leaked into runs/*.log. Install here, at import, before any record can be emitted.
+install_log_redaction()
 logger = logging.getLogger(__name__)
 
 FAMILY_COLUMNS = ("assigned_family_id", "recommended_family_id", "family_id")

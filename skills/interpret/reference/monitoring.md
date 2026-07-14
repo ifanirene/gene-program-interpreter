@@ -1,0 +1,177 @@
+# Reference — running and monitoring
+
+The user's single loudest complaint about this tool: *"During the run I cannot see any progress,
+whether it has failed or merely waiting for something to finish… it's still a black box."*
+
+Silence is the bug. A moving clock is the fix.
+
+## Launch — background, always
+
+**Use the Bash tool's `run_in_background: true` parameter.**
+
+```bash
+"${CLAUDE_PLUGIN_ROOT}/bin/gpi" --config runs/<name>.yaml --progress plain \
+  > runs/<name>.launch.log 2>&1
+```
+
+- **Do not** append `&`. The tool parameter does the detaching; a trailing `&` inside an
+  already-backgrounded shell just orphans the process from the handle you need.
+- **Do not** run it in the foreground. Two things break at once:
+  1. You block for 15–25 minutes and cannot poll, cannot report, cannot answer the user.
+  2. **The Bash tool's timeout maxes out at 600 s.** It will `SIGKILL` a *healthy* pipeline
+     mid-research and leave `progress.json` frozen at `status: "running"` forever — which then
+     looks exactly like a hang, and the next agent "diagnoses" a bug that never existed.
+- `--progress plain` gives one clean ASCII line per event in the launch log. Use it — `rich`
+  emits ANSI redraw codes that are unreadable when captured to a file.
+
+## Poll — every 45–60 s, in separate tool calls
+
+You cannot poll from inside the launch call. Each poll is its own tool call.
+
+**Two things to check, every time:**
+
+1. **Is the shell alive?** `BashOutput` on the launch shell's id. New lines = progress; the
+   shell exiting = the run finished (check the exit status).
+2. **What is the pipeline doing?** Read the snapshot.
+
+```bash
+python3 -c '
+import json, pathlib, sys, time
+p = pathlib.Path(sys.argv[1]) / "progress.json"
+if not p.exists():
+    print("no progress.json yet - pipeline still starting"); sys.exit()
+d = json.loads(p.read_text())
+steps = d.get("steps", [])
+done = sum(1 for x in steps if x["status"] == "completed")
+print("status=%s  active=%s  steps=%d/%d  snapshot_age=%.0fs" % (
+    d.get("status"), d.get("active_step") or "-", done, len(steps),
+    time.time() - p.stat().st_mtime))
+if d.get("failed_step"):
+    print("FAILED STEP:", d["failed_step"])
+for x in steps:
+    if x.get("error"):
+        print("  error [%s]: %s" % (x["name"], x["error"]))
+r = d.get("research") or {}
+if r.get("n_programs"):
+    print("research: %s/%s done  cost=$%.2f" % (
+        r.get("n_done"), r["n_programs"], r.get("total_cost_usd") or 0))
+    for a in r.get("agents", []):
+        print("  %s: %s  turns=%s  tool=%s" % (
+            a["program_id"], a["status"], a.get("turns"), a.get("current_tool")))
+' runs/<name>
+```
+
+Tail the raw log when you need detail the snapshot does not carry:
+
+```bash
+tail -n 20 runs/<name>.launch.log
+```
+
+**REPORT EVERY POLL, EVEN WHEN NOTHING CHANGED.** *"Still on research: 2/3 done, P48 on turn 14,
+no change since last check, 6m12s elapsed"* is a **good** report. It tells the user the tool is
+alive, where it is, and that you are watching. Saying nothing for six minutes is the complaint.
+
+## The liveness table — get this exactly right
+
+This is subtle and it is where monitors go wrong.
+
+| Field | Means | How to read it |
+|---|---|---|
+| `updated_at` | last pipeline **event** | Can legitimately sit still for **7+ minutes** during healthy research while an agent thinks between tool calls. **NEVER conclude a hang from this.** |
+| `heartbeat_at` + `progress.json` **mtime** | last snapshot **write** | Advances ~1/s for as long as the process lives. **This — not `updated_at` — is the liveness signal.** |
+| `pid` | the pipeline process | `ps -p <pid>` settles any argument about whether it is alive |
+| `status` | `running` / `done` / `failed` | a `--progress off` run writes no snapshot at all |
+| `failed_step` | which step killed the run | report it verbatim |
+| `steps[].error` | **the actual failure reason** | report it verbatim; do not paraphrase into a guess |
+
+The trap: `updated_at` is the *interesting* field, so it is the one you naturally watch — and it
+is the one that stalls harmlessly. Watch the **mtime**.
+
+## Progress artifacts
+
+Both live in `<output_dir>/`:
+
+| File | What |
+|---|---|
+| `progress.jsonl` | append-only event log — the source of truth, truncated fresh each run |
+| `progress.json` | reduced snapshot, written atomically ~1/s — what you poll |
+| `pipeline_state.json` | durable step state — what a **resume** reads |
+| `../<name>.launch.log` | stdout/stderr of the run itself |
+
+## The nine steps
+
+`string_enrichment` → `gene_summaries` → `bundle` → `research` → `verify` → `theme` →
+`annotate` → `presentation` → `html_report`
+
+**Only `research` is degradable** (`DEGRADABLE_STEPS = {"research"}`). Everything else stops
+the pipeline on failure.
+
+`verify` failing **stops the run, deliberately.** The rule is *never emit an unverified
+citation*. Do not route around it — a report that renders is worth nothing if its citations were
+never checked. Report the failure and let the user decide.
+
+## Failure → action playbook
+
+| Symptom | What it actually is | Action |
+|---|---|---|
+| **Re-ran after a pipeline upgrade, report is byte-identical** | **The resume trap** — see below | `--start-from annotate` |
+| `updated_at` frozen 7 min, **mtime fresh** | a research agent thinking | **Nothing.** Keep polling. This is healthy. |
+| **mtime** frozen > 3 min, `status: running` | the process is genuinely dead | `ps -p <pid>`, read the launch log, then **Gate 4** |
+| `status: running` forever, no process | a foreground launch got SIGKILLed at 600 s | relaunch **in the background**; resume picks up completed steps |
+| `research` step failed | degradable — pipeline continued | report the thinner literature; the run still produced a report |
+| `verify` step failed | **not** degradable — by design | read `error`; do **not** bypass |
+| Report renders but citations look unchecked | the verifier did not run | treat every citation as unverified; do not present them as verified |
+| Only want the HTML re-rendered | — | `--start-from html_report` |
+| Want to skip all spend | — | `--no-research` (literature marked incomplete) |
+
+## The resume trap — this **will** bite
+
+`pipeline_state.py::compute_config_hash` hashes the **config dict**. It does **not** hash the
+prompt templates or the pipeline code.
+
+So after the pipeline is upgraded — new prompts, new annotation logic, a bug fixed — a re-run
+with the **same config** produces the **same hash**. The saved state loads, every step still
+reads `completed`, and the pipeline **skips all of them.** The user sees a report identical to
+the last one, concludes the fix did nothing, and concludes the tool is broken.
+
+```bash
+# Re-run the affected step and everything after it:
+"${CLAUDE_PLUGIN_ROOT}/bin/gpi" --config runs/<name>.yaml --start-from annotate --progress plain
+```
+
+`--force-restart` also works, **but it re-runs research and therefore re-pays for it.** Never
+reach for `--force-restart` without telling the user it costs money again. `--start-from` is
+almost always the right tool — research output is already on disk and still valid.
+
+## Gate 4 — killing a run
+
+**Never kill a running pipeline unless the user asks.** A slow step is not a failed step.
+
+Before **any** destructive action, confirm the alarm against the raw log. The rule, learned the
+hard way:
+
+> **A monitoring bug looks exactly like the incident it falsely reports.**
+
+A previous watcher script fabricated two alarms out of thin air — a `RESEARCH RESTART` from a
+`prev=999` sentinel that guaranteed a spurious first-iteration trigger, and a `STEP ENDED` from
+a shell word-splitting bug in `set -- $st`. Both were bugs in the *watcher*. Acting on either
+would have killed a **healthy** job and dropped the run into a degraded mode for no reason.
+
+So: if your own telemetry is the only evidence of a problem, **your telemetry is the suspect.**
+Check `ps -p <pid>`, check the mtime, read the raw log — *then* ask the user.
+
+## Recovery flags (all real; checked against the argparse)
+
+| Flag | Effect |
+|---|---|
+| `--start-from STEP` | begin at STEP (the resume-trap fix) |
+| `--stop-after STEP` | stop after STEP, inclusive |
+| `--force-restart` | ignore saved state, re-run everything — **re-pays for research** |
+| `--no-research` | skip the research step entirely; no spend; literature marked incomplete |
+| `--deterministic-presentation` | use the deterministic renderer instead of the LLM batch |
+| `--dry-run` | print the resolved plan; execute nothing; **free** |
+| `--progress {auto,rich,plain,off}` | `plain` when captured to a file; `off` writes no snapshot |
+| `--verbose` | debug logging |
+
+There is **no `--programs` flag on a run.** `--programs` selects programs at `--emit-config`
+time only — it goes into the config. To change which programs run, re-emit the config.

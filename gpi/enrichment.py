@@ -70,7 +70,14 @@ from .column_mapper import (
 from .progress import emit_step_progress
 
 
+from gpi.log_redaction import install_log_redaction
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# This module runs as its own subprocess and configures the root logger itself, so it does
+# NOT inherit the driver's redaction. httpx logs every request URL at INFO, and the NCBI /
+# STRING calls carry api_key and email in the query string — this is where the key actually
+# leaked into runs/*.log. Install here, at import, before any record can be emitted.
+install_log_redaction()
 logger = logging.getLogger(__name__)
 
 """
@@ -193,7 +200,8 @@ DEFAULT_STRING_FULL = "string_enrichment_full.csv"
 DEFAULT_STRING_FILTERED = "string_enrichment_filtered_process_kegg.csv"
 
 # ----------------------------- Cell-type summary -----------------------------
-# Thresholds for categorizing cell-type enrichment (FDR < 0.05 required)
+# Thresholds for categorizing cell-type enrichment (FDR < 0.05 when an fdr column is present;
+# inputs without one are already thresholded upstream, so every row counts)
 CELLTYPE_THRESHOLDS = {
     'highly_cell_type_specific': {'log2fc_min': 3.0, 'log2fc_max': None},
     'moderately_enriched': {'log2fc_min': 1.5, 'log2fc_max': 3.0},
@@ -208,6 +216,46 @@ CELLTYPE_CATEGORIES = [
     'weakly_enriched',
     'depleted',
 ]
+
+# Column order for the long-format cell-type detail output (contract C2)
+CELLTYPE_DETAIL_COLUMNS = [
+    'program',
+    'cell_type',
+    'direction',
+    'log2_fc',
+    'rank_selected',
+]
+CELLTYPE_DETAIL_FILENAME = "celltype_detail.csv"
+
+# Cap on per-row warnings when 'direction' and the sign of log2FC disagree
+MAX_DIRECTION_CONFLICT_WARNINGS = 20
+
+# Accepted spellings of an explicit enrichment direction
+DIRECTION_ENRICHED = {'enriched', 'enrich', 'enrichment', 'up', 'upregulated', 'positive', 'pos', '+', '1'}
+DIRECTION_DEPLETED = {'depleted', 'deplete', 'depletion', 'down', 'downregulated', 'negative', 'neg', '-', '-1'}
+
+
+def normalize_direction(value: object) -> Optional[str]:
+    """Normalize an explicit direction label to 'enriched' or 'depleted'.
+
+    Args:
+        value: Raw value from the input's direction column
+
+    Returns:
+        'enriched', 'depleted', or None when the value is missing or unrecognized
+        (callers then fall back to the sign of log2FC).
+    """
+    if value is None:
+        return None
+
+    text = str(value).strip().lower()
+    if not text or text in {'nan', 'none', 'na', '<na>'}:
+        return None
+    if text in DIRECTION_ENRICHED:
+        return 'enriched'
+    if text in DIRECTION_DEPLETED:
+        return 'depleted'
+    return None
 
 
 def extract_program_id(value: object) -> Optional[int]:
@@ -280,8 +328,9 @@ def validate_celltype_enrichment(df: pd.DataFrame, file_path: Path) -> bool:
     warnings_list = []
     has_critical_errors = False
     
-    # 1. Check required columns
-    required_cols = {'cell_type', 'program', 'log2_fc_in_vs_out', 'fdr'}
+    # 1. Check required columns. 'fdr' is NOT required: inputs that were already thresholded
+    #    upstream (e.g. top-N enriched/depleted marker tables) carry no significance column.
+    required_cols = {'cell_type', 'program', 'log2_fc_in_vs_out'}
     missing = required_cols - set(df.columns)
     if missing:
         warnings_list.append(f"Missing required columns: {sorted(missing)}")
@@ -321,32 +370,46 @@ def validate_celltype_enrichment(df: pd.DataFrame, file_path: Path) -> bool:
     except Exception as e:
         warnings_list.append(f"Failed to validate 'log2_fc_in_vs_out' column: {e}")
     
-    # 5. Validate 'fdr' is numeric and in valid range [0, 1]
-    try:
-        fdr_numeric = pd.to_numeric(df['fdr'], errors='coerce')
-        non_numeric_fdr = df[fdr_numeric.isna()]
-        if not non_numeric_fdr.empty:
-            sample_bad = non_numeric_fdr['fdr'].head(5).tolist()
-            warnings_list.append(f"Non-numeric values in 'fdr': {sample_bad}")
-            warnings_list.append(f"  Found {len(non_numeric_fdr)} non-numeric FDR values (will be ignored)")
-        
-        # Check FDR range (should be 0-1 for proper FDR values)
-        valid_fdr = fdr_numeric.dropna()
-        if len(valid_fdr) > 0:
-            out_of_range_mask = (valid_fdr < 0) | (valid_fdr > 1)
-            if out_of_range_mask.any():
-                out_of_range_vals = valid_fdr[out_of_range_mask].head(5).tolist()
-                warnings_list.append(f"FDR values out of range [0, 1]: {out_of_range_vals}")
-                warnings_list.append(f"  Found {out_of_range_mask.sum()} out-of-range FDR values")
-    except Exception as e:
-        warnings_list.append(f"Failed to validate 'fdr' column: {e}")
-    
-    # 6. Check for completely empty cell_type values
+    # 5. Validate 'fdr' is numeric and in valid range [0, 1] — only when the column is present
+    if 'fdr' in df.columns:
+        try:
+            fdr_numeric = pd.to_numeric(df['fdr'], errors='coerce')
+            non_numeric_fdr = df[fdr_numeric.isna()]
+            if not non_numeric_fdr.empty:
+                sample_bad = non_numeric_fdr['fdr'].head(5).tolist()
+                warnings_list.append(f"Non-numeric values in 'fdr': {sample_bad}")
+                warnings_list.append(f"  Found {len(non_numeric_fdr)} non-numeric FDR values (will be ignored)")
+
+            # Check FDR range (should be 0-1 for proper FDR values)
+            valid_fdr = fdr_numeric.dropna()
+            if len(valid_fdr) > 0:
+                out_of_range_mask = (valid_fdr < 0) | (valid_fdr > 1)
+                if out_of_range_mask.any():
+                    out_of_range_vals = valid_fdr[out_of_range_mask].head(5).tolist()
+                    warnings_list.append(f"FDR values out of range [0, 1]: {out_of_range_vals}")
+                    warnings_list.append(f"  Found {out_of_range_mask.sum()} out-of-range FDR values")
+        except Exception as e:
+            warnings_list.append(f"Failed to validate 'fdr' column: {e}")
+    else:
+        logger.info("  No 'fdr' column: input is treated as pre-filtered (all rows significant)")
+
+    # 6. Validate 'direction' values when present (they are authoritative downstream)
+    if 'direction' in df.columns:
+        unreadable = df[df['direction'].apply(normalize_direction).isna()]
+        if not unreadable.empty:
+            sample_bad = sorted({str(v) for v in unreadable['direction'].head(5)})
+            warnings_list.append(f"Unrecognized values in 'direction': {sample_bad}")
+            warnings_list.append(
+                f"  Found {len(unreadable)} rows whose direction could not be read "
+                f"(will fall back to the sign of log2_fc_in_vs_out)"
+            )
+
+    # 7. Check for completely empty cell_type values
     empty_celltypes = df[df['cell_type'].isna() | (df['cell_type'].astype(str).str.strip() == '')]
     if not empty_celltypes.empty:
         warnings_list.append(f"Found {len(empty_celltypes)} rows with empty 'cell_type' values (will be ignored)")
-    
-    # 7. Log summary statistics (informational)
+
+    # 8. Log summary statistics (informational)
     n_programs = df['program'].nunique()
     n_celltypes = df['cell_type'].nunique()
     logger.info(f"Cell-type enrichment file summary: {file_path}")
@@ -371,6 +434,133 @@ def validate_celltype_enrichment(df: pd.DataFrame, file_path: Path) -> bool:
         return True
 
 
+def _resolve_direction(df: pd.DataFrame) -> pd.Series:
+    """Decide enriched/depleted for each row.
+
+    Policy: an explicit 'direction' column WINS — it is what the upstream tool asserted. The
+    sign of log2_fc_in_vs_out is a fallback, used only when 'direction' is absent entirely or
+    for individual rows whose label cannot be read. Rows where the stated direction disagrees
+    with the sign of the effect size are logged as warnings rather than silently reconciled:
+    that disagreement is a data-integrity signal about the input, not noise to absorb.
+
+    Args:
+        df: Standardized rows carrying 'log2_fc_in_vs_out' (and 'program_id' / 'cell_type',
+            used to name conflicting rows). 'direction' is optional.
+
+    Returns:
+        Series of 'enriched' / 'depleted', aligned to df's index
+    """
+    fc = pd.to_numeric(df['log2_fc_in_vs_out'], errors='coerce')
+    by_sign = pd.Series(np.where(fc < 0, 'depleted', 'enriched'), index=df.index, dtype=object)
+
+    if 'direction' not in df.columns:
+        logger.info(
+            "No 'direction' column — inferring direction from the sign of log2_fc_in_vs_out"
+        )
+        return by_sign
+
+    stated = df['direction'].apply(normalize_direction)
+    unreadable = stated.isna()
+    if unreadable.any():
+        samples = sorted({str(v) for v in df.loc[unreadable, 'direction'].head(5)})
+        logger.warning(
+            "Could not read 'direction' for %d row(s) %s — falling back to the sign of "
+            "log2_fc_in_vs_out for those rows",
+            int(unreadable.sum()),
+            samples,
+        )
+    resolved = stated.where(~unreadable, by_sign).astype(object)
+
+    conflict = fc.notna() & (resolved != by_sign)
+    n_conflict = int(conflict.sum())
+    if n_conflict:
+        logger.warning(
+            "%d row(s) where 'direction' disagrees with the sign of log2_fc_in_vs_out. "
+            "'direction' wins (it is the upstream tool's assertion), but the input should be "
+            "checked:",
+            n_conflict,
+        )
+        conflicts = pd.DataFrame(
+            {
+                'program_id': df.loc[conflict, 'program_id'],
+                'cell_type': df.loc[conflict, 'cell_type'],
+                'direction': resolved[conflict],
+                'log2_fc': fc[conflict],
+            }
+        )
+        for _, row in conflicts.head(MAX_DIRECTION_CONFLICT_WARNINGS).iterrows():
+            logger.warning(
+                "  Program_%s / %s: direction='%s' but log2_fc_in_vs_out=%+.3f",
+                row['program_id'],
+                row['cell_type'],
+                row['direction'],
+                row['log2_fc'],
+            )
+        if n_conflict > MAX_DIRECTION_CONFLICT_WARNINGS:
+            logger.warning("  ... and %d more", n_conflict - MAX_DIRECTION_CONFLICT_WARNINGS)
+
+    return resolved
+
+
+def write_celltype_detail(df: pd.DataFrame, output_file: Path) -> int:
+    """Write the long-format cell-type detail table: one row per (program, cell type).
+
+    The bucketed summary keeps cell-type names and throws the numbers away, which hides cases
+    where a program's depletions are far stronger than its enrichment. This table carries the
+    signed log2FC through to downstream consumers instead.
+
+    Args:
+        df: Significant rows with 'program_id', 'cell_type', 'direction_final',
+            'log2_fc_in_vs_out', and optionally 'rank_selected'
+        output_file: Path to write (columns: program, cell_type, direction, log2_fc,
+            rank_selected)
+
+    Returns:
+        Number of rows written
+    """
+    fc = pd.to_numeric(df['log2_fc_in_vs_out'], errors='coerce')
+    if 'rank_selected' in df.columns:
+        rank = pd.to_numeric(df['rank_selected'], errors='coerce').astype('Int64')
+    else:
+        rank = pd.Series(pd.NA, index=df.index, dtype='Int64')
+
+    detail_df = pd.DataFrame(
+        {
+            'program': df['program_id'].astype(int),
+            'cell_type': df['cell_type'],
+            'direction': df['direction_final'],
+            'log2_fc': fc,
+            'rank_selected': rank,
+        },
+        columns=CELLTYPE_DETAIL_COLUMNS,
+    )
+
+    n_unusable = int(detail_df['log2_fc'].isna().sum())
+    if n_unusable:
+        logger.warning(f"Dropped {n_unusable} cell-type detail row(s) with no numeric log2FC")
+        detail_df = detail_df[detail_df['log2_fc'].notna()]
+
+    # Deterministic order: program, then enriched before depleted, then |log2FC| descending
+    detail_df = (
+        detail_df.assign(
+            _depleted=(detail_df['direction'] == 'depleted').astype(int),
+            _magnitude=detail_df['log2_fc'].abs(),
+        )
+        .sort_values(['program', '_depleted', '_magnitude'], ascending=[True, True, False])
+        .drop(columns=['_depleted', '_magnitude'])
+    )
+
+    ensure_parent_dir(str(output_file))
+    detail_df.to_csv(output_file, index=False)
+    logger.info(
+        "Wrote cell-type detail: %s (%d rows, %d programs)",
+        output_file,
+        len(detail_df),
+        detail_df['program'].nunique(),
+    )
+    return len(detail_df)
+
+
 def generate_celltype_summary(
     enrichment_file: Path,
     output_file: Path,
@@ -383,13 +573,25 @@ def generate_celltype_summary(
     Reads a cell-type enrichment CSV (e.g., from Seurat/Scanpy marker finding)
     and categorizes each program's cell-type associations by log2 fold-change.
 
+    Writes two files:
+    - ``output_file``: the legacy wide, bucketed summary (cell-type names only, no numbers).
+    - ``celltype_detail.csv``, next to ``output_file``: long format, one row per
+      (program, cell type), carrying the **signed** log2FC. The bucketed summary throws the
+      effect sizes away — a program can look "weakly enriched" in one type while being far
+      more strongly depleted in several others — so downstream consumers should prefer this.
+
+    Column names are mapped through ``gpi.column_mapper``, so a file that passes
+    ``--check-inputs`` also runs here.
+
     Args:
         enrichment_file: Path to raw enrichment CSV with columns:
-            cell_type, program, log2_fc_in_vs_out, fdr
+            cell_type, program, log2_fc_in_vs_out, and optionally fdr and direction
+            (aliases accepted).
         output_file: Path to write summary CSV
         thresholds: Dict of category -> {log2fc_min, log2fc_max}.
             Uses CELLTYPE_THRESHOLDS if None.
-        fdr_threshold: FDR cutoff for significance (default: 0.05)
+        fdr_threshold: FDR cutoff for significance (default: 0.05). Ignored when the input
+            has no fdr column, in which case every row is treated as significant.
         topics: Optional set of program IDs to include (None = all)
 
     Returns:
@@ -406,15 +608,17 @@ def generate_celltype_summary(
     if thresholds is None:
         thresholds = CELLTYPE_THRESHOLDS
 
-    # Read enrichment data
+    # Read enrichment data, mapping alias column names onto the canonical schema
     df = pd.read_csv(enrichment_file)
     logger.info(f"Loaded cell-type enrichment: {enrichment_file} ({len(df)} rows)")
+    df = standardize_celltype_enrichment(df)
 
     # Validate input (non-fatal, logs warnings)
     validate_celltype_enrichment(df, enrichment_file)
 
-    # Validate required columns (critical check)
-    required_cols = {'cell_type', 'program', 'log2_fc_in_vs_out', 'fdr'}
+    # Validate required columns (critical check). 'fdr' is deliberately absent from this set:
+    # pre-filtered marker tables have no significance column and are still usable.
+    required_cols = {'cell_type', 'program', 'log2_fc_in_vs_out'}
     missing = required_cols - set(df.columns)
     if missing:
         logger.error(f"Enrichment file missing required columns: {missing}")
@@ -435,14 +639,34 @@ def generate_celltype_summary(
     # Ensure program_id is integer type
     df['program_id'] = df['program_id'].astype(int)
 
+    # Coerce log2FC to numeric so a stray non-numeric value drops its row (as validation
+    # promises) instead of raising in the threshold comparisons below.
+    df['log2_fc_in_vs_out'] = pd.to_numeric(df['log2_fc_in_vs_out'], errors='coerce')
+
     # Filter to requested topics if specified
     if topics:
         df = df[df['program_id'].isin(list(topics))].copy()
         logger.info(f"Filtered to {len(df)} rows for topics: {sorted(topics)}")
 
-    # Filter to significant results
-    df_sig = df[df['fdr'] < fdr_threshold].copy()
-    logger.info(f"Found {len(df_sig)} significant rows (FDR < {fdr_threshold})")
+    # Filter to significant results. Without an 'fdr' column the input was thresholded
+    # upstream, so every row is significant by construction.
+    if 'fdr' in df.columns:
+        df_sig = df[pd.to_numeric(df['fdr'], errors='coerce') < fdr_threshold].copy()
+        logger.info(f"Found {len(df_sig)} significant rows (FDR < {fdr_threshold})")
+    else:
+        df_sig = df.copy()
+        logger.info(
+            f"No 'fdr' column — treating all {len(df_sig)} rows as significant "
+            f"(input is pre-filtered)"
+        )
+
+    # Resolve enriched/depleted. An explicit 'direction' column is what the upstream tool
+    # asserted, so it wins; the sign of log2FC is only a fallback.
+    df_sig['direction_final'] = _resolve_direction(df_sig)
+
+    # Emit the long-format detail file (signed effect sizes) before the lossy bucketing below.
+    detail_out = Path(output_file).parent / CELLTYPE_DETAIL_FILENAME
+    write_celltype_detail(df_sig, detail_out)
 
     # Use cell_type values as-is (assume already has correct names)
     df_sig['cell_type_display'] = df_sig['cell_type']

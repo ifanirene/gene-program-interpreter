@@ -25,6 +25,10 @@ subprocess. This module captures the agent's single ``submit_result``
 payload, records an audit trace, and — on any failure — writes a deterministic minimal
 ``ResearchResult`` so downstream stages stay whole.
 
+The submitted payload is written to ``{audit_dir}/{program_id}.raw_payload.json`` the moment it
+arrives, BEFORE validation: research is the step that costs money, so the bytes the user paid for
+must survive anything that goes wrong afterwards (they can be re-normalized offline, for free).
+
 Run:
     python -m research.research_parallel --bundles program_bundles/ \
         --out-dir research_results/ --concurrency 4 \
@@ -54,6 +58,7 @@ from claude_agent_sdk import (
     query,
     tool,
 )
+from pydantic import ValidationError
 
 from research.literature import (
     LITERATURE_SERVER_NAME,
@@ -61,6 +66,13 @@ from research.literature import (
     build_literature_mcp_server,
 )
 from research.schema import AgentResearchResult, ResearchResult, submit_result_tool_schema
+
+# Imported at MODULE SCOPE on purpose: a broken install (this used to load
+# literature-review/kernel.py by path — a file no wheel contains) must fail at process start,
+# BEFORE any session is launched and any money is spent. Buried in the per-program try/except
+# below, the same ImportError was reported as "payload failed schema validation", which then
+# triggered a retry that could not possibly help.
+from research.verify import normalize_agent_result
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -453,9 +465,14 @@ async def _handle_one_program(
     max_attempts: int = 2,
 ) -> Path:
     """Drive one program end-to-end: prepare workspace, run the session (retry once on
-    transient failure), capture + validate the submit_result payload, and always write a
+    transient failure), persist the raw submit_result payload, validate it, and always write a
     schema-valid ResearchResult + an audit record. Falls back deterministically on any
-    failure. Returns the path to the written ``research_results/{program_id}.json``."""
+    failure. Returns the path to the written ``research_results/{program_id}.json``.
+
+    Retries are for failures a retry can actually fix (no submit_result, a transient SDK error,
+    an agent-authored payload that fails schema validation). An INFRASTRUCTURE failure is not one
+    of them: it stops the loop immediately rather than paying for a second session that would hit
+    the same wall."""
     program_id = _read_bundle_program_id(bundle_path)
     prompt = build_prompt(program_id)
     server_names = sorted([LITERATURE_SERVER_NAME, SUBMIT_SERVER_NAME])
@@ -501,6 +518,21 @@ async def _handle_one_program(
                     last_error = "session ended without calling submit_result"
                 continue  # transient-ish; retry once then fall back
 
+            # Persist the bytes the user PAID FOR the moment they arrive — before validation,
+            # before normalization, before anything that can throw. Whatever goes wrong
+            # downstream, the raw payload is on disk and can be re-normalized offline for free.
+            raw_payload_path = audit_dir / f"{program_id}.raw_payload.json"
+            try:
+                _write_json(raw_payload_path, payload)
+                logger.info(
+                    "Program %s: raw submit_result payload -> %s", program_id, raw_payload_path
+                )
+            except OSError as exc:  # a write failure must not discard a good session
+                logger.warning(
+                    "Program %s: could not persist the raw payload to %s: %s",
+                    program_id, raw_payload_path, exc,
+                )
+
             # Belt-and-suspenders: warn on a LEGACY payload shape (claims[]/inline citations).
             # Pydantic ignores unknown keys, so a legacy submission would silently normalize to
             # empty evidence — surface it instead of failing silently.
@@ -518,13 +550,28 @@ async def _handle_one_program(
 
             # Validate the flat agent payload, then normalize to the canonical schema
             # (build the dedup'd evidence pool + assign ids). The verifier resolves it later.
+            #
+            # The two failure modes here are NOT the same and must never be conflated:
+            #   * ValidationError -> the AGENT produced bad JSON. Retrying can fix that.
+            #   * anything else   -> INFRASTRUCTURE (a bad install, a broken import, disk).
+            #     Retrying cannot fix it and only doubles the bill, so stop after recording it.
+            #     The raw payload is already on disk (above) and can be re-normalized for free.
             try:
-                from research.verify import normalize_agent_result
-
                 rr = normalize_agent_result(AgentResearchResult.model_validate(payload))
-            except Exception as ve:  # noqa: BLE001
+            except ValidationError as ve:
                 last_error = f"submit_result payload failed schema validation: {ve}"
                 continue
+            except Exception as exc:  # noqa: BLE001 - infrastructure, not the agent's fault
+                last_error = (
+                    f"infrastructure error while normalizing payload: "
+                    f"{type(exc).__name__}: {exc}"
+                )
+                logger.error(
+                    "Program %s: %s — NOT retrying (a retry cannot fix this and would spend "
+                    "again); the raw payload is preserved at %s.",
+                    program_id, last_error, raw_payload_path,
+                )
+                break  # out of the retry loop -> deterministic fallback below
 
             # Enforce the program id echo (protocol says echo exactly; correct if drifted).
             if rr.program_id != program_id:
@@ -543,6 +590,7 @@ async def _handle_one_program(
                     "attempts": attempt,
                     "n_submit_calls": submit_holder.get("calls", 1),
                     "tool_trace_path": str((audit_dir / f"{program_id}.audit.json")),
+                    "raw_payload_path": str(raw_payload_path),
                 }
             )
             if submit_holder.get("calls", 1) > 1:

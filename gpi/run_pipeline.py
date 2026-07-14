@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import importlib
 import json
 import logging
 import os
@@ -50,6 +51,7 @@ import yaml
 
 from . import __version__
 from .context_profile import ContextProfile
+from .log_redaction import install_log_redaction
 from . import pipeline_state as ps
 from .progress import (
     RESEARCH_DONE,
@@ -122,6 +124,23 @@ STEP_EXECUTOR: Dict[str, str] = {
     "annotate": "3",
     "presentation": "3/4",
     "html_report": "4",
+}
+
+# The Python module each step ultimately imports. Used only by preflight_imports(), which
+# imports them all up front so a broken install fails at $0 instead of mid-run: most steps
+# import their module inside a subprocess, and the research step imports its verifier inside
+# a retry loop that reports *any* exception as a bad agent payload — so a packaging error
+# there is indistinguishable from a bad payload, and costs a full paid research run to find.
+STEP_MODULES: Dict[str, List[str]] = {
+    "string_enrichment": ["gpi.enrichment"],
+    "gene_summaries": ["gpi.gene_summaries"],
+    "bundle": ["research.bundle"],
+    "research": ["research.research_parallel"],
+    "verify": ["research.verify"],
+    "theme": ["gpi.theme_representation"],
+    "annotate": ["gpi.evidence_context", "gpi.anthropic_batch", "gpi.parse_results"],
+    "presentation": ["gpi.presentation"],
+    "html_report": ["gpi.html_report"],
 }
 
 
@@ -317,6 +336,12 @@ class Paths:
         self.genes_json = self.enrich_dir / "program_genes.json"
         self.overview_csv = self.enrich_dir / "gene_overview.csv"
         self.figures_dir = self.enrich_dir / "figures"
+        # Cell-type enrichment, written by the string_enrichment step when
+        # inputs.celltype_enrichment is set. `celltype_detail` is long-format and carries
+        # signed log2FC; it is what the annotation prompt consumes. `celltype_summary` is
+        # the legacy bucketed table, kept for backwards compatibility.
+        self.celltype_summary = self.enrich_dir / "celltype_summary.csv"
+        self.celltype_detail = self.enrich_dir / "celltype_detail.csv"
 
         self.ncbi_context = o / "ncbi_context.json"
         self.ncbi_summary = o / "ncbi_summary.csv"
@@ -555,7 +580,27 @@ def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
     from research.verify import verify_directory
 
     summary = verify_directory(paths.research_dir, audit_dir=paths.audit_dir)
-    return {"n_programs": summary.get("n_programs"), "audit_dir": summary.get("audit_dir")}
+
+    # Say out loud when verification did not fully run. The whole point of this step is the
+    # promise that no unverified citation reaches the report; a run that quietly could not keep
+    # that promise must not look like one that did. Unreachable citations are KEPT (and marked
+    # 'partial' in the report) rather than dropped — a network failure is not evidence a paper
+    # is fake — so this is a warning, not an error.
+    if summary.get("verification_complete") is False:
+        logger.warning(
+            "verify: INCOMPLETE — %s of %s citation(s) could not be checked%s. They are kept "
+            "and marked unverified in the report, not treated as fabricated. Summary: %s",
+            summary.get("n_unverified"), summary.get("n_citations"),
+            f", {summary['n_files_skipped']} result file(s) skipped"
+            if summary.get("n_files_skipped") else "",
+            summary.get("verification_summary"),
+        )
+    return {
+        "n_programs": summary.get("n_programs"),
+        "audit_dir": summary.get("audit_dir"),
+        "verification_complete": summary.get("verification_complete"),
+        "n_unverified": summary.get("n_unverified"),
+    }
 
 
 def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
@@ -609,6 +654,13 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
     )
     if paths.enrichment_filtered.exists():
         prepare += ["--enrichment-file", str(paths.enrichment_filtered)]
+    # Cell-type enrichment -> the annotation prompt's "Cell-type enrichment" section. Point
+    # at the file, not the directory: --celltype-dir would also match a stale legacy summary
+    # left behind by an earlier run, silently preferring it over the current detail table.
+    if paths.celltype_detail.exists():
+        prepare += ["--celltype-file", str(paths.celltype_detail)]
+    elif paths.celltype_summary.exists():
+        prepare += ["--celltype-file", str(paths.celltype_summary)]
     if paths.ncbi_context.exists():
         prepare += ["--ncbi-file", str(paths.ncbi_context)]
     if paths.theme_dict.exists():
@@ -679,6 +731,10 @@ def run_html_report(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str
     # enrichment CSV (enrichment was dropped from the annotation LLM output).
     if paths.enrichment_filtered.exists():
         argv += ["--enrichment-filtered-csv", str(paths.enrichment_filtered)]
+    # Cell-type enrichment comes from the CSV, not from the annotation text: the model is
+    # never asked to restate it, so the report's old regex only ever matched nothing.
+    if paths.celltype_detail.exists():
+        argv += ["--celltype-file", str(paths.celltype_detail)]
     if paths.presentation_json.exists():
         argv += ["--presentation-json", str(paths.presentation_json)]
     if paths.research_dir.is_dir():
@@ -722,6 +778,33 @@ def step_is_gated(step: str, cfg: PipelineConfig, flags: Flags) -> Optional[str]
     if step == "theme" and not cfg.theme.get("enabled", True):
         return "theme.enabled=false"
     return None
+
+
+def preflight_imports(active_steps: List[str], cfg: PipelineConfig, flags: Flags) -> None:
+    """Import every module the planned steps need, before any paid work starts.
+
+    A missing module used to surface only when the step that needed it ran — for the
+    verifier, that was *after* the research step had already been paid for, and the failure
+    was reported as a bad agent payload rather than a broken install. Importing here turns a
+    packaging regression into a $0 failure at startup with an honest error message.
+    """
+    broken: List[str] = []
+    for step in active_steps:
+        if step_is_gated(step, cfg, flags):
+            continue
+        for module in STEP_MODULES.get(step, []):
+            try:
+                importlib.import_module(module)
+            except Exception as exc:  # noqa: BLE001 — any import failure is fatal here
+                broken.append(f"  {step:<17} needs {module}\n      {type(exc).__name__}: {exc}")
+    if broken:
+        raise SystemExit(
+            "Install is incomplete — these modules could not be imported:\n\n"
+            + "\n".join(broken)
+            + "\n\nNo paid work was started. This usually means the package was built without a "
+            "file it needs at runtime.\nReinstall the plugin; if it persists, please report it "
+            "with the error above."
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -793,6 +876,14 @@ def _print_framing(cfg: PipelineConfig) -> None:
     print(f"  keyword_query    : {p.resolved_keyword_query()}")
     print(f"  condition_context: {p.resolved_condition_context()}")
     print(f"  report_crumb     : {p.resolved_report_dataset_crumb()}")
+    # The keyword_query above is sent to PubMed literally, so a badly-shaped context_term
+    # becomes a slot that matches nothing. Surface that here — this is the last free moment
+    # before the user approves a paid run.
+    warnings = p.validate()
+    if warnings:
+        print("\nContext warnings (the run will still work — these degrade research quality):")
+        for w in warnings:
+            print(f"  ! {w}")
 
 
 def print_plan(
@@ -856,6 +947,13 @@ def run_pipeline(
     if flags.dry_run:
         print_plan(cfg, paths, flags, active_steps, state)
         return 0
+
+    # Keep API keys out of the logs: httpx logs every request URL at INFO, which put
+    # NCBI_API_KEY in cleartext dozens of times per run. Install before anything makes a call.
+    install_log_redaction()
+
+    # Fail a broken install at $0, before the first paid step.
+    preflight_imports(active_steps, cfg, flags)
 
     paths.out.mkdir(parents=True, exist_ok=True)
     # Always write the resolved profile so --profile threading is available.
@@ -954,7 +1052,8 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--regulators", help="[--check-inputs/--emit-config] Single regulator CSV path.")
     parser.add_argument("--regulators-by-condition", action="append", default=None,
                         help="[--emit-config] Condition-keyed regulator file as cond=path (repeatable).")
-    parser.add_argument("--celltype-enrichment", help="[--check-inputs] Cell-type enrichment CSV path.")
+    parser.add_argument("--celltype-enrichment",
+                        help="[--check-inputs/--emit-config] Cell-type enrichment CSV path.")
     parser.add_argument("--output-dir", help="[--emit-config] output_dir to write into the config.")
     parser.add_argument("--programs", help="[--emit-config] Comma-separated program ids (default: all).")
     parser.add_argument("-o", "--output", help="[--emit-config] Write the config here (default: stdout).")
@@ -1039,9 +1138,15 @@ def cmd_check_inputs(args: argparse.Namespace) -> int:
         print(f"  ✗ gene loading: {gene_loading}\n      {exc}")
         ok = False
 
+    # Sniff the separator for the two inputs whose *pipeline* readers sniff it
+    # (evidence_context, gene_summaries, html_report all use sep=None). Reading them strictly
+    # here made pre-flight reject tab-separated files the pipeline handles perfectly well —
+    # pre-flight must predict the run, not impose a stricter rule than it. Gene loading is
+    # deliberately left strict: gpi.enrichment reads it comma-only, so sniffing here would
+    # turn a false failure into the far worse false pass.
     if regulators:
         try:
-            rdf = standardize_regulator_results(pd.read_csv(regulators))
+            rdf = standardize_regulator_results(pd.read_csv(regulators, sep=None, engine="python"))
             sig = int(rdf["significant"].sum()) if "significant" in rdf.columns else "n/a"
             print(f"  ✓ regulators: {regulators}  (rows: {len(rdf)}, significant: {sig})")
         except Exception as exc:  # noqa: BLE001
@@ -1050,7 +1155,9 @@ def cmd_check_inputs(args: argparse.Namespace) -> int:
 
     if celltype:
         try:
-            cdf = standardize_celltype_enrichment(pd.read_csv(celltype))
+            cdf = standardize_celltype_enrichment(
+                pd.read_csv(celltype, sep=None, engine="python")
+            )
             print(f"  ✓ cell-type enrichment: {celltype}  (rows: {len(cdf)})")
         except Exception as exc:  # noqa: BLE001
             print(f"  ✗ cell-type enrichment: {celltype}\n      {exc}")
@@ -1081,7 +1188,7 @@ def cmd_emit_config(args: argparse.Namespace) -> int:
     cond = _parse_cond_args(args.regulators_by_condition)
     if cond:
         inputs["regulators_by_condition"] = cond
-    inputs["celltype_enrichment"] = None
+    inputs["celltype_enrichment"] = args.celltype_enrichment
 
     programs: Optional[List[int]] = None
     if args.programs:

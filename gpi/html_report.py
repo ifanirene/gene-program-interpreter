@@ -731,6 +731,40 @@ def load_presentation(presentation_json: str | None) -> dict[str, dict]:
     return data.get("programs", {})
 
 
+def load_celltype_detail(celltype_file: str | None) -> dict[int, list[dict]]:
+    """Load the long-format cell-type enrichment table, keyed by program id.
+
+    Read from the CSV rather than scraped out of the annotation markdown: the model is never
+    asked to restate its cell-type evidence, so scraping for it only ever found nothing. Rows
+    are sorted by |log2FC| so the strongest association leads, whichever direction it points.
+    """
+    if not celltype_file or not os.path.exists(celltype_file):
+        return {}
+    try:
+        df = pd.read_csv(celltype_file)
+    except (pd.errors.ParserError, OSError, ValueError):
+        return {}
+    needed = {"program", "cell_type", "direction", "log2_fc"}
+    if not needed.issubset(df.columns):
+        return {}  # a legacy bucketed summary — no effect sizes to render
+
+    by_program: dict[int, list[dict]] = {}
+    for _, row in df.iterrows():
+        try:
+            program = int(row["program"])
+            log2_fc = float(row["log2_fc"])
+        except (TypeError, ValueError):
+            continue
+        by_program.setdefault(program, []).append({
+            "cell_type": str(row["cell_type"]).strip(),
+            "direction": str(row["direction"]).strip().lower(),
+            "log2_fc": log2_fc,
+        })
+    for rows in by_program.values():
+        rows.sort(key=lambda r: abs(r["log2_fc"]), reverse=True)
+    return by_program
+
+
 def _coerce_evidence_note(item: object) -> str:
     """Render a contradiction / evidence-gap entry as a display string.
 
@@ -957,6 +991,7 @@ def generate_report(
     top_loading: int = 15,
     top_unique: int = 8,
     enrichment_filtered_csv: str | None = None,
+    celltype_file: str | None = None,
 ):
     """Generate the Program Explorer HTML report."""
 
@@ -967,6 +1002,7 @@ def generate_report(
     )
     pathways_by_program = build_pathways_by_program(enrichment_filtered_csv)
     presentation = load_presentation(presentation_json)
+    celltype_by_program = load_celltype_detail(celltype_file)
     volcano_df = None
     if volcano_csv and os.path.exists(volcano_csv):
         volcano_df = standardize_regulator_results(
@@ -1055,6 +1091,7 @@ def generate_report(
             'top_loading': _split_csv_values(top_loading_str),
             'unique': _split_csv_values(unique_str),
             'celltype': stats.get('celltype') or fallback_stats.get('celltype', ''),
+            'celltype_detail': celltype_by_program.get(topic_id, []),
             'modules': final_modules,
             'contradictions': research.get('contradictions', []),
             'evidence_gaps': research.get('evidence_gaps', []),
@@ -1272,6 +1309,20 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         .modules { display: grid; gap: 14px; }
         .mod { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 16px 6px; background: var(--surface); }
         .mod .mhead { display: flex; gap: 10px; align-items: baseline; margin-bottom: 8px; }
+        .evbadge { margin-left: auto; flex: none; font-size: 10px; font-weight: 700; text-transform: uppercase;
+                   letter-spacing: .04em; padding: 3px 8px; border-radius: 999px; cursor: help; white-space: nowrap; }
+        .ev-partial { color: var(--warn); background: var(--warn-soft); border: 1px solid var(--warn); }
+        .ev-unsupported { color: var(--bad); background: var(--bad-soft); border: 1px solid var(--bad); }
+        .cttable { display: flex; flex-direction: column; gap: 4px; }
+        .ctrow { display: flex; align-items: baseline; gap: 10px; padding: 7px 11px;
+                 border-radius: var(--radius-sm); font-size: 13px; }
+        .ctrow.ct-enr { background: var(--ok-soft); }
+        .ctrow.ct-dep { background: var(--bad-soft); }
+        .ctname { flex: 1; font-weight: 600; }
+        .ctfc { flex: none; font-variant-numeric: tabular-nums; font-weight: 700; }
+        .ct-enr .ctfc { color: var(--ok); }
+        .ct-dep .ctfc { color: var(--bad); }
+        .ctnote { margin-top: 10px; font-size: 11px; line-height: 1.5; color: var(--muted); }
         .mod .mnum { flex: none; width: 24px; height: 24px; border-radius: 7px; background: var(--accent-soft);
             color: var(--accent-text); font-size: 12px; font-weight: 800; display: grid; place-items: center; }
         .mod h3 { font-size: 15.5px; font-weight: 700; line-height: 1.3; }
@@ -1409,6 +1460,35 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         (m.evidence_ids||[]).forEach(push);
         return { pmids: [...new Set(pmids)], dois: [...new Set(dois)] };
     }
+
+    // Evidence badge. Only the exceptional states get chrome — a verified module is the norm
+    // and a badge on every one would be wallpaper. The two states are NOT the same thing, and
+    // collapsing them would be its own dishonesty: 'partial' means the verifier could not
+    // reach the source, NOT that the citation is fake.
+    const EV_BADGE = {
+        partial: ["unverified",
+            "Citations could not be checked — the verifier could not reach PubMed/Crossref "
+            + "(network, rate limit). They are shown as the model gave them. Confirm before citing."],
+        unsupported: ["no verified evidence",
+            "No citation for this module survived verification. Treat the mechanism as a "
+            + "hypothesis, not a cited finding."],
+    };
+    function evBadge(status){
+        const hit = EV_BADGE[String(status==null?"":status).toLowerCase()];
+        if(!hit) return "";
+        return `<span class="evbadge ev-${esc(String(status).toLowerCase())}" title="${esc(hit[1])}">${esc(hit[0])}</span>`;
+    }
+
+    // Cell-type enrichment: signed log2FC per lineage, strongest |effect| first. Depletion is
+    // rendered as prominently as enrichment — a program actively excluded from a lineage says
+    // as much as one that marks it, and the bucketed format this replaces hid the magnitudes.
+    function celltypeRow(c){
+        const dep = String(c.direction||"").toLowerCase() === "depleted";
+        const n = Number(c.log2_fc);
+        const v = (n >= 0 ? "+" : "") + (isFinite(n) ? n.toFixed(2) : "?");
+        return `<div class="ctrow ${dep?"ct-dep":"ct-enr"}">
+            <span class="ctname">${esc(c.cell_type)}</span><span class="ctfc">${esc(v)}</span></div>`;
+    }
     function fmtFDR(fdr){
         const parts = String(fdr).split(/e-?/i);
         if(parts.length < 2) return "FDR " + fdr;
@@ -1523,6 +1603,19 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             </div></div>
         </section>
 
+        ${(p.celltype_detail||[]).length ? `<section class="section open" id="sec-celltype">
+            <button class="head" onclick="toggleSection('sec-celltype')">
+                <span class="htitle">Cell-type enrichment</span>
+                <span class="hmeta">log₂FC of program score, cells of that type vs. all others</span>
+                <span class="chev">›</span></button>
+            <div class="body">
+                <div class="cttable">${p.celltype_detail.map(celltypeRow).join("")}</div>
+                <p class="ctnote">Only cell types for which this program ranked in the top 10 markers are
+                    listed. A type that is absent was not tested into that top 10 — which is not
+                    evidence of absence.</p>
+            </div>
+        </section>` : ""}
+
         <section class="section open" id="sec-modules">
             <button class="head" onclick="toggleSection('sec-modules')">
                 <span class="htitle">Functional modules</span>
@@ -1532,7 +1625,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 const ev = evidenceIds(m);
                 return `
                 <article class="mod">
-                    <div class="mhead"><span class="mnum">${i+1}</span><h3>${esc(m.title)}</h3></div>
+                    <div class="mhead"><span class="mnum">${i+1}</span><h3>${esc(m.title)}</h3>${evBadge(m.status)}</div>
                     ${m.summary ? `<p class="msum">${esc(m.summary)}</p>` : ""}
                     ${(m.key_genes||[]).length ? `<div class="genes">${m.key_genes.map(g => `<span class="gene">${esc(g)}</span>`).join("")}</div>` : ""}
                     ${ev.pmids.length ? `<div class="pmidrow"><span class="pmidlabel">PMID</span><div class="pmids">${ev.pmids.map(x => `<a href="https://pubmed.ncbi.nlm.nih.gov/${esc(x)}/" target="_blank" rel="noopener">${esc(x)}</a>`).join("")}</div></div>` : ""}
@@ -1784,6 +1877,11 @@ if __name__ == '__main__':
         help="STRING enrichment_filtered.csv; sources the deterministic "
         "per-program pathway list and 'Top pathway' chip",
     )
+    parser.add_argument(
+        "--celltype-file",
+        help="Long-format celltype_detail.csv (program, cell_type, direction, log2_fc); "
+        "sources the per-program cell-type enrichment section",
+    )
     parser.add_argument("--top-loading", type=int, default=15)
     parser.add_argument("--top-unique", type=int, default=8)
     parser.add_argument("--output-html")
@@ -1837,4 +1935,5 @@ if __name__ == '__main__':
         top_loading=int(getattr(args, "top_loading", 15) or 15),
         top_unique=int(getattr(args, "top_unique", 8) or 8),
         enrichment_filtered_csv=getattr(args, "enrichment_filtered_csv", None),
+        celltype_file=getattr(args, "celltype_file", None),
     )

@@ -28,12 +28,38 @@ from __future__ import annotations
 import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 
 # Fixed vocabulary for a claim's context match (spec §5). The adapter validates
 # research evidence against this set; it is NOT tissue-specific.
 DEFAULT_EVIDENCE_CONTEXT_TYPES: List[str] = ["direct", "partial", "indirect", "mixed"]
+
+# Advisory thresholds for `ContextProfile.validate()`. Warnings only — never blocking.
+# A concept longer than 3 words is phrase-matched literally by PubMed and returns ~0 hits
+# ("BMP signalling in endothelium" is not a phrase anyone writes), hence "prefer 1-3 words".
+MAX_TERM_WORDS: int = 3
+MAX_CONTEXT_TERMS: int = 10  # beyond this the OR-query is diluted
+
+# Conjunctions inside a context term that really mean "OR". A multi-word term is sent
+# to PubMed as a literal phrase, so "tight junctions and paracellular permeability"
+# phrase-matches almost nothing — a dead slot that still costs a research turn. Split
+# such a term into separately-quoted concepts *for the query only*.
+# `-` is deliberately NOT a delimiter: "TGF-beta" and "blood-brain" must survive whole.
+_CONJUNCTION_RE = re.compile(r"\s+(?:and|&)\s+|\s*/\s*", re.IGNORECASE)
+
+# Connective fragments left behind by a split; they carry no query signal.
+_STOP_FRAGMENTS = frozenset({"a", "an", "and", "or", "the", "&"})
+
+# Organism <-> NCBI taxid pairs we can actually check. Anything else is left alone.
+_ORGANISM_TAXIDS: Dict[str, int] = {
+    "human": 9606,
+    "homo sapiens": 9606,
+    "mouse": 10090,
+    "murine": 10090,
+    "mus musculus": 10090,
+}
+_TAXID_NAMES: Dict[int, str] = {9606: "human", 10090: "mouse"}
 
 
 def _quote_term(term: str) -> str:
@@ -44,6 +70,27 @@ def _quote_term(term: str) -> str:
     if re.search(r"[\s()/]", term):
         return f'"{term}"'
     return term
+
+
+def _split_conjunctions(term: str) -> List[str]:
+    """Split one context term into the separate concepts a boolean query should OR.
+
+        "tight junctions and paracellular permeability"
+            -> ["tight junctions", "paracellular permeability"]
+
+    Query-side only — the caller must not write the result back onto the profile, since
+    the raw term is also prose for the research agent (`functions_to_consider`), where
+    "TGF-beta and BMP signalling in endothelium" is perfectly good English.
+
+    A single-concept term is returned unchanged, and a hyphenated token is never broken.
+    """
+    concepts: List[str] = []
+    for part in _CONJUNCTION_RE.split(term or ""):
+        part = part.strip(" \t,;")
+        if not part or part.lower() in _STOP_FRAGMENTS:
+            continue
+        concepts.append(part)
+    return concepts
 
 
 @dataclass
@@ -108,13 +155,20 @@ class ContextProfile:
         return base
 
     def resolved_keyword_query(self) -> str:
+        # The query is handed to PubMed literally, so every term is split on its
+        # conjunctions first (see `_split_conjunctions`) and each concept is quoted on
+        # its own. `context_terms` itself is NEVER rewritten — the raw phrasing is the
+        # prose the research agent reads.
         if self.keyword_query:
             return self.keyword_query
         terms: List[str] = []
+        seen: Set[str] = set()
         for t in [self.cell_type, self.tissue, *self.conditions, *self.context_terms]:
-            q = _quote_term(t)
-            if q and q not in terms:
-                terms.append(q)
+            for concept in _split_conjunctions(t):
+                q = _quote_term(concept)
+                if q and q.lower() not in seen:
+                    seen.add(q.lower())
+                    terms.append(q)
         if not terms:
             return ""
         return "(" + " OR ".join(terms) + ")"
@@ -154,6 +208,67 @@ class ContextProfile:
         data["condition_context"] = self.resolved_condition_context()
         data["report_dataset_crumb"] = self.resolved_report_dataset_crumb()
         return ContextProfile(**data)
+
+    # ------------------------------------------------------------------ validation
+    def validate(self) -> List[str]:
+        """Return human-readable warnings about this profile. Never raises, never blocks.
+
+        These are query-quality nudges, not errors: a run with warnings still works, it
+        just spends its research budget worse. The caller decides how to surface them
+        (`--emit-config`, `doctor`, the skill); this method only reports.
+        """
+        warnings: List[str] = []
+
+        # Over-specific concepts. Judged AFTER conjunction-splitting, because that is
+        # what actually reaches PubMed — a long term that splits cleanly is fine.
+        for term in self.context_terms:
+            if not str(term).strip():
+                warnings.append(
+                    "context_terms contains an empty term — remove it; it adds nothing "
+                    "to the query and nothing to the research brief."
+                )
+                continue
+            for concept in _split_conjunctions(str(term)):
+                n_words = len(concept.split())
+                if n_words > MAX_TERM_WORDS:
+                    warnings.append(
+                        f"context_terms: {concept!r} is {n_words} words — too specific. "
+                        "PubMed phrase-matches this literally, so it will return almost "
+                        "nothing and the slot is wasted. Prefer 1-3 word concepts "
+                        "(e.g. 'tight junctions', 'paracellular permeability')."
+                    )
+
+        if len(self.context_terms) > MAX_CONTEXT_TERMS:
+            warnings.append(
+                f"context_terms has {len(self.context_terms)} entries (> {MAX_CONTEXT_TERMS}) — "
+                "this dilutes the query; every term competes for the same retrieval budget. "
+                "Keep the highest-signal concepts for this cell type."
+            )
+
+        for cond in self.conditions:
+            if not str(cond).strip():
+                warnings.append("conditions contains an empty entry — remove it.")
+
+        # organism vs. species_taxid. Wrong taxid silently sends STRING enrichment and
+        # NCBI gene lookups to the wrong species. Only checked for organisms we know.
+        expected = _ORGANISM_TAXIDS.get(self.organism.strip().lower())
+        if expected is not None and int(self.species_taxid) != expected:
+            actual = _TAXID_NAMES.get(int(self.species_taxid))
+            actual_desc = f" ({actual})" if actual else ""
+            warnings.append(
+                f"organism is {self.organism!r} but species_taxid is {self.species_taxid}"
+                f"{actual_desc} — enrichment and gene lookups would use the wrong species. "
+                f"Set species_taxid: {expected}."
+            )
+
+        # An empty query means the literature agents retrieve nothing on-context at all.
+        if not self.resolved_keyword_query():
+            warnings.append(
+                "the literature query is empty — set cell_type / tissue / context_terms, "
+                "or the research step has nothing on-context to search for."
+            )
+
+        return warnings
 
     # ------------------------------------------------------------------ prompt hook
     def prompt_fields(self) -> Dict[str, str]:
