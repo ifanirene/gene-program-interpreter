@@ -1,45 +1,87 @@
 # Gene Program Interpreter (GPI)
 
-**Turn a list of weighted gene programs into a biological story — where every claim links to a real paper.**
+**Turn weighted gene programs into a biological story where every claim links to a real paper.**
 
-You give GPI your gene programs (from cNMF / NMF / consensus factorization of single-cell or
-Perturb-seq data) plus a short description of your experiment. GPI reads the literature for each
-program *in parallel*, checks that every citation is a real, resolvable paper, and writes an
-interactive HTML report. It **never invents citations**: an identifier either resolves to a real
-PMID/DOI or it is dropped.
+GPI interprets programs from cNMF, NMF, single-cell, or Perturb-seq data. It runs
+parallel Claude literature research, verifies every PMID/DOI, and produces an
+interactive HTML report. Unresolved citations are marked unsupported rather than
+presented as evidence.
 
-It is **tissue-agnostic** — the biology lives in a short `context` block you fill in (organism,
-tissue, cell type, conditions), not in the code. Liver, T cells, tumor, brain: same pipeline.
+The biology is tissue-agnostic: organism, tissue, cell type, and conditions live in a
+small context profile instead of the code.
 
----
+## Install first
+
+### Recommended: Claude Code plugin
+
+Use the plugin if you want Claude to validate the data, build the biological context,
+preview cost, run the pipeline, and present the report.
+
+This is not a choice between a skill and a pipeline: the **skill is the user interface;
+the Python pipeline is the engine**.
+
+Prerequisites:
+
+- Claude Code, signed in to the Claude account used for research
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for the isolated
+  Python runtime
+
+Install `uv` if needed:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Install GPI from this public GitHub marketplace:
+
+```bash
+claude plugin marketplace add ifanirene/gene-program-interpreter
+claude plugin install gene-program-interpreter@gpi
+```
+
+Restart Claude Code or run `/reload-plugins`. The first use creates an isolated Python
+environment; later runs reuse it.
+
+### Configure credentials
+
+Create `.env` in the directory where you will run the analysis:
+
+```dotenv
+ANTHROPIC_API_KEY=...          # Anthropic Batch: themes, annotation, presentation
+PUBMED_EMAIL=you@example.com   # required courtesy contact for NCBI/Crossref
+OPENALEX_API_KEY=...           # recommended; full OpenAlex verification coverage
+NCBI_API_KEY=...               # recommended; higher PubMed rate limit
+```
+
+Authentication is intentionally split:
+
+- Parallel literature agents use your **Claude login/subscription**.
+- Batch synthesis uses **`ANTHROPIC_API_KEY`**.
+
+No external MCP server is required. PubMed, OpenAlex, and Crossref tools run inside the
+pipeline.
 
 ## What you get
 
-A single self-contained `report.html`. Each program gets a plain-language title, its marker
-genes, mechanistic modules, the top enriched pathway, its regulators, and — if you have
-Perturb-seq data — young/aged style perturbation plots.
+The main output is a self-contained `report.html`. Each program gets a plain-language
+title, marker genes, mechanistic modules, enriched pathways, regulators, and linked
+evidence.
 
-![Program report — overview](docs/images/report_program.png)
+![Program report overview](docs/images/report_program.png)
 
-**Every claim is traceable.** Each mechanistic module lists the exact genes and PMIDs behind it,
-and an *Evidence used* line shows where the call came from (gene loadings, NCBI summaries,
-Perturb-seq regulators, STRING partners, pathway enrichment, and cited literature).
+Every mechanistic claim lists its genes and verified PMIDs/DOIs, plus the deterministic
+evidence used to support the interpretation.
 
 ![A module with resolvable citations and its evidence trail](docs/images/report_evidence.png)
 
-**Perturb-seq is built in.** If you provide regulator effects, the report shows which perturbations
-move each program, split by condition.
+If you provide Perturb-seq regulator effects, the report also shows which perturbations
+move each program, including condition-specific comparisons.
 
-![Perturbation effects — young vs aged volcano plots](docs/images/report_perturbation.png)
+![Perturbation effects across conditions](docs/images/report_perturbation.png)
 
----
+## What you provide
 
-## What you provide (inputs)
-
-### Minimum — one file
-
-A **gene-loading table** (CSV): one row per gene per program, with a gene name, a loading/score,
-and a program id.
+The minimum input is one gene-loading CSV with one row per gene per program:
 
 ```csv
 Name,Score,program_id
@@ -48,195 +90,145 @@ Car3,0.00093,1
 Cyp2e1,0.00089,1
 ```
 
-You **don't need to rename your columns** — GPI auto-detects common names:
+Common column names are detected automatically:
 
-| We need | …and accept any of these header names |
+| Required value | Accepted examples |
 |---|---|
-| gene name | `Name`, `Gene`, `Symbol`, `gene_name`, `gene_symbol`, `gene_id` |
-| loading/score | `Score`, `Loading`, `Weight`, `Value`, `gene_score` |
-| program id | `program_id`, `RowID`, `topic`, `factor`, `component`, `k`, `program` |
+| gene name | `Name`, `Gene`, `Symbol`, `gene_name`, `gene_symbol` |
+| loading | `Score`, `Loading`, `Weight`, `Value`, `gene_score` |
+| program | `program_id`, `RowID`, `topic`, `factor`, `component` |
 
-> **Check before you run anything** (free, reads your file, spends nothing):
-> ```bash
-> python -m gpi.run_pipeline --check-inputs --gene-loading your_loadings.csv
-> ```
-> It prints the detected columns, the number of programs, and the row count.
+Optional inputs add Perturb-seq regulator effects or cell-type enrichment.
 
-### Advanced — optional extras
+## First use in Claude
 
-Both are optional and make the report richer.
+Start Claude Code in the directory containing your data, then run:
 
-**1. Perturb-seq regulator effects** — turns on the perturbation plots and lets GPI name the
-regulators of each program. One CSV, or one file **per condition** (e.g. young / aged).
+```text
+/gene-program-interpreter:interpret path/to/gene_loading.csv
+```
 
-| We need | …accept | 
+You can also ask naturally:
+
+```text
+Interpret these cNMF programs in aged mouse hepatocytes: path/to/gene_loading.csv
+```
+
+Claude will:
+
+1. check the installation and input columns;
+2. propose the biological context for your review;
+3. show a dry-run plan and cost scope;
+4. ask before starting paid work;
+5. monitor the run and open the cited HTML report.
+
+For a first run, use 3–6 representative programs because research cost scales with the
+program count.
+
+## Standalone CLI installation
+
+Use the CLI directly if you want a scriptable workflow outside Claude Code:
+
+```bash
+uv tool install "gene-program-interpreter[progress] @ git+https://github.com/ifanirene/gene-program-interpreter.git"
+gpi doctor
+```
+
+For development:
+
+```bash
+git clone https://github.com/ifanirene/gene-program-interpreter.git
+cd gene-program-interpreter
+uv sync --extra dev --extra progress
+uv run pytest
+```
+
+`pip install -e .` still works for contributors, but it is not the recommended user
+installation.
+
+## Manual CLI workflow
+
+Validate input without spending anything:
+
+```bash
+gpi --check-inputs --gene-loading path/to/gene_loading.csv
+```
+
+Preview a run config:
+
+```bash
+gpi --config path/to/run.yaml --dry-run
+```
+
+Run deterministic enrichment without literature agents:
+
+```bash
+gpi --config path/to/run.yaml --no-research
+```
+
+Run the full pipeline:
+
+```bash
+gpi --config path/to/run.yaml
+```
+
+Outputs are written to the config's `output_dir`. Interrupted runs resume from
+`pipeline_state.json`.
+
+## Configure your own dataset
+
+The Claude skill creates the config interactively. For manual setup, start from
+[`configs/example_generic.yaml`](configs/example_generic.yaml) and change:
+
+- `inputs.gene_loading` — required weighted gene-program CSV;
+- `inputs.regulators` or `regulators_by_condition` — optional Perturb-seq effects;
+- `context` — organism, tissue, cell type, conditions, and normal cell functions;
+- `output_dir` and optional `programs` subset.
+
+The context terms are the highest-leverage research control. Use 6–10 phrases describing
+the cell type's normal biology, while keeping disease or perturbation emphasis in
+`conditions`.
+
+Run `gpi --check-inputs` first and `gpi --dry-run` before any paid run.
+
+## Cost and safety
+
+- `--check-inputs`, `--dry-run`, and `gpi doctor` make no paid API calls.
+- Literature research has a configurable per-program budget and concurrency limit.
+- The Claude skill asks for approval before starting paid work.
+- Runs cache completed steps, so network failures are resumable.
+
+## How it works
+
+| Layer | Role |
 |---|---|
-| program id | `program_id`, `program_name`, `topic`, … |
-| regulator gene | `target_name`, `target_gene`, `grna_target`, `regulator` |
-| effect size | `log2_fc`, `log2FC`, `lfc`, `fold_change` |
-| significance | `adj_pval`, `padj`, `fdr`, `q_value` (and/or a `significant` flag) |
+| Claude skill | Collects inputs, builds context, previews cost, launches and monitors |
+| Python pipeline | Runs deterministic processing, caching, verification, and reporting |
+| Claude Agent SDK | Runs one isolated literature-research session per program |
+| Anthropic Batch | Synthesizes themes, labels, and presentation text |
 
-Tab-separated (`.txt`) condition files are fine — point at them with `regulators_by_condition`
-(see the config below).
+## Repository layout
 
-**2. Cell-type enrichment** — `cell_type, program, log2_fc, fdr`. Adds which programs are enriched
-in which cell types.
-
-### Describe your biology (the `context` block)
-
-This is what steers the literature search. The most important field is **`context_terms`** — list
-6–10 phrases for *what your cell type normally does* (its normal biology), not a disease checklist.
-These reach every literature agent verbatim.
-
-```yaml
-context:
-  organism: mouse
-  species_taxid: 10090          # 10090 = mouse, 9606 = human (must match organism)
-  tissue: liver
-  cell_type: hepatocyte
-  conditions: [aging, MASLD]    # the disease / perturbation angle
-  context_terms:                # ← highest-leverage: normal-function vocabulary
-    - metabolic zonation
-    - xenobiotic and drug metabolism
-    - bile acid metabolism
-    - gluconeogenesis and glycogen storage
-    - nitrogen and urea metabolism
-    - lipid metabolism
-  assay: in vivo Perturb-seq
+```text
+.claude-plugin/   plugin and marketplace manifests
+skills/           distributable Claude skill
+bin/gpi           plugin runtime wrapper
+gpi/              deterministic pipeline and Anthropic Batch steps
+research/         parallel research agents, protocol, and citation verification
+configs/          example run configurations
+tests/            offline regression tests and fixtures
 ```
 
----
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for data contracts and the
+complete module map.
 
-## Two ways to run GPI
+## License
 
-Both do the same work. Pick whichever fits how you like to work.
-
-### Way 1 — Talk to Claude (the Skill) · easiest, recommended for most biologists
-
-If you use Claude Code, you don't have to write any config. Just point Claude at your file:
-
-> *"Interpret my gene programs in `path/to/loadings.csv` — human CD8 T cells, chronic infection."*
-
-Claude will: validate your file → **propose** the biology context and let you edit it →
-show a **cost preview** → run the pipeline in the background with a live progress view →
-open the finished report. You approve before anything is spent.
-
-You can steer scope in plain language — *"just do programs 20–25"*, *"add my young/aged regulator
-files"*, *"skip the literature step for a quick preview"*.
-
-### Way 2 — Run the pipeline yourself (terminal) · reproducible, scriptable
-
-Write a config once, preview it, then run it.
-
-```bash
-# 1. Preview — validates the config and prints the plan. Spends nothing.
-python -m gpi.run_pipeline --config configs/liver_demo.yaml --dry-run
-
-# 2. Full run — research on your Claude subscription, synthesis on API credit.
-python -m gpi.run_pipeline --config configs/liver_demo.yaml
-
-# Quick, free variant: enrichment + gene summaries only, no literature/LLM:
-python -m gpi.run_pipeline --config configs/liver_demo.yaml --no-research
-```
-
-The output (report, research audit, annotations) lands in the config's `output_dir/`. Runs
-**resume from cache**, so a dropped network connection is just re-runnable with the same command.
-
-**Making your own config** is easy — GPI can write one for you from your biology description:
-
-```bash
-# put your context: block in a small stub file (context.yaml), then:
-python -m gpi.run_pipeline --emit-config --context-file context.yaml \
-  --gene-loading your_loadings.csv \
-  --regulators-by-condition young=young.txt --regulators-by-condition aged=aged.txt \
-  --output-dir runs/my_run --programs 20,21,22,23,24,25 \
-  -o runs/my_run.yaml
-```
-
-It fills in schema-correct defaults and prints the resolved search framing so you can sanity-check
-it. Or copy [`configs/liver_demo.yaml`](configs/liver_demo.yaml) (or the non-liver
-[`configs/example_generic.yaml`](configs/example_generic.yaml)) and edit by hand.
-
-> **Tip:** for a first run, pick **3–6 programs** with `programs: [...]`, not the whole set.
-> Cost scales with the number of programs (see below).
-
----
-
-## One-time setup
-
-Python **3.10+**.
-
-```bash
-pip install -e .              # core install
-pip install -e ".[progress]"  # optional: adds the live terminal progress view
-```
-
-**Sign in (two logins, by design):**
-
-- **`claude login`** — the parallel literature agents run on your **Claude.ai subscription**.
-  (No subscription? add `research.auth: api` to your config to bill them to the API key instead.)
-- **`ANTHROPIC_API_KEY`** — the synthesis/labeling step uses the Anthropic **Batch** API.
-
-Put your keys in a `.env` file in the repo (loaded automatically):
-
-```bash
-ANTHROPIC_API_KEY=sk-ant-...
-PUBMED_EMAIL=you@example.com   # NCBI/Crossref courtesy contact — please set
-OPENALEX_API_KEY=...           # enables the OpenAlex citation check (PubMed+Crossref work without it)
-NCBI_API_KEY=...               # optional; speeds up PubMed lookups
-```
-
-There is **no literature database or MCP server to install** — GPI queries PubMed / OpenAlex /
-Crossref directly, and works headless.
-
----
-
-## Cost & safety
-
-- `--dry-run` and `--check-inputs` **spend nothing** — use them freely.
-- Literature research is capped **per program** (`research.max_budget_usd`, default \$1) and runs a
-  few programs at a time (`research.concurrency`). A 6-program run is a few dollars of research plus
-  the Batch synthesis.
-- Nothing paid runs until you confirm (in the Skill) or launch the full command (in the terminal).
-
----
-
-## Reference
-
-| Where | What |
-|---|---|
-| [`configs/liver_demo.yaml`](configs/liver_demo.yaml) | worked mouse-hepatocyte example |
-| [`configs/example_generic.yaml`](configs/example_generic.yaml) | non-liver (human CD8 T-cell) example |
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | full module map, data contracts, schemas |
-
-<details>
-<summary><b>How it works (for developers)</b></summary>
-
-Four executors, split by job and by billing:
-
-| Executor | Does what | Where |
-|---|---|---|
-| ① Skill agent | Turns your description into a `ContextProfile`, orchestrates, presents | `.claude/skills/gene-program-interpreter/` |
-| ② Research subagents | One isolated Claude Agent SDK session per program, MCP tool-using | `research/research_parallel.py` |
-| ③ Anthropic Batch | Annotation, program labels, presentation, theme | `gpi/anthropic_batch.py` |
-| ④ Deterministic scripts | Parsing, enrichment, bundles, **citation verification**, HTML render | `gpi/`, `research/{bundle,verify}.py` |
-
-**Guardrails:** literature research happens *only* in ② (never in code, which only *verifies*
-identifiers); parallelism is controlled in Python (asyncio + semaphore), never by a manager agent;
-the Agent SDK runs locally; **research bills the Claude.ai subscription, Batch bills API credit**.
-
-```
-gpi/          deterministic core + Anthropic-Batch transforms
-research/      parallel-research subsystem: schema, bundle, protocol, research_parallel, verify
-configs/       run configs
-docs/          ARCHITECTURE.md, images
-examples/      demo inputs;  tests/  pytest suite
-```
-</details>
+Gene Program Interpreter is open-source software under the OSI-approved
+[Apache License 2.0](LICENSE).
 
 ## Provenance
 
-The deterministic front-end and HTML renderer are generalized from ProgExplorer, standardized on
-the Anthropic API. The demo fixtures (`examples/liver_demo/`) are a mouse-hepatocyte in-vivo
-Perturb-seq dataset used purely to exercise the pipeline. The screenshots above are from a live
-run over programs 20–25 of that demo (123/123 citations resolved).
+The deterministic front end and HTML renderer are generalized from ProgExplorer and
+standardized on the Anthropic API. Demo fixtures are used only to exercise the pipeline;
+the report screenshots above come from a live demo run with 123 of 123 citations resolved.

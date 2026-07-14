@@ -1,14 +1,14 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "gene-program-interpreter"
 version = "0.1.0"
-description = "Tissue-agnostic Claude Skill that interprets weighted gene programs with parallel, auditable literature research."
+description = "Claude-first pipeline for interpreting weighted gene programs with parallel, auditable literature research."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
 dependencies = [
     # Deterministic front-end (vendored from ProgExplorer)
     "pandas",
@@ -43,8 +43,15 @@ progress = [
 [project.scripts]
 gpi = "gpi.run_pipeline:main"
 
+[project.urls]
+Homepage = "https://github.com/ifanirene/gene-program-interpreter"
+Repository = "https://github.com/ifanirene/gene-program-interpreter"
+
 [tool.setuptools]
 packages = ["gpi", "research"]
+
+[tool.setuptools.package-data]
+research = ["protocol.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

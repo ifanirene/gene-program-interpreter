@@ -95,7 +95,8 @@ def resolve_allowed_tools() -> List[str]:
 SUBMIT_SERVER_NAME = "gpi"
 SUBMIT_TOOL_NAME = "submit_result"
 
-# Repo root = parent of this package dir (research/..). Used to resolve .env + protocol.
+# Repo root = parent of this package dir (research/..). Used only as a development
+# fallback for .env; protocol.md is packaged alongside this module.
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 _PROTOCOL_PATH = Path(__file__).resolve().parent / "protocol.md"
 
@@ -113,15 +114,19 @@ _RESEARCH_ENV_SKIP = frozenset({"ANTHROPIC_API_KEY"})
 
 
 def load_env_file(
-    path: Path = _REPO_ROOT / ".env", skip: frozenset = _RESEARCH_ENV_SKIP
+    path: Optional[Path] = None, skip: frozenset = _RESEARCH_ENV_SKIP
 ) -> None:
-    """Populate ``os.environ`` from a repo ``.env`` (only keys not already set).
+    """Populate ``os.environ`` from the current project's ``.env``.
 
     Deliberately minimal (no dependency on python-dotenv). Never overwrites a key that is
     already present in the environment, so an explicitly-exported value wins. Keys in
     ``skip`` are never loaded (default: ANTHROPIC_API_KEY, so the research CLI uses the
     Claude.ai subscription rather than API credit).
     """
+    if path is None:
+        path = Path.cwd() / ".env"
+        if not path.exists() and (_REPO_ROOT / ".env").exists():
+            path = _REPO_ROOT / ".env"
     if not path.exists():
         return
     for raw in path.read_text(encoding="utf-8").splitlines():

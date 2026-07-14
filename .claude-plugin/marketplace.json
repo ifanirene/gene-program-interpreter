@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "gpi",
+  "owner": {
+    "name": "Gene Program Interpreter maintainers"
+  },
+  "metadata": {
+    "description": "Claude Code plugins for auditable gene-program interpretation"
+  },
+  "plugins": [
+    {
+      "name": "gene-program-interpreter",
+      "source": "./",
+      "description": "Interpret weighted gene programs with parallel literature agents and verified citations.",
+      "category": "life-sciences",
+      "tags": [
+        "gene-programs",
+        "single-cell",
+        "perturb-seq"
+      ]
+    }
+  ]
+}

@@ -6,10 +6,11 @@ or contradicts a task spec, **stop and ask the orchestrator** — do not guess.
 
 ## Mission
 
-A tissue-agnostic Claude **Skill** that interprets weighted gene programs (from
-cNMF/NMF/consensus factorization). It keeps ProgExplorer's deterministic fetches +
-HTML renderer, and replaces its **manual** literature step with **parallel Claude
-Agent SDK literature agents** (one per program) + a **deterministic evidence verifier**.
+A tissue-agnostic Claude Code **plugin** backed by an installable Python pipeline. The
+plugin skill interprets weighted gene programs (from cNMF/NMF/consensus factorization),
+while the pipeline keeps ProgExplorer's deterministic fetches + HTML renderer and replaces
+its **manual** literature step with **parallel Claude Agent SDK literature agents** (one per
+program) + a **deterministic evidence verifier**.
 
 ### Firm guardrails (never violate)
 1. **Literature research happens ONLY in the research agents, via MCP.** Deterministic
@@ -33,19 +34,19 @@ Agent SDK literature agents** (one per program) + a **deterministic evidence ver
 - **④ deterministic scripts** — parsing, fetches, bundle assembly, verify+dedup, HTML render.
 
 ## Environment & conventions
-- **Python:** `/Volumes/IF_PHAGE/conda_envs/perturb2/bin/python` (3.12). It already has
-  pandas, numpy, requests, tqdm, matplotlib, seaborn, PIL, markdown, yaml, jinja2, bs4,
-  pydantic, anthropic 0.54.0 (`messages.batches` present). **`claude-agent-sdk` is NOT yet
-  installed** (only `research/research_parallel.py` needs it).
+- **Python:** 3.10+. The Claude plugin uses `uv` to create an isolated, persistent
+  environment; `pyproject.toml` is the dependency source of truth and includes
+  `claude-agent-sdk`.
 - **Import & run convention:** `gpi` and `research` are packages. Use **relative imports
   within a package** (`from .column_mapper import ColumnMapper`). Vendored modules that had a
-  CLI keep an `argparse` `main()` and are invoked as `python -m gpi.<module> ...`
-  (NOT `python gpi/<module>.py`). Rewrite every ProgExplorer sibling import
+  CLI keep an `argparse` `main()`; users invoke the `gpi` entry point and the orchestrator
+  invokes internal modules as `python -m gpi.<module> ...` (NOT `python gpi/<module>.py`).
+  Rewrite every ProgExplorer sibling import
   `from column_mapper import X` → `from .column_mapper import X`.
-- **Env keys** live in the repo `.env` (ANTHROPIC_API_KEY, NCBI_API_KEY, OPENALEX_API_KEY).
-  Load via `os.environ`; the verifier's DOI check is **keyless** (CrossRef + doi.org).
-- **Verify every module imports** before handing back:
-  `PYTHONPATH=/Volumes/IF_PHAGE/gene-program-interpreter /Volumes/IF_PHAGE/conda_envs/perturb2/bin/python -c "import gpi.<module>"`
+- **Env keys** live in the analysis project's `.env` (ANTHROPIC_API_KEY, PUBMED_EMAIL,
+  NCBI_API_KEY, OPENALEX_API_KEY). Load via `os.environ`; the verifier's DOI check is
+  **keyless** (CrossRef + doi.org).
+- **Verify every module imports** before handing back with `uv run pytest`.
 - **Any LLM-touching test uses a cheap Anthropic model** (Haiku: `claude-haiku-4-5-20251001`)
   or mocks. Do not spend on Opus/Sonnet in tests.
 
