@@ -10,6 +10,9 @@ evidence.
 The biology is tissue-agnostic: organism, tissue, cell type, and conditions live in a small
 context profile instead of in the code.
 
+**[Pipeline walkthrough →](https://ifanirene.github.io/gene-program-interpreter/)** — a
+stage-by-stage tour of how a gene program becomes a cited report.
+
 > **GPI is a Claude Code plugin.** Claude checks your data, builds the biological context,
 > previews the cost, runs the pipeline, and walks you through the report. The skill is the
 > user interface; the Python pipeline is the engine — this is not a choice between them.
@@ -224,8 +227,9 @@ configs/          example run configurations
 tests/            offline regression tests and fixtures
 ```
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for data contracts and the complete
-module map.
+The [pipeline walkthrough](https://ifanirene.github.io/gene-program-interpreter/) illustrates
+these six stages end to end. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for data
+contracts and the complete module map.
 
 ## Development
 
