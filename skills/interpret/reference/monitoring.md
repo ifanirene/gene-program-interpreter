@@ -24,68 +24,67 @@ Silence is the bug. A moving clock is the fix.
 - `--progress plain` gives one clean ASCII line per event in the launch log. Use it — `rich`
   emits ANSI redraw codes that are unreadable when captured to a file.
 
-## Poll — every 45–60 s, in separate tool calls
+## Poll — one blocking `gpi watch` call, looped
 
-You cannot poll from inside the launch call. Each poll is its own tool call.
-
-**Two things to check, every time:**
-
-1. **Is the shell alive?** `BashOutput` on the launch shell's id. New lines = progress; the
-   shell exiting = the run finished (check the exit status).
-2. **What is the pipeline doing?** Read the snapshot.
+You cannot poll from inside the launch call. Poll with a **foreground** `gpi watch`: it blocks
+until something changes (or `--timeout`), prints the delta and a liveness verdict, and ends with
+a token. Looping it is the whole monitoring strategy.
 
 ```bash
-python3 -c '
-import json, pathlib, sys, time
-p = pathlib.Path(sys.argv[1]) / "progress.json"
-if not p.exists():
-    print("no progress.json yet - pipeline still starting"); sys.exit()
-d = json.loads(p.read_text())
-steps = d.get("steps", [])
-done = sum(1 for x in steps if x["status"] == "completed")
-print("status=%s  active=%s  steps=%d/%d  snapshot_age=%.0fs" % (
-    d.get("status"), d.get("active_step") or "-", done, len(steps),
-    time.time() - p.stat().st_mtime))
-if d.get("failed_step"):
-    print("FAILED STEP:", d["failed_step"])
-for x in steps:
-    if x.get("error"):
-        print("  error [%s]: %s" % (x["name"], x["error"]))
-r = d.get("research") or {}
-if r.get("n_programs"):
-    print("research: %s/%s done  cost=$%.2f" % (
-        r.get("n_done"), r["n_programs"], r.get("total_cost_usd") or 0))
-    for a in r.get("agents", []):
-        print("  %s: %s  turns=%s  tool=%s" % (
-            a["program_id"], a["status"], a.get("turns"), a.get("current_tool")))
-' runs/<name>
+"${CLAUDE_PLUGIN_ROOT}/bin/gpi" watch runs/<name> --until-change --timeout 55
 ```
 
-Tail the raw log when you need detail the snapshot does not carry:
+Why blocking, foreground, and short: a model has no timer. "Poll every 45 s" is unexecutable —
+nothing wakes you between calls, so you either spin-poll an unchanged file or go silent. A
+55-second blocking call *is* the wait, and 55 s is comfortably under the Bash 600 s ceiling.
 
-```bash
-tail -n 20 runs/<name>.launch.log
-```
+**The last line is a token. Obey it:**
 
-**REPORT EVERY POLL, EVEN WHEN NOTHING CHANGED.** *"Still on research: 2/3 done, P48 on turn 14,
-no change since last check, 6m12s elapsed"* is a **good** report. It tells the user the tool is
-alive, where it is, and that you are watching. Saying nothing for six minutes is the complaint.
-
-## The liveness table — get this exactly right
-
-This is subtle and it is where monitors go wrong.
-
-| Field | Means | How to read it |
+| Token | Meaning | Do |
 |---|---|---|
-| `updated_at` | last pipeline **event** | Can legitimately sit still for **7+ minutes** during healthy research while an agent thinks between tool calls. **NEVER conclude a hang from this.** |
-| `heartbeat_at` + `progress.json` **mtime** | last snapshot **write** | Advances ~1/s for as long as the process lives. **This — not `updated_at` — is the liveness signal.** |
-| `pid` | the pipeline process | `ps -p <pid>` settles any argument about whether it is alive |
-| `status` | `running` / `done` / `failed` | a `--progress off` run writes no snapshot at all |
-| `failed_step` | which step killed the run | report it verbatim |
-| `steps[].error` | **the actual failure reason** | report it verbatim; do not paraphrase into a guess |
+| `CONTINUE` | alive (a step advanced, or a healthy mid-think silence) | report the change, then call `gpi watch` again immediately |
+| `DONE` | finished | stop; present the report |
+| `FAILED` | a step failed and stopped the run | stop; read the printed error → playbook below |
+| `STALE` | process gone / snapshot frozen | → Gate 4; confirm against the launch log before any kill |
 
-The trap: `updated_at` is the *interesting* field, so it is the one you naturally watch — and it
-is the one that stalls harmlessly. Watch the **mtime**.
+`watch` also prints, every call, the active step + counter and a per-agent line with turns /
+cost / elapsed / idle / the current tool **and its query string**. That is your report material —
+read it back to the user. Tail the raw log only when you need something the snapshot does not
+carry: `tail -n 20 runs/<name>.launch.log`.
+
+For an interactive human at a terminal, `gpi watch runs/<name>` (no `--until-change`) is a live
+`top`-style view that repaints until the run ends.
+
+**REPORT EVERY POLL, EVEN WHEN NOTHING CHANGED.** *"Still on research: 2/3 done, P48 searching
+PubMed for 'Cldn5 blood-brain barrier', turn 14, 6m12s elapsed"* is a **good** report. Saying
+nothing for six minutes is the complaint.
+
+## The startup window — the first ~5 minutes are silent BY DESIGN
+
+On a cold machine, Python compiles the Agent SDK (~77 MB) and its dependencies to bytecode before
+the pipeline emits anything. `gpi watch` reports this honestly:
+
+- Before any event: a **countdown** (`Waiting for run output — 42s elapsed…`), token `CONTINUE`.
+- Once imports begin: a **`preflight k/n`** step naming the module being compiled.
+
+**Report it; do not investigate it; do NOT relaunch.** A relaunch into the same run directory is
+two pipelines writing one output dir. Removing the plotting stack (v0.2.1) shortened this window,
+but a cold first run on a shared filesystem can still take a few minutes.
+
+## Liveness — `gpi watch` owns it now
+
+`gpi watch` computes the verdict for you (process check via the pipeline's real `pid` +
+`progress.json` mtime), so you no longer hand-read the snapshot fields. The rule it encodes is
+still worth knowing, because it is where hand-monitoring always went wrong:
+
+| Signal | Means | The rule |
+|---|---|---|
+| `progress.json` **mtime** | last snapshot write (the pipeline rewrites it ~1/s while alive) | **This is liveness.** Fresh mtime ⇒ alive, even with zero new events. |
+| `updated_at` | last **event** | Can sit still 7+ min while a research agent thinks. **A frozen `updated_at` is NOT a hang** — `watch` returns `CONTINUE`. |
+| `failed_step` / `steps[].error` | the failure and its reason | reported verbatim in the `FAILED` output; never paraphrase into a guess |
+
+The trap that bit hand-monitors: `updated_at` is the *interesting* field, so it is the one you
+naturally watch — and it is the one that stalls harmlessly. `gpi watch` watches the mtime instead.
 
 ## Progress artifacts
 
@@ -98,7 +97,10 @@ Both live in `<output_dir>/`:
 | `pipeline_state.json` | durable step state — what a **resume** reads |
 | `../<name>.launch.log` | stdout/stderr of the run itself |
 
-## The nine steps
+## The steps
+
+A `preflight` import step (visible on a cold start as `preflight k/n`), then the nine pipeline
+steps:
 
 `string_enrichment` → `gene_summaries` → `bundle` → `research` → `verify` → `theme` →
 `annotate` → `presentation` → `html_report`

@@ -1005,8 +1005,12 @@ def generate_report(
     celltype_by_program = load_celltype_detail(celltype_file)
     volcano_df = None
     if volcano_csv and os.path.exists(volcano_csv):
+        # Sniff the separator (sep=None) exactly as --check-inputs, evidence_context, and the
+        # per-condition read above all do. A comma-only read here meant a tab-separated
+        # single-regulator file passed pre-flight with a ✓ and then silently rendered empty —
+        # the one read in the pipeline that did not honor the separator the rest promised.
         volcano_df = standardize_regulator_results(
-            pd.read_csv(volcano_csv),
+            pd.read_csv(volcano_csv, sep=None, engine="python"),
             significance_threshold=regulator_significance_threshold,
         )
     
@@ -1437,6 +1441,16 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
     const roleCls = r => r === "activator" ? "act" : "rep";
     const negLog = fdr => { const v = -Math.log10(parseFloat(fdr)); return isFinite(v) ? v : 0; };
     const cid = c => String(c).replace(/[^a-z0-9]/gi, "_");
+    // Unify the two ways perturbation data reaches a program: condition-keyed runs populate
+    // `condition_volcano` (one panel per condition); single-regulator runs populate `volcano`
+    // (one unnamed panel). The renderer only ever draws condition panels, so a single-regulator
+    // program used to show "No perturbation data" on top of real, parsed points. Fold `volcano`
+    // into a lone "perturbation" panel when there are no explicit conditions.
+    const condVolcanoOf = p => {
+        const cv = p.condition_volcano || {};
+        if (Object.keys(cv).length) return cv;
+        return (p.volcano && p.volcano.length) ? {"perturbation": p.volcano} : {};
+    };
     const asArray = v => Array.isArray(v) ? v : (v ? String(v).split(/,\s*/).filter(Boolean) : []);
     const cap = s => String(s).charAt(0).toUpperCase() + String(s).slice(1);
 
@@ -1556,7 +1570,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         const sortedPw = [...pathways].sort((a,b) => parseFloat(a.fdr) - parseFloat(b.fdr));
         const topPw = sortedPw[0];
         const maxNl = sortedPw.length ? Math.max(...sortedPw.map(x => negLog(x.fdr))) : 1;
-        const conds = Object.keys(p.condition_volcano || {}).sort();
+        const conds = Object.keys(condVolcanoOf(p)).sort();
 
         const regGlance = regs.length
             ? regs.map(r => `<span class="rg" style="color:var(--${r.role==="activator"?"down":"up"})">${esc(r.gene)}</span>`).join("")
@@ -1726,7 +1740,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
     }
 
     function drawVolcanoes(p){
-        const cv = p.condition_volcano || {};
+        const cv = condVolcanoOf(p);
         Object.keys(cv).sort().forEach(c => {
             const arr = cv[c] || [];
             const sigN = arr.filter(d => d.s).length;

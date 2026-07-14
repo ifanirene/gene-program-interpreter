@@ -4,23 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gene-program-interpreter"
-version = "0.2.0"
+version = "0.2.1"
 description = "Claude-first pipeline for interpreting weighted gene programs with parallel, auditable literature research."
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
 dependencies = [
-    # Deterministic front-end (vendored from ProgExplorer)
+    # Deterministic front-end. The report's plots are Plotly.js loaded from a CDN
+    # (gpi/html_report.py) and the enrichment figures are PNGs downloaded from the STRING
+    # API with `requests` (gpi/enrichment.py) — so NO server-side plotting stack is needed.
+    # matplotlib/seaborn/pillow/jinja2/beautifulsoup4 were inherited from ProgExplorer and
+    # imported nowhere; they pulled contourpy/kiwisolver (C++17) and broke `uv` installs on
+    # older toolchains (e.g. GCC 4.8.5). tests/test_dependencies.py keeps them from returning.
     "pandas",
     "numpy",
     "requests",
-    "matplotlib",
-    "seaborn",
-    "pillow",
     "markdown",
     "pyyaml",
-    "jinja2",
-    "beautifulsoup4",
     # Schema + LLM
     "pydantic>=2",
     "anthropic>=0.40",        # Message Batches API: client.messages.batches.*

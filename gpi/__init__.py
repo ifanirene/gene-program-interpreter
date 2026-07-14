@@ -8,4 +8,4 @@ Modules are importable as a package (e.g. ``from gpi.column_mapper import Column
 and the ones with a CLI are runnable as ``python -m gpi.<module> ...``.
 """
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"

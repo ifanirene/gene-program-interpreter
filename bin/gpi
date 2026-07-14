@@ -12,6 +12,22 @@ fi
 
 export UV_LINK_MODE=${UV_LINK_MODE:-copy}
 
+# One-time heads-up (stderr only — never stdout, so it can't pollute a `--progress` capture).
+# The first run on a machine assembles an isolated environment with uv; on a shared/NFS
+# filesystem that can take a few minutes and produces no output, which reads exactly like a
+# hang. Print the notice before handing off, once per cache home. If the marker dir is not
+# writable we simply print every time — harmless.
+_gpi_marker="${XDG_CACHE_HOME:-$HOME/.cache}/gpi/.uv-env-built"
+if [ ! -e "$_gpi_marker" ]; then
+    printf '%s\n' \
+        "gpi: assembling the isolated Python environment (uv). The first run on this machine" \
+        "     can take a few minutes on a shared filesystem and prints nothing while it builds;" \
+        "     later runs reuse the cache and start in seconds." >&2
+    if mkdir -p "$(dirname "$_gpi_marker")" 2>/dev/null; then
+        : > "$_gpi_marker" 2>/dev/null || true
+    fi
+fi
+
 # uv caches the isolated tool environment and reuses downloaded dependencies. `--isolated`
 # ensures an older globally installed `gpi` never shadows the plugin's bundled version.
 exec uv tool run --isolated --from "$PLUGIN_ROOT[progress]" gpi "$@"

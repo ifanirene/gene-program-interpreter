@@ -133,7 +133,9 @@ class SnapshotReducer:
             "research": {
                 "n_programs": 0,
                 "n_done": 0,
+                "n_incomplete": 0,
                 "concurrency": None,
+                "auth": None,
                 "total_cost_usd": 0.0,
                 "agents": {},
             },
@@ -141,6 +143,12 @@ class SnapshotReducer:
         self._step_index: Dict[str, int] = {}
         self._step_start_ts: Dict[str, float] = {}
         self._step_end_ts: Dict[str, float] = {}
+        # Per-agent clocks (mirror the per-step ones): start = first started/tool event,
+        # end = agent_finished, last_tool = most recent tool call. snapshot() turns these into
+        # elapsed_s and idle_s — idle_s is the signal that separates "thinking" from "wedged".
+        self._agent_start_ts: Dict[str, float] = {}
+        self._agent_end_ts: Dict[str, float] = {}
+        self._agent_last_tool_ts: Dict[str, float] = {}
 
     def _blank_step(self, name: str) -> Dict[str, Any]:
         return {"name": name, "status": "pending", "executor": None,
@@ -217,6 +225,7 @@ class SnapshotReducer:
             r = st["research"]
             r["n_programs"] = ev.get("n_programs", 0)
             r["concurrency"] = ev.get("concurrency")
+            r["auth"] = ev.get("auth")  # 'subscription' → total_cost_usd is NOT a $ charge
         elif t in (AGENT_QUEUED, AGENT_STARTED, AGENT_TOOL_CALL, AGENT_FINISHED):
             self._apply_agent(t, ev)
         elif t == RESEARCH_DONE:
@@ -228,27 +237,53 @@ class SnapshotReducer:
 
     def _apply_agent(self, t: str, ev: Dict[str, Any]) -> None:
         pid = str(ev.get("program_id"))
+        ts = ev.get("ts")
         agents = self.state["research"]["agents"]
         a = agents.setdefault(pid, {"program_id": pid, "status": "queued", "turns": None,
-                                    "cost_usd": None, "current_tool": None, "n_tools": 0})
+                                    "cost_usd": None, "current_tool": None,
+                                    "current_detail": None, "n_tools": 0, "error": None,
+                                    "n_mechanisms": None, "n_evidence": None})
         if t == AGENT_QUEUED:
             a["status"] = "queued"
         elif t == AGENT_STARTED:
             a["status"] = "running"
+            if ts is not None:
+                self._agent_start_ts.setdefault(pid, ts)
         elif t == AGENT_TOOL_CALL:
             a["status"] = "running"
             a["current_tool"] = ev.get("tool")
+            # The query string, redacted: a file_path/url arg can carry a key, and the skill
+            # reads progress.json straight back into an agent's context.
+            a["current_detail"] = redact_text(ev.get("detail")) if ev.get("detail") else None
             a["n_tools"] = int(a.get("n_tools") or 0) + 1
             if ev.get("turn") is not None:
                 a["turns"] = ev.get("turn")
+            if ts is not None:
+                self._agent_start_ts.setdefault(pid, ts)  # in case AGENT_STARTED was missed
+                self._agent_last_tool_ts[pid] = ts
         elif t == AGENT_FINISHED:
             a["status"] = ev.get("status", "done")
             if ev.get("num_turns") is not None:
                 a["turns"] = ev.get("num_turns")
             a["cost_usd"] = ev.get("cost_usd")  # may be None on subscription auth
             a["current_tool"] = None
+            a["current_detail"] = None
+            # The failure reason — dropped before, so an 'incomplete' agent that fell back to a
+            # deterministic result looked identical to a cheap success. Redact for the same
+            # reason as a step error.
+            a["error"] = redact_text(ev.get("error")) if ev.get("error") else None
+            if ev.get("n_mechanisms") is not None:
+                a["n_mechanisms"] = ev.get("n_mechanisms")
+            if ev.get("n_evidence") is not None:
+                a["n_evidence"] = ev.get("n_evidence")
+            if ts is not None:
+                self._agent_end_ts[pid] = ts
         r = self.state["research"]
         r["n_done"] = sum(1 for x in agents.values() if x["status"] in _AGENT_DONE_STATES)
+        # A program that fell back counts as done but NOT healthy; surface it so '3/3 done'
+        # cannot silently hide three failures.
+        r["n_incomplete"] = sum(1 for x in agents.values()
+                                if x["status"] in ("incomplete", "failed"))
         r["total_cost_usd"] = round(
             sum(float(x["cost_usd"]) for x in agents.values()
                 if isinstance(x.get("cost_usd"), (int, float))), 4)
@@ -277,7 +312,23 @@ class SnapshotReducer:
         now = time.time() if now is None else now
         research = dict(st["research"])
         agents = research["agents"]
-        research["agents"] = [agents[k] for k in sorted(agents, key=lambda k: (len(k), k))]
+        agent_list: List[Dict[str, Any]] = []
+        for k in sorted(agents, key=lambda k: (len(k), k)):
+            ag = dict(agents[k])
+            start = self._agent_start_ts.get(k)
+            end = self._agent_end_ts.get(k)
+            ag["elapsed_s"] = (
+                round(max(0.0, (end if end is not None else now) - start), 1)
+                if start is not None else None
+            )
+            # Idle only means something for a live agent: seconds since its last tool call.
+            last = self._agent_last_tool_ts.get(k)
+            ag["idle_s"] = (
+                round(max(0.0, now - last), 1)
+                if ag.get("status") == "running" and last is not None else None
+            )
+            agent_list.append(ag)
+        research["agents"] = agent_list
         steps: List[Dict[str, Any]] = []
         for s in st["steps"]:
             step = dict(s)
@@ -312,6 +363,63 @@ def _short_err(err: Any, limit: int = 200) -> str:
     return text if len(text) <= limit else text[: limit - 1] + "…"
 
 
+def _fmt_dur(seconds: Any) -> str:
+    """Compact human duration: ``45s`` / ``6m12s`` / ``1h03m``."""
+    if not isinstance(seconds, (int, float)):
+        return "—"
+    s = int(seconds)
+    if s < 60:
+        return f"{s}s"
+    if s < 3600:
+        return f"{s // 60}m{s % 60:02d}s"
+    return f"{s // 3600}h{(s % 3600) // 60:02d}m"
+
+
+def _agent_activity(a: Dict[str, Any], limit: int = 60) -> str:
+    """What an agent is doing / did, for the table's last column.
+
+    Running → the tool and its query (``search_pubmed · "Madcam1 brain endothelial …"``);
+    finished-ok → the yield (``3 mech · 12 evid``); fell-back → the reason. This is what makes
+    the agent table worth reading instead of a row of ``search_pubmed``."""
+    status = a.get("status")
+    if status in ("incomplete", "failed") and a.get("error"):
+        return _short_err(a["error"], limit=limit + 20)
+    if status in ("ok", "done"):
+        parts = []
+        if a.get("n_mechanisms") is not None:
+            parts.append(f"{a['n_mechanisms']} mech")
+        if a.get("n_evidence") is not None:
+            parts.append(f"{a['n_evidence']} evid")
+        return " · ".join(parts) if parts else "done"
+    tool = a.get("current_tool") or "—"
+    detail = a.get("current_detail")
+    return f"{tool} · {_short_err(detail, limit=limit)}" if detail else tool
+
+
+def _agent_elapsed_cell(a: Dict[str, Any]) -> str:
+    """Elapsed, plus an idle note while running (idle = seconds since the last tool call —
+    the signal that separates a thinking agent from a wedged one)."""
+    base = _fmt_dur(a.get("elapsed_s"))
+    idle = a.get("idle_s")
+    if a.get("status") == "running" and isinstance(idle, (int, float)) and idle >= 30:
+        return f"{base} · idle {_fmt_dur(idle)}"
+    return base
+
+
+def _research_footer(r: Dict[str, Any]) -> str:
+    """One-line research summary shared by the renderers. Names incomplete programs and labels
+    subscription spend honestly (``total_cost_usd`` is not a dollar charge on subscription auth)."""
+    n_done, n_prog = r.get("n_done", 0), r.get("n_programs", 0)
+    inc = r.get("n_incomplete", 0)
+    inc_s = f" ({inc} incomplete)" if inc else ""
+    cost = _fmt_cost(r.get("total_cost_usd"))
+    if r.get("auth") == "subscription":
+        cost_s = f"{cost} · Agent SDK on Claude.ai subscription"
+    else:
+        cost_s = f"{cost} total"
+    return f"{n_done}/{n_prog} programs done{inc_s} · {cost_s}"
+
+
 def render_markdown(snap: Dict[str, Any]) -> str:
     """Render a snapshot as a markdown step-checklist + (during research) an agent table."""
     lines: List[str] = []
@@ -331,13 +439,13 @@ def render_markdown(snap: Dict[str, Any]) -> str:
     r = snap.get("research") or {}
     agents = r.get("agents") or []
     if agents:
-        md += "\n\n| Program | Status | Turns | Cost | Current tool |\n|---|---|---|---|---|\n"
+        md += "\n\n| Program | Status | Turns | Cost | Elapsed | Activity |\n|---|---|---|---|---|---|\n"
         for a in agents:
             turns = "—" if a.get("turns") is None else a["turns"]
-            tool = a.get("current_tool") or "—"
-            md += f"| {a.get('program_id')} | {a.get('status')} | {turns} | {_fmt_cost(a.get('cost_usd'))} | {tool} |\n"
-        md += (f"\n_{r.get('n_done', 0)}/{r.get('n_programs', 0)} programs done "
-               f"· {_fmt_cost(r.get('total_cost_usd'))} total_")
+            activity = _agent_activity(a).replace("|", "\\|")
+            md += (f"| {a.get('program_id')} | {a.get('status')} | {turns} | "
+                   f"{_fmt_cost(a.get('cost_usd'))} | {_agent_elapsed_cell(a)} | {activity} |\n")
+        md += f"\n_{_research_footer(r)}_"
     return md
 
 
@@ -358,7 +466,9 @@ def render_txt(snap: Dict[str, Any]) -> str:
     for a in (r.get("agents") or []):
         out.append(f"    - {a.get('program_id')}: {a.get('status')} "
                    f"turns={a.get('turns')} cost={_fmt_cost(a.get('cost_usd'))} "
-                   f"tool={a.get('current_tool') or '-'}")
+                   f"elapsed={_agent_elapsed_cell(a)} · {_agent_activity(a)}")
+    if r.get("agents"):
+        out.append(f"    {_research_footer(r)}")
     return "\n".join(out)
 
 
@@ -380,10 +490,14 @@ def _plain_line(ev: Dict[str, Any]) -> Optional[str]:
         return f"[research] {ev.get('program_id')} started"
     if t == AGENT_TOOL_CALL:
         turn = f" (turn {ev.get('turn')})" if ev.get("turn") is not None else ""
-        return f"[research] {ev.get('program_id')} → {ev.get('tool')}{turn}"
+        detail = ev.get("detail")
+        detail_s = f' "{_short_err(redact_text(str(detail)), limit=120)}"' if detail else ""
+        return f"[research] {ev.get('program_id')} → {ev.get('tool')}{turn}{detail_s}"
     if t == AGENT_FINISHED:
+        err = ev.get("error")
+        err_s = f" — {_short_err(redact_text(str(err)), limit=120)}" if err else ""
         return (f"[research] {ev.get('program_id')} finished {ev.get('status', 'done')} "
-                f"turns={ev.get('num_turns')} cost={_fmt_cost(ev.get('cost_usd'))}")
+                f"turns={ev.get('num_turns')} cost={_fmt_cost(ev.get('cost_usd'))}{err_s}")
     if t == RESEARCH_DONE:
         n = ev.get("n_results")
         return f"[research] done ({n} result(s))" if n is not None else "[research] done"
@@ -463,13 +577,12 @@ class RichRenderer:
         if agents:
             at = Table(title=None, expand=False, pad_edge=False)
             at.add_column("Program"); at.add_column("Status"); at.add_column("Turns", justify="right")
-            at.add_column("Cost", justify="right"); at.add_column("Current tool")
+            at.add_column("Cost", justify="right"); at.add_column("Elapsed"); at.add_column("Activity")
             for a in agents:
                 turns = "—" if a.get("turns") is None else str(a["turns"])
                 at.add_row(str(a.get("program_id")), str(a.get("status")), turns,
-                           _fmt_cost(a.get("cost_usd")), a.get("current_tool") or "—")
-            footer = Text(f"{r.get('n_done', 0)}/{r.get('n_programs', 0)} programs done · "
-                          f"{_fmt_cost(r.get('total_cost_usd'))} total", style="dim")
+                           _fmt_cost(a.get("cost_usd")), _agent_elapsed_cell(a), _agent_activity(a))
+            footer = Text(_research_footer(r), style="dim")
             renderables += [at, footer]
         return Group(*renderables)
 

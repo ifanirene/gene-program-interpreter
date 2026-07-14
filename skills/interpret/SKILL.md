@@ -40,6 +40,23 @@ moves on. That is exactly how the last run spent the user's money without permis
 If `gpi` is missing, the plugin runtime is incomplete — point to
 `${CLAUDE_PLUGIN_ROOT}/README.md` and stop. Fix any failed check before continuing.
 
+**`doctor` prints the exact `.env` file it loaded and the fix for any missing key.** The two
+keys a paid run *requires* are `ANTHROPIC_API_KEY` (batch synthesis) and `PUBMED_EMAIL`
+(NCBI/Crossref). If `doctor` shows either as ✗, **relay its one-line fix verbatim to the user**
+— it already contains the absolute path, e.g.:
+
+```
+✗ ANTHROPIC_API_KEY is missing (Anthropic Batch synthesis)
+    → add it:  echo 'ANTHROPIC_API_KEY=sk-ant-…' >> /abs/path/.env
+```
+
+Tell them to put their real key after the `=`, then re-run `doctor`. Do **not** proceed to any
+paid gate while a required key is ✗ — the run will die mid-way at the batch step and waste the
+research spend that came before it. (The user enters their own key; never ask them to paste it to
+you.) A `doctor` that reports "no .env found" means their keys live somewhere `gpi` did not look —
+`gpi` searches the working directory and every parent, then `$CLAUDE_PLUGIN_ROOT`; the simplest
+fix is a `.env` in the directory they run from.
+
 ## Gate 1 — INPUTS (`AskUserQuestion`)
 
 **Glob the data directory before you ask anything.** Search for `*loading*`, `*regulat*`,
@@ -141,7 +158,14 @@ you passed the flag, you are on an older build — set it by hand under `inputs:
 "${CLAUDE_PLUGIN_ROOT}/bin/gpi" --config runs/<name>.yaml --dry-run
 ```
 
-Show the resolved framing, the step list, and the **cost scope**:
+**Show the user the resolved input paths from the dry-run header.** It now lists every input
+file — gene loading, regulators, each `regulators[<condition>]`, cell-type enrichment — as an
+**absolute path with a `[✓]`/`[✗ MISSING]` check**, plus the `output_dir`, the exact `.env` in
+effect, and per-key credential status. This is the user's one chance to catch a wrong or
+unmounted file (a `✗ MISSING`, or the right name in the wrong directory) before paying. Read the
+paths back to them; do not just say "inputs look fine."
+
+Then show the resolved framing, the step list, and the **cost scope**:
 
 > **`research.max_budget_usd` is a PER-PROGRAM (per-session) cap, not a total.** The worst case
 > is `max_budget_usd × n_programs`. At the default `1.0`, a 20-program run can cost **$20**, not
@@ -174,49 +198,50 @@ run this in the foreground. A foreground call blocks you for 15–25 minutes and
   > runs/<name>.launch.log 2>&1
 ```
 
-Then poll **every 45–60 s in separate, subsequent tool calls** — you cannot poll from inside
-the launch call. Each poll: confirm the background shell is alive (`BashOutput`), then read the
-snapshot:
+Then **watch it with a blocking poll** — one foreground `gpi watch` call, looped. Each call
+sleeps until something happens (or 55 s), prints what changed and whether the run is alive, and
+ends with a single token you obey. You **cannot** poll from inside the launch call; `watch` is a
+separate, read-only process that folds the same progress log.
 
 ```bash
-python3 -c '
-import json, pathlib, sys, time
-p = pathlib.Path(sys.argv[1]) / "progress.json"
-if not p.exists():
-    print("no progress.json yet - pipeline still starting"); sys.exit()
-d = json.loads(p.read_text())
-steps = d.get("steps", [])
-done = sum(1 for x in steps if x["status"] == "completed")
-print("status=%s  active=%s  steps=%d/%d  snapshot_age=%.0fs" % (
-    d.get("status"), d.get("active_step") or "-", done, len(steps),
-    time.time() - p.stat().st_mtime))
-if d.get("failed_step"):
-    print("FAILED STEP:", d["failed_step"])
-for x in steps:
-    if x.get("error"):
-        print("  error [%s]: %s" % (x["name"], x["error"]))
-r = d.get("research") or {}
-if r.get("n_programs"):
-    print("research: %s/%s done  cost=$%.2f" % (
-        r.get("n_done"), r["n_programs"], r.get("total_cost_usd") or 0))
-    for a in r.get("agents", []):
-        print("  %s: %s  turns=%s  tool=%s" % (
-            a["program_id"], a["status"], a.get("turns"), a.get("current_tool")))
-' runs/<name>
+"${CLAUDE_PLUGIN_ROOT}/bin/gpi" watch runs/<name> --until-change --timeout 55
 ```
 
-**REPORT EVERY POLL, EVEN WHEN NOTHING CHANGED.** Silence *is* the complaint. A moving clock is
-the fix. *"Research: 2/3 programs done, P48 on turn 14, 6m12s elapsed"* beats saying nothing.
+Run this in the **foreground** (NOT `run_in_background`). It is short (≤ 55 s) so it never
+approaches the Bash 600 s ceiling, and blocking is the whole point: it is what actually makes
+55 s pass, so you are not spin-polling an unchanged snapshot or, worse, going silent.
 
-**Read liveness correctly — this is subtle and it is where monitors go wrong:**
+**The last line of the output is a token. Obey it:**
 
-| Field | Means | How to read it |
+| Token | Meaning | Do |
 |---|---|---|
-| `updated_at` | last pipeline **event** | Can legitimately sit still for **7+ minutes** during healthy research while an agent thinks. **NEVER conclude a hang from this.** |
-| `heartbeat_at` + `progress.json` **mtime** | last snapshot **write** | Advances ~1/s while the process lives. **This is the liveness signal.** |
-| `error` / `failed_step` | the actual failure reason | Report it verbatim; do not paraphrase. |
+| `CONTINUE` | alive — a step advanced, or it is healthily mid-think | Report what changed, then **call `gpi watch` again immediately.** |
+| `DONE` | run finished | Stop polling → §5. |
+| `FAILED` | a step failed and stopped the run | Stop polling. Read the printed error → failure playbook. |
+| `STALE` | process gone / snapshot frozen | → **Gate 4**. Confirm against `runs/<name>.launch.log` before any kill. |
 
-Nine steps, in order: `string_enrichment`, `gene_summaries`, `bundle`, `research`, `verify`,
+**Your turn does not end while the run is alive.** There is no timer that will wake you; if you
+stop calling `gpi watch`, the user sees silence — and silence is the entire complaint. On
+`CONTINUE`, always loop.
+
+**REPORT EVERY POLL, EVEN WHEN NOTHING CHANGED.** The `watch` output hands you exactly what to
+say: the active step and its counter, and per-agent turns / cost / elapsed / the current tool
+**and its query** — e.g. *"P48 is searching PubMed for 'Madcam1 brain endothelial venous
+identity', turn 14, 6m12s elapsed."* A moving clock is the fix.
+
+**The first ~5 minutes have no snapshot BY DESIGN.** On a cold machine Python compiles the Agent
+SDK and its dependencies to bytecode before the first event. `gpi watch` reports this as a
+countdown, then as a `preflight k/n` step once imports begin. **Report the countdown; do NOT
+investigate it; do NOT relaunch** — a second launch into the same run directory is two pipelines
+fighting over one output dir.
+
+`gpi watch` owns the liveness verdict now (process check + snapshot mtime), so you no longer
+hand-read `updated_at` vs `heartbeat_at`. The rule it encodes still holds and is worth knowing: a
+frozen `updated_at` during research is an agent **thinking**, not a hang — `watch` returns
+`CONTINUE`, and a failure always names its step and error verbatim.
+
+Ten steps run in order — a `preflight` import step, then the nine pipeline steps:
+`string_enrichment`, `gene_summaries`, `bundle`, `research`, `verify`,
 `theme`, `annotate`, `presentation`, `html_report`.
 
 **Only `research` is degradable.** `verify` failing **stops the pipeline** — deliberately.

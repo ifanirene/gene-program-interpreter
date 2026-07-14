@@ -335,6 +335,33 @@ def _summarize_args(args: Any, limit: int = 240) -> str:
     return s if len(s) <= limit else s[: limit - 3] + "..."
 
 
+# Keys, in priority order, whose value is the thing a human wants to see for a literature tool
+# call — the actual query, the DOI/PMID being resolved, the file being read.
+_DETAIL_KEYS = ("query", "term", "search", "doi", "pmid", "pmids", "ids", "id",
+                "file_path", "path", "url", "name")
+
+
+def _tool_detail(args: Any, limit: int = 160) -> str:
+    """The one human-relevant field of a tool call, for the LIVE event stream.
+
+    The 160-char cap is load-bearing, not cosmetic. ``agent_tool_call`` events are appended to
+    the shared ``progress.jsonl`` by a bare ``O_APPEND`` ``os.write`` (``emit_progress``), and
+    cross-process write atomicity holds only for lines below ``PIPE_BUF`` (4096 B). Concurrent
+    agent sessions share that one log, so an unbounded argument — a long query string, a pasted
+    blob — could tear interleaved writes and corrupt the fold. Cap here, at the source.
+
+    Turns ``P48 → search_pubmed (turn 14)`` into ``… "Madcam1 brain endothelial venous
+    identity"`` — the difference between a progress bar and watching the science happen.
+    """
+    if isinstance(args, dict):
+        for key in _DETAIL_KEYS:
+            val = args.get(key)
+            if val:
+                s = " ".join(str(val).split())
+                return s if len(s) <= limit else s[: limit - 1] + "…"
+    return _summarize_args(args, limit=limit)
+
+
 def _write_json(path: Path, obj: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(obj, indent=2, default=str), encoding="utf-8")
@@ -425,12 +452,14 @@ async def _drive_once(
                             submit_holder["payload"] = block.input
                             submit_holder["calls"] = submit_holder.get("calls", 0) + 1
                         elif progress_cb is not None:
-                            # A literature query — surface it live (fire-and-forget).
+                            # A literature query — surface it live, WITH what it asked for
+                            # (capped in _tool_detail so the shared jsonl line stays atomic).
                             try:
                                 progress_cb("agent_tool_call", {
                                     "program_id": program_id,
                                     "tool": block.name.replace("mcp__", "").replace("__", "."),
                                     "turn": len(tool_trace),
+                                    "detail": _tool_detail(block.input),
                                 })
                             except Exception:
                                 pass

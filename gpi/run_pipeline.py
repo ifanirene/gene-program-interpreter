@@ -59,6 +59,7 @@ from .progress import (
     RUN_DONE,
     RUN_START,
     STEP_DONE,
+    STEP_PROGRESS,
     STEP_START,
     get_emitter,
     make_emitter,
@@ -72,8 +73,35 @@ logger = logging.getLogger("gpi.pipeline")
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def load_env_file(path: Optional[Path] = None) -> None:
-    """Populate ``os.environ`` from ``.env`` (only keys not already set).
+def env_search_candidates() -> List[Path]:
+    """The ordered ``.env`` locations ``load_env_file`` tries, first match wins.
+
+    The project's own ``.env`` must win, so we walk **upward** from the current directory the
+    way git finds ``.git`` — the SCG failure was a ``.env`` one level above where the user ran
+    ``gpi``, which the old cwd-only lookup missed. After the working tree we try the installed
+    plugin dir (``$CLAUDE_PLUGIN_ROOT``) and finally the source checkout (dev fallback).
+    """
+    candidates: List[Path] = []
+    seen: set = set()
+
+    def add(p: Path) -> None:
+        rp = p.resolve()
+        if rp not in seen:
+            seen.add(rp)
+            candidates.append(rp)
+
+    cwd = Path.cwd().resolve()
+    for directory in (cwd, *cwd.parents):
+        add(directory / ".env")
+    plugin_root = os.environ.get("CLAUDE_PLUGIN_ROOT")
+    if plugin_root:
+        add(Path(plugin_root) / ".env")
+    add(_REPO_ROOT / ".env")
+    return candidates
+
+
+def load_env_file(path: Optional[Path] = None) -> Optional[Path]:
+    """Populate ``os.environ`` from ``.env`` (only keys not already set). Return the file used.
 
     The runner spawns most steps as subprocesses (``python -m gpi.theme_representation``,
     ``gpi.evidence_context``, ``gpi.anthropic_batch``, ...) that read ``ANTHROPIC_API_KEY``
@@ -82,14 +110,17 @@ def load_env_file(path: Optional[Path] = None) -> None:
     including a resumed run that starts *after* the research step (previously only the
     research step loaded ``.env``, so ``--start-from theme`` in a fresh process failed).
     Mirrors ``research.research_parallel.load_env_file`` without importing the Agent SDK.
+
+    Returns the path actually loaded, or ``None`` if no ``.env`` was found — so ``doctor`` can
+    tell the user exactly which file supplied the keys (or which locations it searched).
     """
-    if path is None:
-        path = Path.cwd() / ".env"
-        if not path.exists() and (_REPO_ROOT / ".env").exists():
-            path = _REPO_ROOT / ".env"
-    if not path.exists():
-        return
-    for raw in path.read_text(encoding="utf-8").splitlines():
+    if path is not None:
+        chosen: Optional[Path] = path if path.exists() else None
+    else:
+        chosen = next((c for c in env_search_candidates() if c.exists()), None)
+    if chosen is None:
+        return None
+    for raw in chosen.read_text(encoding="utf-8").splitlines():
         line = raw.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
@@ -98,6 +129,7 @@ def load_env_file(path: Optional[Path] = None) -> None:
         val = val.strip().strip('"').strip("'")
         if key and key not in os.environ:
             os.environ[key] = val
+    return chosen
 
 # The one canonical step order. (pipeline_state.STEP_NAMES is the legacy ProgExplorer
 # list; we drive our own order here and let mark_step lazily create entries.)
@@ -396,7 +428,12 @@ def _run_subprocess(argv: List[str], dry_run: bool) -> None:
     _log_cmd(argv)
     if dry_run:
         return
-    result = subprocess.run(argv)
+    # PYTHONUNBUFFERED=1 so a child step's stdout reaches a redirected log line-by-line instead
+    # of sitting in a 4-8 KB block buffer until the step ends. The parent's own progress
+    # renderer already flushes; the children were the ones going dark when captured to a file
+    # (misdiagnosed in docs/INSTALLATION_ISSUES_SCG.md Issue 5 as a parent-side buffering bug).
+    env = {**os.environ, "PYTHONUNBUFFERED": "1"}
+    result = subprocess.run(argv, env=env)
     if result.returncode != 0:
         raise StepError(
             f"subprocess failed (exit {result.returncode}): "
@@ -541,7 +578,8 @@ def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
     emitter = get_emitter()
     concurrency = int(cfg.research.get("concurrency", 4))
     if emitter is not None:
-        emitter.emit(RESEARCH_START, {"n_programs": len(bundle_paths), "concurrency": concurrency})
+        emitter.emit(RESEARCH_START, {"n_programs": len(bundle_paths),
+                                      "concurrency": concurrency, "auth": auth})
     try:
         written = asyncio.run(
             _run_research(
@@ -780,24 +818,50 @@ def step_is_gated(step: str, cfg: PipelineConfig, flags: Flags) -> Optional[str]
     return None
 
 
-def preflight_imports(active_steps: List[str], cfg: PipelineConfig, flags: Flags) -> None:
+def preflight_imports(
+    active_steps: List[str],
+    cfg: PipelineConfig,
+    flags: Flags,
+    emitter: Optional[Any] = None,
+) -> None:
     """Import every module the planned steps need, before any paid work starts.
 
     A missing module used to surface only when the step that needed it ran — for the
     verifier, that was *after* the research step had already been paid for, and the failure
     was reported as a bad agent payload rather than a broken install. Importing here turns a
     packaging regression into a $0 failure at startup with an honest error message.
+
+    This is also the pipeline's longest silence: on a cold machine Python compiles the Agent
+    SDK (~77 MB) and its transitive deps to bytecode here, which can take minutes on a shared
+    filesystem while nothing else has happened yet. So when an ``emitter`` is given we surface
+    it as a ``preflight`` step with a per-module counter — the difference between "hung" and
+    "importing 7/12 research.research_parallel". ``preflight`` is deliberately NOT in
+    ``STEP_ORDER`` or ``pipeline_state``: it is pure startup, never resumed or skipped.
     """
+    targets = [
+        (step, module)
+        for step in active_steps
+        if not step_is_gated(step, cfg, flags)
+        for module in STEP_MODULES.get(step, [])
+    ]
+    total = len(targets)
+    if emitter is not None:
+        emitter.emit(STEP_START, {"step": "preflight", "executor": "import"})
     broken: List[str] = []
-    for step in active_steps:
-        if step_is_gated(step, cfg, flags):
-            continue
-        for module in STEP_MODULES.get(step, []):
-            try:
-                importlib.import_module(module)
-            except Exception as exc:  # noqa: BLE001 — any import failure is fatal here
-                broken.append(f"  {step:<17} needs {module}\n      {type(exc).__name__}: {exc}")
+    for i, (step, module) in enumerate(targets, start=1):
+        # Emit BEFORE the import: the import is the slow part, so this names the module that is
+        # compiling right now, not the one that just finished.
+        if emitter is not None:
+            emitter.emit(STEP_PROGRESS,
+                         {"step": "preflight", "current": i, "total": total, "detail": module})
+        try:
+            importlib.import_module(module)
+        except Exception as exc:  # noqa: BLE001 — any import failure is fatal here
+            broken.append(f"  {step:<17} needs {module}\n      {type(exc).__name__}: {exc}")
     if broken:
+        if emitter is not None:
+            emitter.emit(STEP_DONE, {"step": "preflight", "status": "failed",
+                                     "error": "; ".join(b.split("\n")[-1].strip() for b in broken)})
         raise SystemExit(
             "Install is incomplete — these modules could not be imported:\n\n"
             + "\n".join(broken)
@@ -805,6 +869,8 @@ def preflight_imports(active_steps: List[str], cfg: PipelineConfig, flags: Flags
             "file it needs at runtime.\nReinstall the plugin; if it persists, please report it "
             "with the error above."
         )
+    if emitter is not None:
+        emitter.emit(STEP_DONE, {"step": "preflight", "status": "completed"})
 
 
 # ---------------------------------------------------------------------------
@@ -893,15 +959,37 @@ def print_plan(
     active_steps: List[str],
     state: ps.PipelineState,
 ) -> None:
+    def _fmt_input(label: str, p: Any) -> str:
+        if p is None:
+            return f"{label:<20}: (none)"
+        pth = Path(p)
+        mark = "✓" if pth.exists() else "✗ MISSING"
+        return f"{label:<20}: {pth.resolve()}  [{mark}]"
+
     print("=" * 78)
     print("GENE PROGRAM INTERPRETER — resolved run plan (DRY RUN, nothing executed)")
     print("=" * 78)
-    print(f"config      : {cfg.config_path}")
-    print(f"output_dir  : {paths.out}")
-    print(f"gene_loading: {cfg.gene_loading}")
-    print(f"regulators  : {cfg.regulators}")
-    print(f"programs    : {cfg.programs if cfg.programs is not None else 'ALL'}")
-    print(f"config_hash : {cfg.config_hash()[:16]}")
+    print(f"{'config':<20}: {Path(cfg.config_path).resolve() if cfg.config_path else '(none)'}")
+    print(f"{'output_dir':<20}: {paths.out.resolve()}")
+    # Every input path the run will read, absolute and existence-checked — including the two
+    # (celltype_enrichment, regulators_by_condition) the old header omitted, which are exactly
+    # the ones most likely to be silently wrong.
+    print(_fmt_input("gene_loading", cfg.gene_loading))
+    print(_fmt_input("regulators", cfg.regulators))
+    for cond, path in (cfg.regulators_by_condition or {}).items():
+        print(_fmt_input(f"regulators[{cond}]", path))
+    print(_fmt_input("celltype_enrichment", getattr(cfg, "celltype_enrichment", None)))
+    print(f"{'programs':<20}: {cfg.programs if cfg.programs is not None else 'ALL'}")
+    print(f"{'config_hash':<20}: {cfg.config_hash()[:16]}")
+    # Credentials: which .env is in effect, and which keys are actually present. This is the
+    # confirmation screen, so surface what a paid run depends on before it is authorized.
+    env_path = next((c for c in env_search_candidates() if c.exists()), None)
+    print(f"{'.env':<20}: {env_path or '(none found — keys must be in the environment)'}")
+    cred = " · ".join(
+        f"{k} {'✓' if os.environ.get(k) else '✗'}"
+        for k in ("ANTHROPIC_API_KEY", "PUBMED_EMAIL", "OPENALEX_API_KEY", "NCBI_API_KEY")
+    )
+    print(f"{'credentials':<20}: {cred}")
     print("-" * 78)
     _print_framing(cfg)
     print("-" * 78)
@@ -952,13 +1040,11 @@ def run_pipeline(
     # NCBI_API_KEY in cleartext dozens of times per run. Install before anything makes a call.
     install_log_redaction()
 
-    # Fail a broken install at $0, before the first paid step.
-    preflight_imports(active_steps, cfg, flags)
-
+    # Create the output dir and progress emitter BEFORE importing the step modules. The import
+    # phase is the pipeline's longest cold-start silence (compiling the Agent SDK to bytecode),
+    # and it used to run against an empty run directory with nothing to poll — which reads
+    # exactly like a hang. Now it is a visible 'preflight' step from the first second.
     paths.out.mkdir(parents=True, exist_ok=True)
-    # Always write the resolved profile so --profile threading is available.
-    write_profile_yaml(cfg, paths, dry_run=False)
-    ps.save_state(paths.state_path, state)
 
     # Progress telemetry (opt-in via --progress; 'off' → zero-overhead no-op). The emitter
     # owns a background tailer that renders a live view to the terminal (rich on a TTY, clean
@@ -973,9 +1059,25 @@ def run_pipeline(
         os.environ["GPI_PROGRESS_JSON"] = str(paths.out / "progress.jsonl")
     else:
         os.environ.pop("GPI_PROGRESS_JSON", None)
-    emitter.emit(RUN_START, {"run_id": paths.out.name, "steps": list(active_steps), "n_steps": n_steps})
+    # 'preflight' leads the advertised step list but is not one of the STEP_ORDER steps.
+    emitter.emit(RUN_START, {"run_id": paths.out.name,
+                             "steps": ["preflight"] + list(active_steps),
+                             "n_steps": n_steps + 1})
+
     final_status = "done"
     try:
+        # Fail a broken install at $0, before the first paid step — reported as the preflight
+        # step. Inside the try so a failure still emits RUN_DONE and flushes the final snapshot
+        # (close() drains the log), leaving the failed preflight visible to a monitor.
+        try:
+            preflight_imports(active_steps, cfg, flags, emitter=emitter)
+        except SystemExit:
+            final_status = "failed"
+            raise
+
+        # Always write the resolved profile so --profile threading is available.
+        write_profile_yaml(cfg, paths, dry_run=False)
+        ps.save_state(paths.state_path, state)
         logger.info("Run plan: %s", active_steps)
         for index, step in enumerate(active_steps, start=1):
             executor = STEP_EXECUTOR.get(step, "?")
@@ -1236,7 +1338,7 @@ def cmd_doctor(argv: Optional[List[str]] = None) -> int:
     )
     args = parser.parse_args(argv)
 
-    load_env_file()
+    env_path = load_env_file()
     failures: List[str] = []
     warnings: List[str] = []
 
@@ -1275,16 +1377,29 @@ def cmd_doctor(argv: Optional[List[str]] = None) -> int:
             report("warn", "Could not verify Claude login automatically; run `claude auth status`")
             warnings.append("Claude login status was not verified")
 
-    required_env = {
-        "ANTHROPIC_API_KEY": "Anthropic Batch synthesis",
-        "PUBMED_EMAIL": "NCBI/Crossref polite access",
-    }
-    for key, purpose in required_env.items():
+    # Where credentials come from — show it. A .env in the wrong place is the single most
+    # common setup failure (keys silently absent, then a paid step dies mid-run). The user
+    # asked to see the exact path, and a missing key should come with a copy-pasteable fix.
+    env_target = env_path or (Path.cwd() / ".env")
+    if env_path is not None:
+        report("ok", f".env loaded from {env_path}")
+    else:
+        searched = ", ".join(str(c) for c in env_search_candidates()[:3])
+        report("warn", f"no .env file found (searched {searched}, and parent dirs)")
+        warnings.append("no .env file found")
+
+    # (key, purpose, example value for the fix hint).
+    required_env = [
+        ("ANTHROPIC_API_KEY", "Anthropic Batch synthesis", "sk-ant-…"),
+        ("PUBMED_EMAIL", "NCBI/Crossref polite access", "you@example.com"),
+    ]
+    for key, purpose, example in required_env:
         if os.environ.get(key):
             report("ok", f"{key} is set ({purpose})")
         else:
             report("fail", f"{key} is missing ({purpose})")
-            failures.append(f"set {key} in .env")
+            print(f"      → add it:  echo '{key}={example}' >> {env_target}")
+            failures.append(f"set {key}")
 
     optional_env = {
         "OPENALEX_API_KEY": "full OpenAlex verification coverage",
@@ -1324,6 +1439,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
     if raw_argv and raw_argv[0] == "doctor":
         return cmd_doctor(raw_argv[1:])
+    if raw_argv and raw_argv[0] == "watch":
+        from .watch import cmd_watch  # local import: keeps the fast paths free of it
+        return cmd_watch(raw_argv[1:])
 
     args = build_arg_parser().parse_args(raw_argv)
     logging.basicConfig(

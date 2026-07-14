@@ -45,6 +45,7 @@ RUNTIME_MODULES = [
     "gpi.presentation",
     "gpi.html_report",
     "gpi.progress",
+    "gpi.watch",
     "gpi.log_redaction",
     "research.bundle",
     "research.research_parallel",
