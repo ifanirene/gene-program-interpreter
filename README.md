@@ -1,19 +1,24 @@
-# Gene Program Interpreter
+# Gene Program Interpreter (GPI)
 
-Interpret weighted gene programs from cNMF, NMF, single-cell, or Perturb-seq data
-with parallel literature research and verified PMID/DOI citations.
+**Turn weighted gene programs into a biological story where every claim links to a real paper.**
 
-## What should I install?
+GPI interprets programs from cNMF, NMF, single-cell, or Perturb-seq data. It runs
+parallel Claude literature research, verifies every PMID/DOI, and produces an
+interactive HTML report. Unresolved citations are marked unsupported rather than
+presented as evidence.
 
-Use the **Claude Code plugin** if you want Claude to guide the whole workflow. The
-plugin contains the skill and runs the Python pipeline for you.
+The biology is tissue-agnostic: organism, tissue, cell type, and conditions live in a
+small context profile instead of the code.
 
-Use the **CLI** only if you want to script or develop the pipeline yourself.
+## Install first
 
-This is not a choice between a skill and a pipeline: the **skill is the user
-interface; the pipeline is the engine**.
+### Recommended: Claude Code plugin
 
-## Install — Claude Code plugin (recommended)
+Use the plugin if you want Claude to validate the data, build the biological context,
+preview cost, run the pipeline, and present the report.
+
+This is not a choice between a skill and a pipeline: the **skill is the user interface;
+the Python pipeline is the engine**.
 
 Prerequisites:
 
@@ -21,28 +26,28 @@ Prerequisites:
 - [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for the isolated
   Python runtime
 
-If `uv` is not installed:
+Install `uv` if needed:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Install the plugin:
+Install GPI from this public GitHub marketplace:
 
 ```bash
 claude plugin marketplace add ifanirene/gene-program-interpreter
 claude plugin install gene-program-interpreter@gpi
 ```
 
-Restart Claude Code, or run `/reload-plugins`. The first use creates an isolated
-Python environment; later runs reuse it.
+Restart Claude Code or run `/reload-plugins`. The first use creates an isolated Python
+environment; later runs reuse it.
 
 ### Configure credentials
 
-Create a `.env` file in the directory where you will run the analysis:
+Create `.env` in the directory where you will run the analysis:
 
 ```dotenv
-ANTHROPIC_API_KEY=...          # Anthropic Batch: theme, annotation, presentation
+ANTHROPIC_API_KEY=...          # Anthropic Batch: themes, annotation, presentation
 PUBMED_EMAIL=you@example.com   # required courtesy contact for NCBI/Crossref
 OPENALEX_API_KEY=...           # recommended; full OpenAlex verification coverage
 NCBI_API_KEY=...               # recommended; higher PubMed rate limit
@@ -53,8 +58,47 @@ Authentication is intentionally split:
 - Parallel literature agents use your **Claude login/subscription**.
 - Batch synthesis uses **`ANTHROPIC_API_KEY`**.
 
-No external MCP server is required. PubMed, OpenAlex, and Crossref tools run inside
-the pipeline.
+No external MCP server is required. PubMed, OpenAlex, and Crossref tools run inside the
+pipeline.
+
+## What you get
+
+The main output is a self-contained `report.html`. Each program gets a plain-language
+title, marker genes, mechanistic modules, enriched pathways, regulators, and linked
+evidence.
+
+![Program report overview](docs/images/report_program.png)
+
+Every mechanistic claim lists its genes and verified PMIDs/DOIs, plus the deterministic
+evidence used to support the interpretation.
+
+![A module with resolvable citations and its evidence trail](docs/images/report_evidence.png)
+
+If you provide Perturb-seq regulator effects, the report also shows which perturbations
+move each program, including condition-specific comparisons.
+
+![Perturbation effects across conditions](docs/images/report_perturbation.png)
+
+## What you provide
+
+The minimum input is one gene-loading CSV with one row per gene per program:
+
+```csv
+Name,Score,program_id
+Sult2a2,0.00097,1
+Car3,0.00093,1
+Cyp2e1,0.00089,1
+```
+
+Common column names are detected automatically:
+
+| Required value | Accepted examples |
+|---|---|
+| gene name | `Name`, `Gene`, `Symbol`, `gene_name`, `gene_symbol` |
+| loading | `Score`, `Loading`, `Weight`, `Value`, `gene_score` |
+| program | `program_id`, `RowID`, `topic`, `factor`, `component` |
+
+Optional inputs add Perturb-seq regulator effects or cell-type enrichment.
 
 ## First use in Claude
 
@@ -73,14 +117,17 @@ Interpret these cNMF programs in aged mouse hepatocytes: path/to/gene_loading.cs
 Claude will:
 
 1. check the installation and input columns;
-2. propose the biological context;
+2. propose the biological context for your review;
 3. show a dry-run plan and cost scope;
 4. ask before starting paid work;
 5. monitor the run and open the cited HTML report.
 
-## Install — standalone CLI
+For a first run, use 3–6 representative programs because research cost scales with the
+program count.
 
-For scripting outside Claude Code:
+## Standalone CLI installation
+
+Use the CLI directly if you want a scriptable workflow outside Claude Code:
 
 ```bash
 uv tool install "gene-program-interpreter[progress] @ git+https://github.com/ifanirene/gene-program-interpreter.git"
@@ -101,17 +148,13 @@ installation.
 
 ## Manual CLI workflow
 
-Validate a gene-loading CSV without spending anything:
+Validate input without spending anything:
 
 ```bash
 gpi --check-inputs --gene-loading path/to/gene_loading.csv
 ```
 
-Required canonical columns are `Name, Score, program_id`. Common variants such as
-`Gene`, `Symbol`, `Loading`, `Weight`, `RowID`, `topic`, and `factor` are mapped
-automatically.
-
-Preview your run config:
+Preview a run config:
 
 ```bash
 gpi --config path/to/run.yaml --dry-run
@@ -129,8 +172,8 @@ Run the full pipeline:
 gpi --config path/to/run.yaml
 ```
 
-Outputs, including `report.html`, are written to the config's `output_dir`. Runs
-resume from `pipeline_state.json` after interruption.
+Outputs are written to the config's `output_dir`. Interrupted runs resume from
+`pipeline_state.json`.
 
 ## Configure your own dataset
 
@@ -142,22 +185,27 @@ The Claude skill creates the config interactively. For manual setup, start from
 - `context` — organism, tissue, cell type, conditions, and normal cell functions;
 - `output_dir` and optional `programs` subset.
 
+The context terms are the highest-leverage research control. Use 6–10 phrases describing
+the cell type's normal biology, while keeping disease or perturbation emphasis in
+`conditions`.
+
 Run `gpi --check-inputs` first and `gpi --dry-run` before any paid run.
+
+## Cost and safety
+
+- `--check-inputs`, `--dry-run`, and `gpi doctor` make no paid API calls.
+- Literature research has a configurable per-program budget and concurrency limit.
+- The Claude skill asks for approval before starting paid work.
+- Runs cache completed steps, so network failures are resumable.
 
 ## How it works
 
 | Layer | Role |
 |---|---|
 | Claude skill | Collects inputs, builds context, previews cost, launches and monitors |
-| Python pipeline | Runs deterministic processing, caching, verification, and report generation |
+| Python pipeline | Runs deterministic processing, caching, verification, and reporting |
 | Claude Agent SDK | Runs one isolated literature-research session per program |
 | Anthropic Batch | Synthesizes themes, labels, and presentation text |
-
-Every returned PMID/DOI is resolved by deterministic verification. Unresolved evidence
-is marked unsupported rather than presented as a real citation.
-
-The biology is controlled by a tissue-agnostic `ContextProfile`; changing tissue or
-condition does not require code changes.
 
 ## Repository layout
 
@@ -176,5 +224,11 @@ complete module map.
 
 ## License
 
-Gene Program Interpreter is open-source software licensed under the
+Gene Program Interpreter is open-source software under the OSI-approved
 [Apache License 2.0](LICENSE).
+
+## Provenance
+
+The deterministic front end and HTML renderer are generalized from ProgExplorer and
+standardized on the Anthropic API. Demo fixtures are used only to exercise the pipeline;
+the report screenshots above come from a live demo run with 123 of 123 citations resolved.
