@@ -66,9 +66,9 @@ Validate everything the user names (free, read-only):
 
 **The gene-loading pass is what gates a paid run.** Do not continue while it fails.
 
-A ✗ on a *regulator* or *cell-type* file is worth investigating but is not automatically fatal —
-`--check-inputs` reads CSV, so a **tab-separated** file fails here while still being perfectly
-usable. Check the delimiter before telling the user their file is broken.
+Pre-flight predicts the run: regulator and cell-type files are read with the same separator
+sniffing the pipeline uses, so a tab-separated file passes. Gene loading is read strictly
+comma-separated, because that is what `gpi.enrichment` does — a ✗ there is real.
 
 ## Gate 2 — CONTEXT (`AskUserQuestion`, two parts)
 
