@@ -173,3 +173,8 @@ tests/            offline regression tests and fixtures
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for data contracts and the
 complete module map.
+
+## License
+
+Gene Program Interpreter is open-source software licensed under the
+[Apache License 2.0](LICENSE).
