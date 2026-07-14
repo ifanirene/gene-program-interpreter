@@ -120,6 +120,28 @@ def test_no_shipped_module_references_the_unpackageable_directory() -> None:
     )
 
 
+def test_no_shipped_module_manipulates_sys_path() -> None:
+    """A shipped module that edits ``sys.path`` is papering over a packaging problem.
+
+    ``gpi/gene_summaries.py`` used to append the "repo root" to ``sys.path`` at import. Its own
+    imports were relative and never needed it — but the side effect was to put the *source tree*
+    on the path for anything imported afterwards, which is one of the ways a module missing from
+    the wheel could still resolve in development. A correctly packaged module needs no help
+    finding its siblings.
+    """
+    offenders = []
+    for path in _shipped_sources():
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Attribute) or node.attr != "path":
+                continue
+            if isinstance(node.value, ast.Name) and node.value.id == "sys":
+                offenders.append(f"{path.relative_to(REPO_ROOT)}:{node.lineno}")
+    assert not offenders, (
+        f"Shipped modules touch sys.path, which can mask a missing module: {offenders}"
+    )
+
+
 @pytest.fixture(scope="module")
 def built_wheel(tmp_path_factory: pytest.TempPathFactory) -> Path:
     if shutil.which("uv") is None:
@@ -171,6 +193,47 @@ def test_every_runtime_module_imports_from_the_wheel(built_wheel: Path) -> None:
         "A pipeline module failed to import from the built wheel — the plugin is broken on a "
         f"real install:\n{result.stderr[-3000:]}"
     )
+    assert "ok" in result.stdout
+
+
+def test_runtime_data_files_ship_in_the_wheel(built_wheel: Path) -> None:
+    """Not just code — the *data* a step reads at runtime must be in the wheel too.
+
+    Same bug, different file type, and it bit us twice. ``gpi/presentation.py`` resolved its
+    lexicon as ``Path(__file__).parent.parent / "configs" / ...`` — the repo root in a checkout,
+    ``site-packages/`` in a wheel. ``configs/`` is not a declared package, so the curated lexicon
+    shipped to nobody and every installed user silently fell back to the built-in defaults. It
+    degraded quietly instead of failing, which is why it went unnoticed.
+
+    ``package-data`` can only attach files that already live inside a declared package, so the
+    fix is always the same: move the file into the package. This asserts the *resolved* paths
+    exist in the wheel's own environment, which is the only place the answer is real.
+    """
+    program = """
+import pathlib, sys
+import gpi.presentation as presentation
+import research
+
+missing = []
+if not presentation.DEFAULT_LEXICON_PATH.exists():
+    missing.append(f"gpi/presentation.py DEFAULT_LEXICON_PATH -> {presentation.DEFAULT_LEXICON_PATH}")
+
+protocol = pathlib.Path(research.__file__).resolve().parent / "protocol.md"
+if not protocol.exists():
+    missing.append(f"research/protocol.md -> {protocol}")
+
+if missing:
+    sys.exit("runtime data files are absent from the wheel:\\n  " + "\\n  ".join(missing))
+print("ok")
+"""
+    result = subprocess.run(
+        ["uv", "run", "--isolated", "--no-project", "--with", str(built_wheel),
+         "python", "-c", program],
+        cwd=built_wheel.parent,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr[-2000:]
     assert "ok" in result.stdout
 
 

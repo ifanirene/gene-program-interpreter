@@ -71,9 +71,13 @@ from .progress import emit_step_progress
 
 PROMPT_VERSION = "presentation-v1"
 
-# Default lexicon shipped with the repo (dataset-editable, not code).
-REPO_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_LEXICON_PATH = REPO_ROOT / "configs" / "presentation_lexicon.json"
+# Default lexicon, shipped as package data INSIDE this package (dataset-editable, not code).
+# It used to live at <repo>/configs/, resolved via parent.parent — which is the repo root in a
+# checkout and site-packages/ in a wheel. configs/ is not a declared package, so it shipped to
+# nobody: every installed user silently fell back to DEFAULT_LEXICON below. To override it,
+# drop a configs/presentation_lexicon.json next to your run config (run_pipeline finds it) or
+# pass --lexicon.
+DEFAULT_LEXICON_PATH = Path(__file__).resolve().parent / "presentation_lexicon.json"
 
 DEFAULT_LEXICON: dict[str, Any] = {
     "max_tags": 3,

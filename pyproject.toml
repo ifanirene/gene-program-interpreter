@@ -52,6 +52,11 @@ packages = ["gpi", "research"]
 
 [tool.setuptools.package-data]
 research = ["protocol.md"]
+# Data a step needs at runtime must live INSIDE a declared package. package-data can only
+# attach files that are already in one, so a file under configs/ or any other non-package
+# directory exists in a source checkout and in no wheel — which is invisible in development
+# and broken for every installed user. tests/test_packaging.py enforces this.
+gpi = ["presentation_lexicon.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -41,12 +41,9 @@ from pathlib import Path
 from typing import List, Dict, Set, Any, Optional
 from collections import Counter
 
-# Add repo root to sys.path for consistent imports
-current_file = Path(__file__).resolve()
-repo_root = current_file.parents[1]  # pipeline/ -> repo root
-if str(repo_root) not in sys.path:
-    sys.path.append(str(repo_root))
-
+# (No sys.path manipulation. The imports below are relative, so they never needed it — and
+# putting the source tree on sys.path is precisely what let a wheel-missing module resolve in
+# development and fail for every installed user.)
 from .ncbi_api import NcbiClient
 from .harmonizome_api import HarmonizomeClient
 from .progress import emit_step_progress
