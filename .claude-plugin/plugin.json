@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "gene-program-interpreter",
+  "displayName": "Gene Program Interpreter",
+  "version": "0.1.0",
+  "description": "Interpret weighted gene programs with parallel, auditable literature research and verified citations.",
+  "author": {
+    "name": "ifanirene"
+  },
+  "repository": "https://github.com/ifanirene/gene-program-interpreter",
+  "homepage": "https://github.com/ifanirene/gene-program-interpreter",
+  "license": "Apache-2.0",
+  "keywords": [
+    "gene-programs",
+    "single-cell",
+    "perturb-seq",
+    "literature-research"
+  ]
+}

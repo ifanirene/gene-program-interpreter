@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+PLUGIN_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+
+if ! command -v uv >/dev/null 2>&1; then
+    printf '%s\n' \
+        "Gene Program Interpreter needs uv for its isolated Python environment." \
+        "Install uv from https://docs.astral.sh/uv/getting-started/installation/ and retry." >&2
+    exit 127
+fi
+
+export UV_LINK_MODE=${UV_LINK_MODE:-copy}
+
+# uv caches the isolated tool environment and reuses downloaded dependencies. `--isolated`
+# ensures an older globally installed `gpi` never shadows the plugin's bundled version.
+exec uv tool run --isolated --from "$PLUGIN_ROOT[progress]" gpi "$@"

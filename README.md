@@ -1,99 +1,175 @@
 # Gene Program Interpreter
 
-Interpret weighted **gene programs** (from cNMF / NMF / consensus factorization of
-single-cell or Perturb-seq data) with **parallel, auditable literature research**.
+Interpret weighted gene programs from cNMF, NMF, single-cell, or Perturb-seq data
+with parallel literature research and verified PMID/DOI citations.
 
-Given weighted gene programs + experimental context (+ optional Perturb-seq regulator
-effects), the tool validates inputs, runs deterministic enrichment/gene-summary fetches,
-launches **one isolated Claude literature agent per program**, **verifies every returned
-citation**, synthesizes the evidence, and renders an interactive HTML report where **every
-scientific claim links to a resolvable PMID/DOI**. It never fabricates citations — an
-emitted identifier either resolves to a real paper or is flagged `unsupported`.
+## What should I install?
 
-It is **tissue-agnostic**: the biology lives entirely in a `ContextProfile` (organism,
-tissue, cell type, conditions), not in the code. A liver/MASLD profile reproduces the
-original ProgExplorer behavior; a CD8 T-cell profile works with zero code change.
+Use the **Claude Code plugin** if you want Claude to guide the whole workflow. The
+plugin contains the skill and runs the Python pipeline for you.
 
-## How it works — four executors
+Use the **CLI** only if you want to script or develop the pipeline yourself.
 
-| Executor | Does what | Where |
-|---|---|---|
-| ① Skill agent | Interprets context → `ContextProfile`, orchestrates, presents | `.claude/skills/gene-program-interpreter/SKILL.md` |
-| ② Research subagents | One Claude Agent SDK session per program, MCP tool-using, isolated | `research/research_parallel.py` |
-| ③ Anthropic Batch | Batchable LLM transforms: annotation, presentation, theme | `gpi/anthropic_batch.py` |
-| ④ Deterministic scripts | Parsing, fetches, bundles, **evidence verification**, HTML render | `gpi/`, `research/{bundle,verify}.py` |
+This is not a choice between a skill and a pipeline: the **skill is the user
+interface; the pipeline is the engine**.
 
-**Guardrails:** literature research happens *only* in ② via MCP; parallelism is controlled
-in Python (asyncio + semaphore), never by a manager agent; the Agent SDK runs locally;
-inference goes to Anthropic — **research on the Claude.ai subscription, batch on API credit**
-(no Vertex / gateway).
+## Install — Claude Code plugin (recommended)
 
-## Install
+Prerequisites:
 
-Python **3.10+**. Uses the Claude Agent SDK (which shells out to the local `claude` CLI)
-for the research agents, and the Anthropic Batch API for the synthesis steps.
+- Claude Code, signed in to the Claude account used for research
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for the isolated
+  Python runtime
+
+If `uv` is not installed:
 
 ```bash
-pip install -e .            # or: pip install -e ".[dev]" for tests
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-**Auth is split by executor.** The parallel research agents (executor ②) run the local
-`claude` CLI on your **Claude.ai subscription** — run `claude login` (no subscription? set
-`research.auth: api` to bill research to the API key instead). The Batch synthesis steps
-(executor ③) use `ANTHROPIC_API_KEY`.
-
-The literature layer is **in-process** (`research/literature.py` calls PubMed / OpenAlex /
-Crossref directly) — there is **no external MCP server to install or connect**. Set these
-in a repo `.env` (auto-loaded by the runner):
+Install the plugin:
 
 ```bash
-ANTHROPIC_API_KEY=...          # executor ③ Batch steps (theme / annotate / presentation)
-PUBMED_EMAIL=you@example.com   # NCBI Entrez courtesy + Crossref polite pool
-OPENALEX_API_KEY=...           # required for the OpenAlex tool (PubMed + Crossref still work without it)
-NCBI_API_KEY=...               # recommended; lifts the PubMed rate limit 3→9 rps
+claude plugin marketplace add ifanirene/gene-program-interpreter
+claude plugin install gene-program-interpreter@gpi
 ```
 
-## Quickstart
+Restart Claude Code, or run `/reload-plugins`. The first use creates an isolated
+Python environment; later runs reuse it.
+
+### Configure credentials
+
+Create a `.env` file in the directory where you will run the analysis:
+
+```dotenv
+ANTHROPIC_API_KEY=...          # Anthropic Batch: theme, annotation, presentation
+PUBMED_EMAIL=you@example.com   # required courtesy contact for NCBI/Crossref
+OPENALEX_API_KEY=...           # recommended; full OpenAlex verification coverage
+NCBI_API_KEY=...               # recommended; higher PubMed rate limit
+```
+
+Authentication is intentionally split:
+
+- Parallel literature agents use your **Claude login/subscription**.
+- Batch synthesis uses **`ANTHROPIC_API_KEY`**.
+
+No external MCP server is required. PubMed, OpenAlex, and Crossref tools run inside
+the pipeline.
+
+## First use in Claude
+
+Start Claude Code in the directory containing your data, then run:
+
+```text
+/gene-program-interpreter:interpret path/to/gene_loading.csv
+```
+
+You can also ask naturally:
+
+```text
+Interpret these cNMF programs in aged mouse hepatocytes: path/to/gene_loading.csv
+```
+
+Claude will:
+
+1. check the installation and input columns;
+2. propose the biological context;
+3. show a dry-run plan and cost scope;
+4. ask before starting paid work;
+5. monitor the run and open the cited HTML report.
+
+## Install — standalone CLI
+
+For scripting outside Claude Code:
 
 ```bash
-# See the plan and resolved context without spending anything:
-python -m gpi.run_pipeline --config configs/liver_demo.yaml --dry-run
-
-# Deterministic-only (no LLM): enrichment + bundles, literature marked incomplete:
-python -m gpi.run_pipeline --config configs/liver_demo.yaml --no-research
-
-# Full run (research on your subscription, batch on API credit):
-python -m gpi.run_pipeline --config configs/liver_demo.yaml
+uv tool install "gene-program-interpreter[progress] @ git+https://github.com/ifanirene/gene-program-interpreter.git"
+gpi doctor
 ```
 
-Output (bundles, research results + audit, annotations, `report.html`) lands in the
-config's `output_dir/`. Runs **resume from cache**, so a network/API failure is
-re-runnable.
+For development:
 
-## Configuring your own dataset
-
-Copy [`configs/liver_demo.yaml`](configs/liver_demo.yaml), point `inputs` at your
-gene-loading CSV (`Name,Score,program_id[,source_program,rank]`) and optional
-regulator CSV, and **replace the `context:` block** with your biology.
-[`configs/example_generic.yaml`](configs/example_generic.yaml) shows a non-liver
-(human CD8 T-cell) context.
-
-## Layout
-
-```
-gpi/          deterministic core + Anthropic-batch transforms (vendored/generalized from ProgExplorer)
-research/     the parallel-research subsystem: schema, bundle, protocol, research_parallel, verify
-configs/      run configs (liver_demo, example_generic)
-docs/         ARCHITECTURE.md (build contract)
-examples/     liver demo inputs;  tests/  pytest suite + fixtures
+```bash
+git clone https://github.com/ifanirene/gene-program-interpreter.git
+cd gene-program-interpreter
+uv sync --extra dev --extra progress
+uv run pytest
 ```
 
-See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the full module map, data contracts,
-and the `ContextProfile` / `ResearchResult` schemas.
+`pip install -e .` still works for contributors, but it is not the recommended user
+installation.
 
-## Provenance
+## Manual CLI workflow
 
-The deterministic front-end and HTML renderer are vendored and generalized from
-ProgExplorer (read-only source), standardized on the Anthropic API. The demo fixtures
-(`examples/liver_demo/`, `tests/fixtures/`) are a mouse hepatocyte in-vivo Perturb-seq
-dataset used purely to exercise the pipeline.
+Validate a gene-loading CSV without spending anything:
+
+```bash
+gpi --check-inputs --gene-loading path/to/gene_loading.csv
+```
+
+Required canonical columns are `Name, Score, program_id`. Common variants such as
+`Gene`, `Symbol`, `Loading`, `Weight`, `RowID`, `topic`, and `factor` are mapped
+automatically.
+
+Preview your run config:
+
+```bash
+gpi --config path/to/run.yaml --dry-run
+```
+
+Run deterministic enrichment without literature agents:
+
+```bash
+gpi --config path/to/run.yaml --no-research
+```
+
+Run the full pipeline:
+
+```bash
+gpi --config path/to/run.yaml
+```
+
+Outputs, including `report.html`, are written to the config's `output_dir`. Runs
+resume from `pipeline_state.json` after interruption.
+
+## Configure your own dataset
+
+The Claude skill creates the config interactively. For manual setup, start from
+[`configs/example_generic.yaml`](configs/example_generic.yaml) and change:
+
+- `inputs.gene_loading` — required weighted gene-program CSV;
+- `inputs.regulators` or `regulators_by_condition` — optional Perturb-seq effects;
+- `context` — organism, tissue, cell type, conditions, and normal cell functions;
+- `output_dir` and optional `programs` subset.
+
+Run `gpi --check-inputs` first and `gpi --dry-run` before any paid run.
+
+## How it works
+
+| Layer | Role |
+|---|---|
+| Claude skill | Collects inputs, builds context, previews cost, launches and monitors |
+| Python pipeline | Runs deterministic processing, caching, verification, and report generation |
+| Claude Agent SDK | Runs one isolated literature-research session per program |
+| Anthropic Batch | Synthesizes themes, labels, and presentation text |
+
+Every returned PMID/DOI is resolved by deterministic verification. Unresolved evidence
+is marked unsupported rather than presented as a real citation.
+
+The biology is controlled by a tissue-agnostic `ContextProfile`; changing tissue or
+condition does not require code changes.
+
+## Repository layout
+
+```text
+.claude-plugin/   plugin and marketplace manifests
+skills/           distributable Claude skill
+bin/gpi           plugin runtime wrapper
+gpi/              deterministic pipeline and Anthropic Batch steps
+research/         parallel research agents, protocol, and citation verification
+configs/          example run configurations
+tests/            offline regression tests and fixtures
+```
+
+See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for data contracts and the
+complete module map.

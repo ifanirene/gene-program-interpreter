@@ -57,7 +57,7 @@ agents, one per program (②)**, and an Anthropic **Batch** for the LLM synthesi
 
 **Pre-flight before spending anything** (read-only), reusing the pipeline's own column mapper:
 ```bash
-python -m gpi.run_pipeline --check-inputs --gene-loading <path> [--regulators <path>] [--celltype-enrichment <path>]
+gpi --check-inputs --gene-loading <path> [--regulators <path>] [--celltype-enrichment <path>]
 ```
 Relay its report (detected column mapping, program count + ids, row count). If a required column
 can't be mapped, relay the error verbatim and ask the user to rename or repoint. **Never proceed
@@ -94,7 +94,7 @@ Write the confirmed context into a config. Easiest is the built-in scaffold, whi
 tissue-agnostic skeleton (`configs/example_generic.yaml`) so you only author the `context:`:
 ```bash
 # write a context-only stub (the confirmed structured fields), then:
-python -m gpi.run_pipeline --emit-config --context-file <stub>.yaml \
+gpi --emit-config --context-file <stub>.yaml \
   --gene-loading <path> [--regulators <path>] [--regulators-by-condition young=… --regulators-by-condition aged=…] \
   --output-dir runs/<name> [--programs 10,11,12] -o runs/<name>.yaml
 ```
@@ -105,7 +105,7 @@ direction-counterfactual), not the full set — the research fan-out and Batch s
 
 Then preview, spending nothing:
 ```bash
-python -m gpi.run_pipeline --config runs/<name>.yaml --dry-run
+gpi --config runs/<name>.yaml --dry-run
 ```
 `--dry-run` validates the config and prints the resolved framing + the 9-step plan. Get explicit
 confirmation before any paid step. (Alternatively, if the user prefers, author the YAML directly
@@ -116,7 +116,7 @@ The default path needs **no external MCP servers**. The research agents use an *
 literature server (`research/literature.py`) that calls PubMed / OpenAlex / Crossref directly —
 nothing to install or connect, and it works headless.
 
-Set these in the repo `.env` (auto-loaded by the runner):
+Set these in the analysis project's `.env` (auto-loaded by the runner):
 - **`claude login`** (Claude.ai subscription) — the ② research agents bill the subscription. If the
   user has no subscription, set `research.auth: api` to bill research to the API key instead.
 - **`ANTHROPIC_API_KEY`** — the ③ Batch steps (theme / annotate / presentation).
@@ -125,8 +125,8 @@ Set these in the repo `.env` (auto-loaded by the runner):
 - **`OPENALEX_API_KEY`** — **required for the OpenAlex verification tool**; without it PubMed +
   Crossref still work, so the run degrades rather than fails, but set it for full coverage.
 - **`NCBI_API_KEY`** — recommended; lifts the PubMed rate limit 3→9 rps.
-- **Install:** `pip install -e .` (bundles `claude-agent-sdk`; add `.[progress]` for the live
-  terminal view).
+- **Runtime check:** run `gpi doctor`. If `gpi` is unavailable, follow the plugin or CLI
+  installation in `README.md`; do not invent a separate install path here.
 
 **Cost & scope.** `research.max_budget_usd` is a per-program cap; `research.concurrency` (3–5)
 bounds parallelism. Confirm the program count from Step 1 — cost scales with it.
@@ -135,7 +135,7 @@ bounds parallelism. Confirm the program count from Step 1 — cost scales with i
 Once the user confirms Step 3, launch the run **in the background** (do not block the conversation),
 with `--progress plain` so the captured output is clean, parseable text:
 ```bash
-python -m gpi.run_pipeline --config runs/<name>.yaml --progress plain
+gpi --config runs/<name>.yaml --progress plain
 ```
 The runner writes `<output_dir>/progress.jsonl` (append-only events) and a reduced
 `<output_dir>/progress.json` snapshot. **Poll `progress.json` every ~10–15 s** (`cat` it) and

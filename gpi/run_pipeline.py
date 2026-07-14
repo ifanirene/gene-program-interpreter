@@ -35,8 +35,10 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 import logging
 import os
+import shutil
 import shlex
 import subprocess
 import sys
@@ -46,6 +48,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 import yaml
 
+from . import __version__
 from .context_profile import ContextProfile
 from . import pipeline_state as ps
 from .progress import (
@@ -62,21 +65,26 @@ from .progress import (
 
 logger = logging.getLogger("gpi.pipeline")
 
-# Repo root = parent of this package dir (gpi/..). Used to locate the repo .env.
+# Repo root = parent of this package dir (gpi/..). Used only as a development
+# fallback; an installed CLI loads .env from the directory where the user runs it.
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def load_env_file(path: Path = _REPO_ROOT / ".env") -> None:
-    """Populate ``os.environ`` from the repo ``.env`` (only keys not already set).
+def load_env_file(path: Optional[Path] = None) -> None:
+    """Populate ``os.environ`` from ``.env`` (only keys not already set).
 
     The runner spawns most steps as subprocesses (``python -m gpi.theme_representation``,
     ``gpi.evidence_context``, ``gpi.anthropic_batch``, ...) that read ``ANTHROPIC_API_KEY``
-    /``NCBI_API_KEY``/``OPENALEX_API_KEY`` from their inherited environment. Load the repo
-    ``.env`` here — at the top of every run — so those keys are present for EVERY step,
+    /``NCBI_API_KEY``/``OPENALEX_API_KEY`` from their inherited environment. Load the
+    current project's ``.env`` here so those keys are present for EVERY step,
     including a resumed run that starts *after* the research step (previously only the
     research step loaded ``.env``, so ``--start-from theme`` in a fresh process failed).
     Mirrors ``research.research_parallel.load_env_file`` without importing the Agent SDK.
     """
+    if path is None:
+        path = Path.cwd() / ".env"
+        if not path.exists() and (_REPO_ROOT / ".env").exists():
+            path = _REPO_ROOT / ".env"
     if not path.exists():
         return
     for raw in path.read_text(encoding="utf-8").splitlines():
@@ -115,6 +123,45 @@ STEP_EXECUTOR: Dict[str, str] = {
     "presentation": "3/4",
     "html_report": "4",
 }
+
+
+def default_config_blocks() -> Dict[str, Dict[str, Any]]:
+    """Return the packaged defaults used by ``--emit-config``.
+
+    Keep this independent of the source checkout so a wheel or Claude plugin can build a
+    complete config from any working directory.
+    """
+    return {
+        "settings": {
+            "n_top_genes": 300,
+            "top_loading": 15,
+            "top_unique": 8,
+            "top_enrichment": 7,
+            "genes_per_term": 10,
+        },
+        "research": {
+            "enabled": True,
+            "concurrency": 4,
+            "model": "claude-sonnet-4-6",
+            "max_turns": 30,
+            "max_budget_usd": 1.0,
+            "per_program_timeout": 600,
+        },
+        "annotation": {
+            "model": "claude-sonnet-4-6",
+            "max_tokens": 8192,
+            "batch": True,
+        },
+        "theme": {
+            "enabled": True,
+            "model": "claude-sonnet-4-6",
+            "min_generic_program_count": 4,
+        },
+        "presentation": {
+            "model": "claude-haiku-4-5-20251001",
+            "deterministic_fallback": True,
+        },
+    }
 
 # Steps that must NOT stop the pipeline on failure (spec §8: a failed research
 # step degrades — downstream keeps running with literature marked incomplete).
@@ -887,7 +934,9 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="gpi",
         description="Config-driven orchestrator for the Gene Program Interpreter.",
+        epilog="Run 'gpi doctor' to check the Claude login and project configuration.",
     )
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     parser.add_argument("--config", help="Run config YAML (see configs/liver_demo.yaml). Required to run the pipeline.")
     # --- Pre-flight helpers (read-only; do not run the pipeline) ---
     parser.add_argument(
@@ -1016,8 +1065,7 @@ def cmd_emit_config(args: argparse.Namespace) -> int:
     """Assemble a complete, schema-correct run config from a context-only stub + input paths.
 
     The `context:` block comes from the stub (via ContextProfile, so the derived framing is
-    consistent); the settings/research/annotation/theme/presentation blocks are copied from
-    configs/example_generic.yaml (the canonical skeleton). Also prints the auto-derived framing
+    consistent); the other blocks use packaged defaults. Also prints the auto-derived framing
     so the user reviews what the research agents will actually see."""
     if not args.context_file:
         raise SystemExit("--emit-config requires --context-file (a context-only YAML stub).")
@@ -1025,7 +1073,7 @@ def cmd_emit_config(args: argparse.Namespace) -> int:
         raise SystemExit("--emit-config requires --gene-loading and --output-dir.")
 
     profile = ContextProfile.from_yaml(Path(args.context_file))
-    skel = yaml.safe_load((_REPO_ROOT / "configs" / "example_generic.yaml").read_text(encoding="utf-8"))
+    defaults = default_config_blocks()
 
     inputs: Dict[str, Any] = {"gene_loading": args.gene_loading}
     if args.regulators:
@@ -1052,11 +1100,7 @@ def cmd_emit_config(args: argparse.Namespace) -> int:
         "inputs": inputs,
         "output_dir": args.output_dir,
         "programs": programs,
-        "settings": skel["settings"],
-        "research": skel["research"],
-        "annotation": skel["annotation"],
-        "theme": skel["theme"],
-        "presentation": skel["presentation"],
+        **defaults,
     }
     rendered = yaml.safe_dump(config, sort_keys=False, allow_unicode=True)
     if args.output:
@@ -1073,8 +1117,108 @@ def cmd_emit_config(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_doctor(argv: Optional[List[str]] = None) -> int:
+    """Check the local runtime and credentials without making network or paid calls."""
+    parser = argparse.ArgumentParser(
+        prog="gpi doctor",
+        description="Check whether Gene Program Interpreter is ready for a full run.",
+    )
+    parser.add_argument(
+        "--config",
+        help="Optional run config to parse and check for missing local input files.",
+    )
+    args = parser.parse_args(argv)
+
+    load_env_file()
+    failures: List[str] = []
+    warnings: List[str] = []
+
+    def report(level: str, message: str) -> None:
+        marker = {"ok": "✓", "warn": "!", "fail": "✗"}[level]
+        print(f"  {marker} {message}")
+
+    print("Gene Program Interpreter doctor (read-only; no API calls):")
+    py_ok = sys.version_info >= (3, 10)
+    report("ok" if py_ok else "fail", f"Python {sys.version.split()[0]} (requires 3.10+)")
+    if not py_ok:
+        failures.append("Python 3.10+ is required")
+
+    claude = shutil.which("claude")
+    if not claude:
+        report("fail", "Claude Code CLI was not found on PATH")
+        failures.append("install Claude Code and run `claude login`")
+    else:
+        try:
+            auth = subprocess.run(
+                [claude, "auth", "status", "--json"],
+                capture_output=True,
+                text=True,
+                timeout=10,
+                check=False,
+            )
+            payload = json.loads(auth.stdout) if auth.stdout.strip() else {}
+            logged_in = bool(payload.get("loggedIn"))
+            method = payload.get("authMethod") or payload.get("subscriptionType") or "authenticated"
+            if auth.returncode == 0 and logged_in:
+                report("ok", f"Claude login is active ({method})")
+            else:
+                report("fail", "Claude login is not active; run `claude login`")
+                failures.append("Claude login is required for research")
+        except (OSError, subprocess.TimeoutExpired, json.JSONDecodeError):
+            report("warn", "Could not verify Claude login automatically; run `claude auth status`")
+            warnings.append("Claude login status was not verified")
+
+    required_env = {
+        "ANTHROPIC_API_KEY": "Anthropic Batch synthesis",
+        "PUBMED_EMAIL": "NCBI/Crossref polite access",
+    }
+    for key, purpose in required_env.items():
+        if os.environ.get(key):
+            report("ok", f"{key} is set ({purpose})")
+        else:
+            report("fail", f"{key} is missing ({purpose})")
+            failures.append(f"set {key} in .env")
+
+    optional_env = {
+        "OPENALEX_API_KEY": "full OpenAlex verification coverage",
+        "NCBI_API_KEY": "higher PubMed rate limits",
+    }
+    for key, purpose in optional_env.items():
+        if os.environ.get(key):
+            report("ok", f"{key} is set ({purpose})")
+        else:
+            report("warn", f"{key} is not set ({purpose}; optional)")
+            warnings.append(f"{key} is optional but recommended")
+
+    if args.config:
+        try:
+            cfg = PipelineConfig.from_yaml(args.config)
+            missing = [p for p in [cfg.gene_loading, cfg.regulators, *cfg.regulators_by_condition.values()]
+                       if p is not None and not p.exists()]
+            if missing:
+                for path in missing:
+                    report("fail", f"configured input does not exist: {path}")
+                failures.append("one or more configured inputs are missing")
+            else:
+                report("ok", f"config parsed and local inputs exist: {args.config}")
+        except Exception as exc:  # noqa: BLE001 — doctor must turn parse errors into guidance
+            report("fail", f"config could not be loaded: {exc}")
+            failures.append("fix the run config")
+
+    if failures:
+        print(f"\nNot ready: {len(failures)} required check(s) failed.")
+        return 1
+    suffix = f" ({len(warnings)} optional warning(s))" if warnings else ""
+    print(f"\nReady for a full run{suffix}.")
+    return 0
+
+
 def main(argv: Optional[List[str]] = None) -> int:
-    args = build_arg_parser().parse_args(argv)
+    raw_argv = list(sys.argv[1:] if argv is None else argv)
+    if raw_argv and raw_argv[0] == "doctor":
+        return cmd_doctor(raw_argv[1:])
+
+    args = build_arg_parser().parse_args(raw_argv)
     logging.basicConfig(
         level=logging.DEBUG if args.verbose else logging.INFO,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
