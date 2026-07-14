@@ -1,0 +1,101 @@
+program,highly_cell_type_specific,moderately_enriched,weakly_enriched,significantly_lower_expression
+Program_1,,,,
+Program_2,,,,
+Program_3,,,BBB-high capillary|Distal arteriolar,
+Program_4,,BBB-high capillary,Homeostatic capillary,
+Program_5,,BBB-high capillary,Angiogenic tip,
+Program_6,,Homeostatic capillary,Pan-endo cycling,
+Program_7,,,,
+Program_8,,,Angiogenic tip|BBB-high capillary|Homeostatic capillary,
+Program_9,,,Angiogenic tip|Homeostatic capillary,
+Program_10,,,,
+Program_11,,Angiogenic tip,,
+Program_12,,,Homeostatic capillary|Venous,
+Program_13,,,Angiogenic tip|Venous,
+Program_14,,,Pan-endo cycling|Venous,
+Program_15,,BBB-high capillary,,
+Program_16,,Angiogenic tip,,
+Program_17,,Stalk/remodeling,,
+Program_18,,,Angiogenic tip|BBB-high capillary|Homeostatic capillary,
+Program_19,,,,
+Program_20,,Distal arteriolar,BBB-high capillary,
+Program_21,,Stalk/remodeling,,
+Program_22,,Venous,Pan-endo cycling,
+Program_23,,,,
+Program_24,,,Stalk/remodeling,
+Program_25,,,BBB-high capillary,
+Program_26,,,Homeostatic capillary|Pan-endo cycling|Stalk/remodeling,
+Program_27,Stalk/remodeling,,Angiogenic tip,
+Program_28,,Pan-endo cycling,Venous,
+Program_29,,,Stalk/remodeling,
+Program_30,,Distal arteriolar,BBB-high capillary|Large-artery,
+Program_31,,,,
+Program_32,,Venous,Pan-endo cycling,
+Program_33,,,Venous,
+Program_34,Distal arteriolar,,Large-artery,
+Program_35,,Venous,,
+Program_36,,,BBB-high capillary|Choroid-plexus,
+Program_37,,,BBB-high capillary,
+Program_38,Distal arteriolar,,Large-artery,
+Program_39,,,Venous,
+Program_40,,,Stalk/remodeling|Venous,
+Program_41,Distal arteriolar,Large-artery,,
+Program_42,Venous,,,
+Program_43,,,,
+Program_44,,,Angiogenic tip|BBB-high capillary|Distal arteriolar,
+Program_45,Venous,Pan-endo cycling,,Homeostatic capillary
+Program_46,,,,
+Program_47,,Angiogenic tip|Stalk/remodeling,,
+Program_48,Stalk/remodeling,,,
+Program_49,Pan-endo cycling,,,Homeostatic capillary|Stalk/remodeling
+Program_50,,Choroid-plexus|Venous,Stalk/remodeling,
+Program_51,Distal arteriolar,,BBB-high capillary,
+Program_52,Pan-endo cycling,,,Homeostatic capillary
+Program_53,Choroid-plexus,,,Stalk/remodeling
+Program_54,Stalk/remodeling,,Angiogenic tip,Choroid-plexus
+Program_55,Stalk/remodeling,,,
+Program_56,Venous,,,Stalk/remodeling
+Program_57,Large-artery,,,Venous
+Program_58,Choroid-plexus,,,Angiogenic tip|Stalk/remodeling
+Program_59,,,Choroid-plexus|Distal arteriolar|Large-artery,
+Program_60,,,,
+Program_61,,Choroid-plexus,Large-artery|Venous,
+Program_62,Pan-endo cycling,,,Venous
+Program_63,Large-artery,,Distal arteriolar,Venous
+Program_64,Choroid-plexus,,,BBB-high capillary|Distal arteriolar
+Program_65,Large-artery,,,
+Program_66,Pan-endo cycling,,,
+Program_67,Pan-endo cycling,,,Homeostatic capillary
+Program_68,Large-artery,Distal arteriolar,,Venous
+Program_69,Pan-endo cycling,,,Homeostatic capillary
+Program_70,Large-artery,,,Distal arteriolar
+Program_71,,,Venous,Choroid-plexus
+Program_72,,,,
+Program_73,,,Large-artery,
+Program_74,,Large-artery,Choroid-plexus,
+Program_75,Choroid-plexus,,,Stalk/remodeling|Venous
+Program_76,,,,
+Program_77,,,,
+Program_78,Large-artery,,,
+Program_79,,,Large-artery,Choroid-plexus
+Program_80,,,Choroid-plexus,
+Program_81,,Large-artery,,
+Program_82,,,,
+Program_83,,,Pan-endo cycling,Homeostatic capillary|Venous
+Program_84,,,Choroid-plexus,
+Program_85,,,,
+Program_86,,Large-artery,,
+Program_87,,,,
+Program_88,,,,
+Program_89,,,,Stalk/remodeling
+Program_90,,,,
+Program_91,,,,Stalk/remodeling
+Program_92,,,,
+Program_93,,,,
+Program_94,,,,
+Program_95,,,,
+Program_96,,,,
+Program_97,,,,
+Program_98,,,,
+Program_99,,,,Angiogenic tip|BBB-high capillary|Distal arteriolar
+Program_100,,,,

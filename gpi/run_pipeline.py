@@ -21,7 +21,7 @@ pipeline_state resume:
   9. html_report       [④]  gpi.html_report            → report.html
 
 CLI:
-  python -m gpi.run_pipeline --config configs/liver_demo.yaml \
+  python -m gpi.run_pipeline --config configs/example_generic.yaml \
       [--start-from STEP] [--stop-after STEP] [--no-research] \
       [--deterministic-presentation] [--force-restart] [--dry-run]
 
@@ -937,7 +937,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
         epilog="Run 'gpi doctor' to check the Claude login and project configuration.",
     )
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
-    parser.add_argument("--config", help="Run config YAML (see configs/liver_demo.yaml). Required to run the pipeline.")
+    parser.add_argument("--config", help="Run config YAML (see configs/example_generic.yaml). Required to run the pipeline.")
     # --- Pre-flight helpers (read-only; do not run the pipeline) ---
     parser.add_argument(
         "--check-inputs", action="store_true",

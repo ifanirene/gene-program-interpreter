@@ -1,37 +1,39 @@
-# Gene Program Interpreter — non-liver example config (generalization proof).
+# Gene Program Interpreter — runnable demo config.
 #
-# Same pipeline, a completely different biological context: human CD8 T-cell
-# exhaustion instead of mouse hepatocyte/MASLD. NOTHING about liver appears in
-# the code — only in the `context:` block. Point `inputs` at your own dataset.
+# Points at the dataset shipped in examples/brain_endothelial_demo: a mouse brain
+# endothelial Perturb-seq screen (cNMF, k=100) targeting vascular signalling
+# regulators (TGF-beta/BMP, Notch, VEGF, mechanotransduction).
 #
-# NOTE: for a runnable end-to-end generalization check (spec test 8: "no
-# liver/MASLD text leaks into prompts, evidence-type enum, theme call, or
-# report"), this example reuses the liver demo gene table purely as arbitrary
-# gene symbols under a T-cell context. Replace with your own gene loadings.
+# Nothing about brain or endothelium appears in the code — the biology lives
+# entirely in the `context:` block below. To interpret your own dataset, repoint
+# `inputs` and rewrite `context`.
 
 context:                       # -> ContextProfile.from_dict
-  organism: human
-  species_taxid: 9606
-  tissue: ""
-  cell_type: CD8 T cell
-  conditions: [chronic infection, exhaustion]
-  context_terms:
-    - tumor microenvironment
-    - immune checkpoint
-    - TOX
-    - interferon signaling
-    - effector-to-exhausted transition
-  assay: CRISPR Perturb-seq
-  report_dataset_crumb: Human CD8 T-cell CRISPR Perturb-seq
+  organism: mouse
+  species_taxid: 10090
+  tissue: brain
+  cell_type: brain endothelial cell
+  conditions: [CRISPR perturbation]   # goes into the literature query — keep it searchable
+  context_terms:               # normal biology of the cell type — the key research control
+    - blood-brain barrier integrity
+    - arteriovenous zonation
+    - tight junctions and paracellular permeability
+    - tip and stalk cell specification
+    - angiogenesis and vascular remodelling
+    - TGF-beta and BMP signalling in endothelium
+    - Notch and VEGF signalling
+    - shear-stress mechanotransduction
+  assay: Perturb-seq
+  report_dataset_crumb: Mouse brain endothelial Perturb-seq
 
 inputs:
-  gene_loading: examples/generic_demo/gene_loading.csv   # placeholder symbols; replace with your data
-  regulators: examples/generic_demo/regulators.csv
-  celltype_enrichment: null
+  gene_loading: examples/brain_endothelial_demo/FB_moi15_seq2_loading_gene_k100_top300.csv
+  regulators: examples/brain_endothelial_demo/Discovery_FP_moi15_seq2_thresh10_k100_default.csv
+  celltype_enrichment: null    # requires cell_type/program/log2_fc/fdr columns
 
-output_dir: runs/tcell_example
+output_dir: runs/brain_endothelial_example
 
-programs: [10, 12, 14]
+programs: [57, 63, 65]         # three artery-specific programs; a cheap first run
 
 settings:
   n_top_genes: 300
