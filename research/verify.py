@@ -17,10 +17,14 @@ artifacts written by the research subagents and annotates them **in place**:
     keeps a raw pre-verify copy under a sibling ``research_audit/`` dir.
 
 Reused building blocks:
-  * ``verify_dois`` / ``crossref_lookup`` from ``literature-review/kernel.py``
-    (loaded robustly by path — that file is not a package). ``verify_dois`` is
-    KEYLESS and returns per DOI ``{ok: True|False|None, title?, authors?, year?,
-    journal?, retracted?, registry?}``.
+  * ``verify_dois`` from ``research/_crossref.py`` — the keyless CrossRef +
+    doi.org HEAD verifier, vendored INTO this package (it used to be loaded by
+    path out of ``literature-review/kernel.py``, a hyphenated directory that can
+    never be a package and is therefore absent from the built wheel — so every
+    plugin install raised on import). It returns per DOI ``{ok: True|False|None,
+    title?, authors?, year?, journal?, retracted?, registry?}``, where ``ok=None``
+    means COULD NOT CHECK (the citation is kept) and ``ok=False`` means
+    authoritatively refuted (the citation is dropped).
   * A small keyless-or-keyed PMID resolver (``resolve_pmids``) implemented here
     against ``esummary.fcgi?db=pubmed`` — NcbiClient has no PMID-metadata method.
 
@@ -30,9 +34,8 @@ CLI:  ``python -m research.verify --results-dir research_results/ [--audit-dir r
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
-import os
+import logging
 import re
 import time
 from pathlib import Path
@@ -40,6 +43,7 @@ from typing import Optional
 
 import requests
 
+from research._crossref import env_value, verify_dois
 from research.schema import (
     AgentPaper,
     AgentResearchResult,
@@ -52,28 +56,7 @@ from research.schema import (
 # preserved, unwired claim-vs-paper entailment logic. Not used by the active pipeline.
 from research.schema import Citation, Claim  # noqa: F401
 
-# ---------------------------------------------------------------------------
-# Robustly load literature-review/kernel.py (NOT a package) by repo-relative path
-# ---------------------------------------------------------------------------
-_REPO_ROOT = Path(__file__).resolve().parent.parent
-_KERNEL_PATH = _REPO_ROOT / "literature-review" / "kernel.py"
-
-
-def _load_kernel():
-    if not _KERNEL_PATH.exists():
-        raise FileNotFoundError(
-            f"literature-review/kernel.py not found at {_KERNEL_PATH}; "
-            "the verifier reuses its keyless verify_dois/crossref_lookup."
-        )
-    spec = importlib.util.spec_from_file_location("litreview_kernel", _KERNEL_PATH)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-
-_kernel = _load_kernel()
-verify_dois = _kernel.verify_dois          # keyless CrossRef + doi.org HEAD
-crossref_lookup = _kernel.crossref_lookup  # free-text -> DOI (kept available)
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # PMID resolver (NCBI E-utilities esummary) — keyless or keyed
@@ -84,17 +67,11 @@ _RATE_WITH_KEY = 0.11  # ~9 req/s
 
 
 def _ncbi_api_key() -> Optional[str]:
-    """NCBI key from env; fall back to the repo .env (never printed)."""
-    k = os.environ.get("NCBI_API_KEY")
-    if k:
-        return k.strip() or None
-    envf = _REPO_ROOT / ".env"
-    if envf.exists():
-        for line in envf.read_text().splitlines():
-            line = line.strip()
-            if line.startswith("NCBI_API_KEY="):
-                return line.split("=", 1)[1].strip().strip('"').strip("'") or None
-    return None
+    """NCBI key from the environment, falling back to a ``.env`` in the CURRENT WORKING
+    DIRECTORY — where the user runs ``gpi``. (A repo-relative ``.env`` lookup is meaningless
+    once this package is installed as a wheel: ``__file__`` then points into site-packages.)
+    Never printed or logged."""
+    return env_value("NCBI_API_KEY")
 
 
 def _parse_year(s) -> Optional[int]:
@@ -354,8 +331,14 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
 # ---------------------------------------------------------------------------
 def _resolve_evidence(rr: ResearchResult) -> None:
     """Resolve every ``Evidence`` DOI/PMID and annotate resolved/registry/
-    retracted/verify_error in place; reconcile a missing DOI from the PMID."""
-    dois = sorted({e.doi.strip() for e in rr.evidence if e.doi and e.doi.strip()})
+    retracted/verify_error in place; reconcile a missing DOI from the PMID.
+
+    Every DOI is passed through ``_norm_doi`` before it reaches ``verify_dois`` and every lookup
+    uses the same key, so producer and consumer agree (``verify_dois`` keys by the lowercased,
+    stripped DOI). Normalizing on the way IN also means an agent that submits
+    ``https://doi.org/10.x/y`` gets the bare DOI verified rather than a mangled URL 404-ing and
+    the real paper being discarded as fabricated."""
+    dois = sorted({d for e in rr.evidence if (d := _norm_doi(e.doi))})
     pmids = sorted({e.pmid.strip() for e in rr.evidence if e.pmid and e.pmid.strip()})
 
     doi_res = verify_dois(dois) if dois else {}
@@ -369,7 +352,7 @@ def _resolve_evidence(rr: ResearchResult) -> None:
             continue
         if e.pmid:
             pr = pmid_res.get(e.pmid.strip())
-            d = pr.get("doi") if pr else None
+            d = _norm_doi(pr.get("doi")) if pr else None
             if d and d not in doi_res:
                 recon.add(d)
     if recon:
@@ -394,9 +377,11 @@ def _resolve_evidence(rr: ResearchResult) -> None:
         year: Optional[int] = None
 
         if doi:
-            dr = doi_res.get(doi)
+            dr = doi_res.get(_norm_doi(doi))  # same normalization used to build the batch
             if dr is not None:
                 ok = dr.get("ok")
+                # ok is the TRI-STATE (True/False/None) and rides through untouched: None
+                # ("could not check") must never be collapsed into False ("refuted").
                 outcomes.append(ok)
                 if ok:
                     registry = dr.get("registry")
@@ -608,12 +593,61 @@ def _load_result(raw: str) -> ResearchResult:
     return ResearchResult.model_validate(data)
 
 
+def _write_verification_summary(
+    audit_dir: Path,
+    rrs: list[ResearchResult],
+    skipped: list[dict],
+) -> Path:
+    """Write ``{audit_dir}/verification_summary.json`` — the machine-readable answer to "did
+    verification actually run?".
+
+    ``verification_complete`` is True only when EVERY citation got a non-``None`` verdict (no
+    "could not check") and no result file had to be skipped. A ``None`` verdict means the DOI/PMID
+    could not be reached, so the citation is kept but unproven — a run carrying any of those has
+    not been fully verified, and nothing downstream could tell until now.
+
+    It goes in the AUDIT dir, not the results dir: ``verify_directory`` and
+    ``gpi.research_evidence_adapter`` both glob ``research_results/*.json`` expecting one
+    ``ResearchResult`` per file, so a summary file there would be parsed as a program.
+    """
+    evidence = [e for rr in rrs for e in rr.evidence]
+    n_unverified = sum(1 for e in evidence if e.resolved is None)
+    summary = {
+        "verification_complete": n_unverified == 0 and not skipped,
+        "n_citations": len(evidence),
+        "n_verified": sum(1 for e in evidence if e.resolved is True),
+        "n_unverified": n_unverified,           # resolved is None -> could not check (kept)
+        "n_refuted": sum(1 for e in evidence if e.resolved is False),  # dropped downstream
+        "n_retracted": sum(1 for e in evidence if e.retracted is True),
+        "n_programs": len(rrs),
+        "n_files_skipped": len(skipped),
+        "files_skipped": skipped,
+    }
+    path = audit_dir / "verification_summary.json"
+    path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    logger.info(
+        "verify: %d/%d citation(s) verified across %d program(s) (complete=%s) -> %s",
+        summary["n_verified"], summary["n_citations"], summary["n_programs"],
+        summary["verification_complete"], path,
+    )
+    return path
+
+
 def verify_directory(directory: Path, audit_dir: Optional[Path] = None) -> dict:
     """Verify every ``*.json`` ``ResearchResult`` in ``directory`` in place.
 
     Writes a raw pre-verify copy to ``{audit_dir}/{program_id}.pre_verify.json``
     (default sibling ``research_audit/``) BEFORE overwriting, dedups evidence
-    across programs, and returns an audit summary dict.
+    across programs, writes ``{audit_dir}/verification_summary.json``, and returns
+    an audit summary dict.
+
+    Loading is per-file: an unreadable / off-schema result is logged and SKIPPED rather than
+    sinking the other programs' (already paid-for) research. It raises only when files were
+    present and NONE of them loaded.
+
+    This step is deliberately NOT degradable — "never emit an unverified citation" is a feature —
+    so resolution failures still ride through as ``resolved=None`` (kept, mechanism ``partial``)
+    or ``resolved=False`` (dropped, mechanism ``unsupported``); neither is silently upgraded.
     """
     directory = Path(directory)
     if not directory.is_dir():
@@ -626,16 +660,25 @@ def verify_directory(directory: Path, audit_dir: Optional[Path] = None) -> dict:
     files = sorted(directory.glob("*.json"))
     rrs: list[ResearchResult] = []
     file_of: dict[int, Path] = {}
+    skipped: list[dict] = []
     for f in files:
-        raw = f.read_text()
         try:
+            raw = f.read_text()
             rr = _load_result(raw)  # accepts flat agent output OR canonical form
-        except Exception as e:  # noqa: BLE001 - fail loudly with the offending file
-            raise ValueError(f"{f} is not a valid research result: {e}") from e
+        except Exception as e:  # noqa: BLE001 - one bad file must not sink the good programs
+            logger.error("verify: skipping %s — not a valid research result: %s", f, e)
+            skipped.append({"file": str(f), "error": str(e)})
+            continue
         rrs.append(rr)
         file_of[id(rr)] = f
         # raw record kept separate from summaries (spec P1): pre-verify snapshot
         (audit_dir / f"{rr.program_id}.pre_verify.json").write_text(raw)
+
+    if files and not rrs:
+        raise ValueError(
+            f"no valid research result loaded from {directory}: all {len(files)} file(s) failed "
+            f"({'; '.join(s['error'] for s in skipped)})"
+        )
 
     # 1) resolve identifiers within each program (batched network calls)
     for rr in rrs:
@@ -652,10 +695,15 @@ def verify_directory(directory: Path, audit_dir: Optional[Path] = None) -> dict:
         file_of[id(rr)].write_text(rr.model_dump_json(indent=2))
         programs[rr.program_id] = rr.meta["verify"]
 
+    # 5) machine-readable "did verification actually run?" record
+    summary_path = _write_verification_summary(audit_dir, rrs, skipped)
+
     return {
         "directory": str(directory),
         "audit_dir": str(audit_dir),
+        "verification_summary": str(summary_path),
         "n_programs": len(rrs),
+        "n_files_skipped": len(skipped),
         **dedup,
         "n_mechanisms_unsupported_total": sum(
             p["n_mechanisms_unsupported"] for p in programs.values()
@@ -745,7 +793,6 @@ __all__ = [
     "normalize_agent_result",
     "resolve_pmids",
     "verify_dois",
-    "crossref_lookup",
     "main",
 ]
 

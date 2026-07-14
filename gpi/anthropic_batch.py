@@ -43,7 +43,14 @@ except ImportError:
     anthropic = None  # type: ignore
     ANTHROPIC_AVAILABLE = False
 
+from gpi.log_redaction import install_log_redaction
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# This module runs as its own subprocess and configures the root logger itself, so it does
+# NOT inherit the driver's redaction. httpx logs every request URL at INFO, and the NCBI /
+# STRING calls carry api_key and email in the query string — this is where the key actually
+# leaked into runs/*.log. Install here, at import, before any record can be emitted.
+install_log_redaction()
 logger = logging.getLogger(__name__)
 
 MODEL = "claude-sonnet-4-6"  # Anthropic model name

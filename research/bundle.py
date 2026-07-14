@@ -156,7 +156,13 @@ def _build_research_brief(
     has_regulators: bool,
 ) -> str:
     """Short instruction that REFERENCES the bundle's fields (no re-listing of genes or
-    context). One question; regulators are additional search targets, not background."""
+    context). One question; regulators are additional search targets, not background.
+
+    The profile's ``conditions`` (disease / development / aging framing) are stated in prose
+    here, not left to the bundle's ``conditions`` field alone — a bare JSON key barely reaches
+    the agent. It carries ONE anti-forcing clause: the condition is a lens to check, never a
+    conclusion to reach. (``condition_context`` is deliberately not used: it re-lists the same
+    terms already carried by ``functions_to_consider``.)"""
     rp = profile.resolved()
     role = rp.resolved_annotation_role()
     subject = rp.cell_type or rp.tissue or rp.organism or "cell"
@@ -175,6 +181,14 @@ def _build_research_brief(
         f"Research the genes in `program_genes` and `distinctive_genes`{reg_clause}, within the "
         "cell-type functions listed in `functions_to_consider`. Land on 1-3 coherent functional "
         "themes, each supported by several genes and specific retrieved papers.",
+    ]
+    if rp.conditions:
+        lines += [
+            "",
+            f"Experimental context: {', '.join(rp.conditions)}. Cite the condition link when the "
+            "literature supports it; do not force one.",
+        ]
+    lines += [
         "",
         "Cite ONLY PMIDs/DOIs your tools return — never fabricate an identifier, title, or "
         "quotation. Do not assign the final program label.",

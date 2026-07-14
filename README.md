@@ -60,26 +60,29 @@ program column, so you rarely need to rename anything:
 | program | `program_id`, `RowID`, `topic`, `factor`, `component` |
 
 Optional inputs add Perturb-seq regulator effects (`program_id, target_gene, log2_fc,
-significant`) or cell-type enrichment (`cell_type, program, log2_fc, fdr`). Claude validates
-every column before anything is spent.
+significant`) or cell-type enrichment (`cell_type, program, log2_fc`, plus `direction` and/or
+`fdr`). Claude validates every column before anything is spent.
+
+Cell-type enrichment is worth supplying: its signed log2FC values reach the annotation model
+directly, and they are what let it distinguish a **cell-type identity** program from a
+**cross-cell-type functional** one. Strong depletion in a lineage is as informative as
+enrichment.
 
 ### Demo dataset
 
 [`examples/brain_endothelial_demo/`](examples/brain_endothelial_demo) ships a real dataset you
-can run end to end: a mouse brain endothelial Perturb-seq screen (cNMF, k=100) targeting 166
-vascular signalling regulators across TGF-β/BMP, Notch, VEGF, and mechanotransduction.
+can run end to end: a mouse brain endothelial Perturb-seq screen (cNMF, k=100) from postnatal
+brain, targeting 166 vascular signalling regulators.
 
 | File | Role |
 |---|---|
 | `FB_moi15_seq2_loading_gene_k100_top300.csv` | gene loadings — 100 programs × 300 genes |
 | `Discovery_FP_moi15_seq2_thresh10_k100_default.csv` | regulator effects — 16,200 tested pairs |
-
-The directory also carries per-program cell-type annotation summaries. They are reference
-material, not pipeline inputs — the enrichment table has no `fdr` column, so it cannot be
-passed as `celltype_enrichment`.
+| `FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv` | cell-type enrichment — signed log2FC per lineage |
 
 [`configs/example_generic.yaml`](configs/example_generic.yaml) is a runnable config for this
-dataset, scoped to three artery-specific programs (57, 63, 65).
+dataset, wiring up all three files and scoped to three programs (9, 48, 70) with contrasting
+cell-type signals.
 
 ## Install
 
@@ -159,7 +162,8 @@ count.
 
 - Input validation, dry runs, and installation checks make **no paid API calls**.
 - Claude asks for explicit approval before starting paid work.
-- Literature research has a configurable per-program budget and concurrency limit.
+- Literature research has a configurable budget and concurrency limit. `max_budget_usd` is a
+  cap **per program**, not per run — the worst case for a run is `max_budget_usd × len(programs)`.
 - Runs cache completed steps in `pipeline_state.json`, so a network failure is resumable
   rather than repaid.
 - A failed research step degrades gracefully: the report still renders, with the affected
@@ -200,7 +204,7 @@ gpi --emit-config --context-file context.yaml \
     --gene-loading genes.csv --output-dir runs/my_run -o runs/my_run.yaml
 ```
 
-Scope a first pass with the config's `programs:` key, or with `--programs 57,63,65` when
+Scope a first pass with the config's `programs:` key, or with `--programs 9,48,70` when
 emitting one. Useful flags for the run itself: `--no-research` (deterministic enrichment
 only, no spend) and `--progress plain`.
 

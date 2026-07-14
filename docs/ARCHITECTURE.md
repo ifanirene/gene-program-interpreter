@@ -71,10 +71,10 @@ program) + a **deterministic evidence verifier**.
 | `gpi/html_report.py` | `05_generate_html_report.py` | ④ EXTEND for evidence status + DOI links |
 | `gpi/run_pipeline.py` | `run_pipeline.py` | ④ generalize config; Anthropic-only |
 | `research/schema.py` | NEW (spec §5) | ④ (written by orchestrator) |
-| `research/protocol.md` | NEW (port `literature-review/SKILL.md`) | shared agent protocol |
+| `research/protocol.md` | NEW | shared agent protocol |
 | `research/bundle.py` | NEW | ④ builds `program_bundles/{id}.json` |
 | `research/research_parallel.py` | NEW | ② asyncio + Agent SDK fan-out |
-| `research/verify.py` | NEW | ④ verifier; reuses `literature-review/kernel.py::verify_dois` + `gpi/ncbi_api.py` |
+| `research/verify.py` | NEW | ④ verifier; uses `research/_crossref.py::verify_dois` + `gpi/ncbi_api.py` |
 | `research/literature.py` | NEW | ② in-process literature MCP server (PubMed/OpenAlex/Crossref) wired into each SDK session |
 
 ### DROP entirely (never vendor)

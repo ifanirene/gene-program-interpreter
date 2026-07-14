@@ -66,6 +66,8 @@ from .anthropic_batch import (
     fetch_results,
     submit_batch,
 )
+from .log_redaction import install_log_redaction
+from .progress import emit_step_progress
 
 PROMPT_VERSION = "presentation-v1"
 
@@ -620,12 +622,20 @@ def run_presentation_batch(programs: dict[int, dict[str, Any]], lexicon: dict[st
 
     Raises ``RuntimeError``/``TimeoutError`` on batch failure; the caller falls
     back to the deterministic path.
+
+    Each poll also emits a STEP_PROGRESS event (``gpi.progress.emit_step_progress``), so the
+    minutes spent waiting on the batch show up as ``n/total`` in the live view and in
+    ``progress.json`` instead of reading as a hung step. No plumbing needed: the emitter picks
+    up ``GPI_PROGRESS_JSON`` / ``GPI_PROGRESS_STEP`` from the environment the driver exports,
+    and is a no-op when they are unset (standalone run, or ``--progress off``).
     """
     requests = build_batch_requests(
         programs, lexicon, model, max_tokens, effort, thinking
     )
+    n_requests = len(requests)
     batch_id = submit_batch(requests)
-    print(f"Submitted presentation batch {batch_id} ({len(requests)} requests).")
+    print(f"Submitted presentation batch {batch_id} ({n_requests} requests).")
+    emit_step_progress(0, n_requests, "batch submitted")
 
     deadline = time.time() + timeout if timeout else None
     while True:
@@ -637,6 +647,10 @@ def run_presentation_batch(programs: dict[int, dict[str, Any]], lexicon: dict[st
             f"succeeded={counts['succeeded']} errored={counts['errored']} "
             f"processing={counts['processing']}"
         )
+        # Terminal requests, against the number we actually submitted — a truer total than
+        # re-deriving it from the counts, which omit whatever has not been dispatched yet.
+        done = counts["succeeded"] + counts["errored"] + counts["canceled"]
+        emit_step_progress(done, n_requests, f"batch {processing_status}")
         if processing_status == "ended":
             break
         if processing_status in ("canceling", "canceled"):
@@ -648,6 +662,7 @@ def run_presentation_batch(programs: dict[int, dict[str, Any]], lexicon: dict[st
             )
         time.sleep(poll_interval)
 
+    emit_step_progress(n_requests, n_requests, "fetching results")
     fetch_results(batch_id, results_path)
     return read_results(results_path)
 
@@ -760,6 +775,10 @@ def build_arg_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Optional[list[str]] = None) -> int:
+    # This module runs as its own process (``python -m gpi.presentation``), which does not
+    # inherit the driver's logging config — importing anthropic_batch reconfigures the root
+    # logger to INFO here, so httpx would log every request URL. Redact before that can happen.
+    install_log_redaction()
     args = build_arg_parser().parse_args(argv)
 
     annotations_dir = Path(args.annotations_dir)

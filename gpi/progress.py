@@ -16,6 +16,16 @@ Design constraints (see plan Part C5):
 
 ``progress.jsonl`` lines are small (< PIPE_BUF), so concurrent appends from the driver and
 child step processes are atomic and never interleave-corrupt.
+
+Reading ``progress.json`` (monitors, the Claude skill)
+-----------------------------------------------------
+* ``heartbeat_at`` is the **liveness** signal: it is re-stamped on every snapshot write and so
+  advances ~1/s for as long as the process is alive, event stream or not. ``updated_at`` is the
+  time of the last *event* and may legitimately sit still for many minutes while a research
+  agent thinks — **a frozen ``updated_at`` is not a hang.** Judge liveness by ``heartbeat_at``
+  (and ``pid``); judge activity by ``updated_at``.
+* A failed step keeps its reason in ``steps[i].error``, and ``failed_step`` names it — a failed
+  run always states its cause.
 """
 
 from __future__ import annotations
@@ -26,8 +36,11 @@ import sys
 import threading
 import time
 from contextvars import ContextVar
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, TextIO
+
+from .log_redaction import redact_text
 
 # --------------------------------------------------------------------------- event types
 RUN_START = "run_start"
@@ -93,14 +106,28 @@ def emit_step_progress(current: Any, total: Any, detail: Optional[str] = None) -
 
 
 # --------------------------------------------------------------------------- reducer
+def _iso(ts: float) -> str:
+    """UTC ISO-8601, millisecond precision (the snapshot's human/agent-readable clock)."""
+    return datetime.fromtimestamp(ts, timezone.utc).isoformat(timespec="milliseconds")
+
+
 class SnapshotReducer:
-    """Pure fold of the event stream into a reduced snapshot dict. No I/O, no SDK."""
+    """Pure fold of the event stream into a reduced snapshot dict. No I/O, no SDK.
+
+    ``apply`` is a pure fold over events. ``snapshot`` additionally reads the wall clock, for
+    the two fields that must move even when no event arrives: ``heartbeat_at`` (the liveness
+    signal) and the active step's ``elapsed_s``. Pass ``now`` to keep it deterministic.
+    """
 
     def __init__(self) -> None:
+        t0 = time.time()
         self.state: Dict[str, Any] = {
             "run_id": None,
             "status": "running",
             "updated_at": None,
+            "started_at": _iso(t0),
+            "pid": os.getpid(),
+            "failed_step": None,
             "steps": [],
             "active_step": None,
             "research": {
@@ -112,10 +139,13 @@ class SnapshotReducer:
             },
         }
         self._step_index: Dict[str, int] = {}
+        self._step_start_ts: Dict[str, float] = {}
+        self._step_end_ts: Dict[str, float] = {}
 
     def _blank_step(self, name: str) -> Dict[str, Any]:
         return {"name": name, "status": "pending", "executor": None,
-                "current": None, "total": None, "detail": None}
+                "current": None, "total": None, "detail": None,
+                "error": None, "elapsed_s": None}
 
     def _ensure_step(self, name: Optional[str]) -> None:
         if name and name not in self._step_index:
@@ -129,22 +159,32 @@ class SnapshotReducer:
     def apply(self, ev: Dict[str, Any]) -> None:
         t = ev.get("type")
         st = self.state
-        if ev.get("ts") is not None:
-            st["updated_at"] = ev.get("ts")
+        ts = ev.get("ts")
+        if ts is not None:
+            st["updated_at"] = ts
 
         if t == RUN_START:
             st["run_id"] = ev.get("run_id")
             st["status"] = "running"
+            if ts is not None:
+                st["started_at"] = _iso(ts)
             names = list(ev.get("steps") or [])
             st["steps"] = [self._blank_step(n) for n in names]
             self._step_index = {n: i for i, n in enumerate(names)}
+            self._step_start_ts.clear()
+            self._step_end_ts.clear()
         elif t == STEP_START:
-            self._ensure_step(ev.get("step"))
-            s = self._step(ev.get("step"))
+            name = ev.get("step")
+            self._ensure_step(name)
+            s = self._step(name)
             if s is not None:
                 s["status"] = "in_progress"
                 s["executor"] = ev.get("executor")
-            st["active_step"] = ev.get("step")
+                s["error"] = None  # a re-run clears the previous attempt's failure
+            if name and ts is not None:
+                self._step_start_ts[name] = ts
+                self._step_end_ts.pop(name, None)
+            st["active_step"] = name
         elif t == STEP_PROGRESS:
             self._ensure_step(ev.get("step"))
             s = self._step(ev.get("step"))
@@ -153,11 +193,25 @@ class SnapshotReducer:
                 s["total"] = ev.get("total")
                 s["detail"] = ev.get("detail")
         elif t == STEP_DONE:
-            s = self._step(ev.get("step"))
+            name = ev.get("step")
+            status = ev.get("status", "completed")
+            s = self._step(name)
             if s is not None:
-                s["status"] = ev.get("status", "completed")
+                s["status"] = status
                 s["current"] = s["total"] = s["detail"] = None
-            if st["active_step"] == ev.get("step"):
+                # The error is the whole point of a failed step; the reducer used to drop it,
+                # leaving a dead run with no stated cause. Redact before it lands in
+                # progress.json — a step error can carry an httpx URL with an api_key in it,
+                # and the skill reads that file straight back into an agent's context.
+                s["error"] = redact_text(ev.get("error")) if ev.get("error") else None
+            if name and ts is not None:
+                self._step_end_ts[name] = ts
+            if status == "failed" and name:
+                # Most recent failure wins: that is the one that stopped the run (an earlier
+                # failure in a DEGRADABLE step did not). Every failed step keeps its own
+                # ``error`` in ``steps``, so nothing is lost.
+                st["failed_step"] = name
+            if st["active_step"] == name:
                 st["active_step"] = None
         elif t == RESEARCH_START:
             r = st["research"]
@@ -199,17 +253,45 @@ class SnapshotReducer:
             sum(float(x["cost_usd"]) for x in agents.values()
                 if isinstance(x.get("cost_usd"), (int, float))), 4)
 
-    def snapshot(self) -> Dict[str, Any]:
-        """A JSON-serializable copy; agents rendered as a list sorted by program id."""
+    def _elapsed(self, name: Any, status: Any, now: float) -> Optional[float]:
+        """Seconds the step has been running (live) or took (final). None if never started."""
+        start = self._step_start_ts.get(name)
+        if start is None:
+            return None
+        end = self._step_end_ts.get(name)
+        if end is None:
+            if status != "in_progress":
+                return None
+            end = now  # still running — grow with the wall clock
+        return round(max(0.0, end - start), 1)
+
+    def snapshot(self, now: Optional[float] = None) -> Dict[str, Any]:
+        """A JSON-serializable copy; agents rendered as a list sorted by program id.
+
+        ``heartbeat_at`` is stamped on *every* call, so it advances even when the event stream
+        is silent. That is the difference between "hung" and "working": ``updated_at`` (the last
+        event) can legitimately sit still for many minutes while a research agent thinks, and a
+        monitor that reads it as a hang will kill a healthy run.
+        """
         st = self.state
+        now = time.time() if now is None else now
         research = dict(st["research"])
         agents = research["agents"]
         research["agents"] = [agents[k] for k in sorted(agents, key=lambda k: (len(k), k))]
+        steps: List[Dict[str, Any]] = []
+        for s in st["steps"]:
+            step = dict(s)
+            step["elapsed_s"] = self._elapsed(step.get("name"), step.get("status"), now)
+            steps.append(step)
         return {
             "run_id": st["run_id"],
             "status": st["status"],
+            "pid": st["pid"],
+            "started_at": st["started_at"],
+            "heartbeat_at": _iso(now),
             "updated_at": st["updated_at"],
-            "steps": [dict(s) for s in st["steps"]],
+            "failed_step": st["failed_step"],
+            "steps": steps,
             "active_step": st["active_step"],
             "research": research,
         }
@@ -224,6 +306,12 @@ def _fmt_cost(v: Any) -> str:
     return "—" if not isinstance(v, (int, float)) else f"${float(v):.2f}"
 
 
+def _short_err(err: Any, limit: int = 200) -> str:
+    """One-line, length-capped error — the renderers are line-oriented."""
+    text = " ".join(str(err).split())
+    return text if len(text) <= limit else text[: limit - 1] + "…"
+
+
 def render_markdown(snap: Dict[str, Any]) -> str:
     """Render a snapshot as a markdown step-checklist + (during research) an agent table."""
     lines: List[str] = []
@@ -235,6 +323,8 @@ def render_markdown(snap: Dict[str, Any]) -> str:
             sub = f" — {s.get('current')}/{s.get('total')}"
             if s.get("detail"):
                 sub += f" ({s['detail']})"
+        elif s.get("status") == "failed" and s.get("error"):
+            sub = f" — {_short_err(s['error'])}"
         lines.append(f"- {icon} **{s.get('name')}**{ex}{sub}")
     md = "\n".join(lines)
 
@@ -261,6 +351,8 @@ def render_txt(snap: Dict[str, Any]) -> str:
         sub = ""
         if s.get("status") == "in_progress" and s.get("total"):
             sub = f"  {s.get('current')}/{s.get('total')}"
+        elif s.get("status") == "failed" and s.get("error"):
+            sub = f"  {_short_err(s['error'])}"
         out.append(f"{mark} {s.get('name')}{ex}{sub}")
     r = snap.get("research") or {}
     for a in (r.get("agents") or []):
@@ -280,7 +372,8 @@ def _plain_line(ev: Dict[str, Any]) -> Optional[str]:
         detail = f" {ev.get('detail')}" if ev.get("detail") else ""
         return f"[{ev.get('step')}] {ev.get('current')}/{ev.get('total')}{detail}"
     if t == STEP_DONE:
-        return f"[{ev.get('step')}] {ev.get('status', 'done')}"
+        err = f" — {_short_err(redact_text(str(ev['error'])))}" if ev.get("error") else ""
+        return f"[{ev.get('step')}] {ev.get('status', 'done')}{err}"
     if t == RESEARCH_START:
         return f"[research] {ev.get('n_programs')} program(s), concurrency {ev.get('concurrency')}"
     if t == AGENT_STARTED:
@@ -359,6 +452,8 @@ class RichRenderer:
                 sub = f"{s.get('current')}/{s.get('total')}"
                 if s.get("detail"):
                     sub += f" · {s['detail']}"
+            elif s.get("status") == "failed" and s.get("error"):
+                sub = _short_err(s["error"], limit=90)
             style = "bold" if s.get("status") == "in_progress" else ""
             steps_tbl.add_row(icon, Text(str(s.get("name")), style=style), ex, sub)
 
@@ -469,6 +564,12 @@ class ProgressEmitter:
                 open(self.jsonl_path, "w", encoding="utf-8").close()  # fresh log per run
             except Exception:
                 pass
+            # Overwrite any PREVIOUS run's snapshot before anyone can read it: a resumed run
+            # left progress.json saying `status: "done"`, so a monitor polling at t=0 saw a
+            # finished run that had not started. Written here — synchronously, before the
+            # tailer starts — so there is no window where the stale file is visible, and no
+            # race with the tailer over the shared .tmp path.
+            self._write_snapshot()
             self._thread = threading.Thread(target=self._tail_loop, name="gpi-progress-tailer",
                                             daemon=True)
             self._thread.start()
@@ -524,6 +625,11 @@ class ProgressEmitter:
                     pass
 
     def _maybe_snapshot(self) -> None:
+        # Called on EVERY tailer tick, not only when _drain produced events — that is what
+        # keeps `heartbeat_at` moving through a long silence (a research agent can think for
+        # 7+ minutes without emitting). Do not make this conditional on new events: the
+        # snapshot would freeze and a monitor would read a healthy run as hung. The throttle
+        # bounds the write rate to 1/s; the tailer sleeps `poll` between ticks, so no hot spin.
         if time.time() - self._last_snap >= self._snap_min:
             self._write_snapshot()
 

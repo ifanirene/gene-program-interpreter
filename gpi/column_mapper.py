@@ -16,10 +16,14 @@ Key features:
 - gene_col = mapper.get_column('gene')  # Finds 'Gene', 'gene', 'gene_name', etc.
 """
 
+import logging
 import numbers
 import re
 from typing import Dict, List, Optional, Set
 import pandas as pd
+
+
+logger = logging.getLogger(__name__)
 
 
 class ColumnMapper:
@@ -33,6 +37,7 @@ class ColumnMapper:
     - Cell types: cell_type, celltype, cluster, Cluster, etc.
     - Log2 fold change: log2_fc, log2FC, log2_fold_change, etc.
     - FDR/p-values: fdr, FDR, p_value, pval, etc.
+    - Direction: direction, enrichment_direction, regulation, etc.
     """
     
     # Define column aliases (all lowercase for matching)
@@ -64,8 +69,12 @@ class ColumnMapper:
         ],
         'fdr': [
             'fdr', 'fdr_corrected', 'q_value', 'qvalue', 'qval', 'q',
-            'padj', 'p_adj', 'p_adjusted', 'adjusted_pvalue', 
+            'padj', 'p_adj', 'p_adjusted', 'adjusted_pvalue',
             'p_value', 'pvalue', 'pval', 'p'
+        ],
+        'direction': [
+            'direction', 'enrichment_direction', 'effect_direction',
+            'change_direction', 'regulation', 'dir', 'sign'
         ],
         'regulator_gene': [
             'grna_target', 'target_name', 'target_gene', 'target_gene_name',
@@ -224,31 +233,85 @@ def standardize_gene_loading(df: pd.DataFrame) -> pd.DataFrame:
     return df.rename(columns=rename_map)
 
 
+# Names that appear in BOTH the 'fdr' and 'raw_p_value' alias lists. A file whose significance
+# column is named one of these carries UNADJUSTED p-values, yet it maps onto 'fdr' and is then
+# thresholded downstream as if it were adjusted. Removing the aliases would change behaviour for
+# existing users, so the mapping is surfaced loudly instead of silently.
+AMBIGUOUS_FDR_SOURCES: Set[str] = set(ColumnMapper.ALIASES['fdr']) & set(
+    ColumnMapper.ALIASES['raw_p_value']
+)
+
+
 def standardize_celltype_enrichment(df: pd.DataFrame) -> pd.DataFrame:
     """
     Standardize a cell-type enrichment DataFrame.
-    Expected output columns: cell_type, program, log2_fc_in_vs_out, fdr
-    
+    Expected output columns: cell_type, program, log2_fc_in_vs_out, plus fdr and direction
+    when the input provides them.
+
+    'fdr' is optional: marker tables that were already thresholded upstream (e.g. top-N
+    enriched/depleted markers per cell type) carry no significance column, and every row in
+    them is significant by construction. 'direction' is optional too, but authoritative when
+    present (see gpi.enrichment.generate_celltype_summary).
+
     Args:
         df: Cell-type enrichment DataFrame
-        
+
     Returns:
         DataFrame with standardized column names
     """
     mapper = ColumnMapper(df)
-    
+
     # Get the required columns
-    cols = mapper.get_columns(['cell_type', 'program_id', 'log2_fc', 'fdr'], required=True)
-    
+    cols = mapper.get_columns(['cell_type', 'program_id', 'log2_fc'], required=True)
+
     # Rename to standard names
     rename_map = {
         cols['cell_type']: 'cell_type',
         cols['program_id']: 'program',
         cols['log2_fc']: 'log2_fc_in_vs_out',
-        cols['fdr']: 'fdr'
     }
-    
-    return df.rename(columns=rename_map)
+
+    fdr_col = mapper.get_column('fdr', required=False)
+    if fdr_col is not None:
+        rename_map[fdr_col] = 'fdr'
+        if fdr_col.lower() != 'fdr':
+            logger.info("Cell-type enrichment: mapped column '%s' → 'fdr'", fdr_col)
+        if fdr_col.lower() in AMBIGUOUS_FDR_SOURCES:
+            logger.warning(
+                "Cell-type enrichment: column '%s' was mapped to 'fdr', but its name suggests "
+                "UNADJUSTED p-values. Significance filtering will threshold it as if it were an "
+                "adjusted FDR.",
+                fdr_col,
+            )
+    else:
+        logger.info(
+            "Cell-type enrichment: no 'fdr' column found; rows are treated as pre-filtered "
+            "(all significant)."
+        )
+
+    direction_col = mapper.get_column('direction', required=False)
+    if direction_col is not None:
+        rename_map[direction_col] = 'direction'
+        if direction_col.lower() != 'direction':
+            logger.info("Cell-type enrichment: mapped column '%s' → 'direction'", direction_col)
+
+    # Never rename a column onto a name that already exists: that yields duplicate columns and
+    # turns df['program'] into a DataFrame. A column already carrying the canonical name wins.
+    resolved: Dict[str, str] = {}
+    for source, target in rename_map.items():
+        if source == target:
+            continue
+        if target in df.columns:
+            logger.warning(
+                "Cell-type enrichment: input already has a '%s' column; keeping it and ignoring "
+                "'%s'.",
+                target,
+                source,
+            )
+            continue
+        resolved[source] = target
+
+    return df.rename(columns=resolved)
 
 
 def extract_program_id(value: object) -> Optional[int]:

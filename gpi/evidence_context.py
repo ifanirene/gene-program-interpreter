@@ -60,7 +60,14 @@ try:
 except ImportError:
     pass
 
+from gpi.log_redaction import install_log_redaction
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+# This module runs as its own subprocess and configures the root logger itself, so it does
+# NOT inherit the driver's redaction. httpx logs every request URL at INFO, and the NCBI /
+# STRING calls carry api_key and email in the query string — this is where the key actually
+# leaked into runs/*.log. Install here, at import, before any record can be emitted.
+install_log_redaction()
 logger = logging.getLogger(__name__)
 
 # Default Anthropic model stored in prepared batch requests.
@@ -276,22 +283,87 @@ def select_program_genes(
 # =============================================================================
 # Cell-type context
 # =============================================================================
-def load_celltype_annotations(
-    celltype_dir: Path, celltype_file: Optional[Path] = None
-) -> Dict[int, Dict[str, List[str]]]:
-    if celltype_file and celltype_file.exists():
-        summary_path = celltype_file
-    else:
-        for filename in ["celltype_summary.csv", "program_celltype_annotations_summary.csv"]:
-            candidate = celltype_dir / filename
-            if candidate.exists():
-                summary_path = candidate
-                break
-        else:
-            logger.warning("Cell-type summary not found in: %s", celltype_dir)
-            return {}
+# Candidate filenames searched in --celltype-dir, most informative first. The long-format
+# detail table is preferred over the legacy bucketed summaries because it carries signed
+# effect sizes; the format is ultimately detected by COLUMNS, not by filename, since either
+# CLI flag may point at either format.
+CELLTYPE_FILENAMES = (
+    "celltype_detail.csv",
+    "celltype_summary.csv",
+    "program_celltype_annotations_summary.csv",
+)
 
-    df = pd.read_csv(summary_path)
+# Minimal column set identifying the long-format table written by `gpi.enrichment`
+# (`rank_selected` is optional, so it is not part of the signature).
+CELLTYPE_DETAIL_COLUMNS = {"program", "cell_type", "direction", "log2_fc"}
+
+# The parenthetical is an anti-overclaiming guard, not padding: the upstream marker table is
+# top-N filtered, so a cell type's ABSENCE means "did not rank into the top markers", never
+# "not expressed there". Without this the model reads absence as evidence of absence.
+CELLTYPE_DETAIL_PREAMBLE = (
+    "Program activity by cell type (log2FC of program score, cells of that type vs. all others;\n"
+    "this program ranked in the top 10 markers for each type listed — types not listed were not\n"
+    "tested into the top 10, which is not evidence of absence)."
+)
+
+
+def _resolve_celltype_path(
+    celltype_dir: Optional[Path], celltype_file: Optional[Path] = None
+) -> Optional[Path]:
+    """Pick the cell-type table to read: an explicit file wins, else search the directory."""
+    if celltype_file and celltype_file.exists():
+        return celltype_file
+    if not celltype_dir:
+        logger.warning("Cell-type table not found (no directory or file supplied).")
+        return None
+    for filename in CELLTYPE_FILENAMES:
+        candidate = celltype_dir / filename
+        if candidate.exists():
+            return candidate
+    logger.warning("Cell-type summary not found in: %s", celltype_dir)
+    return None
+
+
+def _load_celltype_detail(df: pd.DataFrame) -> Dict[int, Dict[str, Any]]:
+    """Parse the long-format cell-type table (one row per program x cell type).
+
+    Keeps the SIGNED log2FC so the prompt can show that a program is actively excluded
+    from a lineage, which the legacy enriched/depleted buckets threw away.
+    """
+    detail_map: Dict[int, Dict[str, Any]] = {}
+    for _, row in df.iterrows():
+        program_id = _parse_program_id(row.get("program"))
+        if program_id is None:
+            continue
+        cell_type = str(row.get("cell_type", "")).strip()
+        if not cell_type:
+            continue
+        direction = str(row.get("direction", "")).strip().lower()
+        if direction not in ("enriched", "depleted"):
+            logger.warning(
+                "Skipping cell-type row with unknown direction %r (program %s, %s).",
+                row.get("direction"),
+                program_id,
+                cell_type,
+            )
+            continue
+        try:
+            log2_fc = float(row.get("log2_fc"))
+        except (TypeError, ValueError):
+            continue
+        if not np.isfinite(log2_fc):
+            continue
+        program_detail = detail_map.setdefault(
+            program_id, {"detail": {"enriched": [], "depleted": []}}
+        )
+        program_detail["detail"][direction].append(
+            {"cell_type": cell_type, "log2_fc": log2_fc}
+        )
+    return detail_map
+
+
+def _load_celltype_summary(df: pd.DataFrame) -> Dict[int, Dict[str, Any]]:
+    """Parse the legacy wide/bucketed cell-type summary (names only, no effect sizes)."""
     required_cols = {
         "program",
         "highly_cell_type_specific",
@@ -315,7 +387,7 @@ def load_celltype_annotations(
         logger.warning("Cell-type summary missing depleted column ('depleted').")
         return {}
 
-    annotation_map: Dict[int, Dict[str, List[str]]] = {}
+    annotation_map: Dict[int, Dict[str, Any]] = {}
     for _, row in df.iterrows():
         program_id = _parse_program_id(row.get("program"))
         if program_id is None:
@@ -331,12 +403,53 @@ def load_celltype_annotations(
     return annotation_map
 
 
+def load_celltype_annotations(
+    celltype_dir: Optional[Path], celltype_file: Optional[Path] = None
+) -> Dict[int, Dict[str, Any]]:
+    """Load per-program cell-type context, preferring the signed long format.
+
+    Returns program_id -> either `{"detail": {"enriched": [...], "depleted": [...]}}` (long
+    format; each entry is `{"cell_type": str, "log2_fc": float}` with a SIGNED log2FC) or the
+    legacy bucket mapping (`highly_cell_type_specific`/`moderately_enriched`/`weakly_enriched`/
+    `depleted` -> list of cell-type names). `format_celltype_context` renders both.
+    """
+    summary_path = _resolve_celltype_path(celltype_dir, celltype_file)
+    if summary_path is None:
+        return {}
+
+    df = pd.read_csv(summary_path)
+    if CELLTYPE_DETAIL_COLUMNS <= set(df.columns):
+        return _load_celltype_detail(df)
+    return _load_celltype_summary(df)
+
+
+def _format_celltype_detail(detail: Dict[str, List[Dict[str, Any]]]) -> str:
+    """Render signed per-cell-type log2FCs, strongest |log2FC| first within each direction."""
+    lines = ["#### Cell-type enrichment", CELLTYPE_DETAIL_PREAMBLE]
+    for direction, label in (("enriched", "Enriched"), ("depleted", "Depleted")):
+        entries = detail.get(direction) or []
+        if not entries:
+            continue
+        ranked = sorted(entries, key=lambda entry: abs(entry["log2_fc"]), reverse=True)
+        rendered = ", ".join(
+            f"{entry['cell_type']} ({entry['log2_fc']:+.2f})" for entry in ranked
+        )
+        lines.append(f"- {label}: {rendered}")
+    if len(lines) == 2:
+        return "#### Cell-type enrichment: Not available."
+    return "\n".join(lines)
+
+
 def format_celltype_context(
-    annotation_map: Dict[int, Dict[str, List[str]]], program_id: int
+    annotation_map: Dict[int, Dict[str, Any]], program_id: int
 ) -> str:
     program_info = annotation_map.get(program_id)
     if not program_info:
         return "#### Cell-type enrichment: Not available."
+
+    detail = program_info.get("detail")
+    if isinstance(detail, dict):
+        return _format_celltype_detail(detail)
 
     lines = ["#### Cell-type enrichment"]
     label_map = {
@@ -1132,7 +1245,7 @@ def generate_prompt(
     prompt_template: str,
     top_loading: int,
     top_unique: int,
-    celltype_map: Dict[int, Dict[str, List[str]]],
+    celltype_map: Dict[int, Dict[str, Any]],
     enrichment_by_program: Dict[int, Dict[str, List[dict]]],
     ncbi_data: Dict[int, Dict[str, Any]],
     top_enrichment: int,
@@ -1241,7 +1354,7 @@ def build_annotation_requests(
     gene_df: pd.DataFrame,
     profile: ContextProfile,
     *,
-    celltype_map: Optional[Dict[int, Dict[str, List[str]]]] = None,
+    celltype_map: Optional[Dict[int, Dict[str, Any]]] = None,
     enrichment_by_program: Optional[Dict[int, Dict[str, List[dict]]]] = None,
     ncbi_data: Optional[Dict[int, Dict[str, Any]]] = None,
     regulator_data: Optional[Dict[Any, Any]] = None,
@@ -1325,6 +1438,7 @@ You are a {annotation_role}. Interpret Program {program_id}, {annotation_context
 
 ### Interpretation rules
 - Cite genes and supplied evidence for biological claims.
+- Use the cell-type log2FC values to judge whether this is a cell-type identity program or a cross-cell-type functional program. Strong depletion in a lineage is as informative as enrichment.
 - Treat research-evidence modules as candidate modules, not fixed final boundaries.
 - Add 1-2 de novo functional theme candidates when primary gene descriptions, regulators, or enrichments support them.
 - Do not automatically select all research-evidence candidates; a de novo candidate may replace a research-evidence candidate when it is more specific or clearly supported by evidence.
@@ -1411,9 +1525,10 @@ def cmd_prepare(args: argparse.Namespace) -> int:
         logger.info("Limiting to first %s topics for testing.", args.num_topics)
 
     celltype_file = Path(args.celltype_file) if args.celltype_file else None
+    celltype_dir = Path(args.celltype_dir) if args.celltype_dir else None
     celltype_map = (
-        load_celltype_annotations(Path(args.celltype_dir), celltype_file)
-        if args.celltype_dir or celltype_file
+        load_celltype_annotations(celltype_dir, celltype_file)
+        if celltype_dir or celltype_file
         else {}
     )
     enrichment_by_program = prepare_enrichment_mapping(
@@ -1533,8 +1648,15 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["low", "medium", "high", "xhigh", "max"],
         help="Claude output_config.effort for prepared requests",
     )
-    p.add_argument("--celltype-dir", help="Directory containing program cell-type summary CSV")
-    p.add_argument("--celltype-file", help="Path to cell-type summary CSV (overrides --celltype-dir)")
+    p.add_argument(
+        "--celltype-dir",
+        help="Directory containing a program cell-type CSV (celltype_detail.csv preferred)",
+    )
+    p.add_argument(
+        "--celltype-file",
+        help="Path to a cell-type CSV, long-format or legacy summary; format is detected from "
+             "its columns (overrides --celltype-dir)",
+    )
     p.add_argument("--enrichment-file", help="STRING enrichment CSV (Process/KEGG) with inputGenes")
     p.add_argument("--ncbi-file", help="NCBI context JSON (from gene_summaries fetch)")
     p.add_argument(
