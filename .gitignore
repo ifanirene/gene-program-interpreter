@@ -32,3 +32,6 @@ data/cache/
 
 # Large saved reference pages (kept on disk, not in repo)
 *.mhtml
+
+# gpi.enrichment writes this next to the *input* gene-loading CSV, not into output_dir
+*_with_uniqueness.csv
