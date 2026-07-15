@@ -35,3 +35,6 @@ data/cache/
 
 # gpi.enrichment writes this next to the *input* gene-loading CSV, not into output_dir
 *_with_uniqueness.csv
+
+# Rendered demo video + its TTS/audio build artifacts (~46 MB of binaries; kept on disk, not in repo)
+designs/pipeline-architecture/video/
