@@ -1,5 +1,9 @@
 # Gene Program Interpreter (GPI)
 
+<p align="center">
+  <img src="docs/images/gpi-logo-banner.png" alt="Gene Program Interpreter logo" width="768">
+</p>
+
 **Turn weighted gene programs into a biological story where every claim links to a real paper.**
 
 GPI interprets programs from cNMF, NMF, single-cell, or Perturb-seq data. It runs parallel

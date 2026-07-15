@@ -1,0 +1,59 @@
+# Gene Program Interpreter — installed-plugin E2E run (brain-EC demo, 3 programs).
+# Identical to example_generic.yaml but writes to a fresh output_dir so the run is
+# real (not a resume) and does not clobber the existing brain_endothelial_example.
+
+context:
+  organism: mouse
+  species_taxid: 10090
+  tissue: brain
+  cell_type: brain endothelial cell
+  conditions: [postnatal development]
+  context_terms:
+    - blood-brain barrier
+    - arteriovenous zonation
+    - tight junctions
+    - angiogenesis
+    - tip cells
+    - Notch signaling
+    - VEGF signaling
+    - mechanotransduction
+  assay: Perturb-seq
+  report_dataset_crumb: Mouse brain endothelial Perturb-seq
+
+inputs:
+  gene_loading: examples/brain_endothelial_demo/FB_moi15_seq2_loading_gene_k100_top300.csv
+  regulators: examples/brain_endothelial_demo/Discovery_FP_moi15_seq2_thresh10_k100_default.csv
+  celltype_enrichment: examples/brain_endothelial_demo/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv
+
+output_dir: runs/brain_ec_e2e
+
+programs: [9, 48, 70]
+
+settings:
+  n_top_genes: 300
+  top_loading: 15
+  top_unique: 8
+  top_enrichment: 7
+  genes_per_term: 10
+
+research:
+  enabled: true
+  concurrency: 3
+  model: claude-sonnet-4-6
+  max_turns: 30
+  max_budget_usd: 1.0
+  per_program_timeout: 600
+
+annotation:
+  model: claude-sonnet-4-6
+  max_tokens: 8192
+  batch: true
+
+theme:
+  enabled: true
+  model: claude-sonnet-4-6
+  min_generic_program_count: 4
+
+presentation:
+  model: claude-haiku-4-5-20251001
+  deterministic_fallback: true
