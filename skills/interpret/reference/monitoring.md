@@ -90,14 +90,25 @@ naturally watch — and it is the one that stalls harmlessly. `gpi watch` watche
 
 ## Progress artifacts
 
-Both live in `<output_dir>/`:
+These live in `<output_dir>/` (except the launch log, which is one level up):
 
 | File | What |
 |---|---|
 | `progress.jsonl` | append-only event log — the source of truth, truncated fresh each run |
 | `progress.json` | reduced snapshot, written atomically ~1/s — what you poll |
 | `pipeline_state.json` | durable step state — what a **resume** reads |
+| `dashboard.html` | optional live browser view — written + served by `gpi dashboard` (read-only) |
 | `../<name>.launch.log` | stdout/stderr of the run itself |
+
+## Optional live dashboard
+
+`gpi dashboard runs/<name>` is a **read-only, additive** companion to `gpi watch`: it writes a
+self-contained `dashboard.html` into the run dir and serves that dir over a stdlib `http.server`
+on `127.0.0.1:8899` (an ephemeral port if 8899 is taken), printing a single
+`Dashboard live -> http://…/dashboard.html` line. The page polls the same `progress.json` and
+folds `progress.jsonl` to animate the step rail and a lane per research agent — it emits no
+tokens, makes no API calls, and touches nothing in the run path. It is a view for the **user**;
+`gpi watch` remains the authoritative liveness/token source you narrate from.
 
 ## The steps
 

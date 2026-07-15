@@ -166,6 +166,24 @@ is no `--programs` on a run.
 slot before paying for it. (If the emitted YAML shows `celltype_enrichment: null` even though
 you passed the flag, you are on an older build — set it by hand under `inputs:`.)
 
+## Optional — open a live dashboard? (`AskUserQuestion`)
+
+Right after the experimental-settings questions, offer the optional **live dashboard** — an
+animated browser view of the run: the 10-step rail plus one lane per research agent, each
+lighting up its own tool calls in parallel, styled to match the report card. **Default off.**
+Make three things explicit so it never reads as a cost or a risk:
+
+- **Purely additive and read-only.** It only *reads* the `progress.json` / `progress.jsonl` the
+  run already writes; it changes nothing about the run and nothing about the final report card.
+- **No extra spend.** It is a static page served by a tiny local web server — not an agent. It
+  emits no tokens and makes no API calls.
+- **Local-only link.** On a **remote host**, the `127.0.0.1` URL only opens for someone with
+  access to that host (or a forwarded port); say so rather than handing over a dead link.
+
+Ask with two options, e.g. *"Yes — open a live dashboard"* / *"No — the terminal card is enough."*
+**Remember the answer** — you act on it at launch in §4. `gpi watch` stays your authoritative
+monitor either way.
+
 ## Gate 3 — SPEND (`AskUserQuestion`)
 
 ```bash
@@ -219,6 +237,23 @@ mkdir -p runs
 
 (`mkdir -p runs` first: the launch redirect writes `runs/<name>.launch.log`, and an approved run
 must not fail on a missing directory after the user has already said yes.)
+
+**If the user enabled the live dashboard** (the optional question above), start it now — once,
+right after the launch — as a separate read-only server, with the Bash tool's
+`run_in_background: true`:
+
+```bash
+mkdir -p runs/<name>
+"${CLAUDE_PLUGIN_ROOT}/bin/gpi" dashboard runs/<name>
+```
+
+(`mkdir -p runs/<name>` first so the server starts even during the cold-start minutes before the
+pipeline creates its own output dir — the pipeline tolerates a pre-existing dir and writes into
+it.) It prints one line — `Dashboard live -> http://127.0.0.1:8899/dashboard.html`. **Read that
+URL back to the user** as a clickable link; if `8899` was taken it prints a different port, so
+relay the port it actually printed, not `8899`. The dashboard is an extra view for the user — it
+emits no tokens and is **not** your monitor. Keep using the `gpi watch` loop below as the
+authoritative liveness/progress source.
 
 **Tell the user what to expect BEFORE the first snapshot appears** — say it warmly, up front, so
 the opening quiet never reads as a broken run:

@@ -1444,6 +1444,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     if raw_argv and raw_argv[0] == "watch":
         from .watch import cmd_watch  # local import: keeps the fast paths free of it
         return cmd_watch(raw_argv[1:])
+    if raw_argv and raw_argv[0] == "dashboard":
+        from .dashboard import cmd_dashboard  # local import: keeps the fast paths free of it
+        return cmd_dashboard(raw_argv[1:])
 
     args = build_arg_parser().parse_args(raw_argv)
     logging.basicConfig(
