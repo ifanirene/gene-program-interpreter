@@ -1,10 +1,20 @@
-# Gene Program Interpreter (GPI)
+<h1 align="center">Gene Program Interpreter (GPI)</h1>
 
 <p align="center">
-  <img src="docs/images/gpi-logo-banner.png" alt="Gene Program Interpreter logo" width="480">
+  <img src="docs/images/gpi-logo-banner.png" alt="Gene Program Interpreter logo" width="420">
 </p>
 
-**Turn weighted gene programs into a biological story where every claim links to a real paper.**
+<p align="center">
+  <strong>Turn weighted gene programs into a biological story where every claim links to a real paper.</strong>
+</p>
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=51G7lQjjJHc"><strong>▶ Watch the demo</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://ifanirene.github.io/gene-program-interpreter/brain_ec_demo/report.html"><strong>Explore a live report</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://ifanirene.github.io/gene-program-interpreter/"><strong>View the pipeline</strong></a>
+</p>
 
 GPI interprets programs from cNMF, NMF, single-cell, or Perturb-seq data. It runs parallel
 Claude literature research, verifies every PMID/DOI, and produces an interactive HTML
@@ -14,39 +24,82 @@ evidence.
 The biology is tissue-agnostic: organism, tissue, cell type, and conditions live in a small
 context profile instead of in the code.
 
-**[Pipeline walkthrough →](https://ifanirene.github.io/gene-program-interpreter/)** — a
-stage-by-stage tour of how a gene program becomes a cited report.
-
 > **GPI is a Claude Code plugin.** Claude checks your data, builds the biological context,
 > previews the cost, runs the pipeline, and walks you through the report. The skill is the
 > user interface; the Python pipeline is the engine — this is not a choice between them.
 > A [standalone CLI](#standalone-cli) is available for scripted workflows.
 
-**Contents** — [What you get](#what-you-get) · [What you provide](#what-you-provide) ·
+**Contents** — [Demo](#see-gpi-in-action) · [What you get](#what-you-get) · [What you provide](#what-you-provide) ·
 [Install](#install) · [Use it in Claude](#use-it-in-claude) · [Cost and safety](#cost-and-safety) ·
 [Standalone CLI](#standalone-cli) · [How it works](#how-it-works)
+
+## See GPI in action
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=51G7lQjjJHc">
+    <img src="docs/images/gpi-youtube-demo.jpg" alt="Watch the narrated GPI pipeline demo on YouTube" width="720">
+  </a>
+</p>
+
+<p align="center">
+  <strong><a href="https://www.youtube.com/watch?v=51G7lQjjJHc">▶ GPI pipeline narrated</a></strong><br>
+  <sub>See how weighted gene programs become grounded, cited biological interpretations.</sub>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <strong>Explore the output</strong><br>
+      <sub>Open a real three-program Brain EC analysis.</sub><br><br>
+      <a href="https://ifanirene.github.io/gene-program-interpreter/brain_ec_demo/report.html">Interactive report →</a>
+    </td>
+    <td align="center" width="50%">
+      <strong>Follow the workflow</strong><br>
+      <sub>Walk through research, verification, and synthesis.</sub><br><br>
+      <a href="https://ifanirene.github.io/gene-program-interpreter/">Pipeline walkthrough →</a>
+    </td>
+  </tr>
+</table>
 
 ## What you get
 
 A self-contained `report.html`. Each program gets a plain-language title, marker genes,
 mechanistic modules, enriched pathways, regulators, and linked evidence.
 
-**[Explore the live Brain EC demo report →](https://ifanirene.github.io/gene-program-interpreter/brain_ec_demo/report.html)** —
-a real three-program analysis with interactive pathway, regulator, and citation views. The
-report source and its enrichment figures are also included in
+<p align="center">
+  <a href="https://ifanirene.github.io/gene-program-interpreter/brain_ec_demo/report.html">
+    <img src="docs/images/report_program.png" alt="Program report overview" width="720">
+  </a>
+</p>
+
+<p align="center">
+  <strong>Program overview</strong><br>
+  <sub>Plain-language identity, marker genes, pathways, modules, and regulators in one view.</sub>
+</p>
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/report_evidence.png" alt="A module with resolvable citations and its evidence trail" width="400">
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/report_perturbation.png" alt="Perturbation effects across conditions" width="400">
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">
+      <strong>Auditable evidence</strong><br>
+      <sub>Every mechanistic claim links its genes, verified PMIDs/DOIs, and deterministic evidence.</sub>
+    </td>
+    <td valign="top">
+      <strong>Perturbation effects</strong><br>
+      <sub>See which regulators move each program, including condition-specific comparisons.</sub>
+    </td>
+  </tr>
+</table>
+
+The live report source and enrichment figures are included in
 [`examples/brain_endothelial_demo/`](examples/brain_endothelial_demo).
-
-![Program report overview](docs/images/report_program.png)
-
-Every mechanistic claim lists its genes and verified PMIDs/DOIs, alongside the deterministic
-evidence used to support the interpretation.
-
-![A module with resolvable citations and its evidence trail](docs/images/report_evidence.png)
-
-If you provide Perturb-seq regulator effects, the report also shows which perturbations move
-each program, including condition-specific comparisons.
-
-![Perturbation effects across conditions](docs/images/report_perturbation.png)
 
 ## What you provide
 
