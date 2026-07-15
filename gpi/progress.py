@@ -38,7 +38,7 @@ import time
 from contextvars import ContextVar
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, TextIO
+from typing import Any, Dict, List, Optional, TextIO, Tuple
 
 from .log_redaction import redact_text
 
@@ -407,17 +407,19 @@ def _agent_elapsed_cell(a: Dict[str, Any]) -> str:
 
 
 def _research_footer(r: Dict[str, Any]) -> str:
-    """One-line research summary shared by the renderers. Names incomplete programs and labels
-    subscription spend honestly (``total_cost_usd`` is not a dollar charge on subscription auth)."""
+    """One-line research summary shared by the renderers. Leads with usage (programs + turns),
+    not dollars: on the default subscription auth ``total_cost_usd`` is NOT a per-run charge, so
+    a dollar figure there misleads. Show turns as the usage signal; surface ``$`` only for
+    metered API auth (the annotate/presentation batch)."""
     n_done, n_prog = r.get("n_done", 0), r.get("n_programs", 0)
     inc = r.get("n_incomplete", 0)
     inc_s = f" ({inc} incomplete)" if inc else ""
-    cost = _fmt_cost(r.get("total_cost_usd"))
+    turns = sum((a.get("turns") or 0) for a in (r.get("agents") or []))
     if r.get("auth") == "subscription":
-        cost_s = f"{cost} · Agent SDK on Claude.ai subscription"
+        usage_s = f"{turns} turns · on your Claude subscription (no per-run charge)"
     else:
-        cost_s = f"{cost} total"
-    return f"{n_done}/{n_prog} programs done{inc_s} · {cost_s}"
+        usage_s = f"{turns} turns · {_fmt_cost(r.get('total_cost_usd'))} API credit"
+    return f"{n_done}/{n_prog} programs done{inc_s} · {usage_s}"
 
 
 def render_markdown(snap: Dict[str, Any]) -> str:
@@ -469,6 +471,92 @@ def render_txt(snap: Dict[str, Any]) -> str:
                    f"elapsed={_agent_elapsed_cell(a)} · {_agent_activity(a)}")
     if r.get("agents"):
         out.append(f"    {_research_footer(r)}")
+    return "\n".join(out)
+
+
+# --------------------------------------------------------------------------- compact card
+# Display-only expected-duration hints, keyed by step name. A step not listed simply shows no
+# hint (safe default). This is presentation metadata — it drives the friendly "this step can run
+# long, that's expected" note so a slow-but-healthy step never reads as a hang. Kept next to the
+# renderer (not in the pipeline driver) so the card stays self-contained.
+_STEP_HINTS: Dict[str, Tuple[str, int]] = {
+    # step name          (human hint,                 seconds after which to add a reassurance)
+    "preflight":         ("~1-5 min on a cold machine", 300),
+    "string_enrichment": ("~1-2 min",                   180),
+    "gene_summaries":    ("~2-4 min (NCBI lookups)",    300),
+    "research":          ("~3-8 min per program",       600),
+    "verify":            ("under a minute",             120),
+    "theme":             ("under a minute",             120),
+    "annotate":          ("Anthropic batch — can sit 15+ min, not a hang", 1800),
+    "presentation":      ("Anthropic batch — can sit 15+ min, not a hang", 1800),
+    "html_report":       ("seconds",                     60),
+}
+
+_BAR_WIDTH = 12
+
+
+def _step_bar(steps: List[Dict[str, Any]], width: int = _BAR_WIDTH) -> str:
+    """A Unicode progress bar over completed pipeline steps: ``[███████░░░░░] 4/9``."""
+    total = len(steps) or 1
+    done = sum(1 for s in steps if s.get("status") in ("completed", "skipped"))
+    filled = round(width * done / total)
+    return f"[{'█' * filled}{'░' * (width - filled)}] {done}/{len(steps)}"
+
+
+def render_card(snap: Dict[str, Any]) -> str:
+    """Compact, graphic status for the ``gpi watch --until-change`` path the skill echoes verbatim.
+
+    A step bar + the active step and its live counter (+ a friendly note when a step runs long) +
+    one short line per active research agent. Framed in usage terms (turns/elapsed), never dollars
+    on subscription auth. Short enough to re-emit every poll without noise — the point is that the
+    bar visibly steps forward and the counter moves between polls."""
+    steps = snap.get("steps", [])
+    out: List[str] = []
+    active = next((s for s in steps if s.get("status") == "in_progress"), None)
+    status = snap.get("status")
+    if status in ("done", "failed"):
+        head = "✅ done" if status == "done" else f"❌ failed: {snap.get('failed_step') or '?'}"
+        out.append(f"{_step_bar(steps)} · {head}")
+    else:
+        out.append(f"{_step_bar(steps)} · {active.get('name') if active else 'starting…'}")
+
+    if active:
+        name = active.get("name")
+        parts: List[str] = []
+        if active.get("total"):
+            parts.append(f"{active.get('current')}/{active.get('total')}")
+        if active.get("detail"):
+            parts.append(str(active["detail"]))
+        line = "   ↳ " + (" · ".join(parts) if parts else "working")
+        hint = _STEP_HINTS.get(name or "")
+        if hint:
+            text, long_after = hint
+            elapsed = active.get("elapsed_s")
+            note = ""
+            if isinstance(elapsed, (int, float)) and elapsed > long_after:
+                note = " — still working, that's expected"
+            line += f"   (⏳ {text}{note})"
+        out.append(line)
+
+    r = snap.get("research") or {}
+    auth = r.get("auth")
+    for a in (r.get("agents") or []):
+        st = a.get("status")
+        if st not in ("running", "queued"):
+            continue
+        if st == "queued":
+            out.append(f"   • P{a.get('program_id')}: queued")
+            continue
+        turns = a.get("turns")
+        usage = f"turn {turns}" if turns is not None else "starting"
+        cost = ""
+        if auth == "api" and isinstance(a.get("cost_usd"), (int, float)):
+            cost = f" · {_fmt_cost(a['cost_usd'])}"
+        out.append(
+            f"   • P{a.get('program_id')}: {usage} · {_agent_elapsed_cell(a)}{cost} · {_agent_activity(a)}"
+        )
+    if r.get("agents"):
+        out.append(f"   {_research_footer(r)}")
     return "\n".join(out)
 
 

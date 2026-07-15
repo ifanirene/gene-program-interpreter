@@ -47,17 +47,19 @@ nothing wakes you between calls, so you either spin-poll an unchanged file or go
 | `FAILED` | a step failed and stopped the run | stop; read the printed error → playbook below |
 | `STALE` | process gone / snapshot frozen | → Gate 4; confirm against the launch log before any kill |
 
-`watch` also prints, every call, the active step + counter and a per-agent line with turns /
-cost / elapsed / idle / the current tool **and its query string**. That is your report material —
-read it back to the user. Tail the raw log only when you need something the snapshot does not
-carry: `tail -n 20 runs/<name>.launch.log`.
+`watch` prints a compact **card** every call: a step bar `[███████░░░░] 4/10`, the active step +
+its live counter, and one short line per active agent (turns · elapsed · the tool and its query).
+**Echo that card** — it is already the clean view; do not restate it as a paragraph, and do not read
+back dollar figures (the card is framed in usage — turns/time — which is what matters on a
+subscription). Tail the raw log only when you need something the card does not carry:
+`tail -n 20 runs/<name>.launch.log`.
 
 For an interactive human at a terminal, `gpi watch runs/<name>` (no `--until-change`) is a live
 `top`-style view that repaints until the run ends.
 
-**REPORT EVERY POLL, EVEN WHEN NOTHING CHANGED.** *"Still on research: 2/3 done, P48 searching
-PubMed for 'Cldn5 blood-brain barrier', turn 14, 6m12s elapsed"* is a **good** report. Saying
-nothing for six minutes is the complaint.
+**Paste the card every poll, even when nothing changed** — the bar and the clock move, so it never
+reads as silence. Add at most one plain sentence when a milestone actually changed. Saying nothing
+for six minutes is the complaint; a re-restated paragraph of telemetry is the other complaint.
 
 ## The startup window — the first ~5 minutes are silent BY DESIGN
 

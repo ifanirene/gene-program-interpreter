@@ -29,6 +29,7 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from . import __version__
 from .progress import (
     AGENT_FINISHED,
     AGENT_STARTED,
@@ -37,18 +38,23 @@ from .progress import (
     RUN_DONE,
     RUN_START,
     STEP_DONE,
+    STEP_PROGRESS,
     STEP_START,
     SnapshotReducer,
     _plain_line,
+    render_card,
     render_txt,
 )
 
-# Coarse events that wake ``--until-change`` immediately. Frequent events (tool calls, per-item
-# STEP_PROGRESS) are deliberately NOT here: they are folded into the periodic digest at timeout
-# so the skill gets a ≤timeout summary instead of a call per tool call. Silence between
-# milestones is normal (an agent thinking) and is reported as "alive", not chased.
+# Coarse events that wake ``--until-change`` immediately, so the card's step counter visibly
+# moves between polls. STEP_PROGRESS is included: the startup steps emit it at LOW frequency
+# (string_enrichment per-program ~3-N, gene_summaries 2 phases, preflight per-module), and those
+# ticks are exactly what made the first minutes feel silent. High-frequency AGENT_TOOL_CALL stays
+# OUT — it fires dozens of times per program and is folded into the digest at timeout instead, so
+# the skill gets a ≤timeout summary, not a call per tool call. Silence between milestones is
+# normal (an agent thinking) and is reported as "alive", not chased.
 _MILESTONES = frozenset({
-    RUN_START, STEP_START, STEP_DONE, RESEARCH_START,
+    RUN_START, STEP_START, STEP_PROGRESS, STEP_DONE, RESEARCH_START,
     AGENT_STARTED, AGENT_FINISHED, RESEARCH_DONE, RUN_DONE,
 })
 
@@ -160,7 +166,7 @@ def _print_report(snap: Dict[str, Any], snapshot_path: Path,
                   new_events: List[Dict[str, Any]], waited_s: float) -> str:
     """Print the human report and return the terminal token (its own final line)."""
     run_id = snap.get("run_id") or snapshot_path.parent.name
-    print(f"── gpi watch: {run_id} ──")
+    print(f"── gpi v{__version__} watch: {run_id} ──")
     milestones = [e for e in new_events if e.get("type") in _MILESTONES]
     if milestones:
         print("Changed since last check:")
@@ -171,7 +177,10 @@ def _print_report(snap: Dict[str, Any], snapshot_path: Path,
     else:
         print(f"No milestone in the last {int(waited_s)}s "
               "(this is normal — a research agent can think for minutes).")
-    body = render_txt(snap)
+    # The compact card is what the skill echoes to the user: a step bar + live counter + a line
+    # per active agent, in usage terms (no dollars on subscription). render_txt stays for the
+    # human TUI (_run_continuous).
+    body = render_card(snap)
     if body:
         print(body)
     state, reason = liveness(snap, snapshot_path)
@@ -211,7 +220,7 @@ def _run_until_change(jsonl: Path, snapshot: Path, timeout: float, poll: float) 
                 # Cold start: nothing on disk yet. This is expected for the first minutes while
                 # Python compiles the Agent SDK to bytecode — a countdown, never an error.
                 run_id = jsonl.parent.name
-                print(f"── gpi watch: {run_id} ──")
+                print(f"── gpi v{__version__} watch: {run_id} ──")
                 print(f"Waiting for run output — {int(now - start)}s elapsed, none yet. "
                       "A cold first run compiles dependencies for up to ~5 min before the first "
                       "event; this is normal. Do not relaunch.")

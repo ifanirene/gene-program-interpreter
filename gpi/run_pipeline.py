@@ -1346,7 +1346,9 @@ def cmd_doctor(argv: Optional[List[str]] = None) -> int:
         marker = {"ok": "✓", "warn": "!", "fail": "✗"}[level]
         print(f"  {marker} {message}")
 
-    print("Gene Program Interpreter doctor (read-only; no API calls):")
+    print(f"Gene Program Interpreter v{__version__} doctor (read-only; no API calls):")
+    report("ok", f"gpi version {__version__} "
+                 f"(if this looks stale: `claude plugin marketplace update gpi` → disable → install)")
     py_ok = sys.version_info >= (3, 10)
     report("ok" if py_ok else "fail", f"Python {sys.version.split()[0]} (requires 3.10+)")
     if not py_ok:

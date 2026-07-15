@@ -1156,13 +1156,32 @@ strict aliases rules:
 
 
 def extract_json_payload(text: str) -> Dict[str, Any]:
+    """Return the first JSON object in a model response, tolerating trailing prose/blocks.
+
+    Models sometimes emit a ```json block, then a prose ``**Note:**`` and even a *second*
+    ```json block (e.g. the theme model proposing candidates, then noting the <4-program
+    threshold and appending a conforming empty result). We deterministically take the FIRST
+    valid object. Anchoring the closing fence to ``$`` used to miss it whenever anything
+    followed the first block, and the greedy ``{.*}`` fallback then spanned both blocks into
+    invalid JSON — ``JSONDecodeError: Extra data`` — which halted the pipeline before annotate.
+    """
     stripped = text.strip()
     if stripped.startswith("```"):
         stripped = re.sub(r"^```(?:json)?\s*", "", stripped)
-        stripped = re.sub(r"\s*```$", "", stripped)
+        # Strip the FIRST closing fence and everything after it (Note + any later block).
+        stripped = re.sub(r"\s*```.*", "", stripped, flags=re.S)
     try:
         return json.loads(stripped)
     except json.JSONDecodeError:
+        # Trailing text after a valid object ("Extra data"): decode just the first object.
+        start = stripped.find("{")
+        if start != -1:
+            try:
+                obj, _ = json.JSONDecoder().raw_decode(stripped[start:])
+                return obj
+            except json.JSONDecodeError:
+                pass
+        # Last resort: greedy brace span (a prose preamble before a single object).
         match = re.search(r"\{.*\}", stripped, flags=re.S)
         if not match:
             raise
