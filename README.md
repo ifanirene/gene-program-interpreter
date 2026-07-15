@@ -31,6 +31,11 @@ stage-by-stage tour of how a gene program becomes a cited report.
 A self-contained `report.html`. Each program gets a plain-language title, marker genes,
 mechanistic modules, enriched pathways, regulators, and linked evidence.
 
+**[Explore the live Brain EC demo report →](https://ifanirene.github.io/gene-program-interpreter/brain_ec_demo/report.html)** —
+a real three-program analysis with interactive pathway, regulator, and citation views. The
+report source and its enrichment figures are also included in
+[`examples/brain_endothelial_demo/`](examples/brain_endothelial_demo).
+
 ![Program report overview](docs/images/report_program.png)
 
 Every mechanistic claim lists its genes and verified PMIDs/DOIs, alongside the deterministic
