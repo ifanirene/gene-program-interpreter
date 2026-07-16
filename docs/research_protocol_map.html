@@ -1,5 +1,6 @@
-<!-- Gene Program Interpreter — Literature Research (Agent SDK) Protocol Map -->
-<title>GPI · Literature Research Protocol Map</title>
+<meta charset="utf-8">
+<!-- Gene Program Interpreter &mdash; Literature Research (Agent SDK) Protocol Map -->
+<title>GPI &middot; Literature Research Protocol Map</title>
 <style>
   :root {
     --bg: #f7f8fa; --panel: #ffffff; --ink: #1a1c22; --muted: #5b6472;
@@ -120,20 +121,20 @@
 
 <div class="wrap">
   <header class="page">
-    <div class="eyebrow">Gene Program Interpreter · research/</div>
+    <div class="eyebrow">Gene Program Interpreter &middot; research/</div>
     <h1>Literature Research Protocol Map</h1>
     <p class="lede">
       One isolated Claude Agent SDK session per gene program, fanned out in Python
-      (<code>asyncio</code> + <code>Semaphore</code>), each answering a single question —
-      <em>what is the shared biological function of this program's genes?</em> — against read-only
+      (<code>asyncio</code> + <code>Semaphore</code>), each answering a single question &mdash;
+      <em>what is the shared biological function of this program's genes?</em> &mdash; against read-only
       literature tools, then reduced by a deterministic verifier. This map shows every step, its
       tunable parameters, and where research quality can be raised.
     </p>
     <div class="legend">
-      <span><i class="dot" style="background:var(--bundle)"></i>① Bundle (deterministic)</span>
-      <span><i class="dot" style="background:var(--agent)"></i>② Agent SDK sessions</span>
+      <span><i class="dot" style="background:var(--bundle)"></i>&#9312; Bundle (deterministic)</span>
+      <span><i class="dot" style="background:var(--agent)"></i>&#9313; Agent SDK sessions</span>
       <span><i class="dot" style="background:var(--tool)"></i>Literature MCP tools</span>
-      <span><i class="dot" style="background:var(--verify)"></i>④ Verifier (deterministic)</span>
+      <span><i class="dot" style="background:var(--verify)"></i>&#9315; Verifier (deterministic)</span>
     </div>
   </header>
 
@@ -141,10 +142,10 @@
     <h2>The pipeline, end to end</h2>
     <div class="flow">
       <div class="stage" style="--accent:var(--bundle)">
-        <div class="num">STEP ①</div>
+        <div class="num">STEP &#9312;</div>
         <h3>Assemble bundle</h3>
-        <div class="who">research/bundle.py · offline</div>
-        <p>One immutable <code>program_bundles/{id}.json</code> per program — the complete prompt the agent reads. Nothing not its job is included.</p>
+        <div class="who">research/bundle.py &middot; offline</div>
+        <p>One immutable <code>program_bundles/{id}.json</code> per program &mdash; the complete prompt the agent reads. Nothing not its job is included.</p>
         <ul class="params">
           <li><span class="k">program_genes</span><span class="v">top <code>20</code> by loading</span></li>
           <li><span class="k">distinctive_genes</span><span class="v">top <code>10</code> by uniqueness</span></li>
@@ -154,12 +155,12 @@
       </div>
 
       <div class="stage" style="--accent:var(--agent)">
-        <div class="num">STEP ②</div>
+        <div class="num">STEP &#9313;</div>
         <h3>Fan-out sessions</h3>
         <div class="who">research/research_parallel.py</div>
-        <p>Isolated <code>query()</code> session per bundle. Fresh cwd holds only its own bundle; <code>protocol.md</code> is the system prompt. No manager agent — Python controls parallelism.</p>
+        <p>Isolated <code>query()</code> session per bundle. Fresh cwd holds only its own bundle; <code>protocol.md</code> is the system prompt. No manager agent &mdash; Python controls parallelism.</p>
         <ul class="params">
-          <li><span class="k">concurrency</span><span class="v"><code>4</code> (k=3–5)</span></li>
+          <li><span class="k">concurrency</span><span class="v"><code>4</code> (k=3&ndash;5)</span></li>
           <li><span class="k">model</span><span class="v"><code>sonnet-4-6</code></span></li>
           <li><span class="k">max_turns</span><span class="v"><code>30</code></span></li>
           <li><span class="k">max_budget_usd</span><span class="v"><code>1.0</code>/session</span></li>
@@ -169,10 +170,10 @@
       </div>
 
       <div class="stage" style="--accent:var(--tool)">
-        <div class="num">STEP ③</div>
+        <div class="num">STEP &#9314;</div>
         <h3>Retrieve &amp; submit</h3>
         <div class="who">research/literature.py (in-process MCP)</div>
-        <p>Agent decides every query, retrieves first (never writes from memory), attaches papers to 1–3 mechanisms, and calls <code>submit_result</code> exactly once.</p>
+        <p>Agent decides every query, retrieves first (never writes from memory), attaches papers to 1&ndash;3 mechanisms, and calls <code>submit_result</code> exactly once.</p>
         <ul class="params">
           <li><span class="k">search cap</span><span class="v"><code>10</code> (max <code>15</code>)</span></li>
           <li><span class="k">fetch cap</span><span class="v"><code>20</code> PMIDs</span></li>
@@ -182,9 +183,9 @@
       </div>
 
       <div class="stage" style="--accent:var(--verify)">
-        <div class="num">STEP ④</div>
+        <div class="num">STEP &#9315;</div>
         <h3>Verify &amp; reduce</h3>
-        <div class="who">research/verify.py · deterministic</div>
+        <div class="who">research/verify.py &middot; deterministic</div>
         <p>Normalizes flat output, dedups papers into an evidence pool, resolves every PMID/DOI, flags retractions, and derives each mechanism's status.</p>
         <ul class="params">
           <li><span class="k">resolves</span><span class="v">PMID + DOI</span></li>
@@ -194,25 +195,25 @@
         </ul>
       </div>
     </div>
-    <div class="flow-arrows"><div>→</div><div>→</div><div>→</div><div></div></div>
+    <div class="flow-arrows"><div>&rarr;</div><div>&rarr;</div><div>&rarr;</div><div></div></div>
   </section>
 
   <section>
-    <h2>Tool surface — read-only, the agent sees nothing else</h2>
+    <h2>Tool surface &mdash; read-only, the agent sees nothing else</h2>
     <div class="tools">
       <div class="tool">
         <h4><code>search_pubmed(query, max_results)</code></h4>
         <p>Primary biomedical retrieval. Returns PMIDs (discovery ids), sorted by relevance.</p>
-        <span class="cap">cap 10 · max 15 · relevance sort</span>
+        <span class="cap">cap 10 &middot; max 15 &middot; relevance sort</span>
       </div>
       <div class="tool">
         <h4><code>fetch_pubmed(pmids)</code></h4>
         <p>Canonical metadata + real DOI, year, journal, study_type, abstract, is_preprint, is_retracted. Fetch before citing.</p>
-        <span class="cap">≤ 20 PMIDs / call</span>
+        <span class="cap">&le; 20 PMIDs / call</span>
       </div>
       <div class="tool">
         <h4><code>search_openalex(query, max_results)</code></h4>
-        <p>Cross-publisher, includes preprints. Carries doi/pmid + cited_by_count. <b>Requires OPENALEX_API_KEY</b> — errors out if unset.</p>
+        <p>Cross-publisher, includes preprints. Carries doi/pmid + cited_by_count. <b>Requires OPENALEX_API_KEY</b> &mdash; errors out if unset.</p>
         <span class="cap">key-gated channel</span>
       </div>
       <div class="tool">
@@ -227,76 +228,76 @@
     <h2>Sandbox &amp; guardrails (every session)</h2>
     <div class="strip">
       <ul>
-        <li><b>Isolated cwd</b> — <code>Read</code> can only see this program's bundle.</li>
-        <li><b>Deny-by-default</b> — <code>can_use_tool</code> allowlist: literature + submit + Read.</li>
-        <li><b>Denylist</b> — Bash, Write, Edit, WebSearch/Fetch, Agent, Skill… all blocked.</li>
-        <li><b>Sandboxed config</b> — <code>setting_sources=[]</code> + <code>strict_mcp_config</code>.</li>
-        <li><b>Retrieve-first</b> — cite only tool-returned identifiers; never fabricate.</li>
-        <li><b>No final label</b> — the agent proposes mechanisms; synthesis labels downstream.</li>
-        <li><b>Untrusted text</b> — retrieved titles/abstracts are data, never instructions.</li>
-        <li><b>Auth split</b> — research runs on the Claude.ai subscription, not the API key.</li>
+        <li><b>Isolated cwd</b> &mdash; <code>Read</code> can only see this program's bundle.</li>
+        <li><b>Deny-by-default</b> &mdash; <code>can_use_tool</code> allowlist: literature + submit + Read.</li>
+        <li><b>Denylist</b> &mdash; Bash, Write, Edit, WebSearch/Fetch, Agent, Skill&hellip; all blocked.</li>
+        <li><b>Sandboxed config</b> &mdash; <code>setting_sources=[]</code> + <code>strict_mcp_config</code>.</li>
+        <li><b>Retrieve-first</b> &mdash; cite only tool-returned identifiers; never fabricate.</li>
+        <li><b>No final label</b> &mdash; the agent proposes mechanisms; synthesis labels downstream.</li>
+        <li><b>Untrusted text</b> &mdash; retrieved titles/abstracts are data, never instructions.</li>
+        <li><b>Auth split</b> &mdash; research runs on the Claude.ai subscription, not the API key.</li>
       </ul>
     </div>
   </section>
 
   <section>
-    <h2>Adjustments to raise research quality — ranked</h2>
+    <h2>Adjustments to raise research quality &mdash; ranked</h2>
     <div class="cards">
 
       <div class="card">
         <div class="top"><span class="rank">1</span><h3>Verify claims, not just identifiers</h3></div>
-        <p>Today a mechanism is “supported” if its PMIDs merely <em>resolve</em> — a real but off-topic paper counts. Add the reserved claim-vs-paper <b>entailment</b> check: an adjudicator reads the abstract and confirms it actually supports the mechanism.</p>
-        <div class="why"><b>Why:</b> the single biggest gap. “Supported” currently overstates evidence; resolvability ≠ relevance. Scaffold already exists (<code>FUTURE_claim_verification.md</code>).</div>
-        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag stage-v">Verifier ④</span></div>
+        <p>Today a mechanism is &ldquo;supported&rdquo; if its PMIDs merely <em>resolve</em> &mdash; a real but off-topic paper counts. Add the reserved claim-vs-paper <b>entailment</b> check: an adjudicator reads the abstract and confirms it actually supports the mechanism.</p>
+        <div class="why"><b>Why:</b> the single biggest gap. &ldquo;Supported&rdquo; currently overstates evidence; resolvability &ne; relevance. Scaffold already exists (<code>FUTURE_claim_verification.md</code>).</div>
+        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag stage-v">Verifier &#9315;</span></div>
       </div>
 
       <div class="card">
         <div class="top"><span class="rank">2</span><h3>Make OpenAlex failure loud, add a preprint fallback</h3></div>
         <p>Without <code>OPENALEX_API_KEY</code> the entire cross-publisher + preprint channel silently returns an error, leaving PubMed-only recall. Detect the missing key at launch, warn in the audit, and fall back to a keyless bioRxiv/Europe PMC search.</p>
-        <div class="why"><b>Why:</b> a whole retrieval modality can be dark without anyone noticing — recall quietly halves for recent/preprint biology.</div>
-        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag effort-lo">Low effort</span><span class="tag stage-t">Tools ③</span></div>
+        <div class="why"><b>Why:</b> a whole retrieval modality can be dark without anyone noticing &mdash; recall quietly halves for recent/preprint biology.</div>
+        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag effort-lo">Low effort</span><span class="tag stage-t">Tools &#9314;</span></div>
       </div>
 
       <div class="card">
         <div class="top"><span class="rank">3</span><h3>Gene-synonym expansion before search</h3></div>
         <p>Papers use aliases (<code>Madcam1</code> vs <code>MAdCAM-1</code>, mouse vs human casing). Add an NCBI Gene / alias-resolution helper (or bake synonyms into the bundle) so queries hit the literature's actual vocabulary.</p>
-        <div class="why"><b>Why:</b> symbol mismatches drop true positives at the retrieval step — the cheapest recall the pipeline is leaving on the table.</div>
-        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag stage-b">Bundle ①</span><span class="tag stage-t">Tools ③</span></div>
+        <div class="why"><b>Why:</b> symbol mismatches drop true positives at the retrieval step &mdash; the cheapest recall the pipeline is leaving on the table.</div>
+        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag stage-b">Bundle &#9312;</span><span class="tag stage-t">Tools &#9314;</span></div>
       </div>
 
       <div class="card">
         <div class="top"><span class="rank">4</span><h3>Rank by evidence quality, not just relevance</h3></div>
         <p>PubMed is fixed to relevance sort and quality signals go unused. Surface <code>cited_by_count</code> (already fetched from OpenAlex), study_type, and recency to the agent, and guide it to prefer reviews for established function, primaries for specific claims.</p>
         <div class="why"><b>Why:</b> lets the agent spend its limited turns on load-bearing papers instead of the first relevant hit.</div>
-        <div class="tags"><span class="tag effort-lo">Low effort</span><span class="tag stage-t">Tools ③</span></div>
+        <div class="tags"><span class="tag effort-lo">Low effort</span><span class="tag stage-t">Tools &#9314;</span></div>
       </div>
 
       <div class="card">
         <div class="top"><span class="rank">5</span><h3>Give the agent query-craft guidance</h3></div>
-        <p>The protocol says “search the strongest gene(s)” but offers no query patterns. Add few-shot examples using field tags (<code>[tiab]</code>, <code>[Majr]</code>), gene-set co-occurrence, and cell-type context to move beyond one-gene lookups.</p>
+        <p>The protocol says &ldquo;search the strongest gene(s)&rdquo; but offers no query patterns. Add few-shot examples using field tags (<code>[tiab]</code>, <code>[Majr]</code>), gene-set co-occurrence, and cell-type context to move beyond one-gene lookups.</p>
         <div class="why"><b>Why:</b> query quality is the highest-leverage, zero-infra lever; better queries find the papers that ground a <em>shared</em> function, not a famous single gene.</div>
-        <div class="tags"><span class="tag effort-lo">Low effort</span><span class="tag stage-a">Protocol ②</span></div>
+        <div class="tags"><span class="tag effort-lo">Low effort</span><span class="tag stage-a">Protocol &#9313;</span></div>
       </div>
 
       <div class="card">
         <div class="top"><span class="rank">6</span><h3>Citation-graph expansion</h3></div>
         <p>Add one hop of forward/backward citations (OpenAlex referenced_works / cited_by) from a strong seed paper, so the agent can reach the review or key primary it didn't phrase a query for.</p>
         <div class="why"><b>Why:</b> literature search recall is bounded by phrasing; the citation graph routes around it and finds consensus sources.</div>
-        <div class="tags"><span class="tag stage-t">Tools ③</span></div>
+        <div class="tags"><span class="tag stage-t">Tools &#9314;</span></div>
       </div>
 
       <div class="card">
         <div class="top"><span class="rank">7</span><h3>Turn/budget self-pacing + gene-coverage report</h3></div>
-        <p>Sessions that exhaust <code>max_turns</code> without <code>submit_result</code> fall back to “incomplete,” and a retry hits the same wall. Inject remaining-turn awareness with a “submit now” checkpoint, and require a <code>genes_grounded</code> list so unresearched genes are explicit, not lost in prose.</p>
+        <p>Sessions that exhaust <code>max_turns</code> without <code>submit_result</code> fall back to &ldquo;incomplete,&rdquo; and a retry hits the same wall. Inject remaining-turn awareness with a &ldquo;submit now&rdquo; checkpoint, and require a <code>genes_grounded</code> list so unresearched genes are explicit, not lost in prose.</p>
         <div class="why"><b>Why:</b> converts silent truncation into a graceful partial result, and makes coverage auditable per program.</div>
-        <div class="tags"><span class="tag stage-a">Runner ②</span><span class="tag stage-v">Schema</span></div>
+        <div class="tags"><span class="tag stage-a">Runner &#9313;</span><span class="tag stage-v">Schema</span></div>
       </div>
 
       <div class="card">
         <div class="top"><span class="rank">8</span><h3>Raise caps for deep programs</h3></div>
-        <p>Retrieval is capped at 10/search and 30 turns — tight for a 30-gene program spanning several themes. Make caps config-driven and consider a larger fetch/search budget (and a stronger model) for programs flagged as high-priority.</p>
+        <p>Retrieval is capped at 10/search and 30 turns &mdash; tight for a 30-gene program spanning several themes. Make caps config-driven and consider a larger fetch/search budget (and a stronger model) for programs flagged as high-priority.</p>
         <div class="why"><b>Why:</b> current defaults optimise cost; some programs need depth. Make the trade-off a knob, not a constant.</div>
-        <div class="tags"><span class="tag stage-a">Params ②③</span></div>
+        <div class="tags"><span class="tag stage-a">Params &#9313;&#9314;</span></div>
       </div>
 
     </div>
