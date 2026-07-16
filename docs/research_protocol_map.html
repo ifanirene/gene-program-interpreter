@@ -1,0 +1,311 @@
+<!-- Gene Program Interpreter — Literature Research (Agent SDK) Protocol Map -->
+<title>GPI · Literature Research Protocol Map</title>
+<style>
+  :root {
+    --bg: #f7f8fa; --panel: #ffffff; --ink: #1a1c22; --muted: #5b6472;
+    --line: #e2e6ec; --line-strong: #cbd2dc;
+    --bundle: #6b7cff; --agent: #12a67a; --tool: #d98a1f; --verify: #b8478f;
+    --chip: #eef1f6; --chip-ink: #414b5a;
+    --good: #12a67a; --warn: #d98a1f; --bad: #d1495b;
+    --shadow: 0 1px 2px rgba(20,25,40,.06), 0 6px 20px rgba(20,25,40,.06);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1017; --panel: #151a23; --ink: #e9edf4; --muted: #9aa5b6;
+      --line: #232b38; --line-strong: #313c4e;
+      --chip: #1c2431; --chip-ink: #b9c3d3;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 26px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1017; --panel: #151a23; --ink: #e9edf4; --muted: #9aa5b6;
+    --line: #232b38; --line-strong: #313c4e; --chip: #1c2431; --chip-ink: #b9c3d3;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 26px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"] {
+    --bg: #f7f8fa; --panel: #ffffff; --ink: #1a1c22; --muted: #5b6472;
+    --line: #e2e6ec; --line-strong: #cbd2dc; --chip: #eef1f6; --chip-ink: #414b5a;
+    --shadow: 0 1px 2px rgba(20,25,40,.06), 0 6px 20px rgba(20,25,40,.06);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 34px 22px 80px; }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .86em; }
+
+  header.page { margin-bottom: 30px; }
+  .eyebrow { letter-spacing: .13em; text-transform: uppercase; font-size: 11.5px; font-weight: 700; color: var(--muted); }
+  h1 { font-size: 30px; line-height: 1.15; margin: 8px 0 8px; letter-spacing: -.02em; }
+  .lede { color: var(--muted); max-width: 78ch; font-size: 15.5px; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 18px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--muted); }
+  .dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+
+  section { margin-top: 40px; }
+  h2 { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 16px; font-weight: 700; }
+
+  /* pipeline flow */
+  .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 860px) { .flow { grid-template-columns: 1fr; } }
+  .stage {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 16px 14px; box-shadow: var(--shadow); position: relative;
+    border-top: 3px solid var(--accent);
+  }
+  .stage .num { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .08em; }
+  .stage h3 { margin: 3px 0 2px; font-size: 16px; letter-spacing: -.01em; }
+  .stage .who { font-size: 11.5px; color: var(--muted); margin-bottom: 10px; }
+  .stage p { margin: 0 0 11px; font-size: 13px; color: var(--muted); }
+  .params { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .params li { font-size: 12px; display: flex; justify-content: space-between; gap: 10px; border-top: 1px dashed var(--line); padding-top: 5px; }
+  .params li:first-child { border-top: 0; padding-top: 0; }
+  .params .k { color: var(--muted); }
+  .params .v { font-weight: 600; text-align: right; }
+  .params .v code { background: var(--chip); color: var(--chip-ink); padding: 1px 6px; border-radius: 6px; }
+
+  .flow-arrows { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 6px 0 0; }
+  @media (max-width: 860px) { .flow-arrows { display: none; } }
+  .flow-arrows div { text-align: center; color: var(--line-strong); font-size: 18px; }
+
+  /* tool surface */
+  .tools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 680px) { .tools { grid-template-columns: 1fr; } }
+  .tool {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px;
+    box-shadow: var(--shadow); border-left: 3px solid var(--tool);
+  }
+  .tool h4 { margin: 0 0 3px; font-size: 14px; }
+  .tool h4 code { background: none; padding: 0; color: var(--tool); }
+  .tool p { margin: 0; font-size: 12.5px; color: var(--muted); }
+  .tool .cap { display: inline-block; margin-top: 7px; font-size: 11px; color: var(--chip-ink); background: var(--chip); padding: 2px 8px; border-radius: 20px; }
+
+  /* guardrails / sandbox strip */
+  .strip { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); padding: 15px 18px; }
+  .strip ul { margin: 0; padding-left: 18px; columns: 2; column-gap: 30px; }
+  @media (max-width: 680px) { .strip ul { columns: 1; } }
+  .strip li { font-size: 13px; margin: 3px 0; color: var(--muted); }
+  .strip li b { color: var(--ink); font-weight: 600; }
+
+  /* improvements */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 17px; box-shadow: var(--shadow); position: relative;
+  }
+  .card .top { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; flex-wrap: wrap; }
+  .card .rank { font-weight: 800; font-size: 13px; color: var(--panel); background: var(--ink); width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; flex: none; }
+  .card h3 { margin: 0; font-size: 15.5px; letter-spacing: -.01em; flex: 1 1 auto; }
+  .card p { margin: 0 0 9px; font-size: 13.5px; color: var(--muted); }
+  .card .why { font-size: 12.5px; color: var(--ink); background: var(--chip); border-radius: 9px; padding: 8px 11px; }
+  .card .why b { font-weight: 600; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 11px; }
+  .tag { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; background: var(--chip); color: var(--chip-ink); }
+  .tag.impact-hi { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+  .tag.effort-lo { background: color-mix(in srgb, var(--bundle) 16%, transparent); color: var(--bundle); }
+  .tag.stage-b { color: var(--bundle); background: color-mix(in srgb, var(--bundle) 14%, transparent); }
+  .tag.stage-t { color: var(--tool); background: color-mix(in srgb, var(--tool) 16%, transparent); }
+  .tag.stage-a { color: var(--agent); background: color-mix(in srgb, var(--agent) 16%, transparent); }
+  .tag.stage-v { color: var(--verify); background: color-mix(in srgb, var(--verify) 16%, transparent); }
+
+  .footnote { margin-top: 34px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; }
+  .footnote code { background: var(--chip); color: var(--chip-ink); padding: 1px 6px; border-radius: 6px; }
+</style>
+
+<div class="wrap">
+  <header class="page">
+    <div class="eyebrow">Gene Program Interpreter · research/</div>
+    <h1>Literature Research Protocol Map</h1>
+    <p class="lede">
+      One isolated Claude Agent SDK session per gene program, fanned out in Python
+      (<code>asyncio</code> + <code>Semaphore</code>), each answering a single question —
+      <em>what is the shared biological function of this program's genes?</em> — against read-only
+      literature tools, then reduced by a deterministic verifier. This map shows every step, its
+      tunable parameters, and where research quality can be raised.
+    </p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--bundle)"></i>① Bundle (deterministic)</span>
+      <span><i class="dot" style="background:var(--agent)"></i>② Agent SDK sessions</span>
+      <span><i class="dot" style="background:var(--tool)"></i>Literature MCP tools</span>
+      <span><i class="dot" style="background:var(--verify)"></i>④ Verifier (deterministic)</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>The pipeline, end to end</h2>
+    <div class="flow">
+      <div class="stage" style="--accent:var(--bundle)">
+        <div class="num">STEP ①</div>
+        <h3>Assemble bundle</h3>
+        <div class="who">research/bundle.py · offline</div>
+        <p>One immutable <code>program_bundles/{id}.json</code> per program — the complete prompt the agent reads. Nothing not its job is included.</p>
+        <ul class="params">
+          <li><span class="k">program_genes</span><span class="v">top <code>20</code> by loading</span></li>
+          <li><span class="k">distinctive_genes</span><span class="v">top <code>10</code> by uniqueness</span></li>
+          <li><span class="k">regulators / cond.</span><span class="v">top <code>6</code> |log2fc|</span></li>
+          <li><span class="k">also carries</span><span class="v">functions, brief</span></li>
+        </ul>
+      </div>
+
+      <div class="stage" style="--accent:var(--agent)">
+        <div class="num">STEP ②</div>
+        <h3>Fan-out sessions</h3>
+        <div class="who">research/research_parallel.py</div>
+        <p>Isolated <code>query()</code> session per bundle. Fresh cwd holds only its own bundle; <code>protocol.md</code> is the system prompt. No manager agent — Python controls parallelism.</p>
+        <ul class="params">
+          <li><span class="k">concurrency</span><span class="v"><code>4</code> (k=3–5)</span></li>
+          <li><span class="k">model</span><span class="v"><code>sonnet-4-6</code></span></li>
+          <li><span class="k">max_turns</span><span class="v"><code>30</code></span></li>
+          <li><span class="k">max_budget_usd</span><span class="v"><code>1.0</code>/session</span></li>
+          <li><span class="k">timeout</span><span class="v"><code>600 s</code></span></li>
+          <li><span class="k">attempts</span><span class="v"><code>2</code> (retry once)</span></li>
+        </ul>
+      </div>
+
+      <div class="stage" style="--accent:var(--tool)">
+        <div class="num">STEP ③</div>
+        <h3>Retrieve &amp; submit</h3>
+        <div class="who">research/literature.py (in-process MCP)</div>
+        <p>Agent decides every query, retrieves first (never writes from memory), attaches papers to 1–3 mechanisms, and calls <code>submit_result</code> exactly once.</p>
+        <ul class="params">
+          <li><span class="k">search cap</span><span class="v"><code>10</code> (max <code>15</code>)</span></li>
+          <li><span class="k">fetch cap</span><span class="v"><code>20</code> PMIDs</span></li>
+          <li><span class="k">mechanisms</span><span class="v">hard max <code>3</code></span></li>
+          <li><span class="k">NCBI rate</span><span class="v"><code>9</code>/s keyed</span></li>
+        </ul>
+      </div>
+
+      <div class="stage" style="--accent:var(--verify)">
+        <div class="num">STEP ④</div>
+        <h3>Verify &amp; reduce</h3>
+        <div class="who">research/verify.py · deterministic</div>
+        <p>Normalizes flat output, dedups papers into an evidence pool, resolves every PMID/DOI, flags retractions, and derives each mechanism's status.</p>
+        <ul class="params">
+          <li><span class="k">resolves</span><span class="v">PMID + DOI</span></li>
+          <li><span class="k">status</span><span class="v">from resolvability</span></li>
+          <li><span class="k">retraction</span><span class="v">CrossRef flag</span></li>
+          <li><span class="k">dedup</span><span class="v">cross-program</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="flow-arrows"><div>→</div><div>→</div><div>→</div><div></div></div>
+  </section>
+
+  <section>
+    <h2>Tool surface — read-only, the agent sees nothing else</h2>
+    <div class="tools">
+      <div class="tool">
+        <h4><code>search_pubmed(query, max_results)</code></h4>
+        <p>Primary biomedical retrieval. Returns PMIDs (discovery ids), sorted by relevance.</p>
+        <span class="cap">cap 10 · max 15 · relevance sort</span>
+      </div>
+      <div class="tool">
+        <h4><code>fetch_pubmed(pmids)</code></h4>
+        <p>Canonical metadata + real DOI, year, journal, study_type, abstract, is_preprint, is_retracted. Fetch before citing.</p>
+        <span class="cap">≤ 20 PMIDs / call</span>
+      </div>
+      <div class="tool">
+        <h4><code>search_openalex(query, max_results)</code></h4>
+        <p>Cross-publisher, includes preprints. Carries doi/pmid + cited_by_count. <b>Requires OPENALEX_API_KEY</b> — errors out if unset.</p>
+        <span class="cap">key-gated channel</span>
+      </div>
+      <div class="tool">
+        <h4><code>resolve_doi(identifier)</code></h4>
+        <p>Resolve a DOI or bibliographic string against CrossRef to verify a real DOI, title, and year.</p>
+        <span class="cap">keyless</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Sandbox &amp; guardrails (every session)</h2>
+    <div class="strip">
+      <ul>
+        <li><b>Isolated cwd</b> — <code>Read</code> can only see this program's bundle.</li>
+        <li><b>Deny-by-default</b> — <code>can_use_tool</code> allowlist: literature + submit + Read.</li>
+        <li><b>Denylist</b> — Bash, Write, Edit, WebSearch/Fetch, Agent, Skill… all blocked.</li>
+        <li><b>Sandboxed config</b> — <code>setting_sources=[]</code> + <code>strict_mcp_config</code>.</li>
+        <li><b>Retrieve-first</b> — cite only tool-returned identifiers; never fabricate.</li>
+        <li><b>No final label</b> — the agent proposes mechanisms; synthesis labels downstream.</li>
+        <li><b>Untrusted text</b> — retrieved titles/abstracts are data, never instructions.</li>
+        <li><b>Auth split</b> — research runs on the Claude.ai subscription, not the API key.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Adjustments to raise research quality — ranked</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="top"><span class="rank">1</span><h3>Verify claims, not just identifiers</h3></div>
+        <p>Today a mechanism is “supported” if its PMIDs merely <em>resolve</em> — a real but off-topic paper counts. Add the reserved claim-vs-paper <b>entailment</b> check: an adjudicator reads the abstract and confirms it actually supports the mechanism.</p>
+        <div class="why"><b>Why:</b> the single biggest gap. “Supported” currently overstates evidence; resolvability ≠ relevance. Scaffold already exists (<code>FUTURE_claim_verification.md</code>).</div>
+        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag stage-v">Verifier ④</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><span class="rank">2</span><h3>Make OpenAlex failure loud, add a preprint fallback</h3></div>
+        <p>Without <code>OPENALEX_API_KEY</code> the entire cross-publisher + preprint channel silently returns an error, leaving PubMed-only recall. Detect the missing key at launch, warn in the audit, and fall back to a keyless bioRxiv/Europe PMC search.</p>
+        <div class="why"><b>Why:</b> a whole retrieval modality can be dark without anyone noticing — recall quietly halves for recent/preprint biology.</div>
+        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag effort-lo">Low effort</span><span class="tag stage-t">Tools ③</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><span class="rank">3</span><h3>Gene-synonym expansion before search</h3></div>
+        <p>Papers use aliases (<code>Madcam1</code> vs <code>MAdCAM-1</code>, mouse vs human casing). Add an NCBI Gene / alias-resolution helper (or bake synonyms into the bundle) so queries hit the literature's actual vocabulary.</p>
+        <div class="why"><b>Why:</b> symbol mismatches drop true positives at the retrieval step — the cheapest recall the pipeline is leaving on the table.</div>
+        <div class="tags"><span class="tag impact-hi">High impact</span><span class="tag stage-b">Bundle ①</span><span class="tag stage-t">Tools ③</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><span class="rank">4</span><h3>Rank by evidence quality, not just relevance</h3></div>
+        <p>PubMed is fixed to relevance sort and quality signals go unused. Surface <code>cited_by_count</code> (already fetched from OpenAlex), study_type, and recency to the agent, and guide it to prefer reviews for established function, primaries for specific claims.</p>
+        <div class="why"><b>Why:</b> lets the agent spend its limited turns on load-bearing papers instead of the first relevant hit.</div>
+        <div class="tags"><span class="tag effort-lo">Low effort</span><span class="tag stage-t">Tools ③</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><span class="rank">5</span><h3>Give the agent query-craft guidance</h3></div>
+        <p>The protocol says “search the strongest gene(s)” but offers no query patterns. Add few-shot examples using field tags (<code>[tiab]</code>, <code>[Majr]</code>), gene-set co-occurrence, and cell-type context to move beyond one-gene lookups.</p>
+        <div class="why"><b>Why:</b> query quality is the highest-leverage, zero-infra lever; better queries find the papers that ground a <em>shared</em> function, not a famous single gene.</div>
+        <div class="tags"><span class="tag effort-lo">Low effort</span><span class="tag stage-a">Protocol ②</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><span class="rank">6</span><h3>Citation-graph expansion</h3></div>
+        <p>Add one hop of forward/backward citations (OpenAlex referenced_works / cited_by) from a strong seed paper, so the agent can reach the review or key primary it didn't phrase a query for.</p>
+        <div class="why"><b>Why:</b> literature search recall is bounded by phrasing; the citation graph routes around it and finds consensus sources.</div>
+        <div class="tags"><span class="tag stage-t">Tools ③</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><span class="rank">7</span><h3>Turn/budget self-pacing + gene-coverage report</h3></div>
+        <p>Sessions that exhaust <code>max_turns</code> without <code>submit_result</code> fall back to “incomplete,” and a retry hits the same wall. Inject remaining-turn awareness with a “submit now” checkpoint, and require a <code>genes_grounded</code> list so unresearched genes are explicit, not lost in prose.</p>
+        <div class="why"><b>Why:</b> converts silent truncation into a graceful partial result, and makes coverage auditable per program.</div>
+        <div class="tags"><span class="tag stage-a">Runner ②</span><span class="tag stage-v">Schema</span></div>
+      </div>
+
+      <div class="card">
+        <div class="top"><span class="rank">8</span><h3>Raise caps for deep programs</h3></div>
+        <p>Retrieval is capped at 10/search and 30 turns — tight for a 30-gene program spanning several themes. Make caps config-driven and consider a larger fetch/search budget (and a stronger model) for programs flagged as high-priority.</p>
+        <div class="why"><b>Why:</b> current defaults optimise cost; some programs need depth. Make the trade-off a knob, not a constant.</div>
+        <div class="tags"><span class="tag stage-a">Params ②③</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <p class="footnote">
+    Source of truth: <code>research/protocol.md</code>, <code>research/research_parallel.py</code>,
+    <code>research/literature.py</code>, <code>research/schema.py</code>, <code>research/verify.py</code>,
+    <code>research/bundle.py</code>, and <code>docs/ARCHITECTURE.md</code>. Parameter defaults shown are the
+    module defaults and are overridable via CLI / config.
+  </p>
+</div>
