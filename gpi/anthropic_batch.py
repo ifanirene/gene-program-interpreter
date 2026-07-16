@@ -263,6 +263,7 @@ def cmd_submit(args: argparse.Namespace) -> int:
     logger.info(f"Saved batch ID to {batch_id_file}")
 
     if args.wait:
+        emit_step_progress(0, len(requests_list), "submitted")
         print(f"\nWaiting for batch completion (checking every {POLL_INTERVAL_SECONDS}s)...")
         status = check_batch(batch_id)
         while status["processing_status"] == "in_progress":
@@ -272,10 +273,11 @@ def cmd_submit(args: argparse.Namespace) -> int:
             done = c["succeeded"]
             total = c["processing"] + c["succeeded"]
             print(f"  Status: {status['processing_status']} | Completed: {done}/{total}")
-            emit_step_progress(done, total, "batch")
+            emit_step_progress(done, total, "processing")
 
         print(f"\nFinal status: {status['processing_status']}")
         if status["processing_status"] == "ended":
+            emit_step_progress(len(requests_list), len(requests_list), "fetching results")
             output_file = batch_path.with_name(f"{batch_path.stem}_results.jsonl")
             fetch_results(batch_id, output_file)
             print(f"SUCCESS! Results saved to: {output_file}")

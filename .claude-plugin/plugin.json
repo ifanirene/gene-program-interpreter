@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "gene-program-interpreter",
   "displayName": "Gene Program Interpreter",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "description": "Interpret weighted gene programs with parallel, auditable literature research and verified citations.",
   "author": {
     "name": "ifanirene"

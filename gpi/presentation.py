@@ -14,21 +14,29 @@ consumes but that are not part of the scientific annotation schema:
 - ``tags``        : 2-3 short context chips
 - ``module_short``: a short label per functional module (for the glance strip)
 
-Two generation paths are supported, by design:
+Three generation paths are supported, by design:
 
 1. Deterministic (no model). ``deterministic_presentation`` derives every field
    from the annotation text plus a curated lexicon. Fully reproducible and used
    as the guaranteed ④ fallback so the report never depends on a model being run
-   (used both with ``--deterministic`` and whenever the batch fails).
+   (used with ``--deterministic`` and whenever a model path fails).
 
-2. Anthropic Batch (③). ``build_presentation_prompt`` emits a strict-JSON prompt;
-   requests for every program are submitted through the vendored batch infra
-   (``gpi.anthropic_batch``: ``submit_batch`` / ``check_batch`` / ``fetch_results``),
-   polled to completion, and the per-program model text is validated by
-   ``parse_presentation_response`` against faithfulness rules (highlights must be
-   substrings of the lead, module_short must align to the modules, tags are
-   length/count-capped). Anything missing or invalid falls back to the
-   deterministic value.
+2. Live (③, DEFAULT). ``run_presentation_live`` calls ``messages.create`` once per
+   program, synchronously. Presentation is a tiny task (one short strict-JSON
+   completion per program), so this returns in seconds — unlike the Batch API,
+   whose queue latency (minutes to hours) dwarfs the work. Same prompt and
+   validation as the batch path; a per-program failure falls back to deterministic.
+
+3. Anthropic Batch (③, ``--batch``). Same ``build_presentation_prompt`` strict-JSON
+   prompt, but requests for every program are submitted through the vendored batch
+   infra (``gpi.anthropic_batch``: ``submit_batch`` / ``check_batch`` /
+   ``fetch_results``) and polled to completion. Cheaper per token but slow; opt in
+   for very large runs where cost matters more than latency.
+
+Both model paths validate per-program text with ``parse_presentation_response``
+against faithfulness rules (highlights must be substrings of the lead, module_short
+must align to the modules, tags are length/count-capped); anything missing or
+invalid falls back to the deterministic value.
 
 Highlighting is always deterministic and verifiable: only known gene symbols,
 regulator names, and curated lexicon phrases are emphasized, so emphasis can
@@ -42,7 +50,7 @@ Output contract (``presentation.json``, consumed by ``gpi/html_report.py``)::
 
 CLI::
 
-    python -m gpi.presentation --annotations-dir DIR [--deterministic]
+    python -m gpi.presentation --annotations-dir DIR [--deterministic | --batch]
         [--out presentation.json] [--lexicon L] [--emit-js JS]
         [--model M] [--max-tokens N] [--effort ...] [--thinking adaptive]
         [--results R.jsonl] [--force] [--poll-interval S] [--timeout S]
@@ -53,6 +61,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import sys
 import time
@@ -671,6 +680,65 @@ def run_presentation_batch(programs: dict[int, dict[str, Any]], lexicon: dict[st
     return read_results(results_path)
 
 
+# ---------------------------------------------------------------------------
+# Live path (default): synchronous per-program calls — no batch queue
+# ---------------------------------------------------------------------------
+
+def run_presentation_live(programs: dict[int, dict[str, Any]], lexicon: dict[str, Any],
+                          *, model: str, max_tokens: int, effort: Optional[str],
+                          thinking: Optional[str]) -> dict[int, str]:
+    """Presentation via synchronous per-program ``messages.create`` calls — no Batch queue.
+
+    Presentation is a tiny task: one short strict-JSON completion per program. The Anthropic
+    Batch API's queue latency (minutes to hours; a 3-program batch waited ~10 min in testing)
+    dwarfs that work, so live calls are the sensible default. Returns the same
+    ``{program_id: assistant_text}`` mapping the batch path produces, so
+    :func:`build_presentation` consumes it identically.
+
+    Robust by construction: a per-program failure is swallowed (that id is simply left out, so
+    ``build_presentation`` renders it deterministically) — one bad call never sinks the step.
+    A total failure (missing package/key) raises, and ``main`` falls back to the deterministic
+    path exactly as it does for a failed batch. Each program emits a STEP_PROGRESS tick, so the
+    live view shows ``k/total`` climb quickly instead of a single long wait.
+    """
+    try:
+        import anthropic
+    except ImportError as exc:  # pragma: no cover - environment-dependent
+        raise RuntimeError("anthropic package is required for the live presentation path") from exc
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise RuntimeError("ANTHROPIC_API_KEY is required for the live presentation path")
+    client = anthropic.Anthropic(api_key=api_key)
+
+    ids = sorted(programs)
+    n = len(ids)
+    emit_step_progress(0, n, "live")
+    texts: dict[int, str] = {}
+    for i, program_id in enumerate(ids):
+        params: dict[str, Any] = {
+            "model": model,
+            "max_tokens": max_tokens,
+            "messages": [
+                {"role": "user",
+                 "content": build_presentation_prompt(programs[program_id], lexicon)}
+            ],
+        }
+        if thinking:
+            params["thinking"] = {"type": thinking}
+        if effort:
+            params["output_config"] = {"effort": effort}
+        try:
+            response = client.messages.create(**params)
+            texts[program_id] = "\n".join(
+                b.text for b in response.content if getattr(b, "text", None)
+            )
+        except Exception as exc:  # noqa: BLE001 - per-program deterministic fallback
+            print(f"  presentation topic {program_id}: live call failed ({exc!r}); "
+                  "deterministic fallback for this program.", file=sys.stderr)
+        emit_step_progress(i + 1, n, "live")
+    return texts
+
+
 def build_presentation(programs: dict[int, dict[str, Any]], lexicon: dict[str, Any],
                        model: str, results_texts: Optional[dict[int, str]],
                        cache: dict[str, Any], force: bool) -> dict[str, Any]:
@@ -757,7 +825,10 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--emit-js", default=None,
                         help="Optional path to also write window.PRESENTATION JS")
     parser.add_argument("--deterministic", action="store_true",
-                        help="Force the deterministic path (no Anthropic Batch call)")
+                        help="Force the deterministic path (no model call at all)")
+    parser.add_argument("--batch", action="store_true",
+                        help="Use the Anthropic Batch API (cheaper, but minutes-to-hours of "
+                             "queue latency) instead of the default live per-program calls.")
     parser.add_argument("--model", default="",
                         help="Model recorded in metadata / used in batch requests "
                              f"(batch default: {DEFAULT_BATCH_MODEL})")
@@ -812,9 +883,10 @@ def main(argv: Optional[list[str]] = None) -> int:
     cache = load_cache(output_path)
 
     # Decide the source of agent text:
-    #   --deterministic  -> None (④ deterministic)
+    #   --deterministic  -> None (④ deterministic, no model)
     #   --results FILE   -> fold pre-fetched batch results
-    #   otherwise        -> submit/poll a live Anthropic Batch (③), fall back on failure
+    #   --batch          -> submit/poll an Anthropic Batch (③); cheap but slow, falls back
+    #   otherwise        -> LIVE per-program calls (default): fast, falls back on failure
     results_texts: Optional[dict[int, str]]
     if args.deterministic:
         results_texts = None
@@ -822,7 +894,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     elif args.results:
         results_texts = read_results(Path(args.results))
         model = args.model or DEFAULT_BATCH_MODEL
-    else:
+    elif args.batch:
         model = args.model or DEFAULT_BATCH_MODEL
         results_path = output_path.with_name(
             f"{output_path.stem}_batch_results.jsonl"
@@ -836,6 +908,20 @@ def main(argv: Optional[list[str]] = None) -> int:
             )
         except Exception as exc:  # noqa: BLE001 - fall back to deterministic ④
             print(f"Anthropic Batch path failed ({exc!r}); falling back to the "
+                  "deterministic presentation.", file=sys.stderr)
+            results_texts = None
+            model = args.model  # deterministic metadata
+    else:
+        # Default: live per-program calls. Presentation is one short completion per program,
+        # so the Batch API's queue latency (minutes to hours) is not worth paying for it.
+        model = args.model or DEFAULT_BATCH_MODEL
+        try:
+            results_texts = run_presentation_live(
+                programs, lexicon, model=model, max_tokens=args.max_tokens,
+                effort=args.effort, thinking=args.thinking,
+            )
+        except Exception as exc:  # noqa: BLE001 - fall back to deterministic ④
+            print(f"Live presentation path failed ({exc!r}); falling back to the "
                   "deterministic presentation.", file=sys.stderr)
             results_texts = None
             model = args.model  # deterministic metadata

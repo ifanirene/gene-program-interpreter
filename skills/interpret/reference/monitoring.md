@@ -110,6 +110,12 @@ folds `progress.jsonl` to animate the step rail and a lane per research agent �
 tokens, makes no API calls, and touches nothing in the run path. It is a view for the **user**;
 `gpi watch` remains the authoritative liveness/token source you narrate from.
 
+Scales to large runs: it shows a card only for the **running** agents (at most 8 — the recommended
+large-N `research.concurrency`), collapsing the rest into a `N running · M queued` count instead of
+a card per program, and reads `progress.jsonl` incrementally (HTTP Range) so a multi-hour log is
+never re-parsed whole. For large N (50+ programs), set `research.concurrency: 8` in the config;
+below that, the default (4) is the sweet spot.
+
 ## The steps
 
 A `preflight` import step (visible on a cold start as `preflight k/n`), then the nine pipeline
