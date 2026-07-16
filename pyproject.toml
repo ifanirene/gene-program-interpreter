@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gene-program-interpreter"
-version = "0.2.3"
+version = "0.2.5"
 description = "Claude-first pipeline for interpreting weighted gene programs with parallel, auditable literature research."
 readme = "README.md"
 requires-python = ">=3.10"

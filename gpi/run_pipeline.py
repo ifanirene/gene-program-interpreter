@@ -61,6 +61,7 @@ from .progress import (
     STEP_DONE,
     STEP_PROGRESS,
     STEP_START,
+    emit_step_progress,
     get_emitter,
     make_emitter,
     set_emitter,
@@ -617,6 +618,7 @@ def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
         return {"skipped": True, "reason": "no research results"}
     from research.verify import verify_directory
 
+    emit_step_progress(None, None, "verifying citations")
     summary = verify_directory(paths.research_dir, audit_dir=paths.audit_dir)
 
     # Say out loud when verification did not fully run. The whole point of this step is the
@@ -669,6 +671,7 @@ def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]
         argv += ["--regulator-file", str(cfg.regulators)]
     if paths.research_dir.exists():
         argv += ["--research-evidence-dir", str(paths.research_dir)]
+    emit_step_progress(None, None, "generating theme")
     _run_subprocess(argv, flags.dry_run)
     return {"theme_dictionary": str(paths.theme_dict)}
 
@@ -713,9 +716,11 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
     # evidence (annotation.mask_regulators in the config), both conditions.
     for gene in cfg.annotation.get("mask_regulators", []) or []:
         prepare += ["--mask-regulator", str(gene)]
+    emit_step_progress(None, None, "assembling requests")
     _run_subprocess(prepare, flags.dry_run)
 
     # (b) submit the batch and wait for results (Anthropic Batch API — spends money)
+    # anthropic_batch emits its own sub-phases here: submitted → processing k/n → fetching.
     submit = _pymod(
         "gpi.anthropic_batch", "submit", paths.batch_request,
         "--model", cfg.annotation.get("model", "claude-sonnet-4-6"),
@@ -732,6 +737,7 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         "--summary-csv", paths.summary_csv,
         "--gene-loading-file", cfg.gene_loading,
     )
+    emit_step_progress(None, None, "parsing results")
     _run_subprocess(parse, flags.dry_run)
     return {"annotations_dir": str(paths.annotations_dir), "summary_csv": str(paths.summary_csv)}
 
