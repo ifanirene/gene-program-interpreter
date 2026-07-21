@@ -16,9 +16,11 @@ they share. Nothing else is your job this round.
 
 - This protocol.
 - Your one program bundle, `program_bundles/{program_id}.json` (via `Read`) — its
-  `program_genes`, `distinctive_genes`, `perturbation_regulators` (the genes whose knockout
-  most changes this program — **research these the same way as the program genes**),
-  `functions_to_consider`, and a short `research_brief`.
+  `program_genes` (the highest-loading genes), `distinctive_genes` (genes most specific to
+  *this* program — a **separate, additional** set, no overlap with `program_genes`, so cover
+  them too rather than assuming they are already included), `perturbation_regulators` (the
+  genes whose knockout most changes this program — **research these the same way as the
+  program genes**), `functions_to_consider`, and a short `research_brief`.
 
 ## Tools (retrieve first — never write from memory)
 

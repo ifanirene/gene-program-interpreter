@@ -14,8 +14,8 @@ nothing that isn't the agent's job is included:
       "cell_type": "hepatocyte",
       "conditions": ["aging", "MASLD"],
       "functions_to_consider": [ ...normal cell-type functions... ],   # context, once
-      "program_genes": [ ...gene names... ],                           # top-loading, names only
-      "distinctive_genes": [ ...gene names... ],                       # program-specific, names only
+      "program_genes": [ ...gene names... ],       # top-15 by loading, names only
+      "distinctive_genes": [ ...gene names... ],   # top-8 by uniqueness, DISJOINT from the above
       "perturbation_regulators": {                                     # top-6 per condition, SEARCH TARGETS
           "young": [ {"gene": "Dgat2", "log2fc": 1.83}, ... ],
           "aged":  [ ... ]
@@ -27,6 +27,12 @@ No assay/Perturb-seq wording, no annotation fields, no enrichment block, no "ove
 regulators, no loading/uniqueness scores, no long decimals. The perturbation regulators
 are the genes whose knockout most changes the program — the agent researches them the
 same way as the program genes.
+
+``program_genes`` and ``distinctive_genes`` come from ONE selector shared with the HTML
+report (``gpi.enrichment.select_program_gene_sets``), so the agent researches exactly the
+genes the reader sees, and the two lists are guaranteed disjoint — ``distinctive_genes``
+is ranked over the program's whole gene set with the top-loading genes removed, not
+re-ranked inside them.
 """
 
 from __future__ import annotations
@@ -41,10 +47,9 @@ import pandas as pd
 
 from gpi.context_profile import ContextProfile
 from gpi.enrichment import (
-    build_uniqueness_table,
     extract_program_id,
-    extract_top_genes_by_program,
     resolve_program_id_column,
+    select_program_gene_sets,
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -88,28 +93,25 @@ def _resolve_program_context(
 # -------------------------------------------------------------------------- genes
 
 def _program_and_distinctive_genes(
-    gene_df: pd.DataFrame, int_key: int, top_loading: int
+    gene_df: pd.DataFrame, int_key: int, top_loading: int, top_unique: int
 ) -> Tuple[List[str], List[str]]:
     """Return (program_genes, distinctive_genes) as plain name lists.
 
-    program_genes: top-N by loading Score. distinctive_genes: the same pool re-ranked
-    by global uniqueness (TF-IDF-weighted Score). Uniqueness is used internally to rank
-    but is NOT surfaced in the bundle — the agent needs gene identities, not scores.
-    """
-    id_col = resolve_program_id_column(gene_df)
-    top_map = extract_top_genes_by_program(gene_df, n_top=top_loading, id_col=id_col)
-    program_genes = list(top_map.get(str(int_key), []))
+    Delegates to ``gpi.enrichment.select_program_gene_sets`` — the same selector the HTML
+    report panel uses — so the research agent receives EXACTLY the genes the reader sees:
 
-    uniq_df = build_uniqueness_table(gene_df, id_col=id_col)
-    prog = uniq_df[uniq_df["program_id"].astype(int) == int_key]
-    uniq_by_gene = dict(zip(prog["Name"].astype(str), prog["UniquenessScore"]))
-    ranked = sorted(
-        (g for g in program_genes if g in uniq_by_gene),
-        key=lambda g: uniq_by_gene[g],
-        reverse=True,
+      * program_genes:     top-N by loading Score.
+      * distinctive_genes: top-M by global uniqueness over the program's WHOLE gene set,
+        with the top-loading genes excluded, so the two sets are disjoint.
+
+    That disjointness is load-bearing. This function used to rank uniqueness *within*
+    ``program_genes``, which made distinctive_genes a strict subset of the genes the agent
+    already had — a second list that added no gene and bought no information. Scores stay
+    internal to the ranking either way: the agent needs identities, not numbers.
+    """
+    return select_program_gene_sets(
+        gene_df, int_key, top_loading=top_loading, top_unique=top_unique
     )
-    distinctive_genes = ranked[:10] if ranked else program_genes[:10]
-    return program_genes, distinctive_genes
 
 
 # --------------------------------------------------------------- perturbation regulators
@@ -204,14 +206,17 @@ def build_bundle(
     profile: ContextProfile,
     *,
     ncbi_context: Optional[Dict[str, Any]] = None,
-    top_loading: int = 20,
+    top_loading: int = 15,
+    top_unique: int = 8,
     **_ignored: Any,  # accept legacy kwargs (enrichment_df, top_enrichment) without using them
 ) -> Dict[str, Any]:
     """Assemble the lean, immutable program-bundle dict for one program. Offline; no network."""
     _validate_gene_df(gene_df)
     int_key, label = _program_key(program_id)
 
-    program_genes, distinctive_genes = _program_and_distinctive_genes(gene_df, int_key, top_loading)
+    program_genes, distinctive_genes = _program_and_distinctive_genes(
+        gene_df, int_key, top_loading, top_unique
+    )
     if not program_genes:
         raise ValueError(f"No genes found for program {label} in gene_df — check id and CSV.")
 
@@ -240,7 +245,8 @@ def build_all_bundles(
     ncbi_context_json: Optional[Union[str, Path]] = None,
     out_dir: Union[str, Path] = "program_bundles",
     program_ids: Optional[List[Union[int, str]]] = None,
-    top_loading: int = 20,
+    top_loading: int = 15,
+    top_unique: int = 8,
     **_ignored: Any,  # accept legacy kwargs (enrichment_csv, top_enrichment) without using them
 ) -> List[Path]:
     """Build and write one ``{out_dir}/{program_id}.json`` per requested program."""
@@ -269,11 +275,17 @@ def build_all_bundles(
 
     written: List[Path] = []
     for pid in program_ids:
-        bundle = build_bundle(pid, gene_df, profile, ncbi_context=ncbi_context, top_loading=top_loading)
+        bundle = build_bundle(
+            pid, gene_df, profile,
+            ncbi_context=ncbi_context, top_loading=top_loading, top_unique=top_unique,
+        )
         dest = out_path / f"{bundle['program_id']}.json"
         dest.write_text(json.dumps(bundle, indent=2), encoding="utf-8")
         n_reg = sum(len(v) for v in bundle.get("perturbation_regulators", {}).values())
-        logger.info("Wrote %s (genes=%d, regulators=%d)", dest, len(bundle["program_genes"]), n_reg)
+        logger.info(
+            "Wrote %s (loading=%d, distinctive=%d, regulators=%d)",
+            dest, len(bundle["program_genes"]), len(bundle["distinctive_genes"]), n_reg,
+        )
         written.append(dest)
     return written
 
@@ -295,7 +307,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--profile", help="Optional ContextProfile YAML (default: liver_demo()).")
     parser.add_argument("--programs", help="Comma-separated program ids (e.g. '2,10,18'). Default: all.")
     parser.add_argument("--out-dir", default="program_bundles", help="Output directory for bundle JSONs.")
-    parser.add_argument("--top-loading", type=int, default=20, help="Top-N weighted genes per program.")
+    parser.add_argument("--top-loading", type=int, default=15, help="Top-N genes by loading Score per program.")
+    parser.add_argument(
+        "--top-unique", type=int, default=8,
+        help="Top-M genes by global uniqueness per program, excluding the top-loading N.",
+    )
     return parser
 
 
@@ -309,6 +325,7 @@ def main() -> None:
         out_dir=args.out_dir,
         program_ids=_parse_programs(args.programs),
         top_loading=args.top_loading,
+        top_unique=args.top_unique,
     )
     logger.info("Wrote %d bundle(s) to %s", len(written), args.out_dir)
 

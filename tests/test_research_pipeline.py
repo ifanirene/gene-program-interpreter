@@ -89,6 +89,49 @@ def test_bundle_from_fixtures(gene_loading_csv, literature_context_json, tmp_pat
     assert "perturb" not in json.dumps(bundle).lower().replace("perturbation_regulators", "")
 
 
+def test_bundle_gene_sets_are_disjoint_and_match_the_report(gene_loading_csv, tmp_path):
+    """`distinctive_genes` must be a SEPARATE ranked set, not a re-sort of `program_genes`.
+
+    Regression guard for a real bug: the bundle used to rank uniqueness *within* the
+    top-loading genes, so every "distinctive" gene was already a program gene — a second
+    list that added nothing. The two sets must be disjoint, correctly sized, and identical
+    to what the HTML report shows the reader, since both now come from one selector
+    (`gpi.enrichment.select_program_gene_sets`).
+    """
+    import pandas as pd
+    from gpi.html_report import build_panel_stats
+
+    programs = [1, 2, 10]
+    paths = build_all_bundles(
+        str(gene_loading_csv),
+        ContextProfile.liver_demo(),
+        out_dir=str(tmp_path / "program_bundles"),
+        program_ids=programs,
+        top_loading=15,
+        top_unique=8,
+    )
+    assert len(paths) == len(programs)
+
+    panel = build_panel_stats(
+        pd.DataFrame({"Topic": programs}), str(gene_loading_csv), top_loading=15, top_unique=8
+    )
+
+    for path, pid in zip(paths, programs):
+        bundle = json.loads(path.read_text())
+        loading, distinctive = bundle["program_genes"], bundle["distinctive_genes"]
+
+        # the actual bug: a uniqueness ranking confined to the loading pool
+        assert not set(loading) & set(distinctive), (
+            f"P{pid}: distinctive_genes overlaps program_genes {sorted(set(loading) & set(distinctive))}"
+        )
+        assert len(loading) == 15 and len(distinctive) == 8
+        assert len(set(loading)) == 15 and len(set(distinctive)) == 8  # no dupes within a set
+
+        # the agent must research exactly what the reader sees
+        assert loading == panel[pid]["top_loading"].split(", ")
+        assert distinctive == panel[pid]["unique"].split(", ")
+
+
 def test_inprocess_literature_server_tool_surface():
     """The default in-process literature server exposes exactly the read-only tool surface
     the protocol names — no external server / plugin required to build it."""

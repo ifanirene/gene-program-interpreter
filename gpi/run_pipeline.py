@@ -520,6 +520,7 @@ def run_bundle(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
         f"enrichment_csv={enrichment_csv}, ncbi_context_json={ncbi_json}, "
         f"out_dir={paths.bundles_dir}, program_ids={cfg.programs}, "
         f"top_loading={cfg.setting('top_loading', 15)}, "
+        f"top_unique={cfg.setting('top_unique', 8)}, "
         f"top_enrichment={cfg.setting('top_enrichment', 7)})"
     )
     if flags.dry_run:
@@ -534,6 +535,7 @@ def run_bundle(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
         out_dir=paths.bundles_dir,
         program_ids=cfg.programs,
         top_loading=int(cfg.setting("top_loading", 15)),
+        top_unique=int(cfg.setting("top_unique", 8)),
         top_enrichment=int(cfg.setting("top_enrichment", 7)),
     )
     return {"n_bundles": len(written), "bundles": [str(p) for p in written]}
