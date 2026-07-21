@@ -53,6 +53,11 @@ import numpy as np
 import pandas as pd
 
 from .column_mapper import extract_program_id, standardize_regulator_results
+from .enrichment import (
+    add_global_uniqueness_scores,
+    rank_program_genes_by_loading,
+    select_program_gene_sets,
+)
 
 
 from gpi.log_redaction import install_log_redaction
@@ -122,44 +127,14 @@ def load_gene_table(path: Path, topics: Optional[Sequence[int]] = None) -> pd.Da
     if "UniquenessScore" in df.columns:
         df["UniquenessScore"] = pd.to_numeric(df["UniquenessScore"], errors="coerce")
     elif "Score" in df.columns:
-        df = add_global_uniqueness_scores(df)
+        df = add_global_uniqueness_scores(df)  # canonical impl, from gpi.enrichment
     if "rank" in df.columns:
         df["rank"] = pd.to_numeric(df["rank"], errors="coerce")
     return df
 
 
-def add_global_uniqueness_scores(df: pd.DataFrame) -> pd.DataFrame:
-    """Compute TF-IDF-style uniqueness scores when step 1 output is absent."""
-    required = {"Name", "Score", "program_id"}
-    missing = required - set(df.columns)
-    if missing:
-        logger.warning("Cannot compute uniqueness scores; missing columns: %s", sorted(missing))
-        return df
-    updated = df.copy()
-    updated["Score"] = pd.to_numeric(updated["Score"], errors="coerce")
-    valid = updated.dropna(subset=["Name", "Score", "program_id"]).copy()
-    if valid.empty:
-        return updated
-    total_programs = valid["program_id"].nunique()
-    gene_counts = valid.groupby("Name")["program_id"].nunique().astype(float)
-    idf = np.log((total_programs + 1.0) / (gene_counts + 1.0))
-    updated["UniquenessScore"] = np.nan
-    updated.loc[valid.index, "UniquenessScore"] = (
-        valid["Score"] * valid["Name"].map(idf)
-    )
-    return updated
-
-
 def program_ids_from_gene_table(gene_df: pd.DataFrame) -> List[int]:
     return sorted(gene_df["program_id"].dropna().astype(int).unique().tolist())
-
-
-def sorted_program_genes(group: pd.DataFrame) -> pd.DataFrame:
-    if "rank" in group.columns and group["rank"].notna().any():
-        return group.sort_values(["rank", "Name"], ascending=[True, True])
-    if "Score" in group.columns and group["Score"].notna().any():
-        return group.sort_values(["Score", "Name"], ascending=[False, True])
-    return group.sort_values("Name")
 
 
 def select_program_gene_lists(
@@ -167,37 +142,37 @@ def select_program_gene_lists(
     top_loading: int,
     top_unique: int,
 ) -> Dict[int, Dict[str, List[str]]]:
-    gene_lists: Dict[int, Dict[str, List[str]]] = {}
-    for program_id, group in gene_df.groupby("program_id", sort=True):
-        ordered = sorted_program_genes(group).drop_duplicates("Name", keep="first")
-        top_loading_genes = ordered["Name"].astype(str).head(top_loading).tolist()
-        top_loading_set = set(top_loading_genes)
-        unique_genes: List[str] = []
-        if "UniquenessScore" in ordered.columns and ordered["UniquenessScore"].notna().any():
-            unique_ordered = ordered.sort_values(
-                ["UniquenessScore", "Name"], ascending=[False, True]
+    """Per-program {top_loading_genes, top_unique_genes} from the pipeline-wide selector.
+
+    Ordering is by loading ``Score`` rather than the ``rank`` column this used to prefer.
+    ``rank`` is a derived duplicate of Score order in every loading table the pipeline
+    produces (verified 1:1 on the fixtures), so nothing moves — but tying themes, report and
+    research to one ordering rule means they cannot disagree if a future table ships a rank
+    computed some other way.
+    """
+    return {
+        program_id: dict(
+            zip(
+                ("top_loading_genes", "top_unique_genes"),
+                select_program_gene_sets(
+                    gene_df, program_id, top_loading=top_loading, top_unique=top_unique
+                ),
             )
-            for gene in unique_ordered["Name"].astype(str).tolist():
-                if gene not in top_loading_set:
-                    unique_genes.append(gene)
-                if len(unique_genes) >= top_unique:
-                    break
-        gene_lists[int(program_id)] = {
-            "top_loading_genes": top_loading_genes,
-            "top_unique_genes": unique_genes,
-        }
-    return gene_lists
+        )
+        for program_id in program_ids_from_gene_table(gene_df)
+    }
 
 
 def select_enrichment_gene_lists(
     gene_df: pd.DataFrame,
     top_n: int = 300,
 ) -> Dict[int, List[str]]:
-    genes_by_program: Dict[int, List[str]] = {}
-    for program_id, group in gene_df.groupby("program_id", sort=True):
-        ordered = sorted_program_genes(group).drop_duplicates("Name", keep="first")
-        genes_by_program[int(program_id)] = ordered["Name"].astype(str).head(top_n).tolist()
-    return genes_by_program
+    """The wide per-program gene list sent to enrichment — same loading order as everything
+    else, so it stays a strict superset of that program's top-loading genes."""
+    return {
+        program_id: rank_program_genes_by_loading(gene_df, program_id, limit=top_n)
+        for program_id in program_ids_from_gene_table(gene_df)
+    }
 
 
 def load_assigned_families(

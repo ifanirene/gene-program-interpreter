@@ -51,6 +51,9 @@ from typing import Dict, List
 
 import pandas as pd
 
+from .column_mapper import extract_program_id
+from .enrichment import rank_program_genes_by_loading
+
 """
 @description
 Configuration loader for parsing and summarizing batch results.
@@ -217,7 +220,9 @@ def parse_final_results(result_file: str, output_dir: str) -> List[int]:
 
 
 def load_top_genes_by_topic(gene_loading_file: str, top_n: int = 20) -> Dict[int, List[str]]:
-    """Load top genes by RowID from gene loading CSV."""
+    """Load top genes by program from the gene loading CSV, in the pipeline-wide loading order
+    (``gpi.enrichment.rank_program_genes_by_loading``) so these names agree with the report,
+    the annotation prompt and the research bundle."""
     top_genes_by_topic: Dict[int, List[str]] = {}
     if not gene_loading_file or not os.path.exists(gene_loading_file):
         return top_genes_by_topic
@@ -233,11 +238,15 @@ def load_top_genes_by_topic(gene_loading_file: str, top_n: int = 20) -> Dict[int
              print("  ✗ CSV missing 'program_id' or 'RowID' column")
              return top_genes_by_topic
 
-        for topic_id, group in gene_df.groupby(group_col):
-            genes = (
-                group.sort_values("Score", ascending=False)["Name"].astype(str).head(top_n).tolist()
+        for topic_id in gene_df[group_col].dropna().unique():
+            pid = extract_program_id(topic_id)
+            if pid is None:
+                continue
+            genes = rank_program_genes_by_loading(
+                gene_df, pid, limit=top_n, id_col=group_col
             )
-            top_genes_by_topic[int(topic_id)] = genes
+            if genes:
+                top_genes_by_topic[int(pid)] = genes
         print(f"  ✓ Loaded gene data for {len(top_genes_by_topic)} topics")
     except Exception as e:
         print(f"  ✗ Error loading gene data: {e}")

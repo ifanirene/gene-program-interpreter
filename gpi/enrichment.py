@@ -55,7 +55,7 @@ import logging
 import sys
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
 import numpy as np
 import pandas as pd
@@ -888,6 +888,62 @@ def default_uniqueness_output(input_path: Path) -> Path:
     return input_path.with_name(f"{stem}_with_uniqueness{suffix}")
 
 
+def add_global_uniqueness_scores(df: pd.DataFrame) -> pd.DataFrame:
+    """Return a copy of ``df`` with a ``UniquenessScore`` column (all other columns kept).
+
+    THE canonical uniqueness metric for the whole pipeline: a TF-IDF-style weighting,
+    ``Score x log((n_programs + 1) / (n_programs_containing_gene + 1))``. A gene that loads
+    highly *and* appears in few programs scores high; a housekeeping gene that loads highly
+    everywhere is discounted toward zero.
+
+    Requires ``Name`` / ``Score`` / ``program_id`` and returns ``df`` untouched if any are
+    missing — callers rendering a report must degrade to an empty panel, not crash. Rows with
+    an unusable Name/Score/program_id get ``NaN`` rather than a wrong number.
+
+    This used to be copy-pasted into four modules (report, gene summaries, evidence context,
+    theme representation). Identical formulas that drift silently are how the two "same" gene
+    lists stopped matching, so there is now exactly one.
+    """
+    required = {"Name", "Score", "program_id"}
+    if not required.issubset(df.columns):
+        return df
+
+    updated = df.copy()
+    updated["Score"] = pd.to_numeric(updated["Score"], errors="coerce")
+    updated["program_id"] = pd.to_numeric(updated["program_id"], errors="coerce")
+
+    valid = updated.dropna(subset=["Name", "Score", "program_id"]).copy()
+    if valid.empty:
+        updated["UniquenessScore"] = np.nan
+        return updated
+
+    valid["program_id"] = valid["program_id"].astype(int)
+    total_programs = valid["program_id"].nunique()
+    gene_counts = valid.groupby("Name")["program_id"].nunique().astype(float)
+    idf = np.log((total_programs + 1.0) / (gene_counts + 1.0))
+    valid["UniquenessScore"] = valid["Score"] * valid["Name"].map(idf)
+
+    updated["UniquenessScore"] = np.nan
+    updated.loc[valid.index, "UniquenessScore"] = valid["UniquenessScore"]
+    return updated
+
+
+def ensure_global_uniqueness(
+    df: pd.DataFrame, logger_: Optional[logging.Logger] = None
+) -> pd.DataFrame:
+    """``add_global_uniqueness_scores`` unless the frame already carries usable scores.
+
+    Upstream (``gpi.enrichment`` step 1) may already have written ``UniquenessScore`` into the
+    loading CSV; recomputing it would be wasted work and, if the CSV were a filtered subset,
+    a *different* number (IDF depends on how many programs are in the frame). Prefer what is
+    already there.
+    """
+    if "UniquenessScore" in df.columns and not df["UniquenessScore"].isna().all():
+        return df
+    (logger_ or logger).info("UniquenessScore missing; computing global uniqueness scores.")
+    return add_global_uniqueness_scores(df)
+
+
 def build_uniqueness_table(
     df: pd.DataFrame, id_col: str, program_id_offset: int = 0
 ) -> pd.DataFrame:
@@ -919,25 +975,133 @@ def build_uniqueness_table(
     work = apply_program_id_offset(work, program_id_offset)
 
     if "UniquenessScore" not in work.columns or work["UniquenessScore"].isna().all():
-        work["Score"] = pd.to_numeric(work["Score"], errors="coerce")
-        work["program_id"] = pd.to_numeric(work["program_id"], errors="coerce")
-        valid = work.dropna(subset=["Name", "Score", "program_id"]).copy()
-        if valid.empty:
+        work = add_global_uniqueness_scores(work)
+        if work["UniquenessScore"].isna().all():
             raise ValueError("No valid rows to compute UniquenessScore.")
-
-        valid["program_id"] = valid["program_id"].astype(int)
-        total_programs = valid["program_id"].nunique()
-        gene_counts = valid.groupby("Name")["program_id"].nunique().astype(float)
-        idf = np.log((total_programs + 1.0) / (gene_counts + 1.0))
-        valid["UniquenessScore"] = valid["Score"] * valid["Name"].map(idf)
-
-        work["UniquenessScore"] = np.nan
-        work.loc[valid.index, "UniquenessScore"] = valid["UniquenessScore"]
 
     columns = ["Name", "Score", "program_id", "UniquenessScore"]
     out_df = work[columns].copy()
     out_df.dropna(subset=["Name", "Score", "program_id", "UniquenessScore"], inplace=True)
     return out_df
+
+
+def _take_distinct_names(
+    names: Sequence[object], *, limit: int, exclude: Optional[Set[str]] = None
+) -> List[str]:
+    """First ``limit`` distinct, non-empty gene names from an ALREADY-ORDERED sequence.
+
+    Skips anything in ``exclude`` — that is how the unique set is kept disjoint from the
+    top-loading set. Order is the caller's; this function never re-sorts.
+    """
+    if limit <= 0:
+        return []
+    out: List[str] = []
+    seen: Set[str] = set()
+    for raw in names:
+        name = str(raw).strip()
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        if exclude and name in exclude:
+            continue
+        out.append(name)
+        if len(out) >= limit:
+            break
+    return out
+
+
+def _program_gene_frame(
+    gene_df: pd.DataFrame, program_id: object, *, id_col: Optional[str] = None
+) -> Optional[pd.DataFrame]:
+    """One program's rows, normalized to Name/Score/program_id/UniquenessScore. ``None`` if
+    the table is unusable or the program is absent.
+
+    The single normalization point behind every public gene-list accessor here, so a caller
+    can never get "the top genes" under one column-name convention and "the unique genes"
+    under another.
+    """
+    try:
+        id_col = id_col or resolve_program_id_column(gene_df)
+        uniq_df = build_uniqueness_table(gene_df, id_col=id_col)
+    except (ValueError, KeyError):
+        return None
+
+    key = extract_program_id(program_id)
+    if key is None or uniq_df.empty:
+        return None
+
+    # to_numeric (not .astype(int)): a non-numeric program_id becomes NaN and simply fails
+    # to match, rather than raising and taking the whole report/bundle down with it.
+    prog = uniq_df[pd.to_numeric(uniq_df["program_id"], errors="coerce") == int(key)]
+    return None if prog.empty else prog
+
+
+def select_program_gene_sets(
+    gene_df: pd.DataFrame,
+    program_id: object,
+    *,
+    top_loading: int = 15,
+    top_unique: int = 8,
+    id_col: Optional[str] = None,
+) -> Tuple[List[str], List[str]]:
+    """Canonical per-program gene selection -> ``(top_loading_genes, unique_genes)``.
+
+    This is the SINGLE source of truth for the two gene sets the pipeline both shows the
+    user (HTML report panel) and feeds to the LLM/research agents, so those can never
+    disagree about what "this program's genes" means:
+
+      * ``top_loading_genes`` — the program's top-N genes by loading ``Score``.
+      * ``unique_genes``      — the program's top-M genes by ``UniquenessScore`` ranked over
+        its **entire** gene set, with every gene already in ``top_loading_genes`` **removed**.
+
+    The exclusion is the whole point, and it is why the two arguments are separate ranked
+    sets rather than one list sliced twice. Ranking uniqueness *within* the top-loading pool
+    (the old research-bundle behaviour) can only ever return a re-ordered subset of genes the
+    caller already had — it surfaces nothing new. Ranking the full set and then subtracting
+    the loading genes yields M genes that are genuinely program-specific and that the loading
+    ranking would never have reached.
+
+    Sorts are stable (``kind="mergesort"``), so ties fall back to input row order and repeat
+    runs on the same CSV return byte-identical lists.
+
+    Returns ``([], [])`` instead of raising when the program is absent or the table has no
+    usable rows; the caller decides whether that is fatal (research bundling) or merely an
+    empty panel (report rendering).
+    """
+    prog = _program_gene_frame(gene_df, program_id, id_col=id_col)
+    if prog is None:
+        return [], []
+
+    by_loading = prog.sort_values("Score", ascending=False, kind="mergesort")
+    loading_genes = _take_distinct_names(by_loading["Name"].tolist(), limit=top_loading)
+
+    by_uniqueness = prog.sort_values("UniquenessScore", ascending=False, kind="mergesort")
+    unique_genes = _take_distinct_names(
+        by_uniqueness["Name"].tolist(), limit=top_unique, exclude=set(loading_genes)
+    )
+    return loading_genes, unique_genes
+
+
+def rank_program_genes_by_loading(
+    gene_df: pd.DataFrame,
+    program_id: object,
+    *,
+    limit: Optional[int] = None,
+    id_col: Optional[str] = None,
+) -> List[str]:
+    """The program's distinct gene names ordered by loading ``Score`` (desc), optionally capped.
+
+    The wider companion to ``select_program_gene_sets`` for callers that need more than the
+    headline set — e.g. the ~100-gene "members" list and the full gene list used for STRING
+    validation. Sharing this normalization is what keeps those lists a strict superset of the
+    top-loading genes instead of a separately-sorted near-copy.
+    """
+    prog = _program_gene_frame(gene_df, program_id, id_col=id_col)
+    if prog is None:
+        return []
+    by_loading = prog.sort_values("Score", ascending=False, kind="mergesort")
+    names = by_loading["Name"].tolist()
+    return _take_distinct_names(names, limit=len(names) if limit is None else limit)
 
 
 def build_overview_long_table(

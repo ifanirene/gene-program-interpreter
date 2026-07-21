@@ -50,6 +50,7 @@ from .column_mapper import (
     standardize_regulator_results,
 )
 from .context_profile import ContextProfile
+from .enrichment import ensure_global_uniqueness, select_program_gene_sets
 from .research_evidence_adapter import load_research_evidence_directory
 
 # Load environment variables from .env file (optional).
@@ -216,38 +217,8 @@ def ensure_program_id_column(df: pd.DataFrame, program_id_offset: int = 0) -> pd
     return updated
 
 
-def add_global_uniqueness_scores(df: pd.DataFrame) -> pd.DataFrame:
-    required_cols = {"Name", "Score", "program_id"}
-    missing = required_cols - set(df.columns)
-    if missing:
-        raise ValueError(
-            f"CSV missing required columns for uniqueness: {sorted(missing)}"
-        )
-
-    updated = df.copy()
-    updated["Score"] = pd.to_numeric(updated["Score"], errors="coerce")
-    updated["program_id"] = pd.to_numeric(updated["program_id"], errors="coerce")
-
-    valid = updated.dropna(subset=["Name", "Score", "program_id"]).copy()
-    if valid.empty:
-        raise ValueError("No valid rows to compute uniqueness scores.")
-
-    valid["program_id"] = valid["program_id"].astype(int)
-    total_programs = valid["program_id"].nunique()
-    gene_counts = valid.groupby("Name")["program_id"].nunique().astype(float)
-    idf = np.log((total_programs + 1.0) / (gene_counts + 1.0))
-    valid["UniquenessScore"] = valid["Score"] * valid["Name"].map(idf)
-
-    updated["UniquenessScore"] = np.nan
-    updated.loc[valid.index, "UniquenessScore"] = valid["UniquenessScore"]
-    return updated
-
-
-def ensure_global_uniqueness(df: pd.DataFrame, logger: logging.Logger) -> pd.DataFrame:
-    if "UniquenessScore" in df.columns and not df["UniquenessScore"].isna().all():
-        return df
-    logger.info("UniquenessScore missing; computing global uniqueness scores.")
-    return add_global_uniqueness_scores(df)
+# Uniqueness scoring lives in gpi.enrichment (add_global_uniqueness_scores /
+# ensure_global_uniqueness) — imported above rather than re-implemented here.
 
 
 def load_gene_table(gene_file: Path, program_id_offset: int = 0) -> pd.DataFrame:
@@ -269,15 +240,13 @@ def select_program_genes(
     top_loading: int,
     top_unique: int,
 ) -> Tuple[List[str], List[str]]:
-    program_df = gene_df[gene_df["program_id"] == program_id].copy()
-    if program_df.empty:
-        return [], []
-    top_loading_genes = (
-        program_df.sort_values("Score", ascending=False)["Name"].head(top_loading).tolist()  # type: ignore
+    """(top-loading genes, program-unique genes) for one program — see
+    ``gpi.enrichment.select_program_gene_sets``, the pipeline-wide selector this defers to so
+    the annotation prompt is built from the same genes the report shows and the research agent
+    reads."""
+    return select_program_gene_sets(
+        gene_df, program_id, top_loading=top_loading, top_unique=top_unique
     )
-    unique_ranked = program_df.sort_values("UniquenessScore", ascending=False)["Name"].tolist()  # type: ignore
-    unique_genes = [gene for gene in unique_ranked if gene not in top_loading_genes]
-    return top_loading_genes, unique_genes[:top_unique]
 
 
 # =============================================================================

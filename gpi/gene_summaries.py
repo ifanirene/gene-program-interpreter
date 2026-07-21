@@ -58,6 +58,11 @@ from .column_mapper import (
     standardize_condition_regulator_results,
     standardize_regulator_results,
 )
+from .enrichment import (
+    ensure_global_uniqueness,
+    rank_program_genes_by_loading,
+    select_program_gene_sets,
+)
 
 from gpi.log_redaction import install_log_redaction
 
@@ -235,41 +240,8 @@ def ensure_program_id_column(df: pd.DataFrame, program_id_offset: int = 0) -> pd
     return updated
 
 
-def add_global_uniqueness_scores(df: pd.DataFrame) -> pd.DataFrame:
-    required_cols = {"Name", "Score", "program_id"}
-    missing = required_cols - set(df.columns)
-    if missing:
-        missing_sorted = sorted(missing)
-        raise ValueError(
-            f"CSV missing required columns for uniqueness: {missing_sorted}"
-        )
-
-    updated = df.copy()
-    updated["Score"] = pd.to_numeric(updated["Score"], errors="coerce")
-    updated["program_id"] = pd.to_numeric(updated["program_id"], errors="coerce")
-
-    valid = updated.dropna(subset=["Name", "Score", "program_id"]).copy()
-    if valid.empty:
-        raise ValueError("No valid rows to compute uniqueness scores.")
-
-    valid["program_id"] = valid["program_id"].astype(int)
-    total_programs = valid["program_id"].nunique()
-    gene_counts = valid.groupby("Name")["program_id"].nunique().astype(float)
-    idf = np.log((total_programs + 1.0) / (gene_counts + 1.0))
-    valid["UniquenessScore"] = valid["Score"] * valid["Name"].map(idf)
-
-    updated["UniquenessScore"] = np.nan
-    updated.loc[valid.index, "UniquenessScore"] = valid["UniquenessScore"]
-    return updated
-
-
-def ensure_global_uniqueness(
-    df: pd.DataFrame, logger: logging.Logger
-) -> pd.DataFrame:
-    if "UniquenessScore" in df.columns and not df["UniquenessScore"].isna().all():
-        return df
-    logger.info("UniquenessScore missing; computing global uniqueness scores.")
-    return add_global_uniqueness_scores(df)
+# Uniqueness scoring lives in gpi.enrichment (add_global_uniqueness_scores /
+# ensure_global_uniqueness) — imported above rather than re-implemented here.
 
 # Domain Constants for Programmatic Scoring
 DOMAIN_KEYWORDS = [
@@ -480,57 +452,46 @@ CACHE_DIR = Path("data/cache")
 CACHE_FILE = CACHE_DIR / "ncbi_bioc_cache.json"
 
 def load_program_genes(
-    csv_path: Path, 
-    top_n_loading: int = 20, 
-    top_n_unique: int = 10,
+    csv_path: Path,
+    top_n_loading: int = 15,
+    top_n_unique: int = 8,
     top_n_member: int = 100,
     program_id_offset: int = 0,
 ) -> Dict[int, Dict[str, List[str]]]:
     """
     Load driver and member genes per program.
     Returns: {program_id: {"drivers": [...], "top_loading": [...], "top_unique": [...], "members": [...], "all_genes": [...]}}
-    
+
     Drivers: Top N Loading + Top M Unique (non-overlapping) = exactly N + M genes
     Members (Verification): Top 100 Loading
+
+    Selection is delegated to ``gpi.enrichment`` — the same selector the HTML report and the
+    research bundle use — so the genes this step summarizes are the genes the reader sees and
+    the research agent researches. ``members``/``all_genes`` come from the same loading order,
+    which makes them a strict superset of ``top_loading`` rather than a parallel sort.
     """
     df = pd.read_csv(csv_path)
     # Expect columns: program_id (or RowID), Name, Score
     df = ensure_program_id_column(df, program_id_offset=program_id_offset)
+    # Score once up front; the per-program selector below reuses the column rather than
+    # recomputing the global IDF for each program.
     df = ensure_global_uniqueness(df, logger)
 
     programs = {}
-    for pid, group in df.groupby("program_id"):
-        # 1. Top Loading (by Score)
-        sorted_loading = group.sort_values("Score", ascending=False)["Name"].astype(str).tolist()
-        top_loading_genes = sorted_loading[:top_n_loading]
-        top_loading_set = set(top_loading_genes)
-        
-        # 2. Top Unique (by UniquenessScore) - NON-OVERLAPPING with top loading
-        top_unique_genes = []
-        if "UniquenessScore" in group.columns:
-            sorted_unique = group.sort_values("UniquenessScore", ascending=False)["Name"].astype(str).tolist()
-            # Filter out genes already in top_loading, then take top N
-            for gene in sorted_unique:
-                if gene not in top_loading_set:
-                    top_unique_genes.append(gene)
-                    if len(top_unique_genes) >= top_n_unique:
-                        break
-            
-        # Drivers: exactly top_n_loading + top_n_unique genes (no overlap)
-        drivers = top_loading_genes + top_unique_genes
-        
-        # Members: Top 100 Loading
-        members = sorted_loading[:top_n_member]
-        
-        # All genes: Full list for STRING validation (typically 300)
-        all_genes = sorted_loading
-        
-        programs[int(pid)] = {
-            "drivers": drivers,
+    for pid in sorted({int(p) for p in pd.to_numeric(df["program_id"], errors="coerce").dropna()}):
+        top_loading_genes, top_unique_genes = select_program_gene_sets(
+            df, pid, top_loading=top_n_loading, top_unique=top_n_unique
+        )
+        # Full loading order (typically 300); members is its head.
+        all_genes = rank_program_genes_by_loading(df, pid)
+
+        programs[pid] = {
+            # exactly top_n_loading + top_n_unique genes (guaranteed no overlap)
+            "drivers": top_loading_genes + top_unique_genes,
             "top_loading": top_loading_genes,
             "top_unique": top_unique_genes,
-            "members": members,
-            "all_genes": all_genes  # For STRING regulator validation
+            "members": all_genes[:top_n_member],
+            "all_genes": all_genes,  # For STRING regulator validation
         }
     return programs
 
@@ -1530,8 +1491,8 @@ def main():
     )
     parser.add_argument("--num-programs", type=int, help="Limit number of programs (for testing)")
     parser.add_argument("--topics", type=str, help="Comma-separated list of topic IDs to process (e.g. '6,7,8')")
-    parser.add_argument("--top-loading", type=int, default=20, help="Number of top loading genes (default 20)")
-    parser.add_argument("--top-unique", type=int, default=10, help="Number of top unique genes, non-overlapping with loading (default 10)")
+    parser.add_argument("--top-loading", type=int, default=15, help="Number of top loading genes (default 15)")
+    parser.add_argument("--top-unique", type=int, default=8, help="Number of top unique genes, non-overlapping with loading (default 8)")
     parser.add_argument("--top-member", type=int, default=100, help="Number of member genes for context")
     parser.add_argument("--program-id-offset", type=int, default=0, help="Integer offset added when gene input uses RowID instead of program_id")
     parser.add_argument("--species", type=int, default=10090, help="NCBI taxonomy ID for external evidence APIs")

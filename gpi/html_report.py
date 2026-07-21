@@ -26,6 +26,7 @@ from .column_mapper import (
     standardize_gene_loading,
     standardize_regulator_results,
 )
+from .enrichment import add_global_uniqueness_scores, select_program_gene_sets
 
 PRIORITY_GENES = [
     "Hif1a", "Epas1", "Arnt", "Fzd4", "Fzd6", "Idh2", "Mdh2", "Ogdh",
@@ -475,31 +476,6 @@ def clean_report_annotation_body(annotation_md: str) -> str:
     return "\n".join(lines).strip()
 
 
-def add_global_uniqueness_scores(df: pd.DataFrame) -> pd.DataFrame:
-    """Compute a TF-IDF-like uniqueness score when the input table lacks one."""
-    required = {"Name", "Score", "program_id"}
-    if not required.issubset(df.columns):
-        return df
-
-    updated = df.copy()
-    updated["Score"] = pd.to_numeric(updated["Score"], errors="coerce")
-    updated["program_id"] = pd.to_numeric(updated["program_id"], errors="coerce")
-
-    valid = updated.dropna(subset=["Name", "Score", "program_id"]).copy()
-    if valid.empty:
-        return updated
-
-    valid["program_id"] = valid["program_id"].astype(int)
-    total_programs = valid["program_id"].nunique()
-    gene_counts = valid.groupby("Name")["program_id"].nunique().astype(float)
-    idf = np.log((total_programs + 1.0) / (gene_counts + 1.0))
-    valid["UniquenessScore"] = valid["Score"] * valid["Name"].map(idf)
-
-    updated["UniquenessScore"] = np.nan
-    updated.loc[valid.index, "UniquenessScore"] = valid["UniquenessScore"]
-    return updated
-
-
 def build_panel_stats(
     summary_df: pd.DataFrame,
     gene_loading_csv: str,
@@ -549,44 +525,20 @@ def build_panel_stats(
                 stats['celltype'] = str(row[column]).strip()
                 break
 
-        if not gene_df.empty and {'Name', 'program_id'}.issubset(gene_df.columns):
-            program_genes = gene_df[gene_df['program_id'].astype(int) == topic_id].copy()
-            if not program_genes.empty:
-                if 'Score' in program_genes.columns:
-                    program_genes['_score'] = pd.to_numeric(
-                        program_genes['Score'], errors='coerce'
-                    )
-                    top_loading_df = program_genes.sort_values(
-                        '_score', ascending=False
-                    )
-                else:
-                    top_loading_df = program_genes
-
-                # Recompute the top-loading list from the loading CSV (Score
-                # order) so it matches the annotation pipeline exactly, rather
-                # than trusting summary.csv Top_Genes which may carry a
-                # different count.
-                top_loading_names = (
-                    top_loading_df['Name'].astype(str).head(top_loading).tolist()
-                )
+        if not gene_df.empty:
+            # ONE selector, shared with research/bundle.py. Recomputing the top-loading list
+            # from the loading CSV (rather than trusting summary.csv Top_Genes, which may
+            # carry a different count) is deliberate — and routing both lists through
+            # gpi.enrichment means the genes displayed here and the genes handed to the
+            # research agent cannot drift apart, which is exactly what had happened when
+            # each side computed its own.
+            top_loading_names, unique_names = select_program_gene_sets(
+                gene_df, topic_id, top_loading=top_loading, top_unique=top_unique
+            )
+            if top_loading_names:
                 stats['top_loading'] = ', '.join(top_loading_names)
-
-                if 'UniquenessScore' in program_genes.columns:
-                    program_genes['_uniqueness'] = pd.to_numeric(
-                        program_genes['UniquenessScore'], errors='coerce'
-                    )
-                    top_unique_df = program_genes.sort_values(
-                        '_uniqueness', ascending=False
-                    )
-                    top_loading_set = set(top_loading_names)
-                    unique_names = [
-                        gene
-                        for gene in top_unique_df['Name'].astype(str).tolist()
-                        if gene not in top_loading_set
-                    ]
-                    stats['unique'] = ', '.join(
-                        unique_names[:top_unique]
-                    )
+            if unique_names:
+                stats['unique'] = ', '.join(unique_names)
 
         panel_stats[topic_id] = stats
 
