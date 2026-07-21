@@ -367,6 +367,31 @@ def _write_json(path: Path, obj: Any) -> None:
     path.write_text(json.dumps(obj, indent=2, default=str), encoding="utf-8")
 
 
+def _token_summary(usage: Optional[Dict[str, Any]]) -> Optional[Dict[str, int]]:
+    """Compact input/output/cache token counts from the SDK ``ResultMessage.usage`` dict.
+
+    Returns ``None`` when usage is absent. Reads only int-valued top-level keys and
+    defaults missing ones to 0, so a changed SDK/CLI usage shape degrades to a partial
+    summary rather than raising — the raw ``usage`` dict is persisted alongside as the
+    faithful record.
+    """
+    if not isinstance(usage, dict):
+        return None
+    def _int(v: Any) -> int:
+        return v if isinstance(v, int) else 0
+    inp = _int(usage.get("input_tokens"))
+    out = _int(usage.get("output_tokens"))
+    cache_read = _int(usage.get("cache_read_input_tokens"))
+    cache_creation = _int(usage.get("cache_creation_input_tokens"))
+    return {
+        "input": inp,
+        "output": out,
+        "cache_read": cache_read,
+        "cache_creation": cache_creation,
+        "total": inp + out + cache_read + cache_creation,
+    }
+
+
 def _write_audit(
     audit_dir: Path,
     program_id: str,
@@ -380,6 +405,11 @@ def _write_audit(
     status: str,
     error: Optional[str] = None,
     attempts: int = 1,
+    subtype: Optional[str] = None,
+    is_error: Optional[bool] = None,
+    stop_reason: Optional[str] = None,
+    duration_ms: Optional[int] = None,
+    usage: Optional[Dict[str, Any]] = None,
 ) -> Path:
     audit_path = audit_dir / f"{program_id}.audit.json"
     _write_json(
@@ -392,6 +422,15 @@ def _write_audit(
             "tool_trace": tool_trace,
             "cost_usd": cost_usd,
             "num_turns": num_turns,
+            # SDK terminal-state fields: whether the turn/budget cap actually bound
+            # (subtype/stop_reason) and the token spend (tokens = compact view,
+            # usage = raw). Persisted so a non-binding cap leaves a diagnosable trace.
+            "subtype": subtype,
+            "is_error": is_error,
+            "stop_reason": stop_reason,
+            "duration_ms": duration_ms,
+            "tokens": _token_summary(usage),
+            "usage": usage,
             "status": status,
             "attempts": attempts,
             "error": error,
@@ -471,6 +510,14 @@ async def _drive_once(
                         "num_turns": msg.num_turns,
                         "total_cost_usd": msg.total_cost_usd,
                         "result": msg.result,
+                        # Terminal-state provenance: WHY the session ended (stop_reason /
+                        # subtype — e.g. "end_turn" vs "error_max_turns") and how many tokens
+                        # it cost. These live on the SDK ResultMessage but were dropped, so a
+                        # run could blow past max_turns with no on-disk signal. getattr keeps
+                        # this resilient to SDK-version field drift.
+                        "stop_reason": getattr(msg, "stop_reason", None),
+                        "duration_ms": getattr(msg, "duration_ms", None),
+                        "usage": getattr(msg, "usage", None),
                     }
                 )
 
@@ -616,6 +663,12 @@ async def _handle_one_program(
                     "model": model,
                     "cost_usd": result_info.get("total_cost_usd"),
                     "num_turns": result_info.get("num_turns"),
+                    # Why it stopped + token spend (see _write_audit): makes a non-binding
+                    # max_turns / budget cap visible right in the result file.
+                    "stop_reason": result_info.get("stop_reason"),
+                    "subtype": result_info.get("subtype"),
+                    "duration_ms": result_info.get("duration_ms"),
+                    "tokens": _token_summary(result_info.get("usage")),
                     "attempts": attempt,
                     "n_submit_calls": submit_holder.get("calls", 1),
                     "tool_trace_path": str((audit_dir / f"{program_id}.audit.json")),
@@ -634,6 +687,11 @@ async def _handle_one_program(
                 cost_usd=result_info.get("total_cost_usd"),
                 num_turns=result_info.get("num_turns"),
                 status="ok", attempts=attempt,
+                subtype=result_info.get("subtype"),
+                is_error=result_info.get("is_error"),
+                stop_reason=result_info.get("stop_reason"),
+                duration_ms=result_info.get("duration_ms"),
+                usage=result_info.get("usage"),
             )
             logger.info(
                 "Program %s: ok (turns=%s, cost=%s, mechanisms=%d, evidence=%d)",
@@ -646,6 +704,8 @@ async def _handle_one_program(
                         "program_id": program_id, "status": "ok",
                         "num_turns": result_info.get("num_turns"),
                         "cost_usd": result_info.get("total_cost_usd"),
+                        "stop_reason": result_info.get("stop_reason"),
+                        "tokens": (_token_summary(result_info.get("usage")) or {}).get("total"),
                         "n_mechanisms": len(rr.candidate_mechanisms),
                         "n_evidence": len(rr.evidence),
                     })
@@ -668,6 +728,10 @@ async def _handle_one_program(
         attempts=attempts,
         cost_usd=last_result_info.get("total_cost_usd"),
         num_turns=last_result_info.get("num_turns"),
+        stop_reason=last_result_info.get("stop_reason"),
+        subtype=last_result_info.get("subtype"),
+        duration_ms=last_result_info.get("duration_ms"),
+        tokens=_token_summary(last_result_info.get("usage")),
         tool_trace_path=str((audit_dir / f"{program_id}.audit.json")),
     )
     result_path = out_dir / f"{program_id}.json"
@@ -679,6 +743,11 @@ async def _handle_one_program(
         cost_usd=last_result_info.get("total_cost_usd"),
         num_turns=last_result_info.get("num_turns"),
         status="incomplete", attempts=attempts, error=last_error,
+        subtype=last_result_info.get("subtype"),
+        is_error=last_result_info.get("is_error"),
+        stop_reason=last_result_info.get("stop_reason"),
+        duration_ms=last_result_info.get("duration_ms"),
+        usage=last_result_info.get("usage"),
     )
     logger.error("Program %s: fallback written (reason: %s)", program_id, last_error)
     if progress_cb is not None:
