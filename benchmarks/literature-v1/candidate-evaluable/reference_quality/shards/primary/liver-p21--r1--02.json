@@ -1,0 +1,208 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-4a4bf79af316fed564bf",
+    "RL-66edfccab184902f9a84",
+    "RL-715e37db25a0faa6c296",
+    "RL-7fa2530b6e396a5d70e6",
+    "RL-7fd4234b22fb8bfc045b",
+    "RL-803bb5541c150e4bba5f",
+    "RL-95e57925e0ba07dc2306",
+    "RL-96caf1f9350d2ce119e3"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3891,
+        "source_type": "full_text",
+        "start": 3770,
+        "text": "Regarding DGAT2, its hepatic deficiency in a murine MASLD model lowered fat accumulation by reducing TG synthesis and DNL"
+      },
+      "function_supported_genes": [],
+      "rationale": "DGAT2 (a P21 perturbation regulator, not a supplied program gene) is shown by genetic/pharmacological loss-of-function to reduce hepatic TG synthesis and DNL, consistent with mechanism 3's regulator role. No supplied genes are gene-specifically studied here.",
+      "red_flags": [],
+      "review_id": "RL-4a4bf79af316fed564bf",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 321,
+        "source_type": "abstract",
+        "start": 170,
+        "text": "Acyl-CoA:cholesterol acyltransferase 1 and 2 (ACAT1 and ACAT2) convert various sterols to steryl esters; their activities are activated by cholesterol."
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "ACAT2 is gene-specifically studied (KO mice) and confirmed as a sterol/cholesterol-esterifying enzyme, but the paper's own experiments focus on pregnenolone esterification rather than hepatic cholesterol esterification, giving only partial support to the P21 claim. Tissue context (adrenal, various cell types) is not hepatic, matching the declared indirect label.",
+      "red_flags": [],
+      "review_id": "RL-66edfccab184902f9a84",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 11592,
+        "source_type": "full_text",
+        "start": 11519,
+        "text": "HMGCS1 converts acetyl‐CoA to HMG‐CoA and promotes mevalonate metabolism."
+      },
+      "function_supported_genes": [
+        "Hmgcs1"
+      ],
+      "rationale": "HMGCS1 is extensively gene-specifically studied (knockdown/overexpression/rescue) confirming its acetyl-CoA to HMG-CoA conversion role in mouse liver, matching mechanism 1's assigned enzymatic function. Context is a DEN/CCl4-induced HCC liver model rather than normal aging/MASLD hepatocytes, consistent with the declared partial context.",
+      "red_flags": [],
+      "review_id": "RL-715e37db25a0faa6c296",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 7901,
+        "source_type": "full_text",
+        "start": 7753,
+        "text": "DHCR7 is an enzyme that acts in the final step of the cholesterol biosynthesis pathway and converts 7-DHC possessing conjugated diene to cholesterol"
+      },
+      "function_supported_genes": [
+        "Dhcr7"
+      ],
+      "rationale": "DHCR7 is gene-specifically studied via CRISPR knockout, pharmacological inhibition, and in vivo hepatic genetic ablation in mouse liver, directly confirming its terminal role converting 7-DHC to cholesterol as stated in mechanism 1. Context (mouse hepatocytes/liver in vivo) matches the target biological context.",
+      "red_flags": [],
+      "review_id": "RL-7fa2530b6e396a5d70e6",
+      "studied_genes": [
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1532,
+        "source_type": "abstract",
+        "start": 1402,
+        "text": "our results indicated that low protein levels and activity of HSD17B7 are responsible for the reduced cholesterol content in SHRSP"
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "HSD17B7 mRNA/protein/activity are gene-specifically measured in rat liver and directly linked to reduced cholesterol biosynthesis, supporting the mechanism's assigned function, but this is a strain-comparison observational study, not perturbation. The study is in rat, not the target mouse organism, so the declared 'direct' context is overclaimed relative to indirect (cross-species) evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-7fd4234b22fb8bfc045b",
+      "studied_genes": [
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1447,
+        "source_type": "abstract",
+        "start": 1287,
+        "text": "MTP enhances cellular cholesterol esterification by removing cholesteryl esters from their site of synthesis and depositing them into nascent apoB lipoproteins."
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "Using MTP genetic ablation in mouse liver/intestine and ACAT1/ACAT2-transfected cell systems, the paper directly demonstrates that MTP enhances ACAT-mediated cholesteryl ester synthesis by relieving product inhibition, matching mechanism 3's claim about the MTTP-ACAT2 interaction. Context (mouse liver in vivo) is direct.",
+      "red_flags": [],
+      "review_id": "RL-803bb5541c150e4bba5f",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 575,
+        "source_type": "abstract",
+        "start": 326,
+        "text": "LXR inhibits the LDL receptor (LDLR) pathway through transcriptional induction of Idol (inducible degrader of the LDLR), an E3 ubiquitin ligase that triggers ubiquitination of the LDLR on its cytoplasmic domain, thereby targeting it for degradation."
+      },
+      "function_supported_genes": [],
+      "rationale": "LDLR (a P21 regulator, not a supplied program gene) is shown via LXR/Idol knockout and knockdown experiments in mouse liver/hepatocytes to be regulated for cholesterol uptake, supporting mechanism 2's regulator role for LDLR in hepatic cholesterol homeostasis. No supplied genes are gene-specifically studied.",
+      "red_flags": [],
+      "review_id": "RL-95e57925e0ba07dc2306",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1381,
+        "source_type": "abstract",
+        "start": 1238,
+        "text": "In the liver, the proportion of NSDHL negative cells dropped from approximately 50% at postnatal day 6 to approximately 20% at one year of age."
+      },
+      "function_supported_genes": [
+        "Nsdhl"
+      ],
+      "rationale": "NSDHL is gene-specifically studied via expression pattern and mosaic clonal analysis in mouse liver, showing that NSDHL-deficient hepatocytes are progressively selected against, consistent with an essential cholesterol-biosynthesis role, but the paper does not directly test the C4-demethylation biochemical function itself. Context (mouse liver) is direct.",
+      "red_flags": [],
+      "review_id": "RL-96caf1f9350d2ce119e3",
+      "studied_genes": [
+        "Nsdhl"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7993225,
+    "duration_api_ms": 303558,
+    "duration_ms": 301976,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 302.986
+  }
+}

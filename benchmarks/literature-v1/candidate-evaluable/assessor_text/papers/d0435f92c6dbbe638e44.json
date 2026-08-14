@@ -1,0 +1,14 @@
+{
+  "content_hash": "deed1a5eb4f42921b865586ad41baef81ed11592db4650232ed0b22b80a2be47",
+  "doi": "10.1074/jbc.m312062200",
+  "errors": [],
+  "paper_key": "d0435f92c6dbbe638e44",
+  "pmcid": null,
+  "pmid": "14638678",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Phosphatidylinositol 3-kinase signaling regulates the expression of several genes involved in lipid and glucose homeostasis; deregulation of these genes may contribute to insulin resistance and progression toward type 2 diabetes. By employing RNA arbitrarily primed-PCR to search for novel phosphatidylinositol 3-kinase-regulated genes in response to insulin in isolated rat adipocytes, we identified fatty aldehyde dehydrogenase (FALDH), a key component of the detoxification pathway of aldehydes arising from lipid peroxidation events. Among these latter events are oxidative stresses associated with insulin resistance and diabetes. Upon insulin injection, FALDH mRNA expression increased in rat liver and white adipose tissue and was impaired in two models of insulin-resistant mice, db/db and high fat diet mice. FALDH mRNA levels were 4-fold decreased in streptozotocin-treated rats, suggesting that FALDH deregulation occurs both in hyperinsulinemic insulin-resistant state and hypoinsulinemic type 1 diabetes models. Moreover, insulin treatment increases FALDH activity in hepatocytes, and expression of FALDH was augmented during adipocyte differentiation. Considering the detoxifying role of FALDH, its deregulation in insulin-resistant and type 1 diabetic models may contribute to the lipid-derived oxidative stress. To assess the role of FALDH in the detoxification of oxidized lipid species, we evaluated the production of reactive oxygen species in normal versus FALDH-overexpressing adipocytes. Ectopic expression of FALDH significantly decreased reactive oxygen species production in cells treated by 4-hydroxynonenal, the major lipid peroxidation product, suggesting that FALDH protects against oxidative stress associated with lipid peroxidation. Taken together, our observations illustrate the importance of FALDH in insulin action and its deregulation in states associated with altered insulin signaling.",
+  "text_type": "abstract",
+  "title": "Fatty aldehyde dehydrogenase: potential role in oxidative stress protection and regulation of its gene expression by insulin."
+}

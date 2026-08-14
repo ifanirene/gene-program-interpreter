@@ -1,0 +1,228 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-081933ad9516de845c00",
+    "RL-0a849c76f65251620997",
+    "RL-0fdbb950b388fd1607bc",
+    "RL-1151ece55cc67a4a83be",
+    "RL-40d78e992150c1f1e610",
+    "RL-48196647472e2225acb4",
+    "RL-502a14189be4e1c2dff2",
+    "RL-53157633a89ca27ca997"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 19154,
+        "source_type": "full_text",
+        "start": 18954,
+        "text": "Genes that code for enzymes in the cholesterol synthesis pathway (Idi1, Fdps, Sqle, Cyp51, Tm7sf2, Nsdhl, Hsd7b17, and Dhcr7) were upregulated in the TXNIP C247S mouse livers compared with WT controls"
+      },
+      "function_supported_genes": [
+        "Tm7sf2"
+      ],
+      "rationale": "In HFD mouse liver, Tm7sf2 mRNA is upregulated together with the other cholesterol-synthesis pathway genes, consistent with pathway membership, but the paper's own new data concern expression regulation/insulin-signaling linkage rather than a direct enzymatic function test.",
+      "red_flags": [],
+      "review_id": "RL-081933ad9516de845c00",
+      "studied_genes": [
+        "Tm7sf2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 16068,
+        "source_type": "full_text",
+        "start": 15941,
+        "text": "The Cyp51+/− heterozygotes show a decreased expression of Cyp51 mRNA and protein compared to the Cyp51+/+ controls on each diet"
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Heterozygous Cyp51 knockout mouse liver shows dose-dependent reduction in Cyp51 with altered hepatic cholesterol/gene-expression phenotypes, directly supporting Cyp51's causal role in hepatic cholesterol biosynthesis in the target species/tissue.",
+      "red_flags": [],
+      "review_id": "RL-0a849c76f65251620997",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 30311,
+        "source_type": "full_text",
+        "start": 30074,
+        "text": "Compared to wild-type siblings, total cholesterol levels of lssnu60 homozygous mutants were 43% (s.d. 9.14, P=0.0011) of wild-type levels, whereas those of msmo1nu81 homozygous mutants were 22% (s.d. 10.59, P=0.0006) of wild-type levels."
+      },
+      "function_supported_genes": [
+        "Msmo1",
+        "Lss"
+      ],
+      "rationale": "Zebrafish msmo1 and lss loss-of-function mutants causally show severely reduced whole-body cholesterol, confirming both genes' roles in cholesterol biosynthesis, but the studied system (zebrafish skeletal/whole-larva biology) is a different species and cell type from hepatocyte/MASLD context, making 'partial' an overclaim versus true 'indirect' transferability.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0fdbb950b388fd1607bc",
+      "studied_genes": [
+        "Msmo1",
+        "Lss"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 2544,
+        "source_type": "full_text",
+        "start": 2430,
+        "text": "Mevalonate kinase (EC 2.7.1.36) (MVK) catalyses this conversion, using ATP as a phosphate donor and energy source."
+      },
+      "function_supported_genes": [
+        "Mvk"
+      ],
+      "rationale": "This review synthesizes established biochemistry describing MVK's enzymatic conversion of mevalonate to mevalonate-5-phosphate in the mevalonate pathway; it is secondary literature rather than primary hepatic data, matching the declared indirect context.",
+      "red_flags": [],
+      "review_id": "RL-1151ece55cc67a4a83be",
+      "studied_genes": [
+        "Mvk"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 51112,
+        "source_type": "full_text",
+        "start": 50858,
+        "text": "The phenotype of reduced cholesterol synthesis was able to be reversed in a dose-dependent manner by transiently expressing a CMV-ERG28-V5 construct in the KO cells (Fig. 5F), confirming the reduction in cholesterol synthesis is due to the loss of ERG28."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 knockout in human Huh7 hepatocyte-derived cells causally reduces cholesterol synthesis, rescued by re-expression; NSDHL is gene-specifically shown to physically interact with ERG28 but its own cholesterol-synthesis catalytic function is not independently causally tested in this paper.",
+      "red_flags": [],
+      "review_id": "RL-40d78e992150c1f1e610",
+      "studied_genes": [
+        "Erg28",
+        "Nsdhl"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10409,
+        "source_type": "full_text",
+        "start": 10274,
+        "text": "The qPCR results for Hmgcs1, Hmgcr, Mvd, Idi1, Sqle and Dhcr7 confirmed the genomic analyses, whereas those for Fdft1 did not (Fig. 1)."
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Mvd",
+        "Dhcr7"
+      ],
+      "rationale": "Rat pancreatic islet glucose-stimulation study shows gene-specific upregulation of these cholesterol biosynthesis genes by qPCR/microarray, an associative expression finding rather than causal enzymatic testing, in a non-hepatic tissue.",
+      "red_flags": [],
+      "review_id": "RL-48196647472e2225acb4",
+      "studied_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Mvd",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 32428,
+        "source_type": "full_text",
+        "start": 32287,
+        "text": "After successful knockdown of all transcripts (Fig. 5D), cholesterol levels were significantly decreased compared with the control (Fig. 5E)."
+      },
+      "function_supported_genes": [
+        "Msmo1",
+        "Nsdhl"
+      ],
+      "rationale": "siRNA knockdown of SC4MOL(Msmo1) and NSDHL in human Huh7 liver cells causally reduces total cell cholesterol; HSD17B7 is gene-specifically profiled for MARCHF6-mediated turnover and sterol responsiveness but not causally tested for cholesterol output here.",
+      "red_flags": [],
+      "review_id": "RL-502a14189be4e1c2dff2",
+      "studied_genes": [
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 847,
+        "source_type": "abstract",
+        "start": 766,
+        "text": "The stable transfectants of Hsd17b7 were able to grow independent of cholesterol."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "Overexpression of Hsd17b7 rescues cholesterol auxotrophy in a non-hepatic mouse myeloma cell line, directly demonstrating its causal enzymatic role in cholesterol biosynthesis, though the cell system is indirect relative to mouse hepatocyte/MASLD context.",
+      "red_flags": [],
+      "review_id": "RL-53157633a89ca27ca997",
+      "studied_genes": [
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 1.0754095,
+    "duration_api_ms": 343683,
+    "duration_ms": 341578,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 342.706
+  }
+}

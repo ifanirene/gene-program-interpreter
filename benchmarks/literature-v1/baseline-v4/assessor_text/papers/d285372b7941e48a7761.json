@@ -1,0 +1,14 @@
+{
+  "content_hash": "b1790220f1b10969e08536c63a4db88ba546567c7f3e6c2e0f4b80efe63ccddd",
+  "doi": "10.1016/j.clnu.2024.04.029",
+  "errors": [],
+  "paper_key": "d285372b7941e48a7761",
+  "pmcid": null,
+  "pmid": "38723301",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND & AIMS: The past few decades have witnessed a rapid growth in the prevalence of nonalcoholic fatty liver disease (NAFLD). While the ketogenic diet (KD) is considered for managing NAFLD, the safety and efficacy of the KD on NAFLD has been a controversial topic. Here, we aimed to investigate the effect of KD of different durations on metabolic endpoints in mice with NAFLD and explore the underlying mechanisms.\n\nMETHODS: NAFLD mice were fed with KD for 1, 2, 4 and 6 weeks, respectively. The blood biochemical indexes (blood lipids, AST, ALT and etc.) and liver fat were measured. The LC-MS/MS based proteomic analysis was performed on liver tissues. Metallothionein-2 (MT2) was knocked down with adeno-associated virus (AAV) or small interfering RNA (siRNA) in NAFLD mice and AML-12 cells, respectively. H&E, BODIPY and ROS staining were performed to examine lipid deposition and oxidative stress. Furthermore, MT2 protein levels, nucleus/cytoplasm distribution and DNA binding activity of peroxisome proliferators-activated receptors \u03b1 (PPAR\u03b1) were evaluated.\n\nRESULTS: KD feeding for 2 weeks showed the best improvement on NAFLD phenotype. Proteomic analysis revealed that MT2 was a key candidate for different metabolic endpoints of NAFLD affected by different durations of KD feeding. MT2 knockdown in NAFLD mice blocked the effects of 2 weeks of KD feeding on HFD-induced steatosis. In mouse primary hepatocytes and AML-12 cells, MT2 protein levels were induced by \u03b2-hydroxybutyric acid (\u03b2-OHB). MT2 Knockdown blunted the effects of \u03b2-OHB on alleviating PA-induced lipid deposition. Mechanistically, 2 weeks of KD or \u03b2-OHB treatment reduced oxidative stress and upregulated the protein levels of MT2 in nucleus, which subsequently increased its DNA binding activity and PPAR\u03b1 protein expression.\n\nCONCLUSIONS: Collectively, these findings indicated that KD feeding prevented NAFLD in a time dependent manner and MT2 is a potential target contributing to KD improvement on steatosis.",
+  "text_type": "abstract",
+  "title": "Ketogenic diet time-dependently prevents NAFLD through upregulating the expression of antioxidant protein metallothionein-2."
+}

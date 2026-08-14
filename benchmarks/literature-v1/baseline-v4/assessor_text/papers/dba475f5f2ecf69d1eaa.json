@@ -1,0 +1,14 @@
+{
+  "content_hash": "b2e9b04dbca96666d8560938da75742541b1de6985ad180fe16a512f22e64f74",
+  "doi": "10.1158/0008-5472.can-07-0986",
+  "errors": [],
+  "paper_key": "dba475f5f2ecf69d1eaa",
+  "pmcid": null,
+  "pmid": "18006851",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Angiogenesis plays a key role in promoting tumorigenesis and metastasis. The 16-kDa fragment of prolactin (16k PRL) is an NH(2)-terminal natural breakdown fragment of the intact 23-kDa prolactin and has been shown to have potent antiangiogenic and antitumor activities. The mechanism(s) involved in the action of 16k PRL in endothelial cells remains unclear. In this study, we showed that 16k PRL reduced rat aortic endothelial cell (RAEC) migration in a wound-healing assay and in a Matrigel tube formation assay, suggesting that 16k PRL inhibits endothelial cell migration, an important activity involved in angiogenesis and tumorigenesis. We further investigated how 16k PRL attenuates endothelial cell migration. We first showed that RAEC migration is mediated through the Rho GTPase Rac1, as Rac1 inhibition by the Rac1-specific inhibitor NSC27366 or Rac1 knockdown by small interfering RNA both blocked RAEC migration. We next showed that 16k PRL reduced the activation of Rac1 in a concentration-dependent manner. Furthermore, 16k PRL inhibition of Rac1 is mediated through the suppression of T lymphoma invasion and metastasis 1 (Tiam1) and its upstream activator Ras in a phosphoinositide-3-kinase-independent manner. 16k PRL also down-regulated the phosphorylation of the downstream effector of Rac1, p21-activating kinase 1 (Pak1), and inhibited its translocation to the leading edge of migrating cells. Thus, 16k PRL inhibits cell migration by blocking the Ras-Tiam1-Rac1-Pak1 signaling pathway in endothelial cells.",
+  "text_type": "abstract",
+  "title": "16-kDa prolactin inhibits endothelial cell migration by down-regulating the Ras-Tiam1-Rac1-Pak1 signaling pathway."
+}

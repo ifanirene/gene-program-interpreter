@@ -1,0 +1,60 @@
+# Brain-EC paid run — programs 8-11 (API-billed research), to exercise the new live dashboard.
+# Same inputs/settings as brain_ec_e2e.yaml; differs only in: programs, output_dir, research.auth=api.
+
+context:
+  organism: mouse
+  species_taxid: 10090
+  tissue: brain
+  cell_type: brain endothelial cell
+  conditions: [postnatal development]
+  context_terms:
+    - blood-brain barrier
+    - arteriovenous zonation
+    - tight junctions
+    - angiogenesis
+    - tip cells
+    - Notch signaling
+    - VEGF signaling
+    - mechanotransduction
+  assay: Perturb-seq
+  report_dataset_crumb: Mouse brain endothelial Perturb-seq
+
+inputs:
+  gene_loading: examples/brain_endothelial_demo/FB_moi15_seq2_loading_gene_k100_top300.csv
+  regulators: examples/brain_endothelial_demo/Discovery_FP_moi15_seq2_thresh10_k100_default.csv
+  celltype_enrichment: examples/brain_endothelial_demo/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv
+
+output_dir: runs/brain_ec_p8_11
+
+programs: [8, 9, 10, 11]
+
+settings:
+  n_top_genes: 300
+  top_loading: 15
+  top_unique: 8
+  top_enrichment: 7
+  genes_per_term: 10
+
+research:
+  enabled: true
+  # auth defaults to "subscription": research runs on the Claude.ai subscription with NO
+  # per-run charge. Do NOT set auth: api — that needlessly bills research to the API key.
+  concurrency: 3
+  model: claude-sonnet-4-6
+  max_turns: 30
+  max_budget_usd: 1.0     # per-program cap -> worst case 4 x $1.0 for research
+  per_program_timeout: 600
+
+annotation:
+  model: claude-sonnet-4-6
+  max_tokens: 8192
+  batch: true
+
+theme:
+  enabled: true
+  model: claude-sonnet-4-6
+  min_generic_program_count: 4
+
+presentation:
+  model: claude-haiku-4-5-20251001
+  deterministic_fallback: true

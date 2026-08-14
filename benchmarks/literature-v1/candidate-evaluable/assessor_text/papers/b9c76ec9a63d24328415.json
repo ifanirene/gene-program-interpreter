@@ -1,0 +1,16 @@
+{
+  "content_hash": "ae518727e7707165fd434db8d7d6722bd5cc618ffac326894efebe056343ae4a",
+  "doi": "10.1038/s41422-022-00650-w",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "b9c76ec9a63d24328415",
+  "pmcid": "PMC9253147",
+  "pmid": "35459936",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Mutant isocitrate dehydrogenase 1 (mIDH1) drives tumorigenesis via producing oncometabolite R-2-hydroxyglutarate (R-2-HG) across various tumor types. However, mIDH1 inhibitors appear only effective in hematological tumors. The therapeutic benefit in solid tumors remains elusive, likely due to the complex tumor microenvironment. In this study, we discover that R-2-HG produced by IDH1-mutant tumor cells is preferentially imported into vascular endothelial cells and remodels mitochondrial respiration to promote tumor angiogenesis, conferring a therapeutic vulnerability in IDH1-mutant solid tumors. Mechanistically, SLC1A1, a Na+-dependent glutamate transporter that is preferentially expressed in endothelial cells, facilitates the influx of R-2-HG from the tumor microenvironment into the endothelial cells as well as the intracellular trafficking of R-2-HG from cytoplasm to mitochondria. R-2-HG hijacks SLC1A1 to promote mitochondrial Na+/Ca2+ exchange, which activates the mitochondrial respiratory chain and fuels vascular endothelial cell migration in tumor angiogenesis. SLC1A1 deficiency in mice abolishes mIDH1-promoted tumor angiogenesis as well as the therapeutic benefit of mIDH1 inhibitor in solid tumors. Moreover, we report that HH2301, a newly discovered mIDH1 inhibitor, shows promising efficacy in treating IDH1-mutant cholangiocarcinoma in preclinical models. Together, we identify a new role of SLC1A1 as a gatekeeper of R-2-HG-mediated crosstalk between IDH1-mutant tumor cells and vascular endothelial cells, and demonstrate the therapeutic potential of mIDH1 inhibitors in treating IDH1-mutant solid tumors via disrupting R-2-HG-promoted tumor angiogenesis.",
+  "text_type": "abstract",
+  "title": "SLC1A1-mediated cellular and mitochondrial influx of R-2-hydroxyglutarate in vascular endothelial cells promotes tumor angiogenesis in IDH1-mutant solid tumors."
+}

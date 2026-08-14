@@ -1,0 +1,217 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0364eeef4f0d91a67655",
+    "RL-052bab66f63d10e2ab61",
+    "RL-082dea94c06908c689e1",
+    "RL-148096a874ea409f1b55",
+    "RL-3a33580a6464c5931f9d",
+    "RL-550926b5b162413b40aa",
+    "RL-5dd4b5247c95cbc27365",
+    "RL-5f3a18841e1138ffe838"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1330,
+        "source_type": "abstract",
+        "start": 1130,
+        "text": "Overexpression or knockdown of Htatip2 in hepatocytes affected fatty acid storage and oxidation, consistent with a novel role in mediating the differential effects of PKC isoforms on lipid metabolism."
+      },
+      "function_supported_genes": [
+        "Htatip2"
+      ],
+      "rationale": "Gene-specific overexpression/knockdown of Htatip2 in hepatocytes directly altered fatty acid storage and oxidation, matching the claimed regulatory function. Context is direct (mouse hepatocytes).",
+      "red_flags": [],
+      "review_id": "RL-0364eeef4f0d91a67655",
+      "studied_genes": [
+        "Htatip2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 410,
+        "source_type": "abstract",
+        "start": 351,
+        "text": "Akr1c6, 1c14, 1c20, and 1c22 are primarily present in liver"
+      },
+      "function_supported_genes": [
+        "Akr1c6"
+      ],
+      "rationale": "Akr1c6 is shown to be liver-enriched and inducible by CAR and Nrf2 activators, consistent with the claimed liver-specific, xenobiotic/Nrf2-regulated Phase II enzyme role. Only CAR and Nrf2 induction are directly shown for Akr1c6 in this text, not PXR.",
+      "red_flags": [],
+      "review_id": "RL-052bab66f63d10e2ab61",
+      "studied_genes": [
+        "Akr1c6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1182,
+        "source_type": "abstract",
+        "start": 1002,
+        "text": "siRNA-mediated down-regulation of MOSC2 and the mitochondrial form of cytochrome b(5) type B (CYB5B) significantly inhibited the reductase activity in the differentiated adipocytes"
+      },
+      "function_supported_genes": [
+        "Cyb5b"
+      ],
+      "rationale": "Gene-specific knockdown of Cyb5b impaired amidoxime/lipid-related reductase activity, but this functional demonstration was performed in differentiated 3T3-L1 adipocytes, not hepatocytes, so it supports a general reductase-system role rather than the hepatic lipid-droplet context. Liver membranes (rat) were used only for biochemical characterization, not perturbation.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-082dea94c06908c689e1",
+      "studied_genes": [
+        "Cyb5b"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3498,
+        "source_type": "full_text",
+        "start": 3340,
+        "text": "recombinant SULT2A8 preferentially catalyzes the sulfonation of 7α-OH bile acids including cholic acid (CA), chenodeoxycholic acid, and their conjugated forms"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "Structural and biochemical assays directly confirm SULT2A8 sulfonates 7α-OH bile acids, matching the citation-specific claim; PPARalpha-regulation clause is addressed by a separate cited paper and not required here.",
+      "red_flags": [],
+      "review_id": "RL-148096a874ea409f1b55",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "reversed",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 14568,
+        "source_type": "full_text",
+        "start": 14474,
+        "text": "neither exercise nor Cdo1LKO affected the levels of hepatic cysteine and taurine significantly"
+      },
+      "function_supported_genes": [],
+      "rationale": "This paper's actual function assigned to Cdo1 is a Camkk2-AMPK-FAO signaling axis for NAFLD protection, not the taurine-mediated bile-acid conjugation claim in this mechanism; moreover, the paper's own data show hepatocyte-specific Cdo1 knockout did not significantly change hepatic taurine levels, contradicting the premise that Cdo1 is rate-limiting for taurine production used in bile acid conjugation.",
+      "red_flags": [
+        "wrong_function",
+        "reversed_direction"
+      ],
+      "review_id": "RL-3a33580a6464c5931f9d",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "contradicts"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 30772,
+        "source_type": "full_text",
+        "start": 30650,
+        "text": "one of the key epoxygenases of arachidonic acid metabolism [62,63], Cyp2c50, was significantly reduced in Chrebp⍺-LKO mice"
+      },
+      "function_supported_genes": [
+        "Cyp2c50"
+      ],
+      "rationale": "Cyp2c50 is directly demonstrated as a key CYP450 arachidonic acid epoxygenase in mouse hepatocytes/liver, regulated by ChREBPa and linked to FAO/PPARalpha ligand production, matching the core Phase I epoxygenase function claimed; the specific CAR/PXR/Nrf2 regulator clause in the broader summary is not tested here but is not required for this citation.",
+      "red_flags": [],
+      "review_id": "RL-550926b5b162413b40aa",
+      "studied_genes": [
+        "Cyp2c50"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1540,
+        "source_type": "abstract",
+        "start": 1468,
+        "text": "SULT2A8 is required to maintain the bile acid and cholesterol metabolism"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "In vivo Sult2a8-haplodeficient mice show altered bile acid and cholesterol handling during fasting, directly supporting the gene's role in bile acid elimination and cholesterol homeostasis.",
+      "red_flags": [],
+      "review_id": "RL-5dd4b5247c95cbc27365",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1167,
+        "source_type": "abstract",
+        "start": 1031,
+        "text": "narrow sulfonating activities toward 7α-hydroxyl primary bile acids, including cholic acid, chenodeoxycholic acid, and α-muricholic acid"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "This founding characterization paper directly demonstrates PPARalpha-dependent expression of Sult2a8 (mL-STL) during fasting and its enzymatic sulfonation of 7alpha-OH bile acids, fully matching the claimed function.",
+      "red_flags": [],
+      "review_id": "RL-5f3a18841e1138ffe838",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.6410264,
+    "duration_api_ms": 246361,
+    "duration_ms": 243871,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 3,
+    "wall_seconds": 244.949
+  }
+}

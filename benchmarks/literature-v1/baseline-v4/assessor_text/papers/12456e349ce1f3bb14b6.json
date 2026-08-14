@@ -1,0 +1,14 @@
+{
+  "content_hash": "b4cfdb47eaaa8515058ba0a2fec3827d4ea89843463a19014e8dc7781ae82957",
+  "doi": "10.1016/j.metabol.2025.156266",
+  "errors": [],
+  "paper_key": "12456e349ce1f3bb14b6",
+  "pmcid": null,
+  "pmid": "40228656",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND AND AIMS: The molecular mechanisms underlying metabolic dysfunction-associated steatotic liver disease (MASLD) remain largely unclear; however, emerging evidence suggests that microRNAs (miRNAs) play a critical role in modulating transcriptional regulation of target genes involved in MASLD. This study aims to elucidate the role of miR-93 in lipid metabolism and MASLD progression.\n\nMETHODS: We comprehensively analyzed miRNA expression profiles in liver tissues from patients with MASLD and diet-induced obese mice. miR-93 knockout (KO) mice were fed a high-fat-high-fructose (HFHFr) diet to assess the impact of miR-93 deficiency on MASLD. Transcriptome analysis was performed to elucidate the molecular mechanisms and role of miR-93 in MASLD. Additionally, we employed a high-throughput screening system to identify drugs capable of modulating miR-93 expression.\n\nRESULTS: miR-93 was significantly upregulated in the livers of patients with MASLD and diet-induced obese mice. miR-93 KO mice exhibited reduced hepatic steatosis. Specifically, miR-93 deficiency upregulated genes involved in fatty acid oxidation and downregulated genes associated with cholesterol biosynthesis. Sirtuin 1 (SIRT1) was identified as a direct target of miR-93, and miR-93 KO enhanced SIRT1 expression and activated the LKB1-AMPK signaling pathway. Niacin treatment downregulated miR-93, ameliorating hepatic steatosis by enhancing SIRT1 activity.\n\nCONCLUSIONS: These findings implicate miR-93 as a novel therapeutic target for MASLD. The study demonstrates the therapeutic potential of niacin in modulating the miR-93/SIRT1 axis, providing a new potential treatment for MASLD, a disease with limited current treatment options.",
+  "text_type": "abstract",
+  "title": "Hepatic miR-93 promotes the pathogenesis of metabolic dysfunction-associated steatotic liver disease by suppressing SIRT1."
+}

@@ -1,0 +1,122 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-9fde2b6915b63651244f",
+    "RL-aa43395cb1c6b9bfed78",
+    "RL-ad3d7fb8300108d2a609",
+    "RL-c487a62e550988549c0e"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 717,
+        "source_type": "abstract",
+        "start": 542,
+        "text": "We found that bile acids strongly inhibited the cysteine dioxygenase type-1-mediated (CDO1-mediated) cysteine catabolic pathway via a farnesoid X receptor-dependent mechanism."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "Mouse liver and hepatocyte perturbation data directly support bile acid/FXR control of CDO1-mediated cysteine catabolism. The hepatic context is transferable, but the study concerns bile-acid manipulation and acute injury rather than aging or MASLD.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9fde2b6915b63651244f",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 167,
+        "source_type": "full_text",
+        "start": 0,
+        "text": "The 55 kDa membrane-bound enzyme fatty aldehyde dehydrogenase (EC 1.2.1.48) converts long-chain fatty aldehydes to the corresponding acid in an NAD-dependent reaction."
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "The paper directly assays Aldh3a2/FALDH-mediated conversion of long-chain aldehydes to acids using recombinant enzyme and liver microsomes. Its healthy assay context only partially matches aging or MASLD hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-aa43395cb1c6b9bfed78",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 498,
+        "source_type": "abstract",
+        "start": 384,
+        "text": "DHEA sulfotransferase (Sult2A1), which plays an important role in DHEA sulfation and detoxification of bile acids."
+      },
+      "function_supported_genes": [],
+      "rationale": "The study directly tests hepatic Sult2A1, but Sult2A1 is a paralog rather than a supplied gene. It provides family-level context without gene-specific evidence for the assigned supplied genes.",
+      "red_flags": [
+        "paralog_only"
+      ],
+      "review_id": "RL-ad3d7fb8300108d2a609",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 955,
+        "source_type": "abstract",
+        "start": 702,
+        "text": "The metabolite profiles in the affected individuals fit CA-VA deficiency, showing evidence of impaired provision of bicarbonate to the four enzymes that participate in key pathways in intermediary metabolism: carbamoylphosphate synthetase 1 (urea cycle)"
+      },
+      "function_supported_genes": [
+        "Car5a"
+      ],
+      "rationale": "Human CA5A loss-of-function supports bicarbonate provision to CPS1 for the urea cycle. The pediatric human deficiency setting is indirect for aging or MASLD mouse hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-c487a62e550988549c0e",
+      "studied_genes": [
+        "Car5a"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 77056,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 104770,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4148,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 85.343
+  }
+}

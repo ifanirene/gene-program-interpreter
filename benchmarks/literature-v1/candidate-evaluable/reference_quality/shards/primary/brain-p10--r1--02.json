@@ -1,0 +1,210 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-4a8f23e3d003c28cf3b6",
+    "RL-55bbb18c908c78ced746",
+    "RL-689f197748219170cfe5",
+    "RL-790a9c8ed4212eb9a4d8",
+    "RL-83a46fb3311eafce74e1",
+    "RL-9921c28d1a87e9f2d38f",
+    "RL-9934cbd6af57ae3c29e8",
+    "RL-9c41babf6664c0afdd85"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 281,
+        "source_type": "abstract",
+        "start": 228,
+        "text": "loss of Cep164 leads to early defects in ciliogenesis"
+      },
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "rationale": "Loss-of-function experiments show Cep164 recruits TTBK2 to basal bodies to trigger ciliogenesis, matching the assigned distal-appendage/ciliogenesis-trigger function. Cell system/tissue is not specified as brain endothelium, consistent with the declared indirect context.",
+      "red_flags": [],
+      "review_id": "RL-4a8f23e3d003c28cf3b6",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 44236,
+        "source_type": "full_text",
+        "start": 44159,
+        "text": "a requirement for CC2D2A in RAB8A localization in mouse embryonic fibroblasts"
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "The paper shows CC2D2A physically links to NINL-MICAL3-RAB8A and is required for RAB8A localization/vesicle trafficking at the transition zone, matching the assigned Rab8-dependent gating function. Work is in zebrafish photoreceptors and mouse fibroblasts, not mouse brain endothelium, consistent with indirect context.",
+      "red_flags": [],
+      "review_id": "RL-55bbb18c908c78ced746",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 875,
+        "source_type": "abstract",
+        "start": 725,
+        "text": "gain or loss of Norrin/Fz4 signaling results in a cell-autonomous gain or loss, respectively, of blood retina barrier and blood brain barrier function"
+      },
+      "function_supported_genes": [],
+      "rationale": "Genetic mouse models show Fz4 signaling is cell-autonomously required in endothelial cells for blood-brain-barrier function in the cerebellum, directly supporting the regulator's role in a brain endothelial Wnt program. Fzd4 is a perturbation regulator, not a supplied program gene, so gene arrays are empty.",
+      "red_flags": [],
+      "review_id": "RL-689f197748219170cfe5",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 344,
+        "source_type": "abstract",
+        "start": 239,
+        "text": "identified mutations in a gene encoding the centrosomal protein SDCCAG8 as causing NPHP type 10 in humans"
+      },
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "rationale": "A Sdccag8 knockout mouse recapitulates human NPHP/retinal-degeneration ciliopathy phenotypes, supporting Sdccag8 as a centrosomal ciliopathy gene; the paper's actual novel mechanism is DNA-damage-response signaling in kidney, with no global ciliary defect observed there. Context is kidney/retina in mouse, a different cell type/tissue than brain endothelium, so 'partial' overstates transferability versus 'indirect'.",
+      "red_flags": [],
+      "review_id": "RL-790a9c8ed4212eb9a4d8",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2042,
+        "source_type": "full_text",
+        "start": 1978,
+        "text": "hydrocephalus and situs inversus were the most apparent features"
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "CRISPR knockout of Nme7 in rats phenocopies primary ciliary dyskinesia (hydrocephalus, situs inversus), directly supporting Nme7 as a ciliopathy gene as claimed. Study system is rat, not mouse brain endothelium, consistent with indirect context.",
+      "red_flags": [],
+      "review_id": "RL-83a46fb3311eafce74e1",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 19831,
+        "source_type": "full_text",
+        "start": 19764,
+        "text": "NME7 KO impedes the entry of Smo into the cilium upon SAG treatment"
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "NME7 knockout in RPE1 cells reduces ciliary microtubule stability and impairs SAG-induced Smo entry into cilia, directly matching the claim that NME7 maintains Smo ciliary localization and Hedgehog signaling. Study system is human RPE1 cells, not mouse brain endothelium, consistent with indirect context.",
+      "red_flags": [],
+      "review_id": "RL-9921c28d1a87e9f2d38f",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2565,
+        "source_type": "full_text",
+        "start": 2459,
+        "text": "This novel regulatory module is formed by specific protein-protein interactions among Intu, Fuz, and Wdpcp"
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "Proteomic and knockdown experiments in Xenopus/mouse show the CPLANE module including Wdpcp is required for basal-body recruitment and assembly of IFT-A machinery, matching the assigned function. Work spans Xenopus, mouse and human patient genetics, not mouse brain endothelium, consistent with indirect context.",
+      "red_flags": [],
+      "review_id": "RL-9934cbd6af57ae3c29e8",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1979,
+        "source_type": "full_text",
+        "start": 1835,
+        "text": "BBSome, a stable complex of seven core BBS proteins (BBS1, BBS2, BBS4, BBS5, BBS7, BBS8, BBS9) is implicated in cilia trafficking and biogenesis"
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "Zebrafish/mouse knockdown experiments causally show Bbs9 is required for BBSome-dependent ciliogenesis and cilia trafficking generally, but the paper does not directly test BBSome-mediated Smo/GPR161 GPCR export or Hedgehog signal transduction as specified in this mechanism, so it supports only the broader BBSome-cilia link. Context is zebrafish and mouse IMCD3 cells, not mouse brain endothelium, consistent with indirect context.",
+      "red_flags": [],
+      "review_id": "RL-9c41babf6664c0afdd85",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 1.2972077999999998,
+    "duration_api_ms": 370417,
+    "duration_ms": 368305,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 3,
+    "wall_seconds": 369.761
+  }
+}

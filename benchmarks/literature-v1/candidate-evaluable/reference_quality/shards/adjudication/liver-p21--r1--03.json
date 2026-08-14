@@ -1,0 +1,123 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-7fa2530b6e396a5d70e6",
+    "RL-7fd4234b22fb8bfc045b",
+    "RL-803bb5541c150e4bba5f",
+    "RL-95e57925e0ba07dc2306"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 7901,
+        "source_type": "full_text",
+        "start": 7753,
+        "text": "DHCR7 is an enzyme that acts in the final step of the cholesterol biosynthesis pathway and converts 7-DHC possessing conjugated diene to cholesterol"
+      },
+      "function_supported_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "rationale": "DHCR7 is gene-specifically studied by CRISPR knockout, pharmacologic inhibition, and mouse primary-hepatocyte/in vivo liver ablation, directly confirming its terminal 7-DHC-to-cholesterol role; SC5D knockout reducing 7-DHC accumulation confirms its desaturase function. TM7SF2 was ablated (studied) but its C14-reductase function is only stated as background, so it is not function-supported; Hmgcs1/Fdps/Cyp51 appear only as list-mention upregulation and do not count as studied.",
+      "red_flags": [],
+      "review_id": "RL-7fa2530b6e396a5d70e6",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d",
+        "Tm7sf2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1532,
+        "source_type": "abstract",
+        "start": 1402,
+        "text": "our results indicated that low protein levels and activity of HSD17B7 are responsible for the reduced cholesterol content in SHRSP"
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "HSD17B7 mRNA/protein/activity are gene-specifically measured in rat liver and associated with reduced cholesterol synthesis, supporting its assigned function; CYP51 and SC4MOL(Msmo1) levels were measured but showed no difference, so they are studied yet not function-supported. This is a cross-species observational strain comparison (rat), so the declared 'direct' context is overclaimed relative to indirect.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-7fd4234b22fb8bfc045b",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 987,
+        "source_type": "abstract",
+        "start": 867,
+        "text": "coexpression of MTP and apoB in AC29 cells stably transfected with ACAT1 and ACAT2 increases cholesteryl ester synthesis"
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "Coexpression/reconstitution and MTP conditional ablation causally show MTP enhances ACAT2-mediated cholesteryl esterification by relieving product inhibition, supporting mechanism 3's MTTP-ACAT2 coupling. The ACAT2-specific mechanistic work is in heterologous AC29 cells (not hepatocytes) and aging/MASLD is not studied, so the declared 'direct' context is overclaimed relative to partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-803bb5541c150e4bba5f",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 769,
+        "source_type": "abstract",
+        "start": 686,
+        "text": "Idol knockdown in hepatocytes increases LDLR protein levels and promotes LDL uptake"
+      },
+      "function_supported_genes": [],
+      "rationale": "LDLR is a P21 regulator (not a supplied gene), and LXR/Idol knockdown/adenoviral experiments in mouse hepatocytes and liver in vivo causally establish LDLR-dependent cholesterol uptake, supporting mechanism 2's regulator-level homeostasis claim. The mouse hepatocyte/liver setting is the target context, so 'direct' is accurate and no supplied genes are gene-specifically studied.",
+      "red_flags": [],
+      "review_id": "RL-95e57925e0ba07dc2306",
+      "studied_genes": [],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5549045,
+    "duration_api_ms": 159605,
+    "duration_ms": 157913,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 159.017
+  }
+}

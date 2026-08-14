@@ -1,0 +1,16 @@
+{
+  "content_hash": "b09aa070660a9ebbf4516793ac1433d96ed87ae89cf28e53ccc7f605d753f160",
+  "doi": "10.1152/ajpendo.00151.2011",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "86ffbf2aa09164d5f1fe",
+  "pmcid": "PMC3191547",
+  "pmid": "21693692",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cysteine homeostasis is dependent on the regulation of cysteine dioxygenase (CDO) in response to changes in sulfur amino acid intake. CDO oxidizes cysteine to cysteinesulfinate, which is further metabolized to either taurine or to pyruvate plus sulfate. To gain insight into the physiological function of CDO and the consequence of a loss of CDO activity, mice carrying a null CDO allele (CDO(+/-) mice) were crossed to generate CDO(-/-), CDO(+/-), and CDO(+/+) mice. CDO(-/-) mice exhibited postnatal mortality, growth deficit, and connective tissue pathology. CDO(-/-) mice had extremely low taurine levels and somewhat elevated cysteine levels, consistent with the lack of flux through CDO-dependent catabolic pathways. However, plasma sulfate levels were slightly higher in CDO(-/-) mice than in CDO(+/-) or CDO(+/+) mice, and tissue levels of acid-labile sulfide were elevated, indicating an increase in cysteine catabolism by cysteine desulfhydration pathways. Null mice had lower hepatic cytochrome c oxidase levels, suggesting impaired electron transport capacity. Supplementation of mice with taurine improved survival of male pups but otherwise had little effect on the phenotype of the CDO(-/-) mice. H(2)S has been identified as an important gaseous signaling molecule as well as a toxicant, and pathology may be due to dysregulation of H(2)S production. Control of cysteine levels by regulation of CDO may be necessary to maintain low H(2)S/sulfane sulfur levels and facilitate the use of H(2)S as a signaling molecule.",
+  "text_type": "abstract",
+  "title": "Knockout of the murine cysteine dioxygenase gene results in severe impairment in ability to synthesize taurine and an increased catabolism of cysteine to hydrogen sulfide."
+}

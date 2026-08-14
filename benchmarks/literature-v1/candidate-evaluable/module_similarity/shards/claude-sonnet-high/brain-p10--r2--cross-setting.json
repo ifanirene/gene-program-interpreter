@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "brain-p10--r2--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.92
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.25
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.0
+      }
+    ],
+    "moduleSemanticSimilarity": 0.39,
+    "overall_rationale": "Both sets share a near-identical core ciliary biogenesis module (L1/R1), but the right set's second module pivots to mitochondrial metabolism while the left set's second and third modules focus on endothelial mechanosensing and Wnt/transcriptional regulators, and the right set has no third module at all, so only one strong cross-module match exists.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the same ciliary biogenesis/transition-zone/IFT/BBSome machinery with nearly identical gene sets, differing mainly by R1 adding ciliopathy-syndrome disease framing.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.92
+      },
+      {
+        "left_module": 1,
+        "rationale": "L1 concerns ciliary structural assembly while R2 concerns mitochondrial BCAA/cristae metabolism, an unrelated mechanism despite one shared gene (Wdpcp).",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 1,
+        "rationale": "Right slot is a missing module so no comparison is possible.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both place cilia genes in brain endothelial/vascular development, but L2's core output is flow-mechanosensing and BBB genesis whereas R1's core output is structural ciliogenesis and ciliopathy pathology.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both invoke brain endothelial/BBB physiology, but L2's mechanism is ciliary mechanosensing while R2's is mitochondrial metabolic support, sharing only tissue context.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 2,
+        "rationale": "Right slot is a missing module so no comparison is possible.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 3,
+        "rationale": "R1's brief mention of endothelial cilia and developmental vascular patterning weakly echoes L3's vascular-development theme, but the core mechanisms (Wnt/Norrin receptor and transcriptional regulation vs. ciliary structural genes) are unrelated.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's Wnt/FZD4/GATA2/ENG transcriptional-regulatory axis has no mechanistic connection to R2's mitochondrial metabolic enzyme cluster.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 3,
+        "rationale": "Right slot is a missing module so no comparison is possible.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.10547400000000001,
+    "duration_api_ms": 28468,
+    "duration_ms": 27033,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 28.283
+  }
+}

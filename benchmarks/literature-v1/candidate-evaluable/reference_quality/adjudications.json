@@ -1,0 +1,2443 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 963,
+        "source_type": "abstract",
+        "start": 893,
+        "text": "hydrocephalus and excessive nasal exudates were seen in Nme7(-/-) mice"
+      },
+      "function_supported_genes": [],
+      "rationale": "The Nme7-/- KO causally reproduces the situs inversus/hydrocephalus motile-cilia clause stated in the summary, so the selection-specific claim is supported. However, mechanism 2's assigned function is Smo/Hedgehog ciliary output, which the motile-cilia phenotype does not establish, so Nme7 is not function-supported here.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-0e92bfb5cf811a272d0a",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 381,
+        "source_type": "full_text",
+        "start": 197,
+        "text": "The antibodies against CMG-1 allowed us to detect primary cilia in cultured human umbilical vein endothelial cells (HUVEC) and find conditions eliciting the disassembly of these cilia."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper directly demonstrates the selection-specific context claim that endothelial cells bear primary cilia with IFT machinery, localizing the IFT74 ortholog CMG-1 to HUVEC cilia. It is observational localization and never tests loss of function, so the assigned essential-assembly role is not function-supported; HUVEC is a transferable but distinct vascular bed matching the declared partial label.",
+      "red_flags": [],
+      "review_id": "RL-30c576a064cee4c29b51",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1227,
+        "source_type": "abstract",
+        "start": 1089,
+        "text": "Our study demonstrates that IFT74 is essential for mouse sperm formation, probably through assembly of the core axoneme and fibrous sheath"
+      },
+      "function_supported_genes": [
+        "Ift74"
+      ],
+      "rationale": "Conditional Ift74 KO causally disrupts axoneme assembly with unassembled microtubules and reduced IFT proteins, directly supporting the essential IFT-B assembly function assigned in the mechanism. The sperm-flagella context is indirect relative to brain endothelial primary cilia, but context does not downgrade the functional support, so this resolves to supports rather than partial.",
+      "red_flags": [],
+      "review_id": "RL-338245f2c6d2246dfb13",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 921,
+        "source_type": "abstract",
+        "start": 798,
+        "text": "These findings indicate that one of the major functions of Cep164 in ciliogenesis is to recruit active TTBK2 to centrioles."
+      },
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "rationale": "Loss-of-function, interaction, and rescue experiments causally establish Cep164 recruiting TTBK2 to basal bodies to trigger ciliogenesis, matching the assigned distal-appendage function. The abstract names only 'Cep164-depleted cells' without organism or cell type, so context cannot be assessed and the declared indirect label cannot be verified.",
+      "red_flags": [],
+      "review_id": "RL-4a8f23e3d003c28cf3b6",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 875,
+        "source_type": "abstract",
+        "start": 725,
+        "text": "gain or loss of Norrin/Fz4 signaling results in a cell-autonomous gain or loss, respectively, of blood retina barrier and blood brain barrier function"
+      },
+      "function_supported_genes": [],
+      "rationale": "Genetic gain/loss experiments causally support regulator Fzd4's requirement in CNS endothelial barrier function, but Fzd4 is a perturbation regulator so supplied-gene arrays stay empty. Evidence is adult cerebellar BBB maintenance plus retinal development, so the postnatal brain-EC target is only partially matched, making the declared direct context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-689f197748219170cfe5",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 601,
+        "source_type": "abstract",
+        "start": 227,
+        "text": "We recently identified mutations in a gene encoding the centrosomal protein SDCCAG8 as causing NPHP type 10 in humans. To study the role of Sdccag8 in disease pathogenesis, we generated a Sdccag8 gene-trap mouse line. Homozygous Sdccag8(gt/gt) mice lacked the wild-type Sdccag8 transcript and protein, and recapitulated the human phenotypes of NPHP and retinal degeneration."
+      },
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "rationale": "The Sdccag8 gene-trap mouse recapitulates NPHP and retinal degeneration, fully supporting the citation-specific claim that Sdccag8 is a centrosomal ciliopathy gene whose loss causes nephronophthisis-related disease. The kidney/retina setting is indirect to brain endothelium, so the declared partial context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-790a9c8ed4212eb9a4d8",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 5047,
+        "source_type": "full_text",
+        "start": 4891,
+        "text": "Micro-CT scan performed at postnatal day 1 (P1) revealed random left/right symmetry dysregulation with situs inversus totalis present in most SDNme7−/− rats"
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "The rat CRISPR knockout causally phenocopies primary ciliary dyskinesia (situs inversus, hydrocephalus), directly supporting the explicit mechanism clause that Nme7 loss produces PCD, which is the selection reason. The untested Smo/Hedgehog readout is a non-entailed clause of the broad summary, not a wrong function; rat context is correctly indirect.",
+      "red_flags": [],
+      "review_id": "RL-83a46fb3311eafce74e1",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1979,
+        "source_type": "full_text",
+        "start": 1835,
+        "text": "BBSome, a stable complex of seven core BBS proteins (BBS1, BBS2, BBS4, BBS5, BBS7, BBS8, BBS9) is implicated in cilia trafficking and biogenesis"
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "Zebrafish and mouse IMCD3 knockdown causally establish Bbs9 as a required BBSome-core subunit for ciliary trafficking and biogenesis, the core of the assigned BBSome-trafficking mechanism, so Bbs9 is function-supported at a narrower level. Support is only partial because the specific Smo/GPR161 GPCR export and Hedgehog readout are not directly tested; the zebrafish/kidney-cell systems are correctly indirect.",
+      "red_flags": [],
+      "review_id": "RL-9c41babf6664c0afdd85",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 8193,
+        "source_type": "full_text",
+        "start": 8033,
+        "text": "Analysis of mouse embryonic fibroblasts (MEFs) derived from WdpcpCys40 mutant embryos, referred to as WdpcpCys40 mutant MEFs, confirmed a defect in ciliogenesis"
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "Wdpcp knockout/mutant MEFs causally show a ciliogenesis defect, with Wdpcp localizing to and recruiting transition-zone proteins, directly supporting the selection-reason claim; the untested IFT-A sub-clause does not lower this below supports. Mouse embryo/MEF context is indirect to postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-cc6e56034be9f7e2fa89",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3117,
+        "source_type": "full_text",
+        "start": 3025,
+        "text": "We show that NME7 and its kinase activity are required for efficient microtubule nucleation."
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "RNAi and biochemical experiments causally establish NME7 as a γTuRC component required for microtubule nucleation, but the assigned primary-cilium-assembly role appears only as cited background, making this a narrower molecular form of the claim. Human centrosomal/mitotic system is indirect to brain endothelial cilia.",
+      "red_flags": [],
+      "review_id": "RL-d542d0316e6592db0cac",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 8300,
+        "source_type": "full_text",
+        "start": 8243,
+        "text": "BBS1, BBS2, BBS7, and BBS9 constitute the core subcomplex"
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "BBS9 is investigated gene-specifically only as a core-subcomplex interactor and localization marker, while the causal SMO/GPR161 trafficking experiments perturb BBS1, so Bbs9's trafficking role is corroborated associatively rather than directly. Human RPE1 system is indirect to brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-e0cde018c4ab700810f1",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 15977,
+        "source_type": "full_text",
+        "start": 15885,
+        "text": "WDPCP silencing or inhibition of the MAPK/ERK pathway could reduce mitochondrial biogenesis."
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "siRNA knockdown causally shows WDPCP loss reduces mitochondrial biogenesis, mtDNA, membrane potential and ATP, but WDPCP is a ciliary PCP effector regulating mitochondria via MAPK/ERK rather than an intrinsic mitochondrial metabolic enzyme, so this is a narrower/partial match to Mechanism 2. Human nasal epithelium is indirect relative to mouse brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-5c1ad05f4b58cd61e436",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 812,
+        "source_type": "abstract",
+        "start": 683,
+        "text": "TBC1D32 is involved in the development and function of cilia and is expressed in the developing hypothalamus and pituitary gland."
+      },
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "rationale": "This case series/review reports new TBC1D32 probands and states a ciliary developmental role, providing genetic-association and synthesis-level rather than gene-specific mechanistic evidence, so it partially supports the ciliopathy claim. Developing human hypothalamus/pituitary is indirect, not the closely transferable 'partial' context declared.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a9e2ecbeee798dc7b6b0",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 532,
+        "source_type": "abstract",
+        "start": 217,
+        "text": "We have cloned, expressed in Escherichia coli, and purified the recombinant human mitochondrial MetAP isoform (MetAP1D). The full-length enzyme and a truncated form lacking the mitochondrial targeting sequence (residues 1-55) have been characterized as metal-requiring proteases, with Co2+ being the best activator."
+      },
+      "function_supported_genes": [
+        "Metap1d"
+      ],
+      "rationale": "Direct biochemical characterization establishes MetAP1D as the mitochondrial methionine aminopeptidase, a metal-dependent protease, matching the cited enzymatic function. The recombinant in-vitro system is indirect to mouse brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-bf6376e48bfe2af991ef",
+      "studied_genes": [
+        "Metap1d"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1768,
+        "source_type": "abstract",
+        "start": 1627,
+        "text": "Thus, SDCCAG8 mutations are sufficient to cause BBS in 1-2% of our combined cohorts, and define this gene as the sixteenth BBS locus (BBS16)."
+      },
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "rationale": "Human genetic and phenotypic analysis establishes SDCCAG8 as a bona fide BBS/nephronophthisis ciliopathy gene, directly matching the selection rationale, though it is patient-mutation association rather than a direct transition-zone functional assay. Human patient cohorts are indirect relative to mouse brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-c30b0610814d501b2881",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1467,
+        "source_type": "abstract",
+        "start": 1258,
+        "text": "Knockdown of cep290 function in sentinel fish results in a synergistic pronephric cyst phenotype, revealing a genetic interaction between CC2D2A and CEP290 and implicating CC2D2A in cilium/basal body function."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "Human loss-of-function mutations plus zebrafish knockdown and CEP290 genetic interaction causally implicate CC2D2A in ciliary/basal-body function, supporting its ciliopathy-gene role for cilium assembly. Evidence from human patients and zebrafish kidney is indirect to mouse brain endothelial cilia, so the declared partial context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-ddf8878d8e24dac2310a",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 4084,
+        "source_type": "full_text",
+        "start": 4009,
+        "text": "the expression of Angpt2 is upregulated in EC-specific Prdm16 knockout mice"
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper substantively measures Angpt2 (RNA-seq/qPCR/western) in postnatal mouse brain ECs and shows it is upregulated when the arterial-identity factor Prdm16 is lost, an associative readout on the correct fate axis. It does not demonstrate the assigned tip-cell/sprouting-driver or Tek-antagonism function, which is only background citation, so Angpt2 is not function-supported here.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-13dc533bca062d93b4eb",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 854,
+        "source_type": "abstract",
+        "start": 708,
+        "text": "Moreover, OSS also increased expression of Kir2.1 in EPCs. The down-regulation of Kir2.1 reduced OSS-induced EPC mesenchymal transdifferentiation."
+      },
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "rationale": "Kir2.1/Kcnj2 is shown to be shear-stress-responsive and causally required for the shear-induced cellular response via knockdown and overexpression, directly supporting the smallest selected claim of a shear-sensitive mechanosensing channel. The endothelial-progenitor/carotid-injury system is indirect to postnatal brain endothelium, matching the declared context.",
+      "red_flags": [],
+      "review_id": "RL-13ddf8b81d82d21d35cf",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1116,
+        "source_type": "abstract",
+        "start": 1019,
+        "text": "Overall, our findings reveal a key role for PC ALK5 in regulating brain endothelial morphogenesis"
+      },
+      "function_supported_genes": [],
+      "rationale": "Pericyte-specific Alk5/Tgfbr1 deletion causally establishes the regulator's role in brain endothelial morphogenesis via pericyte-EC (TIMP3) crosstalk, matching the selection reason; Tgfbr1 is a perturbation regulator so supplied-gene arrays stay empty. The embryonic, pericyte-localized setting is transferable but not the postnatal EC-autonomous context, so the declared 'direct' overclaims.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-4cd21b97b77a31ff5a05",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 774,
+        "source_type": "abstract",
+        "start": 574,
+        "text": "Inhibition of Tie2, using a kinase-deficient Tie2 construct, decreases growth of malignant human astrocytoma subcutaneous and intracranial xenografts. Tie2 inactivation disrupted the tumor vascularity"
+      },
+      "function_supported_genes": [],
+      "rationale": "Tek/Tie2 is causally perturbed and supports its angiogenic role, but Tek is a perturbation regulator and the supplied gene Angpt2 appears only as a background modulator statement, so no supplied gene is credited. The adult human astrocytoma tumor-angiogenesis xenograft system is a different disease setting rather than postnatal developmental brain endothelium, so the declared 'partial' overclaims.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-51fded379c64326f0e27",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 18153,
+        "source_type": "full_text",
+        "start": 17993,
+        "text": "Cdc42EP3 is required for most of the hallmarks of CAFs, notably extracellular matrix remodelling and promotion of angiogenesis, cancer cell growth and invasion."
+      },
+      "function_supported_genes": [],
+      "rationale": "This review investigates Cdc42EP3 gene-specifically but as a cancer-associated fibroblast cytoskeletal adaptor that promotes angiogenesis stromally, whereas the mechanism assigns Cdc42ep3 endothelial tip-cell filopodia formation, a function this review attributes to Cdc42EP4/Cdc42EP1. Support is therefore a weaker, related form and, being a review, secondary rather than direct endothelial evidence.",
+      "red_flags": [
+        "wrong_function",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-920e5a6b1b1a04c491c2",
+      "studied_genes": [
+        "Cdc42ep3"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1546,
+        "source_type": "abstract",
+        "start": 1333,
+        "text": "Expression of EAAT-1 (Slc1a3), -2 (Slc1a2), and -3 (Slc1a1) mRNA in the endothelial cells was confirmed by conventional PCR and localization of EAAT-1 and -3 in endothelial cells was shown with immunofluorescence."
+      },
+      "function_supported_genes": [
+        "Slc1a1"
+      ],
+      "rationale": "The paper confirms Slc1a1/EAAT-3 mRNA expression and protein localization in brain endothelial cells and demonstrates polarized brain-to-blood glutamate transport, matching the cited function and direction. The declared direct context overclaims, since this is an in vitro bovine-endothelial/rat-astrocyte coculture rather than the target mouse postnatal brain endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-affec80b10774f33e847",
+      "studied_genes": [
+        "Slc1a1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 817,
+        "source_type": "abstract",
+        "start": 728,
+        "text": "Tgfβ pathway components, including Tgfβ2, Tgfβr2, Alk5, and integrins αVβ8, were reduced."
+      },
+      "function_supported_genes": [],
+      "rationale": "Foxf2 loss reduces Tgfbr2/Alk5 pathway components alongside BBB breakdown, giving pathway-level, directionally consistent support that TGF-β signaling promotes BBB integrity, but the receptors are regulators (not supplied genes) measured in pericytes rather than the endothelial cells the mechanism specifies. The declared direct context overclaims relative to this pericyte-based evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b1d09a63dcdf6abee6e1",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 35843,
+        "source_type": "full_text",
+        "start": 35614,
+        "text": "With our in vitro data we could demonstrate that SCN3B, DSP and HOPX are responsive to shear stress and/or hypoxia in intracranial ECs, besides being differently regulated in the intracranial ECs compared to the extracranial ECs."
+      },
+      "function_supported_genes": [
+        "Hopx"
+      ],
+      "rationale": "HOPX is studied gene-specifically and confirmed to be differentially regulated between intracranial and extracranial arterial ECs and hypoxia-responsive, supporting a weaker specialization claim, but the provided text does not state the direction of the intracranial-vs-extracranial difference that the mechanism's enrichment claim requires. Adult human large-artery ECs only partially match postnatal mouse brain endothelium, so the declared direct context overclaims.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-dc23d8b920afec94f0a5",
+      "studied_genes": [
+        "Hopx"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 23856,
+        "source_type": "full_text",
+        "start": 23678,
+        "text": "our observations establish that NRP1 enables CDC42 activation and CDC42-dependent actin dynamics and filopodia extension in ECM-stimulated ECs, independently of VEGF-A signaling."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper causally shows Nrp1 (a regulator, not a supplied gene) enables CDC42 activation driving tip-cell filopodia and sprouting, supporting only a narrower form of the cited arm; the supplied gene Cdc42ep3 (a distinct CDC42 effector) is never investigated. Evidence is embryonic hindbrain plus retina/zebrafish/human ECs, a closely related developmental setting for postnatal brain endothelium, so the declared partial context is accurate rather than direct.",
+      "red_flags": [
+        "wrong_gene"
+      ],
+      "review_id": "RL-e083affdd600ee732138",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 967,
+        "text": "activates the mitochondrial respiratory chain and fuels vascular endothelial cell migration in tumor angiogenesis"
+      },
+      "function_supported_genes": [
+        "Slc1a1"
+      ],
+      "rationale": "The paper causally shows SLC1A1 mediates endothelial R-2-HG influx that activates mitochondrial respiration and fuels EC migration/angiogenesis, with mouse knockout confirming the direction of the cited claim. Tumor vascular endothelium in mouse is the same cell type in another tissue, so declared partial is accurate rather than overclaimed.",
+      "red_flags": [],
+      "review_id": "RL-0a7beb25f6d4662bc1f7",
+      "studied_genes": [
+        "Slc1a1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3229,
+        "source_type": "full_text",
+        "start": 3066,
+        "text": "Cxcr4a and Cxcl12b are important for inducing the phase transition to the directional phase, thereby promoting directional migration toward the anastomotic target."
+      },
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "rationale": "cxcr4a mutant live-imaging shows Cxcr4a is required for the tip-cell transition to directional migration during cerebral capillary network formation, matching the tip-cell guidance claim. Brain/endothelial/sprouting context all match with only a species difference and accepted ortholog, so partial is a closely transferable and accurate label.",
+      "red_flags": [],
+      "review_id": "RL-54d161cbee9c42984f91",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 735,
+        "source_type": "abstract",
+        "start": 457,
+        "text": "Organoid morphogenesis models revealed abnormal cessation of proliferation, abnormalities in expression of tip and stalk genes, and a failure to properly form elongating tubes. These defects were influenced by both hyperactive PI-3' kinase signaling and altered TGF-β signaling."
+      },
+      "function_supported_genes": [],
+      "rationale": "No supplied gene (Tnfrsf11b/Slc1a1) is studied, but the reported link between altered TGF-β signaling and brain endothelial tip/stalk programs partially supports the TGF-β regulator context, though direction is unresolved. The pathological HRAS malformation model is a related condition, not normal postnatal development, so declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a3e7477dd40323d6a6a8",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "reversed",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1754,
+        "source_type": "abstract",
+        "start": 1694,
+        "text": "we uncover a reinforcing role for angiopoietin 2 at the BBB."
+      },
+      "function_supported_genes": [],
+      "rationale": "Reverse genetics reveals a vessel-reinforcing (stabilizing) role for ANGPT2, explicitly paradoxical to its TEK-antagonist role, which reverses the mechanism's assigned destabilizing/pro-sprouting Angpt2 function. Context is adult pathological pericyte-deficiency rather than normal postnatal development, so declared direct is overclaimed.",
+      "red_flags": [
+        "reversed_direction",
+        "context_overclaim"
+      ],
+      "review_id": "RL-fe80504bafd42b5f9584",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "contradicts"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1184,
+        "source_type": "abstract",
+        "start": 1080,
+        "text": "The results of our study provide unequivocal evidence for a role of HSD17B7 in cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "The abstract shows HSD17B7's zymosterone-to-zymosterol conversion in postsqualene cholesterol biosynthesis proven in vitro, directly supporting the enzymatic function. The unspecified in vitro/promoter system is indirect to mouse hepatocyte aging/MASLD, so the declared partial context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0177374bf6967e556349",
+      "studied_genes": [
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4869,
+        "source_type": "full_text",
+        "start": 4728,
+        "text": "Moreover, we found that ERG28 KO cells showed impaired SREBP-2 processing, resulting in a downregulation of many cholesterol synthesis genes."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 KO in Huh7 liver cells is an SREBP-2 target whose loss impairs SREBP-2 processing, directly supporting the mechanism-2 claim. NSDHL/MSMO1 appear only as ERG28 binding partners and HSD17B7 only as a homolog/inhibitor tool, so only Erg28 is substantively investigated; the human liver-derived cell line matches the declared partial context.",
+      "red_flags": [],
+      "review_id": "RL-05c0907255a005142391",
+      "studied_genes": [
+        "Erg28"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10370,
+        "source_type": "full_text",
+        "start": 10201,
+        "text": "mice fed a western diet (high fat, high cholesterol; WD) exhibited a significant reduction in hepatic Rdh11 mRNA expression compared to mice fed a chow diet for 16 weeks"
+      },
+      "function_supported_genes": [
+        "Rdh11"
+      ],
+      "rationale": "Hepatic Rdh11 is reduced by a high-fat/high-cholesterol diet, induced by statins, and co-regulated like LDLR/HMGCR, directly matching the SREBP2-coregulation claim; the other genes are only co-correlation reference nodes. Evidence is expression response rather than direct SREBP2 perturbation (observational), and aging/established MASLD are not modeled, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-15e8809241c8acf542c8",
+      "studied_genes": [
+        "Rdh11"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10399,
+        "source_type": "full_text",
+        "start": 10274,
+        "text": "The qPCR results for Hmgcs1, Hmgcr, Mvd, Idi1, Sqle and Dhcr7 confirmed the genomic analyses, whereas those for Fdft1 did not"
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Mvd",
+        "Dhcr7"
+      ],
+      "rationale": "Glucose-induced coordinated mRNA upregulation confirms Hmgcs1, Idi1, Mvd, and Dhcr7 as cholesterol-biosynthesis genes (Fdft1 not confirmed; Mvk/Pmvk measured but not reported as changed), an associative/expression-only form of the enzymatic-cascade claim. The rat-islet, non-hepatocyte, expression-only evidence is indirect, matching the declared context.",
+      "red_flags": [],
+      "review_id": "RL-16f57f20ddb8f8436776",
+      "studied_genes": [
+        "Hmgcs1",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4743,
+        "source_type": "full_text",
+        "start": 4527,
+        "text": "A prominent oval cell proliferation (also known as the ductular reaction) was observed in LKOs of both sexes, where the severity correlated with inflammation (mononuclear and granular inflammatory cells) and fibrosis"
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Hepatocyte-specific Cyp51 knockout in mouse liver causally produces oval-cell-driven injury, inflammation and fibrosis with compensatory cholesterogenic changes, supporting CYP51's essential in vivo hepatic cholesterol-synthesis role in the target context. Tm7sf2 appears only as one entry in a compensatory qPCR panel, which is not gene-specific investigation, so it is not credited.",
+      "red_flags": [],
+      "review_id": "RL-177f26e45743a987f8be",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1514,
+        "source_type": "abstract",
+        "start": 1245,
+        "text": "Nevertheless, HSCs were sensitive to FC accumulation because the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper directly reports the SCAP:INSIG ratio disrupting SREBP2-mediated cholesterol-homeostasis feedback in a NASH model, supporting the regulator mechanism with no supplied-gene coverage. The finding is in hepatic stellate cells rather than the target hepatocytes, so the declared direct context is overclaimed (indirect).",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-3094cd650bd5570968ca",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 6008,
+        "source_type": "full_text",
+        "start": 5820,
+        "text": "iDGAT1 and iDGAT2 treatments alone reduced TG content alongside DGAT1 and DGAT2 mRNA levels without showing significant differences across the tested doses (25, 50, 100 µM) (Figure S1A,B)."
+      },
+      "function_supported_genes": [],
+      "rationale": "Pharmacological DGAT2 inhibition causally reduced triglyceride content in a MASLD-like system, supporting DGAT2's regulator role with no supplied-gene coverage. The paper's own experiments use human HepG2 hepatoma cells in vitro rather than mouse hepatocytes, so the declared partial context is overclaimed (indirect).",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-4a4bf79af316fed564bf",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 321,
+        "source_type": "abstract",
+        "start": 170,
+        "text": "Acyl-CoA:cholesterol acyltransferase 1 and 2 (ACAT1 and ACAT2) convert various sterols to steryl esters; their activities are activated by cholesterol."
+      },
+      "function_supported_genes": [],
+      "rationale": "ACAT2's cholesterol-esterification function appears only as an established background statement; the paper's ACAT2-specific experiments (KO mice) concern pregnenolone esterification in adrenal/non-hepatic settings and find no PREG-ester change. Because the cited function is background-only here, Acat2 is not credited as studied or function-supported, leaving only partial associative support.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-66edfccab184902f9a84",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 7901,
+        "source_type": "full_text",
+        "start": 7753,
+        "text": "DHCR7 is an enzyme that acts in the final step of the cholesterol biosynthesis pathway and converts 7-DHC possessing conjugated diene to cholesterol"
+      },
+      "function_supported_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "rationale": "DHCR7 is gene-specifically studied by CRISPR knockout, pharmacologic inhibition, and mouse primary-hepatocyte/in vivo liver ablation, directly confirming its terminal 7-DHC-to-cholesterol role; SC5D knockout reducing 7-DHC accumulation confirms its desaturase function. TM7SF2 was ablated (studied) but its C14-reductase function is only stated as background, so it is not function-supported; Hmgcs1/Fdps/Cyp51 appear only as list-mention upregulation and do not count as studied.",
+      "red_flags": [],
+      "review_id": "RL-7fa2530b6e396a5d70e6",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d",
+        "Tm7sf2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1532,
+        "source_type": "abstract",
+        "start": 1402,
+        "text": "our results indicated that low protein levels and activity of HSD17B7 are responsible for the reduced cholesterol content in SHRSP"
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "HSD17B7 mRNA/protein/activity are gene-specifically measured in rat liver and associated with reduced cholesterol synthesis, supporting its assigned function; CYP51 and SC4MOL(Msmo1) levels were measured but showed no difference, so they are studied yet not function-supported. This is a cross-species observational strain comparison (rat), so the declared 'direct' context is overclaimed relative to indirect.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-7fd4234b22fb8bfc045b",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 987,
+        "source_type": "abstract",
+        "start": 867,
+        "text": "coexpression of MTP and apoB in AC29 cells stably transfected with ACAT1 and ACAT2 increases cholesteryl ester synthesis"
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "Coexpression/reconstitution and MTP conditional ablation causally show MTP enhances ACAT2-mediated cholesteryl esterification by relieving product inhibition, supporting mechanism 3's MTTP-ACAT2 coupling. The ACAT2-specific mechanistic work is in heterologous AC29 cells (not hepatocytes) and aging/MASLD is not studied, so the declared 'direct' context is overclaimed relative to partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-803bb5541c150e4bba5f",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 769,
+        "source_type": "abstract",
+        "start": 686,
+        "text": "Idol knockdown in hepatocytes increases LDLR protein levels and promotes LDL uptake"
+      },
+      "function_supported_genes": [],
+      "rationale": "LDLR is a P21 regulator (not a supplied gene), and LXR/Idol knockdown/adenoviral experiments in mouse hepatocytes and liver in vivo causally establish LDLR-dependent cholesterol uptake, supporting mechanism 2's regulator-level homeostasis claim. The mouse hepatocyte/liver setting is the target context, so 'direct' is accurate and no supplied genes are gene-specifically studied.",
+      "red_flags": [],
+      "review_id": "RL-95e57925e0ba07dc2306",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1381,
+        "source_type": "abstract",
+        "start": 1238,
+        "text": "In the liver, the proportion of NSDHL negative cells dropped from approximately 50% at postnatal day 6 to approximately 20% at one year of age."
+      },
+      "function_supported_genes": [
+        "Nsdhl"
+      ],
+      "rationale": "The paper gene-specifically tracks NSDHL-deficient liver cells and shows their progressive negative selection over life, which functionally supports an essential cholesterol-biosynthesis requirement even though the exact C4-demethylation reaction is not assayed. Mouse liver examined across the lifespan is the target context, so 'direct' is accurate; B's background_only/overclaim downgrade is not warranted because the depletion is a functional finding, not mere background.",
+      "red_flags": [],
+      "review_id": "RL-96caf1f9350d2ce119e3",
+      "studied_genes": [
+        "Nsdhl"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1176,
+        "source_type": "abstract",
+        "start": 1076,
+        "text": "Tm7sf2 deficiency during liver regeneration alters lipid metabolism and generates a stress condition"
+      },
+      "function_supported_genes": [
+        "Tm7sf2"
+      ],
+      "rationale": "The Tm7sf2 knockout causally establishes the enzyme's C14-reductase identity and hepatic role, directly matching the mechanism's claim that its deficiency causes lipid accumulation and ER stress in liver. Unchanged cholesterol content is a nuance but not a contradiction; however the regenerating-liver setting is a different condition than aging/MASLD, so the declared 'direct' context is overclaimed relative to same-tissue/different-condition partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a00515549f5be58f8057",
+      "studied_genes": [
+        "Tm7sf2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 841,
+        "source_type": "abstract",
+        "start": 663,
+        "text": "We found that the pathway components, including MSMO1, CYP51A1, EBP and SC5D, function as potential suppressors of ferroptosis, whereas DHCR7 functions as a pro-ferroptotic gene."
+      },
+      "function_supported_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Sc5d",
+        "Dhcr7"
+      ],
+      "rationale": "The genome-wide CRISPR screen substantively and causally implicates all four genes as functional distal cholesterol-biosynthesis enzymes (SC5D/DHCR7 with explicit catalytic steps; MSMO1/CYP51A1 as confirmed pathway hits), which is exactly the 'distal cholesterol biosynthesis enzyme' claim behind the citation. This resolves toward B: the CRISPR functional evidence exceeds mere listing, so all four are function-supported; the cancer/kidney systems are indirect to mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-aa469413a31b091378a5",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Sc5d",
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 993,
+        "source_type": "abstract",
+        "start": 925,
+        "text": "Three patients had MVD mutations, and 2 patients had PMVK mutations."
+      },
+      "function_supported_genes": [
+        "Mvd",
+        "Pmvk"
+      ],
+      "rationale": "Patient genotyping identifies gene-specific MVD and PMVK loss-of-function mutations whose cholesterol-replenishment response supports their mevalonate-pathway role, but only associatively and without demonstrating the precise enzymatic reactions, so partial is correct. The abstract does report the finding sufficiently for a partial judgment, so B's insufficient_text flag is not warranted; human skin disease is indirect to mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-b86ef285975d5bb08e0f",
+      "studied_genes": [
+        "Mvd",
+        "Pmvk"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 458,
+        "source_type": "abstract",
+        "start": 0,
+        "text": "Sterol regulatory element-binding proteins (SREBPs), master transcriptional regulators of cholesterol and fatty acid synthesis, have been found to contribute to a diverse array of cellular processes. In this review, we focus on genetically engineered mice in which the activities of six components of the SREBP gene pathway, namely SREBP-1, SREBP-2, Scap, Insig-1, Insig-2, or Site-1 protease have been altered through gene knockout or transgenic approaches."
+      },
+      "function_supported_genes": [],
+      "rationale": "This review names Scap/Insig-1 as SREBP-pathway master regulators (perturbation regulators, not supplied genes) but gives no regulatory direction and no data on supplied genes Erg28/Rdh11, and is framed around extrahepatic/developmental functions. Declared direct context is overclaimed for a secondary, extrahepatic synthesis.",
+      "red_flags": [
+        "context_overclaim",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-bb4358ce7362aadea933",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1553,
+        "source_type": "abstract",
+        "start": 1373,
+        "text": "The combination of an SQS inhibitor with an HMGCR or FDPS inhibitor provides a rational approach for reducing cholesterol synthesis while preventing nonsterol isoprenoid depletion."
+      },
+      "function_supported_genes": [
+        "Fdps",
+        "Fdft1"
+      ],
+      "rationale": "Novel squalene-synthase (Fdft1) inhibitors reduce cholesterol biosynthesis in HepG2 cells, and the FDPS inhibitor zoledronate is experimentally used showing FDPS's FPP-synthase role upstream of cholesterol synthesis, so both genes have gene-specific causal support. HepG2 is a transferable hepatic context, matching the declared partial label.",
+      "red_flags": [],
+      "review_id": "RL-c70b6666365c8ced88d9",
+      "studied_genes": [
+        "Fdps",
+        "Fdft1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 10679,
+        "source_type": "full_text",
+        "start": 10490,
+        "text": "Conversely, the direct product of CYP51 demethylation, follicular fluid meiosis-activating sterol (FF-MAS), was decreased 2.6- and 2.1-fold in 6-week HCyp51−/− mice and runts, respectively."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Hepatocyte-specific Cyp51 knockout causally lowers the CYP51 demethylation product FF-MAS and causes progressive liver injury, directly supporting its biosynthetic enzyme role. The model is a developmental (pubertal) mouse liver rather than the aging/MASLD condition, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-cb8ac4e04cfd8021e22e",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 6832,
+        "source_type": "full_text",
+        "start": 6610,
+        "text": "Taken together, many genes play a central role in cholesterol synthesis, including HMGCR, SQLE, HMGCS1, FDFT1, LSS, MVK, PMK, MVD, FDPS, CYP51, TM7SF2, LBR, MSMO1, NSDHL, HSD17B7, DHCR24, EBP, SC5D, DHCR7, IDI1/2 (Fig. 1)."
+      },
+      "function_supported_genes": [],
+      "rationale": "This circRNA/miRNA review only catalogs the pathway genes from KEGG in background text without gene-specific investigation, so no gene qualifies as studied, but it secondarily supports the general claim that these are cholesterol-biosynthesis enzymes. 'No' understated this and B's 15 function-supported genes overclaimed pathway-list mentions.",
+      "red_flags": [
+        "background_only",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-d162c70104d6ae924862",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "background",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "MVK appears only in a prior-work/disease-motivation sentence, while the paper's own experiment blocks the pathway with Lovastatin and tests 25-HC in a human glioblastoma line, generating no MVK-specific data. Adjudicated to Assessment A's 'no': a background prior-work sentence does not study or support the cited hepatocyte MVK function; model-assessed.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-ecd7fb527c49603945e4",
+      "studied_genes": [],
+      "support": "no"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 19154,
+        "source_type": "full_text",
+        "start": 18954,
+        "text": "Genes that code for enzymes in the cholesterol synthesis pathway (Idi1, Fdps, Sqle, Cyp51, Tm7sf2, Nsdhl, Hsd7b17, and Dhcr7) were upregulated in the TXNIP C247S mouse livers compared with WT controls"
+      },
+      "function_supported_genes": [
+        "Idi1",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Nsdhl",
+        "Hsd17b7",
+        "Dhcr7"
+      ],
+      "rationale": "RNA-seq and qPCR give gene-specific expression data upregulating these seven supplied cholesterol-synthesis genes in mouse liver, supporting pathway membership observationally rather than catalytic function. HFD/TXNIP-mutant mouse liver is a MASLD-adjacent condition, closely transferable but not the declared direct aging/MASLD state.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-081933ad9516de845c00",
+      "studied_genes": [
+        "Idi1",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Nsdhl",
+        "Hsd17b7",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 17216,
+        "source_type": "full_text",
+        "start": 17058,
+        "text": "Cyp51+/− males had significantly increased plasma total cholesterol, HDL and LDL cholesterol (20–35% higher than controls) and present hepatomegaly (Table 1)."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Heterozygous Cyp51 knockout causally alters hepatic cholesterol handling in mouse liver, supporting Cyp51's role in cholesterol biosynthesis; Nsdhl/Tm7sf2/Dhcr7 have gene-specific expression readouts (studied) but their function is not tested. Genetic model plus mixed diets is closely transferable but not the declared direct aging/MASLD context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0a849c76f65251620997",
+      "studied_genes": [
+        "Cyp51",
+        "Nsdhl",
+        "Tm7sf2",
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 51112,
+        "source_type": "full_text",
+        "start": 50858,
+        "text": "The phenotype of reduced cholesterol synthesis was able to be reversed in a dose-dependent manner by transiently expressing a CMV-ERG28-V5 construct in the KO cells (Fig. 5F), confirming the reduction in cholesterol synthesis is due to the loss of ERG28."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 KO plus rescue causally establishes its role in cholesterol synthesis, and NanoBiT data show gene-specific interaction with NSDHL and SC4MOL(Msmo1); B's added Fdps/Fdft1/Hsd17b7 are only inhibitor tools, not substantively investigated. Human Huh7 liver line is a species/in-vitro system change (indirect), above the declared partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-40d78e992150c1f1e610",
+      "studied_genes": [
+        "Erg28",
+        "Nsdhl",
+        "Msmo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10409,
+        "source_type": "full_text",
+        "start": 10274,
+        "text": "The qPCR results for Hmgcs1, Hmgcr, Mvd, Idi1, Sqle and Dhcr7 confirmed the genomic analyses, whereas those for Fdft1 did not (Fig. 1)."
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Mvd",
+        "Dhcr7"
+      ],
+      "rationale": "Supplied genes with dedicated qPCR primers are studied, but only Hmgcs1/Idi1/Mvd/Dhcr7 show confirmed upregulation (Fdft1 explicitly failed to confirm), an associative expression finding not catalytic testing. Rat pancreatic islets are a different tissue/species/cell type, correctly declared indirect.",
+      "red_flags": [],
+      "review_id": "RL-48196647472e2225acb4",
+      "studied_genes": [
+        "Hmgcs1",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 32428,
+        "source_type": "full_text",
+        "start": 32287,
+        "text": "After successful knockdown of all transcripts (Fig. 5D), cholesterol levels were significantly decreased compared with the control (Fig. 5E)."
+      },
+      "function_supported_genes": [
+        "Msmo1",
+        "Nsdhl",
+        "Erg28"
+      ],
+      "rationale": "siRNA knockdown of Msmo1(SC4MOL), Nsdhl, and Erg28 causally reduces total cellular cholesterol in human Huh7 liver cells, supporting their C4-demethylation biosynthesis role; Hsd17b7 is gene-specifically profiled but its catalytic contribution appears only as background. Human/hamster cell lines make the mouse-hepatocyte context indirect, so the declared partial is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-502a14189be4e1c2dff2",
+      "studied_genes": [
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Erg28"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1513,
+        "source_type": "abstract",
+        "start": 1306,
+        "text": "the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells"
+      },
+      "function_supported_genes": [],
+      "rationale": "The abstract links the Scap:Insig expression ratio to disrupted SREBP2 cholesterol feedback, supporting a narrower dysregulated form of the regulator relationship but in hepatic stellate cells, not hepatocytes, and without any supplied program gene. The cell-type mismatch makes the declared direct context an overclaim.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5cd2513174caf50a54cb",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 3435,
+        "source_type": "full_text",
+        "start": 3245,
+        "text": "Farnesyl diphosphate synthase (FDPs), an integral enzyme in the mevalonate pathway involved in cholesterol biosynthesis, has emerged as a crucial regulator of metabolic homeostasis in cancer"
+      },
+      "function_supported_genes": [],
+      "rationale": "Fdps is gene-specifically investigated, but the functional experiments address HCC proliferation via an FDPS-G6PD interaction; its mevalonate/cholesterol-biosynthesis role is asserted only as introductory background, so function is not supported. Human HCC cell lines make the mouse-hepatocyte context indirect.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-706e258c97dffbb8395e",
+      "studied_genes": [
+        "Fdps"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 904,
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes."
+      },
+      "function_supported_genes": [],
+      "rationale": "In vivo conditional SCAP knockout in mouse liver causally reduces cholesterol synthesis and biosynthetic-enzyme mRNAs, directly supporting mechanism 2's claim of SCAP as master regulator of the hepatic program; Scap is a regulator, so no supplied genes are credited. Mouse liver hepatocyte context matches the target for this general mechanism, so direct is accurate.",
+      "red_flags": [],
+      "review_id": "RL-74bfd22b55ef7de1a593",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 14772,
+        "source_type": "full_text",
+        "start": 14667,
+        "text": "RDH11 mRNA expression was altered by these cellular treatments in a manner consistent with LDLR and HMGCR"
+      },
+      "function_supported_genes": [
+        "Rdh11"
+      ],
+      "rationale": "In mouse liver, mouse primary hepatocytes, and human hepatoma cells, Rdh11 mRNA tracks cholesterol status in parallel with canonical SREBP2 targets LDLR/HMGCR, directly supporting the co-regulation claim in the target hepatocyte context. The other genes in Assessment B are only co-correlation seed/background regulators, not substantively investigated, so studied_genes is limited to Rdh11.",
+      "red_flags": [],
+      "review_id": "RL-80f9c513752ed89483c1",
+      "studied_genes": [
+        "Rdh11"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1656,
+        "source_type": "abstract",
+        "start": 1550,
+        "text": "HSD17B7, along with MPD and SQE, is involved in the decreased cholesterol synthesis in the liver of SHRSP."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "Hepatic HSD17B7 mRNA, protein, and activity are gene-specifically reduced and linked to lower cholesterol synthesis, while CYP51 and SC4MOL/Msmo1 were also measured (no significant difference), so all three are studied but only Hsd17b7 supports the assigned biosynthesis function. The rat strain model differs in species from the mouse target, so the agent's 'direct' context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-8655cf3bfaadd6f3db6a",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 904,
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes."
+      },
+      "function_supported_genes": [],
+      "rationale": "Conditional SCAP knockout in mouse liver causally reduces cholesterol synthesis and biosynthetic-enzyme mRNAs, supporting mechanism 1's claim that the regulator Scap controls the program via SREBP2 in liver; Scap is a regulator so no supplied genes are studied. Mouse liver in vivo is the target biological context, so 'direct' is accurate despite the cholesterol-deprivation/refeeding rather than aging/MASLD trigger.",
+      "red_flags": [],
+      "review_id": "RL-9b1d86c1ff0c8dc62e7d",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 730,
+        "source_type": "abstract",
+        "start": 630,
+        "text": "inhibition of acetate metabolism via ACSS2 and cholesterol synthesis as key drivers of the phenotype"
+      },
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "rationale": "Pharmacological inhibition links ACSS2-dependent acetate metabolism to cholesterol synthesis in a MASH mouse liver, but EVT0185 is a dual ACLY/ACSS2 inhibitor, preventing clean attribution to Acss2, so support is partial. The demonstrated cellular target is hepatic stellate cell activation rather than a hepatocyte-specific ACSS2-cholesterol effect, making the agent's 'direct' hepatocyte context an overclaim.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9ed874a050c13e1ce2d6",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 7903,
+        "source_type": "full_text",
+        "start": 7753,
+        "text": "DHCR7 is an enzyme that acts in the final step of the cholesterol biosynthesis pathway and converts 7-DHC possessing conjugated diene to cholesterol9."
+      },
+      "function_supported_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "rationale": "CRISPR ablation of DHCR7 and epistatic ablation of SC5D in hepatocytes and mouse liver provide gene-specific causal support for both enzymes' assigned post-squalene sterol-pathway roles (SC5D introduces the C5-6 bond and its ablation blocks 7-DHC formation). Same hepatocyte/liver setting but ferroptosis/injury rather than aging/MASLD, so the declared 'direct' context is a partial overclaim.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9efeb609b3c949a89c57",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 254,
+        "source_type": "abstract",
+        "start": 12,
+        "text": "Genetic inactivation and pharmacologic inhibition of the microsomal triglyceride transfer protein (MTP; gene name MTTP) inhibits hepatic secretion of VLDL, thereby reducing serum lipids and apoB at the expense of increasing hepatic steatosis."
+      },
+      "function_supported_genes": [],
+      "rationale": "The abstract explicitly reports MTTP's VLDL-secretion/steatosis regulator function and the paper's variant data associate MTTP with hepatic steatosis, supporting the assigned regulator role; Mttp is a perturbation regulator so both gene arrays stay empty. The human biobank cohorts are species-indirect to the mouse liver session, making the declared 'direct' context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a825f41108a26d4ab883",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1232,
+        "source_type": "abstract",
+        "start": 1069,
+        "text": "we detected compound heterozygous mutations in the phosphomevalonate kinase (PMVK) gene coding the second enzyme after mevalonate kinase in the mevalonate pathway."
+      },
+      "function_supported_genes": [
+        "Pmvk"
+      ],
+      "rationale": "Gene-specific compound-heterozygous PMVK mutations with elevated mevalonic acid explicitly confirm PMVK as the mevalonate-pathway enzyme following MVK, matching the mechanism's Mvk-to-Pmvk step; context differences are separate from functional support. The non-hepatic human pediatric setting is correctly labeled indirect.",
+      "red_flags": [],
+      "review_id": "RL-aa13c1e7f8facc8720c7",
+      "studied_genes": [
+        "Pmvk"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 770,
+        "source_type": "abstract",
+        "start": 673,
+        "text": "ACAT2 provided the major cholesterol-esterifying activity in 3 of 4 human liver samples examined."
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "Hepatocyte-confined localization plus specific-inhibitor (pyripyropene A) biochemical activity assays directly establish ACAT2 as the dominant hepatocyte cholesterol-esterifying enzyme, matching mechanism 3. The human liver samples differ in species (and MASLD condition) from the mouse target, so the declared 'direct' context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b0bf65debdf8394a131f",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 198,
+        "source_type": "abstract",
+        "start": 0,
+        "text": "NSDHL (NAD(P)H sterol dehydrogenase-like), is a 3beta-hydroxysterol dehydrogenase thought to function in the demethylation of sterol precursors in one of the later steps of cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Nsdhl"
+      ],
+      "rationale": "NSDHL is the paper's entire subject (tissue/developmental expression, mosaic loss, negative selection of deficient cells), so it is substantively studied, but its C4-demethylation role is cited as prior knowledge and only observationally corroborated by high liver expression and negative selection of NSDHL-null cells, yielding partial support. The mouse liver setting is relevant yet developmental rather than aging/MASLD, so the declared direct context is overclaimed; B's empty gene arrays understate that the gene is directly investigated.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b786af039e250eba6e79",
+      "studied_genes": [
+        "Nsdhl"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 869,
+        "source_type": "abstract",
+        "start": 698,
+        "text": "FoxO4-mediated repression of CYP51 led to the accumulation of 24,25 dihydrolano-sterol (DHL), which independently and unlike lanosterol inhibited cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "CYP51 mRNA repression with resulting DHL accumulation plus recapitulation by CYP51 inhibitors causally confirm its lanosterol 14alpha-demethylase role in cholesterol biosynthesis, matching the mechanism. The abstract does not report cell type, tissue, or species, so the declared partial context cannot be assessed from available text.",
+      "red_flags": [],
+      "review_id": "RL-d441a59c5a1311c12a1e",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 895,
+        "source_type": "abstract",
+        "start": 609,
+        "text": "Experiments indicated that human sterol Δ(7)-reductase (DHCR7) is the major target of LK-980 (34-fold increase of 7-dehydrocholesterol), whereas human sterol Δ(14)-reductase (DHCR14), human sterol Δ(24)-reductase (DHCR24), and human sterol C5-desaturase (SC5DL) represent minor targets."
+      },
+      "function_supported_genes": [
+        "Dhcr7"
+      ],
+      "rationale": "DHCR7 is causally established as a postlanosterol synthesis enzyme by a 34-fold substrate accumulation, but Sc5d/SC5DL is only a minor target inferred from computational fitting of the sterol profile, so the co-establishment claim is partial with function support limited to Dhcr7. Human HepG2/primary hepatocytes are closely transferable but not mouse hepatocytes, making the declared direct context an overclaim.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-d9c0f210c10e0a1940fb",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1310,
+        "source_type": "abstract",
+        "start": 1192,
+        "text": "Furthermore, we established that the two SREs that bind SREBP-2 work in cooperation to synergistically activate DHCR7."
+      },
+      "function_supported_genes": [
+        "Dhcr7"
+      ],
+      "rationale": "The paper maps two functional SREBP-2 binding sites in the DHCR7 promoter and shows they cooperatively activate transcription, directly supporting the mechanism that Dhcr7 carries SREs and is SREBP-2-regulated. It is a human promoter/molecular study, an experimental system distinct from mouse liver MASLD, so the declared indirect context is accurate.",
+      "red_flags": [],
+      "review_id": "RL-def9b33e9590b1c3d439",
+      "studied_genes": [
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 24191,
+        "source_type": "full_text",
+        "start": 24077,
+        "text": "DGAT2 inhibition increased the ER content of PE, which blocked SREBP-1 movement from the ER to Golgi for cleavage."
+      },
+      "function_supported_genes": [],
+      "rationale": "DGAT2 perturbation (inhibitor, liver-specific knockout, and overexpression in mouse/rat) causally establishes it as a regulator linking TG synthesis to SREBP-1 cleavage in direct mouse hepatic MASLD context, matching the regulator description. Acss2/Fdft1/Hmgcs1 (ACSS-2, squalene synthase, HMG-CoA synthase) appear only as SREBP-target pathway readouts, so no supplied gene is substantively investigated and supplied-gene arrays stay empty for this perturbation-regulator citation.",
+      "red_flags": [],
+      "review_id": "RL-e87be25ad05faf6b4ce2",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1330,
+        "source_type": "abstract",
+        "start": 1130,
+        "text": "Overexpression or knockdown of Htatip2 in hepatocytes affected fatty acid storage and oxidation, consistent with a novel role in mediating the differential effects of PKC isoforms on lipid metabolism."
+      },
+      "function_supported_genes": [
+        "Htatip2"
+      ],
+      "rationale": "Gene-specific gain/loss-of-function of Htatip2 in mouse hepatocytes causally altered fatty acid storage and oxidation, matching the assigned regulatory role. Fat-fed mouse hepatocytes are the target cell type/tissue and a MASLD-relevant condition, so the direct label is accurate.",
+      "red_flags": [],
+      "review_id": "RL-0364eeef4f0d91a67655",
+      "studied_genes": [
+        "Htatip2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 410,
+        "source_type": "abstract",
+        "start": 351,
+        "text": "Akr1c6, 1c14, 1c20, and 1c22 are primarily present in liver"
+      },
+      "function_supported_genes": [
+        "Akr1c6"
+      ],
+      "rationale": "The paper gives gene-specific evidence that Akr1c6 is liver-enriched and CAR/Nrf2-induced, matching the selection claim of a liver-enriched xenobiotic-receptor-regulated hepatic AKR; catalytic detox activity is not perturbation-tested, so directness is observational. Context is mouse liver, the target tissue/species, so direct is accurate.",
+      "red_flags": [],
+      "review_id": "RL-052bab66f63d10e2ab61",
+      "studied_genes": [
+        "Akr1c6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1182,
+        "source_type": "abstract",
+        "start": 1002,
+        "text": "siRNA-mediated down-regulation of MOSC2 and the mitochondrial form of cytochrome b(5) type B (CYB5B) significantly inhibited the reductase activity in the differentiated adipocytes"
+      },
+      "function_supported_genes": [
+        "Cyb5b"
+      ],
+      "rationale": "CYB5B-specific siRNA knockdown causally establishes its participation in the outer-mitochondrial-membrane amidoxime/lipid reductase system, directly supporting the assigned function. The perturbation was in 3T3-L1 adipocytes (liver membranes only for biochemistry), so context is indirect and the declared partial overclaims it.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-082dea94c06908c689e1",
+      "studied_genes": [
+        "Cyb5b"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3498,
+        "source_type": "full_text",
+        "start": 3340,
+        "text": "recombinant SULT2A8 preferentially catalyzes the sulfonation of 7α-OH bile acids including cholic acid (CA), chenodeoxycholic acid, and their conjugated forms"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "Structural and biochemical assays directly demonstrate that mouse SULT2A8 sulfonates 7α-OH bile acids, matching the citation-specific claim; the PPARalpha clause belongs to a separate citation. The study is of the native mouse enzyme with cited in vivo hepatic bile-acid homeostasis data, so the direct mouse-liver context is accurate.",
+      "red_flags": [],
+      "review_id": "RL-148096a874ea409f1b55",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "causal",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper substantively perturbs hepatic Cdo1 (KO/OE) but assigns it a Camkk2-AMPK-FAO signaling role in NAFLD, not the taurine-mediated bile-acid conjugation function of this mechanism, and reports hepatic taurine was unchanged after knockout (attributed to extrahepatic compensation). This is a wrong-function mismatch rather than a directional refutation, so no support rather than contradicts.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-3a33580a6464c5931f9d",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "no"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1540,
+        "source_type": "abstract",
+        "start": 1468,
+        "text": "SULT2A8 is required to maintain the bile acid and cholesterol metabolism"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "In vivo Sult2a8-haplodeficient mice causally show reduced 7α-OH bile-acid sulfonation and altered bile-acid/cholesterol handling, supporting the assigned function. The mouse liver setting is under fasting rather than aging/MASLD, making the declared direct context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5dd4b5247c95cbc27365",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1167,
+        "source_type": "abstract",
+        "start": 1031,
+        "text": "narrow sulfonating activities toward 7α-hydroxyl primary bile acids, including cholic acid, chenodeoxycholic acid, and α-muricholic acid"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "This founding paper directly establishes Sult2a8 (mL-STL) as a liver-predominant, PPARα-dependent sulfotransferase acting on 7α-OH primary bile acids via recombinant-protein assays, matching the assigned function. The fasting/biochemical characterization setting is transferable but not the target aging/MASLD context, so declared direct is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5f3a18841e1138ffe838",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 364,
+        "source_type": "abstract",
+        "start": 246,
+        "text": "which binds to and inactivates aflatoxin B1 epoxide, preventing the epoxide from binding to DNA and causing mutations."
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "The GSTA3 knockout mouse study directly demonstrates GSTA3's aflatoxin B1 detoxification, matching the mechanism's Phase II detox/aflatoxin claim. The aflatoxin carcinogenesis setting differs from aging/MASLD, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-6926b3be8d716db7aacc",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 9878,
+        "source_type": "full_text",
+        "start": 9771,
+        "text": "The mRNA of Cyp2c50 and Cyp2c54 in Nrf2-null mice was 45 and 65% lower than in wild-type mice, respectively"
+      },
+      "function_supported_genes": [
+        "Cyp2c50",
+        "Aldh1a1",
+        "Gsta3"
+      ],
+      "rationale": "Graded genetic Nrf2 models give gene-specific mRNA data for Cyp2c50, Aldh1a1 (both lower in Nrf2-null, higher with activation) and Gsta3 (increased 20% in Keap1-HKO), supporting Nrf2-regulated xenobiotic-gene status; Aldh3a2 and Akr1c6 are measured but reported unchanged, so studied but not function-supported. Mouse whole-liver/hepatocyte model makes the declared direct context accurate.",
+      "red_flags": [],
+      "review_id": "RL-6a44877265e2c5747629",
+      "studied_genes": [
+        "Cyp2c50",
+        "Aldh1a1",
+        "Aldh3a2",
+        "Gsta3",
+        "Akr1c6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 600,
+        "source_type": "abstract",
+        "start": 444,
+        "text": "FIT1 and FIT2 are endoplasmic reticulum resident membrane proteins that induce lipid droplet accumulation in cell culture and when expressed in mouse liver."
+      },
+      "function_supported_genes": [
+        "Fitm1"
+      ],
+      "rationale": "FIT1 (Fitm1) gain-of-function expression in mouse liver causally induces ER-associated lipid droplet accumulation, directly supporting the smallest cited claim that FITM1 promotes hepatic lipid-droplet biogenesis; the unproven triglyceride-binding clause does not reduce support since the core function is demonstrated in the target mouse-liver context.",
+      "red_flags": [],
+      "review_id": "RL-767f3edaaf0c7a14d825",
+      "studied_genes": [
+        "Fitm1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 951,
+        "source_type": "abstract",
+        "start": 748,
+        "text": "Fatty aldehyde dehydrogenase had high activity towards saturated and unsaturated aliphatic aldehydes ranging from 6 to 24 carbons in length, as well as dihydrophytal, a 20-carbon branched chain aldehyde."
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "Purification and biochemical characterization establish ALDH3A2 (fatty aldehyde dehydrogenase) as a liver microsomal enzyme acting on long-chain aliphatic aldehydes, a narrower form of the cited lipid-peroxidation-aldehyde detoxification claim, so support is partial. Human liver with a conserved ortholog and matched tissue/cell type makes the declared partial context accurate.",
+      "red_flags": [],
+      "review_id": "RL-8917eaf883f998bbc932",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "unclear",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper causally establishes Aldh1a1 as a retinaldehyde dehydrogenase coordinating hepatic gluconeogenesis and lipid metabolism, an entirely different function from the cited lipid-peroxidation-aldehyde detoxification role, which it does not study; this is wrong function rather than a weaker form, so support is no not partial. Mouse liver/hepatocyte work makes the direct context accurate independent of the functional mismatch.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-a56a1e2fbb57a3ab037e",
+      "studied_genes": [
+        "Aldh1a1"
+      ],
+      "support": "no"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 728,
+        "source_type": "abstract",
+        "start": 619,
+        "text": "HAOX2 is expressed predominantly in liver and kidney and displays highest activity toward 2-hydroxypalmitate."
+      },
+      "function_supported_genes": [
+        "Hao2"
+      ],
+      "rationale": "Human HAOX2 (the Hao2 ortholog) is biochemically characterized as a liver-expressed peroxisomal 2-hydroxy fatty acid oxidase, gene-specifically supporting the assigned alpha-oxidation function. The finding is in human tissue, a different species from mouse aging/MASLD liver, so the declared partial context is overclaimed (actually indirect).",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-aeede7f1fab29205b9cc",
+      "studied_genes": [
+        "Hao2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 960,
+        "source_type": "abstract",
+        "start": 639,
+        "text": "Immunotitration studies using antibodies specific to the alpha class GSTs, GSTA1-1, GSTA2-2, and GSTA3-3, indicate that these GST isozymes account for approximately half of the glutathione peroxidase activity toward phospholipid hydroperoxides present in the 28,000g supernatant fractions of rat and mouse liver extracts."
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "Isozyme-specific immunotitration naming GSTA3-3 in mouse and rat liver directly demonstrates alpha-class GST glutathione-peroxidase antioxidant activity, providing gene-specific support for the assigned function. The mouse-liver hepatocyte system is the target context, so the direct label is accurate.",
+      "red_flags": [],
+      "review_id": "RL-b017318c593b56289789",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 669,
+        "source_type": "abstract",
+        "start": 556,
+        "text": "bile acids strongly inhibited the cysteine dioxygenase type-1-mediated (CDO1-mediated) cysteine catabolic pathway"
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "CDO1-overexpressing mouse hepatocytes and FXR-dependent modulation establish CDO1 as the mediator of hepatic cysteine catabolism, directly supporting the core assigned function; the unstated taurine-conjugation clause is a broader claim not required of one citation. Mouse liver hepatocytes are the target context, so direct is accurate.",
+      "red_flags": [],
+      "review_id": "RL-b7b08380dfd123b1605c",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 12746,
+        "source_type": "full_text",
+        "start": 12526,
+        "text": "WT but not Nrf2−/− liver slices treated with arsenic resulted in increased mRNA levels of the key fructose metabolism pathway enzymes ketohexokinase (Khk), sorbitol dehydrogenase (Sord), and triokinase/FMN cyclase (Tkfc)"
+      },
+      "function_supported_genes": [
+        "Sord"
+      ],
+      "rationale": "ChIP-PCR ARE binding and Nrf2-knockout data gene-specifically confirm Sord as an NRF2-regulated hepatic fructose-metabolism gene, supporting the 'under NRF2 regulation' clause, but the study found minimal polyol-pathway flux and did not demonstrate the sorbitol-to-fructose conversion, so support is partial. The arsenic-induced diabetes model is not aging or MASLD, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b880133a833ce5a6f7da",
+      "studied_genes": [
+        "Sord"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 722,
+        "source_type": "abstract",
+        "start": 562,
+        "text": "CDO(-/-) mice had extremely low taurine levels and somewhat elevated cysteine levels, consistent with the lack of flux through CDO-dependent catabolic pathways."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "The whole-body Cdo1 knockout causally establishes CDO1 as required for cysteine-to-taurine flux, matching the mechanism's direction. The taurine phenotype is measured systemically in mouse rather than as hepatocyte-specific data, so the context is indirect and the agent's 'direct' label is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-c6efbbad84bf5495bff1",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1079,
+        "source_type": "abstract",
+        "start": 830,
+        "text": "Another isomerase activity from human liver was found to be a part of the isomerase-hydratase-dehydrogenase polypeptide showing immunological cross-reactivity with the previously characterized peroxisomal multifunctional enzyme (MFE) from rat liver."
+      },
+      "function_supported_genes": [],
+      "rationale": "This 1993 study characterizes human liver peroxisomal enoyl-CoA isomerase activity, weakly supporting the general enzyme function but predating gene nomenclature so it cannot be tied to the specific Eci2 gene, leaving both gene arrays empty. Human liver versus target mouse liver is cross-species and thus indirect, so the agent's 'partial' context label is overclaimed.",
+      "red_flags": [
+        "insufficient_text"
+      ],
+      "review_id": "RL-e852c42233ff0b961e61",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 27657,
+        "source_type": "full_text",
+        "start": 27504,
+        "text": "The protein that most positively predicted hypotaurine abundance was CDO1, confirming its high degree of control over hypotaurine biosynthesis (Fig. 2b)."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "The paper's own mouse-liver covariation proteomics gene-specifically shows CDO1 is the strongest positive predictor of hypotaurine abundance, supporting its rate-limiting role in cysteine-to-taurine flux via observational data. The finding is in mouse liver hepatocyte metabolism, the target tissue and organism, so the 'direct' context label is accurate even though the aging/MASLD conditions are not modeled.",
+      "red_flags": [],
+      "review_id": "RL-f2154dc6b97c36f40430",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 670,
+        "source_type": "abstract",
+        "start": 580,
+        "text": "These include four previously isolated mouse HSD genes (Akr1c18, Akr1c6, Akr1c12, Akr1c13)"
+      },
+      "function_supported_genes": [],
+      "rationale": "Akr1c6 is named only among 'previously isolated' HSD genes, and prereceptor steroid modulation is attributed to the AKR/HSD family as a whole with no Akr1c6-specific functional data or liver context. This yields weak family-level associative support but does not substantively investigate Akr1c6.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-14933a5aa9ab3b84f6a1",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 12746,
+        "source_type": "full_text",
+        "start": 12616,
+        "text": "the key fructose metabolism pathway enzymes ketohexokinase (Khk), sorbitol dehydrogenase (Sord), and triokinase/FMN cyclase (Tkfc)"
+      },
+      "function_supported_genes": [
+        "Sord"
+      ],
+      "rationale": "Sord mRNA is induced by arsenic in WT but not Nrf2-/- mouse liver with ChIP-confirmed NRF2-ARE binding at its promoter, causally supporting NRF2 regulation of this polyol/fructose enzyme. The arsenic-diabetes setting is the same tissue but a related condition rather than the target aging/MASLD, so the 'direct' label is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-192282ce3b107122e137",
+      "studied_genes": [
+        "Sord"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 13414,
+        "source_type": "full_text",
+        "start": 13337,
+        "text": "GSTA3, the primary enzyme responsible for phase II metabolism of AFB1 in mice"
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "The paper measures GSTA3 protein and transcript in mouse liver and repeatedly frames it as the primary Phase II enzyme detoxifying the AFB1 epoxide, giving gene-specific support in the target organism/tissue for the general hepatic detox clause. Directness is observational because the detox function is asserted/cited rather than re-tested biochemically here.",
+      "red_flags": [],
+      "review_id": "RL-4dd99213a043f827b379",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 784,
+        "source_type": "abstract",
+        "start": 614,
+        "text": "aldehyde dehydrogenase 1A1 (ALDH1A1, alternatively known as retinaldehyde dehydrogenase 1 or RALDH1), have also been identified as being associated with metabolic disease"
+      },
+      "function_supported_genes": [],
+      "rationale": "This is a review that only names ALDH1A1/RALDH1 as associated with metabolic disease including NAFLD/NASH, providing secondary associative support. A review does not generate gene-specific data, so Aldh1a1 is not credited as studied or function-supported.",
+      "red_flags": [
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-524c0930970ba7d5a340",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1077,
+        "source_type": "abstract",
+        "start": 729,
+        "text": "We also examined the activity of the enzyme ALA dehydratase (ALAD), which is the second enzyme in the heme biosynthetic pathway, and ALAD gene expression during the fatigue and its recovery sessions. The ALAD activity, as well as its gene expression, in the liver of the fatigued animals was decreased as compared with those of the control animals."
+      },
+      "function_supported_genes": [
+        "Alad"
+      ],
+      "rationale": "The paper confirms Alad as the second hepatic heme-biosynthesis enzyme and shows its liver activity and expression change with metabolic condition (decreased in fatigue, restored on recovery), supporting the smallest cited claim; the PPARα component is untested but not required. Regulation is measured as an expression/activity response to a condition, so directness is observational, and rat-fatigue context is indirect to mouse aging/MASLD.",
+      "red_flags": [],
+      "review_id": "RL-8bcd69ca787b12545d4a",
+      "studied_genes": [
+        "Alad"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 717,
+        "source_type": "abstract",
+        "start": 542,
+        "text": "We found that bile acids strongly inhibited the cysteine dioxygenase type-1-mediated (CDO1-mediated) cysteine catabolic pathway via a farnesoid X receptor-dependent mechanism."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "Cholestyramine feeding and CDO1-overexpressing mouse hepatocytes causally demonstrate FXR-dependent bile acid control of the CDO1 cysteine catabolic pathway, exactly the cited mechanism. The mouse hepatocyte/liver system is the target cell type, tissue, and species, so the declared direct context is accurate even though the specific stressor is bile-acid manipulation rather than aging/MASLD.",
+      "red_flags": [],
+      "review_id": "RL-9fde2b6915b63651244f",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 167,
+        "source_type": "full_text",
+        "start": 0,
+        "text": "The 55 kDa membrane-bound enzyme fatty aldehyde dehydrogenase (EC 1.2.1.48) converts long-chain fatty aldehydes to the corresponding acid in an NAD-dependent reaction."
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "Direct biochemical assays with recombinant Aldh3a2 and rat/mouse liver microsomes establish FALDH conversion of long-chain fatty aldehydes to acids, matching the cited enzyme function. The healthy young rat/mouse liver assay context only partially matches aging/MASLD hepatocytes, so the declared partial label is accurate.",
+      "red_flags": [],
+      "review_id": "RL-aa43395cb1c6b9bfed78",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 498,
+        "source_type": "abstract",
+        "start": 384,
+        "text": "DHEA sulfotransferase (Sult2A1), which plays an important role in DHEA sulfation and detoxification of bile acids."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper studies mouse Sult2A1, a paralog of the supplied Sult2a5/2a7/2a8 genes, so no supplied gene is substantively investigated and both gene arrays stay empty. It supports only a family-level/paralog form of the cited SULT2A sulfation-and-bile-acid-detox function, which is why it was cited as context, warranting partial; the mouse-liver APR/LPS setting partially matches aging/MASLD hepatocytes.",
+      "red_flags": [
+        "paralog_only"
+      ],
+      "review_id": "RL-ad3d7fb8300108d2a609",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1120,
+        "source_type": "abstract",
+        "start": 919,
+        "text": "Our study shows that bile acid-binding mode of mSULT2A8 and how the enzyme holds the 7α-OH group of bile acids at the catalytic center, revealing that the mechanism underlying 7α-OH specific sulfation."
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "The crystal structure of the mouse hepatic enzyme directly establishes SULT2A8 as the 7α-hydroxyl bile-acid sulfotransferase, matching the mechanism claim. This characterizes the actual mouse hepatic enzyme, so the direct context declaration is accurate.",
+      "red_flags": [],
+      "review_id": "RL-b17aae18064317b9f2c8",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1193,
+        "source_type": "abstract",
+        "start": 1042,
+        "text": "As the aging process progressed to senescent stages, the levels of transcript and protein decreased significantly in the liver and kidney of aged rats."
+      },
+      "function_supported_genes": [
+        "Rgn"
+      ],
+      "rationale": "Expression profiling shows SMP30/regucalcin transcript and protein decline with aging in hepatocytes, matching the claim that Rgn marks the aging hepatocyte. Only species differs (rat vs mouse) while tissue, cell type, and aging condition all match, so partial context is accurate.",
+      "red_flags": [],
+      "review_id": "RL-d42354d63977c0f3f9f8",
+      "studied_genes": [
+        "Rgn"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 850,
+        "source_type": "abstract",
+        "start": 756,
+        "text": "Downregulation of Hao2 was observed in all investigated rodent models of hepatocarcinogenesis."
+      },
+      "function_supported_genes": [
+        "Hao2"
+      ],
+      "rationale": "Mouse/rodent models plus a re-expression rescue impairing tumorigenicity causally support Hao2 downregulation and its oncosuppressive role during hepatocarcinogenesis. The disease setting is cancer rather than the target aging/MASLD condition, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-d80a25883afb7304cfa8",
+      "studied_genes": [
+        "Hao2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1182,
+        "source_type": "abstract",
+        "start": 1002,
+        "text": "siRNA-mediated down-regulation of MOSC2 and the mitochondrial form of cytochrome b(5) type B (CYB5B) significantly inhibited the reductase activity in the differentiated adipocytes"
+      },
+      "function_supported_genes": [
+        "Cyb5b"
+      ],
+      "rationale": "CYB5B knockdown causally inhibits the outer-mitochondrial amidoxime reductase system that the abstract names CYB5B as a component of and describes as important for lipid synthesis, supporting the assigned function. The decisive functional experiments were in 3T3-L1 adipocytes rather than hepatocytes, so the declared partial context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-ef80cb26184e135aa53b",
+      "studied_genes": [
+        "Cyb5b"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_telemetry_shards": 29,
+    "known_cost_usd_equivalent": 15.105083,
+    "known_duration_seconds": 4240.669,
+    "seed_reviews": 0,
+    "shards": 29,
+    "unknown_cost_shards": 0
+  }
+}

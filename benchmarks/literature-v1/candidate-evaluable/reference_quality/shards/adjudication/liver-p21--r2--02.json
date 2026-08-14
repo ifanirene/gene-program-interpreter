@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-502a14189be4e1c2dff2",
+    "RL-5cd2513174caf50a54cb",
+    "RL-706e258c97dffbb8395e",
+    "RL-74bfd22b55ef7de1a593"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 32428,
+        "source_type": "full_text",
+        "start": 32287,
+        "text": "After successful knockdown of all transcripts (Fig. 5D), cholesterol levels were significantly decreased compared with the control (Fig. 5E)."
+      },
+      "function_supported_genes": [
+        "Msmo1",
+        "Nsdhl",
+        "Erg28"
+      ],
+      "rationale": "siRNA knockdown of Msmo1(SC4MOL), Nsdhl, and Erg28 causally reduces total cellular cholesterol in human Huh7 liver cells, supporting their C4-demethylation biosynthesis role; Hsd17b7 is gene-specifically profiled but its catalytic contribution appears only as background. Human/hamster cell lines make the mouse-hepatocyte context indirect, so the declared partial is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-502a14189be4e1c2dff2",
+      "studied_genes": [
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Erg28"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1513,
+        "source_type": "abstract",
+        "start": 1306,
+        "text": "the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells"
+      },
+      "function_supported_genes": [],
+      "rationale": "The abstract links the Scap:Insig expression ratio to disrupted SREBP2 cholesterol feedback, supporting a narrower dysregulated form of the regulator relationship but in hepatic stellate cells, not hepatocytes, and without any supplied program gene. The cell-type mismatch makes the declared direct context an overclaim.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5cd2513174caf50a54cb",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 3435,
+        "source_type": "full_text",
+        "start": 3245,
+        "text": "Farnesyl diphosphate synthase (FDPs), an integral enzyme in the mevalonate pathway involved in cholesterol biosynthesis, has emerged as a crucial regulator of metabolic homeostasis in cancer"
+      },
+      "function_supported_genes": [],
+      "rationale": "Fdps is gene-specifically investigated, but the functional experiments address HCC proliferation via an FDPS-G6PD interaction; its mevalonate/cholesterol-biosynthesis role is asserted only as introductory background, so function is not supported. Human HCC cell lines make the mouse-hepatocyte context indirect.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-706e258c97dffbb8395e",
+      "studied_genes": [
+        "Fdps"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 904,
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes."
+      },
+      "function_supported_genes": [],
+      "rationale": "In vivo conditional SCAP knockout in mouse liver causally reduces cholesterol synthesis and biosynthetic-enzyme mRNAs, directly supporting mechanism 2's claim of SCAP as master regulator of the hepatic program; Scap is a regulator, so no supplied genes are credited. Mouse liver hepatocyte context matches the target for this general mechanism, so direct is accurate.",
+      "red_flags": [],
+      "review_id": "RL-74bfd22b55ef7de1a593",
+      "studied_genes": [],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7503885,
+    "duration_api_ms": 237533,
+    "duration_ms": 235406,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 236.62
+  }
+}

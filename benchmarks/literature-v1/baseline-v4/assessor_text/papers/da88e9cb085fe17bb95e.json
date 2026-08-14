@@ -1,0 +1,14 @@
+{
+  "content_hash": "980c1b61cc6b3e9b5776fd15b06ac37d3442e9e3ad3dbf7d3b7d5fdcb336f3ad",
+  "doi": "10.1016/j.yexcr.2019.111503",
+  "errors": [],
+  "paper_key": "da88e9cb085fe17bb95e",
+  "pmcid": null,
+  "pmid": "31336100",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Hypoxic blood-brain barrier (BBB) dysfunction is a common feature of CNS diseases however mechanisms underlying barrier disturbance are still largely unknown. This study investigated the role of transforming growth factor \u03b2 (TGF\u03b2), a cytokine known to induce expression of the proprotein convertase Furin, in hypoxia-mediated barrier compromise. We show that exposure of brain endothelial cells (ECs) to hypoxia (1% O2) rapidly stimulates their migration. Additional exogenous TGF\u03b2 (0.4 nM) exposure potentiated this effect and increased Furin expression in a TGF\u03b2 type I receptor activin-like kinase 5 (ALK5) - dependent manner (prevented by 10 \u03bcM SB431542). Furin inhibition prevented hypoxia-induced EC migration and blocked TGF\u03b2-induced potentiation suggesting existence of a feedback loop. TGF\u03b2 and Furin were also critical for hypoxia-induced BBB dysfunction. TGF\u03b2 treatment aggravated hypoxia-induced BBB permeability but ALK5 or Furin blockade reversed injury-induced permeability changes. Thus during insult Furin compromises endothelial integrity by mediating the effects of TGF\u03b2. Targeting the Furin or ALK5 pathway may offer novel therapeutic strategies for improving BBB stability and CNS function during disease.",
+  "text_type": "abstract",
+  "title": "Furin inhibition prevents hypoxic and TGF\u03b2-mediated blood-brain barrier disruption."
+}

@@ -1,0 +1,122 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-aeede7f1fab29205b9cc",
+    "RL-b017318c593b56289789",
+    "RL-b7b08380dfd123b1605c",
+    "RL-b880133a833ce5a6f7da"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 728,
+        "source_type": "abstract",
+        "start": 619,
+        "text": "HAOX2 is expressed predominantly in liver and kidney and displays highest activity toward 2-hydroxypalmitate."
+      },
+      "function_supported_genes": [
+        "Hao2"
+      ],
+      "rationale": "Human HAOX2 (the Hao2 ortholog) is biochemically characterized as a liver-expressed peroxisomal 2-hydroxy fatty acid oxidase, gene-specifically supporting the assigned alpha-oxidation function. The finding is in human tissue, a different species from mouse aging/MASLD liver, so the declared partial context is overclaimed (actually indirect).",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-aeede7f1fab29205b9cc",
+      "studied_genes": [
+        "Hao2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 960,
+        "source_type": "abstract",
+        "start": 639,
+        "text": "Immunotitration studies using antibodies specific to the alpha class GSTs, GSTA1-1, GSTA2-2, and GSTA3-3, indicate that these GST isozymes account for approximately half of the glutathione peroxidase activity toward phospholipid hydroperoxides present in the 28,000g supernatant fractions of rat and mouse liver extracts."
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "Isozyme-specific immunotitration naming GSTA3-3 in mouse and rat liver directly demonstrates alpha-class GST glutathione-peroxidase antioxidant activity, providing gene-specific support for the assigned function. The mouse-liver hepatocyte system is the target context, so the direct label is accurate.",
+      "red_flags": [],
+      "review_id": "RL-b017318c593b56289789",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 669,
+        "source_type": "abstract",
+        "start": 556,
+        "text": "bile acids strongly inhibited the cysteine dioxygenase type-1-mediated (CDO1-mediated) cysteine catabolic pathway"
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "CDO1-overexpressing mouse hepatocytes and FXR-dependent modulation establish CDO1 as the mediator of hepatic cysteine catabolism, directly supporting the core assigned function; the unstated taurine-conjugation clause is a broader claim not required of one citation. Mouse liver hepatocytes are the target context, so direct is accurate.",
+      "red_flags": [],
+      "review_id": "RL-b7b08380dfd123b1605c",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 12746,
+        "source_type": "full_text",
+        "start": 12526,
+        "text": "WT but not Nrf2−/− liver slices treated with arsenic resulted in increased mRNA levels of the key fructose metabolism pathway enzymes ketohexokinase (Khk), sorbitol dehydrogenase (Sord), and triokinase/FMN cyclase (Tkfc)"
+      },
+      "function_supported_genes": [
+        "Sord"
+      ],
+      "rationale": "ChIP-PCR ARE binding and Nrf2-knockout data gene-specifically confirm Sord as an NRF2-regulated hepatic fructose-metabolism gene, supporting the 'under NRF2 regulation' clause, but the study found minimal polyol-pathway flux and did not demonstrate the sorbitol-to-fructose conversion, so support is partial. The arsenic-induced diabetes model is not aging or MASLD, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b880133a833ce5a6f7da",
+      "studied_genes": [
+        "Sord"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5295965,
+    "duration_api_ms": 157500,
+    "duration_ms": 155195,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 156.238
+  }
+}

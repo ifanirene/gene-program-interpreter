@@ -1,0 +1,16 @@
+{
+  "content_hash": "90e46dd9c34b7044695729fce34487bcebd87fd76e5c33716093cbc811bee012",
+  "doi": "10.1172/jci76431",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "c31f8176bfa944bf9771",
+  "pmcid": "PMC4151216",
+  "pmid": "25083995",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Canonical WNT signaling is required for proper vascularization of the CNS during embryonic development. Here, we used mice with targeted mutations in genes encoding canonical WNT pathway members to evaluate the exact contribution of these components in CNS vascular development and in specification of the blood-brain barrier (BBB) and blood-retina barrier (BRB). We determined that vasculature in various CNS regions is differentially sensitive to perturbations in canonical WNT signaling. The closely related WNT signaling coreceptors LDL receptor-related protein 5 (LRP5) and LRP6 had redundant functions in brain vascular development and barrier maintenance; however, loss of LRP5 alone dramatically altered development of the retinal vasculature. The BBB in the cerebellum and pons/interpeduncular nuclei was highly sensitive to decrements in canonical WNT signaling, and WNT signaling was required to maintain plasticity of barrier properties in mature CNS vasculature. Brain and retinal vascular defects resulting from ablation of Norrin/Frizzled4 signaling were ameliorated by stabilizing \u03b2-catenin, while inhibition of \u03b2-catenin-dependent transcription recapitulated the vascular development and barrier defects associated with loss of receptor, coreceptor, or ligand, indicating that Norrin/Frizzled4 signaling acts predominantly through \u03b2-catenin-dependent transcriptional regulation. Together, these data strongly support a model in which identical or nearly identical canonical WNT signaling mechanisms mediate neural tube and retinal vascularization and maintain the BBB and BRB.",
+  "text_type": "abstract",
+  "title": "Canonical WNT signaling components in vascular development and barrier formation."
+}

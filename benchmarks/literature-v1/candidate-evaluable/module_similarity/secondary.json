@@ -1,0 +1,1426 @@
+{
+  "assessment_type": "model",
+  "assessments": [
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "brain-p10--baseline-replicate",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.99
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.91
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.98
+        }
+      ],
+      "moduleSemanticSimilarity": 0.96,
+      "overall_rationale": "The replicates contain three strongly corresponding programs: core ciliogenesis, endothelial ciliary mechanosensing, and FZD4/GATA2/ENG-mediated CNS vascular-barrier regulation, with weaker cross-pair overlap driven mainly by ciliary dependence or shared brain-endothelial context.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe the same core ciliogenesis machinery, including basal-body docking, transition-zone organization, IFT, and BBSome-mediated trafficking with nearly identical genes.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.99
+        },
+        {
+          "left_module": 1,
+          "rationale": "The right module uses the same ciliary apparatus but shifts the central meaning from organelle construction and trafficking to endothelial flow sensing and BBB maturation.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.55
+        },
+        {
+          "left_module": 1,
+          "rationale": "Core cilia construction is mechanistically distinct from FZD4, GATA2, and Endoglin control of endothelial identity and vascular-barrier formation.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.04
+        },
+        {
+          "left_module": 2,
+          "rationale": "Endothelial mechanosensing requires the core ciliogenesis machinery described on the right, but its defining output is shear-stress detection rather than cilium assembly itself.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.55
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both modules interpret the ciliary genes as enabling blood-flow mechanosensing in brain endothelial cells, with the right module adding BBB maturation as a downstream outcome.",
+          "relationship": "meaningful_refinement",
+          "right_module": 2,
+          "similarity": 0.91
+        },
+        {
+          "left_module": 2,
+          "rationale": "The modules share brain-endothelial and vascular-barrier context, but ciliary shear sensing differs centrally from Wnt/Norrin, GATA2, and Endoglin regulation.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.29
+        },
+        {
+          "left_module": 3,
+          "rationale": "FZD4/GATA2/Endoglin-mediated CNS vascular regulation and core cilium assembly have no substantial shared mechanism or asserted output.",
+          "relationship": "different",
+          "right_module": 1,
+          "similarity": 0.04
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both concern brain endothelial maturation and BBB function, but one centers on receptor and transcriptional regulation while the other centers on ciliary mechanotransduction.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.34
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both modules describe the same FZD4-dependent Norrin/Wnt, GATA2, and Endoglin regulatory program governing CNS angiogenesis, endothelial identity, and BBB integrity.",
+          "relationship": "same_core",
+          "right_module": 3,
+          "similarity": 0.98
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "brain-p10--candidate-replicate",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.95
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 3,
+          "similarity": 0.0
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 2,
+          "similarity": 0.76
+        }
+      ],
+      "moduleSemanticSimilarity": 0.57,
+      "overall_rationale": "Both sets reproduce the primary-cilium assembly and mitochondrial programs, while the replicate folds ciliary signaling into its broader ciliogenesis module and reports no third module.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules center on primary-cilium assembly through distal appendages, transition-zone proteins, and intraflagellar transport, with only minor differences in component scope.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.95
+        },
+        {
+          "left_module": 1,
+          "rationale": "The modules share brain-endothelial context and one listed gene, but cilium biogenesis and mitochondrial metabolism are mechanistically distinct.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.05
+        },
+        {
+          "left_module": 1,
+          "rationale": "The right-hand slot contains no reported module.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.0
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both concern ciliary trafficking and Hedgehog competence, but the left module emphasizes BBSome-dependent GPCR signaling whereas the right emphasizes structural ciliogenesis broadly.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.58
+        },
+        {
+          "left_module": 2,
+          "rationale": "Ciliary GPCR–Hedgehog signaling and mitochondrial metabolic homeostasis share only the endothelial developmental context.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.03
+        },
+        {
+          "left_module": 2,
+          "rationale": "The right-hand slot contains no reported module.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.0
+        },
+        {
+          "left_module": 3,
+          "rationale": "Mitochondrial membrane organization and ciliary assembly are distinct mechanisms despite their shared brain-endothelial context.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.03
+        },
+        {
+          "left_module": 3,
+          "rationale": "The right module retains the same CHCHD6 cristae and METAP1D protein-maturation mechanisms while broadening the program to additional mitochondrial metabolic pathways.",
+          "relationship": "meaningful_refinement",
+          "right_module": 2,
+          "similarity": 0.76
+        },
+        {
+          "left_module": 3,
+          "rationale": "The right-hand slot contains no reported module.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.0
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "brain-p10--r1--cross-setting",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.94
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.39
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.18
+        }
+      ],
+      "moduleSemanticSimilarity": 0.503333,
+      "overall_rationale": "The strongest correspondence is the shared primary-cilium assembly machinery, while ciliary mechanosensing, Hedgehog trafficking, BBB regulation, and mitochondrial organization represent distinct outputs or mechanisms despite some endothelial context overlap.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe primary-cilium biogenesis through IFT, basal-body/distal-appendage, transition-zone, and trafficking machinery, with the right module placing greater emphasis on assembly initiation.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.94
+        },
+        {
+          "left_module": 1,
+          "rationale": "The right module refines the left module's BBSome, NME7, and TBC1D32 components into the narrower output of ciliary GPCR trafficking and Hedgehog signaling.",
+          "relationship": "meaningful_refinement",
+          "right_module": 2,
+          "similarity": 0.78
+        },
+        {
+          "left_module": 1,
+          "rationale": "Ciliary biogenesis and trafficking are mechanistically unrelated to mitochondrial crista organization and mitochondrial protein maturation.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.02
+        },
+        {
+          "left_module": 2,
+          "rationale": "Cilium assembly is required for endothelial ciliary mechanosensing, but the right module describes organelle construction rather than flow detection or shear-stress signaling.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.53
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both concern signaling through functional primary cilia, but endothelial shear mechanotransduction and BBSome-dependent Hedgehog GPCR trafficking have different mechanisms and predicted phenotypes.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.39
+        },
+        {
+          "left_module": 2,
+          "rationale": "The modules share only a postnatal brain-endothelial context, with mitochondrial maintenance distinct from ciliary flow mechanosensing.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.14
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both occur in developing brain endothelial cells and mention Fzd4, but cilium assembly is distinct from Norrin/Wnt-driven angiogenesis and BBB maintenance.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.2
+        },
+        {
+          "left_module": 3,
+          "rationale": "Hedgehog signaling through ciliary GPCR trafficking differs from Norrin/Wnt, GATA2, and Endoglin control of CNS angiogenesis and barrier identity.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.12
+        },
+        {
+          "left_module": 3,
+          "rationale": "The modules share a brain-endothelial developmental context, but mitochondrial biogenesis is only a potential metabolic support process for the asserted BBB and angiogenic program.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.18
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "brain-p10--r2--cross-setting",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.97
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.18
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.0
+        }
+      ],
+      "moduleSemanticSimilarity": 0.383333,
+      "overall_rationale": "The sets strongly agree on primary-cilium construction, while the candidate replaces the baseline's endothelial mechanosensing and vascular signaling modules with mitochondrial metabolism and one missing module.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe the same primary-cilium assembly machinery, including transition-zone organization, intraflagellar transport, BBSome trafficking, and ciliogenesis.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.97
+        },
+        {
+          "left_module": 1,
+          "rationale": "Ciliary biogenesis and mitochondrial metabolic homeostasis are mechanistically distinct despite incidental inclusion of Wdpcp in the mitochondrial gene list.",
+          "relationship": "different",
+          "right_module": 2,
+          "similarity": 0.03
+        },
+        {
+          "left_module": 1,
+          "rationale": "The right slot is explicitly a missing module.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.0
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both concern endothelial primary cilia, but one centers on flow mechanosensing and BBB maturation whereas the other centers on constructing the ciliary apparatus.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.52
+        },
+        {
+          "left_module": 2,
+          "rationale": "The modules share only the brain-endothelial and BBB context, with distinct ciliary mechanosensing versus mitochondrial metabolic mechanisms.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.18
+        },
+        {
+          "left_module": 2,
+          "rationale": "The right slot is explicitly a missing module.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.0
+        },
+        {
+          "left_module": 3,
+          "rationale": "They intersect in CNS vascular barrier development, but Wnt/Norrin, GATA2, and Endoglin regulation is distinct from primary-cilium assembly and Hedgehog-associated patterning.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.22
+        },
+        {
+          "left_module": 3,
+          "rationale": "They share an endothelial BBB setting but assert unrelated receptor-transcriptional vascular regulation and mitochondrial metabolism.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.14
+        },
+        {
+          "left_module": 3,
+          "rationale": "The right slot is explicitly a missing module.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.0
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "brain-p11--baseline-replicate",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.98
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 3,
+          "similarity": 0.82
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 2,
+          "similarity": 0.09
+        }
+      ],
+      "moduleSemanticSimilarity": 0.63,
+      "overall_rationale": "The replicate sets strongly reproduce the canonical tip-cell module and the TGF-β-dependent CNS vascular module, while the left mechanosensory ion-channel module has no corresponding right-side program.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe Nrp1–CDC42-dependent tip-cell identity, filopodial guidance, and sprouting supported by Angpt2, Cxcr4, and Cdc42ep3.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.98
+        },
+        {
+          "left_module": 1,
+          "rationale": "Both concern postnatal brain sprouting and share CXCR4, HOPX, Nrp1, and Tek, but the right module emphasizes Notch-linked arterial specification rather than tip-cell filopodia.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.56
+        },
+        {
+          "left_module": 1,
+          "rationale": "The modules overlap through Angpt2, Nrp1, and postnatal CNS angiogenesis, but tip-cell migration and TGF-β-dependent vascular integrity are distinct central mechanisms and outputs.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.38
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both specify CNS endothelial tip behavior involving Nrp1, but the left module centers ALK5/TGF-β-dependent D-tip identity whereas the right centers CDC42-mediated filopodia.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.52
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both link TGF-β/Nrp1 signaling to CNS sprouting-state specification, but the right module primarily asserts a Dll4-Notch-CXCR4 transition toward arterial fate.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.55
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both center required Tgfbr1/2 signaling, regulated Angpt2, and deep postnatal brain vascular development, with D-tip specification versus integrity and remodeling as related output emphases.",
+          "relationship": "meaningful_refinement",
+          "right_module": 3,
+          "similarity": 0.82
+        },
+        {
+          "left_module": 3,
+          "rationale": "The only overlap is the postnatal brain endothelial context, as ion-channel mechanosensing and neurovascular coupling are mechanistically distinct from angiogenic tip-cell filopodia.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.08
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both occur in developing brain endothelium, but membrane ion-channel mechanosensing is peripheral to Notch-CXCR4-driven sprouting and arterial specification.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.09
+        },
+        {
+          "left_module": 3,
+          "rationale": "Brain vascular context is shared, but mechanosensory calcium signaling and TGF-β/Angpt2-dependent vascular integrity have different mechanisms and predicted phenotypes.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.1
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "brain-p11--candidate-replicate",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.97
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 3,
+          "similarity": 0.2
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 2,
+          "similarity": 0.75
+        }
+      ],
+      "moduleSemanticSimilarity": 0.64,
+      "overall_rationale": "The strongest correspondences are the shared tip-cell sprouting program and the narrower Kcnj2 mechanosensing module, while other pairs share only vascular context or secondary angiogenic outputs.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe Angpt2/Cxcr4-driven brain endothelial tip-cell sprouting, with Nrp1–CDC42 activity and reduced Tek signaling promoting vascular network formation.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.97
+        },
+        {
+          "left_module": 1,
+          "rationale": "Both concern postnatal vascular adaptation, but tip-cell sprouting and Kcnj2-dependent flow sensing are distinct mechanisms and outputs.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.15
+        },
+        {
+          "left_module": 1,
+          "rationale": "Tnfrsf11b-mediated survival and angiogenic support overlap with vascular sprouting, but the right module emphasizes permissive metabolic and survival mechanisms rather than tip-cell specification.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.47
+        },
+        {
+          "left_module": 2,
+          "rationale": "The modules share Angpt2, Cxcr4, Rgs6, Tek, and arteriovenous patterning biology, but one centers identity specification while the other centers active tip-cell sprouting.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.58
+        },
+        {
+          "left_module": 2,
+          "rationale": "Arteriovenous identity specification and potassium-channel-mediated shear sensing share cerebrovascular context but not their central mechanism or predicted phenotype.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.14
+        },
+        {
+          "left_module": 2,
+          "rationale": "Endothelial survival and metabolic support can enable vascular remodeling, but they do not directly reproduce the arterial-versus-venous identity program.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.2
+        },
+        {
+          "left_module": 3,
+          "rationale": "BBB transport and flow sensing are distinct from tip-cell sprouting despite their common brain endothelial and vascular-development context.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.15
+        },
+        {
+          "left_module": 3,
+          "rationale": "The right module closely reproduces the Kcnj2-dependent shear-sensing and flow-induced vasodilation arm of the left module while omitting its BBB transport and TGF-beta components.",
+          "relationship": "meaningful_refinement",
+          "right_module": 2,
+          "similarity": 0.75
+        },
+        {
+          "left_module": 3,
+          "rationale": "The modules share Slc1a1 and Tgfbr1/Tgfbr2, but assign them to different outputs—BBB glutamate homeostasis and integrity versus metabolic support of angiogenic remodeling.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.38
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "brain-p11--r1--cross-setting",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.98
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.36
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.65
+        }
+      ],
+      "moduleSemanticSimilarity": 0.663333,
+      "overall_rationale": "The strongest correspondences are the nearly identical tip-cell sprouting modules and the shared Kcnj2-centered mechanosensing modules, while the remaining similarities reflect narrower overlap in endothelial identity or TGF-β-dependent brain vascular biology.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe the same Angpt2/Cxcr4/Cdc42ep3-positive tip-cell sprouting program, with matching Nrp1 promotion and Tek opposition in postnatal brain endothelium.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.98
+        },
+        {
+          "left_module": 1,
+          "rationale": "They share brain vascular patterning genes and angiogenic-versus-arterial identity features, but one centers on active tip-cell sprouting whereas the other centers on arteriovenous specification.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.43
+        },
+        {
+          "left_module": 1,
+          "rationale": "The modules share only the broad setting of specialized brain endothelium, with distinct angiogenic and BBB transport-mechanosensing outputs.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.13
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both concern brain endothelial tip-cell angiogenesis, but the left module specifically requires TGF-β/ALK5 signaling for diving-tip identity while the right centers on Nrp1–CDC42 and Angpt2–Tek sprouting control.",
+          "relationship": "meaningful_refinement",
+          "right_module": 1,
+          "similarity": 0.68
+        },
+        {
+          "left_module": 2,
+          "rationale": "Angpt2-linked nonarterial identity and postnatal brain vascular development overlap, but TGF-β-dependent diving-tip formation and arteriovenous specification are different central mechanisms and outputs.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.36
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both assign a positive role to Tgfbr1/Tgfbr2 signaling in brain endothelial development, but one predicts diving-tip and deep-plexus defects while the other emphasizes BBB integrity alongside transport and mechanosensing.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.46
+        },
+        {
+          "left_module": 3,
+          "rationale": "Aside from their shared brain endothelial context, membrane ion-channel mechanosensing and angiogenic tip-cell sprouting have different mechanisms and validation phenotypes.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.1
+        },
+        {
+          "left_module": 3,
+          "rationale": "Rgs6 and neurovascular specialization provide peripheral overlap, but membrane calcium and flow sensing are mechanistically distinct from arteriovenous identity specification.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.2
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both center partly on endothelial Kcnj2-mediated flow sensing, but the left extends this to calcium-channel microdomains whereas the right combines mechanosensing with BBB glutamate transport and TGF-β-dependent barrier integrity.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.65
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "brain-p11--r2--cross-setting",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.96
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.14
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.55
+        }
+      ],
+      "moduleSemanticSimilarity": 0.55,
+      "overall_rationale": "The strongest concordance is the shared NRP1–CDC42/CXCR4/ANGPT2 tip-cell program, while TGF-β modules overlap mainly in vascular remodeling and the flow-sensing module is largely setting-level context.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both describe an ANGPT2/CXCR4-positive endothelial tip-cell state in which NRP1 activates CDC42-dependent filopodial guidance during brain-vessel sprouting.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.96
+        },
+        {
+          "left_module": 1,
+          "rationale": "The modules share postnatal cerebrovascular maturation context, but tip-cell migration and filopodia are mechanistically distinct from potassium-channel-mediated flow sensing.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.17
+        },
+        {
+          "left_module": 1,
+          "rationale": "Both support endothelial migration and angiogenesis, but one specifies tip-cell guidance whereas the other centers on anti-apoptotic and metabolic support.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.38
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both connect CXCR4, Notch-associated arterial specification, NRP1, and TEK to sprouting, although the left module more specifically emphasizes the tip-to-arterial or stalk transition.",
+          "relationship": "meaningful_refinement",
+          "right_module": 1,
+          "similarity": 0.74
+        },
+        {
+          "left_module": 2,
+          "rationale": "They meet only in the broad context of postnatal vascular maturation, with no supplied mechanistic link between Dll4–Notch fate specification and KCNJ2 flow sensing.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.14
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both concern angiogenic remodeling and include supportive TGF-β signaling, but arterial fate coupling differs from survival and metabolic fueling.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.34
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both involve ANGPT2-dependent vascular remodeling, but the left centers on TGF-β-mediated integrity and ANGPT2 restraint while the right centers on ANGPT2-driven vessel destabilization and sprouting.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.42
+        },
+        {
+          "left_module": 3,
+          "rationale": "Aside from cerebrovascular maturation context, TGF-β/ANGPT2 control of integrity is distinct from KCNJ2-mediated mechanotransduction and vasodilation.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.16
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both assign TGFBR1/TGFBR2 a positive role in vascular development and remodeling, but the principal mechanisms and predicted phenotypes are integrity and hemorrhage versus survival and metabolic angiogenic capacity.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.55
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "liver-p21--baseline-replicate",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.99
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 3,
+          "similarity": 0.48
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 2,
+          "similarity": 0.3
+        }
+      ],
+      "moduleSemanticSimilarity": 0.59,
+      "overall_rationale": "The replicates strongly agree on the enzymatic cholesterol-biosynthesis module, but their matched regulatory and VLDL-coupling narratives contain explicit reversals in predicted knockout effects despite sharing the same molecular components.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe the same near-complete mevalonate-to-cholesterol enzyme cascade in hepatocytes with essentially identical pathway output and genes.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.99
+        },
+        {
+          "left_module": 1,
+          "rationale": "The modules concern the same cholesterol-synthesis program, but one is the enzymatic pathway while the other is its upstream SREBP2 sterol-sensing control circuit.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.52
+        },
+        {
+          "left_module": 1,
+          "rationale": "Both center on hepatic mevalonate and cholesterol synthesis, although the right module emphasizes pathological elevation, senescence, and VLDL-related regulation rather than pathway execution.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.55
+        },
+        {
+          "left_module": 2,
+          "rationale": "The SREBP2 feedback circuit directly controls the enzymatic pathway described on the right, but regulator control and metabolic execution are distinct mechanisms.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.5
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both identify the same SCAP–INSIG1–SREBP2–LDLR circuit, but they explicitly predict opposite effects of Scap and Insig1 knockout on program activity.",
+          "relationship": "opposed",
+          "right_module": 2,
+          "similarity": 0.35
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both connect SREBP-mediated sterol regulation to hepatic cholesterol synthesis, but the right module shifts toward MASLD, aging, senescence, and VLDL disruption.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.48
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both involve hepatic cholesterol synthesis, but the left module specifically asserts coupling to triglyceride-loaded VLDL assembly and secretion.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.48
+        },
+        {
+          "left_module": 3,
+          "rationale": "VLDL output and SREBP2 sterol sensing intersect through cholesterol demand, but the modules focus on different regulators, mechanisms, and predicted phenotypes.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.3
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both invoke Dgat2/Mttp-dependent VLDL export in MASLD and aging, but one says impaired export attenuates sterol synthesis whereas the other says it activates and amplifies it.",
+          "relationship": "opposed",
+          "right_module": 3,
+          "similarity": 0.2
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "liver-p21--candidate-replicate",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.96
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.98
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.66
+        }
+      ],
+      "moduleSemanticSimilarity": 0.866667,
+      "overall_rationale": "The sets strongly reproduce the cholesterol-biosynthetic enzyme and SREBP2 regulatory programs, while their third modules overlap more broadly in hepatic lipid handling and MASLD but emphasize different metabolic mechanisms.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe the same sequential hepatic mevalonate and post-squalene cholesterol-biosynthesis pathway, with the right module adding acetyl-CoA supply and upstream sterol sensing.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.96
+        },
+        {
+          "left_module": 1,
+          "rationale": "They concern the same cholesterol-synthesis program, but the left centers on catalytic pathway enzymes whereas the right centers on SREBP2-dependent transcriptional control.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.48
+        },
+        {
+          "left_module": 1,
+          "rationale": "The modules intersect at hepatocyte cholesterol esterification through ACAT2, but the right primarily concerns downstream lipid storage, steatosis, and export rather than sterol synthesis.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.29
+        },
+        {
+          "left_module": 2,
+          "rationale": "The left module's SCAP-INSIG1-SREBP2 mechanism is included in the right module, but the right is primarily organized around the enzymatic biosynthesis pathway it regulates.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.55
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both modules assert essentially the same SCAP-INSIG1-dependent SREBP2 transcriptional control of hepatic cholesterol genes, including ERG28 and RDH11.",
+          "relationship": "same_core",
+          "right_module": 2,
+          "similarity": 0.98
+        },
+        {
+          "left_module": 2,
+          "rationale": "They share a hepatic cholesterol-homeostasis and MASLD setting, but transcriptional sterol sensing and downstream lipid esterification, storage, and export are distinct mechanisms.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.25
+        },
+        {
+          "left_module": 3,
+          "rationale": "ACSS2-mediated acetyl-CoA provision directly feeds the biosynthetic pathway described on the right, but triglyceride synthesis and lipoprotein export are not its central mechanism.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.44
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both relate to hepatic cholesterol homeostasis, but acetyl-CoA supply and lipid export have little mechanistic overlap with SCAP-INSIG1-SREBP2 transcriptional regulation.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.19
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both describe MASLD-associated hepatic lipid–cholesterol coupling through DGAT2 and MTTP, although the left emphasizes ACSS2 substrate provision while the right emphasizes ACAT2 esterification and steatosis control.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.66
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "liver-p21--r1--cross-setting",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.98
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.97
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.91
+        }
+      ],
+      "moduleSemanticSimilarity": 0.953333,
+      "overall_rationale": "The sets closely correspond at all three biological levels: pathway execution, sterol-sensing transcriptional control, and coupling of cholesterol synthesis to hepatic lipid supply and export.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe essentially the same near-complete enzymatic mevalonate-to-cholesterol cascade in hepatocytes, with only minor differences in substrate supply and cholesterol esterification details.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.98
+        },
+        {
+          "left_module": 1,
+          "rationale": "Both concern hepatic cholesterol synthesis, but the left module is the enzymatic pathway whereas the right module centers on SREBP2-dependent transcriptional control.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.49
+        },
+        {
+          "left_module": 1,
+          "rationale": "They overlap through ACSS2-supported cholesterol synthesis and hepatic lipid metabolism, but the right module emphasizes substrate provision, triglyceride handling, and VLDL export rather than the sterol enzyme cascade.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.38
+        },
+        {
+          "left_module": 2,
+          "rationale": "The modules address the same cholesterol program, but the left specifies its SCAP–INSIG1–SREBP2 regulatory circuit while the right describes the downstream biosynthetic enzymes.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.5
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both describe SCAP–INSIG1-dependent SREBP2 activation, LDLR-linked feedback, and transcriptional regulation of hepatic cholesterol homeostasis with matching functional direction.",
+          "relationship": "same_core",
+          "right_module": 2,
+          "similarity": 0.97
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both link regulatory perturbations to hepatic cholesterol homeostasis, but sterol-sensing transcriptional feedback is mechanistically distinct from acetyl-CoA supply and lipoprotein assembly.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.29
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both concern hepatic cholesterol production, but VLDL-triglyceride export coupling is distinct from the downstream enzymatic sterol biosynthesis cascade.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.36
+        },
+        {
+          "left_module": 3,
+          "rationale": "They share coordinated hepatic cholesterol homeostasis and MASLD context, but lipid export control and SREBP2 sterol sensing are different central mechanisms.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.4
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both connect ACSS2-derived substrate supply and DGAT2–MTTP-mediated triglyceride/VLDL handling to hepatic cholesterol synthesis and export, with the right adding mechanistic detail on ACAT2 coupling.",
+          "relationship": "meaningful_refinement",
+          "right_module": 3,
+          "similarity": 0.91
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "liver-p21--r2--cross-setting",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.98
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.96
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.64
+        }
+      ],
+      "moduleSemanticSimilarity": 0.86,
+      "overall_rationale": "The sets strongly agree on the enzymatic cholesterol-biosynthesis and SCAP–SREBP2–INSIG1 control modules, while their MASLD modules overlap in lipid-homeostasis context but emphasize different mechanisms and outcomes.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both describe the same near-complete, hepatocyte de novo cholesterol pathway from acetyl-CoA through mevalonate and post-squalene reactions, with the right module adding scaffold and regulatory detail.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.98
+        },
+        {
+          "left_module": 1,
+          "rationale": "Both concern the cholesterol-synthesis program, but the left centers its sequential metabolic reactions whereas the right centers upstream SREBP2-dependent transcriptional control.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.52
+        },
+        {
+          "left_module": 1,
+          "rationale": "They share hepatic cholesterol and Acat2 biology, but the right focuses on esterification, triglyceride regulation, and lipid export in MASLD rather than de novo sterol synthesis.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.3
+        },
+        {
+          "left_module": 2,
+          "rationale": "The right module contains the same SCAP–INSIG1 regulation of cholesterol biosynthesis, but its central subject is the downstream enzymatic pathway rather than the regulatory circuit.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.58
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both identify the canonical SCAP–SREBP2–INSIG1 axis as the transcriptional controller of hepatic cholesterol-synthesis genes, with only secondary targets and feedback details differing.",
+          "relationship": "same_core",
+          "right_module": 2,
+          "similarity": 0.96
+        },
+        {
+          "left_module": 2,
+          "rationale": "The modules intersect only broadly in hepatic lipid regulation, since the left concerns SREBP2 control of sterol synthesis and the right concerns downstream lipid storage and export in MASLD.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.22
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both involve hepatic cholesterol synthesis, but the left interprets its dysregulation as a driver of MASLD and aging-associated senescence whereas the right describes the biosynthetic machinery itself.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.5
+        },
+        {
+          "left_module": 3,
+          "rationale": "The left invokes SREBP-driven mevalonate activation in disease, but its main outputs are steatosis, senescence, and export-linked dysregulation rather than the transcriptional-control mechanism emphasized on the right.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.42
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both connect Acat2, Dgat2, and Mttp to hepatic lipid imbalance and MASLD, but the left centers amplified mevalonate synthesis and senescence while the right centers esterification, triglyceride control, and VLDL export.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.64
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "liver-p25--baseline-replicate",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.98
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.97
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.91
+        }
+      ],
+      "moduleSemanticSimilarity": 0.953333,
+      "overall_rationale": "The replicates contain three strongly conserved programs—xenobiotic conjugation, peroxisomal lipid oxidation, and sulfur/nitrogen metabolism—with only modest differences in scope and emphasis.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both modules describe the same Phase I/II hepatic oxidation and conjugation program for xenobiotics, steroids, and bile acids with concordant enzyme roles and excretory output.",
+          "relationship": "same_core",
+          "right_module": 1,
+          "similarity": 0.98
+        },
+        {
+          "left_module": 1,
+          "rationale": "The modules intersect through hepatic oxidative metabolism and aldehyde detoxification, but fatty-acid catabolism and lipid-droplet handling are peripheral to the left module's conjugative xenobiotic program.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.22
+        },
+        {
+          "left_module": 1,
+          "rationale": "Bile-acid coupling and general hepatic metabolic homeostasis provide context, but cysteine and nitrogen disposal use distinct central mechanisms from xenobiotic oxidation and conjugation.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.14
+        },
+        {
+          "left_module": 2,
+          "rationale": "ER lipid processing, Cyb5b, and sterol export connect the modules, but lipid storage and fatty-acid oxidation differ centrally from xenobiotic and steroid conjugation.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.23
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both modules encode essentially the same coordinated lipid-droplet, peroxisomal fatty-acid oxidation, lipid-aldehyde clearance, and peroxisomal quality-control mechanism.",
+          "relationship": "same_core",
+          "right_module": 2,
+          "similarity": 0.97
+        },
+        {
+          "left_module": 2,
+          "rationale": "They share only broad hepatic metabolic-stress context and a peripheral Sord association, while their substrates, machinery, and physiological outputs differ.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.1
+        },
+        {
+          "left_module": 3,
+          "rationale": "Taurine-dependent bile-acid conjugation links sulfur metabolism indirectly to bile-acid detoxification, but the asserted enzymatic mechanisms and disposal products are different.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.15
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both concern hepatic catabolic homeostasis and oxidative by-product management, but amino-acid nitrogen disposal is mechanistically distinct from peroxisomal fatty-acid oxidation.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.11
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both center on Cdo1-driven cysteine catabolism and taurine production while incorporating Agmat, Car5a, G6pc, and Insr connections to nitrogen disposal and metabolic control, with the right module placing greater emphasis on sulfur homeostasis.",
+          "relationship": "meaningful_refinement",
+          "right_module": 3,
+          "similarity": 0.91
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "liver-p25--candidate-replicate",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.62
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 3,
+          "similarity": 0.48
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 2,
+          "similarity": 0.88
+        }
+      ],
+      "moduleSemanticSimilarity": 0.66,
+      "overall_rationale": "The sets reproduce the bile-acid sulfation and lipid-droplet/peroxisomal programs strongly, while the remaining annotations redistribute detoxification, taurine synthesis, and polyol metabolism across broader mixed modules.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both describe hepatic detoxification and share aldehyde-, glutathione-, and aldo-keto-dependent Phase II functions, but the right module centers bile acid and hydroxysteroid sulfation rather than the left module's coordinated Phase I/II xenobiotic battery.",
+          "relationship": "partial_overlap",
+          "right_module": 1,
+          "similarity": 0.62
+        },
+        {
+          "left_module": 1,
+          "rationale": "The shared Aldh3a2-mediated clearance of lipid-derived aldehydes links the modules, but the right module chiefly concerns fatty-acid oxidation and lipid-droplet storage rather than xenobiotic detoxification.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.27
+        },
+        {
+          "left_module": 1,
+          "rationale": "These modules share only a broad hepatic metabolic and stress-response context, with no matching central mechanism or predicted output.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.08
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both center Sult2a8-dependent hepatic bile-acid sulfation and sterol elimination, while the left adds taurine synthesis and the right broadens into hydroxysteroid and xenobiotic conjugation.",
+          "relationship": "meaningful_refinement",
+          "right_module": 1,
+          "similarity": 0.8
+        },
+        {
+          "left_module": 2,
+          "rationale": "Bile-acid and sterol homeostasis provides limited physiological context, but sulfation and taurine conjugation differ from the right module's lipid-droplet and fatty-acid oxidation mechanisms.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.14
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both invoke Cdo1-driven cysteine-to-taurine metabolism supporting taurine-conjugated bile acids, but the right module omits sulfotransferase biotransformation and adds unrelated nitrogen, heme, carbohydrate, and aging functions.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.48
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both concern hepatic lipid handling, but the left centers lipid droplets and fatty-acid oxidation whereas the right centers sulfation and Phase II conjugation.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.18
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both define the same hepatic lipid-droplet and peroxisomal fatty-acid oxidation program through Fitm1, Hao2, Cyb5b, and Dgat2, with each adding secondary metabolic components.",
+          "relationship": "meaningful_refinement",
+          "right_module": 2,
+          "similarity": 0.88
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both include Sord-mediated sorbitol-to-fructose metabolism, but this is only one subcomponent within otherwise distinct lipid-homeostasis and mixed catabolic programs.",
+          "relationship": "partial_overlap",
+          "right_module": 3,
+          "similarity": 0.31
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "liver-p25--r1--cross-setting",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.86
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 3,
+          "similarity": 0.9
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 2,
+          "similarity": 0.48
+        }
+      ],
+      "moduleSemanticSimilarity": 0.746667,
+      "overall_rationale": "The sets strongly preserve the detoxification and lipid-homeostasis programs, while the candidate redistributes bile-acid sulfation and Cdo1-mediated sulfur metabolism into a combined bile-acid module and leaves nitrogen disposal without a close counterpart.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both describe the same pericentral hepatic Phase I/II detoxification battery, although the right module omits the left module's prominent SULT-mediated steroid and bile-acid conjugation arm.",
+          "relationship": "meaningful_refinement",
+          "right_module": 1,
+          "similarity": 0.86
+        },
+        {
+          "left_module": 1,
+          "rationale": "They share the specific SULT2A-mediated bile-acid sulfation mechanism, but the left centers broad xenobiotic detoxification whereas the right combines sulfation with Cdo1-dependent taurine production.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.58
+        },
+        {
+          "left_module": 1,
+          "rationale": "Their overlap is limited to aldehyde and lipid-derived metabolite handling within hepatic metabolism, while their central outputs are detoxification versus lipid storage and oxidation.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.2
+        },
+        {
+          "left_module": 2,
+          "rationale": "Aldh3a2 links lipid oxidation to reactive-aldehyde detoxification, but the modules principally concern lipid flux and organelle metabolism versus xenobiotic defense.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.18
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both contribute broadly to hepatic lipid and sterol homeostasis and reference Abcg5, but bile-acid conjugation is peripheral to the left module's lipid-droplet and peroxisomal oxidation mechanism.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.24
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both center FITM1-dependent lipid-droplet formation and ECI2/HAO2-dependent peroxisomal fatty-acid oxidation, with the right adding a polyol-fructose metabolic branch.",
+          "relationship": "meaningful_refinement",
+          "right_module": 3,
+          "similarity": 0.9
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both are liver metabolic programs, but nitrogen and sulfur-amino-acid disposal is mechanistically distinct from Phase I/II xenobiotic detoxification.",
+          "relationship": "different",
+          "right_module": 1,
+          "similarity": 0.06
+        },
+        {
+          "left_module": 3,
+          "rationale": "They share the central Cdo1-mediated conversion of cysteine toward taurine, but the left emphasizes amino-acid and ammonia disposal while the right emphasizes bile-acid conjugation and sulfation.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.48
+        },
+        {
+          "left_module": 3,
+          "rationale": "The modules share only a broad hepatic metabolic context, with amino-acid nitrogen disposal unrelated to lipid-droplet, fatty-acid oxidation, and polyol metabolism.",
+          "relationship": "different",
+          "right_module": 3,
+          "similarity": 0.05
+        }
+      ]
+    },
+    {
+      "assessor_id": "codex-gpt-5.6-sol-high",
+      "comparison_id": "liver-p25--r2--cross-setting",
+      "matching": [
+        {
+          "leftModule": 1,
+          "rightModule": 1,
+          "similarity": 0.9
+        },
+        {
+          "leftModule": 2,
+          "rightModule": 2,
+          "similarity": 0.93
+        },
+        {
+          "leftModule": 3,
+          "rightModule": 3,
+          "similarity": 0.96
+        }
+      ],
+      "moduleSemanticSimilarity": 0.93,
+      "overall_rationale": "The two sets contain three strongly corresponding biological programs—bile acid/steroid conjugation, peroxisomal lipid metabolism, and sulfur/nitrogen metabolism—with only modest differences in scope and mechanistic emphasis.",
+      "pair_scores": [
+        {
+          "left_module": 1,
+          "rationale": "Both describe the same hepatic SULT2A/GSTA3-centered bile acid, hydroxysteroid, and xenobiotic conjugation program, although the right module narrows the broader Nrf2/CAR-regulated Phase I/II scope.",
+          "relationship": "meaningful_refinement",
+          "right_module": 1,
+          "similarity": 0.9
+        },
+        {
+          "left_module": 1,
+          "rationale": "The modules share hepatic detoxification, aldehyde handling, Cyb5b, and lipid-related context, but the right module centers on fatty acid oxidation and lipid storage rather than xenobiotic and steroid conjugation.",
+          "relationship": "partial_overlap",
+          "right_module": 2,
+          "similarity": 0.32
+        },
+        {
+          "left_module": 1,
+          "rationale": "Bile acid regulation and general hepatic metabolic homeostasis provide limited context overlap, but sulfur and nitrogen catabolism is mechanistically distinct from Phase I/II detoxification.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.18
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both include hepatic aldehyde or lipid-associated metabolism, but sulfation and xenobiotic conjugation differ fundamentally from peroxisomal fatty acid oxidation and lipid-droplet partitioning.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.22
+        },
+        {
+          "left_module": 2,
+          "rationale": "Both define essentially the same Hao2/Aldh3a2/Fitm1-centered program coupling peroxisomal fatty acid catabolism and fatty-aldehyde clearance to lipid-droplet homeostasis.",
+          "relationship": "same_core",
+          "right_module": 2,
+          "similarity": 0.93
+        },
+        {
+          "left_module": 2,
+          "rationale": "The modules share only broad hepatocyte metabolic and stress-homeostasis context, with little overlap between lipid oxidation and sulfur, nitrogen, or carbohydrate catabolism.",
+          "relationship": "context_only",
+          "right_module": 3,
+          "similarity": 0.14
+        },
+        {
+          "left_module": 3,
+          "rationale": "Their connection is largely through hepatic bile acid and sterol homeostasis, while cysteine and nitrogen catabolism differs from direct bile acid and steroid sulfation.",
+          "relationship": "context_only",
+          "right_module": 1,
+          "similarity": 0.22
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both concern hepatocyte metabolic homeostasis, but sulfur and nitrogen handling has little mechanistic overlap with peroxisomal fatty acid oxidation and lipid storage.",
+          "relationship": "context_only",
+          "right_module": 2,
+          "similarity": 0.13
+        },
+        {
+          "left_module": 3,
+          "rationale": "Both describe the same Cdo1-centered hepatic sulfur and nitrogen metabolic program linked to taurine production, urea-cycle support, glucose regulation, and an aging hepatocyte signature.",
+          "relationship": "same_core",
+          "right_module": 3,
+          "similarity": 0.96
+        }
+      ]
+    }
+  ],
+  "assessor_id": "codex-gpt-5.6-sol-high",
+  "schema_version": 1,
+  "telemetry": {
+    "configured_concurrency": 6,
+    "cost_telemetry_shards": 0,
+    "known_cost_usd_equivalent": null,
+    "known_duration_seconds": 400.568,
+    "model": "gpt-5.6-sol",
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "shards": 16,
+    "unknown_cost_shards": 16
+  }
+}

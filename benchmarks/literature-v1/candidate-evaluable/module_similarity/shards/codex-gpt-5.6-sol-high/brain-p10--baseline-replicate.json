@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "brain-p10--baseline-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.99
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.91
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.98
+      }
+    ],
+    "moduleSemanticSimilarity": 0.96,
+    "overall_rationale": "The replicates contain three strongly corresponding programs: core ciliogenesis, endothelial ciliary mechanosensing, and FZD4/GATA2/ENG-mediated CNS vascular-barrier regulation, with weaker cross-pair overlap driven mainly by ciliary dependence or shared brain-endothelial context.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules describe the same core ciliogenesis machinery, including basal-body docking, transition-zone organization, IFT, and BBSome-mediated trafficking with nearly identical genes.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.99
+      },
+      {
+        "left_module": 1,
+        "rationale": "The right module uses the same ciliary apparatus but shifts the central meaning from organelle construction and trafficking to endothelial flow sensing and BBB maturation.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 1,
+        "rationale": "Core cilia construction is mechanistically distinct from FZD4, GATA2, and Endoglin control of endothelial identity and vascular-barrier formation.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.04
+      },
+      {
+        "left_module": 2,
+        "rationale": "Endothelial mechanosensing requires the core ciliogenesis machinery described on the right, but its defining output is shear-stress detection rather than cilium assembly itself.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both modules interpret the ciliary genes as enabling blood-flow mechanosensing in brain endothelial cells, with the right module adding BBB maturation as a downstream outcome.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.91
+      },
+      {
+        "left_module": 2,
+        "rationale": "The modules share brain-endothelial and vascular-barrier context, but ciliary shear sensing differs centrally from Wnt/Norrin, GATA2, and Endoglin regulation.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.29
+      },
+      {
+        "left_module": 3,
+        "rationale": "FZD4/GATA2/Endoglin-mediated CNS vascular regulation and core cilium assembly have no substantial shared mechanism or asserted output.",
+        "relationship": "different",
+        "right_module": 1,
+        "similarity": 0.04
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both concern brain endothelial maturation and BBB function, but one centers on receptor and transcriptional regulation while the other centers on ciliary mechanotransduction.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.34
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both modules describe the same FZD4-dependent Norrin/Wnt, GATA2, and Endoglin regulatory program governing CNS angiogenesis, endothelial identity, and BBB integrity.",
+        "relationship": "same_core",
+        "right_module": 3,
+        "similarity": 0.98
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16856,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 894,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 19.432
+  }
+}

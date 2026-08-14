@@ -1,0 +1,16 @@
+{
+  "content_hash": "dbf2a22e223b0a33e0866fab8345c056fabcb0866dd448362f071771de27ebc0",
+  "doi": "10.1242/dev.059881",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "4adfea6952f4eceb2505",
+  "pmcid": "PMC3074448",
+  "pmid": "21429983",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "During angiogenic sprouting, newly forming blood vessels need to connect to the existing vasculature in order to establish a functional circulatory loop. Previous studies have implicated genetic pathways, such as VEGF and Notch signaling, in controlling angiogenesis. We show here that both pathways similarly act during vascularization of the zebrafish central nervous system. In addition, we find that chemokine signaling specifically controls arterial-venous network formation in the brain. Zebrafish mutants for the chemokine receptor cxcr4a or its ligand cxcl12b establish a decreased number of arterial-venous connections, leading to the formation of an unperfused and interconnected blood vessel network. We further find that expression of cxcr4a in newly forming brain capillaries is negatively regulated by blood flow. Accordingly, unperfused vessels continue to express cxcr4a, whereas connection of these vessels to the arterial circulation leads to rapid downregulation of cxcr4a expression and loss of angiogenic characteristics in endothelial cells, such as filopodia formation. Together, our findings indicate that hemodynamics, in addition to genetic pathways, influence vascular morphogenesis by regulating the expression of a proangiogenic factor that is necessary for the correct pathfinding of sprouting brain capillaries.",
+  "text_type": "abstract",
+  "title": "Arterial-venous network formation during brain vascularization involves hemodynamic regulation of chemokine signaling."
+}

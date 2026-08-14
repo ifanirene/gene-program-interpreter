@@ -1,0 +1,122 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-9efeb609b3c949a89c57",
+    "RL-a825f41108a26d4ab883",
+    "RL-aa13c1e7f8facc8720c7",
+    "RL-b0bf65debdf8394a131f"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 7903,
+        "source_type": "full_text",
+        "start": 7753,
+        "text": "DHCR7 is an enzyme that acts in the final step of the cholesterol biosynthesis pathway and converts 7-DHC possessing conjugated diene to cholesterol9."
+      },
+      "function_supported_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "rationale": "CRISPR ablation of DHCR7 and epistatic ablation of SC5D in hepatocytes and mouse liver provide gene-specific causal support for both enzymes' assigned post-squalene sterol-pathway roles (SC5D introduces the C5-6 bond and its ablation blocks 7-DHC formation). Same hepatocyte/liver setting but ferroptosis/injury rather than aging/MASLD, so the declared 'direct' context is a partial overclaim.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9efeb609b3c949a89c57",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 254,
+        "source_type": "abstract",
+        "start": 12,
+        "text": "Genetic inactivation and pharmacologic inhibition of the microsomal triglyceride transfer protein (MTP; gene name MTTP) inhibits hepatic secretion of VLDL, thereby reducing serum lipids and apoB at the expense of increasing hepatic steatosis."
+      },
+      "function_supported_genes": [],
+      "rationale": "The abstract explicitly reports MTTP's VLDL-secretion/steatosis regulator function and the paper's variant data associate MTTP with hepatic steatosis, supporting the assigned regulator role; Mttp is a perturbation regulator so both gene arrays stay empty. The human biobank cohorts are species-indirect to the mouse liver session, making the declared 'direct' context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a825f41108a26d4ab883",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1232,
+        "source_type": "abstract",
+        "start": 1069,
+        "text": "we detected compound heterozygous mutations in the phosphomevalonate kinase (PMVK) gene coding the second enzyme after mevalonate kinase in the mevalonate pathway."
+      },
+      "function_supported_genes": [
+        "Pmvk"
+      ],
+      "rationale": "Gene-specific compound-heterozygous PMVK mutations with elevated mevalonic acid explicitly confirm PMVK as the mevalonate-pathway enzyme following MVK, matching the mechanism's Mvk-to-Pmvk step; context differences are separate from functional support. The non-hepatic human pediatric setting is correctly labeled indirect.",
+      "red_flags": [],
+      "review_id": "RL-aa13c1e7f8facc8720c7",
+      "studied_genes": [
+        "Pmvk"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 770,
+        "source_type": "abstract",
+        "start": 673,
+        "text": "ACAT2 provided the major cholesterol-esterifying activity in 3 of 4 human liver samples examined."
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "Hepatocyte-confined localization plus specific-inhibitor (pyripyropene A) biochemical activity assays directly establish ACAT2 as the dominant hepatocyte cholesterol-esterifying enzyme, matching mechanism 3. The human liver samples differ in species (and MASLD condition) from the mouse target, so the declared 'direct' context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b0bf65debdf8394a131f",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5874305000000001,
+    "duration_api_ms": 192287,
+    "duration_ms": 189898,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 191.047
+  }
+}

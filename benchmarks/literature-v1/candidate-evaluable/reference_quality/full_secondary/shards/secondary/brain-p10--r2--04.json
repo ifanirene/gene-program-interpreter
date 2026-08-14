@@ -1,0 +1,48 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-ddff9eef767f83d3ff5d"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 475,
+        "source_type": "abstract",
+        "start": 400,
+        "text": "we report that CLYBL operates as a citramalyl-CoA lyase in mammalian cells."
+      },
+      "function_supported_genes": [
+        "Clybl"
+      ],
+      "rationale": "Enzymology and cellular loss experiments establish CLYBL as a mitochondrial citramalyl-CoA lyase linked to B12 metabolism. The mammalian-cell context is not brain endothelium or postnatal mouse brain, so indirect is accurate.",
+      "red_flags": [],
+      "review_id": "RL-ddff9eef767f83d3ff5d",
+      "studied_genes": [
+        "Clybl"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 16128,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 34107,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 1168,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 27.619
+  }
+}

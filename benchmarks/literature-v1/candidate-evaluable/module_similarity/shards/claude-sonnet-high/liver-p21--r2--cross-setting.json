@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "liver-p21--r2--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 1.0
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.75
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.75
+      }
+    ],
+    "moduleSemanticSimilarity": 0.833333,
+    "overall_rationale": "The two sets share a clear structural correspondence: module 1 in each set is the core mevalonate/cholesterol biosynthetic enzyme cascade (near-identical), module 2 in each set is the SCAP-INSIG1-SREBP2 transcriptional control axis (same core with differing refinements), and module 3 in each set extends into MASLD-linked lipid dysregulation sharing Dgat2/Mttp regulators (same core with differing submechanisms — aging/senescence vs. esterification/Ddr2); off-diagonal pairs show only weak contextual overlap via shared regulators or a single gene without shared central mechanism.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the near-complete mevalonate-to-cholesterol enzyme cascade in hepatocytes with essentially identical gene sets and mechanism.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 1.0
+      },
+      {
+        "left_module": 1,
+        "rationale": "L1 is a pure enzymatic biosynthesis cascade while R2 centers on SREBP2/SCAP/INSIG1 transcriptional control, sharing only a couple of pathway genes (Erg28, Dhcr7) as peripheral overlap.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 1,
+        "rationale": "L1's cholesterol biosynthesis enzymes and R3's MASLD lipid-homeostasis/esterification module share only the gene Acat2 and broad liver context, not a common mechanism.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's SREBP2-SCAP-INSIG1 regulatory circuit is mentioned as a subordinate feature of R1, but R1's central content is the enzyme cascade rather than the regulatory mechanism itself.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.5
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both center on the SCAP-INSIG1-SREBP2 axis controlling the biosynthesis program, with R2 adding SRE-binding/ERG28 feedback detail and L2 adding the Ldlr uptake arm as refinements.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.75
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's SCAP/INSIG1/LDLR transcriptional circuit and R3's Dgat2/Mttp/Fads2 lipid-homeostasis regulators share no common regulators or mechanism beyond general hepatic lipid biology.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's MASLD/aging dysregulation narrative shares only the Scap/Insig1 regulators in passing with R1's purely biosynthetic enzyme-cascade module, which lacks any disease/aging framing.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's disease/senescence-focused module and R2's SRE-binding transcriptional detail overlap only via the shared Scap/Insig1 regulators, not in central mechanism or output.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both are MASLD-context lipid-dysregulation modules sharing Dgat2/Mttp regulators and Acat2, with L3 adding a senescence/aging submechanism and R3 adding esterification/Ddr2 detail as differing refinements.",
+        "relationship": "meaningful_refinement",
+        "right_module": 3,
+        "similarity": 0.75
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.11874199999999999,
+    "duration_api_ms": 69281,
+    "duration_ms": 67870,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 68.802
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "332c3eb66fa394adce7a15031e23781441823cc7b7965e80ad9e627e4cf55b4c",
+  "doi": "10.1016/j.mce.2003.11.016",
+  "errors": [],
+  "paper_key": "5cad0237adc3ebe8bbf2",
+  "pmcid": null,
+  "pmid": "15026190",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Sterol 14 alpha-demethylase (CYP51) is the single cytochrome P450 (CYP) required for sterol biosynthesis in different phyla, and it is the most widely distributed P450 gene family being found in all biological kingdoms. It catalyzes the first step following cyclization in sterol biosynthesis such as removal of the 14 alpha-methyl group from lanosterol in the cholesterol biosynthetic pathway, leading to formation of the initial substrate in steroid hormone biosynthesis. CYP51 from different phyla have low sequence similarity across kingdoms and contain only about 40 conserved amino acid residues in the whole family. An attempt to predict the possible role of these conserved residues is being made by a combination of the results of site-directed mutagenesis and information from the known crystal structure of sterol 14 alpha-demethylase from Mycobacterium tuberculosis.",
+  "text_type": "abstract",
+  "title": "CYP51--the omnipotent P450."
+}

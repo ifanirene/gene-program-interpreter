@@ -1,0 +1,16 @@
+{
+  "content_hash": "b4e21d2f084c113c6d138787a32b2744b2b64bfde6f4cc778631dcf5c9e8517a",
+  "doi": "10.1016/j.freeradbiomed.2013.05.028",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "1d56bdb24184e10fe126",
+  "pmcid": "PMC3827783",
+  "pmid": "23743293",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Besides helping to maintain a reducing intracellular environment, the thioredoxin (Trx) system impacts bioenergetics and drug metabolism. We show that hepatocyte-specific disruption of Txnrd1, encoding Trx reductase-1 (TrxR1), causes a metabolic switch in which lipogenic genes are repressed and periportal hepatocytes become engorged with glycogen. These livers also overexpress machinery for biosynthesis of glutathione and conversion of glycogen into UDP-glucuronate; they stockpile glutathione-S-transferases and UDP-glucuronyl-transferases; and they overexpress xenobiotic exporters. This realigned metabolic profile suggested that the mutant hepatocytes might be preconditioned to more effectively detoxify certain xenobiotic challenges. Hepatocytes convert the pro-toxin acetaminophen (APAP, paracetamol) into cytotoxic N-acetyl-p-benzoquinone imine (NAPQI). APAP defenses include glucuronidation of APAP or glutathionylation of NAPQI, allowing removal by xenobiotic exporters. We found that NAPQI directly inactivates TrxR1, yet Txnrd1-null livers were resistant to APAP-induced hepatotoxicity. Txnrd1-null livers did not have more effective gene expression responses to APAP challenge; however, their constitutive metabolic state supported more robust GSH biosynthesis, glutathionylation, and glucuronidation systems. Following APAP challenge, this effectively sustained the GSH system and attenuated damage.",
+  "text_type": "abstract",
+  "title": "A Txnrd1-dependent metabolic switch alters hepatic lipogenesis, glycogen storage, and detoxification."
+}

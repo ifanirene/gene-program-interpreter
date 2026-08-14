@@ -1,0 +1,16 @@
+{
+  "content_hash": "c86c71f37dc3a4458b7fe2a6058310b7896c66d1489ec8c7136a5b90fcda464c",
+  "doi": "10.1073/pnas.2008559118",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "6e426be1e2a25757b010",
+  "pmcid": "PMC8346798",
+  "pmid": "34330825",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "A network of molecular factors drives the development, differentiation, and maintenance of endothelial cells. Friend leukemia integration 1 transcription factor (FLI1) is a bona fide marker of endothelial cells during early development. In zebrafish Tg(fli1:EGFP)y1 , we identified two endothelial cell populations, high-fli1+ and low-fli1+, by the intensity of green fluorescent protein signal. By comparing RNA-sequencing analysis of non-fli1 expressing cells (fli1-) with these two (fli1+) cell populations, we identified several up-regulated genes, not previously recognized as important, during endothelial development. Compared with fli1- and low-fli1+ cells, high-fli1+ cells showed up-regulated expression of the zinc finger transcription factor PRDI-BF1 and RIZ homology domain containing 16 (prdm16). Prdm16 knockdown (KD) by morpholino in the zebrafish larva was associated with impaired angiogenesis and increased number of low-fli1+ cells at the expense of high-fli1+ cells. In addition, PRDM16 KD in endothelial cells derived from human-induced pluripotent stem cells impaired their differentiation and migration in vitro. Moreover, zebrafish mutants (mut) with loss of function for the oncogene LIM domain only 2 (lmo2) also showed reduced prdm16 gene expression combined with impaired angiogenesis. Prdm16 expression was reduced further in endothelial (CD31+) cells compared with CD31- cells isolated from lmo2-mutants (lmo2-mut) embryos. Chromatin immunoprecipitation-PCR demonstrated that Lmo2 binds to the promoter and directly regulates the transcription of prdm16 This work unveils a mechanism by which prdm16 expression is activated in endothelial cells by Lmo2 and highlights a possible therapeutic pathway by which to modulate endothelial cell growth and repair.",
+  "text_type": "abstract",
+  "title": "Fli1+ cells transcriptional analysis reveals an Lmo2-Prdm16 axis in angiogenesis."
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "451c79e63ce0ecfcd8b590e4624b7a9b1b8d02552722077ca736869114997f86",
+  "doi": "10.1006/dbio.1998.9144",
+  "errors": [],
+  "paper_key": "3e454df0ec4e1709ac21",
+  "pmcid": null,
+  "pmid": "9986727",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Using retroviral entrapment vectors, we identified a novel mouse gene whose expression is restricted to vascular endothelial cells and their precursors in the yolk sac blood islands. A 3.68-kb cDNA corresponding to the endogenous transcript was isolated using genomic DNA flanking the entrapment vector insertion as a probe. We have named this gene Vezf1 for vascular endothelial zinc finger 1. Vezf1 encodes a protein with a predicted molecular mass of 56 kDa and that contains six putative zinc finger domains and shows high homology to a previously identified human gene, DB1, that is believed to be involved in regulating expression of cytokine genes such as interleukin-3. In situ hybridization analysis revealed the onset of expression in advanced primitive streak-stage embryos being located in the extraembryonic mesodermal component of the visceral yolk sac and in the anteriormost mesoderm of the embryo proper. During head-fold and somite stages, expression was restricted to vascular endothelial cells that arise during both vasculogenesis and angiogenesis. Vezf1-related sequences were found to be highly conserved among higher vertebrate species that have acquired extraembryonic yolk sac membranes during evolution. The Vezf1 locus mapped to the proximal part of mouse chromosome 2, a region which has homology to human chromosome 9q. Vezf1 expression correlates temporally and spatially with the early differentiation of angioblasts into the endothelial cell lineage and the proliferation of endothelial cells of the embryonic vascular system. Thus, Vezf1 may play an important role in the endothelial lineage determination and may have an additional role during later stages of embryonic vasculogenesis and angiogenesis.",
+  "text_type": "abstract",
+  "title": "Vezf1: A Zn finger transcription factor restricted to endothelial cells and their precursors."
+}

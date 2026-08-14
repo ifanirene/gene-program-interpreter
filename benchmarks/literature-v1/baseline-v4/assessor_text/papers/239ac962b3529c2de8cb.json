@@ -1,0 +1,14 @@
+{
+  "content_hash": "adeff545eccd7d171cd4661a6d395af70fa0537b7c53695e902606fdaaa0b461",
+  "doi": "10.1016/j.ejphar.2025.177890",
+  "errors": [],
+  "paper_key": "239ac962b3529c2de8cb",
+  "pmcid": null,
+  "pmid": "40617382",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Metabolic dysfunction-associated steatotic liver disease (MASLD) is a prevalent liver disorder that can progress to metabolic dysfunction-associated steatohepatitis (MASH), potentially leading to liver fibrosis, cirrhosis, and cancer. As there is no sufficient specific pharmacological treatment for the progression of MASLD to MASH, we focused on the study of master transcriptional regulators involved in energy, cholesterol and lipid metabolism and adipogenesis. Therefore, our experimental work aimed to investigate the possible hepatoprotective effects and safety of fatostatin, which is the inhibitor of sterol regulatory element binding proteins 1 and 2 (SREBP1/2), in preclinical dietary models of the MASLD progression. Pretreatment of primary hepatocytes with fatostatin improved in vitro lipotoxicity produced by palmitic acid. To induce MASLD-to-MASH progression in vivo, male C57BL6J mice received a special western-type atherogenic diet with fructose and glucose in drinking water for 12 weeks. Despite the simultaneous administration of the diet to mice, an additional 4-week fatostatin treatment significantly improved the oral glucose tolerance test and reduced body, adipose tissue and liver weights, fasting glycemia, alkaline phosphatase, total cholesterol, liver conjugated dienes, nitrites and triglycerides, steatosis, and histopathological total MASLD activity score. These effects were related to the beneficial modulatory effect of fatostatin on liver expression of genes involved in lipid metabolism. Although fatostatin remarkably slowed the progression of MASLD, it produced elevated serum TNF-alpha, representing systemic inflammation, and severe skin adverse reactions similar to eczema, previously not reported. Therefore, we assume that liver-targeted specific inhibition of SREBP1/2 could be valuable in treating the progression of MASLD to MASH without concomitant skin toxicity.",
+  "text_type": "abstract",
+  "title": "Effectiveness and safety of the SREBP1/2 inhibitor, fatostatin, in a preclinical model of metabolic dysfunction-associated steatotic liver disease progression."
+}

@@ -1,0 +1,9 @@
+{
+  "approval_file_sha256": "27bdfc1ad42a6156954c6e524d6136637a1306635032f918304f8e3988cfdac0",
+  "approved": true,
+  "approved_at": "2026-07-21T07:16:35Z",
+  "approved_by": "workspace user",
+  "benchmark_id": "literature-v1",
+  "max_api_equivalent_usd": 28.0,
+  "run_dir": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v1"
+}

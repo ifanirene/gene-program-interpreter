@@ -1,0 +1,14 @@
+{
+  "content_hash": "d210225ccc271aec0dd79b18bdcbe3e71f33b5eb468b4749de57e6c26bb6bf2e",
+  "doi": "10.1016/j.metabol.2020.154307",
+  "errors": [],
+  "paper_key": "0081536acd0da504fd3e",
+  "pmcid": null,
+  "pmid": "32622843",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Aberrant concentration, structure and functionality of High Density Lipoprotein (HDL) are associated with many prevalent diseases, including cardiovascular disease and non-alcoholic fatty liver disease (NAFLD). Mice with liver-specific ablation of Hnf4\u03b1 (H4LivKO) present steatosis and dyslipidemia by mechanisms that are not completely understood. The aim of this study was to explore the role of liver HNF4A in HDL metabolism and the development of steatosis.\n\nMETHODS AND RESULTS: Serum and tissue samples were obtained from 6-weeks old H4LivKO mice and their littermate controls. Liver and serum lipids were measured and HDL structure and functionality were assessed. Global gene expression changes in the liver were analyzed by expression arrays, validations were performed by RT-qPCR and DNA-protein interactions were studied by chromatin immunoprecipitation (ChIP). H4LivKO mice presented liver steatosis, increased liver triglyceride content and decreased concentration of serum total cholesterol, HDL cholesterol, triglycerides, phospholipids and cholesteryl esters. Most classes of phospholipids showed significant changes in species ratio and sphingosine-1-phosphate (S1P) levels were reduced. H4LivKO serum was enriched in the smaller, denser HDL particles, devoid of APOA2 and APOM apolipoproteins, exhibiting decreased activity of paraoxonase-1 but retaining macrophage cholesterol efflux capacity and phospho-AKT activation in endothelial cells. Global gene expression analysis revealed the association of liver HNF4A with known and novel regulators of HDL metabolism as well as NAFLD-susceptibility genes.\n\nCONCLUSIONS: HNF4A ablation in mouse liver causes hepatic steatosis, perturbations in HDL structure and function and significant global changes in gene expression. This study reveals new targets of HNF4A involved in HDL metabolism and the development of steatosis and enriches our knowledge on HDL functionality in NAFLD.",
+  "text_type": "abstract",
+  "title": "Defects in High Density Lipoprotein metabolism and hepatic steatosis in mice with liver-specific ablation of Hepatocyte Nuclear Factor 4A."
+}

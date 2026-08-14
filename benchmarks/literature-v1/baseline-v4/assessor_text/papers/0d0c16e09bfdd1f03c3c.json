@@ -1,0 +1,14 @@
+{
+  "content_hash": "1fc4fc98cf502ba7a95ff16480ce6f4a147398dd3950fccb44a1aaf2267b7eed",
+  "doi": "10.1167/iovs.09-4978",
+  "errors": [],
+  "paper_key": "0d0c16e09bfdd1f03c3c",
+  "pmcid": null,
+  "pmid": "20181837",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "PURPOSE. Although stromal cell-derived factor (SDF)-1 contributes to angiogenesis, its effects on sprouting angiogenesis remain ill defined. The authors investigated how SDF-1 and its receptor, CXCR4, influence neovascular sprouting. METHODS. In vivo retinal vascular development was evaluated and ex vivo retinal angiogenesis induced by vascular endothelial growth factor (VEGF). Time-sequential observation was followed by the quantification of movements in neovascular sprouts and microglia. Real-time PCR was performed for the measurement of mRNA levels. RESULTS. Neutralizing antibodies against SDF-1 or an antagonist of CXCR4, AMD3100, reduced the radius of the vascularized area in retinal vascular development. These inhibitions disturbed the filopodial extensions in tip cells and proliferation in stalk cells, reduced the number of microglia, and decreased the mRNA levels of KDR/Flk-1, UNC5B, and PDGFB, which are abundantly expressed in tip cells. In ex vivo experiments, VEGF induced SDF-1 mRNA expression, and the inhibition of SDF-1/CXCR4 decreased the number of VEGF-induced neovascular sprouts. The authors further evaluated the kinetics of sprouts using time-lapse imaging and found that SDF-1/CXCR4 contributes to the elongation of neovascular sprouts and to the extension and retraction of leading edges. The movements of resident microglia after VEGF treatment were also reduced by SDF-1/CXCR4 inhibition. Interestingly, microglial depletion decreased VEGF-induced neovascular sprouts with the partial effects of SDF-1/CXCR4 blockade. CONCLUSIONS. SDF-1/CXCR4 promotes retinal angiogenesis by both tip cell activation and the indirect angiogenic effects of microglia.",
+  "text_type": "abstract",
+  "title": "SDF-1/CXCR4 contributes to the activation of tip cells and microglia in retinal angiogenesis."
+}

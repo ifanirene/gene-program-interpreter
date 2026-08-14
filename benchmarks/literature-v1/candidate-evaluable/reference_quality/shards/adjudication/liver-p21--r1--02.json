@@ -1,0 +1,112 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-177f26e45743a987f8be",
+    "RL-3094cd650bd5570968ca",
+    "RL-4a4bf79af316fed564bf",
+    "RL-66edfccab184902f9a84"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4743,
+        "source_type": "full_text",
+        "start": 4527,
+        "text": "A prominent oval cell proliferation (also known as the ductular reaction) was observed in LKOs of both sexes, where the severity correlated with inflammation (mononuclear and granular inflammatory cells) and fibrosis"
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Hepatocyte-specific Cyp51 knockout in mouse liver causally produces oval-cell-driven injury, inflammation and fibrosis with compensatory cholesterogenic changes, supporting CYP51's essential in vivo hepatic cholesterol-synthesis role in the target context. Tm7sf2 appears only as one entry in a compensatory qPCR panel, which is not gene-specific investigation, so it is not credited.",
+      "red_flags": [],
+      "review_id": "RL-177f26e45743a987f8be",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1514,
+        "source_type": "abstract",
+        "start": 1245,
+        "text": "Nevertheless, HSCs were sensitive to FC accumulation because the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper directly reports the SCAP:INSIG ratio disrupting SREBP2-mediated cholesterol-homeostasis feedback in a NASH model, supporting the regulator mechanism with no supplied-gene coverage. The finding is in hepatic stellate cells rather than the target hepatocytes, so the declared direct context is overclaimed (indirect).",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-3094cd650bd5570968ca",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 6008,
+        "source_type": "full_text",
+        "start": 5820,
+        "text": "iDGAT1 and iDGAT2 treatments alone reduced TG content alongside DGAT1 and DGAT2 mRNA levels without showing significant differences across the tested doses (25, 50, 100 µM) (Figure S1A,B)."
+      },
+      "function_supported_genes": [],
+      "rationale": "Pharmacological DGAT2 inhibition causally reduced triglyceride content in a MASLD-like system, supporting DGAT2's regulator role with no supplied-gene coverage. The paper's own experiments use human HepG2 hepatoma cells in vitro rather than mouse hepatocytes, so the declared partial context is overclaimed (indirect).",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-4a4bf79af316fed564bf",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 321,
+        "source_type": "abstract",
+        "start": 170,
+        "text": "Acyl-CoA:cholesterol acyltransferase 1 and 2 (ACAT1 and ACAT2) convert various sterols to steryl esters; their activities are activated by cholesterol."
+      },
+      "function_supported_genes": [],
+      "rationale": "ACAT2's cholesterol-esterification function appears only as an established background statement; the paper's ACAT2-specific experiments (KO mice) concern pregnenolone esterification in adrenal/non-hepatic settings and find no PREG-ester change. Because the cited function is background-only here, Acat2 is not credited as studied or function-supported, leaving only partial associative support.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-66edfccab184902f9a84",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5697685000000001,
+    "duration_api_ms": 146443,
+    "duration_ms": 144924,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 146.279
+  }
+}

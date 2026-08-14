@@ -1,0 +1,14 @@
+{
+  "content_hash": "e1239b59a51b704b8004277d63e0c24a07989080532885886b035068c618c894",
+  "doi": "10.1096/fj.05-3928com",
+  "errors": [],
+  "paper_key": "aa92342543e56ec760db",
+  "pmcid": null,
+  "pmid": "16195373",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Endothelial cell (EC) barrier dysfunction results in increased vascular permeability observed in inflammation, tumor angiogenesis, and atherosclerosis. The platelet-derived phospholipid sphingosine-1-phosphate (S1P) decreases EC permeability in vitro and in vivo and thus has obvious therapeutic potential. We examined S1P-mediated human pulmonary artery EC signaling and barrier regulation in caveolin-enriched microdomains (CEM). Immunoblotting from S1P-treated EC revealed S1P-mediated rapid recruitment (1 microM, 5 min) to CEMs of the S1P receptors S1P1 and S1P3, p110 PI3 kinase alpha and beta catalytic subunits, the Rac1 GEF, Tiam1, and alpha-actinin isoforms 1 and 4. Immunoprecipitated p110 PI3 kinase catalytic subunits from S1P-treated EC exhibited PIP3 production in CEMs. Immunoprecipitation of S1P receptors from CEM fractions revealed complexes containing Tiam1 and S1P1. PI3 kinase inhibition (LY294002) attenuated S1P-induced Tiam1 association with S1P1, Tiam1/Rac1 activation, alpha-actinin-1/4 recruitment, and EC barrier enhancement. Silencing of either S1P1 or Tiam1 expression resulted in the loss of S1P-mediated Rac1 activation and alpha-actinin-1/4 recruitment to CEM. Finally, silencing S1P1, Tiam1, or both alpha-actinin isoforms 1/4 inhibits S1P-induced cortical F-actin rearrangement and S1P-mediated barrier enhancement. Taken together, these results suggest that S1P-induced recruitment of S1P1 to CEM fractions promotes PI3 kinase-mediated Tiam1/Rac1 activation required for alpha-actinin-1/4-regulated cortical actin rearrangement and EC barrier enhancement.",
+  "text_type": "abstract",
+  "title": "Regulation of sphingosine 1-phosphate-induced endothelial cytoskeletal rearrangement and barrier enhancement by S1P1 receptor, PI3 kinase, Tiam1/Rac1, and alpha-actinin."
+}

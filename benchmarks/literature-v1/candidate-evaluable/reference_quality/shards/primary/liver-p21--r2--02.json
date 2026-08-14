@@ -1,0 +1,206 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-5cd2513174caf50a54cb",
+    "RL-6477323ccc29012a84a7",
+    "RL-706e258c97dffbb8395e",
+    "RL-74bfd22b55ef7de1a593",
+    "RL-80f9c513752ed89483c1",
+    "RL-8655cf3bfaadd6f3db6a",
+    "RL-8ecdf7b6ae8e85092555",
+    "RL-9b1d86c1ff0c8dc62e7d"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1513,
+        "source_type": "abstract",
+        "start": 1306,
+        "text": "the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells"
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper studies the Scap/Insig ratio disrupting SREBP2 feedback specifically in hepatic stellate cells (not hepatocytes), so it partially supports the Scap/Insig1-SREBP2 relationship but in a different liver cell type and as a dysregulated rather than normal state. No supplied program genes (Erg28/Dhcr7/Rdh11) are mentioned.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5cd2513174caf50a54cb",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "background",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "Mvd is gene-specifically manipulated (CRISPR knock-in) but the study investigates skin inflammation, not cholesterol biosynthesis; the abstract explicitly states no changes in cholesterol-regulation genes were found, and the cholesterol-pathway role of MVD is only cited as prior background.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-6477323ccc29012a84a7",
+      "studied_genes": [
+        "Mvd"
+      ],
+      "support": "no"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 3435,
+        "source_type": "full_text",
+        "start": 3245,
+        "text": "Farnesyl diphosphate synthase (FDPs), an integral enzyme in the mevalonate pathway involved in cholesterol biosynthesis, has emerged as a crucial regulator of metabolic homeostasis in cancer"
+      },
+      "function_supported_genes": [],
+      "rationale": "Fdps is extensively gene-specifically studied (knockdown/overexpression) but the functional experiments in this paper address HCC proliferation via a novel FDPS-G6PD protein interaction, not the cholesterol biosynthesis catalytic function; the mevalonate-pathway/cholesterol role is asserted only as introductory background.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-706e258c97dffbb8395e",
+      "studied_genes": [
+        "Fdps"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 904,
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes."
+      },
+      "function_supported_genes": [],
+      "rationale": "In vivo hepatic Scap knockout directly demonstrates that Scap is required for expression of cholesterol biosynthetic enzyme mRNAs in mouse liver, matching mechanism 2's claim of Scap as master regulator of the program.",
+      "red_flags": [],
+      "review_id": "RL-74bfd22b55ef7de1a593",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 14772,
+        "source_type": "full_text",
+        "start": 14667,
+        "text": "RDH11 mRNA expression was altered by these cellular treatments in a manner consistent with LDLR and HMGCR"
+      },
+      "function_supported_genes": [
+        "Rdh11"
+      ],
+      "rationale": "In mouse liver, mouse hepatocytes, and human hepatoma cells, Rdh11 mRNA responds to cholesterol status in parallel with canonical SREBP2 targets LDLR and HMGCR, directly supporting the claim that Rdh11 is co-regulated with SREBP2 targets in hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-80f9c513752ed89483c1",
+      "studied_genes": [
+        "Rdh11"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1395,
+        "source_type": "abstract",
+        "start": 1333,
+        "text": "HSD17B7 activity was significantly lower in SHRSP than in WKY."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "Hepatic Hsd17b7 mRNA, protein, and enzyme activity correlate with reduced liver cholesterol synthesis in a rat strain comparison, supporting its role as a cholesterol biosynthesis enzyme, but the study is in rat liver, a different species than the mouse target context, so 'direct' context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-8655cf3bfaadd6f3db6a",
+      "studied_genes": [
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2528,
+        "source_type": "full_text",
+        "start": 2457,
+        "text": "FDFT1 knockdown decreases cholesterol and bile acid levels in HCC cells"
+      },
+      "function_supported_genes": [
+        "Fdft1"
+      ],
+      "rationale": "FDFT1 knockdown/overexpression experiments in human hepatocyte-derived HCC cells and mouse liver tumor models causally alter cholesterol levels, directly supporting Fdft1's role as the squalene-synthesizing enzyme in the pathway, in a liver-derived but cancer-context system.",
+      "red_flags": [],
+      "review_id": "RL-8ecdf7b6ae8e85092555",
+      "studied_genes": [
+        "Fdft1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 904,
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes."
+      },
+      "function_supported_genes": [],
+      "rationale": "Same in vivo hepatic Scap knockout data supports mechanism 1's claim that Scap directly regulates the entire biosynthetic program via SREBP2 in mouse liver; no supplied program genes are individually named.",
+      "red_flags": [],
+      "review_id": "RL-9b1d86c1ff0c8dc62e7d",
+      "studied_genes": [],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7610144999999999,
+    "duration_api_ms": 305562,
+    "duration_ms": 304177,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 305.218
+  }
+}

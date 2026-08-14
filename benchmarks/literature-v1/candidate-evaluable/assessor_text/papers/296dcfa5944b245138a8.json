@@ -1,0 +1,16 @@
+{
+  "content_hash": "698ac38c65da1e398411044d5f283ee56c7b3ae8dbcfcf45d97495ac223beee5",
+  "doi": "10.1161/atvbaha.120.314935",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "296dcfa5944b245138a8",
+  "pmcid": "PMC7503211",
+  "pmid": "32698687",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "OBJECTIVE: To determine if endothelial dysfunction in a mouse model of diet-induced obesity and in obese humans is mediated by the suppression of endothelial Kir (inwardly rectifying K+) channels. Approach and Results: Endothelial dysfunction, observed as reduced dilations to flow, occurred after feeding mice a high-fat, Western diet for 8 weeks. The functional downregulation of endothelial Kir2.1 using dominant-negative Kir2.1 construct resulted in substantial reductions in the response to flow in mesenteric arteries of lean mice, whereas no effect was observed in arteries of obese mice. Overexpressing wild-type-Kir2.1 in endothelium of arteries from obese mice resulted in full recovery of the flow response. Exposing freshly isolated endothelial cells to fluid shear during patch-clamp electrophysiology revealed that the flow-sensitivity of Kir was virtually abolished in cells from obese mice. Atomic force microscopy revealed that the endothelial glycocalyx was stiffer and the thickness of the glycocalyx layer reduced in arteries from obese mice. We also identified that the length of the glycocalyx is critical to the flow-activation of Kir. Overexpressing Kir2.1 in endothelium of arteries from obese mice restored flow- and heparanase-sensitivity, indicating an important role for heparan sulfates in the flow-activation of Kir. Furthermore, the Kir2.1-dependent component of flow-induced vasodilation was lost in the endothelium of resistance arteries of obese humans obtained from biopsies collected during bariatric surgery.\n\nCONCLUSIONS: We conclude that obesity-induced impairment of flow-induced vasodilation is attributed to the loss of flow-sensitivity of endothelial Kir channels and propose that the latter is mediated by the biophysical alterations of the glycocalyx.",
+  "text_type": "abstract",
+  "title": "Impairment of Flow-Sensitive Inwardly Rectifying K+ Channels via Disruption of Glycocalyx Mediates Obesity-Induced Endothelial Dysfunction."
+}

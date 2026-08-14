@@ -1,0 +1,16 @@
+{
+  "content_hash": "a04c2181391cf737a3b15680e4c4d5e55f7709a297974e9b4f9174e5ff124193",
+  "doi": "10.1038/s41586-023-06983-9",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "e32ae82c4f2b8177dbc2",
+  "pmcid": "PMC11298758",
+  "pmid": "38297130",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Ferroptosis, a form of regulated cell death that is driven by iron-dependent phospholipid peroxidation, has been implicated in multiple diseases, including cancer1-3, degenerative disorders4 and organ ischaemia-reperfusion injury (IRI)5,6. Here, using genome-wide CRISPR-Cas9 screening, we identified that the enzymes involved in distal cholesterol biosynthesis have pivotal yet opposing roles in regulating ferroptosis through dictating the level of 7-dehydrocholesterol (7-DHC)-an intermediate metabolite of distal cholesterol biosynthesis that is synthesized by sterol C5-desaturase (SC5D) and metabolized by 7-DHC reductase (DHCR7) for cholesterol synthesis. We found that the pathway components, including MSMO1, CYP51A1, EBP and SC5D, function as potential suppressors of ferroptosis, whereas DHCR7 functions as a pro-ferroptotic gene. Mechanistically, 7-DHC dictates ferroptosis surveillance by using the conjugated diene to exert its anti-phospholipid autoxidation function and shields plasma and mitochondria membranes from phospholipid autoxidation. Importantly, blocking the biosynthesis of endogenous 7-DHC by pharmacological targeting of EBP induces ferroptosis and inhibits tumour growth, whereas increasing the 7-DHC level by inhibiting DHCR7 effectively promotes cancer metastasis and attenuates the progression of kidney IRI, supporting a critical function of this axis in vivo. In conclusion, our data reveal a role of 7-DHC as a natural anti-ferroptotic metabolite and suggest that pharmacological manipulation of 7-DHC levels is a promising therapeutic strategy for cancer and IRI.",
+  "text_type": "abstract",
+  "title": "7-Dehydrocholesterol dictates ferroptosis sensitivity."
+}

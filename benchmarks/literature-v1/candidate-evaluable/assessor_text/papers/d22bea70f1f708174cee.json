@@ -1,0 +1,16 @@
+{
+  "content_hash": "723e471cbcd197754f500fc9095321197a5c6a781271dbbaa29b94659cc81aa9",
+  "doi": "10.1016/j.cell.2017.09.051",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "d22bea70f1f708174cee",
+  "pmcid": "PMC5827971",
+  "pmid": "29056341",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "CLYBL encodes a ubiquitously expressed mitochondrial enzyme, conserved across all vertebrates, whose cellular activity and pathway assignment are unknown. Its homozygous loss is tolerated in seemingly healthy individuals, with reduced circulating B12 levels being the only and consistent phenotype reported to date. Here, by combining enzymology, structural biology, and activity-based metabolomics, we report that CLYBL operates as a citramalyl-CoA lyase in mammalian cells. Cells lacking CLYBL accumulate citramalyl-CoA, an intermediate in the C5-dicarboxylate metabolic pathway that includes itaconate, a recently identified human anti-microbial metabolite and immunomodulator. We report that CLYBL loss leads to a cell-autonomous defect in the mitochondrial B12 metabolism and that itaconyl-CoA is a cofactor-inactivating, substrate-analog inhibitor of the mitochondrial B12-dependent methylmalonyl-CoA mutase (MUT). Our work de-orphans the function of human CLYBL and reveals that a consequence of exposure to the immunomodulatory metabolite itaconate is B12 inactivation.",
+  "text_type": "abstract",
+  "title": "The Human Knockout Gene CLYBL Connects Itaconate to Vitamin B12."
+}

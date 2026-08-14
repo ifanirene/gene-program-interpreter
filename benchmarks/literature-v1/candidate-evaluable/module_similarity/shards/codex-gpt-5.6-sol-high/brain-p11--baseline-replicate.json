@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "brain-p11--baseline-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.98
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 3,
+        "similarity": 0.82
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 2,
+        "similarity": 0.09
+      }
+    ],
+    "moduleSemanticSimilarity": 0.63,
+    "overall_rationale": "The replicate sets strongly reproduce the canonical tip-cell module and the TGF-β-dependent CNS vascular module, while the left mechanosensory ion-channel module has no corresponding right-side program.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules describe Nrp1–CDC42-dependent tip-cell identity, filopodial guidance, and sprouting supported by Angpt2, Cxcr4, and Cdc42ep3.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.98
+      },
+      {
+        "left_module": 1,
+        "rationale": "Both concern postnatal brain sprouting and share CXCR4, HOPX, Nrp1, and Tek, but the right module emphasizes Notch-linked arterial specification rather than tip-cell filopodia.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.56
+      },
+      {
+        "left_module": 1,
+        "rationale": "The modules overlap through Angpt2, Nrp1, and postnatal CNS angiogenesis, but tip-cell migration and TGF-β-dependent vascular integrity are distinct central mechanisms and outputs.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.38
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both specify CNS endothelial tip behavior involving Nrp1, but the left module centers ALK5/TGF-β-dependent D-tip identity whereas the right centers CDC42-mediated filopodia.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.52
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both link TGF-β/Nrp1 signaling to CNS sprouting-state specification, but the right module primarily asserts a Dll4-Notch-CXCR4 transition toward arterial fate.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both center required Tgfbr1/2 signaling, regulated Angpt2, and deep postnatal brain vascular development, with D-tip specification versus integrity and remodeling as related output emphases.",
+        "relationship": "meaningful_refinement",
+        "right_module": 3,
+        "similarity": 0.82
+      },
+      {
+        "left_module": 3,
+        "rationale": "The only overlap is the postnatal brain endothelial context, as ion-channel mechanosensing and neurovascular coupling are mechanistically distinct from angiogenic tip-cell filopodia.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.08
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both occur in developing brain endothelium, but membrane ion-channel mechanosensing is peripheral to Notch-CXCR4-driven sprouting and arterial specification.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.09
+      },
+      {
+        "left_module": 3,
+        "rationale": "Brain vascular context is shared, but mechanosensory calcium signaling and TGF-β/Angpt2-dependent vascular integrity have different mechanisms and predicted phenotypes.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.1
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16231,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 1039,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 22.373
+  }
+}

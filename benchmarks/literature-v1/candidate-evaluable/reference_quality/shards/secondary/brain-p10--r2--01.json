@@ -1,0 +1,96 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-7b3938f58c0d76d9fef5",
+    "RL-aa3efd2b8625d1de4c6a",
+    "RL-c52c12c9cf73b0c9ef7d"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 36218,
+        "source_type": "full_text",
+        "start": 36108,
+        "text": "These findings support a link between CC2D2A and MICAL3-RAB8-mediated vesicle trafficking/fusion through NINL."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "The paper directly tests CC2D2A localization and physical interactions linking it to RAB8-regulated ciliary vesicle trafficking. Its retinal and cultured-cell systems are indirect to postnatal mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-7b3938f58c0d76d9fef5",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1222,
+        "source_type": "abstract",
+        "start": 978,
+        "text": "We performed the first characterization of a Bckdhb-/- mouse model, which recapitulates the severe human phenotype of MSUD with early-neonatal symptoms leading to death during the first week of life with massive accumulation of MSUD biomarkers."
+      },
+      "function_supported_genes": [
+        "Bckdhb"
+      ],
+      "rationale": "Bckdhb knockout causes massive accumulation of MSUD metabolic biomarkers, supporting its essential role in BCAA catabolism. The systemic neonatal mouse model is not specific to brain endothelial cells or vascular development.",
+      "red_flags": [],
+      "review_id": "RL-aa3efd2b8625d1de4c6a",
+      "studied_genes": [
+        "Bckdhb"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1018,
+        "source_type": "abstract",
+        "start": 798,
+        "text": "The autozygome of each index harbored a single novel truncating variant as revealed by exome sequencing, and the affected genes (SCLT1 and TBC1D32/C6orf170) have established roles in centrosomal biology and ciliogenesis."
+      },
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "rationale": "A truncating TBC1D32 variant in a ciliopathy case provides gene-specific disease evidence, but the abstract reports no direct functional test of ciliogenesis. The human patient setting is indirect to postnatal mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-c52c12c9cf73b0c9ef7d",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 132864,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 168205,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4895,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 98.802
+  }
+}

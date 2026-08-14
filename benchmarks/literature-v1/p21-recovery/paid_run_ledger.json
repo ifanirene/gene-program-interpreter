@@ -1,0 +1,516 @@
+{
+  "approval_file_sha256": "b1fa91bc4ceab4ea7ac37da1b31ab29492c856058dfc1ad17dcaaf6e2de3f7ee",
+  "approved_ceiling_usd": 20.0,
+  "benchmark_id": "literature-v1",
+  "canary_session_id": "liver-p21--r1",
+  "fanout_status": "complete",
+  "schema_version": 1,
+  "sessions": {
+    "liver-p21--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "4732e697efe4a73cc5a9762e3f4b5214332c99a3f9b11a6cf74976a50e2e2a7e",
+          "cost_usd": 1.999769,
+          "duration_ms": 1047538,
+          "error": null,
+          "is_error": false,
+          "num_turns": 95,
+          "result_sha256": "ad8c410c377751373c6be593e8cbcadddba8560a553d6a3f7ca283117f26a906",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 121632,
+            "cache_read": 1079770,
+            "input": 57,
+            "output": 63017,
+            "total": 1264476
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__search_openalex,mcp__literature__fetch_pubmed,mcp__literature__resolve_doi,mcp__literature__expand_openalex_citations\"}",
+              "attempt": 1,
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/program_bundles/P21.json\"}",
+              "attempt": 1,
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/program_bundles/P21.json\"}",
+              "attempt": 1,
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"pattern\": \"**/P21.json\"}",
+              "attempt": 1,
+              "tool": "Glob"
+            },
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P21.json\"}",
+              "attempt": 1,
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"cholesterol biosynthesis mevalonate pathway hepatocyte liver SREBP\", \"research_phase\": \"theme\", \"target_genes\": []}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Hmgcs1 Idi1 Fdps mevalonate pathway liver cholesterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Hmgcs1\", \"Idi1\", \"Fdps\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Fdft1 squalene synthase Lss lanosterol synthase Cyp51 sterol biosynthesis hepatocyte\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Fdft1\", \"Lss\", \"Cyp51\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Sc5d Dhcr7 Nsdhl sterol biosynthesis cholesterol liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Sc5d\", \"Dhcr7\", \"Nsdhl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Hmgcs1 HMG-CoA synthase cholesterol biosynthesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Hmgcs1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Fdft1 squalene synthase farnesyl diphosphate cholesterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Fdft1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Cyp51 lanosterol demethylase sterol synthesis liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Cyp51\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Mvk Pmvk Mvd mevalonate kinase pathway sterol biosynthesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Mvk\", \"Pmvk\", \"Mvd\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Scap Insig1 SREBP2 cholesterol biosynthesis regulation liver\", \"research_phase\": \"regulator\", \"target_genes\": [\"Scap\", \"Insig1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Dhcr7 7-dehydrocholesterol reductase cholesterol synthesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Dhcr7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38308184\", \"42248910\", \"37604220\", \"34454908\", \"36328117\", \"19088433\", \"27671501\", \"36835419\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Hmgcs1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39899681\", \"36894036\", \"40706591\", \"30468409\", \"8020937\", \"33113804\", \"29909962\", \"39136074\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Fdft1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"28098217\", \"10551787\", \"14630712\", \"10544287\", \"25739789\", \"1940622\", \"8619637\", \"10927636\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Cyp51\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"32322062\", \"16879892\", \"39168395\", \"41668292\", \"28736205\", \"23832448\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Scap\", \"Insig1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Acat2 acetyl-CoA acetyltransferase cholesterol esterification sterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acat2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Acss2 acetyl-CoA synthetase lipid cholesterol liver hepatocyte\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39481851\", \"22474282\", \"31727739\", \"18502767\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acat2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38297130\", \"31882361\", \"38472233\", \"39047230\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Dhcr7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Msmo1 methylsterol monooxygenase sterol cholesterol biosynthesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Msmo1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Nsdhl sterol dehydrogenase cholesterol biosynthesis liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Nsdhl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Idi1 isopentenyl diphosphate isomerase mevalonate cholesterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Idi1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Mvk mevalonate kinase cholesterol biosynthesis sterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Mvk\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"40214644\", \"32430393\", \"30360570\", \"37195326\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Msmo1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"26344763\", \"19631568\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Nsdhl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"29056891\", \"25120636\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Idi1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"28901277\", \"32125649\", \"38131282\", \"28918367\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Mvk\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Pmvk phosphomevalonate kinase Mvd mevalonate diphosphate decarboxylase sterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Pmvk\", \"Mvd\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Tm7sf2 transmembrane 7 superfamily member 2 sterol C14-reductase cholesterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tm7sf2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Hsd17b7 hydroxysteroid 17-beta dehydrogenase 7 cholesterol sterol biosynthesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Hsd17b7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Dgat2 diacylglycerol acyltransferase liver lipid MASLD hepatocyte\", \"research_phase\": \"regulator\", \"target_genes\": [\"Dgat2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"16126295\", \"31587341\", \"16901934\", \"16356630\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Hsd17b7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"31449901\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Pmvk\", \"Mvd\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39201759\", \"41805633\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Dgat2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"TM7SF2 sterol C14 reductase sterol biosynthesis liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tm7sf2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"ERG28 sterol biosynthesis cholesterol yeast homolog\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Erg28\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Ldlr LDL receptor cholesterol liver hepatocyte uptake\", \"research_phase\": \"regulator\", \"target_genes\": [\"Ldlr\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Mttp microsomal triglyceride transfer protein VLDL liver lipoprotein\", \"research_phase\": \"regulator\", \"target_genes\": [\"Mttp\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Acss2 acetyl-CoA synthetase short chain fatty acid cholesterol mevalonate\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"27341299\", \"9615229\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tm7sf2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"19520913\", \"33462514\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Ldlr\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"25702706\", \"23111699\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Mttp\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Sc5d sterol C5 desaturase lathosterol 7-dehydrocholesterol cholesterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Sc5d\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Acss2 lipogenesis acetate cholesterol liver NAFLD MASLD\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tas2r138 bitter taste receptor liver hepatocyte cholesterol metabolism\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tas2r138\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Rdh11 retinol dehydrogenase 11 liver metabolic function\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Rdh11\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Fgfr4 fibroblast growth factor receptor 4 bile acid cholesterol liver\", \"research_phase\": \"regulator\", \"target_genes\": [\"Fgfr4\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"11731337\", \"20952551\", \"28330720\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Sc5d\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"37324939\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Sc5d\", \"Dhcr7\", \"Nsdhl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39362601\", \"15790565\", \"29567832\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Rdh11\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"26579439\", \"16213224\", \"34825156\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Fgfr4\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Acss2 ACSS2 acetyl-CoA synthetase mevalonate isoprenoid sterol lipid synthesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Erg28 sterol C4 demethylation complex mammalian cholesterol biosynthesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Erg28\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ddr2 Cetn2 Zfp839 liver hepatocyte expression\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Ddr2\", \"Cetn2\", \"Zfp839\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Fads2 fatty acid desaturase liver cholesterol MASLD lipid metabolism\", \"research_phase\": \"regulator\", \"target_genes\": [\"Fads2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Acss2 ACSS2 acetyl-CoA synthetase short chain cholesterol synthesis acetate\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Erg28 ERG28 C4 demethylation sterol cholesterol biosynthesis mammalian\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Erg28\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"TAS2R138 bitter taste receptor cholesterol bile acid liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tas2r138\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"42134098\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Fads2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"cholesterol biosynthesis program aging hepatocyte SREBP2 mevalonate decline\", \"research_phase\": \"theme\", \"target_genes\": [\"Hmgcs1\", \"Cyp51\", \"Dhcr7\", \"Fdft1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"SREBP2 target genes mevalonate pathway cholesterol synthesis hepatocyte regulation\", \"research_phase\": \"theme\", \"target_genes\": [\"Hmgcs1\", \"Fdps\", \"Idi1\", \"Mvk\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"36216146\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Erg28\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"25584894\", \"19617323\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"41977407\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tas2r138\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"31685796\"], \"research_phase\": \"theme\", \"target_genes\": [\"Hmgcs1\", \"Fdps\", \"Idi1\", \"Mvk\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Fdps farnesyl diphosphate synthase mevalonate pathway cholesterol isoprenoid\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Fdps\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"cholesterol biosynthesis aging liver mouse hepatocyte decline MASLD NAFLD\", \"research_phase\": \"theme\", \"target_genes\": [\"Hmgcs1\", \"Cyp51\", \"Dhcr7\", \"Fdft1\", \"Sc5d\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Scap SREBP cleavage activating protein cholesterol sensing hepatocyte sterol\", \"research_phase\": \"regulator\", \"target_genes\": [\"Scap\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39521858\", \"21903868\", \"34896359\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Fdps\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"24217618\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Scap\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Idi1 IDI1 isopentenyl-diphosphate isomerase cholesterol sterol synthesis SREBP\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Idi1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"sterol biosynthesis genes aging mouse liver transcriptome\", \"research_phase\": \"theme\", \"target_genes\": [\"Hmgcs1\", \"Cyp51\", \"Fdft1\", \"Dhcr7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"cholesterol synthesis MASLD NASH hepatocyte SREBP mevalonate upregulation\", \"research_phase\": \"theme\", \"target_genes\": [\"Hmgcs1\", \"Fdft1\", \"Cyp51\", \"Nsdhl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ddr2 discoidin domain receptor 2 cholesterol lipid metabolism\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Ddr2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"23774190\", \"42082151\", \"26032512\"], \"research_phase\": \"theme\", \"target_genes\": [\"Hmgcs1\", \"Cyp51\", \"Dhcr7\", \"Fdft1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"IDI1 isopentenyl diphosphate delta isomerase 1 mevalonate pathway cholesterol sterol liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Idi1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Acss2 ACSS2 acetyl-CoA synthetase 2 lipogenesis cholesterol hepatocyte liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insig1 insulin induced gene 1 SREBP feedback cholesterol synthesis liver\", \"research_phase\": \"regulator\", \"target_genes\": [\"Insig1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cetn2 centrin 2 liver hepatocyte expression function\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Cetn2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Zfp839 zinc finger protein 839 liver mouse expression\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Zfp839\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Lss lanosterol synthase cholesterol biosynthesis liver hepatocyte sterol\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Lss\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"ACSS2 acetyl-CoA synthetase 2 liver lipid synthesis NAFLD steatosis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ddr2 discoidin domain receptor collagen hepatic stellate cell liver fibrosis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Ddr2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tas2r bitter taste receptor hepatocyte lipid steatosis liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tas2r138\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"32214246\", \"40127788\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Acss2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"15591520\", \"29656147\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Ddr2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"LSS lanosterol synthase oxidosqualene cyclase cholesterol biosynthesis liver\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Lss\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"23583456\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Idi1\", \"Mvk\", \"Pmvk\", \"Mvd\", \"Fdps\", \"Lss\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 1, \"query\": \"select:mcp__gpi__submit_result\"}",
+              "attempt": 1,
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P21 encodes nearly the complete enzymatic cascade for mevalonate-pathway-driven de novo cholesterol biosynthesis in mouse hepatocytes, spanning early steps (Hmgcs1, Idi1, Fdps, Mvk, Pmvk, Mvd), squalene synthes...",
+              "attempt": 1,
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": null
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "503eaaafe085cc094f55df961e9364734d56cb6d665d677f2885bb344e2241a0",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 20.0,
+      "program_id": "P21",
+      "recorded_cost_usd": 1.999769,
+      "status": "verified",
+      "verification_summary_sha256": "8eba7b1bd211c28412098f1a2c31a5375fcd251ac56db088fc2db1ef1788f8f0"
+    }
+  }
+}

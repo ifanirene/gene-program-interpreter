@@ -1,0 +1,47 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-brain-p11-r2",
+    "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+    "candidate_additions": [
+      "Kcnj2-mediated endothelial shear/flow sensing and vasodilation.",
+      "Tnfrsf11b-mediated endothelial survival and tube formation.",
+      "Slc1a1-mediated metabolic support of endothelial migration and angiogenesis.",
+      "Rgs6 involvement in Notch-dependent arterial specification."
+    ],
+    "candidate_removed_or_weakened": [
+      "The Dll4-Notch-CXCR4 mechanism coupling tip-cell migration to arterial connection is substantially weakened.",
+      "Hopx-supported intracranial arterial endothelial identity is no longer interpreted.",
+      "TGF-β control of Angpt2, angiogenic-front migration, and postnatal CNS vascular integrity is reduced from a central mechanism to a brief supporting statement.",
+      "The Nrp1–Alk1/Alk5 link between tip/stalk transition and TGF-β balance is omitted."
+    ],
+    "core_interpretation_changed": true,
+    "decision_relevant_differences": [
+      "Both annotations identify a postnatal brain endothelial sprouting/tip-cell program.",
+      "The baseline centers arterial specification and TGF-β-dependent vascular integrity alongside sprouting.",
+      "The candidate instead elevates mechanosensitive flow sensing and endothelial survival/metabolism as the other two major themes.",
+      "This changes which biological processes would be prioritized for follow-up experiments."
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "The dominant angiogenic tip-cell interpretation is retained through Angpt2, Cxcr4, and Nrp1. However, two of the baseline's three central mechanisms—arterial fate coupling and TGF-β/Angpt2 homeostatic control—are largely displaced by flow sensing and survival/metabolic support. This is more than added evidence coverage and could redirect biological follow-up.",
+    "semantic_relation": "materially_changed",
+    "shared_core_conclusions": [
+      "P11 represents a postnatal mouse brain endothelial program.",
+      "Sprouting angiogenesis and tip-cell identity are the dominant shared interpretation.",
+      "Angpt2, Cxcr4, and Nrp1 support active tip-cell migration and filopodial behavior.",
+      "Tgfbr1 and Tgfbr2 support brain vascular development, although their mechanistic prominence differs."
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16619,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 705,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 20.83
+  }
+}

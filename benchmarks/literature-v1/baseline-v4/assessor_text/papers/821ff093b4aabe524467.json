@@ -1,0 +1,14 @@
+{
+  "content_hash": "74fbd70ba757550a6016b2f348402a3b198b79b5642184b5dd5c0a449fe3003c",
+  "doi": "10.1016/j.jtha.2023.06.007",
+  "errors": [],
+  "paper_key": "821ff093b4aabe524467",
+  "pmcid": null,
+  "pmid": "37315795",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Endoglin, alias CD105, is a human membrane glycoprotein highly expressed in vascular endothelial cells. It is involved in angiogenesis and angiogenesis-related diseases, including the rare vascular pathology known as hereditary hemorrhagic telangiectasia type 1. Although endoglin acts as an accessory receptor for members of the transforming growth factor-\u03b2 family, in recent years, emerging evidence has shown a novel functional role for this protein beyond the transforming growth factor-\u03b2 system. In fact, endoglin has been found to be an integrin counterreceptor involved in endothelial cell adhesion processes during pathological inflammatory conditions and primary hemostasis. Furthermore, a circulating form of endoglin, also named as soluble endoglin, whose levels are abnormally increased in different pathological conditions, such as preeclampsia, seems to act as an antagonist of membrane-bound endoglin and as a competitor of the fibrinogen-integrin interaction in platelet-dependent thrombus formation. These studies suggest that membrane-bound endoglin and circulating endoglin are important components involved in vascular homeostasis and hemostasis.",
+  "text_type": "abstract",
+  "title": "Novel vascular roles of human endoglin in pathophysiology."
+}

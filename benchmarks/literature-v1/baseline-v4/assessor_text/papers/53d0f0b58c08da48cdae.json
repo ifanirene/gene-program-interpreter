@@ -1,0 +1,14 @@
+{
+  "content_hash": "e46144b7a59859f8060da5f337506d1142681ce1f396a72399cb490bfcc4f7ca",
+  "doi": "10.1006/bbrc.1998.9841",
+  "errors": [],
+  "paper_key": "53d0f0b58c08da48cdae",
+  "pmcid": null,
+  "pmid": "9920722",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Senescence marker protein-30 (SMP30), which we previously identified, is notable for its androgen-independent decrease in the livers of aging rats. Hepatocytes and renal tubular epithelia express large amounts of SMP30 in their cytosol throughout the tissue-maturing process and adulthood, but its level decreases thereafter. Upon cloning cDNAs that encode SMP30 in rats, mice, and humans, we found that the amino acid sequence of SMP30 is well conserved with remarkable homology among these species. However, this gene, which is so strongly conserved in these higher animals, does not appear in yeast. We also determined the genome organization and 5' flanking region of SMP30 in mouse genome. In the meantime, SMP30 turned out be identical to a Ca2+-binding protein called regucalcin (RC). To learn how this protein functions, we transfected Hep G2 cells with human SMP30 cDNA so that these cells stably express large amounts of SMP30. The results suggest that SMP30 regulates Ca2+ homeostasis by enhancing Ca2+-pumping activity in the plasma membranes. Thus, SMP30 seems to play a critical role in the highly differentiated functions of the liver and kidney and to exert a major impact on Ca2+ homeostasis. If so, down-regulation of SMP30 with aging would attribute greatly to the related deterioration of these organs, as indicated in this brief overview of the structure, expression, and function of SMP30.",
+  "text_type": "abstract",
+  "title": "Senescence marker protein-30 (SMP30): structure and biological function."
+}

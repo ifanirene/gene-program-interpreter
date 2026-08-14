@@ -1,0 +1,16 @@
+{
+  "content_hash": "a32a4670ca7362e47566927f8e8821fb35eb0df0c0b0aa7ea80199e6afaecaa2",
+  "doi": "10.1161/atvbaha.112.248583",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "b1daa0a0431bdd2136e1",
+  "pmcid": "PMC3399424",
+  "pmid": "22499991",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "OBJECTIVE: MicroRNAs (miRs) regulate angiogenesis by posttranscriptional silencing of target genes. The significance of angiostatic miR-200b in switching on skin wound angiogenesis was tested.\n\nMETHODS AND RESULTS: Wounding caused imminent and transient downregulation of miR-200b in dermal wound-edge endothelial cells. Derailing this injury response by lentiviral delivery of miR-200b in vivo impaired wound angiogenesis. Computational prediction, target reporter luciferase assay, and Western blot analysis provided first evidence that miR-200b targets globin transcription factor binding protein 2 (GATA2) and vascular endothelial growth factor receptor 2 (VEGFR2). Overexpression of GATA2 or VEGFR2 in endothelial cells rescued the angiostatic effect of miR-200b in vitro. Downregulation of miR-200b derepressed GATA2 and VEGFR2 expression to switch on wound angiogenesis, which was disrupted in diabetic wounds. Treatment of endothelial cells with tumor necrosis factor-\u03b1, a proinflammatory cytokine abundant in diabetic wounds, induced miR-200b expression, silenced GATA2 and VEGFR2, and suppressed angiogenesis. These outcomes were attenuated using anti-miR-200b strategy. Neutralization of tumor necrosis factor-\u03b1 in the diabetic wounds improved wound angiogenesis and closure, which was accompanied by downregulation of miR-200b expression and desilencing of GATA2 and VEGFR2.\n\nCONCLUSIONS: Injury-induced repression of miR-200b turned on wound angiogenesis. In mice with diabetes mellitus,excessive tumor necrosis factor-\u03b1 induced miR-200b blunting proangiogenic functions of GATA2 and VEGFR2.",
+  "text_type": "abstract",
+  "title": "Downregulation of endothelial microRNA-200b supports cutaneous wound angiogenesis by desilencing GATA binding protein 2 and vascular endothelial growth factor receptor 2."
+}

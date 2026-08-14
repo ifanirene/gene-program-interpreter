@@ -1,0 +1,16 @@
+{
+  "content_hash": "5586a0ea1d1979b59ac939e5369fb576652d40295b41dc28dbe3ff36014358de",
+  "doi": "10.1093/hmg/ddaa284",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "ae9b3a9c62127fe6f942",
+  "pmcid": "PMC8033148",
+  "pmid": "33517424",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The BBSome is a protein complex consisting of BBS1, BBS2, BBS4, BBS5, BBS7, BBS8, BBS9 and BBS18 that associates with intraflagellar transport complexes and specializes in ciliary trafficking. In primary cilia, ciliary entry requires the fully assembled BBSome as well as the small GTPase, ARL6 (BBS3). Retinal photoreceptors possess specialized cilia. In light of key structural and functional differences between primary and specialized cilia, we examined the principles of BBSome recruitment to photoreceptor cilia. We performed sucrose gradient fractionation using retinal lysates of Bbs2-/-, Bbs7-/-, Bbs8-/- and Bbs3-/- mice to determine the status of BBSome assembly, then determined localization of BBSome components using immunohistochemistry. Surprisingly, we found that a subcomplex of the BBSome containing at least BBS1, BBS5, BBS8 and BBS9 is recruited to cilia in the absence of BBS2 or BBS7. In contrast, a BBSome subcomplex consisting of BBS1, BBS2, BBS5, BBS7 and BBS9 is found in Bbs8-/- retinas and is denied ciliary entry in photoreceptor cells. In addition, the BBSome remains fully assembled in Bbs3-/- retinas and can be recruited to photoreceptor cilia in the absence of BBS3. We compared phenotypic severity of their retinal degeneration phenotypes. These findings demonstrate that unlike primary cilia, photoreceptor cilia admit a partially assembled BBSome meeting specific requirements. In addition, the recruitment of the BBSome to photoreceptor cilia does not require BBS3. These findings indicate that the ciliary entry of the BBSome is subjected to cell-specific regulation, particularly in cells with highly adapted forms of cilia such as photoreceptors.",
+  "text_type": "abstract",
+  "title": "Photoreceptor cilia, in contrast to primary cilia, grant entry to a partially assembled BBSome."
+}

@@ -1,0 +1,119 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-a825f41108a26d4ab883",
+    "RL-aa13c1e7f8facc8720c7",
+    "RL-b0bf65debdf8394a131f",
+    "RL-b786af039e250eba6e79"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1357,
+        "source_type": "abstract",
+        "start": 1259,
+        "text": "MTTP I128T is associated with reduced hepatic steatosis as well as reduced plasma lipids and apoB."
+      },
+      "function_supported_genes": [],
+      "rationale": "The MTTP variant association supports a role in hepatic lipid balance, but it does not establish the claimed VLDL-export mechanism and the allele's functional effect is unresolved. The evidence comes from human cohorts rather than the target mouse context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a825f41108a26d4ab883",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1231,
+        "source_type": "abstract",
+        "start": 1120,
+        "text": "phosphomevalonate kinase (PMVK) gene coding the second enzyme after mevalonate kinase in the mevalonate pathway"
+      },
+      "function_supported_genes": [
+        "Pmvk"
+      ],
+      "rationale": "The case report identifies PMVK mutations and explicitly places its encoded enzyme immediately after mevalonate kinase in the mevalonate pathway. Its pediatric inflammatory context is indirect to mouse liver aging and MASLD.",
+      "red_flags": [],
+      "review_id": "RL-aa13c1e7f8facc8720c7",
+      "studied_genes": [
+        "Pmvk"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 770,
+        "source_type": "abstract",
+        "start": 673,
+        "text": "ACAT2 provided the major cholesterol-esterifying activity in 3 of 4 human liver samples examined."
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "ACAT2-specific inhibition assays establish ACAT2 as the major cholesterol-esterifying enzyme in most examined liver samples. The human liver setting lacks the target mouse MASLD context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b0bf65debdf8394a131f",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 198,
+        "source_type": "abstract",
+        "start": 0,
+        "text": "NSDHL (NAD(P)H sterol dehydrogenase-like), is a 3beta-hydroxysterol dehydrogenase thought to function in the demethylation of sterol precursors in one of the later steps of cholesterol biosynthesis."
+      },
+      "function_supported_genes": [],
+      "rationale": "The assigned sterol-demethylation function appears only as a tentative introductory statement; the experiments instead examine developmental expression and selection of deficient cells. Mouse liver is relevant, but the developmental setting does not directly match aging or MASLD.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-b786af039e250eba6e79",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 37376,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 59676,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 6549,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 126.383
+  }
+}

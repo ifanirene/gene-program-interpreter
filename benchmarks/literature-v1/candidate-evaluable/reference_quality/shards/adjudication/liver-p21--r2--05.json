@@ -1,0 +1,123 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-b786af039e250eba6e79",
+    "RL-d441a59c5a1311c12a1e",
+    "RL-d9c0f210c10e0a1940fb",
+    "RL-def9b33e9590b1c3d439"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 198,
+        "source_type": "abstract",
+        "start": 0,
+        "text": "NSDHL (NAD(P)H sterol dehydrogenase-like), is a 3beta-hydroxysterol dehydrogenase thought to function in the demethylation of sterol precursors in one of the later steps of cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Nsdhl"
+      ],
+      "rationale": "NSDHL is the paper's entire subject (tissue/developmental expression, mosaic loss, negative selection of deficient cells), so it is substantively studied, but its C4-demethylation role is cited as prior knowledge and only observationally corroborated by high liver expression and negative selection of NSDHL-null cells, yielding partial support. The mouse liver setting is relevant yet developmental rather than aging/MASLD, so the declared direct context is overclaimed; B's empty gene arrays understate that the gene is directly investigated.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b786af039e250eba6e79",
+      "studied_genes": [
+        "Nsdhl"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 869,
+        "source_type": "abstract",
+        "start": 698,
+        "text": "FoxO4-mediated repression of CYP51 led to the accumulation of 24,25 dihydrolano-sterol (DHL), which independently and unlike lanosterol inhibited cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "CYP51 mRNA repression with resulting DHL accumulation plus recapitulation by CYP51 inhibitors causally confirm its lanosterol 14alpha-demethylase role in cholesterol biosynthesis, matching the mechanism. The abstract does not report cell type, tissue, or species, so the declared partial context cannot be assessed from available text.",
+      "red_flags": [],
+      "review_id": "RL-d441a59c5a1311c12a1e",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 895,
+        "source_type": "abstract",
+        "start": 609,
+        "text": "Experiments indicated that human sterol Δ(7)-reductase (DHCR7) is the major target of LK-980 (34-fold increase of 7-dehydrocholesterol), whereas human sterol Δ(14)-reductase (DHCR14), human sterol Δ(24)-reductase (DHCR24), and human sterol C5-desaturase (SC5DL) represent minor targets."
+      },
+      "function_supported_genes": [
+        "Dhcr7"
+      ],
+      "rationale": "DHCR7 is causally established as a postlanosterol synthesis enzyme by a 34-fold substrate accumulation, but Sc5d/SC5DL is only a minor target inferred from computational fitting of the sterol profile, so the co-establishment claim is partial with function support limited to Dhcr7. Human HepG2/primary hepatocytes are closely transferable but not mouse hepatocytes, making the declared direct context an overclaim.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-d9c0f210c10e0a1940fb",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1310,
+        "source_type": "abstract",
+        "start": 1192,
+        "text": "Furthermore, we established that the two SREs that bind SREBP-2 work in cooperation to synergistically activate DHCR7."
+      },
+      "function_supported_genes": [
+        "Dhcr7"
+      ],
+      "rationale": "The paper maps two functional SREBP-2 binding sites in the DHCR7 promoter and shows they cooperatively activate transcription, directly supporting the mechanism that Dhcr7 carries SREs and is SREBP-2-regulated. It is a human promoter/molecular study, an experimental system distinct from mouse liver MASLD, so the declared indirect context is accurate.",
+      "red_flags": [],
+      "review_id": "RL-def9b33e9590b1c3d439",
+      "studied_genes": [
+        "Dhcr7"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.558764,
+    "duration_api_ms": 165450,
+    "duration_ms": 163508,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 3,
+    "wall_seconds": 164.43
+  }
+}

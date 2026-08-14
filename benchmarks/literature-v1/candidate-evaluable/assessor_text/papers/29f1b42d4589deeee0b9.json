@@ -1,0 +1,16 @@
+{
+  "content_hash": "d1fcffd87b2e18b4a455b4d36f8bfab570917de62735fedc093a27c8099d0d72",
+  "doi": "10.1074/jbc.m800398200",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "29f1b42d4589deeee0b9",
+  "pmcid": "PMC2459284",
+  "pmid": "18502767",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cholesteryl ester synthesis by the acyl-CoA:cholesterol acyltransferase enzymes ACAT1 and ACAT2 is, in part, a cellular homeostatic mechanism to avoid toxicity associated with high free cholesterol levels. In hepatocytes and enterocytes, cholesteryl esters are secreted as part of apoB lipoproteins, the assembly of which is critically dependent on microsomal triglyceride transfer protein (MTP). Conditional genetic ablation of MTP reduces cholesteryl esters and enhances free cholesterol in the liver and intestine without diminishing ACAT1 and ACAT2 mRNA levels. As expected, increases in hepatic free cholesterol are associated with decreases in 3-hydroxy-3-methylglutaryl-CoA reductase and increases in ATP-binding cassette transporter 1 mRNA levels. Chemical inhibition of MTP also decreases esterification of cholesterol in Caco-2 and HepG2 cells. Conversely, coexpression of MTP and apoB in AC29 cells stably transfected with ACAT1 and ACAT2 increases cholesteryl ester synthesis. Liver and enterocyte microsomes from MTP-deficient animals synthesize lesser amounts of cholesteryl esters in vitro, but addition of purified MTP and low density lipoprotein corrects this deficiency. Enrichment of microsomes with cholesteryl esters also inhibits cholesterol ester synthesis. Thus, MTP enhances cellular cholesterol esterification by removing cholesteryl esters from their site of synthesis and depositing them into nascent apoB lipoproteins. Therefore, MTP plays a novel role in regulating cholesteryl ester biosynthesis in cells that produce lipoproteins. We speculate that non-lipoprotein-producing cells may use different mechanisms to alleviate product inhibition and modulate cholesteryl ester biosynthesis.",
+  "text_type": "abstract",
+  "title": "Microsomal triglyceride transfer protein enhances cellular cholesteryl esterification by relieving product inhibition."
+}

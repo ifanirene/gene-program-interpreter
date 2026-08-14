@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "literature-v1",
+  "created_at": "2026-07-22T17:10:00-07:00",
+  "assessment_status": "structural_and_factual_assessment_complete",
+  "pairing": {
+    "baseline": "baseline-v4",
+    "candidate_main": "candidate-unbounded",
+    "recovered_session": "p21-recovery/liver-p21--r1",
+    "session_ids": [
+      "brain-p10--r1", "brain-p10--r2", "brain-p11--r1", "brain-p11--r2",
+      "liver-p21--r1", "liver-p21--r2", "liver-p25--r1", "liver-p25--r2"
+    ]
+  },
+  "coverage": {
+    "baseline_mean_supplied_gene_citation_coverage": 0.407609,
+    "baseline_mean_supplied_gene_function_coverage": 0.38587,
+    "candidate_mean_supplied_gene_citation_coverage": 0.548913,
+    "candidate_mean_supplied_gene_function_coverage": 0.548913,
+    "paired_mean_citation_delta": 0.141305,
+    "paired_mean_function_delta": 0.163044,
+    "per_case_function_coverage": {
+      "brain-p10": {"baseline": 0.347826, "candidate": 0.456522, "delta": 0.108696},
+      "brain-p11": {"baseline": 0.152174, "candidate": 0.304348, "delta": 0.152174},
+      "liver-p21": {"baseline": 0.652173, "candidate": 0.847826, "delta": 0.195653},
+      "liver-p25": {"baseline": 0.391304, "candidate": 0.586957, "delta": 0.195653}
+    }
+  },
+  "adjudicated_factual_quality": {
+    "baseline_mean_supplied_gene_citation_coverage": 0.407608,
+    "baseline_mean_supplied_gene_function_coverage": 0.385869,
+    "candidate_mean_supplied_gene_citation_coverage": 0.532609,
+    "candidate_mean_supplied_gene_function_coverage": 0.516304,
+    "paired_mean_citation_delta": 0.125,
+    "paired_mean_function_delta": 0.130435,
+    "positive_function_sessions": 8,
+    "paired_sessions": 8,
+    "minimum_case_function_delta": 0.086957,
+    "maximum_case_function_delta": 0.173913,
+    "baseline_context_overclaim_rate": 0.348993,
+    "candidate_context_overclaim_rate": 0.345679,
+    "baseline_flagged_link_rate": 0.493333,
+    "candidate_flagged_link_rate": 0.424242,
+    "baseline_contradictions": 0,
+    "candidate_contradictions": 2,
+    "decision": "quality_gain_but_two_source_opposed_claims_block_promotion"
+  },
+  "selection": {
+    "baseline_retained_paper_no_supplied_gene_share": 0.407,
+    "candidate_session_level_unique_papers": 157,
+    "candidate_session_level_unique_papers_studying_no_supplied_gene": 22,
+    "candidate_retained_paper_no_supplied_gene_share": 0.140127
+  },
+  "verification": {
+    "valid_sessions": 8,
+    "verified_citations": 157,
+    "candidate_unique_assessor_papers": 133,
+    "assessor_abstracts": 79,
+    "assessor_open_access_full_texts": 54,
+    "review_links": 165,
+    "fixed_sample_double_score_links": 33,
+    "expanded_double_score_links": 165,
+    "adjudicated_full_review_disagreements": 102
+  },
+  "operations": {
+    "baseline_pilot_cost_usd": 5.1769133,
+    "candidate_known_minimum_accepted_cost_usd": 16.727064,
+    "candidate_to_baseline_known_cost_ratio": 3.231088,
+    "cost_note": "Lower bound: SDK failures with missing terminal telemetry and failed main-run P21 attempts are excluded.",
+    "baseline_median_duration_minutes": 5.238575,
+    "candidate_median_duration_minutes": 22.363467,
+    "baseline_p95_duration_minutes": 7.08278,
+    "candidate_p95_duration_minutes": 44.311433,
+    "candidate_to_baseline_p95_duration_ratio": 6.25621,
+    "candidate_max_duration_minutes": 45.279417
+  },
+  "correctness_events": {
+    "main_sessions_valid": 7,
+    "main_sessions_failed": 1,
+    "isolated_recoveries_valid": 1,
+    "schema_failures_before_retry_or_recovery": 2,
+    "sdk_failures": 2,
+    "canonical_ledger_corrections_in_accepted_sessions": 0
+  },
+  "interpretation": [
+    "The retrieval-first evidence graph met the preferred structural coverage target in every paired case.",
+    "Separating regulator/context evidence reduced the share of retained papers that study no supplied gene.",
+    "The adjudicated factual audit retained a 13.0-point mean function-coverage gain across all eight paired sessions.",
+    "Wrong-gene, paralog-only, and wrong-function flags fell; context overclaim was flat.",
+    "Two candidate contradictions versus zero at baseline fail the strict factual non-regression gate.",
+    "Unbounded turns prevented censoring, but cost and latency fail the 1.5x production gate by a wide margin."
+  ]
+}

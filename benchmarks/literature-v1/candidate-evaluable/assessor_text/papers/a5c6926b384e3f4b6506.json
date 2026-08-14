@@ -1,0 +1,14 @@
+{
+  "content_hash": "2a42a16121b7a2814120a3cfe65afd5d3fffae5c0730c6e4b876a640bc78a929",
+  "doi": "10.1002/jimd.12604",
+  "errors": [],
+  "paper_key": "a5c6926b384e3f4b6506",
+  "pmcid": null,
+  "pmid": "36880392",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Maple syrup urine disease (MSUD) is rare autosomal recessive metabolic disorder caused by the dysfunction of the mitochondrial branched-chain 2-ketoacid dehydrogenase (BCKD) enzyme complex leading to massive accumulation of branched-chain amino acids and 2-keto acids. MSUD management, based on a life-long strict protein restriction with nontoxic amino acids oral supplementation represents an unmet need as it is associated with a poor quality of life, and does not fully protect from acute life-threatening decompensations or long-term neuropsychiatric complications. Orthotopic liver transplantation is a beneficial therapeutic option, which shows that restoration of only a fraction of whole-body BCKD enzyme activity is therapeutic. MSUD is thus an ideal target for gene therapy. We and others have tested AAV gene therapy in mice for two of the three genes involved in MSUD, BCKDHA and DBT. In this study, we developed a similar approach for the third MSUD gene, BCKDHB. We performed the first characterization of a Bckdhb-/- mouse model, which recapitulates the severe human phenotype of MSUD with early-neonatal symptoms leading to death during the first week of life with massive accumulation of MSUD biomarkers. Based on our previous experience in Bckdha-/- mice, we designed a transgene carrying the human BCKDHB gene under the control of a ubiquitous EF1\u03b1 promoter, encapsidated in an AAV8 capsid. Injection in neonatal Bckdhb-/- mice at 1014 vg/kg achieved long-term rescue of the severe MSUD phenotype of Bckdhb-/- mice. These data further validate the efficacy of gene therapy for MSUD opening perspectives towards clinical translation.",
+  "text_type": "abstract",
+  "title": "Successful treatment of severe MSUD in Bckdhb-/- mice with neonatal AAV gene therapy."
+}

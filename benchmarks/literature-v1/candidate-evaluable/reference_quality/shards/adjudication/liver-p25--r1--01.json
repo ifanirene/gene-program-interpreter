@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0364eeef4f0d91a67655",
+    "RL-052bab66f63d10e2ab61",
+    "RL-082dea94c06908c689e1",
+    "RL-148096a874ea409f1b55"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1330,
+        "source_type": "abstract",
+        "start": 1130,
+        "text": "Overexpression or knockdown of Htatip2 in hepatocytes affected fatty acid storage and oxidation, consistent with a novel role in mediating the differential effects of PKC isoforms on lipid metabolism."
+      },
+      "function_supported_genes": [
+        "Htatip2"
+      ],
+      "rationale": "Gene-specific gain/loss-of-function of Htatip2 in mouse hepatocytes causally altered fatty acid storage and oxidation, matching the assigned regulatory role. Fat-fed mouse hepatocytes are the target cell type/tissue and a MASLD-relevant condition, so the direct label is accurate.",
+      "red_flags": [],
+      "review_id": "RL-0364eeef4f0d91a67655",
+      "studied_genes": [
+        "Htatip2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 410,
+        "source_type": "abstract",
+        "start": 351,
+        "text": "Akr1c6, 1c14, 1c20, and 1c22 are primarily present in liver"
+      },
+      "function_supported_genes": [
+        "Akr1c6"
+      ],
+      "rationale": "The paper gives gene-specific evidence that Akr1c6 is liver-enriched and CAR/Nrf2-induced, matching the selection claim of a liver-enriched xenobiotic-receptor-regulated hepatic AKR; catalytic detox activity is not perturbation-tested, so directness is observational. Context is mouse liver, the target tissue/species, so direct is accurate.",
+      "red_flags": [],
+      "review_id": "RL-052bab66f63d10e2ab61",
+      "studied_genes": [
+        "Akr1c6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1182,
+        "source_type": "abstract",
+        "start": 1002,
+        "text": "siRNA-mediated down-regulation of MOSC2 and the mitochondrial form of cytochrome b(5) type B (CYB5B) significantly inhibited the reductase activity in the differentiated adipocytes"
+      },
+      "function_supported_genes": [
+        "Cyb5b"
+      ],
+      "rationale": "CYB5B-specific siRNA knockdown causally establishes its participation in the outer-mitochondrial-membrane amidoxime/lipid reductase system, directly supporting the assigned function. The perturbation was in 3T3-L1 adipocytes (liver membranes only for biochemistry), so context is indirect and the declared partial overclaims it.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-082dea94c06908c689e1",
+      "studied_genes": [
+        "Cyb5b"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3498,
+        "source_type": "full_text",
+        "start": 3340,
+        "text": "recombinant SULT2A8 preferentially catalyzes the sulfonation of 7α-OH bile acids including cholic acid (CA), chenodeoxycholic acid, and their conjugated forms"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "Structural and biochemical assays directly demonstrate that mouse SULT2A8 sulfonates 7α-OH bile acids, matching the citation-specific claim; the PPARalpha clause belongs to a separate citation. The study is of the native mouse enzyme with cited in vivo hepatic bile-acid homeostasis data, so the direct mouse-liver context is accurate.",
+      "red_flags": [],
+      "review_id": "RL-148096a874ea409f1b55",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5054255000000001,
+    "duration_api_ms": 155096,
+    "duration_ms": 153422,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 154.561
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "6472ba2cbccd7970849afd58c09e0cef8952ce6bc4d5399262dbbb9460b197a7",
+  "doi": "10.1097/moh.0000000000000419",
+  "errors": [],
+  "paper_key": "6112942fb0032c662f47",
+  "pmcid": null,
+  "pmid": "29438260",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "PURPOSE OF REVIEW: Mutations in the Endoglin (Eng) gene, an auxiliary receptor in the transforming growth factor beta (TGF\u03b2)-superfamily signaling pathway, are responsible for the human vascular disorder hereditary hemorrhagic telangiectasia (HHT) type 1, characterized in part by blood vessel enlargement. A growing body of work has uncovered an autonomous role for Eng in endothelial cells. We will highlight the influence of Eng on distinct cellular behaviors, such as migration and shape control, which are ultimately important for the assignment of proper blood vessel diameters.\n\nRECENT FINDINGS: How endothelial cells establish hierarchically ordered blood vessel trees is one of the outstanding questions in vascular biology. Mutations in components of the TGF\u03b2-superfamily of signaling molecules disrupt this patterning and cause arteriovenous malformations (AVMs). Eng is a TGF\u03b2 coreceptor enhancing signaling through the type I receptor Alk1. Recent studies identified bone morphogenetic proteins (BMPs) 9 and 10 as the primary ligands for Alk1/Eng. Importantly, Eng potentiated Alk1 pathway activation downstream of hemodynamic forces. New results furthermore revealed how Eng affects endothelial cell migration and cell shape control in response to these forces, thereby providing new avenues for our understanding of AVM cause.\n\nSUMMARY: We will discuss the interplay of Eng and hemodynamic forces, such as shear stress, in relation to Alk1 receptor activation. We will furthermore detail how this signaling pathway influences endothelial cell behaviors important for the establishment of hierarchically ordered blood vessel trees. Finally, we will provide an outlook how these insights might help in developing new therapies for the treatment of HHT.",
+  "text_type": "abstract",
+  "title": "Endothelial cell biology of Endoglin in hereditary hemorrhagic telangiectasia."
+}

@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "brain-p10--r1--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.94
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.39
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.18
+      }
+    ],
+    "moduleSemanticSimilarity": 0.503333,
+    "overall_rationale": "The strongest correspondence is the shared primary-cilium assembly machinery, while ciliary mechanosensing, Hedgehog trafficking, BBB regulation, and mitochondrial organization represent distinct outputs or mechanisms despite some endothelial context overlap.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules describe primary-cilium biogenesis through IFT, basal-body/distal-appendage, transition-zone, and trafficking machinery, with the right module placing greater emphasis on assembly initiation.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.94
+      },
+      {
+        "left_module": 1,
+        "rationale": "The right module refines the left module's BBSome, NME7, and TBC1D32 components into the narrower output of ciliary GPCR trafficking and Hedgehog signaling.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.78
+      },
+      {
+        "left_module": 1,
+        "rationale": "Ciliary biogenesis and trafficking are mechanistically unrelated to mitochondrial crista organization and mitochondrial protein maturation.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.02
+      },
+      {
+        "left_module": 2,
+        "rationale": "Cilium assembly is required for endothelial ciliary mechanosensing, but the right module describes organelle construction rather than flow detection or shear-stress signaling.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.53
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both concern signaling through functional primary cilia, but endothelial shear mechanotransduction and BBSome-dependent Hedgehog GPCR trafficking have different mechanisms and predicted phenotypes.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.39
+      },
+      {
+        "left_module": 2,
+        "rationale": "The modules share only a postnatal brain-endothelial context, with mitochondrial maintenance distinct from ciliary flow mechanosensing.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.14
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both occur in developing brain endothelial cells and mention Fzd4, but cilium assembly is distinct from Norrin/Wnt-driven angiogenesis and BBB maintenance.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "Hedgehog signaling through ciliary GPCR trafficking differs from Norrin/Wnt, GATA2, and Endoglin control of CNS angiogenesis and barrier identity.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.12
+      },
+      {
+        "left_module": 3,
+        "rationale": "The modules share a brain-endothelial developmental context, but mitochondrial biogenesis is only a potential metabolic support process for the asserted BBB and angiogenic program.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.18
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16712,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 966,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 21.619
+  }
+}

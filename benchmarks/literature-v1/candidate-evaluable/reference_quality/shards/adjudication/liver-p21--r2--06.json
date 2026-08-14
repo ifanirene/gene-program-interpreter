@@ -1,0 +1,42 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-e87be25ad05faf6b4ce2"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 24191,
+        "source_type": "full_text",
+        "start": 24077,
+        "text": "DGAT2 inhibition increased the ER content of PE, which blocked SREBP-1 movement from the ER to Golgi for cleavage."
+      },
+      "function_supported_genes": [],
+      "rationale": "DGAT2 perturbation (inhibitor, liver-specific knockout, and overexpression in mouse/rat) causally establishes it as a regulator linking TG synthesis to SREBP-1 cleavage in direct mouse hepatic MASLD context, matching the regulator description. Acss2/Fdft1/Hmgcs1 (ACSS-2, squalene synthase, HMG-CoA synthase) appear only as SREBP-target pathway readouts, so no supplied gene is substantively investigated and supplied-gene arrays stay empty for this perturbation-regulator citation.",
+      "red_flags": [],
+      "review_id": "RL-e87be25ad05faf6b4ce2",
+      "studied_genes": [],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.2883345,
+    "duration_api_ms": 71241,
+    "duration_ms": 68948,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 69.895
+  }
+}

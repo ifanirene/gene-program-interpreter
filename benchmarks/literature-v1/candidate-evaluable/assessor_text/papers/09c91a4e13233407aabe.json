@@ -1,0 +1,16 @@
+{
+  "content_hash": "eae8b61ec0ce388b8649c4ed1ec80a81ef742754591cd03013c3d4848ef55927",
+  "doi": "10.1016/j.semcdb.2017.07.011",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "09c91a4e13233407aabe",
+  "pmcid": "PMC5775927",
+  "pmid": "28736205",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Sterol regulatory element-binding proteins (SREBPs), master transcriptional regulators of cholesterol and fatty acid synthesis, have been found to contribute to a diverse array of cellular processes. In this review, we focus on genetically engineered mice in which the activities of six components of the SREBP gene pathway, namely SREBP-1, SREBP-2, Scap, Insig-1, Insig-2, or Site-1 protease have been altered through gene knockout or transgenic approaches. In addition to the expected impacts on lipid metabolism, manipulation of these genes in mice is found to affect a wide array of developmental and physiologic processes ranging from interferon signaling in macrophages to synaptic transmission in the brain. The findings reviewed herein provide a blueprint to guide future studies defining the complex interactions between lipid biology and the physiologic processes of many distinct organ systems.",
+  "text_type": "abstract",
+  "title": "Developmental and extrahepatic physiological functions of SREBP pathway genes in mice."
+}

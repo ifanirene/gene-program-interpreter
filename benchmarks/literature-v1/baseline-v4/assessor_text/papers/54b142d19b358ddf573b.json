@@ -1,0 +1,14 @@
+{
+  "content_hash": "3e91096ced7dfffe48f787e043e2010b9a0549001bc46d3d66d5e53294148997",
+  "doi": "10.1111/j.1440-169x.2004.00743.x",
+  "errors": [],
+  "paper_key": "54b142d19b358ddf573b",
+  "pmcid": null,
+  "pmid": "15206957",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The expression of mouse HtrA1 is developmentally regulated and restricted in embryo tissues which depend largely on TGF-beta signaling for their differentiation. We examined whether mouse HtrA3, another HtrA family member very close to HtrA1, shows similar expression patterns. HtrA3 and -1 were expressed mostly in the same embryonic organs but exhibited complementary patterns in various tissues; the lens epithelial cells in day 12.5 embryo expressed HtrA3 whereas the ciliary body and pigment retina expressed HtrA1. In the vertebrae of day 14.5 embryo, HtrA3 was expressed in the tail region, but HtrA1 was predominantly expressed in the thoracic and lumbar regions. Similar to HtrA1, HtrA3 bound to various TGF-beta proteins and inhibited the signaling of BMP-4, -2 and TGF-beta 1. HtrA3 did not inhibit signaling originated from a constitutively active BMP receptor, indicating that the inhibition occurred upstream of the cell surface receptor. HtrA3 also showed proteolytic activities indistinguishable from those of HtrA1 toward beta-casein and some extracellular matrix (ECM) proteoglycans. The protease activity was absolutely required for the TGF-beta signal inhibition activity. All these data suggest that HtrA3 and -1 have the overlapping biological activities but can function in complementary fashion in certain types of tissues.",
+  "text_type": "abstract",
+  "title": "Developmentally regulated expression of mouse HtrA3 and its role as an inhibitor of TGF-beta signaling."
+}

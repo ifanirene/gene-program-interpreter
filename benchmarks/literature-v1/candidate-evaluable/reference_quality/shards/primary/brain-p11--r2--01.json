@@ -1,0 +1,220 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0a7beb25f6d4662bc1f7",
+    "RL-0c73ccc4d28e3a565c0b",
+    "RL-24d856c907e05d8e3a6f",
+    "RL-493a12558580ff39f9c5",
+    "RL-52c1f64bf508b8222052",
+    "RL-54d161cbee9c42984f91",
+    "RL-80883b9e36c6c06f1ca8",
+    "RL-9d6bcac1a4302a5bcb96"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 967,
+        "text": "activates the mitochondrial respiratory chain and fuels vascular endothelial cell migration in tumor angiogenesis"
+      },
+      "function_supported_genes": [
+        "Slc1a1"
+      ],
+      "rationale": "Paper directly shows SLC1A1 mediates endothelial R-2-HG influx that activates mitochondrial respiration and fuels EC migration/angiogenesis, matching the citation-specific claim, with mouse knockout confirming causality. The system is tumor vascular endothelium rather than brain vasculature, so context is better labeled indirect than the declared partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0a7beb25f6d4662bc1f7",
+      "studied_genes": [
+        "Slc1a1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 681,
+        "source_type": "abstract",
+        "start": 527,
+        "text": "the ability of OPG to support endothelial cell survival, as well as the formation of cord-like structures in vitro using a matrigel tubule formation assay"
+      },
+      "function_supported_genes": [
+        "Tnfrsf11b"
+      ],
+      "rationale": "Paper's own in vitro assays demonstrate OPG promotes endothelial survival and tube formation, matching the mechanism's claim that OPG supports endothelial survival and angiogenic capacity. Study uses human tumor-associated endothelium rather than brain vasculature, consistent with the declared indirect context.",
+      "red_flags": [],
+      "review_id": "RL-0c73ccc4d28e3a565c0b",
+      "studied_genes": [
+        "Tnfrsf11b"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1218,
+        "source_type": "abstract",
+        "start": 1015,
+        "text": "This included a consistent upregulation in cerebrovascular expression of ANG2 and downregulation of its receptor Tyr kinase with Ig and EGF homology domains (TIE2/TEK) in HHT mice compared with controls."
+      },
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "rationale": "Paper directly shows ANG2 upregulation paired with TEK downregulation in brain endothelial cells of a proangiogenic mouse model, closely matching the mechanism claim, and pharmacological ANG2 blockade functionally confirms its proangiogenic role. Because this is a disease (HHT) rather than normal postnatal developmental context, 'partial' context is more accurate than the declared 'direct'.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-24d856c907e05d8e3a6f",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 711,
+        "source_type": "abstract",
+        "start": 494,
+        "text": "Zebrafish mutants for the chemokine receptor cxcr4a or its ligand cxcl12b establish a decreased number of arterial-venous connections, leading to the formation of an unperfused and interconnected blood vessel network."
+      },
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "rationale": "Cxcr4a loss-of-function directly reduces arterial-venous connection number during brain capillary network formation, matching the mechanism's claim about Cxcr4 controlling connection number. The zebrafish system is a different species/experimental system than the mouse brain endothelial session context, making 'indirect' more accurate than the declared 'partial'.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-493a12558580ff39f9c5",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 810,
+        "source_type": "abstract",
+        "start": 689,
+        "text": "OPG formed a complex with tumor necrosis factor-related apoptosis-inducing ligand (TRAIL) in HMECs under these conditions"
+      },
+      "function_supported_genes": [
+        "Tnfrsf11b"
+      ],
+      "rationale": "Paper directly demonstrates OPG-TRAIL complex formation blocking TRAIL-induced apoptosis in microvascular endothelial cells, precisely matching the mechanism's stated survival function of Tnfrsf11b. Study uses generic human microvascular endothelial cells, not brain vasculature or mouse, so 'indirect' is more accurate than the declared 'partial'.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-52c1f64bf508b8222052",
+      "studied_genes": [
+        "Tnfrsf11b"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3229,
+        "source_type": "full_text",
+        "start": 3066,
+        "text": "Cxcr4a and Cxcl12b are important for inducing the phase transition to the directional phase, thereby promoting directional migration toward the anastomotic target."
+      },
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "rationale": "Live-imaging and cxcr4a mutant analysis show Cxcr4a is required for the transition of tip cells from non-directional to directional migration during brain capillary network formation, directly matching the mechanism's tip-cell guidance claim. This is a zebrafish (not mouse) brain vascular system, so 'indirect' better reflects the species mismatch than the declared 'partial'.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-54d161cbee9c42984f91",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "underclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 21638,
+        "source_type": "full_text",
+        "start": 21498,
+        "text": "revealed a reduction in the number of large blood vessels in the fetal brain of RGS6−/−/CaMKIIVV when compared with RGS6−/−/CaMKIIMM embryos"
+      },
+      "function_supported_genes": [
+        "Rgs6"
+      ],
+      "rationale": "Paper shows Rgs6 loss (combined with oxidation-resistant CaMKII) causes decreased Notch pathway/arterial marker expression and reduced fetal brain vessels, supporting Rgs6's role in Notch-dependent arterial/vascular specification, but the phenotype only manifests with combined RGS6/CaMKII loss rather than Rgs6 loss alone, making this a narrower/qualified form of the claim. The study includes direct mouse fetal brain vasculature data, so 'partial' context is more accurate than the declared 'indirect'.",
+      "red_flags": [],
+      "review_id": "RL-80883b9e36c6c06f1ca8",
+      "studied_genes": [
+        "Rgs6"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 6957,
+        "source_type": "full_text",
+        "start": 6920,
+        "text": "showed massive ICH from E12.5 onwards"
+      },
+      "function_supported_genes": [],
+      "rationale": "Neural-specific Tgfbr2 deletion causes cerebral hemorrhage and impaired vessel branching in the forebrain, directly supporting the regulator claim that TGF-beta signaling (Tgfbr1/Tgfbr2) is required for brain vascular development. This is embryonic mouse forebrain rather than postnatal brain endothelium, consistent with the declared partial context.",
+      "red_flags": [],
+      "review_id": "RL-9d6bcac1a4302a5bcb96",
+      "studied_genes": [],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7935144999999999,
+    "duration_api_ms": 307627,
+    "duration_ms": 305297,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 306.335
+  }
+}

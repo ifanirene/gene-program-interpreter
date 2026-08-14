@@ -1,0 +1,118 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-30c576a064cee4c29b51",
+    "RL-343e0ebf9b978e4e82e4",
+    "RL-4a8f23e3d003c28cf3b6",
+    "RL-55bbb18c908c78ced746"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 381,
+        "source_type": "full_text",
+        "start": 197,
+        "text": "The antibodies against CMG-1 allowed us to detect primary cilia in cultured human umbilical vein endothelial cells (HUVEC) and find conditions eliciting the disassembly of these cilia."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper directly demonstrates primary cilia and a putative IFT component in human endothelial cells, supporting the endothelial-context rationale. Its IFT-71/IFT74 experiments do not establish the assigned Ift74-dependent tubulin-transport function.",
+      "red_flags": [],
+      "review_id": "RL-30c576a064cee4c29b51",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 20226,
+        "source_type": "full_text",
+        "start": 20039,
+        "text": "For Opa1, Chchd3, Mitofilin, and Chchd6 knockouts, the number of cristae per mitochondrion decreased, as did the cristae score and cristae surface area compared with the WT (Figure 4i–k)."
+      },
+      "function_supported_genes": [
+        "Chchd6"
+      ],
+      "rationale": "Chchd6 knockout in primary mouse myotubes causally reduced multiple cristae measures, supporting its role in MICOS-dependent inner-membrane organization. The experiment is ex vivo skeletal muscle rather than an in vivo knockout or brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-343e0ebf9b978e4e82e4",
+      "studied_genes": [
+        "Chchd6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 921,
+        "source_type": "abstract",
+        "start": 798,
+        "text": "These findings indicate that one of the major functions of Cep164 in ciliogenesis is to recruit active TTBK2 to centrioles."
+      },
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "rationale": "Loss, interaction, and rescue experiments support Cep164 recruitment of TTBK2 as a trigger for ciliogenesis. The cached abstract does not identify the organism or cell type, preventing context calibration.",
+      "red_flags": [],
+      "review_id": "RL-4a8f23e3d003c28cf3b6",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 44729,
+        "source_type": "full_text",
+        "start": 44579,
+        "text": "Once at the base of the cilium, NINL interacts with CC2D2A, providing the specificity of the docking point at the entrance to the ciliary compartment."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "Gene-specific interaction, localization, and mutant evidence supports CC2D2A as a ciliary-base docking component in RAB8-linked vesicle trafficking. The retinal and cultured-cell systems are indirect to postnatal mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-55bbb18c908c78ced746",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 215552,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 258273,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 7853,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 154.301
+  }
+}

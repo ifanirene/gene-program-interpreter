@@ -1,0 +1,14 @@
+{
+  "content_hash": "88437868549f89adce7c12c1fec587eefc90ce203b339f6d6f22f503f3c1bc95",
+  "doi": "10.1677/jme.1.02043",
+  "errors": [],
+  "paper_key": "10e467f89e5bb8bf4ef6",
+  "pmcid": null,
+  "pmid": "16901934",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "In both humans and mice, 17beta-hydroxysteroid dehydrogenase type-7 (HSD17B7) was described as possessing dual enzymatic functionality. The enzyme was first shown to be able to convert estrone to estradiol in vitro. Later involvement of this enzyme in postsqualene cholesterol biosynthesis was postulated (conversion of zymosterone to zymosterol) and could be proven in vitro. In this work, we performed a detailed analysis of the transcriptional regulation of both the human and murine genes. Despite relatively low sequence similarity, both promoters contain similar contexts of transcription factor-binding sites. The participation of these sites in transcriptional regulation of HSD17B7 was proven by electro-mobility shift assay and site-directed mutagenesis of the corresponding binding sites. We describe novel involvement of vitamin D receptor/retinoid X receptor and provide new information on the regulation of HSD17B7 expression by sterol regulatory element-binding protein and hepatocyte nuclear factor 4, the latter known from other genes of cholesterogenic enzymes. The results of our study provide unequivocal evidence for a role of HSD17B7 in cholesterol biosynthesis.",
+  "text_type": "abstract",
+  "title": "Transcriptional regulation of human and murine 17beta-hydroxysteroid dehydrogenase type-7 confers its participation in cholesterol biosynthesis."
+}

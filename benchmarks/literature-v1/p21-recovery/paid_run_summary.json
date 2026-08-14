@@ -1,0 +1,45 @@
+{
+  "api_equivalent_cost_usd_recorded": 1.999769,
+  "approval": {
+    "approval_file_sha256": "b1fa91bc4ceab4ea7ac37da1b31ab29492c856058dfc1ad17dcaaf6e2de3f7ee",
+    "approved": true,
+    "approved_at": "2026-07-22T16:49:00-07:00",
+    "approved_by": "workspace user (standing subscription research authorization; unbounded turns authorized)",
+    "auth_preflight": {
+      "api_provider": "firstParty",
+      "auth_method": "claude.ai",
+      "command_exit_code": 0,
+      "logged_in": true
+    },
+    "benchmark_id": "literature-v1",
+    "max_api_equivalent_usd": 20.0,
+    "run_dir": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/p21-recovery"
+  },
+  "benchmark_id": "literature-v1",
+  "blocking_reason": null,
+  "execution": {
+    "auth": "subscription",
+    "concurrency": 1,
+    "cost_basis": "api-equivalent",
+    "max_attempts": 2,
+    "max_budget_usd": 10.0,
+    "max_turns": null,
+    "model": "claude-sonnet-4-6",
+    "per_program_timeout_seconds": 3600
+  },
+  "freezable": true,
+  "schema_version": 1,
+  "sessions": [
+    {
+      "attempts": 1,
+      "cost_usd": 1.999769,
+      "duration_ms": 1047538,
+      "ledger_status": "verified",
+      "num_turns": 95,
+      "program_id": "P21",
+      "session_id": "liver-p21--r1",
+      "status": "ok",
+      "telemetry_complete": true
+    }
+  ]
+}

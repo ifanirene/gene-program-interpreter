@@ -1,0 +1,14 @@
+{
+  "content_hash": "4a456b0423dff82f4d9b41f34700c29a213bc9da1812c8349fd9c436346d239e",
+  "doi": "10.1016/j.cub.2022.12.046",
+  "errors": [],
+  "paper_key": "aa2b36c293d300c22f92",
+  "pmcid": null,
+  "pmid": "36669498",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cilia are highly conserved organelles critical for animal development and perception. Dysfunction of cilia has been linked to a wide spectrum of human genetic diseases, termed ciliopathies.1,2 Transition fibers (TFs) are striking ciliary base structures essential for cilia assembly. Vertebrates' TFs that originate from centriole distal appendages (DAs) mediate basal body docking to ciliary vesicles to initiate ciliogenesis and regulate the entry of ciliary proteins for axoneme assembly via intraflagellar transport (IFT) machinery.3 Although no distal appendages can be observed on Drosophila centrioles,4,5 three key TF proteins, FBF1, CEP164, and CEP89, have obvious homologs in Drosophila. We aimed to compare their functions with their mammalian counterparts in Drosophila ciliogenesis. Here, we show that all three proteins are localized like TF proteins at the ciliary base in both sensory neurons and spermatocytes, the only two types of ciliated cells in flies. Fbf1 and Cep89 are essential for the formation of IFT-dependent neuronal cilia, but Cep164 is dispensable for ciliogenesis in flies. Strikingly, none are required for basal body docking and transition zone (TZ) assembly in IFT-dependent neuronal cilia or IFT-independent spermatocyte cilia. Furthermore, we demonstrate that Unc is essential to recruit all three TF proteins and establish a hierarchical order, with Cep89 acting on Fbf1. Collectively, our results not only demonstrate that TF proteins are required for IFT-dependent ciliogenesis in Drosophila, in agreement with an evolutionarily conserved function of these proteins in regulating ciliary protein entry, but also that the basal body docking function of TFs has diverged during evolution.",
+  "text_type": "abstract",
+  "title": "Drosophila transition fibers are essential for IFT-dependent ciliary elongation but not basal body docking and ciliary budding."
+}

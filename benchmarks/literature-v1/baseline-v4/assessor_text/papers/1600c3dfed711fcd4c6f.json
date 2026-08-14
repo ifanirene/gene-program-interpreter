@@ -1,0 +1,16 @@
+{
+  "content_hash": "74863d25b43f5a18ccaac63934231ee4164d116eb37578dcb300a21867d3b5bc",
+  "doi": "10.1073/pnas.97.1.320",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "1600c3dfed711fcd4c6f",
+  "pmcid": "PMC26661",
+  "pmid": "10618416",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The LMO2 gene is activated by chromosomal translocations in human T cell acute leukemias, but in mouse embryogenesis, Lmo2 is essential for initiation of yolk sac and definitive hematopoiesis. The LMO2 protein comprises two LIM-zinc-finger-like protein interaction modules and functions by interaction with specific partners in DNA-binding transcription complexes. We have now investigated the role of Lmo2-associated transcription complexes in the formation of the vascular system by following the fate of Lmo2-null embryonic stem (ES) cells in mouse chimeras. Lmo2 is expressed in vascular endothelium, and Lmo2-null ES cells contributed to the capillary network normally until around embryonic day 9. However, after this time, marked disorganization of the vascular system was observed in those chimeric mice that have a high contribution of Lmo2-null ES cells. Moreover, Lmo2-null ES cells do not contribute to endothelial cells of large vessel walls of surviving chimeric mice after embryonic day 10. These results show that Lmo2 is not needed for de novo capillary formation from mesoderm but is necessary for angiogenic remodeling of the existing capillary network into mature vasculature. Thus, Lmo2-mediated transcription complexes not only regulate distinct phases of hematopoiesis but also angiogenesis, presumably by Lmo2 interacting with distinct partners in the different settings.",
+  "text_type": "abstract",
+  "title": "The oncogenic LIM-only transcription factor Lmo2 regulates angiogenesis but not vasculogenesis in mice."
+}

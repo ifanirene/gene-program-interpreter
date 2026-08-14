@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "assessor_id": "codex-adjudicator-liver-other",
+  "reviews": [
+    {
+      "review_id": "RL-2fdedf3d9ad47904a976",
+      "assessor_id": "codex-adjudicator-liver-other",
+      "support": "supports",
+      "studied_genes": [
+        "Me1",
+        "Acly"
+      ],
+      "function_supported_genes": [
+        "Me1",
+        "Acly"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "underclaimed",
+      "evidence_span": {
+        "text": "As can be seen in Table 2, the results of proteomics verification in the liver of db/db mice showed that levels of aldehyde oxidase 1 (Aox1), acyl-coenzyme A thioesterase 2 (Acot2), perilipin-2 (Plin2), acetyl-CoA carboxylase 1 (Acc), NADP-dependent malic enzyme (Me1), fatty acid synthase (Fasn), ATP-citrate synthase (Acly), fatty acid binding protein, intestinal (Fabp2) in the MCG were 2.24, 4.58, 3.37, 4.09, 6.84, 7.71, 3.84, and 1.59 fold those of NCG, respectively.",
+        "start": 21394,
+        "end": 21867,
+        "source_type": "full_text"
+      },
+      "rationale": "Mouse NAFLD liver proteomics directly measures coordinated elevation of Me1 and Acly, and the paper assigns both to hepatic de novo fatty-acid synthesis. Whole-liver sampling does not make this context indirect: the same mouse liver disease model includes hepatocyte steatosis and supplies the target biological context. The relationship remains observational.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-5647b6ba86f448cabe99",
+      "assessor_id": "codex-adjudicator-liver-other",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp2e1"
+      ],
+      "function_supported_genes": [
+        "Cyp2e1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Considering the function of CYGB as O2 carrier, these results strongly support the hypothesis that HSCs are involved in the CYP2E1-mediated xenobiotic activation by augmenting O2 supply to hepatocytes.",
+        "start": 1466,
+        "end": 1667,
+        "source_type": "abstract"
+      },
+      "rationale": "CYP2E1-dependent versus independent injury models and hepatocyte/HSC co-culture support CYP2E1-mediated xenobiotic activation in hepatocytes. The acute APAP and carbon-tetrachloride injury setting is closely transferable, but it is not the aging/MASLD condition declared as direct.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-5ca95ef495132b7abde9",
+      "assessor_id": "codex-adjudicator-liver-other",
+      "support": "contradicts",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "not_applicable",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Furthermore, the expression of SREBP‐1c, a master regulator of these genes except for Dgat1/2, was significantly decreased at mRNA (Figure 1P) and protein levels (Figure 1N,O) in the liver.",
+        "start": 7676,
+        "end": 7865,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper explicitly separates DGAT1/2 from SREBP-1c target genes. It shows GK co-regulates SREBP-1c and DGAT1/2 in fatty liver, not that DGAT2 is a downstream SREBP-1c target as claimed. This is a wrong functional edge rather than a reversed quantitative direction.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-719e6b59ed923a170805",
+      "assessor_id": "codex-adjudicator-liver-other",
+      "support": "supports",
+      "studied_genes": [
+        "Hal"
+      ],
+      "function_supported_genes": [
+        "Hal"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "It catalyzes the first reaction in the catabolism of histidine, which involves the irreversible non-oxidative deamination of L-histidine to trans-urocanic acid and ammonia [14–17].",
+        "start": 1984,
+        "end": 2164,
+        "source_type": "full_text"
+      },
+      "rationale": "The article substantively studies HAL in normal and malignant human liver, reports liver enrichment and tumor downregulation, and explicitly assigns the histidine-catabolic reaction. The evidence supports the descriptive gene-function claim, although human liver cancer is only a partial context for mouse hepatocyte aging/MASLD.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-7dc25d951d78cd49c241",
+      "assessor_id": "codex-adjudicator-liver-other",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp2e1"
+      ],
+      "function_supported_genes": [
+        "Cyp2e1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "As a result, FTY720 treatment led to a significant decrease in Cyp1a1, Cyp1a2, Cyp2e1, and Cyp2a5 enzyme mRNA level in primary hepatocytes isolated from WT mice",
+        "start": 16782,
+        "end": 16942,
+        "source_type": "full_text"
+      },
+      "rationale": "Hepatocyte-specific PP2A deletion and PP2A agonism causally regulate Cyp2e1 expression and activity within a xenobiotic-metabolism program, so the citation supports the selected claim. Normal and xenobiotic-exposed mouse hepatocytes are closely relevant but not aging/MASLD, which the agent labeled direct.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-8b5f0c2dd98577fc419a",
+      "assessor_id": "codex-adjudicator-liver-other",
+      "support": "contradicts",
+      "studied_genes": [
+        "Acox1"
+      ],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "reversed",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The in vivo and in vitro assays further verified that ACOX1-mediated oxidative stress contributed to mitochondrial compromise and lipid accumulation in PFOA/PFOS-exposed mouse hepatocytes, which could be mitigated by co-treatment with ACOX1 inhibitor and mitochondria ROS scavenger.",
+        "start": 1508,
+        "end": 1790,
+        "source_type": "abstract"
+      },
+      "rationale": "The cited study reports PPARalpha-linked ACOX1 upregulation and shows that ACOX1 activity promotes oxidative stress and lipid accumulation; inhibition mitigates the phenotype. That reverses the selection claim that ACOX1 is reduced in NAFLD and does not support the assigned protective beta-oxidation disease role.",
+      "red_flags": [
+        "reversed_direction",
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-f61da05e22029f356be0",
+      "assessor_id": "codex-adjudicator-liver-other",
+      "support": "supports",
+      "studied_genes": [
+        "Pck1"
+      ],
+      "function_supported_genes": [
+        "Pck1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "However, blocking gluconeogenesis with PCK1 inhibitor aggravated hepatic I/R injury by decreasing glucose level and deepening lactate accumulation, while overexpressing PCK1 did the opposite.",
+        "start": 1156,
+        "end": 1347,
+        "source_type": "abstract"
+      },
+      "rationale": "PCK1 inhibition and overexpression causally establish its hepatic gluconeogenic role, and human, mouse, and hepatocyte data show induction under metabolic stress. Ischemia-reperfusion is not aging/MASLD, but that context difference should be labeled partial rather than used to downgrade functional support.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    }
+  ]
+}

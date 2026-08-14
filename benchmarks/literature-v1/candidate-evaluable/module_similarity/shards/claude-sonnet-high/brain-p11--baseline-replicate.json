@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "brain-p11--baseline-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.82
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 3,
+        "similarity": 0.75
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 2,
+        "similarity": 0.0
+      }
+    ],
+    "moduleSemanticSimilarity": 0.523333,
+    "overall_rationale": "Left and right sets both decompose into a tip-cell/sprouting-angiogenesis module, a TGF-β-linked module, and (only on the left) an unrelated ion-channel/calcium module; the best cross-set matches are L1–R1 and L2–R3, with L2–R2 flagged as directionally opposed and L3 having no counterpart in the right set.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe sprouting tip-cell identity in postnatal brain vasculature via Angpt2/Cxcr4/Cdc42ep3 downstream of Nrp1, but R1 is a narrower version lacking L1's Hopx/Gabarapl1/Tek content.",
+        "relationship": "meaningful_refinement",
+        "right_module": 1,
+        "similarity": 0.82
+      },
+      {
+        "left_module": 1,
+        "rationale": "Shares Cxcr4, Hopx, Nrp1 and Tek regulator, but L1's core is general filopodial tip-cell identity while R2's core mechanism is Notch-driven CXCR4 coupling to arterial specification.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.45
+      },
+      {
+        "left_module": 1,
+        "rationale": "Only Angpt2/Nrp1 overlap; L1's CDC42-driven filopodia/sprouting mechanism is unrelated to R3's TGF-β-mediated vascular integrity/Angpt2-repression mechanism.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 2,
+        "rationale": "Shares Angpt2 and Nrp1 in a tip-cell identity context, but L2's defining mechanism is Tgfbr1/2-dependent D-tip specification whereas R1's is CDC42-driven filopodial guidance.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.45
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both link Nrp1/TGF-β signaling to tip-versus-stalk fate, but L2 asserts CNS-specific TGF-β/Alk5 signaling promotes tip (D-tip) identity while R2 asserts Alk5/TGF-β shifts cells from tip toward stalk, a directional conflict.",
+        "relationship": "opposed",
+        "right_module": 2,
+        "similarity": 0.3
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both center on Tgfbr1/Tgfbr2 as regulators whose loss decreases the program and on TGF-β repression of Angpt2, with R3 narrowing the output to vascular integrity/hemorrhage prevention versus L2's D-tip identity framing.",
+        "relationship": "meaningful_refinement",
+        "right_module": 3,
+        "similarity": 0.75
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's ion-channel/calcium mechanosensing genes (Kcnj2, Cacna1c, Jph1) share no genes or mechanism with R1's tip-cell sprouting program.",
+        "relationship": "different",
+        "right_module": 1,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 3,
+        "rationale": "No gene or mechanistic overlap between L3's membrane calcium/ion-channel signaling and R2's Notch-CXCR4-arterial specification axis.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's ion-channel mechanosensing module is biologically unrelated to R3's TGF-β/Angiopoietin-2 vascular integrity axis.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.14446,
+    "duration_api_ms": 50815,
+    "duration_ms": 49532,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 50.875
+  }
+}

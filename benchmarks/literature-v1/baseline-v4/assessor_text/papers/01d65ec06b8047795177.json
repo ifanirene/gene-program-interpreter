@@ -1,0 +1,16 @@
+{
+  "content_hash": "7bb941625670f09fce1f427d385a8a0cffbbeac1a0bd18a4677e45f0a2a78c98",
+  "doi": "10.1124/dmd.108.024174",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "01d65ec06b8047795177",
+  "pmcid": "PMC2683654",
+  "pmid": "18838502",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Temporal coordination of hepatic drug-processing gene (DPG) expression facilitates absorption, biotransformation, and excretion of exogenous and endogenous compounds. To further elucidate the circadian rhythm of hepatic DPG expression, male C57BL/6 mice were subjected to a standard 12-h light/dark cycle, and livers were collected at 2:00, 6:00, and 10:00 AM and 2:00, 6:00, and 10:00 PM. The mRNAs of hepatic phase I enzymes (cytochromes P450, aldehyde dehydrogenases, and carboxylesterases), phase II enzymes (glucuronosyltransferases, sulfotransferases, and glutathione S-transferases), uptake and efflux transporters, and transcription factors were quantified. Messenger RNAs of various genes were graphed across time of day and compared by hierarchical clustering. In general, the mRNA of phase I enzymes increased during the dark phase, whereas the mRNAs of most phase II enzymes and transporters reached maximal levels during the light phase. The majority of hepatic transcription factors exhibited expression peaks either before or after the onset of the dark phase. During the same time period, the negative clock regulator gene Rev-Erbalpha and the hepatic clock-controlled gene Dbp also reached mRNA expression peaks. Considering their important role in xenobiotic metabolism, hepatic transcription factors, such as constitutive androstane receptor, pregnane X receptor, aryl hydrocarbon receptor, and peroxisomal proliferator activated receptor alpha, may be involved in coupling the hepatic circadian clock to environmental cues. Taken together, these data demonstrate that the circadian expression of the DPG battery and transcription factors contribute to the temporal detoxification cycle in the liver.",
+  "text_type": "abstract",
+  "title": "Circadian expression profiles of drug-processing genes and transcription factors in mouse liver."
+}

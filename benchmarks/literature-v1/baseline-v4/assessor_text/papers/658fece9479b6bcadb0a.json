@@ -1,0 +1,14 @@
+{
+  "content_hash": "cb144d4b6c6cbc00a341b8b463abc444b4fdd1a21c8e24f702f4964b22715612",
+  "doi": "10.1016/s0021-9258(19)39773-x",
+  "errors": [],
+  "paper_key": "658fece9479b6bcadb0a",
+  "pmcid": null,
+  "pmid": "2154476",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Delta 3,delta 2-Enoyl-CoA isomerase (EC 5.3.3.8), an obligatory auxiliary enzyme for the metabolism of double bonds at odd-numbered positions of fatty acids during their beta-oxidation, was studied in hearts and livers of normal and clofibrate-treated rats. Hepatic peroxisomal and mitochondrial isoenzymes were separable by dye-ligand chromatography. The mitochondrial one was further purified to apparent homogeneity. An isomerase was also purified from heart muscle, a peroxisome-poor tissue. These enzymes were dimeric basic proteins (pI 9.5) with a subunit molecular weight of 30,000. Both cis- and trans-enoyl-CoA served as substrates for the hepatic enzyme studied. The velocity ratio for the C6-, C10-, and C12-trans-3-enoyl substrates was 9:2.5:1. By immunoelectron microscopy the enzyme protein selected for purification was found to be mitochondrial both in liver and heart. Chromatographic evidence, immunoelectron microscopy, and immunoblotting indicated that in the liver but not in the heart, the enzyme underwent an induction of 1 order of magnitude during clofibrate treatment. Antibodies towards the rat isomerases detected cross-reactive proteins in bovine and pig liver and heart and human placenta. The estimated subunit sizes varied from species to species, being 31,000 in bovine liver and heart, 29,000 in pig liver and heart, and 30,000 in human placenta. The data are in accord with the notion of a dual location of the delta 3,delta 2-enoyl-CoA isomerase. Mitochondrial origin of one of the isoenzymes and its tissue-specific induction by clofibrate were verified by immunochemistry and the identity of the peroxisomal one revealed by the chromatographic behavior of the proteins.",
+  "text_type": "abstract",
+  "title": "Delta 3,delta 2-enoyl-CoA isomerases. Characterization of the mitochondrial isoenzyme in the rat."
+}

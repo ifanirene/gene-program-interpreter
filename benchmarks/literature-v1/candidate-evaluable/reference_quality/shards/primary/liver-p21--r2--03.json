@@ -1,0 +1,220 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-9ed874a050c13e1ce2d6",
+    "RL-9efeb609b3c949a89c57",
+    "RL-a825f41108a26d4ab883",
+    "RL-aa13c1e7f8facc8720c7",
+    "RL-b0bf65debdf8394a131f",
+    "RL-b786af039e250eba6e79",
+    "RL-d29d1d9fc24dd68d66b4",
+    "RL-d441a59c5a1311c12a1e"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 730,
+        "source_type": "abstract",
+        "start": 630,
+        "text": "inhibition of acetate metabolism via ACSS2 and cholesterol synthesis as key drivers of the phenotype"
+      },
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "rationale": "The paper links ACSS2-dependent acetate metabolism to cholesterol synthesis in a MASH mouse liver model, matching the session's MASLD hepatocyte context. However, EVT0185 is a dual ACLY/ACSS2 inhibitor, so the effect cannot be cleanly attributed to Acss2 alone, limiting this to partial gene-specific support.",
+      "red_flags": [],
+      "review_id": "RL-9ed874a050c13e1ce2d6",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 7903,
+        "source_type": "full_text",
+        "start": 7753,
+        "text": "DHCR7 is an enzyme that acts in the final step of the cholesterol biosynthesis pathway and converts 7-DHC possessing conjugated diene to cholesterol9."
+      },
+      "function_supported_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "rationale": "CRISPR ablation of DHCR7 (and SC5D as an epistasis control) in hepatocytes and liver-specific KO mice directly confirms both enzymes' roles in the terminal post-squalene cholesterol synthesis steps. The paper's disease context is ferroptosis/ischemia-reperfusion/APAP liver injury rather than aging/MASLD, so 'direct' context is an overclaim relative to a partial (same cell type, different condition) match.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9efeb609b3c949a89c57",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 254,
+        "source_type": "abstract",
+        "start": 12,
+        "text": "Genetic inactivation and pharmacologic inhibition of the microsomal triglyceride transfer protein (MTP; gene name MTTP) inhibits hepatic secretion of VLDL, thereby reducing serum lipids and apoB at the expense of increasing hepatic steatosis."
+      },
+      "function_supported_genes": [],
+      "rationale": "This human cohort study of an MTTP coding variant supports MTP's role in VLDL export and hepatic steatosis, consistent with the mechanism's regulator description. Mttp is a perturbation regulator here (supplied-gene arrays stay empty), and the human biobank cohort context is species-indirect relative to the mouse liver session, so the agent's 'direct' label overclaims context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a825f41108a26d4ab883",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1232,
+        "source_type": "abstract",
+        "start": 1069,
+        "text": "we detected compound heterozygous mutations in the phosphomevalonate kinase (PMVK) gene coding the second enzyme after mevalonate kinase in the mevalonate pathway."
+      },
+      "function_supported_genes": [
+        "Pmvk"
+      ],
+      "rationale": "A human autoinflammatory disease case report identifies compound heterozygous PMVK mutations, confirming PMVK as the second mevalonate-pathway enzyme, but this is a systemic disease case study, not a hepatic cholesterol-synthesis-specific investigation, so support for the liver mechanism is only partial. The indirect context label is accurate given the non-hepatic, human patient setting.",
+      "red_flags": [],
+      "review_id": "RL-aa13c1e7f8facc8720c7",
+      "studied_genes": [
+        "Pmvk"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 770,
+        "source_type": "abstract",
+        "start": 673,
+        "text": "ACAT2 provided the major cholesterol-esterifying activity in 3 of 4 human liver samples examined."
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "Immunohistology and inhibitor-based activity assays in human liver biopsies directly support ACAT2 as the dominant hepatocyte cholesterol-esterifying enzyme, matching mechanism 3's claim. Because the study uses human liver tissue rather than mouse, the context is a species-ortholog partial match rather than fully direct as declared.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b0bf65debdf8394a131f",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 198,
+        "source_type": "abstract",
+        "start": 0,
+        "text": "NSDHL (NAD(P)H sterol dehydrogenase-like), is a 3beta-hydroxysterol dehydrogenase thought to function in the demethylation of sterol precursors in one of the later steps of cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Nsdhl"
+      ],
+      "rationale": "The paper reports NSDHL's proposed demethylation function and shows liver is a high-expression site with mosaic loss-of-function selection in the Bpa1H mouse, but the core enzymatic claim is stated as prior knowledge ('thought to function') rather than newly tested here, and the study is developmental rather than aging/MASLD liver. This supports a narrower, partial context claim than the declared direct label.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b786af039e250eba6e79",
+      "studied_genes": [
+        "Nsdhl"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 57166,
+        "source_type": "full_text",
+        "start": 57030,
+        "text": "FADS2−/− organoids displayed a markedly aggravated steatosis phenotype compared with FADS2WT organoids challenged with the same FFA dose"
+      },
+      "function_supported_genes": [],
+      "rationale": "CRISPR knockout and overexpression of FADS2 in human hepatocyte organoids causally establishes FADS2 as a steatosis modulator, matching mechanism 3's regulator role; FADS2 is a regulator so supplied-gene arrays remain empty. The organoid steatosis model closely parallels MASLD but is human rather than mouse, making 'direct' an overclaim versus a partial context match.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-d29d1d9fc24dd68d66b4",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 869,
+        "source_type": "abstract",
+        "start": 698,
+        "text": "FoxO4-mediated repression of CYP51 led to the accumulation of 24,25 dihydrolano-sterol (DHL), which independently and unlike lanosterol inhibited cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "CYP51 mRNA repression and pharmacological CYP51 inhibitor recapitulation directly confirm its lanosterol 14alpha-demethylase role in blocking cholesterol biosynthesis, matching the mechanism. The abstract does not report the cell type or tissue used, so context cannot be assessed from available text despite the agent's 'partial' label.",
+      "red_flags": [
+        "insufficient_text"
+      ],
+      "review_id": "RL-d441a59c5a1311c12a1e",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7119182,
+    "duration_api_ms": 318460,
+    "duration_ms": 316141,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 3,
+    "wall_seconds": 317.263
+  }
+}

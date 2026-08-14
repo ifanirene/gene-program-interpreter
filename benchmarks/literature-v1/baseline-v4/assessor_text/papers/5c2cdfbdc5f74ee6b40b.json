@@ -1,0 +1,14 @@
+{
+  "content_hash": "80ac53fcd513f9978e4e0738732d3d66a910c8e270891d59295b7540a2901d2e",
+  "doi": "10.1016/j.envint.2023.108138",
+  "errors": [],
+  "paper_key": "5c2cdfbdc5f74ee6b40b",
+  "pmcid": null,
+  "pmid": "37572494",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Per- and polyfluoroalkyl substances (PFAS) are persistent and ubiquitous environmental contaminants with well-documented hepatotoxicity. However, the mechanistic linkage between PFAS exposure and non-alcoholic fatty liver disease (NAFLD) remains largely elusive.\n\nOBJECTIVES: This study aimed to explore PFAS-to-NAFLD link and the relevant molecular mechanisms.\n\nMETHODS: The cross-sectional analyses using National Health and Nutrition Examination Survey (NHANES) data were conducted to investigate the association between PFAS exposure and NAFLD. A combination of in silico toxicological analyses, bioinformatics approaches, animal experiments, and in vitro assays was used to explore the molecular initiating events (MIEs) and key events (KEs) in PFAS-induced hepatic lipid metabolism disorders.\n\nRESULTS: The cross-sectional analyses with NHANES data revealed the significant association between PFAS exposure and hepatic steatosis/NAFLD. The in silico toxicological analyses showed that PPAR\u03b1 activation induced by perfluorooctanoic acid (PFOA) and perfluorooctane sulfonic acid (PFOS), prototypical representatives of PFAS, is the critical MIE associated with NAFLD-predominant liver diseases. Transcriptome-based bioinformatic annotation and analyses identified that transcriptional upregulation of hepatic acyl-CoA oxidase 1 (ACOX1) in PPAR\u03b1-regulated peroxisomal \u03b2-oxidation pathway was the KE involved with PFOA/PFOS-perturbed hepatic lipid metabolic pathways in humans, mice and rats. The in vivo and in vitro assays further verified that ACOX1-mediated oxidative stress contributed to mitochondrial compromise and lipid accumulation in PFOA/PFOS-exposed mouse hepatocytes, which could be mitigated by co-treatment with ACOX1 inhibitor and mitochondria ROS scavenger. Additionally, we observed that besides PFOA and PFOS, hepatic ACOX1 exhibited good-fit response to short-term exposures of long-chain (C7-C10) perfluoroalkyl carboxylic acids (PFHpA, PFNA, PFDA) and perfluoroalkyl sulfonic acids (PFHpS, PFDS) in human hepatocyte spheroids through benchmark dose (BMD) modeling.\n\nCONCLUSION: Our study unveils a novel molecular target for PFAS-induced hepatic lipid metabolic disorders, shedding new light on prediction, assessment, and mitigation of PFAS hepatotoxicity.",
+  "text_type": "abstract",
+  "title": "PPAR\u03b1/ACOX1 as a novel target for hepatic lipid metabolism disorders induced by per- and polyfluoroalkyl substances: An integrated approach."
+}

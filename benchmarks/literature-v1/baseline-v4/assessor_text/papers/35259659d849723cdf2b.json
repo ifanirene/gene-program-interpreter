@@ -1,0 +1,16 @@
+{
+  "content_hash": "69f920a2d87a7496e5c43961cbfdd0aa2cbf8ac28765c8f757628fe1f9dfe018",
+  "doi": "10.1093/brain/awp246",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "35259659d849723cdf2b",
+  "pmcid": "PMC2792368",
+  "pmid": "19812212",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "A role for the Notch signalling pathway in the formation of arteriovenous malformations during development has been suggested. However, whether Notch signalling is involved in brain arteriovenous malformations in humans remains unclear. Here, we performed immunohistochemistry on surgically resected brain arteriovenous malformations and found that, compared with control brain vascular tissue, Notch-1 signalling was activated in smooth muscle and endothelial cells of the lesional tissue. Western blotting showed an activated form of Notch-1 in brain arteriovenous malformations, irrespective of clinical presentation and with or without preoperative embolization, but not in normal cerebral vessels from controls. In addition, the Notch-1 ligands Jagged-1 and Delta-like-4 and the downstream Notch-1 target Hes-1 were increased in abundance and activated in human brain arteriovenous malformations. Finally, increased angiogenesis was found in adult rats treated with a Notch-1 activator. Our findings suggest that activation of Notch-1 signalling is a phenotypic feature of brain arteriovenous malformations, and that activation of Notch-1 in normal vasculature induces a pro-angiogenic state, which may contribute to the development of vascular malformations.",
+  "text_type": "abstract",
+  "title": "Notch-1 signalling is activated in brain arteriovenous malformations in humans."
+}

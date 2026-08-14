@@ -1,0 +1,122 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-338245f2c6d2246dfb13",
+    "RL-42714aba16b5a9c52a0b",
+    "RL-790a9c8ed4212eb9a4d8",
+    "RL-9921c28d1a87e9f2d38f"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 586,
+        "source_type": "abstract",
+        "start": 289,
+        "text": "mice deficiency in Ift74 gene in male germ cells were infertile with low sperm count and immotile sperm. The few developed spermatozoa displayed misshaped heads and short tails. Transmission electron microscopy revealed abnormal flagellar axonemes in the seminiferous tubules where sperm are made."
+      },
+      "function_supported_genes": [
+        "Ift74"
+      ],
+      "rationale": "Ift74 loss directly disrupts sperm flagellum and axoneme formation, supporting an IFT-dependent ciliary assembly role. The evidence concerns mouse germ cells and motile flagella rather than brain endothelium or primary cilia.",
+      "red_flags": [],
+      "review_id": "RL-338245f2c6d2246dfb13",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 13026,
+        "source_type": "full_text",
+        "start": 12823,
+        "text": "On the basis of these data, we conclude that the IFT-B component IFT38 makes a major contribution to the IFT-B–BBSome interface via interaction through BBS1, BBS2, and BBS9 from the BBSome (see Fig. 2A)."
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "Gene-specific interaction assays place BBS9 at the IFT-B–BBSome interface, while IFT38 perturbation links that interface to GPR161 export. BBS9 itself was not perturbed to establish GPCR export, so the trafficking claim is only partially supported.",
+      "red_flags": [],
+      "review_id": "RL-42714aba16b5a9c52a0b",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 601,
+        "source_type": "abstract",
+        "start": 227,
+        "text": "We recently identified mutations in a gene encoding the centrosomal protein SDCCAG8 as causing NPHP type 10 in humans. To study the role of Sdccag8 in disease pathogenesis, we generated a Sdccag8 gene-trap mouse line. Homozygous Sdccag8(gt/gt) mice lacked the wild-type Sdccag8 transcript and protein, and recapitulated the human phenotypes of NPHP and retinal degeneration."
+      },
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "rationale": "The gene-trap mouse establishes SDCCAG8 as a centrosomal ciliopathy gene whose loss causes NPHP and retinal disease, but not as a primary-cilium assembly factor. Kidney and retinal settings are indirect to brain endothelium, making the declared partial context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-790a9c8ed4212eb9a4d8",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 19847,
+        "source_type": "full_text",
+        "start": 19742,
+        "text": "the data support that NME7 KO impedes the entry of Smo into the cilium upon SAG treatment (Fig 6B and C)."
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "NME7 knockout directly reduces SAG-induced Smo entry into cilia, matching the assigned Hedgehog-trafficking mechanism. The human RPE1 cell system is indirect to mouse postnatal brain endothelial cells.",
+      "red_flags": [],
+      "review_id": "RL-9921c28d1a87e9f2d38f",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 139264,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 179705,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 8451,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 163.989
+  }
+}

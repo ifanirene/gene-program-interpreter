@@ -1,0 +1,16 @@
+{
+  "content_hash": "ed8b816b396f1fe5c07aef848d8033d18d8bd348577e560e638154041e67b290",
+  "doi": "10.1002/ajmg.a.63150",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "aac17c66ede02915a43a",
+  "pmcid": "PMC10204718",
+  "pmid": "36826837",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Exome sequencing is a powerful tool in prenatal and postnatal genetics and can help identify novel candidate genes critical to human development. We describe seven unpublished probands with rare likely pathogenic variants or variants of uncertain significance that segregate with recessive disease in TBC1D32, including four fetal probands in three unrelated pedigrees and three pediatric probands in unrelated pedigrees. We also report clinical comparisons with seven previously published patients. Index probands were identified through an ongoing prenatal exome sequencing study and through an online data sharing platform (Gene Matcher\u2122). A literature review was also completed. TBC1D32 is involved in the development and function of cilia and is expressed in the developing hypothalamus and pituitary gland. We provide additional data to expand the phenotype correlated with TBC1D32 variants, including a severe prenatal phenotype associated with life-limiting congenital anomalies.",
+  "text_type": "abstract",
+  "title": "Diagnosis of TBC1D32-associated conditions: Expanding the phenotypic spectrum of a complex ciliopathy."
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "473fd23686789cc2340c507991af500109d3c20e555938bbfaa117700f03d712",
+  "doi": "10.1016/j.bbrc.2006.12.139",
+  "errors": [],
+  "paper_key": "9005ee055fef08a40017",
+  "pmcid": null,
+  "pmid": "17204241",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Fatigue can be defined physiologically as inability to maintain the expected power output. At present, no standard of fatigue are yet available. In order to find biomarkers of fatigue, we investigated the level of delta-aminolevulinic acid (ALA), the first intermediate metabolite in the heme biosynthetic pathway, in the plasma and urine of an animal model of fatigue. To prepare fatigued animals, we kept rats for 5 days in a cage filled with water to a height of 1.5 cm. As a result, the plasma and urinary ALA levels were increased in the fatigued animals as compared with those in the control animals. One day after the rats had been returned to their normal cages, these increased levels were restored to the control ones. We also examined the activity of the enzyme ALA dehydratase (ALAD), which is the second enzyme in the heme biosynthetic pathway, and ALAD gene expression during the fatigue and its recovery sessions. The ALAD activity, as well as its gene expression, in the liver of the fatigued animals was decreased as compared with those of the control animals. Both activity and gene expression of ALAD were recovered to their respective control levels after the rats had been allowed to rest in their normal cages for 1 day. Furthermore, the activity of ALA synthase (ALAS), the rate-limiting enzyme in the heme biosynthesis, in the liver was increased after the fatigue session for 5 days. Although this level of increase in the plasma concentration of ALA may not induce fatigue, increase in plasma and urinary ALA levels can be biomarkers of fatigue.",
+  "text_type": "abstract",
+  "title": "Decrease of hepatic delta-aminolevulinate dehydratase activity in an animal model of fatigue."
+}

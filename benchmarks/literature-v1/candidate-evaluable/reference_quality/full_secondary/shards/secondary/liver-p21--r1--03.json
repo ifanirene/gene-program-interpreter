@@ -1,0 +1,126 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-7fd4234b22fb8bfc045b",
+    "RL-803bb5541c150e4bba5f",
+    "RL-95e57925e0ba07dc2306",
+    "RL-a00515549f5be58f8057"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1655,
+        "source_type": "abstract",
+        "start": 1429,
+        "text": "low protein levels and activity of HSD17B7 are responsible for the reduced cholesterol content in SHRSP, indicating that HSD17B7, along with MPD and SQE, is involved in the decreased cholesterol synthesis in the liver of SHRSP"
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "Rat liver measurements associate reduced HSD17B7 abundance and activity with reduced hepatic cholesterol synthesis. The species and hypertensive-rat setting are indirect to aging/MASLD mouse hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-7fd4234b22fb8bfc045b",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 987,
+        "source_type": "abstract",
+        "start": 867,
+        "text": "coexpression of MTP and apoB in AC29 cells stably transfected with ACAT1 and ACAT2 increases cholesteryl ester synthesis"
+      },
+      "function_supported_genes": [
+        "Acat2"
+      ],
+      "rationale": "Perturbation, coexpression, and reconstitution experiments show that MTP promotes ACAT-dependent cholesteryl esterification and apoB-lipoprotein loading. The hepatic context is relevant, but aging/MASLD was not studied.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-803bb5541c150e4bba5f",
+      "studied_genes": [
+        "Acat2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 769,
+        "source_type": "abstract",
+        "start": 686,
+        "text": "Idol knockdown in hepatocytes increases LDLR protein levels and promotes LDL uptake"
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper causally establishes LDLR-dependent cholesterol uptake in hepatocytes and mouse liver, supporting the regulator-level homeostasis claim. It does not study aging or MASLD, and LDLR is a regulator rather than a supplied gene.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-95e57925e0ba07dc2306",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1176,
+        "source_type": "abstract",
+        "start": 1076,
+        "text": "Tm7sf2 deficiency during liver regeneration alters lipid metabolism and generates a stress condition"
+      },
+      "function_supported_genes": [
+        "Tm7sf2"
+      ],
+      "rationale": "The knockout supports the narrower claim that TM7SF2 deficiency disrupts hepatic lipid metabolism and causes stress, but cholesterol content was unchanged, weakening the claimed essential sterol-synthesis role. Regenerating mouse liver is related to hepatocyte biology but not aging/MASLD.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a00515549f5be58f8057",
+      "studied_genes": [
+        "Tm7sf2"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 67840,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 97688,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 10065,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 188.641
+  }
+}

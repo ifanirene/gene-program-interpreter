@@ -1,0 +1,208 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-51fded379c64326f0e27",
+    "RL-64dff063a63f09f71102",
+    "RL-920e5a6b1b1a04c491c2",
+    "RL-94f6465ea7414b57d28c",
+    "RL-a067f883b7440ceeb232",
+    "RL-affec80b10774f33e847",
+    "RL-b1d09a63dcdf6abee6e1",
+    "RL-dc23d8b920afec94f0a5"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 277,
+        "source_type": "abstract",
+        "start": 171,
+        "text": "Angiopoietin-mediated modulation of Tie2 activation contributes to normal vessel development and stability"
+      },
+      "function_supported_genes": [],
+      "rationale": "This paper's own experiments concern Tie2/Tek kinase-deficient constructs in astrocytoma xenografts, not gene-specific Angpt2 data; Angpt2's antagonism of Tie2 is only a background statement, so Angpt2 is not substantively studied here. The tumor astrocytoma context is a disease/tumor angiogenesis setting rather than the target postnatal developmental brain endothelium.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-51fded379c64326f0e27",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 641,
+        "source_type": "abstract",
+        "start": 527,
+        "text": "the ability of OPG to support endothelial cell survival, as well as the formation of cord-like structures in vitro"
+      },
+      "function_supported_genes": [
+        "Tnfrsf11b"
+      ],
+      "rationale": "The paper directly demonstrates OPG (Tnfrsf11b) supports endothelial cell survival and cord/tube formation, matching the claimed pro-angiogenic, pro-survival function. Evidence is from human tumor endothelium in vitro, an indirect but informative system relative to mouse brain endothelium, consistent with the declared indirect context.",
+      "red_flags": [],
+      "review_id": "RL-64dff063a63f09f71102",
+      "studied_genes": [
+        "Tnfrsf11b"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "unclear",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 18153,
+        "source_type": "full_text",
+        "start": 17993,
+        "text": "Cdc42EP3 is required for most of the hallmarks of CAFs, notably extracellular matrix remodelling and promotion of angiogenesis, cancer cell growth and invasion."
+      },
+      "function_supported_genes": [],
+      "rationale": "This review paper reports Cdc42EP3 driving cancer-associated fibroblast (stromal, not endothelial) cytoskeletal activity that indirectly promotes angiogenesis, whereas the mechanism's specific claim (endothelial tip-cell filopodia formation via CDC42/Borg effector engagement) is attributed in this same review to Cdc42EP4/Cdc42EP1, not Cdc42EP3. Support is only partial/related, and the review format makes the directness secondary rather than a primary causal endothelial study.",
+      "red_flags": [
+        "wrong_function",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-920e5a6b1b1a04c491c2",
+      "studied_genes": [
+        "Cdc42ep3"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1465,
+        "source_type": "abstract",
+        "start": 1370,
+        "text": "these findings demonstrate that NRP1 promotes endothelial tip cell function during angiogenesis"
+      },
+      "function_supported_genes": [],
+      "rationale": "Genetic mosaic and cell-type-specific knockout experiments directly establish Nrp1 as required cell-autonomously in brain endothelium for tip cell function, matching the regulator's claimed role exactly. Context is direct: developing mouse brain vasculature, the target tissue and organism.",
+      "red_flags": [],
+      "review_id": "RL-94f6465ea7414b57d28c",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 865,
+        "source_type": "abstract",
+        "start": 795,
+        "text": "TGFβ and Furin were also critical for hypoxia-induced BBB dysfunction."
+      },
+      "function_supported_genes": [],
+      "rationale": "Pharmacological ALK5 (Tgfbr1) inhibition experiments directly show TGFβ/ALK5 signaling regulates brain endothelial permeability, supporting the regulator's claimed role. However, this is a hypoxic/disease-stress model rather than the postnatal developmental context, so the declared 'direct' label overclaims relative to a 'partial' match.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a067f883b7440ceeb232",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1546,
+        "source_type": "abstract",
+        "start": 1333,
+        "text": "Expression of EAAT-1 (Slc1a3), -2 (Slc1a2), and -3 (Slc1a1) mRNA in the endothelial cells was confirmed by conventional PCR and localization of EAAT-1 and -3 in endothelial cells was shown with immunofluorescence."
+      },
+      "function_supported_genes": [
+        "Slc1a1"
+      ],
+      "rationale": "The paper confirms Slc1a1/EAAT-3 expression and localization in brain endothelial cells and demonstrates polarized brain-to-blood glutamate transport across a BBB coculture, matching the claimed function. Context is a BBB endothelial coculture model, directly matching the target brain endothelial cell system despite bovine/rat species.",
+      "red_flags": [],
+      "review_id": "RL-affec80b10774f33e847",
+      "studied_genes": [
+        "Slc1a1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 817,
+        "source_type": "abstract",
+        "start": 728,
+        "text": "Tgfβ pathway components, including Tgfβ2, Tgfβr2, Alk5, and integrins αVβ8, were reduced."
+      },
+      "function_supported_genes": [],
+      "rationale": "This paper shows Tgfbr2/Alk5 pathway components are reduced in Foxf2-deficient brain pericytes alongside BBB breakdown, consistent with TGF-β signaling supporting BBB integrity, but the measurements are in pericytes, not brain endothelial cells as the mechanism specifically claims. The declared 'direct' context therefore overclaims relative to this pericyte-based, indirect cellular evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b1d09a63dcdf6abee6e1",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 35332,
+        "source_type": "full_text",
+        "start": 35259,
+        "text": "HOPX and SCN3B revealed an increased expression under hypoxic conditions."
+      },
+      "function_supported_genes": [
+        "Hopx"
+      ],
+      "rationale": "The paper validates HOPX as a differentially expressed, hypoxia-responsive marker distinguishing intracranial (basilar) from extracranial (carotid) arterial endothelial cells, supporting the claimed intracranial enrichment. However, the data are from adult human tissue rather than mouse postnatal development, so 'partial' context is more accurate than the declared 'direct'.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-dc23d8b920afec94f0a5",
+      "studied_genes": [
+        "Hopx"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5585321999999999,
+    "duration_api_ms": 316538,
+    "duration_ms": 313923,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 316.04
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-80f9c513752ed89483c1",
+    "RL-8655cf3bfaadd6f3db6a",
+    "RL-9b1d86c1ff0c8dc62e7d",
+    "RL-9ed874a050c13e1ce2d6"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 14772,
+        "source_type": "full_text",
+        "start": 14667,
+        "text": "RDH11 mRNA expression was altered by these cellular treatments in a manner consistent with LDLR and HMGCR"
+      },
+      "function_supported_genes": [
+        "Rdh11"
+      ],
+      "rationale": "In mouse liver, mouse primary hepatocytes, and human hepatoma cells, Rdh11 mRNA tracks cholesterol status in parallel with canonical SREBP2 targets LDLR/HMGCR, directly supporting the co-regulation claim in the target hepatocyte context. The other genes in Assessment B are only co-correlation seed/background regulators, not substantively investigated, so studied_genes is limited to Rdh11.",
+      "red_flags": [],
+      "review_id": "RL-80f9c513752ed89483c1",
+      "studied_genes": [
+        "Rdh11"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1656,
+        "source_type": "abstract",
+        "start": 1550,
+        "text": "HSD17B7, along with MPD and SQE, is involved in the decreased cholesterol synthesis in the liver of SHRSP."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "Hepatic HSD17B7 mRNA, protein, and activity are gene-specifically reduced and linked to lower cholesterol synthesis, while CYP51 and SC4MOL/Msmo1 were also measured (no significant difference), so all three are studied but only Hsd17b7 supports the assigned biosynthesis function. The rat strain model differs in species from the mouse target, so the agent's 'direct' context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-8655cf3bfaadd6f3db6a",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 904,
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes."
+      },
+      "function_supported_genes": [],
+      "rationale": "Conditional SCAP knockout in mouse liver causally reduces cholesterol synthesis and biosynthetic-enzyme mRNAs, supporting mechanism 1's claim that the regulator Scap controls the program via SREBP2 in liver; Scap is a regulator so no supplied genes are studied. Mouse liver in vivo is the target biological context, so 'direct' is accurate despite the cholesterol-deprivation/refeeding rather than aging/MASLD trigger.",
+      "red_flags": [],
+      "review_id": "RL-9b1d86c1ff0c8dc62e7d",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 730,
+        "source_type": "abstract",
+        "start": 630,
+        "text": "inhibition of acetate metabolism via ACSS2 and cholesterol synthesis as key drivers of the phenotype"
+      },
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "rationale": "Pharmacological inhibition links ACSS2-dependent acetate metabolism to cholesterol synthesis in a MASH mouse liver, but EVT0185 is a dual ACLY/ACSS2 inhibitor, preventing clean attribution to Acss2, so support is partial. The demonstrated cellular target is hepatic stellate cell activation rather than a hepatocyte-specific ACSS2-cholesterol effect, making the agent's 'direct' hepatocyte context an overclaim.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9ed874a050c13e1ce2d6",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.4723845,
+    "duration_api_ms": 131170,
+    "duration_ms": 129610,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 130.514
+  }
+}

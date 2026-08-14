@@ -1,0 +1,127 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0177374bf6967e556349",
+    "RL-05c0907255a005142391",
+    "RL-0601d5e7467599f25f9b",
+    "RL-15171d9c5f375baf481b"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 376,
+        "source_type": "abstract",
+        "start": 216,
+        "text": "Later involvement of this enzyme in postsqualene cholesterol biosynthesis was postulated (conversion of zymosterone to zymosterol) and could be proven in vitro."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "Model-assessed: the in vitro finding supports HSD17B7's postsqualene cholesterol-biosynthesis function. The unspecified in vitro system is indirect to aging or MASLD mouse hepatocytes, so the declared partial context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0177374bf6967e556349",
+      "studied_genes": [
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4332,
+        "source_type": "full_text",
+        "start": 4165,
+        "text": "In this work, we investigated the transcriptional regulation of human ERG28, revealing it is an SREBP-2 target, akin to the bulk of cholesterol synthesis enzymes (13)."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "Model-assessed: promoter and perturbation experiments support ERG28 as an SREBP-2-regulated cholesterol-homeostasis component. Human liver-derived cancer cells are partially transferable to mouse hepatocytes but do not model aging or MASLD directly.",
+      "red_flags": [],
+      "review_id": "RL-05c0907255a005142391",
+      "studied_genes": [
+        "Erg28",
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 30311,
+        "source_type": "full_text",
+        "start": 30074,
+        "text": "Compared to wild-type siblings, total cholesterol levels of lssnu60 homozygous mutants were 43% (s.d. 9.14, P=0.0011) of wild-type levels, whereas those of msmo1nu81 homozygous mutants were 22% (s.d. 10.59, P=0.0006) of wild-type levels."
+      },
+      "function_supported_genes": [
+        "Msmo1",
+        "Lss"
+      ],
+      "rationale": "Model-assessed: genetic loss reduced cholesterol for both genes, while liver-specific rescue demonstrated functional hepatic activity. The zebrafish setting is indirect to mouse hepatocytes, matching the declared context.",
+      "red_flags": [],
+      "review_id": "RL-0601d5e7467599f25f9b",
+      "studied_genes": [
+        "Msmo1",
+        "Lss"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 24742,
+        "source_type": "full_text",
+        "start": 24651,
+        "text": "As expected, FDFT1 inhibition decreased the cholesterol content in HCC cells (Figure 6A,B)."
+      },
+      "function_supported_genes": [
+        "Fdft1"
+      ],
+      "rationale": "Model-assessed: genetic and pharmacological inhibition causally supports FDFT1's role in cellular cholesterol production. Liver-derived HCC systems preserve hepatic relevance but differ from aging and MASLD, making context partial.",
+      "red_flags": [],
+      "review_id": "RL-15171d9c5f375baf481b",
+      "studied_genes": [
+        "Fdft1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 231936,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 278638,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 9044,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 175.628
+  }
+}

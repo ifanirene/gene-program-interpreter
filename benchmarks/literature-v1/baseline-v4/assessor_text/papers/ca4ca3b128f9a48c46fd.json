@@ -1,0 +1,14 @@
+{
+  "content_hash": "461ca82dfed34e5df409402b2ce732f6e707f71cf746fc7bbe0025aff90a4cde",
+  "doi": "10.1161/circresaha.113.301686",
+  "errors": [],
+  "paper_key": "ca4ca3b128f9a48c46fd",
+  "pmcid": null,
+  "pmid": "24025447",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "RATIONALE: The formation of novel blood vessels is initiated by vascular endothelial growth factor. Subsequently, DLL4-Notch signaling controls the selection of tip cells, which guide new sprouts, and trailing stalk cells. Notch signaling in stalk cells is induced by DLL4 on the tip cells. Moreover, DLL4 and DLL1 are expressed in the stalk cell plexus to maintain Notch signaling. Notch loss-of-function causes formation of a hyperdense vascular network with disturbed blood flow.\n\nOBJECTIVE: This study was aimed at identifying novel modifiers of Notch signaling that interact with the intracellular domains of DLL1 and DLL4.\n\nMETHODS AND RESULTS: Synaptojanin-2 binding protein (SYNJ2BP, also known as ARIP2) interacted with the PDZ binding motif of DLL1 and DLL4, but not with the Notch ligand Jagged-1. SYNJ2BP was preferentially expressed in stalk cells, enhanced DLL1 and DLL4 protein stability, and promoted Notch signaling in endothelial cells. SYNJ2BP induced expression of the Notch target genes HEY1, lunatic fringe (LFNG), and ephrin-B2, reduced phosphorylation of ERK1/2, and decreased expression of the angiogenic factor vascular endothelial growth factor (VEGF)-C. It inhibited the expression of genes enriched in tip cells, such as angiopoietin-2, ESM1, and Apelin, and impaired tip cell formation. SYNJ2BP inhibited endothelial cell migration, proliferation, and VEGF-induced angiogenesis. This could be rescued by blockade of Notch signaling or application of angiopoietin-2. SYNJ2BP-silenced human endothelial cells formed a functional vascular network in immunocompromised mice with significantly increased vascular density.\n\nCONCLUSIONS: These data identify SYNJ2BP as a novel inhibitor of tip cell formation, executing its functions predominately by promoting Delta-Notch signaling.",
+  "text_type": "abstract",
+  "title": "Synaptojanin-2 binding protein stabilizes the Notch ligands DLL1 and DLL4 and inhibits sprouting angiogenesis."
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "b08a6d2e92da9e5720e225c04e206f56d184cd5af61549d69b8986dfe72f2022",
+  "doi": "10.1073/pnas.202471599",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "51739120fa9e6a4ca7be",
+  "pmcid": "PMC130519",
+  "pmid": "12242342",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Oxysterols regulate cholesterol homeostasis through liver X receptor (LXR; cholesterol-lowering)- and sterol regulatory element-binding protein (SREBP; cholesterol-raising)-mediated signaling pathways. Previously we reported that the hypocholesterolemic agent LY295427 (4alpha-allylcholestan-3alpha-ol) reverses oxysterol-mediated suppression of SREBP processing. We now report that LY295427 increases expression of insulin-induced gene-1 (INSIG-1) and restores SREBP processing in cells treated with oxysterols. In cells overexpressing the INSIG-1 gene, by contrast, SREBP processing is suppressed and oxysterol regulation is disrupted. SREBP processing is not restored by addition of LY295427, but is restored by increasing the levels of SREBP cleavage-activating protein (SCAP). These findings suggest that the INSIG-1 protein alters sterol balance by modulating SREBP processing jointly with SCAP. To test whether the action of oxysterols on SREBP processing is mediated through endogenous INSIG-1 protein, we used RNAi to lower the expression of the INSIG-1 gene, and found that reduced INSIG-1 protein levels caused the loss of SREBP regulation by oxysterols. We conclude that: (i) INSIG-1 gene expression is suppressed by oxysterols; (ii) LY295427 treatment counters the suppressive effects of oxysterols on SREBP processing, resulting in the expression of the INSIG-1 gene; and (iii) INSIG-1 gene expression affects SREBP processing. Taken together, these data suggest that INSIG-1 plays a critical role in regulating cholesterol concentrations in the cell.",
+  "text_type": "abstract",
+  "title": "The hypocholesterolemic agent LY295427 up-regulates INSIG-1, identifying the INSIG-1 protein as a mediator of cholesterol homeostasis through SREBP."
+}

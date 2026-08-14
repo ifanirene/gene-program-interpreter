@@ -1,0 +1,222 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-a00515549f5be58f8057",
+    "RL-aa469413a31b091378a5",
+    "RL-abadb2ff1633b9762c56",
+    "RL-b86ef285975d5bb08e0f",
+    "RL-bb4358ce7362aadea933",
+    "RL-c70b6666365c8ced88d9",
+    "RL-c7cfd3867b60bd50ce88",
+    "RL-cb8ac4e04cfd8021e22e"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 575,
+        "source_type": "abstract",
+        "start": 516,
+        "text": "Tm7sf2 KO mice showed no alteration in cholesterol content."
+      },
+      "function_supported_genes": [
+        "Tm7sf2"
+      ],
+      "rationale": "Tm7sf2 knockout mice show hepatic lipid accumulation, ER stress and delayed cell-cycle progression in regenerating liver, confirming its enzymatic role in hepatic sterol biosynthesis. Directly matches mechanism 1's claim about TM7SF2 hepatocyte function.",
+      "red_flags": [],
+      "review_id": "RL-a00515549f5be58f8057",
+      "studied_genes": [
+        "Tm7sf2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 662,
+        "source_type": "abstract",
+        "start": 542,
+        "text": "that is synthesized by sterol C5-desaturase (SC5D) and metabolized by 7-DHC reductase (DHCR7) for cholesterol synthesis."
+      },
+      "function_supported_genes": [
+        "Sc5d",
+        "Dhcr7"
+      ],
+      "rationale": "A CRISPR screen confirms Sc5d and Dhcr7's specific catalytic steps producing/consuming 7-DHC en route to cholesterol, matching their assigned enzymatic roles; Msmo1 and Cyp51 are only listed as pathway members without step-specific data here.",
+      "red_flags": [],
+      "review_id": "RL-aa469413a31b091378a5",
+      "studied_genes": [
+        "Msmo1",
+        "Cyp51",
+        "Sc5d",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3418,
+        "source_type": "full_text",
+        "start": 3266,
+        "text": "Acyl-CoA synthetase short chain family member 2 (ACSS2), which converts acetate into acetyl-CoA, was notably upregulated in fructose-consuming LAKO mice"
+      },
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "rationale": "Hepatic Acss2 knockdown strongly suppressed fructose-derived fatty acid synthesis, establishing it as the key enzyme converting acetate to acetyl-CoA for hepatic lipogenesis, matching the mechanism's claim.",
+      "red_flags": [],
+      "review_id": "RL-abadb2ff1633b9762c56",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 993,
+        "source_type": "abstract",
+        "start": 925,
+        "text": "Three patients had MVD mutations, and 2 patients had PMVK mutations."
+      },
+      "function_supported_genes": [
+        "Mvd",
+        "Pmvk"
+      ],
+      "rationale": "Patient genotyping links MVD/PMVK loss-of-function mutations to porokeratosis, and their disease-related phenotype responds to cholesterol replenishment, supporting their mevalonate-pathway function, but in human skin rather than mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-b86ef285975d5bb08e0f",
+      "studied_genes": [
+        "Mvd",
+        "Pmvk"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "not_applicable",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 714,
+        "source_type": "abstract",
+        "start": 516,
+        "text": "manipulation of these genes in mice is found to affect a wide array of developmental and physiologic processes ranging from interferon signaling in macrophages to synaptic transmission in the brain."
+      },
+      "function_supported_genes": [],
+      "rationale": "This is a review synthesizing prior Scap/Insig1/Insig2 knockout studies (perturbation regulators, not supplied genes) and is explicitly framed around extrahepatic/developmental functions rather than direct hepatic evidence for supplied genes Erg28/Rdh11.",
+      "red_flags": [
+        "context_overclaim",
+        "background_only",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-bb4358ce7362aadea933",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 381,
+        "source_type": "abstract",
+        "start": 256,
+        "text": "Squalene synthase (SQS) utilizes FPP in the first committed step from the mevalonate pathway toward cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Fdft1"
+      ],
+      "rationale": "This study directly pharmacologically characterizes squalene synthase (Fdft1) converting FPP to squalene in HepG2 hepatoma cells; Fdps is only mentioned as established background about NBP action, not newly investigated here.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-c70b6666365c8ced88d9",
+      "studied_genes": [
+        "Fdft1"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1273,
+        "source_type": "abstract",
+        "start": 1170,
+        "text": "Dual inhibition of ACLY and ACSS2 broke this cycle by reducing hepatic acetyl-CoA flux, suppressing DNL"
+      },
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "rationale": "Hepatic Acly knockdown activates the Acss2-acetyl-CoA pathway sustaining lipogenesis in a mouse NAFLD model, and dual Acss2+Acly inhibition was required to suppress hepatic DNL, directly matching the mechanism's claim.",
+      "red_flags": [],
+      "review_id": "RL-c7cfd3867b60bd50ce88",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1169,
+        "source_type": "full_text",
+        "start": 1051,
+        "text": "the hepatocyte Cyp51−/− mice, survive for over 19 weeks although with marked changes in liver structure and function8."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Hepatocyte-specific Cyp51 knockout mice develop progressive liver structural and functional injury, confirming Cyp51's essential enzymatic role in hepatic cholesterol synthesis as described in the mechanism.",
+      "red_flags": [],
+      "review_id": "RL-cb8ac4e04cfd8021e22e",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7038175,
+    "duration_api_ms": 329217,
+    "duration_ms": 327565,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 328.663
+  }
+}

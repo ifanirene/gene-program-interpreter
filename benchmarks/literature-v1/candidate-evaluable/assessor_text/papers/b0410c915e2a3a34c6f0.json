@@ -1,0 +1,14 @@
+{
+  "content_hash": "23a6dd09e3509883bfc8a61e91d3c24dea1f700d05cb62bcfb37cbff09be6754",
+  "doi": "10.1111/1440-1681.13188",
+  "errors": [],
+  "paper_key": "b0410c915e2a3a34c6f0",
+  "pmcid": null,
+  "pmid": "31587341",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Reduced serum cholesterol content was recently reported to be one of the factors responsible for cerebral haemorrhage. Stroke-prone spontaneously hypertensive rats (SHRSP) are known to have lower serum cholesterol content than normotensive Wistar-Kyoto rats (WKY). We previously reported that lower levels of mevalonate pyrophosphate decarboxylase (MPD) and squalene epoxidase (SQE), which are associated with cholesterol biosynthesis in the liver, are involved in the low serum cholesterol content in SHRSP. Here, we investigate the levels of sterol 14-demethylase (CYP51), methylsterol monooxygenase (SC4MOL), and hydroxysteroid 17-\u03b2 dehydrogenase 7 (HSD17B7), which contribute to the cholesterol synthesis pathway in the conversion of lanosterol to zymosterol, in SHRSP and WKY. The HSD17B7 mRNA levels in the liver of SHRSP were markedly lower than those in WKY, whereas no significant differences were observed in CYP51 and SC4MOL levels in the two types of rats. The relative levels of protein, heteronuclear RNA, and mRNA of HSD17B7 were also significantly lower in SHRSP than in WKY. The degradation rates of HSD17B7 were the same in SHRSP and WKY. The protein levels of HSD17B7 were not significantly reduced in tissues other than the liver, including the brain, lung, heart, spleen, kidney, and testis, in SHRSP. Moreover, HSD17B7 activity was significantly lower in SHRSP than in WKY. Thus, our results indicated that low protein levels and activity of HSD17B7 are responsible for the reduced cholesterol content in SHRSP, indicating that HSD17B7, along with MPD and SQE, is involved in the decreased cholesterol synthesis in the liver of SHRSP.",
+  "text_type": "abstract",
+  "title": "Stroke-prone spontaneously hypertensive rats have reduced hydroxysteroid 17-\u03b2 dehydrogenase 7 levels for low cholesterol biosynthesis."
+}

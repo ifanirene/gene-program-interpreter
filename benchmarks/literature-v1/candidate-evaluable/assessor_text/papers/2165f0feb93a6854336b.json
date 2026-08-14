@@ -1,0 +1,16 @@
+{
+  "content_hash": "404d9c23560e3e1a62cc53b2ad44273a21172a66e2a7d3f35fabe6a28785eaab",
+  "doi": "10.1172/jci.insight.99676",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "2165f0feb93a6854336b",
+  "pmcid": "PMC5931126",
+  "pmid": "29669937",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Bile acids are signaling molecules that critically control hepatocellular function. Disrupted bile acid homeostasis may be implicated in the pathogenesis of chronic liver diseases. Glutathione is an important antioxidant that protects the liver against oxidative injury. Various forms of liver disease share the common characteristics of reduced cellular glutathione and elevated oxidative stress. This study reports a potentially novel physiological function of bile acids in regulating hepatic sulfur amino acid and glutathione metabolism. We found that bile acids strongly inhibited the cysteine dioxygenase type-1-mediated (CDO1-mediated) cysteine catabolic pathway via a farnesoid X receptor-dependent mechanism. Attenuating this bile acid repressive effect depleted the free cysteine pool and reduced the glutathione concentration in mouse liver. Upon acetaminophen challenge, cholestyramine-fed mice showed impaired hepatic glutathione regeneration capacity and markedly worsened liver injury, which was fully prevented by N-acetylcysteine administration. These effects were recapitulated in CDO1-overexpressing hepatocytes. Findings from this study support the importance of maintaining bile acid homeostasis under physiological and pathophysiological conditions, as altered hepatic bile acid signaling may negatively impact the antioxidant defense mechanism and sensitivity to oxidative injury. Furthermore, this finding provides a possible explanation for the reported mild hepatotoxicity associated with the clinical use of bile acid sequestrants in human patients.",
+  "text_type": "abstract",
+  "title": "Bile acids regulate cysteine catabolism and glutathione regeneration to modulate hepatic sensitivity to oxidative injury."
+}

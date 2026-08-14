@@ -1,0 +1,94 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-c6efbbad84bf5495bff1",
+    "RL-e852c42233ff0b961e61",
+    "RL-f2154dc6b97c36f40430"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 722,
+        "source_type": "abstract",
+        "start": 562,
+        "text": "CDO(-/-) mice had extremely low taurine levels and somewhat elevated cysteine levels, consistent with the lack of flux through CDO-dependent catabolic pathways."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "The whole-body Cdo1 knockout causally establishes CDO1 as required for cysteine-to-taurine flux, matching the mechanism's direction. The taurine phenotype is measured systemically in mouse rather than as hepatocyte-specific data, so the context is indirect and the agent's 'direct' label is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-c6efbbad84bf5495bff1",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1079,
+        "source_type": "abstract",
+        "start": 830,
+        "text": "Another isomerase activity from human liver was found to be a part of the isomerase-hydratase-dehydrogenase polypeptide showing immunological cross-reactivity with the previously characterized peroxisomal multifunctional enzyme (MFE) from rat liver."
+      },
+      "function_supported_genes": [],
+      "rationale": "This 1993 study characterizes human liver peroxisomal enoyl-CoA isomerase activity, weakly supporting the general enzyme function but predating gene nomenclature so it cannot be tied to the specific Eci2 gene, leaving both gene arrays empty. Human liver versus target mouse liver is cross-species and thus indirect, so the agent's 'partial' context label is overclaimed.",
+      "red_flags": [
+        "insufficient_text"
+      ],
+      "review_id": "RL-e852c42233ff0b961e61",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 27657,
+        "source_type": "full_text",
+        "start": 27504,
+        "text": "The protein that most positively predicted hypotaurine abundance was CDO1, confirming its high degree of control over hypotaurine biosynthesis (Fig. 2b)."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "The paper's own mouse-liver covariation proteomics gene-specifically shows CDO1 is the strongest positive predictor of hypotaurine abundance, supporting its rate-limiting role in cysteine-to-taurine flux via observational data. The finding is in mouse liver hepatocyte metabolism, the target tissue and organism, so the 'direct' context label is accurate even though the aging/MASLD conditions are not modeled.",
+      "red_flags": [],
+      "review_id": "RL-f2154dc6b97c36f40430",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.3998645,
+    "duration_api_ms": 114250,
+    "duration_ms": 113025,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 114.036
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "brain-p10--baseline-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 1.0
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 1.0
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.95
+      }
+    ],
+    "moduleSemanticSimilarity": 0.983333,
+    "overall_rationale": "This is a near-identical baseline replicate: the cilia biogenesis module (L1/R1), endothelial cilia mechanosensing module (L2/R2), and Wnt/Fzd4-Gata2-Eng regulator module (L3/R3) each match one-to-one with near-perfect similarity, while cross-pairs share genes/tissue context but diverge in core mechanism (structural biogenesis vs. mechanosensory function vs. transcriptional regulation), warranting low partial-overlap or context-only scores.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the identical cilia biogenesis machinery (BBSome, IFT, transition zone, distal appendages) with essentially the same gene set and mechanistic framing.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 1.0
+      },
+      {
+        "left_module": 1,
+        "rationale": "Shares the same cilia gene set with right module 2 but frames them as flow-mechanosensing output rather than structural biogenesis, a different core mechanism emphasis.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 1,
+        "rationale": "Cilia structural genes versus Wnt/TGF-b endothelial transcriptional regulators share only the brain vascular tissue context, not mechanism.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 2,
+        "rationale": "Left module 2 frames the same ciliary genes as mechanosensors for blood flow while right module 1 frames them as biogenesis machinery, overlapping genes but different central mechanism/output.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both describe endothelial primary cilia as flow-shear mechanosensors driving postnatal BBB maturation using the same gene set and evidence (KLF2, shear response).",
+        "relationship": "same_core",
+        "right_module": 2,
+        "similarity": 1.0
+      },
+      {
+        "left_module": 2,
+        "rationale": "Ciliary mechanosensation and transcriptional/receptor regulators of endothelial identity share only the endothelial/BBB context, not mechanism or gene roles.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 3,
+        "rationale": "Regulatory Wnt/TGF-b transcription factors versus structural cilia biogenesis genes share no mechanistic overlap beyond the same overall program.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 3,
+        "rationale": "Endothelial identity/BBB transcriptional regulators differ mechanistically from ciliary mechanosensation, overlapping only in the shared endothelial/BBB context.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both describe the same Fzd4/Gata2/Eng regulator trio governing Norrin-Wnt CNS vascular identity and BBB integrity, differing only in that left retains Tet1 as a supporting gene.",
+        "relationship": "same_core",
+        "right_module": 3,
+        "similarity": 0.95
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.10608599999999999,
+    "duration_api_ms": 30949,
+    "duration_ms": 29554,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 30.68
+  }
+}

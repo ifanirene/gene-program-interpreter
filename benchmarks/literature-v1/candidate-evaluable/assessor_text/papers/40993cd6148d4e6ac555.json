@@ -1,0 +1,14 @@
+{
+  "content_hash": "f60f7b01b071a874d2bb7ef7d9bc42dbce09b41b0a6b0327dfea5077e2ca8626",
+  "doi": "10.1152/ajpendo.00130.2004",
+  "errors": [],
+  "paper_key": "40993cd6148d4e6ac555",
+  "pmcid": null,
+  "pmid": "15198932",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The acute-phase response (APR) induces alterations in lipid metabolism, and our data suggest that this is associated with suppression of type II nuclear hormone receptors that are key regulators of fatty acid, cholesterol, and bile acid metabolism. Recently, the farnesoid X receptor (FXR), constitutive androstane receptor (CAR), and pregnane X receptor (PXR) were found to regulate DHEA sulfotransferase (Sult2A1), which plays an important role in DHEA sulfation and detoxification of bile acids. Because FXR, PXR, and CAR are suppressed during the APR, we hypothesized that Sult2A1 is downregulated during the APR. To induce the APR, mice were treated with LPS, which will then trigger the release of various cytokines, and the mRNA levels of Sult2A1 and the sulfate donor 3'-phosphoadenosine 5'-phosphosulfate synthase 2 (PAPSS2), as well as the enzyme activity of Sult2A1, were determined in the liver. We found that mRNA levels of Sult2A1 decrease in a time- and dose-dependent manner during the LPS-induced APR. Similar changes were observed in the mRNA levels of PAPSS2, the major synthase of PAPS in the liver. Moreover, hepatic Sult2A1 activity and serum levels of DHEA-sulfate (DHEA-S) were significantly decreased in LPS-treated animals. These results suggest that decreased levels or activities of FXR, PXR, and CAR during the APR could contribute to decreases in Sult2A1, resulting in decreased sulfation of DHEA and lower circulating level of DHEA-S. Finally, we found that both TNF and IL-1 caused a significant decrease in the mRNA level of Sult2A1 in Hep3B human hepatoma cells, suggesting that the proinflammatory cytokines TNF and IL-1 mediate the inhibitory effect of LPS on Sult2A1 mRNA level. Our study provides a possible mechanism by which infection and inflammation are associated with altered steroid metabolism and cholestasis.",
+  "text_type": "abstract",
+  "title": "Suppression of DHEA sulfotransferase (Sult2A1) during the acute-phase response."
+}

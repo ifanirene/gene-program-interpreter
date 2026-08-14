@@ -1,0 +1,2271 @@
+{
+  "manifest": {
+    "blocks": [
+      {
+        "body": "# Reference quality audit",
+        "id": "title",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "body": "## Technical summary\n\nModel assessors reviewed **261 citation–mechanism links** across **14 sessions**. **96.6%** of links supported or partially supported their citation-specific function. Mean supplied-gene citation coverage was **36.3%** per session, while mean function-supported coverage was **34.5%**. The agent overclaimed context directness for **27.7%** of assessable links.  Exact agreement on the fixed 53-link subset was **52.8%**; all 25 disagreements were independently adjudicated. These are model judgments, not human ground truth.",
+        "id": "technical-summary",
+        "layout": "full",
+        "sourceId": "metrics",
+        "type": "markdown"
+      },
+      {
+        "body": "## What was measured\n\nCitation coverage is the share of all 23 supplied genes studied by at least one cited paper; function-supported coverage additionally requires support for the function assigned to that gene. Context is classified independently and is not an evidence acceptance gate. Evidence from another tissue or cell type remains useful when labeled partial or indirect.",
+        "id": "scope",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "body": "## Headline audit measures",
+        "id": "summary-heading",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "cardIds": [
+          "links-card",
+          "citation-coverage-card",
+          "function-coverage-card",
+          "support-card",
+          "context-card",
+          "flags-card",
+          "reliability-card"
+        ],
+        "id": "summary",
+        "layout": "full",
+        "type": "metric-strip"
+      },
+      {
+        "body": "## Per-program supplied-gene coverage\n\nFor repeated programs, union coverage asks whether either run found evidence for a supplied gene; mean run coverage preserves the typical single-output result. The uncovered-gene list is the direct search target for the next agent version.",
+        "id": "program-finding",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "id": "program-table-block",
+        "layout": "full",
+        "tableId": "program-table",
+        "type": "table"
+      },
+      {
+        "body": "## Gene coverage varies by program and run\n\nCitation coverage ranged from **13.0%** in **brain-p11--r2** to **73.9%** in **liver-p21--r1**. The largest gap between studying a gene and supporting its assigned function was **4.3%** in **liver-p23--r1**. The chart separates these two questions; a gap identifies citations that are gene-relevant but functionally weak.",
+        "id": "coverage-finding",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "chartId": "coverage-chart",
+        "id": "coverage-chart-block",
+        "layout": "full",
+        "type": "chart"
+      },
+      {
+        "body": "## Exact session-level results\n\nThe table preserves the numerator, fixed 23-gene denominator, link volume, context-calibration error, and red-flag count for audit and comparison.",
+        "id": "coverage-detail",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "id": "coverage-table-block",
+        "layout": "full",
+        "tableId": "coverage-table",
+        "type": "table"
+      },
+      {
+        "body": "## Repeat runs separate paper instability from biological coverage\n\nMean citation-set Jaccard was **0.120**, compared with **0.698** for covered genes and **0.611** for function-supported genes. Comparing these values shows whether different paper selections still preserve the same biological coverage.",
+        "id": "repeat-finding",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "id": "repeat-table-block",
+        "layout": "full",
+        "tableId": "repeat-table",
+        "type": "table"
+      },
+      {
+        "body": "## Citation-level failures remain traceable\n\nThe most frequent flag was **context_overclaim** (72 instances). Each flag retains the paper, support judgment, declared and assessed context, and reviewer rationale. Context is flagged only when the agent overstates directness, not merely because evidence is indirect.",
+        "id": "flag-finding",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "id": "flag-table-block",
+        "layout": "full",
+        "tableId": "flag-table",
+        "type": "table"
+      },
+      {
+        "body": "## Independent scoring quantifies model uncertainty\n\nThe fixed subset included **53 links (20.3%)**. Exact agreement across all structured fields was **52.8%**. Field-level rates show whether uncertainty came from functional support, gene assignment, directness, direction, or context classification.",
+        "id": "reliability-finding",
+        "layout": "full",
+        "sourceId": "reliability",
+        "type": "markdown"
+      },
+      {
+        "id": "reliability-table-block",
+        "layout": "full",
+        "tableId": "reliability-table",
+        "type": "table"
+      },
+      {
+        "body": "## How functional support was assessed\n\nFor each session–mechanism–paper link, the assessor reduced the selection reason to a gene–function claim, read the cached abstract or claim-relevant article passage, and recorded support, directness, direction, studied genes, function-supported genes, context class, and an exact source span. Positive and contradictory judgments could not pass validation without a span that exactly matched the frozen text.",
+        "id": "methodology",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "body": "## Limitations and robustness\n\nThis audit is model-assessed. Abstracts were accepted when they explicitly reported the relevant result; absent detail was labeled not assessable rather than negative. Cached article bodies omit some tables, captions, and supplements. A deterministic 20% subset was independently double-scored, and disagreements were adjudicated before final aggregation.",
+        "id": "limitations",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "body": "## Recommended next steps\n\nPrioritize uncovered supplied genes and links flagged for wrong function or reversed direction. Improve the agent prompt so partial and indirect contexts are stated explicitly without weakening valid cross-tissue mechanistic evidence.",
+        "id": "next-steps",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "body": "## Further questions\n\nDo low paper-set Jaccards still preserve covered genes and functional conclusions? Which supplied genes remain uncited across both repeats? These distinctions determine whether optimization should target search stability, gene coverage, or claim calibration.",
+        "id": "further-questions",
+        "layout": "full",
+        "type": "markdown"
+      }
+    ],
+    "cards": [
+      {
+        "dataset": "summary",
+        "description": "Every retained session–mechanism–paper link.",
+        "id": "links-card",
+        "metrics": [
+          {
+            "field": "review_link_count",
+            "format": "number",
+            "label": "Links reviewed"
+          }
+        ],
+        "sourceId": "metrics"
+      },
+      {
+        "dataset": "summary",
+        "description": "Mean share of 23 supplied genes studied per session.",
+        "id": "citation-coverage-card",
+        "metrics": [
+          {
+            "field": "mean_citation_coverage",
+            "format": "percent",
+            "label": "Mean citation coverage"
+          }
+        ],
+        "sourceId": "metrics"
+      },
+      {
+        "dataset": "summary",
+        "description": "Mean share with support for the assigned function.",
+        "id": "function-coverage-card",
+        "metrics": [
+          {
+            "field": "mean_function_supported_coverage",
+            "format": "percent",
+            "label": "Mean functional coverage"
+          }
+        ],
+        "sourceId": "metrics"
+      },
+      {
+        "dataset": "summary",
+        "description": "Links scored supports or partial.",
+        "id": "support-card",
+        "metrics": [
+          {
+            "field": "supportive_link_rate",
+            "format": "percent",
+            "label": "Supportive links"
+          }
+        ],
+        "sourceId": "metrics"
+      },
+      {
+        "dataset": "summary",
+        "description": "Agent label was more direct than the assessed context.",
+        "id": "context-card",
+        "metrics": [
+          {
+            "field": "context_overclaim_rate",
+            "format": "percent",
+            "label": "Context overclaim"
+          }
+        ],
+        "sourceId": "metrics"
+      },
+      {
+        "dataset": "summary",
+        "description": "Links with at least one citation-quality flag.",
+        "id": "flags-card",
+        "metrics": [
+          {
+            "field": "red_flagged_link_count",
+            "format": "number",
+            "label": "Flagged links"
+          }
+        ],
+        "sourceId": "metrics"
+      },
+      {
+        "dataset": "summary",
+        "description": "Exact agreement across all structured fields in double scoring.",
+        "id": "reliability-card",
+        "metrics": [
+          {
+            "field": "exact_agreement_rate",
+            "format": "percent",
+            "label": "Exact model agreement"
+          }
+        ],
+        "sourceId": "metrics"
+      }
+    ],
+    "charts": [
+      {
+        "dataset": "session_coverage",
+        "encodings": {
+          "tooltip": [
+            {
+              "field": "citedGenes",
+              "label": "Genes cited",
+              "type": "quantitative"
+            },
+            {
+              "field": "functionalGenes",
+              "label": "Functions supported",
+              "type": "quantitative"
+            },
+            {
+              "field": "suppliedGenes",
+              "label": "Supplied genes",
+              "type": "quantitative"
+            }
+          ],
+          "x": {
+            "field": "session",
+            "label": "Session",
+            "type": "nominal"
+          },
+          "y": {
+            "fields": [
+              "citationCoverage",
+              "functionCoverage"
+            ],
+            "format": "percent",
+            "label": "Share of supplied genes",
+            "type": "quantitative"
+          }
+        },
+        "id": "coverage-chart",
+        "intent": "comparison",
+        "layout": "full",
+        "maxRows": 14,
+        "question": "How much of each supplied program has citation and functional support?",
+        "rationale": "A grouped horizontal bar makes gaps between cited and function-supported genes visible.",
+        "sourceId": "sessions",
+        "subtitle": "Citation coverage versus coverage with function support",
+        "title": "Supplied-gene coverage by session",
+        "type": "horizontalBar",
+        "valueFormat": "percent"
+      }
+    ],
+    "description": "Model-assessed functional support, gene coverage, context calibration, and repeat stability.",
+    "generatedAt": "2026-07-22T10:24:10.188878Z",
+    "sources": [
+      {
+        "id": "metrics",
+        "label": "Reference-quality summary query",
+        "path": "sources/summary.sql"
+      },
+      {
+        "id": "sessions",
+        "label": "Per-session coverage query",
+        "path": "sources/session_coverage.sql"
+      },
+      {
+        "id": "programs",
+        "label": "Per-program coverage query",
+        "path": "sources/program_coverage.sql"
+      },
+      {
+        "id": "flags",
+        "label": "Citation red-flag query",
+        "path": "sources/red_flags.sql"
+      },
+      {
+        "id": "repeats",
+        "label": "Repeat-run stability query",
+        "path": "sources/repeat_stability.sql"
+      },
+      {
+        "id": "reliability",
+        "label": "Double-score reliability query",
+        "path": "sources/reliability.sql"
+      }
+    ],
+    "surface": "report",
+    "tables": [
+      {
+        "columns": [
+          {
+            "field": "program",
+            "label": "Program",
+            "type": "text"
+          },
+          {
+            "field": "runs",
+            "format": "number",
+            "label": "Runs"
+          },
+          {
+            "field": "suppliedGenes",
+            "format": "number",
+            "label": "Supplied genes"
+          },
+          {
+            "field": "citedGenes",
+            "format": "number",
+            "label": "Genes cited"
+          },
+          {
+            "field": "citationCoverage",
+            "format": "percent",
+            "label": "Union citation coverage"
+          },
+          {
+            "field": "functionalGenes",
+            "format": "number",
+            "label": "Functions supported"
+          },
+          {
+            "field": "functionCoverage",
+            "format": "percent",
+            "label": "Union functional coverage"
+          },
+          {
+            "field": "meanRunCoverage",
+            "format": "percent",
+            "label": "Mean run coverage"
+          },
+          {
+            "field": "uncoveredGenes",
+            "label": "Uncovered supplied genes",
+            "type": "text"
+          }
+        ],
+        "dataset": "program_coverage",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "program"
+        },
+        "density": "dense",
+        "id": "program-table",
+        "layout": "full",
+        "sourceId": "programs",
+        "subtitle": "Citation and functional coverage use the union across repeats; mean run coverage shows typical output-level performance.",
+        "title": "Coverage by unique program"
+      },
+      {
+        "columns": [
+          {
+            "field": "session",
+            "label": "Session",
+            "type": "text"
+          },
+          {
+            "field": "program",
+            "label": "Program",
+            "type": "text"
+          },
+          {
+            "field": "suppliedGenes",
+            "format": "number",
+            "label": "Supplied genes"
+          },
+          {
+            "field": "citedGenes",
+            "format": "number",
+            "label": "Genes cited"
+          },
+          {
+            "field": "citationCoverage",
+            "format": "percent",
+            "label": "Citation coverage"
+          },
+          {
+            "field": "functionalGenes",
+            "format": "number",
+            "label": "Functions supported"
+          },
+          {
+            "field": "functionCoverage",
+            "format": "percent",
+            "label": "Function-supported coverage"
+          },
+          {
+            "field": "linkCount",
+            "format": "number",
+            "label": "Links reviewed"
+          },
+          {
+            "field": "contextOverclaim",
+            "format": "percent",
+            "label": "Context overclaim"
+          },
+          {
+            "field": "flaggedLinks",
+            "format": "number",
+            "label": "Flagged links"
+          }
+        ],
+        "dataset": "session_coverage",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "session"
+        },
+        "density": "dense",
+        "id": "coverage-table",
+        "layout": "full",
+        "sourceId": "sessions",
+        "subtitle": "Counts use every supplied core gene as the denominator; regulators are excluded.",
+        "title": "Exact per-session coverage"
+      },
+      {
+        "columns": [
+          {
+            "field": "case",
+            "label": "Case",
+            "type": "text"
+          },
+          {
+            "field": "leftRun",
+            "label": "Run 1",
+            "type": "text"
+          },
+          {
+            "field": "rightRun",
+            "label": "Run 2",
+            "type": "text"
+          },
+          {
+            "field": "citationJaccard",
+            "format": "number",
+            "label": "Citation Jaccard"
+          },
+          {
+            "field": "coveredGeneJaccard",
+            "format": "number",
+            "label": "Covered-gene Jaccard"
+          },
+          {
+            "field": "functionalGeneJaccard",
+            "format": "number",
+            "label": "Functional-gene Jaccard"
+          }
+        ],
+        "dataset": "repeat_stability",
+        "density": "dense",
+        "id": "repeat-table",
+        "layout": "full",
+        "sourceId": "repeats",
+        "title": "Repeat-run stability"
+      },
+      {
+        "columns": [
+          {
+            "field": "session",
+            "label": "Session",
+            "type": "text"
+          },
+          {
+            "field": "redFlag",
+            "label": "Flag",
+            "type": "text"
+          },
+          {
+            "field": "paperTitle",
+            "label": "Paper",
+            "type": "text"
+          },
+          {
+            "field": "support",
+            "label": "Support",
+            "type": "text"
+          },
+          {
+            "field": "rationale",
+            "label": "Rationale",
+            "type": "text"
+          }
+        ],
+        "dataset": "red_flags",
+        "density": "dense",
+        "id": "flag-table",
+        "layout": "full",
+        "sourceId": "flags",
+        "title": "Citation-level red flags"
+      },
+      {
+        "columns": [
+          {
+            "field": "field",
+            "label": "Judgment field",
+            "type": "text"
+          },
+          {
+            "field": "agreementRate",
+            "format": "percent",
+            "label": "Agreement"
+          },
+          {
+            "field": "doubleScored",
+            "format": "number",
+            "label": "Double-scored"
+          },
+          {
+            "field": "disagreements",
+            "format": "number",
+            "label": "Any-field disagreements"
+          },
+          {
+            "field": "adjudicated",
+            "format": "number",
+            "label": "Adjudicated"
+          }
+        ],
+        "dataset": "reliability",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "agreementRate"
+        },
+        "density": "spacious",
+        "id": "reliability-table",
+        "layout": "full",
+        "sourceId": "reliability",
+        "subtitle": "Fixed 20% double-score subset; disagreements were adjudicated.",
+        "title": "Independent model agreement by field"
+      }
+    ],
+    "title": "Reference quality audit",
+    "version": 1
+  },
+  "snapshot": {
+    "datasets": {
+      "program_coverage": [
+        {
+          "case": "brain-p10",
+          "citationCoverage": 0.391304,
+          "citedGenes": 9,
+          "functionCoverage": 0.391304,
+          "functionalGenes": 9,
+          "meanRunCoverage": 0.369565,
+          "program": "P10",
+          "runs": 2,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Bckdhb, Camkmt, Cfap36, Chchd6, Clybl, D130040H23Rik, Elp4, Eml6, Map2k6, Metap1d, Prkdc, Stxbp4, Tex9, X1110051M20Rik"
+        },
+        {
+          "case": "brain-p11",
+          "citationCoverage": 0.217391,
+          "citedGenes": 5,
+          "functionCoverage": 0.217391,
+          "functionalGenes": 5,
+          "meanRunCoverage": 0.173913,
+          "program": "P11",
+          "runs": 2,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Bag2, Cacna1c, Cdc42ep3, Chst9, Cpe, Ctdspl, Dgki, Epb41l4b, Jph1, Megf6, Prdm1, Rgs6, Rhod, Slc16a9, Slc1a1, Sort1, Syt12, Tnfrsf11b"
+        },
+        {
+          "case": "brain-p8",
+          "citationCoverage": 0.304348,
+          "citedGenes": 7,
+          "functionCoverage": 0.304348,
+          "functionalGenes": 7,
+          "meanRunCoverage": 0.304348,
+          "program": "P8",
+          "runs": 1,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Adamts12, Adamts5, Arap2, Arid5b, Fut8, Grb14, Hmcn1, Klhl6, Lrrn3, Ntm, Pcca, Sorbs1, Srgap2, Tbc1d4, Tmtc2, Zfp608"
+        },
+        {
+          "case": "brain-p9",
+          "citationCoverage": 0.217391,
+          "citedGenes": 5,
+          "functionCoverage": 0.173913,
+          "functionalGenes": 4,
+          "meanRunCoverage": 0.217391,
+          "program": "P9",
+          "runs": 1,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Asap3, Bpgm, Chp2, Cyfip2, Ddi2, Dennd2c, Dgkh, Hip1, Ldlrad4, Map7, Pcnx, Ppm1h, Ppp1r2, Proser2, Slc16a9, Slc6a17, Spsb1, Usp3"
+        },
+        {
+          "case": "liver-p20",
+          "citationCoverage": 0.26087,
+          "citedGenes": 6,
+          "functionCoverage": 0.26087,
+          "functionalGenes": 6,
+          "meanRunCoverage": 0.26087,
+          "program": "P20",
+          "runs": 1,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Cep152, Chd2, Cyp2d40, Dusp11, Hspb2, Impact, Med12, Med18, Pilrb2, Ptk6, Retsat, Rnpc3, Scara5, Slc7a8, Srgap1, Urm1, Zfpm1"
+        },
+        {
+          "case": "liver-p21",
+          "citationCoverage": 0.73913,
+          "citedGenes": 17,
+          "functionCoverage": 0.73913,
+          "functionalGenes": 17,
+          "meanRunCoverage": 0.652173,
+          "program": "P21",
+          "runs": 2,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Cetn2, Ddr2, Erg28, Rdh11, Tas2r138, Zfp839"
+        },
+        {
+          "case": "liver-p22",
+          "citationCoverage": 0.391304,
+          "citedGenes": 9,
+          "functionCoverage": 0.391304,
+          "functionalGenes": 9,
+          "meanRunCoverage": 0.391304,
+          "program": "P22",
+          "runs": 1,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Ampd2, Gstm7, Gstp1, Gstp3, Intu, Lama1, Nob1, Sema3e, Stap1, Twist1, Ugdh, Utp3, Zfp709, Zfp729b"
+        },
+        {
+          "case": "liver-p23",
+          "citationCoverage": 0.26087,
+          "citedGenes": 6,
+          "functionCoverage": 0.217391,
+          "functionalGenes": 5,
+          "meanRunCoverage": 0.26087,
+          "program": "P23",
+          "runs": 1,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Adam32, Casc3, Cd207, Chpt1, Clstn3, Cyp4b1, Emc10, Fcor, Hipk1, Mesp2, Mup10, Mup17, Phactr4, Ripply1, Ttll3, Ubxn11, Vnn1"
+        },
+        {
+          "case": "liver-p24",
+          "citationCoverage": 0.391304,
+          "citedGenes": 9,
+          "functionCoverage": 0.391304,
+          "functionalGenes": 9,
+          "meanRunCoverage": 0.391304,
+          "program": "P24",
+          "runs": 1,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Car9, Cfap46, Cmtm4, Frat2, Gas2, Ifitm2, Igfbp2, Mapre2, Pigr, Rab3gap2, Rida, Sdr9c7, Uroc1, Zfp385a"
+        },
+        {
+          "case": "liver-p25",
+          "citationCoverage": 0.565217,
+          "citedGenes": 13,
+          "functionCoverage": 0.521739,
+          "functionalGenes": 12,
+          "meanRunCoverage": 0.434782,
+          "program": "P25",
+          "runs": 2,
+          "suppliedGenes": 23,
+          "uncoveredGenes": "Agmat, Alad, Eci2, Htatip2, Psmd1, Rnase4, Spag17, Sult2a5, Sult2a7, Sult2a8"
+        }
+      ],
+      "red_flags": [
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Role for primary cilia as flow detectors in the cardiovascular system.",
+          "program": "P10",
+          "rationale": "This review supports endothelial primary cilia as shear sensors, but it is cardiovascular-wide rather than brain-endothelial evidence.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Epigenetically coordinated GATA2 binding is necessary for endothelium-specific endomucin expression.",
+          "program": "P10",
+          "rationale": "GATA2 perturbation supports its role in endothelial identity, but no supplied core P10 gene is studied and the endothelium is not brain-specific.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Centrosomal protein Dzip1l binds Cby, promotes ciliary bud formation, and acts redundantly with Bromi to regulate ciliogenesis in the mouse.",
+          "program": "P10",
+          "rationale": "The mouse genetic study directly connects Tbc1d32/Bromi to ciliogenesis, but in neural developmental cells rather than endothelium.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "The ciliopathy gene cc2d2a controls zebrafish photoreceptor outer segment development through a role in Rab8-dependent vesicle trafficking.",
+          "program": "P10",
+          "rationale": "Cc2d2a is experimentally studied and supports transition-zone Rab8-dependent trafficking, in zebrafish photoreceptors rather than endothelial cells.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "The carboxyl-terminal region of SDCCAG8 comprises a functional module essential for cilia formation as well as organ development and homeostasis.",
+          "program": "P10",
+          "rationale": "Knockdown/rescue and mouse genetics support an essential C-terminal Sdccag8 module for cilia formation; the studied systems are not endothelial.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Dysregulation of sonic hedgehog signaling causes hearing loss in ciliopathy mouse models.",
+          "program": "P10",
+          "rationale": "Tbc1d32 mutant phenotyping supports ciliary defects with impaired SHH signaling, but the context is mouse cochlea rather than endothelium.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Primary cilia sensitize endothelial cells for fluid shear stress.",
+          "program": "P10",
+          "rationale": "Chemical cilia removal and KLF2 response support endothelial shear mechanosensing, but the cells are embryonic cardiac/arterial endothelium rather than brain endothelium.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Norrin-induced Frizzled4 endocytosis and endo-lysosomal trafficking control retinal angiogenesis and barrier function.",
+          "program": "P10",
+          "rationale": "The study directly supports FZD4 trafficking in retinal endothelial barrier biology, a closely related CNS endothelial context rather than brain endothelium.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Knockdown of Bardet-Biedl syndrome gene BBS9/PTHB1 leads to cilia defects.",
+          "program": "P10",
+          "rationale": "Bbs9 knockdown directly reduces ciliogenesis, but the cultured cells and zebrafish assays are not endothelial.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Variable phenotypes and penetrance between and within different zebrafish ciliary transition zone mutants.",
+          "program": "P10",
+          "rationale": "The paper directly tests Cc2d2a as a transition-zone mutant, but Nme7 is absent from the paper despite the selection reason naming it.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Variable phenotypes and penetrance between and within different zebrafish ciliary transition zone mutants.",
+          "program": "P10",
+          "rationale": "The paper directly tests Cc2d2a as a transition-zone mutant, but Nme7 is absent from the paper despite the selection reason naming it.",
+          "redFlag": "wrong_gene",
+          "session": "brain-p10--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "BBS1 is involved in retrograde trafficking of ciliary GPCRs in the context of the BBSome complex.",
+          "program": "P10",
+          "rationale": "Protein-interaction experiments directly support the claimed BBS9 reinforcement of ARL6-BBS1 assembly; the systems are HEK293T/RPE1 cells.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "indirect",
+          "paperTitle": "C2cd3 is critical for centriolar distal appendage assembly and ciliary vesicle docking in mammals.",
+          "program": "P10",
+          "rationale": "The paper directly measures Cep164 recruitment, but the docking and IFT requirement is established for C2cd3 rather than by perturbing Cep164 itself.",
+          "redFlag": "wrong_function",
+          "session": "brain-p10--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "A transition zone complex regulates mammalian ciliogenesis and ciliary membrane composition.",
+          "program": "P10",
+          "rationale": "Loss-of-function evidence supports Cc2d2a in transition-zone control of ciliogenesis and membrane composition; the tissues are not endothelial.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Together, the IFT81 and IFT74 N-termini form the main module for intraflagellar transport of tubulin.",
+          "program": "P10",
+          "rationale": "Chlamydomonas mutant experiments directly support the Ift74-Ift81 tubulin transport module; the context is evolutionarily informative but non-endothelial.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Photoreceptor cilia, in contrast to primary cilia, grant entry to a partially assembled BBSome.",
+          "program": "P10",
+          "rationale": "The mouse retinal study directly tracks BBS9-containing BBSome entry into photoreceptor cilia, but is not endothelial evidence.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "WDPCP Modulates Cilia Beating Through the MAPK/ERK Pathway in Chronic Rhinosinusitis With Nasal Polyps.",
+          "program": "P10",
+          "rationale": "WDPCP perturbation supports ciliogenesis and ciliary beating through MAPK/ERK in human nasal epithelial cells, not endothelium.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "WDPCP Modulates Cilia Beating Through the MAPK/ERK Pathway in Chronic Rhinosinusitis With Nasal Polyps.",
+          "program": "P10",
+          "rationale": "The paper supports WDPCP-dependent cilia function, but it does not test endothelial shear mechanosensing or BBB maturation and uses nasal epithelium.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "WDPCP Modulates Cilia Beating Through the MAPK/ERK Pathway in Chronic Rhinosinusitis With Nasal Polyps.",
+          "program": "P10",
+          "rationale": "The paper supports WDPCP-dependent cilia function, but it does not test endothelial shear mechanosensing or BBB maturation and uses nasal epithelium.",
+          "redFlag": "wrong_function",
+          "session": "brain-p10--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Vascular Endothelial Primary Cilia: Mechanosensation and Hypertension.",
+          "program": "P10",
+          "rationale": "The review supports vascular endothelial cilia as flow sensors, but not specifically brain endothelial cells.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p10--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "indirect",
+          "paperTitle": "Emerging mechanistic understanding of cilia function in cellular signalling.",
+          "program": "P10",
+          "rationale": "The review supports cilia as signaling hubs but does not address endothelial flow sensing, BBB maturation, or any supplied core gene.",
+          "redFlag": "wrong_function",
+          "session": "brain-p10--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "The Ism between Endothelial Cilia and Endothelial Nanotubules Is an Evolving Concept in the Genesis of the BBB.",
+          "program": "P10",
+          "rationale": "The exact brain-endothelial review states that empirical support for ciliary mechanosensing is absent and favors nanotubules in BBB genesis. It therefore does not support the claimed ciliary function; the direction cannot be established.",
+          "redFlag": "wrong_function",
+          "session": "brain-p10--r2",
+          "support": "no"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "indirect",
+          "paperTitle": "Renal-retinal ciliopathy gene Sdccag8 regulates DNA damage response signaling.",
+          "program": "P10",
+          "rationale": "The paper studies Sdccag8 loss and retinal trafficking pathology, but does not establish the assigned cilia-formation/transition-zone function and reports no global renal ciliary defect.",
+          "redFlag": "wrong_function",
+          "session": "brain-p10--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "Synergistic induction of blood-brain barrier properties.",
+          "program": "P11",
+          "rationale": "TGF-β inhibition improves barrier tightness, opposite to a simple positive TGF-β maturation claim.",
+          "redFlag": "reversed_direction",
+          "session": "brain-p11--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Hypoxia tolerance in the Norrin-deficient retina and the chronically hypoxic brain studied at single-cell resolution.",
+          "program": "P11",
+          "rationale": "Brain endothelial cells activate a tip program under chronic hypoxia rather than normal postnatal development.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Specialized endothelial tip cells guide neuroretina vascularization and blood-retina-barrier formation.",
+          "program": "P11",
+          "rationale": "ALK5 deletion blocks postnatal retinal diving-tip identity; Angpt2 is profiled but is ancillary to this link.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "indirect",
+          "paperTitle": "A junctophilin-caveolin interaction enables efficient coupling between ryanodine receptors and BKCa channels in the Ca2+ microdomain of vascular smooth muscle.",
+          "program": "P11",
+          "rationale": "The study supports JPH2 calcium microdomains in smooth muscle, not supplied Jph1.",
+          "redFlag": "paralog_only",
+          "session": "brain-p11--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "Release of endothelial cell associated VEGFR2 during TGF-β modulated angiogenesis in vitro.",
+          "program": "P11",
+          "rationale": "Peripheral endothelial culture supports ALK5 regulation of tip behavior but in the reverse direction from CNS D-tip identity.",
+          "redFlag": "reversed_direction",
+          "session": "brain-p11--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Loss of TGFβ-Mediated Repression of Angiopoietin-2 in Pericytes Underlies Germinal Matrix Hemorrhage Pathogenesis.",
+          "program": "P11",
+          "rationale": "ALK5 causally represses Angpt2 in brain pericytes, not endothelial tip cells.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Single-Cell Analysis of Blood-Brain Barrier Response to Pericyte Loss.",
+          "program": "P11",
+          "rationale": "Adult pathological brain profiling supports a context-dependent ANGPT2 endothelial function.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "The CXCL12/CXCR4/CXCR7 ligand-receptor system regulates neuro-glio-vascular interactions and vessel growth during human brain development.",
+          "program": "P11",
+          "rationale": "Human fetal brain localization supports association with sprouts, not a causal postnatal mouse function.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Androgen Receptor Governs Tip Cell Formation in Cerebrovascular Malformations.",
+          "program": "P11",
+          "rationale": "The study identifies and manipulates pathological cerebrovascular tip cells rather than normal developmental cells.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Identification and functional analysis of endothelial tip cell-enriched genes.",
+          "program": "P11",
+          "rationale": "Retinal transcriptomics identifies Angpt2 as a tip-cell secreted molecule in a related CNS vascular bed.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Profiling the unique protective properties of intracranial arterial endothelial cells.",
+          "program": "P11",
+          "rationale": "The human artery comparison and protein validation substantively study HOPX and support intracranial endothelial enrichment. They do not test an arterial-identity function, which remains a suggestion. Human adult intracranial artery ECs are closely relevant but not the target mouse postnatal brain setting.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Dll4 and Notch signalling couples sprouting angiogenesis and artery formation.",
+          "program": "P11",
+          "rationale": "Genetic experiments support CXCR4 in Notch-dependent postnatal vessel growth, mainly in retina.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "Alk1 and Alk5 inhibition by Nrp1 controls vascular sprouting downstream of Notch.",
+          "program": "P11",
+          "rationale": "The paper causally supports the Notch-NRP1-ALK1/ALK5 tip-stalk mechanism, but it never studies CXCR4 or an arteriovenous boundary. Thus the added CXCR4-NRP1 linkage is unsupported and no supplied P11 gene receives coverage from this citation.",
+          "redFlag": "wrong_gene",
+          "session": "brain-p11--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "Alk1 and Alk5 inhibition by Nrp1 controls vascular sprouting downstream of Notch.",
+          "program": "P11",
+          "rationale": "The paper causally supports the Notch-NRP1-ALK1/ALK5 tip-stalk mechanism, but it never studies CXCR4 or an arteriovenous boundary. Thus the added CXCR4-NRP1 linkage is unsupported and no supplied P11 gene receives coverage from this citation.",
+          "redFlag": "wrong_function",
+          "session": "brain-p11--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Microarray analysis of retinal endothelial tip cells identifies CXCR4 as a mediator of tip cell morphology and branching.",
+          "program": "P11",
+          "rationale": "Neonatal retinal profiling supports Angpt2 enrichment and Cxcr4 enrichment/function.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Loss of TGFβ-Mediated Repression of Angiopoietin-2 in Pericytes Underlies Germinal Matrix Hemorrhage Pathogenesis.",
+          "program": "P11",
+          "rationale": "Genetic and pharmacological experiments causally support ALK5-SMAD repression of Angpt2 and its role in germinal-matrix hemorrhage. However, the paper identifies pericytes, not endothelial cells, as the excessive ANGPT2 source. This is a relevant brain vascular cross-talk context, but the direct endothelial label is overclaimed.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Neuropilin-1 is required for endothelial tip cell guidance in the developing central nervous system.",
+          "program": "P11",
+          "rationale": "Mouse hindbrain experiments support Nrp1 tip guidance at an embryonic rather than postnatal stage.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Endothelial Notch signalling limits angiogenesis via control of artery formation.",
+          "program": "P11",
+          "rationale": "Live imaging and genetics support Notch induction of Cxcr4 during arterial tip migration.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "NRP1 acts cell autonomously in endothelium to promote tip cell function during sprouting angiogenesis.",
+          "program": "P11",
+          "rationale": "Developing-brain mosaics establish a cell-autonomous Nrp1 tip role; Nrp1 is a regulator.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p11--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Pericyte ALK5/TIMP3 Axis Contributes to Endothelial Morphogenesis in the Developing Brain.",
+          "program": "P8",
+          "rationale": "Pericyte-specific Alk5 deletion causally alters brain endothelial morphogenesis, but the perturbed regulator is in pericytes rather than the target brain endothelial cell.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p8--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Disruption of the Extracellular Matrix Progressively Impairs Central Nervous System Vascular Maturation Downstream of β-Catenin Signaling",
+          "program": "P9",
+          "rationale": "Forebrain profiling supports Adamtsl2 and Htra3 as brain-enriched ECM genes during embryonic BBB maturation.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p9--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "Synergistic induction of blood-brain barrier properties",
+          "program": "P9",
+          "rationale": "TGF-β inhibition improves BBB tightness, opposite to the claimed positive driver direction.",
+          "redFlag": "reversed_direction",
+          "session": "brain-p9--r1",
+          "support": "contradicts"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "Synergistic induction of blood-brain barrier properties",
+          "program": "P9",
+          "rationale": "TGF-β inhibition improves BBB tightness, opposite to the claimed positive driver direction.",
+          "redFlag": "wrong_function",
+          "session": "brain-p9--r1",
+          "support": "contradicts"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Developmentally regulated expression of mouse HtrA3 and its role as an inhibitor of TGF-beta signaling",
+          "program": "P9",
+          "rationale": "Htra3 directly inhibits extracellular TGF-β/BMP signaling outside brain endothelium.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p9--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "The transcription factor Vezf1 represses the expression of the antiangiogenic factor Cited2 in endothelial cells",
+          "program": "P9",
+          "rationale": "Vezf1 loss impairs generic endothelial tube formation through Cited2 regulation.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p9--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "miR-24 Targets the Transmembrane Glycoprotein Neuropilin-1 in Human Brain Microvascular Endothelial Cells",
+          "program": "P9",
+          "rationale": "NRP1 regulation is validated in brain endothelial cells, but BBB or tip/stalk function is not tested.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p9--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Vezf1: A Zn finger transcription factor restricted to endothelial cells and their precursors",
+          "program": "P9",
+          "rationale": "Vezf1 marks embryonic endothelium, but brain endothelial identity and function are not tested.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p9--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "EndMT contributes to the onset and progression of cerebral cavernous malformations",
+          "program": "P9",
+          "rationale": "The paper supports CCM/TGF-driven EndMT but perturbs Ccm1 rather than claimed Ccm2.",
+          "redFlag": "wrong_gene",
+          "session": "brain-p9--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Ethanol Alters DNMT1/3a/3b Expression Profile, Promotes Persistent DNA Hypomethylation in Human Brain Endothelial Cells and Impairs Late Cortical Angiogenesis",
+          "program": "P9",
+          "rationale": "VEZF1 is measured in brain endothelial cells, but no perturbation establishes GLUT1 or CLDN5 regulation.",
+          "redFlag": "wrong_function",
+          "session": "brain-p9--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Ethanol Alters DNMT1/3a/3b Expression Profile, Promotes Persistent DNA Hypomethylation in Human Brain Endothelial Cells and Impairs Late Cortical Angiogenesis",
+          "program": "P9",
+          "rationale": "VEZF1 is measured in brain endothelial cells, but no perturbation establishes GLUT1 or CLDN5 regulation.",
+          "redFlag": "context_overclaim",
+          "session": "brain-p9--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "The Central Role of Cytochrome P450 in Xenobiotic Metabolism-A Brief Review on a Fascinating Enzyme Family.",
+          "program": "P20",
+          "rationale": "This establishes a general CYP-family function, not the supplied Cyp2d40 ortholog in mouse hepatocytes.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p20--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "CYP4A11 is involved in the development of nonalcoholic fatty liver disease via ROS-induced lipid peroxidation and inflammation.",
+          "program": "P20",
+          "rationale": "Human CYP4A11 experiments support a conserved CYP4A fatty-acid function for mouse Cyp4a12 co-orthologs, but not a direct mouse-context causal claim.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p20--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Hepatic Acat2 overexpression promotes systemic cholesterol metabolism and adipose lipid metabolism in mice.",
+          "program": "P21",
+          "rationale": "Liver-specific Acat2 gain of function supports its thiolase-to-acetoacetyl-CoA role and shifts mouse hepatic cholesterol-pathway genes. The citation does not support the separate cholesterol-esterification statement.",
+          "redFlag": "wrong_function",
+          "session": "liver-p21--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Histone deacetylase inhibitors: a new mode for inhibition of cholesterol metabolism.",
+          "program": "P21",
+          "rationale": "TSA perturbation supports coordinated repression of the cholesterol program, but the HepG2-specific gene list in the selection reason is too broad because Lss and Nsdhl are reported in F9 cells. The paper substantively measures 11 supplied genes; Msmo1 is absent, and Acat2 is measured without supporting its assigned HMG-CoA function. HepG2 is a transferable hepatic model rather than the target mouse hepatocyte context.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Inhibition of human sterol Δ7-reductase and other postlanosterol enzymes by LK-980, a novel inhibitor of cholesterol synthesis.",
+          "program": "P21",
+          "rationale": "The data support DHCR7 and SC5D as late cholesterol-pathway enzymes, but not the stronger claim that both are rate-limiting. Human hepatocytes are partial context.",
+          "redFlag": "wrong_function",
+          "session": "liver-p21--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Inhibition of human sterol Δ7-reductase and other postlanosterol enzymes by LK-980, a novel inhibitor of cholesterol synthesis.",
+          "program": "P21",
+          "rationale": "The data support DHCR7 and SC5D as late cholesterol-pathway enzymes, but not the stronger claim that both are rate-limiting. Human hepatocytes are partial context.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Inflammatory stress exacerbates hepatic cholesterol accumulation via increasing cholesterol uptake and de novo synthesis.",
+          "program": "P21",
+          "rationale": "The study causally supports inflammatory activation of the hepatic SREBP2-LDLR-HMGCR axis, but it does not perturb LDLR or show that LDLR loss drives compensatory synthesis, so the knockout direction is unresolved. Mouse liver and HepG2 inflammatory models are closely transferable, not the stated aging/MASLD hepatocyte condition. No supplied P21 gene is studied.",
+          "redFlag": "wrong_function",
+          "session": "liver-p21--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Inflammatory stress exacerbates hepatic cholesterol accumulation via increasing cholesterol uptake and de novo synthesis.",
+          "program": "P21",
+          "rationale": "The study causally supports inflammatory activation of the hepatic SREBP2-LDLR-HMGCR axis, but it does not perturb LDLR or show that LDLR loss drives compensatory synthesis, so the knockout direction is unresolved. Mouse liver and HepG2 inflammatory models are closely transferable, not the stated aging/MASLD hepatocyte condition. No supplied P21 gene is studied.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "CTRP12 inhibits triglyceride synthesis and export in hepatocytes by suppressing HNF-4α and DGAT2 expression.",
+          "program": "P21",
+          "rationale": "The paper supports the hepatocyte DGAT-MTTP triglyceride-export arm, but neither Acss2 nor cholesterol synthesis, so only part of the proposed coupling is supported.",
+          "redFlag": "wrong_function",
+          "session": "liver-p21--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "direct",
+          "paperTitle": "The potential role and mechanism of circRNA/miRNA axis in cholesterol synthesis.",
+          "program": "P21",
+          "rationale": "This pathway-focused review substantively describes the sequential functions of 15 supplied cholesterol-synthesis genes, including PMK as the PMVK alias, so all 15 count as function-supported secondary evidence. It does not provide the target mouse hepatocyte disease context. The selection reason presents it as an explicit review-based pathway listing, so it is not misrepresented as primary evidence.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Effect of cholesterol on lipogenesis and VLDL-TG assembly and secretion in goose primary hepatocytes.",
+          "program": "P21",
+          "rationale": "Cholesterol loading changes DGAT2/MTTP and VLDL-TG output in primary hepatocytes. Goose hepatocytes are partial mouse context and no supplied gene is studied.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Dietary fructose feeds hepatic lipogenesis via microbiota-derived acetate.",
+          "program": "P21",
+          "rationale": "The study establishes Acss2 as an acetate-to-lipogenic acetyl-CoA node and shows acetate labeling of HMG-CoA, but does not directly measure cholesterol synthesis.",
+          "redFlag": "wrong_function",
+          "session": "liver-p21--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "direct",
+          "paperTitle": "CYP51--the omnipotent P450.",
+          "program": "P21",
+          "rationale": "The CYP51-focused review explicitly supports the assigned lanosterol demethylase function. It is general secondary evidence without mouse hepatocyte or MASLD context, but the selection reason identifies it as a review rather than presenting it as primary evidence.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "direct",
+          "paperTitle": "A comprehensive machine-readable view of the mammalian cholesterol biosynthesis pathway.",
+          "program": "P21",
+          "rationale": "This expert-curated map substantively describes enzymatic steps for 16 supplied genes, but has no specific mouse-hepatocyte context.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "The hypocholesterolemic agent LY295427 up-regulates INSIG-1, identifying the INSIG-1 protein as a mediator of cholesterol homeostasis through SREBP.",
+          "program": "P21",
+          "rationale": "Overexpression and RNAi experiments support INSIG1-SCAP control of SREBP processing. The unspecified cell system is indirect for mouse hepatocytes.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Haploid genetic screens identify SPRING/C12ORF49 as a determinant of SREBP signaling and cholesterol metabolism.",
+          "program": "P21",
+          "rationale": "The paper supports functional SCAP/SREBP machinery and hepatic Hmgcs regulation. SCAP mislocalization itself was shown mainly in engineered non-hepatocyte cells, not mouse hepatocytes as stated.",
+          "redFlag": "wrong_function",
+          "session": "liver-p21--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "The potential role and mechanism of circRNA/miRNA axis in cholesterol synthesis.",
+          "program": "P21",
+          "rationale": "The review covers most supplied enzymes as a pathway list, supporting the mechanism but not gene-level study coverage. It is indirect rather than partial mouse-hepatocyte evidence.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Effectiveness and safety of the SREBP1/2 inhibitor, fatostatin, in a preclinical model of metabolic dysfunction-associated steatotic liver disease progression.",
+          "program": "P21",
+          "rationale": "SREBP1/2 inhibition improves cholesterol and MASLD outcomes, but the abstract does not directly measure elevated P21 sterol flux or name supplied genes.",
+          "redFlag": "wrong_function",
+          "session": "liver-p21--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "PAQR3 modulates cholesterol homeostasis by anchoring Scap/SREBP complex to the Golgi apparatus.",
+          "program": "P21",
+          "rationale": "The study causally supports PAQR3-SCAP-SREBP control and measures Hmgcs1 and squalene synthase/Fdft1 in primary hepatocytes. The selection reason incorrectly attributes the knockdown result to Scap; PAQR3 was perturbed, so the Scap perturbation direction is unresolved. Mouse primary hepatocytes and high-fat-diet liver are closely transferable but do not exactly establish the aging/MASLD condition.",
+          "redFlag": "wrong_function",
+          "session": "liver-p21--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "PAQR3 modulates cholesterol homeostasis by anchoring Scap/SREBP complex to the Golgi apparatus.",
+          "program": "P21",
+          "rationale": "The study causally supports PAQR3-SCAP-SREBP control and measures Hmgcs1 and squalene synthase/Fdft1 in primary hepatocytes. The selection reason incorrectly attributes the knockdown result to Scap; PAQR3 was perturbed, so the Scap perturbation direction is unresolved. Mouse primary hepatocytes and high-fat-diet liver are closely transferable but do not exactly establish the aging/MASLD condition.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p21--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Microsomal triglyceride transfer protein enhances cellular cholesteryl esterification by relieving product inhibition.",
+          "program": "P21",
+          "rationale": "This paper's ACAT2 is acyl-CoA:cholesterol acyltransferase 2 (legacy name for SOAT2), whereas supplied mouse Acat2 is cytosolic acetyl-CoA acetyltransferase/thiolase. The symbol collision does not support the supplied gene.",
+          "redFlag": "wrong_gene",
+          "session": "liver-p21--r2",
+          "support": "no"
+        },
+        {
+          "assessedContext": "not_assessable",
+          "declaredContext": "partial",
+          "paperTitle": "The hypocholesterolemic agent LY295427 up-regulates INSIG-1, identifying the INSIG-1 protein as a mediator of cholesterol homeostasis through SREBP.",
+          "program": "P21",
+          "rationale": "INSIG1 gain- and loss-of-function experiments support joint control of SREBP processing with SCAP, but the abstract does not establish ER retention or directly measure suppression of cholesterol biosynthesis. It reports only unspecified cells, so biological context cannot be assessed from the cached abstract. No supplied P21 gene is studied.",
+          "redFlag": "insufficient_text",
+          "session": "liver-p21--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Effects of binge ethanol on lipid homeostasis and oxidative stress in a rat model of nonalcoholic fatty liver disease.",
+          "program": "P22",
+          "rationale": "Rat fatty-liver expression supports MT1/MT2 as an antioxidant response, but it is observational and not an exact mouse-context match.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p22--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Dietary fructose feeds hepatic lipogenesis via microbiota-derived acetate.",
+          "program": "P22",
+          "rationale": "The cited in vivo isotope study explicitly shows fructose-derived hepatic DNL does not require ACLY, opposite the selection reason.",
+          "redFlag": "reversed_direction",
+          "session": "liver-p22--r1",
+          "support": "contradicts"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Dietary fructose feeds hepatic lipogenesis via microbiota-derived acetate.",
+          "program": "P22",
+          "rationale": "The cited in vivo isotope study explicitly shows fructose-derived hepatic DNL does not require ACLY, opposite the selection reason.",
+          "redFlag": "wrong_function",
+          "session": "liver-p22--r1",
+          "support": "contradicts"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Inducibility of drug-metabolizing enzymes by xenobiotics in mice with liver-specific knockout of Ctnnb1.",
+          "program": "P23",
+          "rationale": "The cached abstract discusses β-catenin zonation but contains no Cyp2e1-specific evidence for the selected claim.",
+          "redFlag": "insufficient_text",
+          "session": "liver-p23--r1",
+          "support": "not_assessable"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Nitration of tyrosine 92 mediates the activation of rat microsomal glutathione s-transferase by peroxynitrite.",
+          "program": "P23",
+          "rationale": "Biochemical/cell experiments support oxidative activation of MGST1, but the systems are rat enzyme and kidney-derived cells, not hepatocytes.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p23--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Involvement of hepatic stellate cell cytoglobin in acute hepatocyte damage through the regulation of CYP2E1-mediated xenobiotic metabolism.",
+          "program": "P23",
+          "rationale": "CYP2E1-dependent versus independent injury models and hepatocyte/HSC co-culture support CYP2E1-mediated xenobiotic activation in hepatocytes. The acute APAP and carbon-tetrachloride injury setting is closely transferable, but it is not the aging/MASLD condition declared as direct.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p23--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Loss of the E3 ubiquitin ligase MARCHF6 alters hepatic lipid metabolism and drives spontaneous hepatosteatosis.",
+          "program": "P23",
+          "rationale": "The experiment shows SQLE accumulation and SREBP1 activation in parallel after MARCHF6 loss, not that SQLE stabilization activates SREBP1.",
+          "redFlag": "wrong_function",
+          "session": "liver-p23--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Glycerol Kinase Drives Hepatic de novo Lipogenesis and Triglyceride Synthesis in Nonalcoholic Fatty Liver by Activating SREBP-1c Transcription, Upregulating DGAT1/2 Expression, and Promoting Glycerol Metabolism.",
+          "program": "P23",
+          "rationale": "The paper explicitly separates DGAT1/2 from SREBP-1c target genes. It shows GK co-regulates SREBP-1c and DGAT1/2 in fatty liver, not that DGAT2 is a downstream SREBP-1c target as claimed. This is a wrong functional edge rather than a reversed quantitative direction.",
+          "redFlag": "wrong_function",
+          "session": "liver-p23--r1",
+          "support": "contradicts"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Protein phosphatase 2A regulates cytotoxicity and drug resistance by dephosphorylating AHR and MDR1.",
+          "program": "P23",
+          "rationale": "Hepatocyte-specific PP2A deletion and PP2A agonism causally regulate Cyp2e1 expression and activity within a xenobiotic-metabolism program, so the citation supports the selected claim. Normal and xenobiotic-exposed mouse hepatocytes are closely relevant but not aging/MASLD, which the agent labeled direct.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p23--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Pdcd4 promotes lipid deposition by attenuating PPARα-mediated fatty acid oxidation in hepatocytes.",
+          "program": "P23",
+          "rationale": "Rat primary-hepatocyte experiments causally support PPARα regulation of the Acox1 ortholog, with a partial species match.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p23--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "PPARα/ACOX1 as a novel target for hepatic lipid metabolism disorders induced by per- and polyfluoroalkyl substances: An integrated approach.",
+          "program": "P23",
+          "rationale": "The cited study reports PPARalpha-linked ACOX1 upregulation and shows that ACOX1 activity promotes oxidative stress and lipid accumulation; inhibition mitigates the phenotype. That reverses the selection claim that ACOX1 is reduced in NAFLD and does not support the assigned protective beta-oxidation disease role.",
+          "redFlag": "reversed_direction",
+          "session": "liver-p23--r1",
+          "support": "contradicts"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "PPARα/ACOX1 as a novel target for hepatic lipid metabolism disorders induced by per- and polyfluoroalkyl substances: An integrated approach.",
+          "program": "P23",
+          "rationale": "The cited study reports PPARalpha-linked ACOX1 upregulation and shows that ACOX1 activity promotes oxidative stress and lipid accumulation; inhibition mitigates the phenotype. That reverses the selection claim that ACOX1 is reduced in NAFLD and does not support the assigned protective beta-oxidation disease role.",
+          "redFlag": "wrong_function",
+          "session": "liver-p23--r1",
+          "support": "contradicts"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Secreted MUP1 that reduced under ER stress attenuates ER stress induced insulin resistance through suppressing protein synthesis in hepatocytes.",
+          "program": "P23",
+          "rationale": "The paper supports MUP1 as a metabolic hepatokine, but MUP1 is a paralog rather than supplied Mup10 or Mup17.",
+          "redFlag": "paralog_only",
+          "session": "liver-p23--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Identification of MUP1 as a regulator for glucose and lipid metabolism in mice.",
+          "program": "P23",
+          "rationale": "MUP1 manipulation supports a family-level metabolic effect, but cannot be assigned to supplied Mup10 or Mup17.",
+          "redFlag": "paralog_only",
+          "session": "liver-p23--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Some biochemical and histochemical properties of human liver serine dehydratase.",
+          "program": "P24",
+          "rationale": "Rat histochemistry and enzyme work supports periportal Sds ortholog localization, but the species is not the target mouse.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p24--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Regulation of human hepatic hydroxysteroid sulfotransferase gene expression by the peroxisome proliferator-activated receptor alpha transcription factor.",
+          "program": "P24",
+          "rationale": "Primary human-hepatocyte work supports the orthologous SULT2A sulfation function, with a species rather than tissue mismatch.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p24--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Hepatic zonation of carbon and nitrogen fluxes derived from glutamine and ammonia transformations.",
+          "program": "P24",
+          "rationale": "Perfused rat liver supports periportal glutamine uptake through liver glutaminase activity, but does not directly perturb mouse Gls2.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p24--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Histidine ammonia lyase expression characteristics in primary liver cancer: hepatocellular carcinoma and cholangiocarcinoma.",
+          "program": "P24",
+          "rationale": "The article substantively studies HAL in normal and malignant human liver, reports liver enrichment and tumor downregulation, and explicitly assigns the histidine-catabolic reaction. The evidence supports the descriptive gene-function claim, although human liver cancer is only a partial context for mouse hepatocyte aging/MASLD.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p24--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Urea cycle dysregulation in non-alcoholic fatty liver disease.",
+          "program": "P24",
+          "rationale": "Human and rat steatotic-liver evidence supports reduced CPS1 and urea-cycle dysfunction in NAFLD, with a partial species match.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p24--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "m6A-mediated gluconeogenic enzyme PCK1 upregulation protects against hepatic ischemia-reperfusion injury.",
+          "program": "P24",
+          "rationale": "PCK1 inhibition and overexpression causally establish its hepatic gluconeogenic role, and human, mouse, and hepatocyte data show induction under metabolic stress. Ischemia-reperfusion is not aging/MASLD, but that context difference should be labeled partial rather than used to downgrade functional support.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p24--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Metabolic Interplay between Peroxisomes and Other Subcellular Organelles Including Mitochondria and the Endoplasmic Reticulum.",
+          "program": "P25",
+          "rationale": "The review directly supports ALDH3A2 ER localization and broader peroxisome–ER lipid interplay, but not Hao2/Eci2 or mouse hepatocyte MASLD. The function is non-directional and the context is indirect.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Lipid sensing by PPARα: Role in controlling hepatocyte gene regulatory networks and the metabolic response to fasting.",
+          "program": "P25",
+          "rationale": "The abstract supports a hepatic PPARα fasting network but does not mention or verify the claimed Hao2 and Eci2 targets.",
+          "redFlag": "insufficient_text",
+          "session": "liver-p25--r1",
+          "support": "not_assessable"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Lipid sensing by PPARα: Role in controlling hepatocyte gene regulatory networks and the metabolic response to fasting.",
+          "program": "P25",
+          "rationale": "The abstract supports a hepatic PPARα fasting network but does not mention or verify the claimed Hao2 and Eci2 targets.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r1",
+          "support": "not_assessable"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Bile Acid sulfation: a pathway of bile acid elimination and detoxification.",
+          "program": "P25",
+          "rationale": "The review supports SULT2A1 bile-acid detoxification, but SULT2A1 is not one of the supplied mouse Sult2a5/7/8 paralogs and therefore does not count as gene coverage.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Bile Acid sulfation: a pathway of bile acid elimination and detoxification.",
+          "program": "P25",
+          "rationale": "The review supports SULT2A1 bile-acid detoxification, but SULT2A1 is not one of the supplied mouse Sult2a5/7/8 paralogs and therefore does not count as gene coverage.",
+          "redFlag": "paralog_only",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Enzymatic properties of a member (AKR1C20) of the aldo-keto reductase family.",
+          "program": "P25",
+          "rationale": "The experiment characterizes AKR1C20 and explicitly distinguishes it from AKR1C6; AKR1C6 is only a comparator, so this paper does not cover supplied Akr1c6.",
+          "redFlag": "wrong_gene",
+          "session": "liver-p25--r1",
+          "support": "no"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Enzymatic properties of a member (AKR1C20) of the aldo-keto reductase family.",
+          "program": "P25",
+          "rationale": "The experiment characterizes AKR1C20 and explicitly distinguishes it from AKR1C6; AKR1C6 is only a comparator, so this paper does not cover supplied Akr1c6.",
+          "redFlag": "paralog_only",
+          "session": "liver-p25--r1",
+          "support": "no"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Enzymatic properties of a member (AKR1C20) of the aldo-keto reductase family.",
+          "program": "P25",
+          "rationale": "The experiment characterizes AKR1C20 and explicitly distinguishes it from AKR1C6; AKR1C6 is only a comparator, so this paper does not cover supplied Akr1c6.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r1",
+          "support": "no"
+        },
+        {
+          "assessedContext": "indirect",
+          "declaredContext": "partial",
+          "paperTitle": "Peroxisome quality control and dysregulated lipid metabolism in neurodegenerative diseases.",
+          "program": "P25",
+          "rationale": "The review supports Lonp2 in peroxisome quality control, but not specifically fatty-acid oxidation, and its disease focus is neurodegeneration rather than liver.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "The Regulation of Steroid Action by Sulfation and Desulfation.",
+          "program": "P25",
+          "rationale": "The review supports steroid sulfation at the SULT2A family level, but only mentions the mouse Sult2a cluster in background and does not substantively assess supplied Sult2a7 or Akr1c6.",
+          "redFlag": "background_only",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Direct binding of triglyceride to fat storage-inducing transmembrane proteins 1 and 2 is important for lipid droplet formation.",
+          "program": "P25",
+          "rationale": "FITM1 is directly tested for triglyceride binding and lipid-droplet partitioning, including ectopic mouse-liver overexpression; endogenous expression is primarily muscle, so context is partial.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r1",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Non-canonical NRF2 activation promotes a pro-diabetic shift in hepatic glucose metabolism.",
+          "program": "P25",
+          "rationale": "The paper studies Sord and supports NRF2-dependent hepatic fructose metabolism under arsenic stress, but not Sord as a peroxisomal/fatty-acid-catabolism component in mechanism 2.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Non-canonical NRF2 activation promotes a pro-diabetic shift in hepatic glucose metabolism.",
+          "program": "P25",
+          "rationale": "The paper studies Sord and supports NRF2-dependent hepatic fructose metabolism under arsenic stress, but not Sord as a peroxisomal/fatty-acid-catabolism component in mechanism 2.",
+          "redFlag": "wrong_function",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Ontogeny of novel cytochrome P450 gene isoforms during postnatal liver maturation in mice.",
+          "program": "P25",
+          "rationale": "The abstract supports developmental profiling of the mouse Cyp2c cluster but does not identify Cyp2c50 specifically; missing abstract detail is not treated as negative evidence.",
+          "redFlag": "insufficient_text",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Interactions between hepatic Mrp4 and Sult2a as revealed by the constitutive androstane receptor and Mrp4 knockout mice.",
+          "program": "P25",
+          "rationale": "The study supports a hepatocyte Sult2a1/Mrp4 elimination pathway, but Sult2a1 is a paralog rather than supplied Sult2a5/7/8.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Interactions between hepatic Mrp4 and Sult2a as revealed by the constitutive androstane receptor and Mrp4 knockout mice.",
+          "program": "P25",
+          "rationale": "The study supports a hepatocyte Sult2a1/Mrp4 elimination pathway, but Sult2a1 is a paralog rather than supplied Sult2a5/7/8.",
+          "redFlag": "paralog_only",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Lipid Metabolism in Metabolic-Associated Steatotic Liver Disease (MASLD).",
+          "program": "P25",
+          "rationale": "The MASLD review directly supports dysregulated fatty-acid oxidation and DGAT2-driven lipid-droplet storage, but it does not study Fitm1, Hao2, or Eci2. This is useful pathway context, not supplied-gene evidence.",
+          "redFlag": "wrong_gene",
+          "session": "liver-p25--r1",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Fatty aldehyde dehydrogenase: potential role in oxidative stress protection and regulation of its gene expression by insulin.",
+          "program": "P25",
+          "rationale": "FALDH/Aldh3a2 is experimentally studied in rat liver and hepatocytes and supports insulin-responsive lipid-aldehyde detoxification; species and disease context are transferable rather than exact.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Senescence marker protein-30 (SMP30): structure and biological function.",
+          "program": "P25",
+          "rationale": "SMP30/regucalcin is the accepted Rgn alias; the rat hepatocyte evidence directly supports age-dependent decline, with partial species context.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r2",
+          "support": "supports"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "indirect",
+          "paperTitle": "Delta 3,delta 2-enoyl-CoA isomerases. Characterization of the mitochondrial isoenzyme in the rat.",
+          "program": "P25",
+          "rationale": "The rat-liver paper supports the relevant enoyl-CoA-isomerase activity and PPAR-like induction, but the cached text does not identify the enzyme as Eci2, so it cannot count as Eci2 coverage.",
+          "redFlag": "insufficient_text",
+          "session": "liver-p25--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Interactions between hepatic Mrp4 and Sult2a as revealed by the constitutive androstane receptor and Mrp4 knockout mice.",
+          "program": "P25",
+          "rationale": "The study supports Sult2a1/Mrp4 bile-acid sulfate elimination in hepatocytes, but Sult2a1 is not one of the supplied mouse Sult2a paralogs.",
+          "redFlag": "context_overclaim",
+          "session": "liver-p25--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "direct",
+          "paperTitle": "Interactions between hepatic Mrp4 and Sult2a as revealed by the constitutive androstane receptor and Mrp4 knockout mice.",
+          "program": "P25",
+          "rationale": "The study supports Sult2a1/Mrp4 bile-acid sulfate elimination in hepatocytes, but Sult2a1 is not one of the supplied mouse Sult2a paralogs.",
+          "redFlag": "paralog_only",
+          "session": "liver-p25--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "Effect of graded Nrf2 activation on phase-I and -II drug metabolizing enzymes and transporters in mouse liver.",
+          "program": "P25",
+          "rationale": "The graded mouse-liver Nrf2 experiment studies all five supplied genes and supports induction of Cyp2c50, Aldh1a1, and Gsta3; Akr1c6 and Aldh3a2 were measured but not induced, so the claimed shared module is only partial.",
+          "redFlag": "wrong_function",
+          "session": "liver-p25--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "partial",
+          "declaredContext": "partial",
+          "paperTitle": "Beta-oxidation of unsaturated fatty acids in humans. Isoforms of delta 3, delta 2-enoyl-CoA isomerase.",
+          "program": "P25",
+          "rationale": "The abstract supports hepatic mitochondrial/peroxisomal enoyl-CoA-isomerase activities, but does not identify Eci2, so strict supplied-gene coverage is not warranted.",
+          "redFlag": "insufficient_text",
+          "session": "liver-p25--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "HNF4α Regulates CSAD to Couple Hepatic Taurine Production to Bile Acid Synthesis in Mice.",
+          "program": "P25",
+          "rationale": "The mouse hepatocyte study causally supports bile-acid regulation of downstream CSAD and taurine production, but Cdo1 is only pathway background rather than a substantively studied supplied gene.",
+          "redFlag": "background_only",
+          "session": "liver-p25--r2",
+          "support": "partial"
+        },
+        {
+          "assessedContext": "direct",
+          "declaredContext": "direct",
+          "paperTitle": "HNF4α Regulates CSAD to Couple Hepatic Taurine Production to Bile Acid Synthesis in Mice.",
+          "program": "P25",
+          "rationale": "The mouse hepatocyte study causally supports bile-acid regulation of downstream CSAD and taurine production, but Cdo1 is only pathway background rather than a substantively studied supplied gene.",
+          "redFlag": "wrong_function",
+          "session": "liver-p25--r2",
+          "support": "partial"
+        }
+      ],
+      "reliability": [
+        {
+          "adjudicated": 25,
+          "agreementRate": 0.830189,
+          "disagreements": 25,
+          "doubleScored": 53,
+          "field": "assessed_context"
+        },
+        {
+          "adjudicated": 25,
+          "agreementRate": 0.830189,
+          "disagreements": 25,
+          "doubleScored": 53,
+          "field": "context_label_accuracy"
+        },
+        {
+          "adjudicated": 25,
+          "agreementRate": 0.811321,
+          "disagreements": 25,
+          "doubleScored": 53,
+          "field": "direction"
+        },
+        {
+          "adjudicated": 25,
+          "agreementRate": 0.962264,
+          "disagreements": 25,
+          "doubleScored": 53,
+          "field": "directness"
+        },
+        {
+          "adjudicated": 25,
+          "agreementRate": 0.90566,
+          "disagreements": 25,
+          "doubleScored": 53,
+          "field": "function_supported_genes"
+        },
+        {
+          "adjudicated": 25,
+          "agreementRate": 0.716981,
+          "disagreements": 25,
+          "doubleScored": 53,
+          "field": "red_flags"
+        },
+        {
+          "adjudicated": 25,
+          "agreementRate": 0.943396,
+          "disagreements": 25,
+          "doubleScored": 53,
+          "field": "studied_genes"
+        },
+        {
+          "adjudicated": 25,
+          "agreementRate": 0.716981,
+          "disagreements": 25,
+          "doubleScored": 53,
+          "field": "support"
+        }
+      ],
+      "repeat_stability": [
+        {
+          "case": "brain-p10",
+          "citationJaccard": 0.142857,
+          "coveredGeneJaccard": 0.888889,
+          "functionalGeneJaccard": 0.777778,
+          "leftRun": "brain-p10--r1",
+          "rightRun": "brain-p10--r2"
+        },
+        {
+          "case": "brain-p11",
+          "citationJaccard": 0.1,
+          "coveredGeneJaccard": 0.6,
+          "functionalGeneJaccard": 0.4,
+          "leftRun": "brain-p11--r1",
+          "rightRun": "brain-p11--r2"
+        },
+        {
+          "case": "liver-p21",
+          "citationJaccard": 0.107143,
+          "coveredGeneJaccard": 0.764706,
+          "functionalGeneJaccard": 0.764706,
+          "leftRun": "liver-p21--r1",
+          "rightRun": "liver-p21--r2"
+        },
+        {
+          "case": "liver-p25",
+          "citationJaccard": 0.129032,
+          "coveredGeneJaccard": 0.538462,
+          "functionalGeneJaccard": 0.5,
+          "leftRun": "liver-p25--r1",
+          "rightRun": "liver-p25--r2"
+        }
+      ],
+      "session_coverage": [
+        {
+          "case": "brain-p10",
+          "citationCoverage": 0.391304,
+          "citedGenes": 9,
+          "contextOverclaim": 0.708333,
+          "flagInstances": 20,
+          "flaggedLinkRate": 0.75,
+          "flaggedLinks": 18,
+          "functionCoverage": 0.391304,
+          "functionalGenes": 9,
+          "linkCount": 24,
+          "program": "P10",
+          "session": "brain-p10--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 23
+        },
+        {
+          "case": "brain-p10",
+          "citationCoverage": 0.347826,
+          "citedGenes": 8,
+          "contextOverclaim": 0.0,
+          "flagInstances": 3,
+          "flaggedLinkRate": 0.12,
+          "flaggedLinks": 3,
+          "functionCoverage": 0.304348,
+          "functionalGenes": 7,
+          "linkCount": 25,
+          "program": "P10",
+          "session": "brain-p10--r2",
+          "suppliedGenes": 23,
+          "uniqueCitations": 25
+        },
+        {
+          "case": "brain-p11",
+          "citationCoverage": 0.217391,
+          "citedGenes": 5,
+          "contextOverclaim": 0.333333,
+          "flagInstances": 9,
+          "flaggedLinkRate": 0.5,
+          "flaggedLinks": 9,
+          "functionCoverage": 0.217391,
+          "functionalGenes": 5,
+          "linkCount": 18,
+          "program": "P11",
+          "session": "brain-p11--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 18
+        },
+        {
+          "case": "brain-p11",
+          "citationCoverage": 0.130435,
+          "citedGenes": 3,
+          "contextOverclaim": 0.5,
+          "flagInstances": 10,
+          "flaggedLinkRate": 0.5625,
+          "flaggedLinks": 9,
+          "functionCoverage": 0.086957,
+          "functionalGenes": 2,
+          "linkCount": 16,
+          "program": "P11",
+          "session": "brain-p11--r2",
+          "suppliedGenes": 23,
+          "uniqueCitations": 15
+        },
+        {
+          "case": "brain-p8",
+          "citationCoverage": 0.304348,
+          "citedGenes": 7,
+          "contextOverclaim": 0.045455,
+          "flagInstances": 1,
+          "flaggedLinkRate": 0.045455,
+          "flaggedLinks": 1,
+          "functionCoverage": 0.304348,
+          "functionalGenes": 7,
+          "linkCount": 22,
+          "program": "P8",
+          "session": "brain-p8--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 22
+        },
+        {
+          "case": "brain-p9",
+          "citationCoverage": 0.217391,
+          "citedGenes": 5,
+          "contextOverclaim": 0.428571,
+          "flagInstances": 10,
+          "flaggedLinkRate": 0.571429,
+          "flaggedLinks": 8,
+          "functionCoverage": 0.173913,
+          "functionalGenes": 4,
+          "linkCount": 14,
+          "program": "P9",
+          "session": "brain-p9--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 14
+        },
+        {
+          "case": "liver-p20",
+          "citationCoverage": 0.26087,
+          "citedGenes": 6,
+          "contextOverclaim": 0.111111,
+          "flagInstances": 2,
+          "flaggedLinkRate": 0.111111,
+          "flaggedLinks": 2,
+          "functionCoverage": 0.26087,
+          "functionalGenes": 6,
+          "linkCount": 18,
+          "program": "P20",
+          "session": "liver-p20--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 18
+        },
+        {
+          "case": "liver-p21",
+          "citationCoverage": 0.73913,
+          "citedGenes": 17,
+          "contextOverclaim": 0.5,
+          "flagInstances": 13,
+          "flaggedLinkRate": 0.6875,
+          "flaggedLinks": 11,
+          "functionCoverage": 0.73913,
+          "functionalGenes": 17,
+          "linkCount": 16,
+          "program": "P21",
+          "session": "liver-p21--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 16
+        },
+        {
+          "case": "liver-p21",
+          "citationCoverage": 0.565217,
+          "citedGenes": 13,
+          "contextOverclaim": 0.133333,
+          "flagInstances": 7,
+          "flaggedLinkRate": 0.375,
+          "flaggedLinks": 6,
+          "functionCoverage": 0.565217,
+          "functionalGenes": 13,
+          "linkCount": 16,
+          "program": "P21",
+          "session": "liver-p21--r2",
+          "suppliedGenes": 23,
+          "uniqueCitations": 15
+        },
+        {
+          "case": "liver-p22",
+          "citationCoverage": 0.391304,
+          "citedGenes": 9,
+          "contextOverclaim": 0.045455,
+          "flagInstances": 3,
+          "flaggedLinkRate": 0.090909,
+          "flaggedLinks": 2,
+          "functionCoverage": 0.391304,
+          "functionalGenes": 9,
+          "linkCount": 22,
+          "program": "P22",
+          "session": "liver-p22--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 22
+        },
+        {
+          "case": "liver-p23",
+          "citationCoverage": 0.26087,
+          "citedGenes": 6,
+          "contextOverclaim": 0.222222,
+          "flagInstances": 11,
+          "flaggedLinkRate": 0.555556,
+          "flaggedLinks": 10,
+          "functionCoverage": 0.217391,
+          "functionalGenes": 5,
+          "linkCount": 18,
+          "program": "P23",
+          "session": "liver-p23--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 18
+        },
+        {
+          "case": "liver-p24",
+          "citationCoverage": 0.391304,
+          "citedGenes": 9,
+          "contextOverclaim": 0.352941,
+          "flagInstances": 6,
+          "flaggedLinkRate": 0.352941,
+          "flaggedLinks": 6,
+          "functionCoverage": 0.391304,
+          "functionalGenes": 9,
+          "linkCount": 17,
+          "program": "P24",
+          "session": "liver-p24--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 17
+        },
+        {
+          "case": "liver-p25",
+          "citationCoverage": 0.391304,
+          "citedGenes": 9,
+          "contextOverclaim": 0.4,
+          "flagInstances": 17,
+          "flaggedLinkRate": 0.55,
+          "flaggedLinks": 11,
+          "functionCoverage": 0.347826,
+          "functionalGenes": 8,
+          "linkCount": 20,
+          "program": "P25",
+          "session": "liver-p25--r1",
+          "suppliedGenes": 23,
+          "uniqueCitations": 20
+        },
+        {
+          "case": "liver-p25",
+          "citationCoverage": 0.478261,
+          "citedGenes": 11,
+          "contextOverclaim": 0.2,
+          "flagInstances": 9,
+          "flaggedLinkRate": 0.466667,
+          "flaggedLinks": 7,
+          "functionCoverage": 0.434783,
+          "functionalGenes": 10,
+          "linkCount": 15,
+          "program": "P25",
+          "session": "liver-p25--r2",
+          "suppliedGenes": 23,
+          "uniqueCitations": 15
+        }
+      ],
+      "summary": [
+        {
+          "context_overclaim_rate": 0.276923,
+          "contradiction_rate": 0.015326,
+          "exact_agreement_rate": 0.528302,
+          "mean_citation_coverage": 0.36335392857142856,
+          "mean_function_supported_coverage": 0.3447204285714286,
+          "red_flag_count": 121,
+          "red_flagged_link_count": 103,
+          "red_flagged_link_rate": 0.394636,
+          "review_link_count": 261,
+          "session_count": 14,
+          "supportive_link_rate": 0.965517,
+          "unique_paper_count": 236
+        }
+      ]
+    },
+    "generatedAt": "2026-07-22T10:24:10.188878Z",
+    "status": "ready",
+    "version": 1
+  },
+  "sources": [
+    {
+      "id": "metrics",
+      "label": "Reference-quality summary query",
+      "path": "sources/summary.sql"
+    },
+    {
+      "id": "sessions",
+      "label": "Per-session coverage query",
+      "path": "sources/session_coverage.sql"
+    },
+    {
+      "id": "programs",
+      "label": "Per-program coverage query",
+      "path": "sources/program_coverage.sql"
+    },
+    {
+      "id": "flags",
+      "label": "Citation red-flag query",
+      "path": "sources/red_flags.sql"
+    },
+    {
+      "id": "repeats",
+      "label": "Repeat-run stability query",
+      "path": "sources/repeat_stability.sql"
+    },
+    {
+      "id": "reliability",
+      "label": "Double-score reliability query",
+      "path": "sources/reliability.sql"
+    }
+  ],
+  "surface": "report"
+}

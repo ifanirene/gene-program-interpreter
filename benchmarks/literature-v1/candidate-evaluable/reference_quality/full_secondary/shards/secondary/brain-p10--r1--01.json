@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-083bfff9d0a161756d80",
+    "RL-0e92bfb5cf811a272d0a",
+    "RL-10594afcdb966e3bbc7a",
+    "RL-183470d687b7b5380f8a"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 35229,
+        "source_type": "full_text",
+        "start": 34953,
+        "text": "In contrast, in Tbc1d32bromi (Figure 3U–Ub) and Ift88 cKO (Figure 3V–Vb) mutants, MYO7A immunoreactivity was detected in the apical cochlea, but not in the base. Such reversal of the HC differentiation wave has only been reported in mutants in which SHH signaling is disrupted"
+      },
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "rationale": "Tbc1d32 mutation produces a developmental phenotype associated with disrupted SHH signaling. Embryonic cochlea is indirect to postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-083bfff9d0a161756d80",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 802,
+        "source_type": "abstract",
+        "start": 704,
+        "text": "Nme7(-/-) mice (for: nonmetastatic cells 7) had lesions consistent with deficient ciliary motility"
+      },
+      "function_supported_genes": [],
+      "rationale": "Nme7 knockout supports a motile-cilia phenotype but does not assess ciliary GPCR trafficking or Hedgehog signaling. It therefore provides only broader ciliary support for this mechanism.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-0e92bfb5cf811a272d0a",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 36339,
+        "source_type": "full_text",
+        "start": 36267,
+        "text": "in E14.5 Tbc1d32bromi cochlea, most precursor cells lacked primary cilia"
+      },
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "rationale": "The Tbc1d32 mutant directly causes a strong ciliogenesis defect in embryonic cochlear cells. This supports the assembly mechanism in an indirect tissue and developmental context.",
+      "red_flags": [],
+      "review_id": "RL-10594afcdb966e3bbc7a",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3674,
+        "source_type": "full_text",
+        "start": 3598,
+        "text": "knocking out CHCHD6 results in abnormal cristae with reduced cristae content"
+      },
+      "function_supported_genes": [
+        "Chchd6"
+      ],
+      "rationale": "CHCHD6 knockout directly alters mitochondrial cristae architecture. HeLa cells are an indirect context for mouse postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-183470d687b7b5380f8a",
+      "studied_genes": [
+        "Chchd6"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 164352,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 188698,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 6267,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 132.596
+  }
+}

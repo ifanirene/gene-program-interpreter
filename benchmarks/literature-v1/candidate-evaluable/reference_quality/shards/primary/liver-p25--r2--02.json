@@ -1,0 +1,217 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-9bb58929218910003e0f",
+    "RL-9fde2b6915b63651244f",
+    "RL-aa43395cb1c6b9bfed78",
+    "RL-ad3d7fb8300108d2a609",
+    "RL-b17aae18064317b9f2c8",
+    "RL-c487a62e550988549c0e",
+    "RL-d42354d63977c0f3f9f8",
+    "RL-d80a25883afb7304cfa8"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4729,
+        "source_type": "full_text",
+        "start": 4591,
+        "text": "PSMD1 and PSMD2 inhibition suppressed fatty acid and lipid synthesis by downregulating SREBF1 and PPARγ via ASK-p38-JNK and AKT signaling."
+      },
+      "function_supported_genes": [
+        "Psmd1"
+      ],
+      "rationale": "Knockdown/overexpression of PSMD1 in HepG2 cells directly modulates lipid droplet number/size via p38-JNK and AKT signaling, exactly matching the mechanism's PSMD1 claim. Human hepatoma cell line rather than primary hepatocyte context, correctly declared indirect.",
+      "red_flags": [],
+      "review_id": "RL-9bb58929218910003e0f",
+      "studied_genes": [
+        "Psmd1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 717,
+        "source_type": "abstract",
+        "start": 542,
+        "text": "We found that bile acids strongly inhibited the cysteine dioxygenase type-1-mediated (CDO1-mediated) cysteine catabolic pathway via a farnesoid X receptor-dependent mechanism."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "Perturbation (cholestyramine feeding, CDO1-overexpressing hepatocytes) in mouse liver directly demonstrates FXR-dependent bile acid control of the CDO1 cysteine catabolic pathway, matching the mechanism's claim exactly. Context is direct mouse hepatocyte biology.",
+      "red_flags": [],
+      "review_id": "RL-9fde2b6915b63651244f",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "underclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 166,
+        "source_type": "full_text",
+        "start": 33,
+        "text": "fatty aldehyde dehydrogenase (EC 1.2.1.48) converts long-chain fatty aldehydes to the corresponding acid in an NAD-dependent reaction"
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "Biochemical enzyme assays (rat liver microsomes, plus direct measurement of activity in C57BL/6 mouse liver tissue) establish Aldh3a2/FALDH oxidation of long-chain fatty aldehydes in liver, matching the mechanism claim. Mouse liver tissue data are present, so the declared 'partial' context understates the directness available.",
+      "red_flags": [],
+      "review_id": "RL-aa43395cb1c6b9bfed78",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "underclaimed",
+      "direction": "not_applicable",
+      "directness": "observational",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "This paper studies mouse Sult2a1, not the supplied Sult2a5/Sult2a7/Sult2a8 genes; paralog-only evidence does not count as gene-specific support under the protocol. Tissue/species (mouse liver) context is actually direct, understated by the declared 'partial' label.",
+      "red_flags": [
+        "wrong_gene",
+        "paralog_only"
+      ],
+      "review_id": "RL-ad3d7fb8300108d2a609",
+      "studied_genes": [],
+      "support": "no"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 647,
+        "source_type": "abstract",
+        "start": 513,
+        "text": "A recent study identified mouse cytosolic sulfotransferase 2A8 (mSULT2A8) as the major hepatic 7α-hydroxyl bile acid-sulfating enzyme."
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "Structural/biochemical characterization of mouse SULT2A8 directly establishes its role as the major hepatic 7α-hydroxyl bile-acid sulfating enzyme, exactly matching the mechanism claim. Context is direct mouse liver enzyme biology.",
+      "red_flags": [],
+      "review_id": "RL-b17aae18064317b9f2c8",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 955,
+        "source_type": "abstract",
+        "start": 776,
+        "text": "showing evidence of impaired provision of bicarbonate to the four enzymes that participate in key pathways in intermediary metabolism: carbamoylphosphate synthetase 1 (urea cycle)"
+      },
+      "function_supported_genes": [
+        "Car5a"
+      ],
+      "rationale": "Human loss-of-function CA5A mutations directly demonstrate the enzyme's necessity for bicarbonate supply to CPS1 in the urea cycle, matching the mechanism claim. This is a human clinical genetics study, a species change from the mouse target, so 'indirect' rather than the declared 'partial' better reflects the cross-species context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-c487a62e550988549c0e",
+      "studied_genes": [
+        "Car5a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1192,
+        "source_type": "abstract",
+        "start": 1095,
+        "text": "the levels of transcript and protein decreased significantly in the liver and kidney of aged rats"
+      },
+      "function_supported_genes": [
+        "Rgn"
+      ],
+      "rationale": "Developmental/aging expression profiling in rat liver directly shows SMP30/regucalcin transcript and protein decline with aging, matching the mechanism's claim about Rgn as an aging marker. Rat rather than mouse is a species difference, which per protocol is 'indirect' context rather than the declared 'partial'.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-d42354d63977c0f3f9f8",
+      "studied_genes": [
+        "Rgn"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 850,
+        "source_type": "abstract",
+        "start": 756,
+        "text": "Downregulation of Hao2 was observed in all investigated rodent models of hepatocarcinogenesis."
+      },
+      "function_supported_genes": [
+        "Hao2"
+      ],
+      "rationale": "Multiple mouse hepatocarcinogenesis models plus a functional rescue experiment (Hao2 re-expression impairing tumorigenicity) directly support the mechanism's claim that Hao2 is downregulated in hepatocarcinogenesis. Mouse liver models make the direct context declaration accurate.",
+      "red_flags": [],
+      "review_id": "RL-d80a25883afb7304cfa8",
+      "studied_genes": [
+        "Hao2"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5407945000000001,
+    "duration_api_ms": 206041,
+    "duration_ms": 204341,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 205.399
+  }
+}

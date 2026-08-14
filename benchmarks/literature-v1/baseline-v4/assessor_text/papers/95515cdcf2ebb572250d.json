@@ -1,0 +1,16 @@
+{
+  "content_hash": "fa548bc1d1784d8af677a18cf91131d798dae15dc3d5dd84c69484242ce5e373",
+  "doi": "10.1038/s41388-019-0786-6",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "95515cdcf2ebb572250d",
+  "pmcid": "PMC6597267",
+  "pmid": "30918328",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Angiogenesis is critical to cancer development and metastasis. However, anti-angiogenic agents have only had modest therapeutic success, partly due to an incomplete understanding of tumor endothelial cell (EC) biology. We previously reported that the microRNA (miR)-200 family inhibits metastasis through regulation of tumor angiogenesis, but the underlying molecular mechanisms are poorly characterized. Here, using integrated bioinformatics approaches, we identified the RNA-binding protein (RBP) quaking (QKI) as a leading miR-200b endothelial target with previously unappreciated roles in the tumor microenvironment in lung cancer. In lung cancer samples, both miR-200b suppression and QKI overexpression corresponded with tumor ECs relative to normal ECs, and QKI silencing phenocopied miR-200b-mediated inhibition of sprouting. Additionally, both cancer cell and endothelial QKI expression in patient samples significantly corresponded with poor survival and correlated with angiogenic indices. QKI supported EC function by stabilizing cyclin D1 (CCND1) mRNA to promote EC G1/S cell cycle transition and proliferation. Both nanoparticle-mediated RNA interference of endothelial QKI expression and palbociclib blockade of CCND1 function potently inhibited metastasis in concert with significant effects on tumor vasculature. Altogether, this work demonstrates the clinical relevance and therapeutic potential of a novel, actionable miR/RBP axis in tumor angiogenesis and metastasis.",
+  "text_type": "abstract",
+  "title": "Quaking orchestrates a post-transcriptional regulatory network of endothelial cell cycle progression critical to angiogenesis and metastasis."
+}

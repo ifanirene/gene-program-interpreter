@@ -1,0 +1,15 @@
+{
+  "approval_file_sha256": "3b1435d76a8a2d40a82aa593ac56184c47b1f234598155730d5d86c233499417",
+  "approved": true,
+  "approved_at": "2026-07-22T15:24:00-07:00",
+  "approved_by": "workspace user (standing subscription research authorization; generous limits authorized)",
+  "auth_preflight": {
+    "api_provider": "firstParty",
+    "auth_method": "claude.ai",
+    "command_exit_code": 0,
+    "logged_in": true
+  },
+  "benchmark_id": "literature-v1",
+  "max_api_equivalent_usd": 40.0,
+  "run_dir": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/candidate-final"
+}

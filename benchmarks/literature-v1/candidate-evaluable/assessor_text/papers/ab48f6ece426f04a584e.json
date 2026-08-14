@@ -1,0 +1,14 @@
+{
+  "content_hash": "3e03a4de03a61224ecc330b37aa36f97d14d3b95ea6db31afb46bb306bdf20fd",
+  "doi": "10.1007/s11248-020-00215-w",
+  "errors": [],
+  "paper_key": "ab48f6ece426f04a584e",
+  "pmcid": null,
+  "pmid": "33029720",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "SULT2A8 is a male-predominant and liver-specific mouse cytosolic sulfotransferase (SULT) that sulfonates 7\u03b1-hydroxyl (7\u03b1-OH) bile acids in vitro. Sulfonation regulates bile acid homeostasis, which in turn regulates cholesterol and energy metabolism. Using the Sult2a8-heterozygous (HT) mouse model created earlier in our laboratory, we aimed to investigate the physiological role of SULT2A8 in sulfonating 7\u03b1-OH bile acids and its impact on energy metabolism in vivo under both fed and energy-deprivation conditions. Disruption of one allele of the Sult2a8 gene in male HT mice resulted in losing ~ 50% of the 7\u03b1-OH sulfonating activity compared to wild-type (WT) control, but no significant change in female HT mice. Under the fed condition comparing the levels of hepatic and biliary bile acids as well as plasma/serum energy metabolites, HT mice displayed a profile similar to that of WT mice, suggesting that the Sult2a8-haplodeficient mice conducted normal energy metabolism. However, after 48-h fasting, a significant decrease in plasma cholesterol level was found in male HT mice but without any significant reduction in female HT mice. Of interest, in male Sult2a8-haplodeficient mice, an increase of the hepatic taurine-conjugated cholic acid level was noted but no noticeable change in other tested bile acids after fasting. Taken together, SULT2A8 is a male-specific and key hepatic SULT in metabolizing 7\u03b1-OH primary bile acids. During energy deprivation, SULT2A8 is required to maintain the bile acid and cholesterol metabolism, suggesting SULT is a potential therapeutic target for controlling metabolic diseases.",
+  "text_type": "abstract",
+  "title": "Male-biased fasting-induced changes in hepatic tauro-cholic acid and plasma cholesterol in Sult2a8-haplodeficient mice."
+}

@@ -1,0 +1,46 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-liver-p21-r1",
+    "assessor_id": "annotation-primary-sonnet-high-20260722",
+    "candidate_additions": [
+      "Rdh11 introduced as a novel SREBP2-regulated hepatocyte cholesterol-homeostasis gene (induced by statins, reduced by high-fat/cholesterol diet, co-regulated with Hmgcr/Ldlr) — a gene not mentioned anywhere in the baseline",
+      "Erg28 given an explicit functional assignment as the non-catalytic scaffold of the C4-demethylation complex, SREBP2 co-regulated, whose loss impairs SREBP2 activation (baseline only listed Erg28 as a supporting gene without functional detail)",
+      "Four distinctive genes (Ddr2, Cetn2, Zfp839, Tas2r138) explicitly flagged as having no retrieved evidence linking them to the pathway",
+      "Gene-specific phenotype evidence added: hepatocyte Cyp51 knockout causes liver injury/oval-cell response/fibrosis; Tm7sf2 deficiency causes lipid accumulation and ER stress in regenerating liver",
+      "Mechanistic detail that Acss2 acts independently of Acly and that dual Acss2+Acly inhibition is needed to suppress hepatic lipogenesis",
+      "Mechanistic detail on Mttp-Acat2 interaction: Mttp relieves product inhibition of Acat2-mediated cholesteryl ester synthesis, linking esterification to VLDL export",
+      "Quantitative detail that Scap knockout reduces hepatic cholesterol synthesis by ~80%",
+      "MASLD/NASH-specific detail that dysregulated Scap:Insig1 ratios drive free cholesterol accumulation"
+    ],
+    "candidate_removed_or_weakened": [
+      "Baseline's broader 'aging and MASLD' framing for the Dgat2/Mttp coupling mechanism is narrowed in the candidate to MASLD/NASH context only, dropping the aging reference"
+    ],
+    "core_interpretation_changed": false,
+    "decision_relevant_differences": [
+      "Rdh11 as a newly asserted SREBP2 target gene could prompt follow-up validation or inclusion in the gene program that baseline did not suggest",
+      "Erg28's clarified mechanistic role (scaffold vs. undefined supporting gene) changes how a reader would prioritize it for functional follow-up",
+      "Explicit non-evidence flag for Ddr2/Cetn2/Zfp839/Tas2r138 helps a reader triage which distinctive genes still need investigation, which baseline left implicit"
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations converge on the same central biological story: P21 is the hepatic de novo cholesterol biosynthesis pathway under SCAP/INSIG1-SREBP2 transcriptional control, balanced against Ldlr-mediated uptake, fed by Acss2-derived acetyl-CoA, and coupled to Dgat2/Mttp-driven VLDL-TG export in the MASLD context. No mechanism, direction, or regulatory relationship is reversed or contradicted. The candidate's value-add is (1) a new gene-function claim (Rdh11 as an SREBP2 target), (2) a specific mechanistic role for Erg28 that was previously just a listed gene, (3) explicit acknowledgment of unexplained distinctive genes, and (4) denser gene-specific and context-specific literature support (KO phenotypes, Acss2/Acly relationship, Mttp-Acat2 interaction, quantitative Scap effect size). These are meaningful refinements and gene-function assignments layered onto an unchanged core interpretation, not a change in the program's biological identity or the direction of any regulatory effect.",
+    "semantic_relation": "same_core_with_meaningful_refinement",
+    "shared_core_conclusions": [
+      "P21 is the near-complete mevalonate-pathway/post-squalene de novo cholesterol biosynthesis program in mouse hepatocytes (Hmgcs1 through Dhcr7, plus Acat2 esterification)",
+      "Program transcription is gated by the SCAP/INSIG1-SREBP2 sterol-sensing feedback circuit: Scap knockout abrogates the program, Insig1 knockout hyperactivates it",
+      "Ldlr knockout drives compensatory upregulation of de novo synthesis, forming the uptake/synthesis balance limb",
+      "Acss2 supplies acetyl-CoA substrate for the pathway",
+      "Dgat2 and Mttp couple cholesterol synthesis to VLDL-triglyceride assembly/export, relevant to hepatic lipid handling in MASLD"
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.0910319,
+    "duration_api_ms": 43954,
+    "duration_ms": 40874,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 42.668
+  }
+}

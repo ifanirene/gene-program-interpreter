@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "liver-p25--baseline-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 1.0
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.95
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.85
+      }
+    ],
+    "moduleSemanticSimilarity": 0.933333,
+    "overall_rationale": "This is a strong baseline replicate: modules 1 and 2 are near-identical restatements of the same detoxification and lipid-catabolism gene programs, module 3 shares the same Cdo1-centered sulfur/nitrogen disposal core with added refinements in the right replicate, and cross-pairs show only weak, mechanistically unrelated gene/regulator overlaps.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Nearly identical Phase I/II detoxification gene sets (Sult2a5/7/8, Gsta3, Akr1c6, Aldh1a1, Cyp2c50) with the same bile acid/steroid conjugation-excretion mechanism and shared Tpst1 regulator.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 1.0
+      },
+      {
+        "left_module": 1,
+        "rationale": "Shares only the aldehyde-clearing gene Aldh3a2 but the core mechanisms differ sharply: conjugation/excretion detoxification versus peroxisomal fatty acid beta-oxidation.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 1,
+        "rationale": "Both are hepatocyte metabolic programs sharing the Insig1 regulator, but xenobiotic/steroid detoxification and cysteine/taurine catabolism are unrelated core mechanisms.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 2,
+        "rationale": "Shares the Cyb5b gene and Abcg5 regulator, but lipid droplet/peroxisomal fatty acid handling is mechanistically distinct from Phase I/II xenobiotic-steroid conjugation.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.3
+      },
+      {
+        "left_module": 2,
+        "rationale": "Nearly identical gene sets (Fitm1, Hao2, Eci2, Aldh3a2, Lonp2) and Dgat2 regulator describe the same peroxisomal/ER fatty acid catabolism and lipid droplet biogenesis mechanism.",
+        "relationship": "same_core",
+        "right_module": 2,
+        "similarity": 0.95
+      },
+      {
+        "left_module": 2,
+        "rationale": "Shares only the Sord gene; peroxisomal lipid oxidation and sulfur amino acid/taurine catabolism are unrelated core processes.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "Minimal gene/regulator overlap and no shared mechanism between nitrogen/sulfur amino acid disposal and xenobiotic Phase I/II detoxification.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 3,
+        "rationale": "No meaningful gene or mechanistic overlap between urea-cycle/sulfur amino acid catabolism and peroxisomal fatty acid oxidation.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both center on Cdo1-driven cysteine-to-taurine catabolism feeding urea/polyamine disposal (Agmat, Car5a) with shared G6pc/Insr regulators, while the right module adds an aging (Rgn) and glucose-homeostasis refinement.",
+        "relationship": "meaningful_refinement",
+        "right_module": 3,
+        "similarity": 0.85
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.091691,
+    "duration_api_ms": 41202,
+    "duration_ms": 39156,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 40.16
+  }
+}

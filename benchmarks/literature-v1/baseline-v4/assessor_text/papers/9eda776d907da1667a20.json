@@ -1,0 +1,16 @@
+{
+  "content_hash": "471f1d6cd1ea8cf0f8b096e772462d50fbf2bc288a20d4c8fd1b40b15c83d6e0",
+  "doi": "10.1152/ajpheart.00732.2023",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "9eda776d907da1667a20",
+  "pmcid": "PMC11482249",
+  "pmid": "39212765",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Hypertension is associated with decreased endothelial function through reduced contributions of nitric oxide (NO). We previously discovered that flow-induced NO production in resistance arteries of mice and humans critically depends on endothelial inwardly rectifying K+ (Kir2.1) channels. The goal of this study was to establish whether these channels contribute to the impairment of endothelial function, measured by flow-induced vasodilation (FIV) in peripheral resistance arteries of humans with hypertension. We measured FIV in vessels isolated from subcutaneous fat biopsies from 32 subjects: normotensive [n = 19; 30.6 \u00b1 9.8 yr old; systolic blood pressure (SBP): 115.2 \u00b1 7 mmHg; diastolic blood pressure (DBP): 75.3 \u00b1 5.7 mmHg] and hypertensive (n = 13; 45.3 \u00b1 15.3 yr old; SBP: 146.1 \u00b1 15.2 mmHg; DBP: 94.4 \u00b1 6.9 mmHg). Consistent with previous studies, we find that FIV is impaired in hypertensive adults as demonstrated by a significant reduction in FIV when compared with the normotensive adults. Furthermore, our data suggest that the impairment of FIV in hypertensive adults is partially attributed to a reduction in Kir2.1-dependent vasodilation. Specifically, we show that blocking Kir2.1 with ML133 or functionally downregulating Kir2.1 with endothelial-specific adenoviral vector containing dominant-negative Kir2.1 (dnKir2.1) result in a significant reduction in FIV in normotensive subjects but with a smaller effect in hypertensive adults. The Kir2.1-dependent vasodilation was negatively correlated to both SBP and DBP, indicating that the Kir2.1 contribution to FIV decreases as blood pressure increases. In addition, we show that exposing vessels from normotensive adults to acute high-pressure results in loss of Kir2.1 contribution, as high pressure impairs vasodilation. No effect is seen when these vessels were incubated with dnKir2.1. Overexpressing wtKir2.1 in the endothelium resulted in some improvement in vasodilation in arteries from all participants, with a greater recovery in hypertensive adults. Our data suggest that hypertension-induced suppression of Kir2.1 is an important mechanism underlying endothelial dysfunction in hypertension.NEW & NOTEWORTHY Impairment of endothelial function under high blood pressure is linked to the loss of inwardly rectifying K+ (Kir2.1) channels activity in human resistance arteries, leading to a reduction in flow-induced vasodilation and possibly leading to a vicious cycle between elevation of blood pressure, and further impairment of Kir2.1 function and flow-induced vasodilation.",
+  "text_type": "abstract",
+  "title": "Impairment of microvascular endothelial Kir2.1 channels contributes to endothelial dysfunction in human hypertension."
+}

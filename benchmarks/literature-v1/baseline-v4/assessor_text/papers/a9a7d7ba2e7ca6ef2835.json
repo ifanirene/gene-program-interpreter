@@ -1,0 +1,14 @@
+{
+  "content_hash": "ecbd53abf2ce60c8655b0ad103462e49b39fddea3c1f27ecf8f12789db3680a6",
+  "doi": "10.1124/dmd.108.026179",
+  "errors": [],
+  "paper_key": "a9a7d7ba2e7ca6ef2835",
+  "pmcid": null,
+  "pmid": "19237511",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Basal as well as xenobiotic-induced expression of the main enzymes from phase I and phase II of drug metabolism is confined to the perivenous areas of the mammalian liver lobule. Whereas signal transduction pathways that govern xenobiotic-induced expression of these enzymes via ligand-activated transcription factors such as constitutive androstane receptor (CAR) or the aryl hydrocarbon receptor (AhR) have been intensively studied, the mechanisms regulating zone-specific basal expression of genes related to drug metabolism and preferential response of perivenous hepatocytes to xenobiotic inducers are still largely unknown. Recent publications by our and other groups point to an important role for the Wnt/beta-catenin pathway in the maintenance of the perivenous hepatocyte gene expression profile including the main hepatic detoxification enzymes, and beta-catenin signaling was recently implicated in the expression of several cytochrome P450 isoenzymes. To analyze, whether the beta-catenin pathway would also affect inducible expression of drug-metabolizing enzymes, mice with liver-specific knockout of the Ctnnb1 gene (encoding beta-catenin) were treated with different model inducers of xenobiotic metabolism. Knockout of beta-catenin led to alterations in basal expression of most drug metabolism-related genes analyzed and resulted in strongly diminished responses to agonists of CAR-, AhR-, and nuclear factor erythroid-related factor 2-dependent transcription. Taken together, the data presented in this study indicate that beta-catenin not only regulates basal expression of drug-metabolizing enzymes but also determines the magnitude and hepatic localization of response to xenobiotic inducers in vivo.",
+  "text_type": "abstract",
+  "title": "Inducibility of drug-metabolizing enzymes by xenobiotics in mice with liver-specific knockout of Ctnnb1."
+}

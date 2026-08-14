@@ -1,0 +1,16 @@
+{
+  "content_hash": "e060e6d2c8a0064abcd7cb3eac1b55fa4c239a2b777b2e42de84589b61f1c6b2",
+  "doi": "10.1038/labinvest.2015.29",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "dad5449fb3d3a2d4b9a8",
+  "pmcid": "PMC6331008",
+  "pmid": "25686096",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Oxygen (O2) is required for cytochrome P450 (CYP)-dependent drug metabolism. Cytoglobin (CYGB) is a unique globin expressed exclusively in hepatic stellate cells (HSCs). However, its role in O2-dependent metabolism in neighboring hepatocytes remains unknown. This study provides evidence that CYGB in HSCs is involved in acetaminophen (N-acetyl-p-aminophenol; APAP)-induced hepatotoxicity. Serum alanine aminotransferase levels were higher in wild-type mice than in Cygb-null mice. Wild-type mice exhibited more severe hepatocyte necrosis around the central vein area compared with Cygb-null mice, thus indicating that CYGB deficiency protects against APAP-induced liver damage. Although no difference in the hepatic expression of CYP2E1, a key enzyme involved in APAP toxicity, was observed between wild-type and Cygb-null mice, the serum levels of the APAP metabolites cysteinyl-APAP and N-acetyl-cysteinyl-APAP were decreased in Cygb-null mice, suggesting reduced APAP metabolism in the livers of Cygb-null mice. In primary cultures, APAP-induced hepatocyte damage was increased by co-culturing with wild-type HSCs but not with Cygb-null HSCs. In addition, cell damage was markedly alleviated under low O2 condition (5% O2), suggesting the requirement of O2 for APAP toxicity. Carbon tetrachloride-induced liver injury (CYP2E1-dependent), but not lipopolysaccharide/D-galactosamine-induced injury (CYP2E1-independent), was similarly alleviated in Cygb-null mice. Considering the function of CYGB as O2 carrier, these results strongly support the hypothesis that HSCs are involved in the CYP2E1-mediated xenobiotic activation by augmenting O2 supply to hepatocytes. In conclusion, CYGB in HSCs contributes to the CYP-mediated metabolism of xenobiotics in hepatocytes by supplying O2 for enzymatic oxidation.",
+  "text_type": "abstract",
+  "title": "Involvement of hepatic stellate cell cytoglobin in acute hepatocyte damage through the regulation of CYP2E1-mediated xenobiotic metabolism."
+}

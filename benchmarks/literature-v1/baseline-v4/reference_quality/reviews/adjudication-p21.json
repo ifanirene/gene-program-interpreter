@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "assessor_type": "model",
+  "assessor_id": "codex-adjudicator-p21",
+  "reviews": [
+    {
+      "review_id": "RL-242b5a9c5abc75abc94d",
+      "assessor_id": "codex-adjudicator-p21",
+      "support": "partial",
+      "studied_genes": [
+        "Hmgcs1",
+        "Cyp51",
+        "Fdps",
+        "Acat2",
+        "Mvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Lss",
+        "Nsdhl",
+        "Dhcr7"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Cyp51",
+        "Fdps",
+        "Mvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Lss",
+        "Nsdhl",
+        "Dhcr7"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Map of cholesterol biosynthesis. TSA down regulates 9 of 15 genes in this pathway in the F9 embryonal carcinoma model and 11 of 15 pathway genes in the HepG2 cell line.",
+        "start": 5458,
+        "end": 5626,
+        "source_type": "full_text"
+      },
+      "rationale": "TSA perturbation supports coordinated repression of the cholesterol program, but the HepG2-specific gene list in the selection reason is too broad because Lss and Nsdhl are reported in F9 cells. The paper substantively measures 11 supplied genes; Msmo1 is absent, and Acat2 is measured without supporting its assigned HMG-CoA function. HepG2 is a transferable hepatic model rather than the target mouse hepatocyte context.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-6dcde1c34bce3dbdd012",
+      "assessor_id": "codex-adjudicator-p21",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "unclear",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "We demonstrated that inflammatory stress increased hepatic cholesterol accumulation and enhanced sterol regulatory element binding protein 2 (SREBP2), low-density lipoprotein receptor (LDLr) and HMGCoA-r mRNA and protein expression in livers of C57BL/6J mice and in HepG2 cells.",
+        "start": 977,
+        "end": 1255,
+        "source_type": "abstract"
+      },
+      "rationale": "The study causally supports inflammatory activation of the hepatic SREBP2-LDLR-HMGCR axis, but it does not perturb LDLR or show that LDLR loss drives compensatory synthesis, so the knockout direction is unresolved. Mouse liver and HepG2 inflammatory models are closely transferable, not the stated aging/MASLD hepatocyte condition. No supplied P21 gene is studied.",
+      "red_flags": [
+        "wrong_function",
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-85775391149b8f392d5d",
+      "assessor_id": "codex-adjudicator-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Hmgcs1",
+        "Fdft1",
+        "Lss",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Sc5d",
+        "Dhcr7",
+        "Idi1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Fdft1",
+        "Lss",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Sc5d",
+        "Dhcr7",
+        "Idi1"
+      ],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Taken together, many genes play a central role in cholesterol synthesis, including HMGCR, SQLE, HMGCS1, FDFT1, LSS, MVK, PMK, MVD, FDPS, CYP51, TM7SF2, LBR, MSMO1, NSDHL, HSD17B7, DHCR24, EBP, SC5D, DHCR7, IDI1/2 (Fig. 1).",
+        "start": 6610,
+        "end": 6832,
+        "source_type": "full_text"
+      },
+      "rationale": "This pathway-focused review substantively describes the sequential functions of 15 supplied cholesterol-synthesis genes, including PMK as the PMVK alias, so all 15 count as function-supported secondary evidence. It does not provide the target mouse hepatocyte disease context. The selection reason presents it as an explicit review-based pathway listing, so it is not misrepresented as primary evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-c0149ee32fcc6767c368",
+      "assessor_id": "codex-adjudicator-p21",
+      "support": "partial",
+      "studied_genes": [
+        "Hmgcs1",
+        "Fdft1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Fdft1"
+      ],
+      "directness": "causal",
+      "direction": "unclear",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Knockdown of PAQR3 significantly reduced cholesterol and TG levels in primary hepatocytes (Fig. 1b). Consistently, knockdown of PAQR3 in primary hepatocytes significantly reduced the mRNA levels of critical cholesterol-synthesizing and uptaking genes including 3-hydroxy-3-methylglutaryl-CoA reductase (HMGCR), HMGC synthase (HMGCS), LDL receptor (LDLR) and squalene synthase (SS) (Fig. 1c).",
+        "start": 5857,
+        "end": 6248,
+        "source_type": "full_text"
+      },
+      "rationale": "The study causally supports PAQR3-SCAP-SREBP control and measures Hmgcs1 and squalene synthase/Fdft1 in primary hepatocytes. The selection reason incorrectly attributes the knockdown result to Scap; PAQR3 was perturbed, so the Scap perturbation direction is unresolved. Mouse primary hepatocytes and high-fat-diet liver are closely transferable but do not exactly establish the aging/MASLD condition.",
+      "red_flags": [
+        "wrong_function",
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-e02070e104a3f6abe459",
+      "assessor_id": "codex-adjudicator-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "It catalyzes the first step following cyclization in sterol biosynthesis such as removal of the 14 alpha-methyl group from lanosterol in the cholesterol biosynthetic pathway, leading to formation of the initial substrate in steroid hormone biosynthesis.",
+        "start": 220,
+        "end": 473,
+        "source_type": "abstract"
+      },
+      "rationale": "The CYP51-focused review explicitly supports the assigned lanosterol demethylase function. It is general secondary evidence without mouse hepatocyte or MASLD context, but the selection reason identifies it as a review rather than presenting it as primary evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-fa25d9f81d5e685add1e",
+      "assessor_id": "codex-adjudicator-p21",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "not_assessable",
+      "context_label_accuracy": "not_assessable",
+      "evidence_span": {
+        "text": "SREBP processing is not restored by addition of LY295427, but is restored by increasing the levels of SREBP cleavage-activating protein (SCAP). These findings suggest that the INSIG-1 protein alters sterol balance by modulating SREBP processing jointly with SCAP.",
+        "start": 638,
+        "end": 901,
+        "source_type": "abstract"
+      },
+      "rationale": "INSIG1 gain- and loss-of-function experiments support joint control of SREBP processing with SCAP, but the abstract does not establish ER retention or directly measure suppression of cholesterol biosynthesis. It reports only unspecified cells, so biological context cannot be assessed from the cached abstract. No supplied P21 gene is studied.",
+      "red_flags": [
+        "insufficient_text"
+      ]
+    }
+  ]
+}

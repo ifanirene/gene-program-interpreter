@@ -1,0 +1,16 @@
+{
+  "content_hash": "54d725c287003a7ccb6b40fc7838c61df8550ccd501cccea43f964f577fa602a",
+  "doi": "10.1101/gad.891301",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "b8143f944aa64ff8cb2e",
+  "pmcid": "PMC313801",
+  "pmid": "11358865",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "In liver, the synthesis of cholesterol and fatty acids increases in response to cholesterol deprivation and insulin elevation, respectively. This regulatory mechanism underlies the adaptation to cholesterol synthesis inhibitors (statins) and high calorie diets (insulin). In nonhepatic cells, lipid synthesis is controlled by sterol regulatory element-binding proteins (SREBPs), membrane-bound transcription factors whose active domains are released proteolytically to enter the nucleus and activate genes involved in the synthesis and uptake of cholesterol and fatty acids. SCAP (SREBP cleavage-activating protein) is a sterol-regulated escort protein that transports SREBPs from their site of synthesis in the endoplasmic reticulum to their site of cleavage in the Golgi. Here, we produced a conditional deficiency of SCAP in mouse liver by genomic recombination mediated by inducible Cre recombinase. SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes. Moreover, these mRNAs failed to increase normally in response to cholesterol deprivation produced by a cholesterol synthesis inhibitor and to insulin elevation produced by a fasting-refeeding protocol. These data provide in vivo evidence that SCAP and the SREBPs are required for hepatic lipid synthesis under basal and adaptive conditions.",
+  "text_type": "abstract",
+  "title": "SREBP cleavage-activating protein (SCAP) is required for increased lipid synthesis in liver induced by cholesterol deprivation and insulin elevation."
+}

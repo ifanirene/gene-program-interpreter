@@ -1,0 +1,223 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0177374bf6967e556349",
+    "RL-05c0907255a005142391",
+    "RL-0601d5e7467599f25f9b",
+    "RL-15171d9c5f375baf481b",
+    "RL-15e8809241c8acf542c8",
+    "RL-16f57f20ddb8f8436776",
+    "RL-177f26e45743a987f8be",
+    "RL-3094cd650bd5570968ca"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1184,
+        "source_type": "abstract",
+        "start": 1080,
+        "text": "The results of our study provide unequivocal evidence for a role of HSD17B7 in cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "The abstract directly states HSD17B7 catalyzes zymosterone-to-zymosterol conversion in post-squalene cholesterol biosynthesis, proven in vitro; support for the enzymatic function claim is solid. No tissue/cell type is specified, so a 'partial' liver-context claim is not assessable from this text.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0177374bf6967e556349",
+      "studied_genes": [
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4869,
+        "source_type": "full_text",
+        "start": 4728,
+        "text": "Moreover, we found that ERG28 KO cells showed impaired SREBP-2 processing, resulting in a downregulation of many cholesterol synthesis genes."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 KO in Huh7 human hepatoma cells reduces cholesterol synthesis and impairs SREBP-2 processing, directly supporting ERG28 as an SREBP-2-coregulated scaffold gene in a liver-derived cell line. Huh7 is a human liver cancer cell line rather than primary hepatocytes, matching the declared partial context.",
+      "red_flags": [],
+      "review_id": "RL-05c0907255a005142391",
+      "studied_genes": [
+        "Erg28"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2287,
+        "source_type": "full_text",
+        "start": 2178,
+        "text": "Restoration of hepatic Msmo1 or Lss activity is sufficient for post-larval survival of corresponding mutants."
+      },
+      "function_supported_genes": [
+        "Msmo1",
+        "Lss"
+      ],
+      "rationale": "CRISPR knockouts of msmo1 and lss are embryonic lethal, and hepatic-restricted transgenic rescue confirms both enzymes' essential role in cholesterol biosynthesis for survival. This is a zebrafish, non-hepatocyte-specific-mechanism system, so the declared indirect context (different species) is accurate.",
+      "red_flags": [],
+      "review_id": "RL-0601d5e7467599f25f9b",
+      "studied_genes": [
+        "Msmo1",
+        "Lss"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2609,
+        "source_type": "full_text",
+        "start": 2457,
+        "text": "FDFT1 knockdown decreases cholesterol and bile acid levels in HCC cells and promotes hepatocyte nuclear factor 4 alpha (HNF4A) transcriptional activity."
+      },
+      "function_supported_genes": [
+        "Fdft1"
+      ],
+      "rationale": "FDFT1 knockdown/overexpression causally alters intracellular cholesterol levels in hepatocyte-derived HCC cell lines and mouse HCC liver models, supporting its role in hepatic cholesterol synthesis. Context is hepatocellular carcinoma tissue/cells rather than the target normal aging/MASLD hepatocyte state, matching the declared partial label.",
+      "red_flags": [],
+      "review_id": "RL-15171d9c5f375baf481b",
+      "studied_genes": [
+        "Fdft1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 10370,
+        "source_type": "full_text",
+        "start": 10201,
+        "text": "mice fed a western diet (high fat, high cholesterol; WD) exhibited a significant reduction in hepatic Rdh11 mRNA expression compared to mice fed a chow diet for 16 weeks"
+      },
+      "function_supported_genes": [
+        "Rdh11"
+      ],
+      "rationale": "RDH11 is identified as an SREBP2-coregulated gene in mouse liver and human hepatocyte-derived cells, with statin induction, high-cholesterol diet suppression, and gain/loss-of-function experiments in mouse primary hepatocytes and in vivo liver knockdown, directly matching the mechanism claim. Studies use mouse liver/hepatocytes in vivo, matching the declared direct context.",
+      "red_flags": [],
+      "review_id": "RL-15e8809241c8acf542c8",
+      "studied_genes": [
+        "Rdh11"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10399,
+        "source_type": "full_text",
+        "start": 10274,
+        "text": "The qPCR results for Hmgcs1, Hmgcr, Mvd, Idi1, Sqle and Dhcr7 confirmed the genomic analyses, whereas those for Fdft1 did not"
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Mvd",
+        "Dhcr7"
+      ],
+      "rationale": "This study shows glucose-induced upregulation of cholesterol-biosynthesis gene mRNAs in rat pancreatic islets, gene-specific but purely expression/correlative (no perturbation of enzymatic function) and in an unrelated tissue to hepatocytes; Fdft1 upregulation was not confirmed by qPCR so it is excluded from function support. The declared indirect context (different tissue and species) is accurate.",
+      "red_flags": [],
+      "review_id": "RL-16f57f20ddb8f8436776",
+      "studied_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Mvd",
+        "Dhcr7",
+        "Fdft1"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4743,
+        "source_type": "full_text",
+        "start": 4527,
+        "text": "A prominent oval cell proliferation (also known as the ductular reaction) was observed in LKOs of both sexes, where the severity correlated with inflammation (mononuclear and granular inflammatory cells) and fibrosis"
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Hepatocyte-specific Cyp51 knockout in mice causes oval-cell-driven liver injury, inflammation and fibrosis with compensatory cholesterogenic gene changes, directly demonstrating CYP51's essential enzymatic role in hepatocyte cholesterol synthesis in vivo. Mouse hepatocyte-specific model matches the declared direct context.",
+      "red_flags": [],
+      "review_id": "RL-177f26e45743a987f8be",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1514,
+        "source_type": "abstract",
+        "start": 1245,
+        "text": "Nevertheless, HSCs were sensitive to FC accumulation because the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells."
+      },
+      "function_supported_genes": [],
+      "rationale": "This paper directly supports the SCAP:INSIG1-driven SREBP2 feedback mechanism disrupting cholesterol homeostasis in a MASLD/NASH mouse model, but the experiments are conducted in hepatic stellate cells, not hepatocytes, so 'direct' context is overclaimed relative to the session's hepatocyte target. As a regulator-only paper it contributes no supplied-gene coverage.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-3094cd650bd5570968ca",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.9401734999999999,
+    "duration_api_ms": 299029,
+    "duration_ms": 296422,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 297.483
+  }
+}

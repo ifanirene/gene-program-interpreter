@@ -1,0 +1,72 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0a7beb25f6d4662bc1f7",
+    "RL-80883b9e36c6c06f1ca8"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1081,
+        "source_type": "abstract",
+        "start": 895,
+        "text": "R-2-HG hijacks SLC1A1 to promote mitochondrial Na+/Ca2+ exchange, which activates the mitochondrial respiratory chain and fuels vascular endothelial cell migration in tumor angiogenesis."
+      },
+      "function_supported_genes": [
+        "Slc1a1"
+      ],
+      "rationale": "The paper mechanistically links endothelial SLC1A1-mediated metabolite trafficking to mitochondrial respiration, endothelial migration, and angiogenesis. Its tumor-endothelial setting is transferable but not direct to postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-0a7beb25f6d4662bc1f7",
+      "studied_genes": [
+        "Slc1a1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "underclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 6486,
+        "source_type": "full_text",
+        "start": 6284,
+        "text": "Our findings demonstrate a critical combined need for RGS6 and ox‐CaMKII regulation of Notch signaling as well as downstream arterial/venous specification (vascular development) and cardiac development."
+      },
+      "function_supported_genes": [
+        "Rgs6"
+      ],
+      "rationale": "Combined RGS6 and ox-CaMKII perturbation supports an RGS6 contribution to Notch-dependent arterial specification, but the lack of an individual-loss phenotype makes the support partial. Embryonic mouse vascular development, including fetal-brain vessels, is closely related rather than merely indirect to postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-80883b9e36c6c06f1ca8",
+      "studied_genes": [
+        "Rgs6"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 123648,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 154472,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4962,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 100.664
+  }
+}

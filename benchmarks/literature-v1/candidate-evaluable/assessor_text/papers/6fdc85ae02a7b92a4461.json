@@ -1,0 +1,16 @@
+{
+  "content_hash": "6a835be30fbb00b14c9f13315bae885d940001aa4dd95b5e820bee80ab995fcc",
+  "doi": "10.1016/j.bcp.2024.116103",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "6fdc85ae02a7b92a4461",
+  "pmcid": "PMC10976970",
+  "pmid": "38428825",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Liver is a major organ that metabolizes sulfur amino acids cysteine, which is the substrate for the synthesis of many essential cellular molecules including GSH, taurine, and coenzyme A. Bile acid-activated farnesoid x receptor (FXR) inhibits cysteine dioxygenase type 1 (CDO1), which mediates hepatic cysteine catabolism and taurine synthesis. To define the impact of bile acid inhibition of CDO1 on hepatic sulfur amino acid metabolism and antioxidant capacity, we developed hepatocyte-specific CDO1 knockout mice (Hep-CDO1 KO) and hepatocyte specific CDO1 transgenic mice (Hep-CDO1 Tg). Liver metabolomics revealed that genetic deletion of hepatic CDO1 reduced de novo taurine synthesis but had no impact on hepatic taurine abundance or bile acid conjugation. Consistent with reduced cysteine catabolism, Hep-CDO1 KO mice showed increased hepatic cysteine abundance but unaltered methionine cycle intermediates and coenzyme A synthesis. Upon acetaminophen overdose, Hep-CDO1 KO mice showed increased GSH synthesis capacity and alleviated liver injury. In contrast, hepatic CDO1 overexpression in Hep-CDO1 Tg mice stimulated hepatic cysteine to taurine conversion, resulting in reduced hepatic cysteine abundance. However, Hep-CDO1 Tg mice and WT showed similar susceptibility to acetaminophen-induced liver injury. Hep-CDO1 Tg mice showed similar hepatic taurine and coenzyme A compared to WT mice. In summary, these findings suggest that bile acid and FXR signaling inhibition of CDO1-mediated hepatic cysteine catabolism preferentially modulates hepatic GSH synthesis capacity and antioxidant defense, but has minimal effect on hepatic taurine and coenzyme A abundance. Repression of hepatic CDO1 may contribute to the hepatoprotective effects of FXR activation under certain pathologic conditions.",
+  "text_type": "abstract",
+  "title": "Deletion of hepatocyte cysteine dioxygenase type 1, a bile acid repressed gene, enhances glutathione synthesis and ameliorates acetaminophen hepatotoxicity."
+}

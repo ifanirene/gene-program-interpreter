@@ -1,0 +1,16 @@
+{
+  "content_hash": "208362a49c2ce3c7a9464e43a9078c40b3daa5b76cf3ae4d2bc55cf7fe23d7a8",
+  "doi": "10.1152/physrev.00017.2013",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "15398b640e9dcf811796",
+  "pmcid": "PMC3929114",
+  "pmid": "24382882",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "A family of detoxifying enzymes called aldehyde dehydrogenases (ALDHs) has been a subject of recent interest, as its role in detoxifying aldehydes that accumulate through metabolism and to which we are exposed from the environment has been elucidated. Although the human genome has 19 ALDH genes, one ALDH emerges as a particularly important enzyme in a variety of human pathologies. This ALDH, ALDH2, is located in the mitochondrial matrix with much known about its role in ethanol metabolism. Less known is a new body of research to be discussed in this review, suggesting that ALDH2 dysfunction may contribute to a variety of human diseases including cardiovascular diseases, diabetes, neurodegenerative diseases, stroke, and cancer. Recent studies suggest that ALDH2 dysfunction is also associated with Fanconi anemia, pain, osteoporosis, and the process of aging. Furthermore, an ALDH2 inactivating mutation (termed ALDH2*2) is the most common single point mutation in humans, and epidemiological studies suggest a correlation between this inactivating mutation and increased propensity for common human pathologies. These data together with studies in animal models and the use of new pharmacological tools that activate ALDH2 depict a new picture related to ALDH2 as a critical health-promoting enzyme.",
+  "text_type": "abstract",
+  "title": "Targeting aldehyde dehydrogenase 2: new therapeutic opportunities."
+}

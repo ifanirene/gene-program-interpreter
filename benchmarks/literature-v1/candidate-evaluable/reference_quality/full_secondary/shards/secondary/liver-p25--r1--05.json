@@ -1,0 +1,99 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-b880133a833ce5a6f7da",
+    "RL-e852c42233ff0b961e61",
+    "RL-f2154dc6b97c36f40430"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 12746,
+        "source_type": "full_text",
+        "start": 12526,
+        "text": "WT but not Nrf2−/− liver slices treated with arsenic resulted in increased mRNA levels of the key fructose metabolism pathway enzymes ketohexokinase (Khk), sorbitol dehydrogenase (Sord), and triokinase/FMN cyclase (Tkfc)"
+      },
+      "function_supported_genes": [
+        "Sord"
+      ],
+      "rationale": "Model-assessed: NRF2 perturbation supports Sord regulation within hepatic fructose metabolism. The mouse-liver context matches, but arsenic-induced diabetes is not aging or MASLD.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b880133a833ce5a6f7da",
+      "studied_genes": [
+        "Sord"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "unclear",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "Model-assessed: the abstract reports human liver enoyl-CoA isomerase activities but does not identify ECI2 or provide a secure gene-specific mapping. Human evidence is indirect for the mouse context.",
+      "red_flags": [
+        "insufficient_text",
+        "context_overclaim"
+      ],
+      "review_id": "RL-e852c42233ff0b961e61",
+      "studied_genes": [],
+      "support": "not_assessable"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 27657,
+        "source_type": "full_text",
+        "start": 27504,
+        "text": "The protein that most positively predicted hypotaurine abundance was CDO1, confirming its high degree of control over hypotaurine biosynthesis (Fig. 2b)."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "Model-assessed: gene-specific abundance modeling supports CDO1 control of hypotaurine biosynthesis, but only associatively and without directly testing bile-acid conjugation. The mouse-liver setting lacks the aging or MASLD condition.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-f2154dc6b97c36f40430",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 89088,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 128159,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 7842,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 149.454
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "0ce406c7882322d0fd8af7d09c36422a2e79ee7a4aea8bf4bee9c05d201f7551",
+  "doi": "10.1016/s0304-4165(96)00126-2",
+  "errors": [],
+  "paper_key": "0b596bf44568bc6afa84",
+  "pmcid": null,
+  "pmid": "9133646",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "To better understand the genetic disorder Sjogren-Larsson syndrome which is caused by a deficiency of fatty aldehyde dehydrogenase activity, we determined the subcellular localization of the enzyme and investigated its biochemical properties. Using density gradient centrifugation, we found that fatty aldehyde dehydrogenase activity was predominantly localized in the microsomal fraction in human liver. This fatty aldehyde dehydrogenase was solubilized from human liver microsomes and purified by chromatography on columns consisting of omega-aminohexyl-agarose and 5'-AMP-Sepharose 4B. The enzyme had an apparent subunit molecular weight of 54000, required NAD+ as cofactor, had optimal activity at pH 9.8, and was thermolabile at 47 degrees C. Fatty aldehyde dehydrogenase had high activity towards saturated and unsaturated aliphatic aldehydes ranging from 6 to 24 carbons in length, as well as dihydrophytal, a 20-carbon branched chain aldehyde. In contrast, acetaldehyde, propionaldehyde, crotonaldehyde, glutaraldehyde, benzaldehyde, and retinaldehyde were poor substrates. The enzyme was inhibited by disulfiram, iodoacetamide, alpha,p-dibromoacetophenone, and p-chloromercuribenzoate. These results indicate that microsomal fatty aldehyde dehydrogenase is a distinct human aldehyde dehydrogenase isozyme that acts on a variety of medium- and long-chain aliphatic substrates.",
+  "text_type": "abstract",
+  "title": "Human liver fatty aldehyde dehydrogenase: microsomal localization, purification, and biochemical characterization."
+}

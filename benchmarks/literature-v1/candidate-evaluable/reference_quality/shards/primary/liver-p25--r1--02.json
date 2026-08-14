@@ -1,0 +1,217 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-6926b3be8d716db7aacc",
+    "RL-6a44877265e2c5747629",
+    "RL-767f3edaaf0c7a14d825",
+    "RL-86a86fe4051c778eaf13",
+    "RL-8917eaf883f998bbc932",
+    "RL-a56a1e2fbb57a3ab037e",
+    "RL-aeede7f1fab29205b9cc",
+    "RL-b017318c593b56289789"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 364,
+        "source_type": "abstract",
+        "start": 246,
+        "text": "which binds to and inactivates aflatoxin B1 epoxide, preventing the epoxide from binding to DNA and causing mutations."
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "GSTA3 knockout mice directly demonstrate GSTA3's detoxifying function by binding/inactivating aflatoxin B1 epoxide in mouse liver, matching the mechanism's Phase II detox/aflatoxin-detox claim.",
+      "red_flags": [],
+      "review_id": "RL-6926b3be8d716db7aacc",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 9878,
+        "source_type": "full_text",
+        "start": 9771,
+        "text": "The mRNA of Cyp2c50 and Cyp2c54 in Nrf2-null mice was 45 and 65% lower than in wild-type mice, respectively"
+      },
+      "function_supported_genes": [
+        "Cyp2c50",
+        "Aldh1a1"
+      ],
+      "rationale": "Graded Nrf2 genetic models show Cyp2c50 and Aldh1a1 mRNA decrease with Nrf2 loss and rise with Nrf2 activation in mouse liver, supporting Nrf2-regulated xenobiotic gene status; Akr1c6 was also gene-specifically measured but explicitly not altered by Nrf2, so it is studied but not function-supported.",
+      "red_flags": [],
+      "review_id": "RL-6a44877265e2c5747629",
+      "studied_genes": [
+        "Cyp2c50",
+        "Aldh1a1",
+        "Akr1c6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 600,
+        "source_type": "abstract",
+        "start": 444,
+        "text": "FIT1 and FIT2 are endoplasmic reticulum resident membrane proteins that induce lipid droplet accumulation in cell culture and when expressed in mouse liver."
+      },
+      "function_supported_genes": [
+        "Fitm1"
+      ],
+      "rationale": "FIT1 (Fitm1) overexpression in mouse liver induces lipid droplet accumulation, supporting a lipid-droplet biogenesis role, but the paper does not directly demonstrate FIT1 triglyceride-binding as claimed; the gene-specific KO/silencing causal experiments were done for FIT2, not FIT1.",
+      "red_flags": [],
+      "review_id": "RL-767f3edaaf0c7a14d825",
+      "studied_genes": [
+        "Fitm1"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 536,
+        "source_type": "abstract",
+        "start": 439,
+        "text": "a key component of the detoxification pathway of aldehydes arising from lipid peroxidation events"
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "FALDH (Aldh3a2) is characterized as a key detoxifier of lipid-peroxidation-derived aldehydes, and ectopic FALDH expression causally reduced ROS from 4-HNE, matching the mechanism's claim; tissue is rat liver/adipocytes rather than mouse hepatocytes, consistent with the declared partial context.",
+      "red_flags": [],
+      "review_id": "RL-86a86fe4051c778eaf13",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1384,
+        "source_type": "abstract",
+        "start": 1223,
+        "text": "microsomal fatty aldehyde dehydrogenase is a distinct human aldehyde dehydrogenase isozyme that acts on a variety of medium- and long-chain aliphatic substrates."
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "This biochemical characterization confirms ALDH3A2 as a microsomal liver enzyme acting on aliphatic aldehydes, but it tests general long-chain aldehyde substrates rather than lipid-peroxidation-specific aldehydes, and uses human tissue rather than mouse.",
+      "red_flags": [],
+      "review_id": "RL-8917eaf883f998bbc932",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "unclear",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "This paper establishes Aldh1a1 as a retinoid-driven regulator of hepatic gluconeogenesis and lipid synthesis via KO mice, an entirely different function from the mechanism's claim of ALDH1A1 as a lipid-peroxidation-aldehyde detoxifying enzyme; no detoxification finding is reported.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-a56a1e2fbb57a3ab037e",
+      "studied_genes": [
+        "Aldh1a1"
+      ],
+      "support": "no"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 728,
+        "source_type": "abstract",
+        "start": 619,
+        "text": "HAOX2 is expressed predominantly in liver and kidney and displays highest activity toward 2-hydroxypalmitate."
+      },
+      "function_supported_genes": [
+        "Hao2"
+      ],
+      "rationale": "Human HAOX2 (Hao2 ortholog) is biochemically shown to be liver-expressed with peroxisomal 2-hydroxy fatty acid oxidase activity, matching the mechanism's claim, though the species is human rather than mouse.",
+      "red_flags": [],
+      "review_id": "RL-aeede7f1fab29205b9cc",
+      "studied_genes": [
+        "Hao2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 959,
+        "source_type": "abstract",
+        "start": 759,
+        "text": "these GST isozymes account for approximately half of the glutathione peroxidase activity toward phospholipid hydroperoxides present in the 28,000g supernatant fractions of rat and mouse liver extracts"
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "Isoform-specific immunotitration using a GSTA3-3-specific antibody in mouse and rat liver directly quantifies GSTA3's contribution to antioxidant glutathione peroxidase activity, matching the mechanism's antioxidant-function claim.",
+      "red_flags": [],
+      "review_id": "RL-b017318c593b56289789",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.4700268,
+    "duration_api_ms": 243786,
+    "duration_ms": 240888,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 242.173
+  }
+}

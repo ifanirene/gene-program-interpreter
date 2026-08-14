@@ -1,0 +1,14 @@
+{
+  "adjudicated_count": 1,
+  "assessment_type": "model",
+  "decision_agreement_count": 7,
+  "decision_agreement_rate": 0.875,
+  "disagreement_count": 1,
+  "disagreement_ids": [
+    "annotation-liver-p25-r1"
+  ],
+  "double_scored_count": 8,
+  "schema_version": 1,
+  "semantic_relation_agreement_count": 7,
+  "semantic_relation_agreement_rate": 0.875
+}

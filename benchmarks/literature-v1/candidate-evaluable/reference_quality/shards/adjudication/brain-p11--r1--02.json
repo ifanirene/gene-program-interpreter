@@ -1,0 +1,121 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-920e5a6b1b1a04c491c2",
+    "RL-affec80b10774f33e847",
+    "RL-b1d09a63dcdf6abee6e1",
+    "RL-dc23d8b920afec94f0a5"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 18153,
+        "source_type": "full_text",
+        "start": 17993,
+        "text": "Cdc42EP3 is required for most of the hallmarks of CAFs, notably extracellular matrix remodelling and promotion of angiogenesis, cancer cell growth and invasion."
+      },
+      "function_supported_genes": [],
+      "rationale": "This review investigates Cdc42EP3 gene-specifically but as a cancer-associated fibroblast cytoskeletal adaptor that promotes angiogenesis stromally, whereas the mechanism assigns Cdc42ep3 endothelial tip-cell filopodia formation, a function this review attributes to Cdc42EP4/Cdc42EP1. Support is therefore a weaker, related form and, being a review, secondary rather than direct endothelial evidence.",
+      "red_flags": [
+        "wrong_function",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-920e5a6b1b1a04c491c2",
+      "studied_genes": [
+        "Cdc42ep3"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1546,
+        "source_type": "abstract",
+        "start": 1333,
+        "text": "Expression of EAAT-1 (Slc1a3), -2 (Slc1a2), and -3 (Slc1a1) mRNA in the endothelial cells was confirmed by conventional PCR and localization of EAAT-1 and -3 in endothelial cells was shown with immunofluorescence."
+      },
+      "function_supported_genes": [
+        "Slc1a1"
+      ],
+      "rationale": "The paper confirms Slc1a1/EAAT-3 mRNA expression and protein localization in brain endothelial cells and demonstrates polarized brain-to-blood glutamate transport, matching the cited function and direction. The declared direct context overclaims, since this is an in vitro bovine-endothelial/rat-astrocyte coculture rather than the target mouse postnatal brain endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-affec80b10774f33e847",
+      "studied_genes": [
+        "Slc1a1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 817,
+        "source_type": "abstract",
+        "start": 728,
+        "text": "Tgfβ pathway components, including Tgfβ2, Tgfβr2, Alk5, and integrins αVβ8, were reduced."
+      },
+      "function_supported_genes": [],
+      "rationale": "Foxf2 loss reduces Tgfbr2/Alk5 pathway components alongside BBB breakdown, giving pathway-level, directionally consistent support that TGF-β signaling promotes BBB integrity, but the receptors are regulators (not supplied genes) measured in pericytes rather than the endothelial cells the mechanism specifies. The declared direct context overclaims relative to this pericyte-based evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b1d09a63dcdf6abee6e1",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 35843,
+        "source_type": "full_text",
+        "start": 35614,
+        "text": "With our in vitro data we could demonstrate that SCN3B, DSP and HOPX are responsive to shear stress and/or hypoxia in intracranial ECs, besides being differently regulated in the intracranial ECs compared to the extracranial ECs."
+      },
+      "function_supported_genes": [
+        "Hopx"
+      ],
+      "rationale": "HOPX is studied gene-specifically and confirmed to be differentially regulated between intracranial and extracranial arterial ECs and hypoxia-responsive, supporting a weaker specialization claim, but the provided text does not state the direction of the intracranial-vs-extracranial difference that the mechanism's enrichment claim requires. Adult human large-artery ECs only partially match postnatal mouse brain endothelium, so the declared direct context overclaims.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-dc23d8b920afec94f0a5",
+      "studied_genes": [
+        "Hopx"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.6103835000000001,
+    "duration_api_ms": 162896,
+    "duration_ms": 161319,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 162.335
+  }
+}

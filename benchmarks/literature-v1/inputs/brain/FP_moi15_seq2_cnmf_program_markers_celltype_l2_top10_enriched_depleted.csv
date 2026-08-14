@@ -1,0 +1,102 @@
+cell_type,direction,program,rank_selected,myAUC,log2_fc_in_vs_out
+Large-artery,enriched,Program_57,1,0.893,5.999
+Large-artery,enriched,Program_65,2,0.835,5.524
+Large-artery,enriched,Program_63,3,0.812,4.541
+Large-artery,enriched,Program_70,4,0.81,6.836
+Large-artery,enriched,Program_41,5,0.742,2.688
+Large-artery,enriched,Program_78,6,0.725,3.238
+Large-artery,enriched,Program_68,7,0.719,3.766
+Large-artery,depleted,Program_8,1,0.164,-3.79
+Large-artery,depleted,Program_6,2,0.177,-4.718
+Large-artery,depleted,Program_9,3,0.194,-3.441
+Large-artery,depleted,Program_18,4,0.213,-2.666
+Large-artery,depleted,Program_4,5,0.218,-3.657
+Large-artery,depleted,Program_5,6,0.241,-2.879
+Large-artery,depleted,Program_11,7,0.256,-4.393
+Large-artery,depleted,Program_16,8,0.268,-2.837
+Large-artery,depleted,Program_13,9,0.282,-2.33
+Large-artery,depleted,Program_15,10,0.297,-2.313
+Cycling artery,enriched,Program_78,1,0.987,6.162
+Cycling artery,enriched,Program_67,2,0.845,5.079
+Cycling artery,enriched,Program_63,3,0.784,3.044
+Cycling artery,enriched,Program_62,4,0.78,4.69
+Cycling artery,enriched,Program_38,5,0.761,2.525
+Cycling artery,enriched,Program_65,6,0.744,2.954
+Cycling artery,enriched,Program_68,7,0.72,2.335
+Cycling artery,enriched,Program_34,8,0.718,1.589
+Cycling artery,depleted,Program_12,1,0.15,-2.262
+Cycling artery,depleted,Program_1,2,0.151,-1.709
+Cycling artery,depleted,Program_8,3,0.154,-3.291
+Cycling artery,depleted,Program_9,4,0.163,-3.59
+Cycling artery,depleted,Program_6,5,0.171,-3.807
+Cycling artery,depleted,Program_10,6,0.173,-2.254
+Cycling artery,depleted,Program_4,7,0.197,-3.424
+Cycling artery,depleted,Program_18,8,0.2,-2.165
+Cycling artery,depleted,Program_13,9,0.217,-2.503
+Cycling artery,depleted,Program_17,10,0.233,-3.138
+Capillary,enriched,Program_6,1,0.872,1.859
+Capillary,enriched,Program_9,2,0.768,1.234
+Capillary,enriched,Program_4,3,0.725,0.876
+Capillary,enriched,Program_8,4,0.714,0.953
+Peri-arterial capillary,enriched,Program_15,1,0.884,2.142
+Peri-arterial capillary,enriched,Program_4,2,0.814,1.737
+Peri-arterial capillary,enriched,Program_5,3,0.802,1.59
+Peri-arterial capillary,enriched,Program_3,4,0.75,1.149
+Tip-like: Pre-artery,enriched,Program_11,1,0.906,2.625
+Tip-like: Pre-artery,enriched,Program_16,2,0.844,2.04
+Tip-like: Pre-artery,enriched,Program_47,3,0.738,2.263
+Tip-like: angiogenic,enriched,Program_21,1,0.875,3.063
+Tip-like: angiogenic,enriched,Program_17,2,0.853,2.37
+Tip-like: angiogenic,enriched,Program_27,3,0.829,3.229
+Tip-like: angiogenic,enriched,Program_48,4,0.805,4.646
+Tip-like: angiogenic,enriched,Program_55,5,0.777,4.041
+Tip-like: angiogenic,enriched,Program_54,6,0.772,3.805
+Tip-like: angiogenic,depleted,Program_3,1,0.25,-2.08
+Tip-like: angiogenic,depleted,Program_4,2,0.261,-2.617
+Tip-like: angiogenic,depleted,Program_5,3,0.278,-2.143
+Choroid-plexus,enriched,Program_53,1,0.941,7.186
+Choroid-plexus,enriched,Program_64,2,0.893,6.46
+Choroid-plexus,enriched,Program_58,3,0.869,6.721
+Choroid-plexus,enriched,Program_75,4,0.808,6.971
+Choroid-plexus,depleted,Program_6,1,0.175,-4.34
+Choroid-plexus,depleted,Program_9,2,0.204,-3.217
+Choroid-plexus,depleted,Program_8,3,0.218,-2.476
+Choroid-plexus,depleted,Program_18,4,0.22,-2.484
+Choroid-plexus,depleted,Program_5,5,0.227,-3.013
+Choroid-plexus,depleted,Program_3,6,0.258,-1.897
+Choroid-plexus,depleted,Program_4,7,0.268,-2.362
+Choroid-plexus,depleted,Program_16,8,0.272,-2.464
+Choroid-plexus,depleted,Program_15,9,0.273,-2.439
+Choroid-plexus,depleted,Program_46,10,0.284,-1.803
+Cycling,enriched,Program_66,1,0.806,5.084
+Cycling,enriched,Program_62,2,0.805,4.975
+Cycling,enriched,Program_52,3,0.79,3.945
+Cycling,enriched,Program_28,4,0.774,2.135
+Cycling,enriched,Program_69,5,0.763,4.937
+Cycling,enriched,Program_67,6,0.741,5.496
+Cycling,enriched,Program_49,7,0.731,3.649
+Cycling,depleted,Program_1,1,0.253,-0.965
+Cycling,depleted,Program_5,2,0.286,-2.319
+Arteriole,enriched,Program_20,1,0.893,3.235
+Arteriole,enriched,Program_38,2,0.876,4.345
+Arteriole,enriched,Program_34,3,0.842,3.075
+Arteriole,enriched,Program_41,4,0.83,3.951
+Arteriole,enriched,Program_30,5,0.794,2.705
+Arteriole,enriched,Program_3,6,0.734,1.163
+Arteriole,enriched,Program_51,7,0.716,3.128
+Arteriole,depleted,Program_9,1,0.264,-2.094
+Arteriole,depleted,Program_17,2,0.28,-2.954
+Arteriole,depleted,Program_6,3,0.288,-2.219
+Arteriole,depleted,Program_8,4,0.294,-1.577
+Arteriole,depleted,Program_26,5,0.298,-3.002
+Venous,enriched,Program_42,1,0.865,4.911
+Venous,enriched,Program_22,2,0.819,3.345
+Venous,enriched,Program_56,3,0.761,4.631
+Venous,enriched,Program_45,4,0.752,3.538
+Venous,enriched,Program_32,5,0.748,2.388
+Venous,depleted,Program_11,1,0.255,-3.837
+Venous,depleted,Program_5,2,0.257,-2.553
+Venous,depleted,Program_9,3,0.262,-1.839
+Venous,depleted,Program_15,4,0.281,-2.489
+Venous,depleted,Program_8,5,0.292,-1.413
+Venous,depleted,Program_3,6,0.296,-1.645

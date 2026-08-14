@@ -1,0 +1,82 @@
+{
+  "approval_file_sha256": "f98dc9c855f1a5fd03afd899d39e304e5742adb507bf4a09511dec5fca3acb67",
+  "approved_ceiling_usd": 28.0,
+  "benchmark_id": "literature-v1",
+  "canary_session_id": "brain-p8--r1",
+  "fanout_status": "canary_running",
+  "schema_version": 1,
+  "sessions": {
+    "brain-p10--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P10",
+      "status": "pending"
+    },
+    "brain-p10--r2": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P10",
+      "status": "pending"
+    },
+    "brain-p11--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P11",
+      "status": "pending"
+    },
+    "brain-p11--r2": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P11",
+      "status": "pending"
+    },
+    "brain-p8--r1": {
+      "attempt_records": [],
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P8",
+      "status": "started"
+    },
+    "brain-p9--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P9",
+      "status": "pending"
+    },
+    "liver-p20--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P20",
+      "status": "pending"
+    },
+    "liver-p21--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P21",
+      "status": "pending"
+    },
+    "liver-p21--r2": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P21",
+      "status": "pending"
+    },
+    "liver-p22--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P22",
+      "status": "pending"
+    },
+    "liver-p23--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P23",
+      "status": "pending"
+    },
+    "liver-p24--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P24",
+      "status": "pending"
+    },
+    "liver-p25--r1": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P25",
+      "status": "pending"
+    },
+    "liver-p25--r2": {
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P25",
+      "status": "pending"
+    }
+  }
+}

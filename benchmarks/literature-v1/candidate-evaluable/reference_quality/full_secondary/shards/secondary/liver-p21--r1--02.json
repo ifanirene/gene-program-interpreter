@@ -1,0 +1,124 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-15e8809241c8acf542c8",
+    "RL-4a4bf79af316fed564bf",
+    "RL-66edfccab184902f9a84",
+    "RL-715e37db25a0faa6c296"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 16661,
+        "source_type": "full_text",
+        "start": 16412,
+        "text": "Together, these data confirm the responsiveness of RDH11 mRNA expression to altered cholesterol levels per se, and further highlight the similarity in the transcriptional profile of RDH11 to other SREBP2 target genes in both mouse and human systems."
+      },
+      "function_supported_genes": [
+        "Rdh11"
+      ],
+      "rationale": "Model-assessed: RDH11 responds like established SREBP2 targets, but SREBP2 itself was not directly perturbed or tested for binding. The mouse liver and primary-hepatocyte context is relevant, but aging or established MASLD was not studied.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-15e8809241c8acf542c8",
+      "studied_genes": [
+        "Rdh11",
+        "Nsdhl",
+        "Acss2",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Idi1"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 6008,
+        "source_type": "full_text",
+        "start": 5820,
+        "text": "iDGAT1 and iDGAT2 treatments alone reduced TG content alongside DGAT1 and DGAT2 mRNA levels without showing significant differences across the tested doses (25, 50, 100 µM) (Figure S1A,B)."
+      },
+      "function_supported_genes": [],
+      "rationale": "Model-assessed: DGAT2 inhibition causally reduced triglyceride accumulation, supporting its regulator role. The evidence comes from human hepatoma cells in an in-vitro MASLD-like system rather than mouse hepatocytes in vivo.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-4a4bf79af316fed564bf",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 321,
+        "source_type": "abstract",
+        "start": 170,
+        "text": "Acyl-CoA:cholesterol acyltransferase 1 and 2 (ACAT1 and ACAT2) convert various sterols to steryl esters; their activities are activated by cholesterol."
+      },
+      "function_supported_genes": [],
+      "rationale": "Model-assessed: The relevant ACAT2 sterol-esterification function appears only as background. The reported experiments instead concern pregnenolone esterification in non-hepatic contexts.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-66edfccab184902f9a84",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 15412,
+        "source_type": "full_text",
+        "start": 15231,
+        "text": "Further, we collected tumor tissues and found that HMGCS1 overexpression rescued CSN6 KD‐mediated decreased cholesterol and TG levels, and YAP1 target gene expression (Figure 3G,H)."
+      },
+      "function_supported_genes": [
+        "Hmgcs1"
+      ],
+      "rationale": "Model-assessed: HMGCS1 perturbation causally altered cholesterol levels in liver-cancer models, consistent with its assigned mevalonate-pathway function. The HCC and high-fat-diet context is related to, but narrower than, general MASLD hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-715e37db25a0faa6c296",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 292864,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 329017,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 10692,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 211.175
+  }
+}

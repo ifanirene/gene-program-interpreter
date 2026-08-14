@@ -1,0 +1,44 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-ecd7fb527c49603945e4"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "background",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "MVK appears only in a prior-work/disease-motivation sentence, while the paper's own experiment blocks the pathway with Lovastatin and tests 25-HC in a human glioblastoma line, generating no MVK-specific data. Adjudicated to Assessment A's 'no': a background prior-work sentence does not study or support the cited hepatocyte MVK function; model-assessed.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-ecd7fb527c49603945e4",
+      "studied_genes": [],
+      "support": "no"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.1325755,
+    "duration_api_ms": 62375,
+    "duration_ms": 41657,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 42.595
+  }
+}

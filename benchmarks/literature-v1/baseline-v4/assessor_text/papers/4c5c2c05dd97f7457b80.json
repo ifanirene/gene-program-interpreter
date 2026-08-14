@@ -1,0 +1,16 @@
+{
+  "content_hash": "db6b5410af770115b0f2f77d529e849b40d0341df57ec08da52b7fc49bbf22df",
+  "doi": "10.1073/pnas.1318737111",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "4c5c2c05dd97f7457b80",
+  "pmcid": "PMC3926046",
+  "pmid": "24469809",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The primary cilium plays critical roles in vertebrate development and physiology, but the mechanisms underlying its biogenesis remain poorly understood. We investigated the molecular function of C2 calcium-dependent domain containing 3 (C2cd3), an essential regulator of primary cilium biogenesis. We show that C2cd3 is localized to the centriolar satellites in a microtubule- and Pcm1-dependent manner; however, C2cd3 is dispensable for centriolar satellite integrity. C2cd3 is also localized to the distal ends of both mother and daughter centrioles and is required for the recruitment of five centriolar distal appendage proteins: Sclt1, Ccdc41, Cep89, Fbf1, and Cep164. Furthermore, loss of C2cd3 results in failure in the recruitment of Ttbk2 to the ciliary basal body as well as the removal of Cp110 from the ciliary basal body, two critical steps in initiating ciliogenesis. C2cd3 is also required for recruiting the intraflagellar transport proteins Ift88 and Ift52 to the mother centriole. Consistent with a role in distal appendage assembly, C2cd3 is essential for ciliary vesicle docking to the mother centriole. Our results suggest that C2cd3 regulates cilium biogenesis by promoting the assembly of centriolar distal appendages critical for docking ciliary vesicles and recruiting other essential ciliogenic proteins.",
+  "text_type": "abstract",
+  "title": "C2cd3 is critical for centriolar distal appendage assembly and ciliary vesicle docking in mammals."
+}

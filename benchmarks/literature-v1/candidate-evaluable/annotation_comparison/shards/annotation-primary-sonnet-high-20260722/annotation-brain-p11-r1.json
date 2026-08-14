@@ -1,0 +1,45 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-brain-p11-r1",
+    "assessor_id": "annotation-primary-sonnet-high-20260722",
+    "candidate_additions": [
+      "New standalone mechanism: arteriovenous identity specification (Angpt2 as venous marker repressed by arterial factors, Cxcr4 downregulated at arterial connection, Rgs6 driving Notch-dependent arterial specification) — not present as a distinct theme in baseline",
+      "Tnfrsf11b/OPG added as a tip-cell/angiogenic survival gene",
+      "Slc1a1/EAAT-3 BBB glutamate-efflux transporter introduced as a program gene with its own mechanistic role",
+      "Tgfbr1/Tgfbr2 reinterpreted as governing BBB morphogenesis/barrier integrity rather than tip-cell identity"
+    ],
+    "candidate_removed_or_weakened": [
+      "Baseline's central TGF-β mechanism — CNS-specific 'diving' tip cells uniquely requiring ALK5/Tgfbr1 for tip-cell identity, explicitly opposite to TGF-β's peripheral anti-angiogenic role — is dropped entirely and replaced with a generic BBB-integrity explanation",
+      "The calcium-signaling/mechanosensory module (Cacna1c, Jph1, Syt12) linked to neurovascular coupling is entirely absent from the candidate",
+      "Prdm1, previously tied to the TGF-β/tip-cell mechanism, is dropped",
+      "Gabarapl1 (EPC migration/angiogenesis gene) is dropped from the tip-cell mechanism"
+    ],
+    "core_interpretation_changed": true,
+    "decision_relevant_differences": [
+      "Baseline attributes the strong Tgfbr1/Tgfbr2 KO effect to a documented CNS-specific tip-cell-identity mechanism (ALK5-dependent 'diving' tip cells) with a notable context-reversal relative to peripheral vasculature; candidate attributes the same perturbation to BBB barrier morphogenesis/integrity — these imply different follow-up experiments (angiogenic sprouting/vascular invasion assays vs. barrier permeability assays)",
+      "Candidate promotes Hopx/Rgs6/Angpt2/Cxcr4 into a distinct arteriovenous-identity program absent from baseline, which would lead a reader toward a different biological framing (AV patterning vs. pure tip-cell sprouting/calcium-mechanosensing)",
+      "Baseline's calcium-handling/neurovascular-coupling hypothesis (Cacna1c, Jph1, Syt12) is lost, removing a decision-relevant candidate mechanism for functional hyperemia relevance",
+      "Introduction of Slc1a1 shifts part of the program's interpretation toward BBB metabolite transport, a functional category absent from baseline"
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations agree on a core tip-cell/angiogenic-sprouting mechanism anchored by Angpt2, Cxcr4, Cdc42ep3, Nrp1, and Tek, and on Kcnj2 as a mechanosensitive channel. However, the candidate replaces baseline's specific, mechanistically distinctive explanation of the Tgfbr1/Tgfbr2 requirement (CNS 'diving' tip-cell identity acquisition, notably reversed from peripheral TGF-β biology) with a different explanation (BBB morphogenesis/barrier integrity), drops the calcium-signaling/neurovascular-coupling module (Cacna1c, Jph1, Syt12) entirely, and adds a new arteriovenous-identity-specification mechanism built from genes baseline had assigned elsewhere (Hopx, Rgs6) or interpreted differently (Angpt2, Cxcr4). These are changes to central mechanistic claims, not just added citations or verbosity — a reader would draw different biological conclusions and design different follow-up experiments depending on which version they read, so this exceeds refinement and constitutes a material change.",
+    "semantic_relation": "materially_changed",
+    "shared_core_conclusions": [
+      "Angpt2, Cxcr4, Cdc42ep3 with regulators Nrp1/Tek drive tip-cell/angiogenic sprouting behavior in postnatal brain endothelium",
+      "Hopx marks a specialized intracranial arterial EC state",
+      "Kcnj2/Kir2.1 functions as a flow/mechanosensitive endothelial K+ channel",
+      "Tgfbr1 and Tgfbr2 knockouts both decrease the program (TGF-β receptor signaling required)"
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.12434100000000001,
+    "duration_api_ms": 38891,
+    "duration_ms": 37698,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 39.151
+  }
+}

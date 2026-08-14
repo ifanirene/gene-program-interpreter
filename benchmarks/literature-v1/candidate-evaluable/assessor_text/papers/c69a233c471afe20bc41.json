@@ -1,0 +1,14 @@
+{
+  "content_hash": "cba3cef02b3fb6c90b87fada532bf5e09d935549ca1dbf4ab7b666d33f101de7",
+  "doi": "10.1002/hep.26604",
+  "errors": [],
+  "paper_key": "c69a233c471afe20bc41",
+  "pmcid": null,
+  "pmid": "23832448",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "UNLABELLED: Although nonalcoholic steatohepatitis (NASH) is associated with hypercholesterolemia, the underlying mechanisms of this association have not been clarified. We aimed to elucidate the precise role of cholesterol in the pathophysiology of NASH. C57BL/6 mice were fed a control, high-cholesterol (HC), methionine-choline-deficient (MCD), or MCD+HC diet for 12 weeks or a control, HC, high-fat (HF), or HF+HC diet for 24 weeks. Increased cholesterol intake accelerated liver fibrosis in both the mouse models without affecting the degree of hepatocellular injury or Kupffer cell activation. The major causes of the accelerated liver fibrosis involved free cholesterol (FC) accumulation in hepatic stellate cells (HSCs), which increased Toll-like receptor 4 protein (TLR4) levels through suppression of the endosomal-lysosomal degradation pathway of TLR4, and thereby sensitized the cells to transforming growth factor (TGF)\u03b2-induced activation by down-regulating the expression of bone morphogenetic protein and activin membrane-bound inhibitor. Mammalian-cell cholesterol levels are regulated by way of a feedback mechanism mediated by sterol regulatory element-binding protein 2 (SREBP2), maintaining cellular cholesterol homeostasis. Nevertheless, HSCs were sensitive to FC accumulation because the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells. HSC activation subsequently enhanced the disruption of the feedback system by Insig-1 down-regulation. In addition, the suppression of peroxisome proliferator-activated receptor \u03b3 signaling accompanying HSC activation enhanced both SREBP2 and microRNA-33a signaling. Consequently, FC accumulation in HSCs increased and further sensitized these cells to TGF\u03b2-induced activation in a vicious cycle, leading to exaggerated liver fibrosis in NASH.\n\nCONCLUSION: These characteristic mechanisms of FC accumulation in HSCs are potential targets to treat liver fibrosis in liver diseases including NASH.",
+  "text_type": "abstract",
+  "title": "Free cholesterol accumulation in hepatic stellate cells: mechanism of liver fibrosis aggravation in nonalcoholic steatohepatitis in mice."
+}

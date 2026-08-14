@@ -1,0 +1,52 @@
+{
+  "assessment_type": "model",
+  "assessments": [
+    {
+      "assessment_id": "annotation-liver-p25-r1",
+      "assessor_id": "annotation-adjudicator-opus-high-20260722",
+      "candidate_additions": [
+        "Htatip2 added as a hepatic fatty acid storage/oxidation regulator",
+        "More specific enzyme assignments: Cyp2c50 as arachidonic-acid/EET epoxygenase, Sult2a8 as the PPARalpha-regulated major 7alpha-OH bile acid sulfotransferase, Sord placed in the polyol-fructose pathway",
+        "New standalone bile acid biotransformation mechanism pairing Sult2a8 sulfonation with Cdo1 taurine conjugation and cholesterol handling",
+        "Transcription-factor regulatory context (Nrf2, CAR, PXR, PPARalpha) for the detox battery"
+      ],
+      "candidate_removed_or_weakened": [
+        "Entire nitrogen/ammonia disposal (urea cycle support) mechanism removed: Car5a (bicarbonate to CPS1) and Agmat (agmatine/arginine polyamine-urea handling) absent from all candidate mechanisms",
+        "Cdo1 reassigned from sulfur amino acid catabolism/nitrogen disposal to bile acid taurine conjugation",
+        "Lonp2 (peroxisomal Lon protease, oxidized-protein clearance) dropped",
+        "Sult2a5 and Sult2a7 downgraded from credited detox members to unsupported 'likely paralog' mentions",
+        "Perturbation regulators Tpst1, Insig1, G6pc, and Insr dropped"
+      ],
+      "core_interpretation_changed": true,
+      "decision_relevant_differences": [
+        "Baseline affirms P25 supports hepatic ammonia/nitrogen disposal via the urea cycle (Car5a->CPS1 bicarbonate, Agmat); candidate provides no basis for this, giving a reader the opposite answer to whether the program handles nitrogen/ammonia detoxification",
+        "Cdo1's pathway attribution shifts from general sulfur/nitrogen catabolism to bile acid taurine conjugation, changing which functional axis a reader assigns the gene to",
+        "Loss of urea-cycle/nitrogen context regulators (G6pc, Insr) removes the evidence anchoring the dropped nitrogen-disposal theme"
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "Both annotations share the dominant frame of a pericentral hepatocyte program coupling Phase I/II detoxification, bile acid/steroid processing, and lipid-droplet/peroxisomal fatty-acid metabolism in an aging/MASLD context, and the candidate genuinely refines the retained themes with gene-specific detail (EET epoxygenase, PPARalpha-regulated Sult2a8, Htatip2, Sord polyol pathway) and TF context. However, the candidate does not merely trim citations or qualify an existing conclusion: it eliminates one of the three named central mechanisms in the baseline — sulfur amino acid catabolism feeding hepatic nitrogen/ammonia disposal and urea-cycle support, built on Cdo1+Car5a+Agmat. Car5a and Agmat disappear entirely, and Cdo1 is re-attributed to a bile acid taurine-conjugation axis. This is an affirmative, biologically distinct functional claim (ammonia/urea handling) that a reader of the candidate would no longer draw, and Cdo1's pathway reassignment changes attribution of a shared gene. Because a reader could reach a different biological decision about whether P25 participates in nitrogen/ammonia detoxification, this exceeds refinement and constitutes a material change to a central program mechanism. This resolves the prior disagreement in favor of the materially_changed call: the secondary assessor correctly identified the same removals but under-weighted that the removed item was a distinctly named central mechanism carrying an independent functional conclusion, not a peripheral qualifier.",
+      "semantic_relation": "materially_changed",
+      "shared_core_conclusions": [
+        "Coordinated Phase I/II xenobiotic detoxification battery (Cyp2c50, Aldh1a1, Aldh3a2, Gsta3, Akr1c6) characteristic of pericentral hepatocytes",
+        "Bile acid/steroid sulfation via SULT2A enzymes supports biliary/urinary elimination",
+        "Lipid droplet biogenesis (Fitm1) coupled to peroxisomal/ER fatty acid oxidation (Eci2, Hao2, Cyb5b)",
+        "Cdo1 channels cysteine catabolism toward taurine production",
+        "Program interpreted in a pericentral hepatocyte aging/MASLD context"
+      ]
+    }
+  ],
+  "assessor_id": "annotation-adjudicator-opus-high-20260722",
+  "mode": "adjudication",
+  "schema_version": 1,
+  "telemetry": {
+    "configured_concurrency": 6,
+    "cost_telemetry_shards": 1,
+    "known_cost_usd_equivalent": 0.24446,
+    "known_duration_seconds": 68.116,
+    "model": "opus",
+    "provider": "claude",
+    "reasoning_effort": "high",
+    "shards": 1,
+    "unknown_cost_shards": 0
+  }
+}

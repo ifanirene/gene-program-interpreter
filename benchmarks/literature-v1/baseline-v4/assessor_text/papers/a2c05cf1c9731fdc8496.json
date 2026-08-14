@@ -1,0 +1,14 @@
+{
+  "content_hash": "b238711ebe8bdae2ec137eb4e18caf9c16771ec8d3488760f723ae18929f9a2d",
+  "doi": "10.1242/jcs.264456",
+  "errors": [],
+  "paper_key": "a2c05cf1c9731fdc8496",
+  "pmcid": null,
+  "pmid": "41969033",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Sensing of mechanical force is crucial in regulating vascular homeostasis, physiology and disease. Endothelial cells line the lumens of blood vessels and are constantly exposed to flowing blood. This generates mechanical shear stress, which is instrumental in modulating endothelial cell behavior. Mechanosensitive proteins, including ion channels, G protein-coupled receptors (GPCR) and other cell surface receptors, adhesion molecules, integrins, primary cilia, cytoskeletal elements and the glycocalyx, transduce mechanical stimuli into biochemical signals that are essential for maintaining vascular integrity, responding to inflammatory stimuli and facilitating angiogenesis and arteriogenesis. Disruption in shear stress sensing can lead to pathological conditions, such as atherosclerosis or vascular anomalies. This Review article provides an integrated overview of the current knowledge on endothelial shear stress sensing and highlights key unanswered questions that will shape future research in vascular biology and disease.",
+  "text_type": "abstract",
+  "title": "Sensing of shear stress in vascular endothelial cells - from physiology to pathology."
+}

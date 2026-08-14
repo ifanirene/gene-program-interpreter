@@ -1,0 +1,1088 @@
+{
+  "schema_version": 1,
+  "assessor_type": "model",
+  "assessor_id": "primary-p10",
+  "reviews": [
+    {
+      "review_id": "RL-0ff43b052cd2bf7e11f8",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "directness": "observational",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Finally, in vitro co-sedimentation assays using recombinant proteins showed that both mouse and Chlamydomonas NDK7 directly bind to microtubules.",
+        "start": 912,
+        "end": 1057,
+        "source_type": "abstract"
+      },
+      "rationale": "The paper directly studies NDK7/Nme7 and supports microtubule binding plus association with ciliated tissues; it does not study endothelium.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-2b08d7300d6d1b149678",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "In the embryonic and adult cardiovascular system, they have been demonstrated to function as shear stress sensors on endothelial cells and could act as strain sensors on smooth muscle cells and cardiomyocytes and as chemosensors on fibroblasts.",
+        "start": 566,
+        "end": 810,
+        "source_type": "abstract"
+      },
+      "rationale": "This review supports endothelial primary cilia as shear sensors, but it is cardiovascular-wide rather than brain-endothelial evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-3251db962d3d02712309",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Moreover, abrogation of GATA2 in endothelium demonstrated not only a reduction of endothelial-specific markers, but also induction of mesenchymal transition promoting gene expression.",
+        "start": 959,
+        "end": 1142,
+        "source_type": "abstract"
+      },
+      "rationale": "GATA2 perturbation supports its role in endothelial identity, but no supplied core P10 gene is studied and the endothelium is not brain-specific.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-367170f394bf65b1774d",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Dzip1l also has overlapping functions with Bromi (Tbc1d32) in ciliogenesis, cilia morphogenesis and neural tube patterning.",
+        "start": 703,
+        "end": 826,
+        "source_type": "abstract"
+      },
+      "rationale": "The mouse genetic study directly connects Tbc1d32/Bromi to ciliogenesis, but in neural developmental cells rather than endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-3f6fc3234d7e7cfd4227",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Our data support a model where Cc2d2a, localized at the connecting cilium of the photoreceptor, functions in Rab8-dependent trafficking and fusion of opsin-carrier vesicles.",
+        "start": 5308,
+        "end": 5481,
+        "source_type": "full_text"
+      },
+      "rationale": "Cc2d2a is experimentally studied and supports transition-zone Rab8-dependent trafficking, in zebrafish photoreceptors rather than endothelial cells.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-40f6fcb9756c008f9136",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "These results suggest that SDCCAG8-C is required for cilia formation.",
+        "start": 10813,
+        "end": 10882,
+        "source_type": "full_text"
+      },
+      "rationale": "Knockdown/rescue and mouse genetics support an essential C-terminal Sdccag8 module for cilia formation; the studied systems are not endothelial.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-4fb2ff1615d99a481738",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In the adult retina and cerebellum, gain or loss of Norrin/Fz4 signaling results in a cell-autonomous gain or loss, respectively, of blood retina barrier and blood brain barrier function, indicating an ongoing requirement for Frizzled signaling in barrier maintenance and substantial plasticity in mature CNS vascular structure.",
+        "start": 689,
+        "end": 1017,
+        "source_type": "abstract"
+      },
+      "rationale": "Mouse gain/loss experiments support Fzd4-dependent CNS endothelial barrier maintenance, although Fzd4 is a regulator rather than a supplied core gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-685737eb16fcf10d64bb",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In particular, the combined loss of Wnt7a and Norrin or Wnt7a and Frizzled4 (Fz4) leads to anatomically localized BBB defects that are far more severe than observed with loss of Wnt7a, Norrin, or Fz4 alone.",
+        "start": 452,
+        "end": 658,
+        "source_type": "abstract"
+      },
+      "rationale": "Postnatal mouse genetics directly supports cooperation between Fzd4/Norrin and Wnt7 signaling in BBB maintenance; no core P10 gene is involved.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-72ec97d8fe019a11456e",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "For example, in ciliopathy models exhibiting both cochlear shortening and polarity defects, including Ift88, Kif3a, Ift27, Cilk1, and Tbc1d32bromi mutants (Figure 2; Jones et al., 2008; May-Simera et al., 2015; Sipe and Lu, 2011), SHH signaling is impaired (Table 2; Bangs and Anderson, 2017; Eguether et al., 2018; Huangfu et al., 2003).",
+        "start": 66935,
+        "end": 67273,
+        "source_type": "full_text"
+      },
+      "rationale": "Tbc1d32 mutant phenotyping supports ciliary defects with impaired SHH signaling, but the context is mouse cochlea rather than endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-759066a26f7bef444e90",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "This shows that primary cilia sensitize endothelial cells for fluid shear stress.",
+        "start": 704,
+        "end": 785,
+        "source_type": "abstract"
+      },
+      "rationale": "Chemical cilia removal and KLF2 response support endothelial shear mechanosensing, but the cells are embryonic cardiac/arterial endothelium rather than brain endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-958e86a35a3a582b9ce0",
+      "assessor_id": "primary-p10",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Endoglin, the ALK1 co-receptor, has been shown to be associated with neurovascular abnormalities.",
+        "start": 19964,
+        "end": 20061,
+        "source_type": "full_text"
+      },
+      "rationale": "The review places Endoglin in cerebrovascular homeostasis, but gives only indirect synthesis for the specific proliferation/brain-AVM claim and studies no core P10 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-9594ecb69af61acee588",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "We conclude that NDP-induced FZD4 endocytosis and endo-lysosomal trafficking control retinal angiogenesis and barrier function.",
+        "start": 4709,
+        "end": 4836,
+        "source_type": "full_text"
+      },
+      "rationale": "The study directly supports FZD4 trafficking in retinal endothelial barrier biology, a closely related CNS endothelial context rather than brain endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-96abb021ff0e3da9ea57",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Knockdown of Bbs9 using mouse specific shRNA constructs negatively affected ciliogenesis in IMCD3 cells, resulting in more cells with no cilia compared to the control transfection",
+        "start": 17186,
+        "end": 17365,
+        "source_type": "full_text"
+      },
+      "rationale": "Bbs9 knockdown directly reduces ciliogenesis, but the cultured cells and zebrafish assays are not endothelial.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-97374e5a8662c474b3be",
+      "assessor_id": "primary-p10",
+      "support": "partial",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Loss of mks1, rpgrip1l, tmem67, tmem216, tctn1 and b9d2 appeared to result in strong disruption of the cone outer segments, whereas loss of cc2d2a resulted in mild disruption.",
+        "start": 21298,
+        "end": 21473,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper directly tests Cc2d2a as a transition-zone mutant, but Nme7 is absent from the paper despite the selection reason naming it.",
+      "red_flags": [
+        "context_overclaim",
+        "wrong_gene"
+      ]
+    },
+    {
+      "review_id": "RL-9fb24ff337e1d65091c3",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "directness": "observational",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "These VIP and immunoblotting data suggest that BBS9 can reinforce the interaction of ARL6 with BBS1, although it does not directly interact with ARL6 (see Discussion).",
+        "start": 29660,
+        "end": 29827,
+        "source_type": "full_text"
+      },
+      "rationale": "Protein-interaction experiments directly support the claimed BBS9 reinforcement of ARL6-BBS1 assembly; the systems are HEK293T/RPE1 cells.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-a1a5c12d45752d07aeff",
+      "assessor_id": "primary-p10",
+      "support": "partial",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "C2cd3 is also localized to the distal ends of both mother and daughter centrioles and is required for the recruitment of five centriolar distal appendage proteins: Sclt1, Ccdc41, Cep89, Fbf1, and Cep164.",
+        "start": 470,
+        "end": 673,
+        "source_type": "abstract"
+      },
+      "rationale": "The paper directly measures Cep164 recruitment, but the docking and IFT requirement is established for C2cd3 rather than by perturbing Cep164 itself.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-a3b381a44c03d7021b37",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Tet1"
+      ],
+      "function_supported_genes": [
+        "Tet1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "This increase in transcription is mediated by the upregulation of Tet1; the elevated TET1 protein partially demethylates the miR-150 promoter into a 5hmC-rich sequence.",
+        "start": 1583,
+        "end": 1751,
+        "source_type": "abstract"
+      },
+      "rationale": "The abstract directly supports Tet1-mediated promoter demethylation in brain microvascular endothelial cells and the resulting angiogenic-miRNA regulation.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-b67a3002ec83b19ac8aa",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Like Tctn1, loss of Tctn2, Tmem67 or Cc2d2a causes tissue-specific defects in ciliogenesis and ciliary membrane composition.",
+        "start": 688,
+        "end": 812,
+        "source_type": "abstract"
+      },
+      "rationale": "Loss-of-function evidence supports Cc2d2a in transition-zone control of ciliogenesis and membrane composition; the tissues are not endothelial.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-b90efc5b0f45e2cc096d",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "function_supported_genes": [
+        "Ift74"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "These results indicate that, together, the IFT81 and IFT74 N-termini are crucial for flagellar assembly, and are likely to function as the main module for IFT of tubulin.",
+        "start": 829,
+        "end": 999,
+        "source_type": "abstract"
+      },
+      "rationale": "Chlamydomonas mutant experiments directly support the Ift74-Ift81 tubulin transport module; the context is evolutionarily informative but non-endothelial.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-d524d2b751f75cf3155e",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "directness": "observational",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Surprisingly, we found that a subcomplex of the BBSome containing at least BBS1, BBS5, BBS8 and BBS9 is recruited to cilia in the absence of BBS2 or BBS7.",
+        "start": 753,
+        "end": 907,
+        "source_type": "abstract"
+      },
+      "rationale": "The mouse retinal study directly tracks BBS9-containing BBSome entry into photoreceptor cilia, but is not endothelial evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-d6a9235e6e7e7f9749f7",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "WDPCP regulated ciliogenesis and cilia beating through the MAPK/ERK pathway in HSECs.",
+        "start": 13528,
+        "end": 13613,
+        "source_type": "full_text"
+      },
+      "rationale": "WDPCP perturbation supports ciliogenesis and ciliary beating through MAPK/ERK in human nasal epithelial cells, not endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-da3108b12f0080269960",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Using canonical Wnt signaling assays in cell culture and genetic loss- and gain-of-function experiments in mice, we show that Gpr124 functions as a coactivator of Wnt7a- and Wnt7b-stimulated canonical Wnt signaling via a Frizzled receptor and Lrp coreceptor and that Gpr124-stimulated signaling functions in concert with Norrin/Frizzled4 signaling to control CNS vascular development.",
+        "start": 390,
+        "end": 774,
+        "source_type": "abstract"
+      },
+      "rationale": "The mouse study supports concerted Wnt7/Gpr124 and Norrin/Fzd4 signaling in CNS vascular development, but studies no supplied core P10 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-db2707a0d0051935b1fd",
+      "assessor_id": "primary-p10",
+      "support": "partial",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "WDPCP regulated ciliogenesis and cilia beating through the MAPK/ERK pathway in HSECs.",
+        "start": 13528,
+        "end": 13613,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper supports WDPCP-dependent cilia function, but it does not test endothelial shear mechanosensing or BBB maturation and uses nasal epithelium.",
+      "red_flags": [
+        "context_overclaim",
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-e18432e3b3cf4b292755",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Endothelial primary cilia protruding from the inner surface of blood vessel walls sense changes in blood flow and convert this mechanosensation into an intracellular biochemical/molecular signal, which triggers a cellular response.",
+        "start": 104,
+        "end": 335,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports vascular endothelial cilia as flow sensors, but not specifically brain endothelial cells.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-0d5d1e99110749460013",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Endoglin, alias CD105, is a human membrane glycoprotein highly expressed in vascular endothelial cells. It is involved in angiogenesis and angiogenesis-related diseases, including the rare vascular pathology known as hereditary hemorrhagic telangiectasia type 1.",
+        "start": 0,
+        "end": 262,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports Endoglin as a vascular-endothelial angiogenesis/homeostasis regulator, though it is not brain-specific and Endoglin is not a core P10 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-0ecdc45252683acc7602",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "directness": "observational",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Here we have analyzed the 99-kDa human BBS9 protein, one of the eight BBSome components. The protein is composed of four structured domains, including a β-stranded N-terminal domain. The 1.8 Å crystal structure of the 46-kDa N-terminal domain reveals a seven-bladed β-propeller. A structure-based homology search suggests that it functions in protein-protein interactions.",
+        "start": 203,
+        "end": 575,
+        "source_type": "abstract"
+      },
+      "rationale": "The structural study directly analyzes BBS9 and supports a protein-interaction architecture for BBSome assembly; it does not provide cell-context evidence.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-16a1363fc8c9ceaea171",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Our data show that rapamycin treatment enhances calcium influx after induction of shear stress in epithelial and endothelial cells (Figure 4A).",
+        "start": 12009,
+        "end": 12152,
+        "source_type": "full_text"
+      },
+      "rationale": "Mouse vascular endothelial-cell experiments support primary-cilium mechanosensitivity and its modulation by cilium length, but the cells are not brain-specific.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-3b4e101ec46d4aefdadc",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "However, L6-F4-2 treatment markedly improved BRB and BBB function, reducing biotin extravasation in NdpKO retina and cerebellum to essentially WT levels",
+        "start": 24529,
+        "end": 24681,
+        "source_type": "full_text"
+      },
+      "rationale": "A FZD4-selective WNT surrogate causally restores barrier function in neonatal CNS vasculature and adult stroke, but Fzd4 is a regulator rather than a core gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-5a5fe09c2c028b402b2d",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In summary, the CRISPR/Cas-9-mediated knock-out of the rat Nme7 gene resulted in a range of conditions consistent with the presentation of primary ciliary dyskinesia [42], supporting the previously implicated role of the centrosomally located Nme7 in ciliogenesis and the control of ciliary transport.",
+        "start": 21429,
+        "end": 21730,
+        "source_type": "full_text"
+      },
+      "rationale": "Rat Nme7 knockout directly supports a ciliogenesis/ciliary-transport function, but in motile-cilia phenotypes outside endothelium.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-6b0cc8c75820777fed49",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "For example, in ciliopathy models exhibiting both cochlear shortening and polarity defects, including Ift88, Kif3a, Ift27, Cilk1, and Tbc1d32bromi mutants (Figure 2; Jones et al., 2008; May-Simera et al., 2015; Sipe and Lu, 2011), SHH signaling is impaired (Table 2; Bangs and Anderson, 2017; Eguether et al., 2018; Huangfu et al., 2003).",
+        "start": 66935,
+        "end": 67273,
+        "source_type": "full_text"
+      },
+      "rationale": "Tbc1d32 mutant phenotypes support ciliary control of SHH signaling in mouse cochlea; this is correctly labeled indirect to brain endothelium.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-6f434a5254769b3a969f",
+      "assessor_id": "primary-p10",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In this Review, we discuss how cilia function as signalling hubs in cell-cell communication using three signalling pathways as examples: ciliary G-protein-coupled receptors (GPCRs), the Hedgehog (Hh) pathway and polycystin ion channels.",
+        "start": 404,
+        "end": 640,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports cilia as signaling hubs but does not address endothelial flow sensing, BBB maturation, or any supplied core gene.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-7b48bebde36f0916fddc",
+      "assessor_id": "primary-p10",
+      "support": "no",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "",
+        "start": null,
+        "end": null,
+        "source_type": ""
+      },
+      "rationale": "The paper is in the exact brain-endothelial context, but explicitly says empirical support for BEC ciliary mechanosensing is lacking and instead favors nanotubules for barrier genesis.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-8d4f99c0e9880c1234ec",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "function_supported_genes": [
+        "Ift74"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Here, we report PCD and motile cilia defects associated with mutations in IFT74, a component of the anterograde IFT-B complex, and show the consequences of an IFT74 inframe N-terminal deletion on its interactions with other IFT-B components.",
+        "start": 6376,
+        "end": 6617,
+        "source_type": "full_text"
+      },
+      "rationale": "Human IFT74 mutations and airway-cell experiments support an essential IFT/ciliary role, but in respiratory epithelium rather than endothelium.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-94fc72dac874e940bc4a",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We conclude that NDP-induced FZD4 endocytosis and endo-lysosomal trafficking control retinal angiogenesis and barrier function.",
+        "start": 4709,
+        "end": 4836,
+        "source_type": "full_text"
+      },
+      "rationale": "The study directly supports FZD4 trafficking in retinal endothelial barrier biology, a related CNS endothelial context; Fzd4 is not a core gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-9bc4f06ab5e3b044d39f",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Recently, endothelial cilia is thought to play an important role in brain vascular barrier function (Ma and Zhou, 2020), which is an emerging area of research in brain vascular biology.",
+        "start": 37560,
+        "end": 37745,
+        "source_type": "full_text"
+      },
+      "rationale": "The review accurately identifies brain-endothelial cilia and vascular-barrier function as an emerging mechanism, without claiming that a supplied gene was tested.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-ab691fc8aa6d5adf5347",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "WDPCP regulated ciliogenesis and cilia beating through the MAPK/ERK pathway in HSECs.",
+        "start": 13528,
+        "end": 13613,
+        "source_type": "full_text"
+      },
+      "rationale": "WDPCP perturbation supports ciliogenesis, cilia beating, and MAPK/ERK linkage in nasal epithelial cells; indirect context is correctly declared.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-b2fdeb39284ec689fbe9",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We show that Cep164 is essential for the initial establishment of the ciliary membrane at the distal end of the M-centriole.",
+        "start": 3771,
+        "end": 3895,
+        "source_type": "full_text"
+      },
+      "rationale": "Cep164 depletion and interaction studies directly support its role linking the mother centriole to ciliary membrane formation; the RPE cell context is indirect.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-b6727b17806fe92d13c9",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Mechanosensitive proteins, including ion channels, G protein-coupled receptors (GPCR) and other cell surface receptors, adhesion molecules, integrins, primary cilia, cytoskeletal elements and the glycocalyx, transduce mechanical stimuli into biochemical signals that are essential for maintaining vascular integrity, responding to inflammatory stimuli and facilitating angiogenesis and arteriogenesis.",
+        "start": 298,
+        "end": 699,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports primary cilia among vascular endothelial shear transducers, but is not brain-specific and covers no supplied core gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-baa904e1b062a4cbb29d",
+      "assessor_id": "primary-p10",
+      "support": "partial",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "These mice exhibited early onset retinal degeneration that was associated with rhodopsin mislocalization in the photoreceptors and reduced cone cell numbers, and led to progressive loss of vision.",
+        "start": 602,
+        "end": 798,
+        "source_type": "abstract"
+      },
+      "rationale": "The paper studies Sdccag8 loss and retinal trafficking pathology, but does not establish the assigned cilia-formation/transition-zone function and reports no global renal ciliary defect.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-c1c8b35a258f04ef42d6",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In contrast, reduced expression of Cep83, Sclt1, and Cep164 markedly decreased cilia frequency compared to controls",
+        "start": 15318,
+        "end": 15433,
+        "source_type": "full_text"
+      },
+      "rationale": "Cep164 siRNA directly reduces primary-cilium assembly and impairs basal-body docking in fibroblasts; the context is correctly indirect.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-cd80945e765766106d25",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Based on the physical and genetic interactions that we identify, we propose a model in which CC2D2A provides a docking point at the photoreceptor ciliary base, allowing RAB8A-positive vesicles to bind through a series of interactions involving CC2D2A-NINL-MICAL3-RAB8A.",
+        "start": 5631,
+        "end": 5900,
+        "source_type": "full_text"
+      },
+      "rationale": "Physical and genetic interaction data support CC2D2A-dependent RAB8 vesicle docking at the ciliary base; the photoreceptor context is indirect.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-d44dae990d9dd41eb8fc",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Downregulation of miR-200b derepressed GATA2 and VEGFR2 expression to switch on wound angiogenesis, which was disrupted in diabetic wounds.",
+        "start": 778,
+        "end": 917,
+        "source_type": "abstract"
+      },
+      "rationale": "Perturbation and rescue experiments support GATA2 in endothelial angiogenic switching, in dermal rather than brain endothelium; no core gene is studied.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-d5a274b0a6c97b8ef270",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "function_supported_genes": [
+        "Ift74"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "These results indicate that, together, the IFT81 and IFT74 N-termini are crucial for flagellar assembly, and are likely to function as the main module for IFT of tubulin.",
+        "start": 829,
+        "end": 999,
+        "source_type": "abstract"
+      },
+      "rationale": "Chlamydomonas Ift74 mutants directly support the tubulin-carrying IFT module; its evolutionary but non-endothelial context is correctly indirect.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-d863ad0c090f76d8bbe5",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The Norrin protein is secreted by retinal Müller glial cells and the Norrin homodimer binds to FZD-4, which triggers canonical Wnt-signaling that governs angiogenesis in the retina and the inner ear [39,40].",
+        "start": 20704,
+        "end": 20911,
+        "source_type": "full_text"
+      },
+      "rationale": "The review supports FZD4/Norrin control of retinal endothelial angiogenesis and barrier-like biology, a related CNS endothelial context; no core gene is studied.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-e83dff7ac5537f433f9c",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "underclaimed",
+      "evidence_span": {
+        "text": "Conversely, silencing of GATA2 and Lmo2 expression in primary EC inhibited VEGF-induced angiogenic activity, including EC migration and sprouting in vitro, two key steps of angiogenesis in vivo.",
+        "start": 483,
+        "end": 677,
+        "source_type": "abstract"
+      },
+      "rationale": "GATA2 silencing directly impairs angiogenic behavior in primary endothelial cells. This is partial same-cell-type evidence, so the agent's indirect label is too conservative.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-eb9c54402cfc7cdb48d9",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "This shows that primary cilia sensitize endothelial cells for fluid shear stress.",
+        "start": 704,
+        "end": 785,
+        "source_type": "abstract"
+      },
+      "rationale": "Embryonic cardiac endothelial experiments directly support ciliary shear sensing, but are partial rather than brain-endothelial context as declared.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-ef375850d4e529f2f519",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "underclaimed",
+      "evidence_span": {
+        "text": "Hereditary hemorrhagic telangiectasia (HHT) is caused by mutations in endoglin (ENG; HHT1) or ACVRL1/ALK1 (HHT2) genes and is an autosomal dominant vascular dysplasia. Clinically, HHT is characterized by epistaxis, telangiectases and arteriovenous malformations in some internal organs such as the lung, brain or liver. Endoglin and ALK1 proteins are specific endothelial receptors of the transforming growth factor (TGF)-beta superfamily that are essential for vascular integrity.",
+        "start": 0,
+        "end": 481,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports Endoglin mutation, endothelial TGF-beta signaling, and brain AVM relevance. This is partial endothelial/cerebrovascular evidence, not wholly indirect.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-f3cde43988e60609c9c9",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Like Tctn1, loss of Tctn2, Tmem67 or Cc2d2a causes tissue-specific defects in ciliogenesis and ciliary membrane composition.",
+        "start": 688,
+        "end": 812,
+        "source_type": "abstract"
+      },
+      "rationale": "Cc2d2a loss directly supports transition-zone control of ciliary assembly and trafficking in non-endothelial mouse tissues.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-fc0b531c63a689aa5cdd",
+      "assessor_id": "primary-p10",
+      "support": "supports",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "These findings indicate that one of the major functions of Cep164 in ciliogenesis is to recruit active TTBK2 to centrioles.",
+        "start": 798,
+        "end": 921,
+        "source_type": "abstract"
+      },
+      "rationale": "Cep164 depletion/rescue directly supports recruitment of TTBK2 as an initiating ciliogenesis function; the cultured-cell context is indirect.",
+      "red_flags": []
+    }
+  ]
+}

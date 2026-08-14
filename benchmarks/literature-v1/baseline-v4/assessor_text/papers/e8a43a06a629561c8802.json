@@ -1,0 +1,16 @@
+{
+  "content_hash": "3815c89b3998e1c031471b9fbbbfd924008353020846f37fa3ec11ad02c57c59",
+  "doi": "10.1073/pnas.0708579105",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "e8a43a06a629561c8802",
+  "pmcid": "PMC2224239",
+  "pmid": "18160536",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The ability to store fat in the form of cytoplasmic triglyceride droplets is conserved from Saccharomyces cerevisiae to humans. Although much is known regarding the composition and catabolism of lipid droplets, the molecular components necessary for the biogenesis of lipid droplets have remained obscure. Here we report the characterization of a conserved gene family important for lipid droplet formation named fat-inducing transcript (FIT). FIT1 and FIT2 are endoplasmic reticulum resident membrane proteins that induce lipid droplet accumulation in cell culture and when expressed in mouse liver. shRNA silencing of FIT2 in 3T3-LI adipocytes prevents accumulation of lipid droplets, and depletion of FIT2 in zebrafish blocks diet-induced accumulation of lipid droplets in the intestine and liver, highlighting an important role for FIT2 in lipid droplet formation in vivo. Together these studies identify and characterize a conserved gene family that is important in the fundamental process of storing fat.",
+  "text_type": "abstract",
+  "title": "Evolutionarily conserved gene family important for fat storage."
+}

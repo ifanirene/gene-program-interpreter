@@ -42,8 +42,10 @@ import argparse
 import asyncio
 import json
 import logging
+import math
 import os
 import shutil
+import time
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -63,6 +65,7 @@ from pydantic import ValidationError
 from research.literature import (
     LITERATURE_SERVER_NAME,
     LiteratureClient,
+    LiteratureTraceRecorder,
     build_literature_mcp_server,
 )
 from research.schema import AgentResearchResult, ResearchResult, submit_result_tool_schema
@@ -78,6 +81,30 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 
+class ResearchLimitExceeded(RuntimeError):
+    """A deterministic client-side ceiling; retrying unchanged limits cannot help."""
+
+
+def validate_research_limits(
+    max_turns: Optional[int], max_budget_usd: float, per_program_timeout: float
+) -> None:
+    if max_turns is not None and (
+        isinstance(max_turns, bool) or not isinstance(max_turns, int) or max_turns <= 0
+    ):
+        raise ValueError("max_turns must be a positive integer or None")
+    for name, value in (
+        ("max_budget_usd", max_budget_usd),
+        ("per_program_timeout", per_program_timeout),
+    ):
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(float(value))
+            or float(value) <= 0
+        ):
+            raise ValueError(f"{name} must be positive and finite")
+
+
 # --------------------------------------------------------------------------- constants
 
 # The literature tools are served by a single in-process SDK MCP server
@@ -87,7 +114,7 @@ logger = logging.getLogger(__name__)
 
 # Tools every session may use regardless of source (exact matches). ``Read`` stays allowed so
 # the agent can read its own bundle from the session cwd.
-BASE_ALLOWED_TOOLS: List[str] = ["mcp__gpi__submit_result", "Read"]
+BASE_ALLOWED_TOOLS: List[str] = ["mcp__gpi__submit_result"]
 
 # Belt-and-suspenders denylist (in addition to deny-by-default + strict_mcp_config): the
 # side-effecting / off-task built-ins the research agent must never use. This is what the
@@ -194,7 +221,7 @@ def _tool_allowed(tool_name: str, allowed: List[str]) -> bool:
     return False
 
 
-def _make_can_use_tool(allowed: List[str]):
+def _make_can_use_tool(allowed: List[str], *, allowed_read_path: Optional[Path] = None):
     """Build a deny-by-default permission callback bound to this session's allowlist.
 
     ``allowed_tools`` already auto-approves the read-only families without a prompt; this
@@ -207,6 +234,16 @@ def _make_can_use_tool(allowed: List[str]):
     allowed = list(allowed)
 
     async def _can_use_tool(tool_name: str, tool_input: Dict[str, Any], context: Any):
+        if tool_name == "Read" and allowed_read_path is not None:
+            requested = Path(str(tool_input.get("file_path") or ""))
+            if not requested.is_absolute():
+                requested = allowed_read_path.parent.parent / requested
+            try:
+                if requested.resolve() == allowed_read_path.resolve():
+                    return PermissionResultAllow()
+            except OSError:
+                pass
+            return PermissionResultDeny(message="Read is limited to the exact program bundle.")
         if _tool_allowed(tool_name, allowed):
             return PermissionResultAllow()
         return PermissionResultDeny(
@@ -230,9 +267,11 @@ def build_options(
     system_prompt: str,
     submit_holder: Dict[str, Any],
     model: str,
-    max_turns: int,
+    max_turns: Optional[int],
     max_budget_usd: float,
     literature_client: Optional[LiteratureClient] = None,
+    trace_recorder: Optional[LiteratureTraceRecorder] = None,
+    allowed_read_path: Optional[Path] = None,
 ) -> ClaudeAgentOptions:
     """Construct the per-program ``ClaudeAgentOptions`` (one isolated session).
 
@@ -244,21 +283,29 @@ def build_options(
     the deny callback. Also applies the read-only allowlist, a side-effect denylist, and the
     SDK-native turn/budget caps.
     """
+    validate_research_limits(max_turns, max_budget_usd, 1.0)
     submit_tool = _make_submit_tool(submit_holder)
     gpi_server = create_sdk_mcp_server(name=SUBMIT_SERVER_NAME, version="1.0.0", tools=[submit_tool])
 
     mcp_servers: Dict[str, Any] = {
         SUBMIT_SERVER_NAME: gpi_server,
-        LITERATURE_SERVER_NAME: build_literature_mcp_server(literature_client),
+        LITERATURE_SERVER_NAME: build_literature_mcp_server(
+            literature_client, trace_recorder=trace_recorder
+        ),
     }
 
     allowed = resolve_allowed_tools()
+    if allowed_read_path is None:
+        bundle_paths = sorted((workspace / "program_bundles").glob("*.json"))
+        if len(bundle_paths) != 1:
+            raise ValueError("research workspace must contain exactly one program bundle")
+        allowed_read_path = bundle_paths[0]
     return ClaudeAgentOptions(
         system_prompt=system_prompt,
         mcp_servers=mcp_servers,
         allowed_tools=list(allowed),
         disallowed_tools=list(DISALLOWED_TOOLS),   # explicit denylist (belt-and-suspenders)
-        can_use_tool=_make_can_use_tool(allowed),
+        can_use_tool=_make_can_use_tool(allowed, allowed_read_path=allowed_read_path),
         permission_mode="default",          # deny-by-default via can_use_tool; no blanket bypass
         setting_sources=[],                 # sandbox: isolate from user/project settings
         strict_mcp_config=True,             # ignore any settings-file MCP servers when sandboxed
@@ -392,6 +439,195 @@ def _token_summary(usage: Optional[Dict[str, Any]]) -> Optional[Dict[str, int]]:
     }
 
 
+def derive_queries_from_trace(literature_trace: List[Dict[str, Any]]) -> List[str]:
+    """Return first-seen exact PubMed/OpenAlex search queries, deduping exact repeats."""
+    queries: List[str] = []
+    seen: set[str] = set()
+    for event in literature_trace:
+        query = event.get("query")
+        if (
+            event.get("action") == "search"
+            and event.get("source") in {"pubmed", "openalex"}
+            and isinstance(query, str)
+            and query
+            and query not in seen
+        ):
+            seen.add(query)
+            queries.append(query)
+    return queries
+
+
+def summarize_literature_trace(
+    literature_trace: List[Dict[str, Any]], supplied_genes: List[str]
+) -> Dict[str, Any]:
+    """Separate supplied-gene attempts from regulator research deterministically."""
+    supplied_lookup = {gene.casefold(): gene for gene in supplied_genes}
+    attempted: set[str] = set()
+    regulator_targets: set[str] = set()
+    supplied_queries = 0
+    regulator_queries = 0
+    for event in literature_trace:
+        if event.get("action") != "search":
+            continue
+        phase = event.get("research_phase")
+        targets = [str(value) for value in event.get("target_genes") or []]
+        if phase in {"supplied_gene", "gap"}:
+            supplied_queries += 1
+            attempted.update(
+                supplied_lookup[target.casefold()]
+                for target in targets
+                if target.casefold() in supplied_lookup
+            )
+        elif phase == "regulator":
+            regulator_queries += 1
+            regulator_targets.update(targets)
+    return {
+        "supplied_genes": list(supplied_genes),
+        "attempted_supplied_genes": [gene for gene in supplied_genes if gene in attempted],
+        "unattempted_supplied_genes": [gene for gene in supplied_genes if gene not in attempted],
+        "supplied_gene_query_count": supplied_queries,
+        "regulator_targets": sorted(
+            regulator_targets, key=lambda value: (value.casefold(), value)
+        ),
+        "regulator_query_count": regulator_queries,
+    }
+
+
+def validate_retrieval_contract(
+    agent: AgentResearchResult,
+    bundle: Dict[str, Any],
+    literature_trace: List[Dict[str, Any]],
+) -> None:
+    """Reject incomplete retrieval-first submissions before normalization."""
+    supplied = list(
+        dict.fromkeys((bundle.get("program_genes") or []) + (bundle.get("distinctive_genes") or []))
+    )
+    expected = {gene.casefold(): gene for gene in supplied}
+    ledger = {entry.gene.casefold(): entry for entry in agent.supplied_gene_ledger}
+    if set(ledger) != set(expected):
+        missing = [gene for key, gene in expected.items() if key not in ledger]
+        extra = [entry.gene for key, entry in ledger.items() if key not in expected]
+        raise ValueError(f"supplied_gene_ledger mismatch; missing={missing}, extra={extra}")
+
+    traced = {
+        str(gene).casefold()
+        for event in literature_trace
+        if event.get("action") == "search"
+        and event.get("research_phase") in {"supplied_gene", "gap"}
+        for gene in event.get("target_genes") or []
+    }
+    for key, entry in ledger.items():
+        if entry.state != "unresolved_identifier" and (
+            not entry.search_attempted or key not in traced
+        ):
+            raise ValueError(f"{entry.gene}: terminal ledger state lacks a trace-backed search")
+        if entry.state == "searched_no_evidence" and not entry.search_attempted:
+            raise ValueError(f"{entry.gene}: searched_no_evidence requires search_attempted")
+
+    function_supported = {
+        gene.casefold()
+        for mechanism in agent.candidate_mechanisms[:3]
+        for paper in mechanism.papers
+        for gene in paper.function_supported_genes
+    }
+    for key, entry in ledger.items():
+        if entry.state == "evidence_found" and key not in function_supported:
+            raise ValueError(f"{entry.gene}: evidence_found lacks an exact gene-paper edge")
+
+    expected_regulators = {
+        str(record.get("gene", "")).strip().casefold()
+        for records in (bundle.get("perturbation_regulators") or {}).values()
+        for record in records
+        if str(record.get("gene", "")).strip()
+    }
+    actual_regulators = {entry.gene.casefold() for entry in agent.regulator_ledger}
+    if actual_regulators != expected_regulators:
+        raise ValueError("regulator_ledger must account for surfaced regulators separately")
+
+    for mechanism in agent.candidate_mechanisms[:3]:
+        function_supported = {
+            gene.casefold()
+            for paper in mechanism.papers
+            for gene in paper.function_supported_genes
+        }
+        missing_support = [
+            gene for gene in mechanism.supporting_genes
+            if gene.casefold() not in function_supported
+        ]
+        if missing_support:
+            raise ValueError(
+                f"{mechanism.name}: supporting genes lack function evidence: {missing_support}"
+            )
+        for paper in mechanism.papers:
+            if paper.text_type == "unavailable":
+                raise ValueError(f"{mechanism.name}: selected paper is title-only/unavailable")
+            if paper.selection_reason == "legacy evidence link":
+                raise ValueError(f"{mechanism.name}: selected paper lacks a selection reason")
+            if paper.function_supported_genes and not all(
+                value.strip()
+                for value in (
+                    paper.finding, paper.direction, paper.context,
+                    paper.limitation, paper.evidence_span,
+                )
+            ):
+                raise ValueError(
+                    f"{mechanism.name}: function edge lacks finding/direction/context/"
+                    "limitation/evidence span"
+                )
+
+
+def canonicalize_supplied_gene_ledger(
+    agent: AgentResearchResult,
+) -> list[dict[str, str]]:
+    """Conservatively remove function credit that is not backed by an exact paper edge.
+
+    The immutable raw payload retains the agent-authored ledger. The canonical result may only
+    downgrade an optimistic state; it never upgrades a gene or invents evidence.
+    """
+    supported = {
+        gene.casefold()
+        for mechanism in agent.candidate_mechanisms[:3]
+        for paper in mechanism.papers
+        for gene in paper.function_supported_genes
+    }
+    corrections: list[dict[str, str]] = []
+    for entry in agent.supplied_gene_ledger:
+        if entry.state != "evidence_found" or entry.gene.casefold() in supported:
+            continue
+        corrections.append(
+            {
+                "gene": entry.gene,
+                "agent_state": "evidence_found",
+                "canonical_state": "searched_no_evidence",
+                "reason": "no exact mechanism-local function-supported paper edge",
+            }
+        )
+        entry.state = "searched_no_evidence"
+    return corrections
+
+
+def _attempt_totals(attempt_records: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def _sum(field: str) -> Any:
+        values = [record.get(field) for record in attempt_records]
+        numeric = [value for value in values if isinstance(value, (int, float))]
+        return sum(numeric) if numeric else None
+
+    token_fields = ("input", "output", "cache_read", "cache_creation", "total")
+    tokens = {
+        field: sum(
+            int((record.get("tokens") or {}).get(field) or 0)
+            for record in attempt_records
+        )
+        for field in token_fields
+    }
+    return {
+        "cost_usd": _sum("cost_usd"),
+        "num_turns": _sum("num_turns"),
+        "duration_ms": _sum("duration_ms"),
+        "tokens": tokens if any(tokens.values()) else None,
+    }
+
+
 def _write_audit(
     audit_dir: Path,
     program_id: str,
@@ -410,6 +646,10 @@ def _write_audit(
     stop_reason: Optional[str] = None,
     duration_ms: Optional[int] = None,
     usage: Optional[Dict[str, Any]] = None,
+    literature_trace: Optional[List[Dict[str, Any]]] = None,
+    attempt_records: Optional[List[Dict[str, Any]]] = None,
+    trace_summary: Optional[Dict[str, Any]] = None,
+    token_summary: Optional[Dict[str, int]] = None,
 ) -> Path:
     audit_path = audit_dir / f"{program_id}.audit.json"
     _write_json(
@@ -420,6 +660,9 @@ def _write_audit(
             "model": model,
             "mcp_servers": sorted(mcp_server_names),
             "tool_trace": tool_trace,
+            "literature_trace_schema_version": 2,
+            "literature_trace": literature_trace or [],
+            "trace_summary": trace_summary or {},
             "cost_usd": cost_usd,
             "num_turns": num_turns,
             # SDK terminal-state fields: whether the turn/budget cap actually bound
@@ -429,10 +672,11 @@ def _write_audit(
             "is_error": is_error,
             "stop_reason": stop_reason,
             "duration_ms": duration_ms,
-            "tokens": _token_summary(usage),
+            "tokens": token_summary if token_summary is not None else _token_summary(usage),
             "usage": usage,
             "status": status,
             "attempts": attempts,
+            "attempt_records": attempt_records or [],
             "error": error,
         },
     )
@@ -463,6 +707,8 @@ async def _drive_once(
     per_program_timeout: float,
     program_id: str = "",
     progress_cb: Optional[Callable[[str, dict], None]] = None,
+    tool_trace: Optional[List[Dict[str, Any]]] = None,
+    client_turn_limit: Optional[int] = None,
 ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     """Run ONE query() session to completion (or timeout). Returns (tool_trace, result_info).
 
@@ -474,13 +720,20 @@ async def _drive_once(
     tools, so this ToolUseBlock loop is the only place that sees every query). It is a bare
     callable (no ``gpi`` import here) and each call is a single small append downstream.
     """
-    tool_trace: List[Dict[str, Any]] = []
+    tool_trace = tool_trace if tool_trace is not None else []
     result_info: Dict[str, Any] = {}
     submit_tool_fullname = f"mcp__{SUBMIT_SERVER_NAME}__{SUBMIT_TOOL_NAME}"
 
     async def _run() -> None:
+        assistant_turns = 0
         async for msg in query(prompt=_prompt_stream(prompt), options=options):
             if isinstance(msg, AssistantMessage):
+                assistant_turns += 1
+                result_info["client_counted_turns"] = assistant_turns
+                if client_turn_limit is not None and assistant_turns > client_turn_limit:
+                    raise ResearchLimitExceeded(
+                        f"client max_turns reached ({client_turn_limit})"
+                    )
                 for block in msg.content:
                     if isinstance(block, ToolUseBlock):
                         tool_trace.append(
@@ -533,7 +786,7 @@ async def _handle_one_program(
     workspaces_root: Path,
     system_prompt: str,
     model: str,
-    max_turns: int,
+    max_turns: Optional[int],
     max_budget_usd: float,
     per_program_timeout: float,
     literature_client: Optional[LiteratureClient] = None,
@@ -550,17 +803,64 @@ async def _handle_one_program(
     of them: it stops the loop immediately rather than paying for a second session that would hit
     the same wall."""
     program_id = _read_bundle_program_id(bundle_path)
+    bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+    supplied_genes = list(
+        dict.fromkeys((bundle.get("program_genes") or []) + (bundle.get("distinctive_genes") or []))
+    )
     prompt = build_prompt(program_id)
     server_names = sorted([LITERATURE_SERVER_NAME, SUBMIT_SERVER_NAME])
+    raw_payload_path = audit_dir / f"{program_id}.raw_payload.json"
 
     last_error: Optional[str] = None
-    last_trace: List[Dict[str, Any]] = []
     last_result_info: Dict[str, Any] = {}
+    cumulative_tool_trace: List[Dict[str, Any]] = []
+    literature_trace: List[Dict[str, Any]] = []
+    attempt_records: List[Dict[str, Any]] = []
     attempts = 0
 
     for attempt in range(1, max_attempts + 1):
         attempts = attempt
         submit_holder: Dict[str, Any] = {}
+        attempt_trace: List[Dict[str, Any]] = []
+        result_info: Dict[str, Any] = {}
+        attempt_started = time.monotonic()
+        committed = False
+
+        def _commit_attempt(status: str, error: Optional[str] = None) -> None:
+            nonlocal committed
+            if committed:
+                return
+            cumulative_tool_trace.extend(
+                {"attempt": attempt, **event} for event in attempt_trace
+            )
+            duration = result_info.get("duration_ms")
+            if not isinstance(duration, int):
+                duration = round((time.monotonic() - attempt_started) * 1000)
+            attempt_records.append(
+                {
+                    "attempt": attempt,
+                    "status": status,
+                    "error": error,
+                    "subtype": result_info.get("subtype"),
+                    "is_error": result_info.get("is_error"),
+                    "stop_reason": result_info.get("stop_reason"),
+                    "num_turns": result_info.get("num_turns"),
+                    "cost_usd": result_info.get("total_cost_usd"),
+                    "duration_ms": duration,
+                    "tokens": _token_summary(result_info.get("usage")),
+                    "client_counted_turns": result_info.get("client_counted_turns"),
+                    "phase_event_counts": {
+                        phase: sum(
+                            1 for event in literature_trace
+                            if event.get("attempt") == attempt
+                            and event.get("research_phase") == phase
+                        )
+                        for phase in ("supplied_gene", "regulator", "theme", "expansion", "gap")
+                    },
+                }
+            )
+            committed = True
+
         try:
             workspace = _prepare_workspace(bundle_path, workspaces_root, program_id)
             options = build_options(
@@ -571,85 +871,81 @@ async def _handle_one_program(
                 max_turns=max_turns,
                 max_budget_usd=max_budget_usd,
                 literature_client=literature_client,
+                trace_recorder=LiteratureTraceRecorder(literature_trace, attempt=attempt),
             )
-            tool_trace, result_info = await _drive_once(
+            _, result_info = await _drive_once(
                 prompt=prompt,
                 options=options,
                 submit_holder=submit_holder,
                 per_program_timeout=per_program_timeout,
                 program_id=program_id,
                 progress_cb=progress_cb,
+                tool_trace=attempt_trace,
+                client_turn_limit=max_turns,
             )
-            last_trace, last_result_info = tool_trace, result_info
+            last_result_info = result_info
 
             payload = submit_holder.get("payload")
             if payload is None:
-                # No submit_result -> could be max_turns / budget / model just didn't call it.
                 subtype = result_info.get("subtype", "")
-                if subtype == "error_max_turns" or (result_info.get("num_turns") or 0) >= max_turns:
+                if subtype == "error_max_turns" or (
+                    max_turns is not None
+                    and (result_info.get("num_turns") or 0) >= max_turns
+                ):
                     last_error = "max_turns reached without submit_result"
                 elif "budget" in str(subtype).lower():
                     last_error = "budget exceeded without submit_result"
                 else:
                     last_error = "session ended without calling submit_result"
-                continue  # transient-ish; retry once then fall back
+                _commit_attempt("incomplete", last_error)
+                if "max_turns" in last_error or "budget" in last_error:
+                    break
+                continue
 
-            # Persist the bytes the user PAID FOR the moment they arrive — before validation,
-            # before normalization, before anything that can throw. Whatever goes wrong
-            # downstream, the raw payload is on disk and can be re-normalized offline for free.
-            raw_payload_path = audit_dir / f"{program_id}.raw_payload.json"
             try:
                 _write_json(raw_payload_path, payload)
                 logger.info(
                     "Program %s: raw submit_result payload -> %s", program_id, raw_payload_path
                 )
-            except OSError as exc:  # a write failure must not discard a good session
+            except OSError as exc:
                 logger.warning(
                     "Program %s: could not persist the raw payload to %s: %s",
                     program_id, raw_payload_path, exc,
                 )
 
-            # Belt-and-suspenders: warn on a LEGACY payload shape (claims[]/inline citations).
-            # Pydantic ignores unknown keys, so a legacy submission would silently normalize to
-            # empty evidence — surface it instead of failing silently.
             if isinstance(payload, dict):
-                _mechs = payload.get("candidate_mechanisms") or []
+                mechanisms = payload.get("candidate_mechanisms") or []
                 if "claims" in payload or any(
-                    isinstance(m, dict) and "citations" in m for m in _mechs
+                    isinstance(mechanism, dict) and "citations" in mechanism
+                    for mechanism in mechanisms
                 ):
                     logger.warning(
-                        "Program %s: submit_result payload uses the LEGACY claims/citations shape; "
-                        "the current schema attaches papers[] to each mechanism — legacy fields are "
-                        "ignored and evidence may be empty.",
-                        program_id,
+                        "Program %s: submit_result payload uses the legacy claims/citations shape; "
+                        "current papers[] fields will be used.", program_id,
                     )
 
-            # Validate the flat agent payload, then normalize to the canonical schema
-            # (build the dedup'd evidence pool + assign ids). The verifier resolves it later.
-            #
-            # The two failure modes here are NOT the same and must never be conflated:
-            #   * ValidationError -> the AGENT produced bad JSON. Retrying can fix that.
-            #   * anything else   -> INFRASTRUCTURE (a bad install, a broken import, disk).
-            #     Retrying cannot fix it and only doubles the bill, so stop after recording it.
-            #     The raw payload is already on disk (above) and can be re-normalized for free.
             try:
-                rr = normalize_agent_result(AgentResearchResult.model_validate(payload))
-            except ValidationError as ve:
-                last_error = f"submit_result payload failed schema validation: {ve}"
+                agent_result = AgentResearchResult.model_validate(payload)
+                agent_supplied_gene_ledger = [
+                    entry.model_dump(mode="json")
+                    for entry in agent_result.supplied_gene_ledger
+                ]
+                ledger_corrections = canonicalize_supplied_gene_ledger(agent_result)
+                validate_retrieval_contract(agent_result, bundle, literature_trace)
+                rr = normalize_agent_result(agent_result)
+            except (ValidationError, ValueError) as exc:
+                last_error = f"submit_result payload failed schema validation: {exc}"
+                _commit_attempt("invalid_payload", last_error)
                 continue
-            except Exception as exc:  # noqa: BLE001 - infrastructure, not the agent's fault
+            except Exception as exc:  # noqa: BLE001
                 last_error = (
                     f"infrastructure error while normalizing payload: "
                     f"{type(exc).__name__}: {exc}"
                 )
-                logger.error(
-                    "Program %s: %s — NOT retrying (a retry cannot fix this and would spend "
-                    "again); the raw payload is preserved at %s.",
-                    program_id, last_error, raw_payload_path,
-                )
-                break  # out of the retry loop -> deterministic fallback below
+                _commit_attempt("infrastructure_error", last_error)
+                logger.error("Program %s: %s — not retrying.", program_id, last_error)
+                break
 
-            # Enforce the program id echo (protocol says echo exactly; correct if drifted).
             if rr.program_id != program_id:
                 logger.warning(
                     "Program %s: agent echoed program_id=%r; overriding to bundle id.",
@@ -657,22 +953,24 @@ async def _handle_one_program(
                 )
                 rr.program_id = program_id
 
+            _commit_attempt("ok")
+            totals = _attempt_totals(attempt_records)
+            trace_summary = summarize_literature_trace(literature_trace, supplied_genes)
+            rr.queries = derive_queries_from_trace(literature_trace)
             rr.meta.update(
                 {
                     "status": "ok",
                     "model": model,
-                    "cost_usd": result_info.get("total_cost_usd"),
-                    "num_turns": result_info.get("num_turns"),
-                    # Why it stopped + token spend (see _write_audit): makes a non-binding
-                    # max_turns / budget cap visible right in the result file.
+                    **totals,
                     "stop_reason": result_info.get("stop_reason"),
                     "subtype": result_info.get("subtype"),
-                    "duration_ms": result_info.get("duration_ms"),
-                    "tokens": _token_summary(result_info.get("usage")),
                     "attempts": attempt,
+                    "trace_summary": trace_summary,
                     "n_submit_calls": submit_holder.get("calls", 1),
                     "tool_trace_path": str((audit_dir / f"{program_id}.audit.json")),
                     "raw_payload_path": str(raw_payload_path),
+                    "agent_supplied_gene_ledger": agent_supplied_gene_ledger,
+                    "ledger_corrections": ledger_corrections,
                 }
             )
             if submit_holder.get("calls", 1) > 1:
@@ -683,29 +981,28 @@ async def _handle_one_program(
             _write_audit(
                 audit_dir, program_id,
                 prompt=prompt, model=model, mcp_server_names=server_names,
-                tool_trace=tool_trace,
-                cost_usd=result_info.get("total_cost_usd"),
-                num_turns=result_info.get("num_turns"),
+                tool_trace=cumulative_tool_trace,
+                literature_trace=literature_trace,
+                trace_summary=trace_summary,
+                attempt_records=attempt_records,
+                cost_usd=totals["cost_usd"], num_turns=totals["num_turns"],
                 status="ok", attempts=attempt,
-                subtype=result_info.get("subtype"),
-                is_error=result_info.get("is_error"),
+                subtype=result_info.get("subtype"), is_error=result_info.get("is_error"),
                 stop_reason=result_info.get("stop_reason"),
-                duration_ms=result_info.get("duration_ms"),
-                usage=result_info.get("usage"),
+                duration_ms=totals["duration_ms"], token_summary=totals["tokens"],
             )
             logger.info(
                 "Program %s: ok (turns=%s, cost=%s, mechanisms=%d, evidence=%d)",
-                program_id, result_info.get("num_turns"), result_info.get("total_cost_usd"),
+                program_id, totals["num_turns"], totals["cost_usd"],
                 len(rr.candidate_mechanisms), len(rr.evidence),
             )
             if progress_cb is not None:
                 try:
                     progress_cb("agent_finished", {
                         "program_id": program_id, "status": "ok",
-                        "num_turns": result_info.get("num_turns"),
-                        "cost_usd": result_info.get("total_cost_usd"),
+                        "num_turns": totals["num_turns"], "cost_usd": totals["cost_usd"],
                         "stop_reason": result_info.get("stop_reason"),
-                        "tokens": (_token_summary(result_info.get("usage")) or {}).get("total"),
+                        "tokens": (totals["tokens"] or {}).get("total"),
                         "n_mechanisms": len(rr.candidate_mechanisms),
                         "n_evidence": len(rr.evidence),
                     })
@@ -715,47 +1012,46 @@ async def _handle_one_program(
 
         except asyncio.TimeoutError:
             last_error = f"per_program_timeout ({per_program_timeout}s) exceeded"
+            _commit_attempt("timeout", last_error)
             logger.warning("Program %s attempt %d: %s", program_id, attempt, last_error)
-        except Exception as exc:  # noqa: BLE001 - any SDK/transport error is retry-then-fallback
+        except ResearchLimitExceeded as exc:
+            last_error = str(exc)
+            _commit_attempt("client_max_turns", last_error)
+            logger.warning("Program %s attempt %d: %s", program_id, attempt, last_error)
+            break
+        except Exception as exc:  # noqa: BLE001
             last_error = f"SDK error: {type(exc).__name__}: {exc}"
+            _commit_attempt("sdk_error", last_error)
             logger.warning("Program %s attempt %d: %s", program_id, attempt, last_error)
 
-    # ---- all attempts exhausted -> deterministic fallback ----
+    totals = _attempt_totals(attempt_records)
+    trace_summary = summarize_literature_trace(literature_trace, supplied_genes)
     rr = _fallback_result(
-        program_id,
-        reason=last_error or "unknown failure",
-        model=model,
-        attempts=attempts,
-        cost_usd=last_result_info.get("total_cost_usd"),
-        num_turns=last_result_info.get("num_turns"),
-        stop_reason=last_result_info.get("stop_reason"),
-        subtype=last_result_info.get("subtype"),
-        duration_ms=last_result_info.get("duration_ms"),
-        tokens=_token_summary(last_result_info.get("usage")),
+        program_id, reason=last_error or "unknown failure", model=model, attempts=attempts,
+        **totals, stop_reason=last_result_info.get("stop_reason"),
+        subtype=last_result_info.get("subtype"), trace_summary=trace_summary,
         tool_trace_path=str((audit_dir / f"{program_id}.audit.json")),
     )
+    rr.queries = derive_queries_from_trace(literature_trace)
     result_path = out_dir / f"{program_id}.json"
     _write_json(result_path, json.loads(rr.model_dump_json()))
     _write_audit(
         audit_dir, program_id,
         prompt=prompt, model=model, mcp_server_names=server_names,
-        tool_trace=last_trace,
-        cost_usd=last_result_info.get("total_cost_usd"),
-        num_turns=last_result_info.get("num_turns"),
+        tool_trace=cumulative_tool_trace, literature_trace=literature_trace,
+        trace_summary=trace_summary, attempt_records=attempt_records,
+        cost_usd=totals["cost_usd"], num_turns=totals["num_turns"],
         status="incomplete", attempts=attempts, error=last_error,
-        subtype=last_result_info.get("subtype"),
-        is_error=last_result_info.get("is_error"),
-        stop_reason=last_result_info.get("stop_reason"),
-        duration_ms=last_result_info.get("duration_ms"),
-        usage=last_result_info.get("usage"),
+        subtype=last_result_info.get("subtype"), is_error=last_result_info.get("is_error"),
+        stop_reason=last_result_info.get("stop_reason"), duration_ms=totals["duration_ms"],
+        token_summary=totals["tokens"],
     )
     logger.error("Program %s: fallback written (reason: %s)", program_id, last_error)
     if progress_cb is not None:
         try:
             progress_cb("agent_finished", {
                 "program_id": program_id, "status": "incomplete",
-                "num_turns": last_result_info.get("num_turns"),
-                "cost_usd": last_result_info.get("total_cost_usd"),
+                "num_turns": totals["num_turns"], "cost_usd": totals["cost_usd"],
                 "error": last_error,
             })
         except Exception:
@@ -772,7 +1068,7 @@ async def run_research(
     audit_dir: str | Path = "research_audit",
     concurrency: int = 4,
     model: str = "claude-sonnet-4-6",
-    max_turns: int = 30,
+    max_turns: Optional[int] = 30,
     max_budget_usd: float = 1.0,
     per_program_timeout: float = 600,
     progress_cb: Optional[Callable[[str, dict], None]] = None,
@@ -796,6 +1092,7 @@ async def run_research(
         raise ValueError("run_research received no bundle paths.")
     if not (1 <= concurrency <= 16):
         raise ValueError(f"concurrency must be in [1,16], got {concurrency}")
+    validate_research_limits(max_turns, max_budget_usd, per_program_timeout)
 
     load_env_file()
     out_dir = Path(out_dir)
@@ -855,7 +1152,7 @@ def dry_run(
     *,
     out_dir: str | Path = "research_results",
     model: str = "claude-sonnet-4-6",
-    max_turns: int = 30,
+    max_turns: Optional[int] = 30,
     max_budget_usd: float = 1.0,
 ) -> Dict[str, Any]:
     """Build + validate the full launch config for each bundle WITHOUT launching sessions.
@@ -881,6 +1178,7 @@ def dry_run(
             model=model,
             max_turns=max_turns,
             max_budget_usd=max_budget_usd,
+            allowed_read_path=Path(bundle_path),
         )
         per_program.append(
             {

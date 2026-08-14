@@ -1,0 +1,16 @@
+{
+  "content_hash": "229051c6dc5547eebd0115c41d59317731d5a4763c2480b7e26fccd5460615b6",
+  "doi": "10.1016/j.cell.2012.10.042",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "8e943eee02568d423bdc",
+  "pmcid": "PMC3535266",
+  "pmid": "23217714",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Norrin/Frizzled4 (Fz4) signaling activates the canonical Wnt pathway to control retinal vascular development. Using genetically engineered mice, we show that precocious Norrin production leads to premature retinal vascular invasion and delayed Norrin production leads to characteristic defects in intraretinal vascular architecture. In genetic mosaics, wild-type endothelial cells (ECs) instruct neighboring Fz4(-/-) ECs to produce an architecturally normal mosaic vasculature, a cell nonautonomous effect. However, over the ensuing weeks, Fz4(-/-) ECs are selectively eliminated from the mosaic vasculature, implying the existence of a quality control program that targets defective ECs. In the adult retina and cerebellum, gain or loss of Norrin/Fz4 signaling results in a cell-autonomous gain or loss, respectively, of blood retina barrier and blood brain barrier function, indicating an ongoing requirement for Frizzled signaling in barrier maintenance and substantial plasticity in mature CNS vascular structure.",
+  "text_type": "abstract",
+  "title": "Norrin/Frizzled4 signaling in retinal vascular development and blood brain barrier plasticity."
+}

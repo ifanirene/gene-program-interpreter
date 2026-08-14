@@ -1,0 +1,190 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-9f72d03c8a188627beb0",
+    "RL-b385d1999f04916474a8",
+    "RL-cc6e56034be9f7e2fa89",
+    "RL-d542d0316e6592db0cac",
+    "RL-e0cde018c4ab700810f1",
+    "RL-eb6e41646ef46fd76567",
+    "RL-ed761449626e1d4df505"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4602,
+        "source_type": "full_text",
+        "start": 4482,
+        "text": "we detected a significant reduction in the cilium assembly and reduced ciliary microtubule stability after NME7 knockout"
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "CRISPR knockout of NME7 in human RPE1 cells directly reduced primary cilium assembly, ciliary microtubule stability, and Hedgehog signaling, matching the mechanism's claim that Nme7 maintains cilium assembly and microtubule stability. This is an RPE1 cell-line system, not brain endothelium, so indirect context is appropriately assigned.",
+      "red_flags": [],
+      "review_id": "RL-9f72d03c8a188627beb0",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 26019,
+        "source_type": "full_text",
+        "start": 25918,
+        "text": "Activated Wat1 functions as a nucleophile, attacking the carbonyl moiety of the scissile peptide bond"
+      },
+      "function_supported_genes": [
+        "Metap1d"
+      ],
+      "rationale": "Crystal structures and docking simulations of hMetAP1D directly establish its binuclear catalytic mechanism for cleaving the initiator methionine from substrate peptides, supporting the mechanism's claim that Metap1d cleaves N-terminal methionine from nascent mitochondrial proteins. The study is purely structural/biochemical in a heterologous expression system, not brain endothelium, matching the indirect context label.",
+      "red_flags": [],
+      "review_id": "RL-b385d1999f04916474a8",
+      "studied_genes": [
+        "Metap1d"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2567,
+        "source_type": "full_text",
+        "start": 2469,
+        "text": "disruption of ciliogenesis together with developmental anomalies consistent with PCP perturbations"
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "Wdpcp knockout/mutant mice show ciliogenesis defects and transition-zone protein (Mks1, Nphp1, Sept2) recruitment failure, consistent with Wdpcp being required for ciliogenesis, but the paper explicitly reports IFT88 localization was unchanged in mutant MEFs, so it does not directly demonstrate the specific IFT-A recruitment mechanism claimed. Context is mouse MEFs/kidney/embryo, not brain endothelium, so indirect is accurate.",
+      "red_flags": [],
+      "review_id": "RL-cc6e56034be9f7e2fa89",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3117,
+        "source_type": "full_text",
+        "start": 3025,
+        "text": "We show that NME7 and its kinase activity are required for efficient microtubule nucleation."
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "Biochemical and RNAi experiments show NME7 is a bona fide γTuRC component required for its microtubule-nucleating activity, directly supporting the mechanism's claim that Nme7 is a γTuRC component. Experiments use human cell lines (HEK293T/HeLa/RPE-1) focused on centrosomal/mitotic MT nucleation rather than brain endothelial cilia, consistent with the indirect context label.",
+      "red_flags": [],
+      "review_id": "RL-d542d0316e6592db0cac",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 18376,
+        "source_type": "full_text",
+        "start": 18272,
+        "text": "BBS9-positive and BBS8-positive aggregates around the ciliary base in RPE1 cells treated with BBS1 siRNA"
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "The paper's causal manipulation targets BBS1, not Bbs9; Bbs9 is only examined as an immunostaining marker showing that BBSome/ARL6 entry into cilia and normal ciliary GPCR (SMO/GPR161) trafficking depend on BBS1, giving observational rather than gene-specific causal support for Bbs9 itself. This still corroborates Bbs9's role as a BBSome subunit required for ciliary GPCR trafficking, consistent with the mechanism, in a human RPE1 cell system distinct from brain endothelium (indirect).",
+      "red_flags": [],
+      "review_id": "RL-e0cde018c4ab700810f1",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 5481,
+        "source_type": "full_text",
+        "start": 5308,
+        "text": "Our data support a model where Cc2d2a, localized at the connecting cilium of the photoreceptor, functions in Rab8-dependent trafficking and fusion of opsin-carrier vesicles."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "Zebrafish cc2d2a mutants show transition-zone localization of Cc2d2a and a genetic/functional link to Rab8-dependent vesicle trafficking, directly matching the mechanism's claim. The study system is zebrafish photoreceptors/kidney/neuroepithelium, a different species and cell type than mouse brain endothelium, so indirect context is accurate.",
+      "red_flags": [],
+      "review_id": "RL-eb6e41646ef46fd76567",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1815,
+        "source_type": "full_text",
+        "start": 1679,
+        "text": "recruitment of tau-tubulin kinase 2 (TTBK2) to the distal appendages of centrioles through CEP164 that is located at their tip structure"
+      },
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "rationale": "Structural and biochemical (ITC, pull-down, crystallography) data directly demonstrate CEP164 recruits TTBK2 via its WW domain to initiate ciliogenesis, matching the mechanism's claim precisely. The work is in vitro/human cell line biochemistry, not brain endothelium, so the indirect context label is accurate.",
+      "red_flags": [],
+      "review_id": "RL-ed761449626e1d4df505",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.6810135,
+    "duration_api_ms": 166986,
+    "duration_ms": 165259,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 166.181
+  }
+}

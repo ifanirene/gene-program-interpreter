@@ -144,7 +144,8 @@ def test_inprocess_literature_server_tool_surface():
     )
 
     assert set(LITERATURE_TOOL_NAMES) == {
-        "search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi"
+        "search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi",
+        "expand_openalex_citations",
     }
     server = build_literature_mcp_server()  # builds without any network call or external dep
     assert server is not None
@@ -163,8 +164,9 @@ def test_research_wiring_inprocess_default_is_sandboxed(
     pytest.importorskip("claude_agent_sdk")
     from research.research_parallel import DISALLOWED_TOOLS, dry_run, resolve_allowed_tools
 
-    # The allowlist is the single in-process literature family + Read + submit.
+    # Read is gated dynamically to the exact bundle path, so it is not auto-approved here.
     assert resolve_allowed_tools()[0] == "mcp__literature__*"
+    assert "Read" not in resolve_allowed_tools()
 
     paths = build_all_bundles(
         str(gene_loading_csv),

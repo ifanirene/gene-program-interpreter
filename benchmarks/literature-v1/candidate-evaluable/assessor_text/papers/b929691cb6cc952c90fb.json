@@ -1,0 +1,14 @@
+{
+  "content_hash": "0b0e2460587423de3fcd3919510857663fff70726b16763921c0cb5d54c3c17d",
+  "doi": "10.1016/j.jhep.2015.11.029",
+  "errors": [],
+  "paper_key": "b929691cb6cc952c90fb",
+  "pmcid": null,
+  "pmid": "26658681",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND & AIMS: l-2-Hydroxy acid oxidases are flavin mononucleotide-dependent peroxisomal enzymes, responsible for the oxidation of l-2-hydroxy acids to ketoacids, resulting in the formation of hydrogen peroxide. We investigated the role of HAO2, a member of this family, in rat, mouse and human hepatocarcinogenesis.\n\nMETHODS: We evaluated Hao2 expression by qRT-PCR in the following rodent models of hepatocarcinogenesis: the Resistant-Hepatocyte, the CMD and the chronic DENA rat models, and the TCPOBOP/DENA and TCPOBOP only mouse models. Microarray and qRT-PCR analyses were performed on two cohorts of human hepatocellular carcinoma (HCC) patients. Rat HCC cells were transduced by a Hao2 encoding lentiviral vector and grafted in mice.\n\nRESULTS: Downregulation of Hao2 was observed in all investigated rodent models of hepatocarcinogenesis. Interestingly, Hao2 mRNA levels were also profoundly downregulated in early preneoplastic lesions. Moreover, HAO2 mRNA levels were strongly downregulated in two distinct series of human HCCs, when compared to both normal and cirrhotic peri-tumoral liver. HAO2 levels were inversely correlated with grading, overall survival and metastatic ability. Finally, exogenous expression of Hao2 in rat cells impaired their tumorigenic ability.\n\nCONCLUSION: Our work identifies for the first time the oncosuppressive role of the metabolic gene Hao2. Indeed, its expression is severely decreased in HCC of different species and etiology, and its reintroduction in HCC cells profoundly impairs tumorigenesis. We also demonstrate that dysregulation of HAO2 is a very early event in the development of HCC and it may represent a useful diagnostic and prognostic marker for human HCC.",
+  "text_type": "abstract",
+  "title": "The metabolic gene HAO2 is downregulated in hepatocellular carcinoma and predicts metastasis and poor survival."
+}

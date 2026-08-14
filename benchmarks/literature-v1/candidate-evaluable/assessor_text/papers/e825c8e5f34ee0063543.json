@@ -1,0 +1,14 @@
+{
+  "content_hash": "f503139c172127941451afbd73c154a974d3f240809e59277d41675001932a85",
+  "doi": "10.1016/j.jbiotec.2005.07.017",
+  "errors": [],
+  "paper_key": "e825c8e5f34ee0063543",
+  "pmcid": null,
+  "pmid": "16126295",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "NS0 is a host cell line widely used for the production of recombinant therapeutic proteins. In this work, we investigated the cholesterol-dependent phenotype of NS0 cells. Growth response to different precursors and comparative transcript analyses pointed to deficiency of 17beta-hydroxysteroid dehydrogenase type 7 (Hsd17b7) in NS0 cells. Hsd17b7 was previously shown to encode for an enzyme involved in estrogenic steroid biosynthesis. Its recent cloning into a yeast mutant deficient in ERG27 led to its functional characterization as the 3-ketoreductase of the cholesterol biosynthesis pathway. To ascertain that its cholesterol biosynthesis is blocked at the reduction reaction catalyzed by Hsd17b7, we genetically engineered NS0 cells to over express Hsd17b7. The stable transfectants of Hsd17b7 were able to grow independent of cholesterol. The results affirm the role of Hsd17b7 in the cholesterol biosynthesis pathway in mammals. Further, the findings allow for rational engineering of this industrially important cell line to alleviate their cholesterol dependence.",
+  "text_type": "abstract",
+  "title": "17Beta-hydroxysteroid dehydrogenase type 7 (Hsd17b7) reverts cholesterol auxotrophy in NS0 cells."
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "d6e5ccb9aec1d9ebb6577e39e6389459b5676bc8e1ec6b23c8a744397f2e7a8d",
+  "doi": "10.1016/j.devcel.2015.05.008",
+  "errors": [],
+  "paper_key": "9bd0cc6e401842138664",
+  "pmcid": null,
+  "pmid": "26120030",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Pericytes are critical for cerebrovascular maturation and development of the blood-brain barrier (BBB), but their role in maintenance of the adult BBB, and how CNS pericytes differ from those of other tissues, is less well understood. We show that the forkhead transcription factor Foxf2 is specifically expressed in pericytes of the brain and that Foxf2(-/-) embryos develop intracranial hemorrhage, perivascular edema, thinning of the vascular basal lamina, an increase of luminal endothelial caveolae, and a leaky BBB. Foxf2(-/-) brain pericytes were more numerous, proliferated faster, and expressed significantly less Pdgfr\u03b2. Tgf\u03b2-Smad2/3 signaling was attenuated, whereas phosphorylation of Smad1/5 and p38 were enhanced. Tgf\u03b2 pathway components, including Tgf\u03b22, Tgf\u03b2r2, Alk5, and integrins \u03b1V\u03b28, were reduced. Foxf2 inactivation in adults resulted in BBB breakdown, endothelial thickening, and increased trans-endothelial vesicular transport. On the basis of these results, FOXF2 emerges as an interesting candidate locus for stroke susceptibility in humans.",
+  "text_type": "abstract",
+  "title": "Foxf2 Is Required for Brain Pericyte Differentiation and Development and Maintenance of the Blood-Brain Barrier."
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "305f531c34177a916ccae6eca1ada5cfab50c990e4486c109f4468918fb5a317",
+  "doi": "10.1016/j.freeradbiomed.2014.06.005",
+  "errors": [],
+  "paper_key": "e25abde5cbdbbbd12976",
+  "pmcid": null,
+  "pmid": "24945955",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "It was reported that VDAC1 possesses an NADH oxidoreductase activity and plays an important role in the activation of xenobiotics in the outer mitochondrial membrane. In the present work, we evaluated the participation of VDAC1 and Cyb5R3 in the NADH-dependent activation of various redox cyclers in mitochondria. We show that external NADH oxidoreductase caused the redox cycling of menadione \u226b lucigenin>nitrofurantoin. Paraquat was predominantly activated by internal mitochondria oxidoreductases. An increase in the ionic strength stimulated and suppressed the redox cycling of negatively and positively charged acceptors, as was expected for the Cyb5R3-mediated reduction. Antibodies against Cyb5R3 but not VDAC substantially inhibited the NADH-related oxidoreductase activities. The specific VDAC blockers G3139 and erastin, separately or in combination, in concentrations sufficient for the inhibition of substrate transport, exhibited minimal effects on the redox cycler-dependent NADH oxidation, ROS generation, and reduction of exogenous cytochrome c. In contrast, Cyb5R3 inhibitors (6-propyl-2-thiouracil, p-chloromercuriobenzoate, quercetin, mersalyl, and ebselen) showed similar patterns of inhibition of ROS generation and cytochrome c reduction. The analysis of the spectra of the endogenous cytochromes b5 and c in the presence of nitrofurantoin and the inhibitors of VDAC and Cyb5R3 demonstrated that the redox cycler can transfer electrons from Cyb5R3 to endogenous cytochrome c. This caused the oxidation of outer membrane-bound cytochrome b5, which is in redox balance with Cyb5R3. The data obtained argue against VDAC1 and in favor of Cyb5R3 involvement in the activation of redox cyclers in the outer mitochondrial membrane.",
+  "text_type": "abstract",
+  "title": "External mitochondrial NADH-dependent reductase of redox cyclers: VDAC1 or Cyb5R3?"
+}

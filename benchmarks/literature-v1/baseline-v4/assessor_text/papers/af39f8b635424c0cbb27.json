@@ -1,0 +1,16 @@
+{
+  "content_hash": "4206a5406a53eb017b0fcff466acd3aa72b4f6801e82ae8d21c66bd473d814f1",
+  "doi": "10.1074/jbc.ra119.008708",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "af39f8b635424c0cbb27",
+  "pmcid": "PMC6682731",
+  "pmid": "31197036",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Hepatic steatosis is a hallmark of nonalcoholic fatty liver disease (NAFLD) and is promoted by dysregulated de novo lipogenesis. ATP-citrate lyase (ACLY) is a crucial lipogenic enzyme that is up-regulated in individuals with NAFLD. A previous study has shown that acetylation of ACLY at Lys-540, Lys-546, and Lys-554 (ACLY-3K) increases ACLY protein stability by antagonizing its ubiquitylation, thereby promoting lipid synthesis and cell proliferation in lung cancer cells. But the functional importance of this regulatory mechanism in other cellular or tissue contexts or under other pathophysiological conditions awaits further investigation. Here, we show that ACLY-3K acetylation also promotes ACLY protein stability in AML12 cells, a mouse hepatocyte cell line, and found that the deacetylase sirtuin 2 (SIRT2) deacetylates ACLY-3K and destabilizes ACLY in these cells. Of note, the livers of mice and humans with NAFLD had increased ACLY protein and ACLY-3K acetylation levels and decreased SIRT2 protein levels. Mimicking ACLY-3K acetylation by replacing the three lysines with three glutamines (ACLY-3KQ variant) promoted lipid accumulation both in high glucose-treated AML12 cells and in the livers of high-fat/high-sucrose (HF/HS) diet-fed mice. Moreover, overexpressing SIRT2 in AML12 cells inhibited lipid accumulation, which was more efficiently reversed by overexpressing the ACLY-3KQ variant than by overexpressing WT ACLY. Additionally, hepatic SIRT2 overexpression decreased ACLY-3K acetylation and its protein level and alleviated hepatic steatosis in HF/HS diet-fed mice. Our findings reveal a posttranscriptional mechanism underlying the up-regulation of hepatic ACLY in NAFLD and suggest that the SIRT2/ACLY axis is involved in NAFLD progression.",
+  "text_type": "abstract",
+  "title": "Enhanced acetylation of ATP-citrate lyase promotes the progression of nonalcoholic fatty liver disease."
+}

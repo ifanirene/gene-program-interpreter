@@ -1,0 +1,199 @@
+schema_version: 1
+benchmark_id: literature-v1
+
+sentinel_case_ids:
+  - brain-p10
+  - brain-p11
+  - liver-p21
+  - liver-p25
+
+budget:
+  sessions: 8
+  max_attempts: 2
+  max_budget_usd_per_attempt: 1.0
+  max_api_equivalent_usd: 16.0
+
+execution:
+  auth: subscription
+  model: claude-sonnet-4-6
+  concurrency: 8
+  max_turns: 30
+  max_budget_usd: 1.0
+  per_program_timeout_seconds: 600
+  max_attempts: 2
+  cost_basis: api-equivalent
+
+cases:
+  - case_id: brain-p10
+    experiment: brain-endothelial
+    program_id: P10
+    profile_path: profiles/brain.yaml
+    inputs:
+      gene_loading: inputs/brain/FB_moi15_seq2_loading_gene_k100_top300.csv
+      regulators: inputs/brain/Discovery_FP_moi15_seq2_thresh10_k100_default.csv
+      celltype_enrichment: inputs/brain/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv
+      ncbi_context: inputs/brain/ncbi_context.json
+    expected:
+      program_genes:
+        - Map2k6
+        - X1110051M20Rik
+        - Bbs9
+        - Cfap36
+        - D130040H23Rik
+        - Stxbp4
+        - Wdpcp
+        - Metap1d
+        - Prkdc
+        - Nme7
+        - Bckdhb
+        - Camkmt
+        - Cc2d2a
+        - Tbc1d32
+        - Eml6
+      distinctive_genes:
+        - Clybl
+        - Tet1
+        - Chchd6
+        - Ift74
+        - Elp4
+        - Cep164
+        - Tex9
+        - Sdccag8
+    repeat_count: 2
+    hashes:
+      profiles/brain.yaml: e423deb8632e4b74c454e449f209204929b407a4a1dcd2a94d968c34bf7f2741
+      inputs/brain/FB_moi15_seq2_loading_gene_k100_top300.csv: 87fb0df0c4beeed7e2c39daac918a3547d4d378af6917a500b90b1ff5149dcf7
+      inputs/brain/Discovery_FP_moi15_seq2_thresh10_k100_default.csv: 2a617c7ca3124b7591432738890b20267b3223230a43511706f937da4401340b
+      inputs/brain/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv: 1e32661dda6e6ce5af16b745d5f0a4e8eafa759b2f582250851ef97f55ae78d8
+      inputs/brain/ncbi_context.json: 46147d0c8b0e01b81021ce09b61179a9854fbe18412150161700bb770a525482
+
+  - case_id: brain-p11
+    experiment: brain-endothelial
+    program_id: P11
+    profile_path: profiles/brain.yaml
+    inputs:
+      gene_loading: inputs/brain/FB_moi15_seq2_loading_gene_k100_top300.csv
+      regulators: inputs/brain/Discovery_FP_moi15_seq2_thresh10_k100_default.csv
+      celltype_enrichment: inputs/brain/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv
+      ncbi_context: inputs/brain/ncbi_context.json
+    expected:
+      program_genes:
+        - Slc1a1
+        - Ctdspl
+        - Cxcr4
+        - Tnfrsf11b
+        - Dgki
+        - Megf6
+        - Angpt2
+        - Slc16a9
+        - Kcnj2
+        - Chst9
+        - Cpe
+        - Cdc42ep3
+        - Prdm1
+        - Hopx
+        - Cacna1c
+      distinctive_genes:
+        - Rgs6
+        - Syt12
+        - Rhod
+        - Bag2
+        - Jph1
+        - Sort1
+        - Epb41l4b
+        - Gabarapl1
+    repeat_count: 2
+    hashes:
+      profiles/brain.yaml: e423deb8632e4b74c454e449f209204929b407a4a1dcd2a94d968c34bf7f2741
+      inputs/brain/FB_moi15_seq2_loading_gene_k100_top300.csv: 87fb0df0c4beeed7e2c39daac918a3547d4d378af6917a500b90b1ff5149dcf7
+      inputs/brain/Discovery_FP_moi15_seq2_thresh10_k100_default.csv: 2a617c7ca3124b7591432738890b20267b3223230a43511706f937da4401340b
+      inputs/brain/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv: 1e32661dda6e6ce5af16b745d5f0a4e8eafa759b2f582250851ef97f55ae78d8
+      inputs/brain/ncbi_context.json: 46147d0c8b0e01b81021ce09b61179a9854fbe18412150161700bb770a525482
+
+  - case_id: liver-p21
+    experiment: hepatocyte
+    program_id: P21
+    profile_path: profiles/liver.yaml
+    inputs:
+      gene_loading: inputs/liver/gene_loading_K50_0_5_top300.csv
+      regulators_by_condition:
+        young: inputs/liver/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_young_F.txt
+        aged: inputs/liver/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_aged_F.txt
+      ncbi_context: inputs/liver/ncbi_context.json
+    expected:
+      program_genes:
+        - Cyp51
+        - Hmgcs1
+        - Fdps
+        - Msmo1
+        - Nsdhl
+        - Idi1
+        - Acss2
+        - Fdft1
+        - Tm7sf2
+        - Tas2r138
+        - Sc5d
+        - Hsd17b7
+        - Dhcr7
+        - Lss
+        - Erg28
+      distinctive_genes:
+        - Mvk
+        - Rdh11
+        - Ddr2
+        - Pmvk
+        - Cetn2
+        - Zfp839
+        - Mvd
+        - Acat2
+    repeat_count: 2
+    hashes:
+      profiles/liver.yaml: a3a90411b660576e9c102f6c827fc266eb85d23d25739e23930216caef36dbb7
+      inputs/liver/gene_loading_K50_0_5_top300.csv: 1301ba79edccfc5deba0537e254ac3a2ed7a251851f066dd1e232528b7c01250
+      inputs/liver/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_young_F.txt: 909805bb43d8086485eff6c2e7db415bcefe61484a7e68b574c45bc9ca37ba1d
+      inputs/liver/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_aged_F.txt: 7000eaf38fe1b091f9c592cf39dd8851a38db0943256bfecbe907dc854a91b9a
+      inputs/liver/ncbi_context.json: 921c4193599e20ddbfe6e2de2d1161fd11422b26f581fe58fb79e4a7f1f468bd
+
+  - case_id: liver-p25
+    experiment: hepatocyte
+    program_id: P25
+    profile_path: profiles/liver.yaml
+    inputs:
+      gene_loading: inputs/liver/gene_loading_K50_0_5_top300.csv
+      regulators_by_condition:
+        young: inputs/liver/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_young_F.txt
+        aged: inputs/liver/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_aged_F.txt
+      ncbi_context: inputs/liver/ncbi_context.json
+    expected:
+      program_genes:
+        - Akr1c6
+        - Rgn
+        - Aldh1a1
+        - Sult2a7
+        - Aldh3a2
+        - Alad
+        - Sord
+        - Fitm1
+        - Cyb5b
+        - Cdo1
+        - Hao2
+        - Gsta3
+        - Sult2a5
+        - Rnase4
+        - Cyp2c50
+      distinctive_genes:
+        - Spag17
+        - Agmat
+        - Sult2a8
+        - Car5a
+        - Lonp2
+        - Psmd1
+        - Htatip2
+        - Eci2
+    repeat_count: 2
+    hashes:
+      profiles/liver.yaml: a3a90411b660576e9c102f6c827fc266eb85d23d25739e23930216caef36dbb7
+      inputs/liver/gene_loading_K50_0_5_top300.csv: 1301ba79edccfc5deba0537e254ac3a2ed7a251851f066dd1e232528b7c01250
+      inputs/liver/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_young_F.txt: 909805bb43d8086485eff6c2e7db415bcefe61484a7e68b574c45bc9ca37ba1d
+      inputs/liver/50_CRT_log_nCount_RNA_log_nFeature_RNA_log_nFeature_CRISPR_thre5_log_nCount_CRISPR_thre5_aged_F.txt: 7000eaf38fe1b091f9c592cf39dd8851a38db0943256bfecbe907dc854a91b9a
+      inputs/liver/ncbi_context.json: 921c4193599e20ddbfe6e2de2d1161fd11422b26f581fe58fb79e4a7f1f468bd

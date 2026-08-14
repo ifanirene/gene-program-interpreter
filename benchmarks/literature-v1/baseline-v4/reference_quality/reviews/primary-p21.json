@@ -1,0 +1,812 @@
+{
+  "schema_version": 1,
+  "assessor_type": "model",
+  "assessor_id": "primary-p21",
+  "reviews": [
+    {
+      "review_id": "RL-0a9ea963b058f961bd07",
+      "assessor_id": "primary-p21",
+      "support": "partial",
+      "studied_genes": [
+        "Acat2",
+        "Mvk",
+        "Idi1",
+        "Fdps",
+        "Fdft1",
+        "Cyp51",
+        "Msmo1",
+        "Dhcr7"
+      ],
+      "function_supported_genes": [
+        "Acat2",
+        "Mvk",
+        "Idi1",
+        "Fdps",
+        "Fdft1",
+        "Cyp51",
+        "Msmo1",
+        "Dhcr7"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Cholesterol biosynthesis-related genes, such as Mvk, Idi1, Fdps, Fdft1, Cyp51a1, Msmo1 and Dhcr7 were upregulated (Fig. 6a).",
+        "start": 17805,
+        "end": 17929,
+        "source_type": "full_text"
+      },
+      "rationale": "Liver-specific Acat2 gain of function supports its thiolase-to-acetoacetyl-CoA role and shifts mouse hepatic cholesterol-pathway genes. The citation does not support the separate cholesterol-esterification statement.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-242b5a9c5abc75abc94d",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Hmgcs1",
+        "Cyp51",
+        "Fdps",
+        "Acat2",
+        "Mvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Lss",
+        "Nsdhl",
+        "Dhcr7"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Cyp51",
+        "Fdps",
+        "Acat2",
+        "Mvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Lss",
+        "Nsdhl",
+        "Dhcr7"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Expression data from HepG2 cells also indicated that multiple enzymes in cholesterol biosynthesis and fatty acid synthesis pathways were significantly down regulated (Figure 3).",
+        "start": 17584,
+        "end": 17761,
+        "source_type": "full_text"
+      },
+      "rationale": "TSA perturbation supports coordinated cholesterol-pathway regulation. HepG2 is a human hepatoma model, so the direct mouse-hepatocyte label is too strong.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-40098cc460cadd4e2943",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes.",
+        "start": 904,
+        "end": 1080,
+        "source_type": "abstract"
+      },
+      "rationale": "Conditional mouse-liver Scap deficiency directly demonstrates the regulator requirement for hepatic lipid synthesis. Scap is not in the supplied-gene denominator.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-47cb3ccbf39d99c1b53e",
+      "assessor_id": "primary-p21",
+      "support": "partial",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "function_supported_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Experiments indicated that human sterol Δ(7)-reductase (DHCR7) is the major target of LK-980 (34-fold increase of 7-dehydrocholesterol), whereas human sterol Δ(14)-reductase (DHCR14), human sterol Δ(24)-reductase (DHCR24), and human sterol C5-desaturase (SC5DL) represent minor targets.",
+        "start": 609,
+        "end": 895,
+        "source_type": "abstract"
+      },
+      "rationale": "The data support DHCR7 and SC5D as late cholesterol-pathway enzymes, but not the stronger claim that both are rate-limiting. Human hepatocytes are partial context.",
+      "red_flags": [
+        "wrong_function",
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-490fe81565b6e16d4d74",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Fdft1"
+      ],
+      "function_supported_genes": [
+        "Fdft1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Overexpression of SS increased de novo cholesterol biosynthesis with increased 3-hydroxy-3-methyglutaryl-CoA (HMG-CoA) reductase activity, in spite of the downregulation of its own mRNA expression.",
+        "start": 302,
+        "end": 499,
+        "source_type": "abstract"
+      },
+      "rationale": "Mouse-liver overexpression of squalene synthase, the Fdft1 product, directly increases cholesterol synthesis.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-61540a022c6b44664286",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Absence of Insig1 in the liver (Figure 2A) resulted in a marked upregulation of SREBP1 and SREBP2 target genes, leading to enhanced lipid/cholesterol synthesis and remodelling (Figure 2B).",
+        "start": 13186,
+        "end": 13374,
+        "source_type": "full_text"
+      },
+      "rationale": "Insig1 loss in a mouse NASH model directly supports negative feedback on SREBP-driven hepatic cholesterol synthesis. Insig1 is a regulator.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-6dcde1c34bce3dbdd012",
+      "assessor_id": "primary-p21",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We demonstrated that inflammatory stress increased hepatic cholesterol accumulation and enhanced sterol regulatory element binding protein 2 (SREBP2), low-density lipoprotein receptor (LDLr) and HMGCoA-r mRNA and protein expression in livers of C57BL/6J mice and in HepG2 cells.",
+        "start": 977,
+        "end": 1255,
+        "source_type": "abstract"
+      },
+      "rationale": "The study supports hepatic SREBP2-LDLR-HMGCR feedback, but does not test Ldlr knockout or establish the claimed explanation for its perturbation fold change.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-8341775104beac531474",
+      "assessor_id": "primary-p21",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "CTRP12 treatment also downregulates the expression of hepatocyte nuclear factor-4α (HNF-4α) and its target gene microsomal triglyceride transfer protein (MTTP), leading to reduced very-low-density lipoprotein (VLDL)-triglyceride export from hepatocytes.",
+        "start": 622,
+        "end": 875,
+        "source_type": "abstract"
+      },
+      "rationale": "The paper supports the hepatocyte DGAT-MTTP triglyceride-export arm, but neither Acss2 nor cholesterol synthesis, so only part of the proposed coupling is supported.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-85775391149b8f392d5d",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Taken together, many genes play a central role in cholesterol synthesis, including HMGCR, SQLE, HMGCS1, FDFT1, LSS, MVK, PMK, MVD, FDPS, CYP51, TM7SF2, LBR, MSMO1, NSDHL, HSD17B7, DHCR24, EBP, SC5D, DHCR7, IDI1/2 (Fig.",
+        "start": 6610,
+        "end": 6828,
+        "source_type": "full_text"
+      },
+      "rationale": "The pathway-focused review maps nearly all supplied enzymes to cholesterol synthesis, but only as a pathway list; this supports the mechanism without counting genes as substantively studied. It is not direct mouse-hepatocyte evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-b2c271d4500bf0a67774",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We showed that IKK-mediated activation of hepatocyte NF-κB induces de novo lipogenesis (DNL) and cholesterol synthesis, leading to hepatic accumulation of triglycerides and cholesterol, accompanied by high plasma cholesterol levels.",
+        "start": 3480,
+        "end": 3712,
+        "source_type": "full_text"
+      },
+      "rationale": "A hepatocyte-specific mouse perturbation directly measures increased lipid and cholesterol synthesis; HMGCS1 is measured as a pathway protein.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-cfde5c855118d7be3a63",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Fdft1"
+      ],
+      "function_supported_genes": [
+        "Fdft1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Other SREBP2 downstream targets, such as Farnesyl-diphosphate farnesyltransferase 1 (FDFT1) and 3-hydroxy-3-methylglutaryl-CoA reductase (HMGCR), were also upregulated by KLF2 in the liver of C57BL/6J mice fed a high-fat diet after being treated with Ad-ALB-Klf2 for 1 week (supplemental Fig.",
+        "start": 21713,
+        "end": 22005,
+        "source_type": "full_text"
+      },
+      "rationale": "Liver-specific Klf2 overexpression activates SREBP2 and its Fdft1 target in mouse liver.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-daf9675935894ab3741e",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Similar to the regulation of extracellular VLDL and intracellular TG accumulation, the mRNA levels of the microsomal triglyceride transfer protein, forkhead box O1, and DGAT2 increased with treatment with 10 or 20 μg/ml of cholesterol, but decreased with treatment with 30 μg/ml of cholesterol (p < 0.05).",
+        "start": 1018,
+        "end": 1323,
+        "source_type": "abstract"
+      },
+      "rationale": "Cholesterol loading changes DGAT2/MTTP and VLDL-TG output in primary hepatocytes. Goose hepatocytes are partial mouse context and no supplied gene is studied.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-de544aa0b08392482e69",
+      "assessor_id": "primary-p21",
+      "support": "partial",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Depletion of hepatic ACSS2 strongly suppressed the labeling of fatty acids in circulating lipids from 13C-fructose (Fig. 3d).",
+        "start": 8501,
+        "end": 8626,
+        "source_type": "full_text"
+      },
+      "rationale": "The study establishes Acss2 as an acetate-to-lipogenic acetyl-CoA node and shows acetate labeling of HMG-CoA, but does not directly measure cholesterol synthesis.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-e02070e104a3f6abe459",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "It catalyzes the first step following cyclization in sterol biosynthesis such as removal of the 14 alpha-methyl group from lanosterol in the cholesterol biosynthetic pathway, leading to formation of the initial substrate in steroid hormone biosynthesis.",
+        "start": 220,
+        "end": 473,
+        "source_type": "abstract"
+      },
+      "rationale": "The CYP51-focused review supports the assigned demethylase function, but is general secondary evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-ebff6126c1db18127944",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp51",
+        "Hmgcs1",
+        "Fdps",
+        "Msmo1",
+        "Nsdhl",
+        "Idi1",
+        "Fdft1",
+        "Tm7sf2",
+        "Sc5d",
+        "Hsd17b7",
+        "Dhcr7",
+        "Lss",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Acat2"
+      ],
+      "function_supported_genes": [
+        "Cyp51",
+        "Hmgcs1",
+        "Fdps",
+        "Msmo1",
+        "Nsdhl",
+        "Idi1",
+        "Fdft1",
+        "Tm7sf2",
+        "Sc5d",
+        "Hsd17b7",
+        "Dhcr7",
+        "Lss",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Acat2"
+      ],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "The model of the cholesterol biosynthesis pathway presented in this work has been assembled using a variety of publicly available resources including the research findings of the LipidMaps consortium [8] and results obtained from thorough searches of the published literature that have been manually curated and validated by domain experts.",
+        "start": 2135,
+        "end": 2475,
+        "source_type": "full_text"
+      },
+      "rationale": "This expert-curated map substantively describes enzymatic steps for 16 supplied genes, but has no specific mouse-hepatocyte context.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-f7e99b9b10b42ca7b091",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "These findings suggest that the INSIG-1 protein alters sterol balance by modulating SREBP processing jointly with SCAP.",
+        "start": 782,
+        "end": 901,
+        "source_type": "abstract"
+      },
+      "rationale": "Overexpression and RNAi experiments support INSIG1-SCAP control of SREBP processing. The unspecified cell system is indirect for mouse hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-1f0a922d711614ed5737",
+      "assessor_id": "primary-p21",
+      "support": "partial",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Using adenoviral-mediated silencing of hepatic Spring expression we found marked attenuation of SREBP2 signaling in the liver, with limited effect on the SREBP1 pathway.",
+        "start": 33932,
+        "end": 34101,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper supports functional SCAP/SREBP machinery and hepatic Hmgcs regulation. SCAP mislocalization itself was shown mainly in engineered non-hepatocyte cells, not mouse hepatocytes as stated.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-250f52f3f3d3826951e1",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Furthermore, cholesterol synthesis in IKKβca;A20LKO mice was 2-fold higher compared to WT mice (Figure 5C).",
+        "start": 28950,
+        "end": 29057,
+        "source_type": "full_text"
+      },
+      "rationale": "The hepatocyte-specific mouse model directly measures increased cholesterol synthesis and HMGCS1 protein.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-48bcfac4b40852c81b72",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Acat2",
+        "Cyp51",
+        "Fdps",
+        "Hmgcs1",
+        "Idi1",
+        "Lss",
+        "Msmo1",
+        "Mvk",
+        "Mvd",
+        "Nsdhl"
+      ],
+      "function_supported_genes": [
+        "Acat2",
+        "Cyp51",
+        "Fdps",
+        "Hmgcs1",
+        "Idi1",
+        "Lss",
+        "Msmo1",
+        "Mvk",
+        "Mvd",
+        "Nsdhl"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In cholesterol biosynthesis signaling, the expression of 16 proteins (ACAA2, ACAT1, ACAT2, CYP51A1, EBP, FDPS, HADHA, HADHB, HMGCS1, IDI1, LBR, LSS, MSMO1, MVK, NSDHL, and SQLE) differed between two proteomes and eventually induced deactivation of the pathway (Figure 2E).",
+        "start": 11234,
+        "end": 11506,
+        "source_type": "full_text"
+      },
+      "rationale": "27-hydroxycholesterol suppresses a broad set of P21 pathway proteins and transcripts in AML12 and primary mouse hepatocytes.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-6515a6465138462705ba",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We show that inhibition of Ser871 phosphorylation leads to increased cholesterol synthesis and cholesterol accumulation in the liver and, surprisingly, an elevated capacity for triglyceride synthesis.",
+        "start": 4203,
+        "end": 4403,
+        "source_type": "full_text"
+      },
+      "rationale": "A phosphorylation-resistant HMGCR knock-in connects AMPK-HMGCR control to hepatic cholesterol synthesis and steatosis. Hmgcs1 is measured but its specific function is not tested.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-7a812444f7281360d634",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Taken together, many genes play a central role in cholesterol synthesis, including HMGCR, SQLE, HMGCS1, FDFT1, LSS, MVK, PMK, MVD, FDPS, CYP51, TM7SF2, LBR, MSMO1, NSDHL, HSD17B7, DHCR24, EBP, SC5D, DHCR7, IDI1/2 (Fig.",
+        "start": 6610,
+        "end": 6828,
+        "source_type": "full_text"
+      },
+      "rationale": "The review covers most supplied enzymes as a pathway list, supporting the mechanism but not gene-level study coverage. It is indirect rather than partial mouse-hepatocyte evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-8313ab9a4140282ab449",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We demonstrate that the IKK:NF-κB axis controls DNL and cholesterol synthesis post-translationally by regulating the phosphorylation levels of AMPK and HMGCR and the protein levels of HMGCS1.",
+        "start": 40527,
+        "end": 40718,
+        "source_type": "full_text"
+      },
+      "rationale": "The mouse hepatocyte model connects cholesterol synthesis, HMGCS1 regulation, middle age, and steatotic liver pathology.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-833cf27c0cbeeeaff664",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Through these activities, Insig-1 and Insig-2 influence cholesterol metabolism, lipogenesis, and glucose homeostasis in diverse tissues such as adipose tissue and liver.",
+        "start": 455,
+        "end": 624,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports Insig-SCAP/HMGCR feedback and includes liver, but is secondary and not mouse-hepatocyte-specific.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-9229f992a4c27da67e36",
+      "assessor_id": "primary-p21",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Despite the simultaneous administration of the diet to mice, an additional 4-week fatostatin treatment significantly improved the oral glucose tolerance test and reduced body, adipose tissue and liver weights, fasting glycemia, alkaline phosphatase, total cholesterol, liver conjugated dienes, nitrites and triglycerides, steatosis, and histopathological total MASLD activity score.",
+        "start": 1009,
+        "end": 1391,
+        "source_type": "abstract"
+      },
+      "rationale": "SREBP1/2 inhibition improves cholesterol and MASLD outcomes, but the abstract does not directly measure elevated P21 sterol flux or name supplied genes.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-a0025244798c67771989",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Furthermore, the liver of Cideb-null mice has lower rates of cholesterol biosynthesis and reduced expression levels of sterol response element-binding protein (SREBP) cleavage-activation protein (SCAP), and lower levels of nuclear form of SREBP2 and its downstream target genes in cholesterol biosynthesis pathway under a normal diet treatment.",
+        "start": 732,
+        "end": 1076,
+        "source_type": "abstract"
+      },
+      "rationale": "Cideb-null mouse liver links lower SCAP/nuclear SREBP2 to lower cholesterol synthesis. The abstract's ACAT is cholesterol acyltransferase and is not supplied Acat2 thiolase.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-b92d49a4066182657fed",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Mvk",
+        "Pmvk",
+        "Fdft1"
+      ],
+      "function_supported_genes": [
+        "Mvk",
+        "Pmvk",
+        "Fdft1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Overall, these results highlight the importance of ERRα in mediating MVA/cholesterol biosynthetic pathway-induced cellular senescence in vitro in human cells and in vivo in mouse.",
+        "start": 22728,
+        "end": 22907,
+        "source_type": "full_text"
+      },
+      "rationale": "Perturbations of MVK, PMVK, and FDFT1 establish a cholesterol-branch senescence mechanism; HFD mouse-liver experiments support hepatic relevance.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-bbcd1c6f846751aa3d9b",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp51",
+        "Dhcr7"
+      ],
+      "function_supported_genes": [
+        "Cyp51",
+        "Dhcr7"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Inhibition of generation of the SREBPs active form by fatostatin or Scap siRNA in both in vivo and in vitro significantly decreased the expressions of de novo cholesterol biosynthetic enzymes, cholesterol accumulation, and progesterone (P4) production compared with the control group.",
+        "start": 903,
+        "end": 1187,
+        "source_type": "abstract"
+      },
+      "rationale": "Mouse granulosa-cell experiments support conserved INSIG1-SCAP-SREBP control and Cyp51/Dhcr7 targets. Other tissue/cell type is correctly partial.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-c0149ee32fcc6767c368",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Hmgcs1",
+        "Fdps",
+        "Fdft1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Fdps",
+        "Fdft1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Consistently, knockdown of PAQR3 in primary hepatocytes significantly reduced the mRNA levels of critical cholesterol-synthesizing and uptaking genes including 3-hydroxy-3-methylglutaryl-CoA reductase (HMGCR), HMGC synthase (HMGCS), LDL receptor (LDLR) and squalene synthase (SS) (Fig.",
+        "start": 5958,
+        "end": 6243,
+        "source_type": "full_text"
+      },
+      "rationale": "Primary-hepatocyte and mouse-liver perturbations support PAQR3-SCAP/SREBP control and measure Hmgcs1, Fdps, and Fdft1 targets.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-c9f8ab00bf2d7955d073",
+      "assessor_id": "primary-p21",
+      "support": "no",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "not_applicable",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "",
+        "start": null,
+        "end": null,
+        "source_type": ""
+      },
+      "rationale": "This paper's ACAT2 is acyl-CoA:cholesterol acyltransferase 2 (legacy name for SOAT2), whereas supplied mouse Acat2 is cytosolic acetyl-CoA acetyltransferase/thiolase. The symbol collision does not support the supplied gene.",
+      "red_flags": [
+        "wrong_gene"
+      ]
+    },
+    {
+      "review_id": "RL-cdef8d40fdbbef430a64",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "These data indicate that propiconazole increases cell proliferation by increasing the levels of cholesterol biosynthesis intermediates presumably through a negative feedback mechanism within the pathway, a result of CYP51 inhibition.",
+        "start": 2318,
+        "end": 2551,
+        "source_type": "abstract"
+      },
+      "rationale": "CYP51 inhibition in AML12 mouse hepatocytes perturbs cholesterol intermediates and pathway feedback.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-dfa3085dcde3f76de26c",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Specifically, miR-93 deficiency upregulated genes involved in fatty acid oxidation and downregulated genes associated with cholesterol biosynthesis.",
+        "start": 1043,
+        "end": 1191,
+        "source_type": "abstract"
+      },
+      "rationale": "MiR-93 knockout in mouse MASLD links cholesterol-biosynthesis transcription to steatosis, but the abstract names no supplied genes.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-fa25d9f81d5e685add1e",
+      "assessor_id": "primary-p21",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "These findings suggest that the INSIG-1 protein alters sterol balance by modulating SREBP processing jointly with SCAP.",
+        "start": 782,
+        "end": 901,
+        "source_type": "abstract"
+      },
+      "rationale": "Cell experiments support INSIG1-SCAP control of SREBP processing, but the abstract has no liver or hepatocyte context.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    }
+  ]
+}

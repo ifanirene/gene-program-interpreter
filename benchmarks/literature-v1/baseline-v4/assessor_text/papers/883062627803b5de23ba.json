@@ -1,0 +1,16 @@
+{
+  "content_hash": "e0f6b23b29e4b6a3499dbabebc11e49c12edab1e70e097ec0c1c1f8388e0ea8e",
+  "doi": "10.1242/jcs.187120",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "883062627803b5de23ba",
+  "pmcid": "PMC5506485",
+  "pmid": "27068536",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The assembly and maintenance of most cilia and flagella rely on intraflagellar transport (IFT). Recent in vitro studies have suggested that, together, the calponin-homology domain within the IFT81 N-terminus and the highly basic N-terminus of IFT74 form a module for IFT of tubulin. By using Chlamydomonas mutants for IFT81 and IFT74, we tested this hypothesis in vivo. Modification of the predicted tubulin-binding residues in IFT81 did not significantly affect basic anterograde IFT and length of steady-state flagella but slowed down flagellar regeneration, a phenotype similar to that seen in a strain that lacks the IFT74 N-terminus. In both mutants, the frequency of tubulin transport by IFT was greatly reduced. A double mutant that combined the modifications to IFT81 and IFT74 was able to form only very short flagella. These results indicate that, together, the IFT81 and IFT74 N-termini are crucial for flagellar assembly, and are likely to function as the main module for IFT of tubulin.",
+  "text_type": "abstract",
+  "title": "Together, the IFT81 and IFT74 N-termini form the main module for intraflagellar transport of tubulin."
+}

@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "brain-p11--candidate-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.97
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 3,
+        "similarity": 0.2
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 2,
+        "similarity": 0.75
+      }
+    ],
+    "moduleSemanticSimilarity": 0.64,
+    "overall_rationale": "The strongest correspondences are the shared tip-cell sprouting program and the narrower Kcnj2 mechanosensing module, while other pairs share only vascular context or secondary angiogenic outputs.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules describe Angpt2/Cxcr4-driven brain endothelial tip-cell sprouting, with Nrp1–CDC42 activity and reduced Tek signaling promoting vascular network formation.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.97
+      },
+      {
+        "left_module": 1,
+        "rationale": "Both concern postnatal vascular adaptation, but tip-cell sprouting and Kcnj2-dependent flow sensing are distinct mechanisms and outputs.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 1,
+        "rationale": "Tnfrsf11b-mediated survival and angiogenic support overlap with vascular sprouting, but the right module emphasizes permissive metabolic and survival mechanisms rather than tip-cell specification.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.47
+      },
+      {
+        "left_module": 2,
+        "rationale": "The modules share Angpt2, Cxcr4, Rgs6, Tek, and arteriovenous patterning biology, but one centers identity specification while the other centers active tip-cell sprouting.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.58
+      },
+      {
+        "left_module": 2,
+        "rationale": "Arteriovenous identity specification and potassium-channel-mediated shear sensing share cerebrovascular context but not their central mechanism or predicted phenotype.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.14
+      },
+      {
+        "left_module": 2,
+        "rationale": "Endothelial survival and metabolic support can enable vascular remodeling, but they do not directly reproduce the arterial-versus-venous identity program.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "BBB transport and flow sensing are distinct from tip-cell sprouting despite their common brain endothelial and vascular-development context.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 3,
+        "rationale": "The right module closely reproduces the Kcnj2-dependent shear-sensing and flow-induced vasodilation arm of the left module while omitting its BBB transport and TGF-beta components.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.75
+      },
+      {
+        "left_module": 3,
+        "rationale": "The modules share Slc1a1 and Tgfbr1/Tgfbr2, but assign them to different outputs—BBB glutamate homeostasis and integrity versus metabolic support of angiogenic remodeling.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.38
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16316,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 1089,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 29.224
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "952bcd3c8f06df6c7669e98b04460562b50fde42a7d6352f6098eb267d3df0c1",
+  "doi": "10.1016/j.cca.2013.11.010",
+  "errors": [],
+  "paper_key": "3b43d115b37e53640e6b",
+  "pmcid": null,
+  "pmid": "24252657",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cholesterol is essential for the growth and function of all mammalian cells, but abnormally increased blood cholesterol is a major risk factor for atherosclerotic cardiovascular disease. ATP-binding cassette (ABC) transporters G5 (ABCG5) and G8 (ABCG8) form an obligate heterodimer that limits intestinal absorption and facilitates biliary secretion of cholesterol and phytosterols. Consistent with their function, ABCG5 and ABCG8 are located on the apical membrane of enterocytes and hepatocytes. Liver X receptor is the major positive regulator of ABCG5 and ABCG8 expression. Mutations in either of the two genes cause sitosterolemia, a condition in which cholesterol and plant sterols accumulate in the circulation leading to premature cardiovascular disease. Overexpression of ABCG5 and ABCG8 in mice retards diet-induced atherosclerosis because of reduced circulating and hepatic cholesterol. In the current review, we summarize recent developments and propose a future framework that provides new perspectives on the regulation of cholesterol metabolism and treatment of atherosclerotic cardiovascular disease.",
+  "text_type": "abstract",
+  "title": "ABCG5/ABCG8 in cholesterol excretion and atherosclerosis."
+}

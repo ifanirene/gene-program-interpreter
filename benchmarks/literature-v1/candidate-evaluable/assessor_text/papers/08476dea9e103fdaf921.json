@@ -1,0 +1,16 @@
+{
+  "content_hash": "f705540e66f431b57609422a425e6f3cc01e52e9b5fcba6d02d9424266bbdb15",
+  "doi": "10.1016/s0002-9440(10)63137-9",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "08476dea9e103fdaf921",
+  "pmcid": "PMC1602258",
+  "pmid": "14742253",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Tie2 is an endothelial cell-specific receptor tyrosine kinase, whose activation is positively and negatively modulated by angiopoietin-1 and angiopoietin-2, respectively. Angiopoietin-mediated modulation of Tie2 activation contributes to normal vessel development and stability, however, its role in tumor angiogenesis is not well known. We investigated the role of Tie2 activation in malignant astrocytomas, a common and highly vascularized primary human brain tumor. We found that Tie2 expression and activation increases with increasing malignancy grade of astrocytomas. Inhibition of Tie2, using a kinase-deficient Tie2 construct, decreases growth of malignant human astrocytoma subcutaneous and intracranial xenografts. Tie2 inactivation disrupted the tumor vascularity, with a decrease in microvascular density, increased presence of abnormally dilated vessels, and loss of interaction between endothelial cells and surrounding smooth muscle cells, all collectively resulting in increased tumor cell apoptosis. Overall, these findings strongly suggest that Tie2 activation contributes significantly to astrocytoma tumor angiogenesis and growth. We postulate that targeting Tie2 activation, either independently or in conjunction with other anti-angiogenic therapies, such as against vascular endothelial growth factor, is of potential clinical interest.",
+  "text_type": "abstract",
+  "title": "Targeting the Tie2/Tek receptor in astrocytomas."
+}

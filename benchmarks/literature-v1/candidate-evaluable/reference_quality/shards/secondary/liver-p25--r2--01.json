@@ -1,0 +1,98 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-8bcd69ca787b12545d4a",
+    "RL-b17aae18064317b9f2c8",
+    "RL-d42354d63977c0f3f9f8"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1077,
+        "source_type": "abstract",
+        "start": 729,
+        "text": "We also examined the activity of the enzyme ALA dehydratase (ALAD), which is the second enzyme in the heme biosynthetic pathway, and ALAD gene expression during the fatigue and its recovery sessions. The ALAD activity, as well as its gene expression, in the liver of the fatigued animals was decreased as compared with those of the control animals."
+      },
+      "function_supported_genes": [
+        "Alad"
+      ],
+      "rationale": "The study identifies ALAD as the second heme-biosynthetic enzyme and shows that experimentally induced fatigue decreases its hepatic activity and expression. Rat liver under fatigue is indirect to mouse hepatocytes during aging or MASLD.",
+      "red_flags": [],
+      "review_id": "RL-8bcd69ca787b12545d4a",
+      "studied_genes": [
+        "Alad"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1120,
+        "source_type": "abstract",
+        "start": 919,
+        "text": "Our study shows that bile acid-binding mode of mSULT2A8 and how the enzyme holds the 7α-OH group of bile acids at the catalytic center, revealing that the mechanism underlying 7α-OH specific sulfation."
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "The SULT2A8–bile acid structure directly supports its 7α-hydroxyl bile-acid sulfation mechanism. The purified structural system does not directly reproduce the target aging/MASLD hepatocyte context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b17aae18064317b9f2c8",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1193,
+        "source_type": "abstract",
+        "start": 1042,
+        "text": "As the aging process progressed to senescent stages, the levels of transcript and protein decreased significantly in the liver and kidney of aged rats."
+      },
+      "function_supported_genes": [
+        "Rgn"
+      ],
+      "rationale": "The paper measures Rgn/SMP30 and shows that its transcript and protein decline with aging, including in hepatocytes. Rat hepatocyte aging is closely transferable but not identical to the mouse aging/MASLD context.",
+      "red_flags": [],
+      "review_id": "RL-d42354d63977c0f3f9f8",
+      "studied_genes": [
+        "Rgn"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 36352,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 57307,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 3679,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 73.844
+  }
+}

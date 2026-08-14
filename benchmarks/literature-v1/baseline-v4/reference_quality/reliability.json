@@ -1,0 +1,539 @@
+{
+  "adjudicated_count": 25,
+  "assessment_type": "model",
+  "disagreement_count": 25,
+  "double_scored_count": 53,
+  "double_scored_fraction": 0.203065,
+  "exact_agreement_count": 28,
+  "exact_agreement_rate": 0.528302,
+  "field_agreement_rates": {
+    "assessed_context": 0.830189,
+    "context_label_accuracy": 0.830189,
+    "direction": 0.811321,
+    "directness": 0.962264,
+    "function_supported_genes": 0.90566,
+    "red_flags": 0.716981,
+    "studied_genes": 0.943396,
+    "support": 0.716981
+  },
+  "links": [
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "direction",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-10c90de4214dc35aeb36",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "support",
+        "direction"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-1b94bd4f696f98c72ae7",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-1bc48c6831d8c93d5dec",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "direction"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-2031655117f8baca41ce",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-p21",
+      "disagreement_fields": [
+        "support",
+        "studied_genes",
+        "function_supported_genes"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p21",
+      "review_id": "RL-242b5a9c5abc75abc94d",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "support"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-26961567be69d2771a0f",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-liver-other",
+      "disagreement_fields": [
+        "support",
+        "assessed_context",
+        "context_label_accuracy"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-2fdedf3d9ad47904a976",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p11-p9",
+      "review_id": "RL-324ec6f55da876ef1562",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-367170f394bf65b1774d",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-3b4e101ec46d4aefdadc",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-40f6fcb9756c008f9136",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-41d5b48e1c26a52b2d20",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-43697367f664f9f0214d",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "directness",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-48422b8ea27c2539bf2b",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-508dcce725e005b5de67",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-53aee5c7d77412cae242",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "support",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p11-p9",
+      "review_id": "RL-54dff275faab78dc35a5",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "function_supported_genes"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p11-p9",
+      "review_id": "RL-5551cbd4f12617c28768",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "direction"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-560b17922f0923a44c21",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-liver-other",
+      "disagreement_fields": [
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-5647b6ba86f448cabe99",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-liver-other",
+      "disagreement_fields": [
+        "support",
+        "direction",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-5ca95ef495132b7abde9",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p21",
+      "review_id": "RL-61540a022c6b44664286",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": "codex-adjudicator-p21",
+      "disagreement_fields": [
+        "direction",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p21",
+      "review_id": "RL-6dcde1c34bce3dbdd012",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-6dda4ff1cad86bd77841",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-71660da32cfe719ce00c",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-liver-other",
+      "disagreement_fields": [
+        "support"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-719e6b59ed923a170805",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "support",
+        "direction",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-7b48bebde36f0916fddc",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-liver-other",
+      "disagreement_fields": [
+        "support",
+        "directness",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-7dc25d951d78cd49c241",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-p21",
+      "disagreement_fields": [
+        "studied_genes",
+        "function_supported_genes",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p21",
+      "review_id": "RL-85775391149b8f392d5d",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-8b30a8cb6ecf33399b92",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-liver-other",
+      "disagreement_fields": [
+        "support",
+        "function_supported_genes",
+        "direction",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-8b5f0c2dd98577fc419a",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-8c50dcad33b923e32752",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "support",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p11-p9",
+      "review_id": "RL-8e8098d397b5ef463914",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-94fc72dac874e940bc4a",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p11-p9",
+      "review_id": "RL-a278001bc49e2e9e1781",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-b2fdeb39284ec689fbe9",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-b67a3002ec83b19ac8aa",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p11-p9",
+      "review_id": "RL-b9f6789f11d353be3566",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "support"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p11-p9",
+      "review_id": "RL-bfd8007f2b08a42926ff",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": "codex-adjudicator-p21",
+      "disagreement_fields": [
+        "support",
+        "studied_genes",
+        "function_supported_genes",
+        "direction",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p21",
+      "review_id": "RL-c0149ee32fcc6767c368",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-d5a274b0a6c97b8ef270",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-d6a9235e6e7e7f9749f7",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-d76fa2f8ef89c1f51301",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-da3108b12f0080269960",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-da91ecd322946781d7f7",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-dd747e318d498d5beedc",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-p21",
+      "disagreement_fields": [
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p21",
+      "review_id": "RL-e02070e104a3f6abe459",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": "codex-adjudicator-mixed",
+      "disagreement_fields": [
+        "direction",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p8-p25",
+      "review_id": "RL-e259e3212002092d0f1d",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p10",
+      "review_id": "RL-eb9c54402cfc7cdb48d9",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-liver-other",
+      "disagreement_fields": [
+        "support"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-f61da05e22029f356be0",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": "codex-adjudicator-p21",
+      "disagreement_fields": [
+        "support",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "primary-p21",
+      "review_id": "RL-fa25d9f81d5e685add1e",
+      "secondary_assessor": "secondary-a"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "codex-primary-p20-p22-p23-p24",
+      "review_id": "RL-fc596e6d20e00f89ceaf",
+      "secondary_assessor": "secondary-b"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "primary-p11-p9",
+      "review_id": "RL-ff25a8b2a5f5c0c87200",
+      "secondary_assessor": "secondary-a"
+    }
+  ],
+  "schema_version": 1
+}

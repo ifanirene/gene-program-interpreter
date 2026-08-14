@@ -1,0 +1,14 @@
+{
+  "content_hash": "918981e53af0fe32f75f24f7b8832a18858d2c8399550164a8933b370036833d",
+  "doi": "10.1007/s10753-023-01828-z",
+  "errors": [],
+  "paper_key": "f8a41c0ec97b9e75f371",
+  "pmcid": null,
+  "pmid": "37227548",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The mevalonate-diphosphate decarboxylase (MVD) gene, a member of the mevalonate pathway, plays a critical role in regulating the biosynthesis of cholesterol, steroid hormones, and non-steroid isoprenoids. Previous studies have suggested that the MVD c.746 T > C mutation is a major pathogenic gene of porokeratosis (PK), an autoinflammatory keratinization disease (AIKD) with unclear pathogenesis, few effective treatments, and no suitable animal model. To investigate the function of MvdF250S/+ mutation, we developed a novel MvdF250S/+ mouse model carrying an equivalent point mutation to the most common genetic variation among Chinese PK patients (MVDF249S/+) using CRISPR/Cas9 technology, which exhibited reduced cutaneous expression of Mvd protein. In the absence of external stimulation, MvdF250S/+ mice did not display specific phenotypes. However, upon induction with imiquimod (IMQ), MvdF250S/+ mice exhibited decreased susceptibility to skin acute inflammation compared to wild-type (WT) mice, as evidenced by reduced cutaneous proliferation and lower protein levels of IL-17a and IL-1\u03b2. Additionally, after IMQ induction, the MvdF250S/+mice exhibited downregulated collagen generation and upregulated expression of Fabp3 compared to WT mice, whereas no significant changes in the key genes related to cholesterol regulation were found. Furthermore, the MvdF250S/+ mutation activated autophagy. Our findings provided insights into the biological function of MVD in the skin.",
+  "text_type": "abstract",
+  "title": "Decreased Imiquimod-Induced Psoriasis-Like Skin Inflammation in a Novel MvdF250S/+ Knock-In Mouse Model."
+}

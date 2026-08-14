@@ -1,0 +1,14 @@
+{
+  "content_hash": "3a487596a730d4de72c324d51abf374733b1879df1c6810566cf90ed60e5e334",
+  "doi": "10.1007/978-94-024-1079-2_38",
+  "errors": [],
+  "paper_key": "927b6123f2d2d167e271",
+  "pmcid": null,
+  "pmid": "28849476",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The cysteine dioxygenase (Cdo1)-null mouse is unable to synthesize hypotaurine and taurine by the cysteine/cysteine sulfinate pathway and has very low taurine levels in all tissues. The lack of taurine is associated with a lack of taurine conjugation of bile acids, a dramatic increase in the total and unconjugated hepatic bile acid pools, and an increase in betaine and other molecules that serve as organic osmolytes. We used the Cdo1-mouse model to determine the effects of taurine deficiency on expression of proteins involved in sulfur amino acid and bile acid metabolism. We identified cysteine sulfinic acid decarboxylase (Csad), betaine:homocysteine methytransferase (Bhmt), cholesterol 7\u03b1-hydroxylase (Cyp7a1), and cytochrome P450 3A11 (Cyp3a11) as genes whose hepatic expression is strongly regulated in response to taurine depletion in the Cdo1-null mouse. Dietary taurine supplementation of Cdo1-null mice restored hepatic levels of these four proteins and their respective mRNAs to wild-type levels, whereas dietary taurine supplementation had no effect on abundance of these proteins or mRNAs in wild-type mice.",
+  "text_type": "abstract",
+  "title": "Identification of Taurine-Responsive Genes in Murine Liver Using the Cdo1-Null Mouse Model."
+}

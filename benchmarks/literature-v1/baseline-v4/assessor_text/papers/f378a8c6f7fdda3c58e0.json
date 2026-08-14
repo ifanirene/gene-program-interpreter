@@ -1,0 +1,14 @@
+{
+  "content_hash": "f9708580cd5c68e94bccf7ca9995b0346386940095d5cddffda8e5ec08343135",
+  "doi": "10.1038/s41574-023-00809-4",
+  "errors": [],
+  "paper_key": "f378a8c6f7fdda3c58e0",
+  "pmcid": null,
+  "pmid": "37055547",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Excessive sugar consumption and defective glucose sensing by hepatocytes contribute to the development of metabolic diseases including type 2 diabetes mellitus (T2DM) and nonalcoholic fatty liver disease (NAFLD). Hepatic metabolism of carbohydrates into lipids is largely dependent on the carbohydrate-responsive element binding protein (ChREBP), a transcription factor that senses intracellular carbohydrates and activates many different target genes, through the activation of de novo lipogenesis (DNL). This process is crucial for the storage of energy as triglycerides in hepatocytes. Furthermore, ChREBP and its downstream targets represent promising targets for the development of therapies for the treatment of NAFLD and T2DM. Although lipogenic inhibitors (for example, inhibitors of fatty acid synthase, acetyl-CoA carboxylase or ATP citrate lyase) are currently under investigation, targeting lipogenesis remains a topic of discussion for NAFLD treatment. In this Review, we discuss mechanisms that regulate ChREBP activity in a tissue-specific manner and their respective roles in controlling DNL and beyond. We also provide in-depth discussion of the roles of ChREBP in the onset and progression of NAFLD and consider emerging targets for NAFLD therapeutics.",
+  "text_type": "abstract",
+  "title": "The role of ChREBP in carbohydrate sensing and NAFLD development."
+}

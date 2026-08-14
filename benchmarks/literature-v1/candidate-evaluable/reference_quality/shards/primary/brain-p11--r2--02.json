@@ -1,0 +1,136 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-a3e7477dd40323d6a6a8",
+    "RL-bca2b920f9dab51d685c",
+    "RL-bcb8d8bbafcc60bae100",
+    "RL-eedf1854869a82bd0119",
+    "RL-fe80504bafd42b5f9584"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "background",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "This abstract describes HRAS-driven brain vascular malformation with generic 'altered TGF-β signaling' and tip/stalk gene abnormalities, but contains no gene-specific data on Tnfrsf11b or Slc1a1. Neither supplied gene of mechanism 3 is studied here.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-a3e7477dd40323d6a6a8",
+      "studied_genes": [],
+      "support": "no"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 718,
+        "source_type": "abstract",
+        "start": 596,
+        "text": "Overexpressing wild-type-Kir2.1 in endothelium of arteries from obese mice resulted in full recovery of the flow response."
+      },
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "rationale": "Dominant-negative knockdown and overexpression experiments causally establish Kir2.1 (Kcnj2) as the flow-sensitive channel mediating endothelial mechanotransduction, matching the mechanism's claim. Tissue is mesenteric artery endothelium rather than brain, consistent with the declared partial (same cell type, different vascular bed) context.",
+      "red_flags": [],
+      "review_id": "RL-bca2b920f9dab51d685c",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 23856,
+        "source_type": "full_text",
+        "start": 23710,
+        "text": "NRP1 enables CDC42 activation and CDC42-dependent actin dynamics and filopodia extension in ECM-stimulated ECs, independently of VEGF-A signaling."
+      },
+      "function_supported_genes": [],
+      "rationale": "This paper directly and causally establishes the regulator claim that NRP1 activates CDC42 to drive endothelial tip-cell filopodia formation, using mouse hindbrain, zebrafish, and human EC models. Angpt2 appears only as an incidental qPCR marker gene, not as a substantively investigated supplied gene, so no supplied-gene credit applies; embryonic hindbrain vs. postnatal brain vasculature supports a partial context call.",
+      "red_flags": [],
+      "review_id": "RL-bcb8d8bbafcc60bae100",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 854,
+        "source_type": "abstract",
+        "start": 767,
+        "text": "The down-regulation of Kir2.1 reduced OSS-induced EPC mesenchymal transdifferentiation."
+      },
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "rationale": "Knockdown and overexpression of Kir2.1 (Kcnj2) in endothelial progenitor cells causally link the channel to oscillating-shear-induced mesenchymal transdifferentiation, matching the specific mechanism clause about Kcnj2 in EPCs. The system (cultured EPCs, carotid injury model) is a different cell/tissue context from brain endothelium, consistent with the declared indirect label.",
+      "red_flags": [],
+      "review_id": "RL-eedf1854869a82bd0119",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "reversed",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1754,
+        "source_type": "abstract",
+        "start": 1694,
+        "text": "we uncover a reinforcing role for angiopoietin 2 at the BBB."
+      },
+      "function_supported_genes": [],
+      "rationale": "Using reverse genetics in pericyte-deficient brain, the paper finds ANGPT2 plays a BBB-reinforcing (stabilizing) role, explicitly noted as paradoxical relative to its canonical TEK-antagonist, vessel-destabilizing function claimed in the mechanism summary. Context (brain, BBB, single-cell) is directly on-target even though the functional direction opposes the cited destabilizing/pro-sprouting claim.",
+      "red_flags": [
+        "reversed_direction"
+      ],
+      "review_id": "RL-fe80504bafd42b5f9584",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "contradicts"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.42523150000000004,
+    "duration_api_ms": 180753,
+    "duration_ms": 171947,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 172.868
+  }
+}

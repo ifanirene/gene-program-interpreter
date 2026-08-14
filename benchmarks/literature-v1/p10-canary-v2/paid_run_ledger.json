@@ -1,0 +1,406 @@
+{
+  "approval_file_sha256": "daba94edbcd3d43476efb358b1543e569595d4eb8c5463ebd2e96a0946072773",
+  "approved_ceiling_usd": 2.5,
+  "benchmark_id": "literature-v1",
+  "canary_session_id": "brain-p10--r1",
+  "fanout_blocking_reason": "canary was not successful on its first attempt; remaining sessions were not launched",
+  "fanout_status": "blocked_by_canary",
+  "schema_version": 1,
+  "sessions": {
+    "brain-p10--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "1ebd1b2d0f266244d00958dd156ced13ebef9251d8f7ea2fdebd4ca3ed65b48c",
+          "cost_usd": 1.3884880999999998,
+          "duration_ms": 779951,
+          "error": "submit_result payload failed schema validation: Stxbp4: evidence_found lacks an exact gene-paper edge",
+          "is_error": false,
+          "num_turns": 73,
+          "result_sha256": "7b2519a2b8ec64c981d695044b8157a7045829cb410227bcde79a922ac1b43f4",
+          "status": "incomplete",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 85592,
+            "cache_read": 531217,
+            "input": 42,
+            "output": 47654,
+            "total": 664505
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/program_bundles/P10.json\"}",
+              "attempt": 1,
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__literature__expand_openalex_citations,mcp__gpi__submit_result\"}",
+              "attempt": 1,
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"pattern\": \"**/P10.json\"}",
+              "attempt": 1,
+              "tool": "Glob"
+            },
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/program_bundles/P10.json\"}",
+              "attempt": 1,
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P10.json\"}",
+              "attempt": 1,
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Bbs9 BBS9 cilia ciliopathy\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Bbs9\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Wdpcp cilia planar cell polarity endothelial\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Wdpcp\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cc2d2a cilia Joubert syndrome transition zone\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Cc2d2a\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ift74 intraflagellar transport cilia ciliopathy\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Ift74\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cep164 centrosome cilia ciliogenesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Cep164\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Sdccag8 cilia ciliopathy nephronophthisis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Sdccag8\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Nme7 cilia ciliopathy axonemal\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Nme7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tbc1d32 cilia hedgehog signaling mouse\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tbc1d32\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Wdpcp WDR35 cilia ciliopathy mouse\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Wdpcp\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cfap36 cilia flagella associated protein\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Cfap36\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Prkdc DNA-PKcs DNA repair brain endothelial\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Prkdc\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Map2k6 MKK6 p38 MAPK endothelial angiogenesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Map2k6\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tet1 DNA methylation brain endothelial epigenetics\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tet1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"22479622\", \"31530639\", \"26085087\", \"30970040\", \"21816947\", \"22983010\", \"37555648\", \"36865301\", \"24982133\", \"24722439\", \"22190896\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Bbs9\", \"Cc2d2a\", \"Ift74\", \"Cep164\", \"Sdc...",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Nme7 NME7 cilia motile primary\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Nme7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Wdpcp cilia ciliary endothelial vasculature\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Wdpcp\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Eml6 echinoderm microtubule associated cilia\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Eml6\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Bckdhb branched chain amino acid metabolism brain\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Bckdhb\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Chchd6 mitochondria MINOS coiled-coil helix\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Chchd6\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Stxbp4 syntaxin binding protein vesicle trafficking\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Stxbp4\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Camkmt calmodulin methyltransferase function\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Camkmt\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38884744\", \"20080492\", \"33382037\", \"29487109\", \"20159594\", \"20301495\", \"23665562\", \"36104602\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Nme7\", \"Tbc1d32\", \"Bckdhb\", \"Stxbp4\", \"Chchd6\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Wdpcp cilia cardiovascular development angiogenesis\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Wdpcp\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Metap1d methionine aminopeptidase mitochondria\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Metap1d\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Elp4 elongator complex neuron brain development\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Elp4\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Clybl citrate lyase brain metabolism coenzyme A\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Clybl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Gata2 brain endothelial blood-brain barrier\", \"research_phase\": \"regulator\", \"target_genes\": [\"Gata2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Fzd4 frizzled Wnt signaling blood-brain barrier brain endothelial\", \"research_phase\": \"regulator\", \"target_genes\": [\"Fzd4\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Eng endoglin TGF-beta angiogenesis endothelial brain\", \"research_phase\": \"regulator\", \"target_genes\": [\"Eng\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"40963808\", \"37947657\", \"34056869\", \"28675177\", \"25373781\", \"33471197\", \"28796572\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Gata2\", \"Fzd4\", \"Eng\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Wdpcp WDR repeat planar cell polarity cilia mouse heart\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Wdpcp\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Prkdc DNA-PKcs V(D)J recombination DNA repair\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Prkdc\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tex9 testis expressed gene brain function\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tex9\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"primary cilia endothelial cell brain blood vessel flow sensing\", \"research_phase\": \"theme\", \"target_genes\": []}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Bckdhb BCKDHB branched chain keto acid dehydrogenase endothelial\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Bckdhb\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Camkmt calmodulin methyltransferase cilia brain\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Camkmt\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"37594251\", \"30571172\", \"38407308\", \"17929833\", \"20301495\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tex9\", \"Prkdc\", \"Bckdhb\", \"Metap1d\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Wdpcp WDPCP cilia ciliopathy mouse development\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Wdpcp\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Eml6 EML6 microtubule spindle brain\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Eml6\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Elp4 ELP4 elongator complex acetylation tRNA\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Elp4\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Clybl CLYBL itaconate CoA brain metabolism\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Clybl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Camkmt CAMKMT calmodulin lysine methyltransferase\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Camkmt\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cfap36 CFAP36 ciliary protein axoneme motility\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Cfap36\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tet1 TET1 hydroxymethylcytosine blood-brain barrier endothelial vascular\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Tet1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"24302887\", \"38546045\", \"29332244\", \"30085123\", \"23794250\", \"35235761\", \"42132410\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Wdpcp\", \"Elp4\", \"Camkmt\", \"Tet1\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cfap36 CFAP36 cilia dyskinesia situs\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Cfap36\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Clybl citrate lyase itaconate metabolism endothelial\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Clybl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Eml6 EML6 microtubule protein gene\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Eml6\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Map2k6 MKK6 p38 MAPK stress kinase function\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Map2k6\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"BBSome IFT cilia endothelial angiogenesis vascular development\", \"research_phase\": \"theme\", \"target_genes\": [\"Bbs9\", \"Ift74\", \"Cep164\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Gata2 GATA2 endothelial transcription factor angiogenesis vasculature\", \"research_phase\": \"regulator\", \"target_genes\": [\"Gata2\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"22499991\", \"23892628\", \"25630869\", \"39238827\", \"35081682\", \"9768359\", \"38290061\"], \"research_phase\": \"regulator\", \"target_genes\": [\"Gata2\", \"Eml6\", \"Map2k6\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"CFAP36 cilia ciliary beating motility ciliopathy\", \"research_phase\": \"gap\", \"target_genes\": [\"Cfap36\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"CLYBL malonate succinate coenzyme A brain function\", \"research_phase\": \"gap\", \"target_genes\": [\"Clybl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Stxbp4 synip GLUT4 exocytosis insulin brain\", \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Stxbp4\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"cilia primary cilia brain endothelial mouse postnatal development Wnt signaling\", \"research_phase\": \"theme\", \"target_genes\": [\"Bbs9\", \"Cc2d2a\", \"Ift74\", \"Cep164\", \"Sdccag8\", \"Wdpcp\", \"Tbc1d32\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 3, \"query\": \"1110051M20Rik mouse gene function\", \"research_phase\": \"gap\", \"target_genes\": [\"X1110051M20Rik\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 3, \"query\": \"D130040H23Rik mouse gene function\", \"research_phase\": \"gap\", \"target_genes\": [\"D130040H23Rik\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"primary cilia endothelial cells brain vascular development zebrafish IFT\", \"research_phase\": \"theme\", \"target_genes\": [\"Bbs9\", \"Ift74\", \"Cep164\", \"Wdpcp\", \"Cc2d2a\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"BBSome ciliogenesis transition zone brain postnatal development\", \"research_phase\": \"theme\", \"target_genes\": [\"Bbs9\", \"Cc2d2a\", \"Sdccag8\", \"Tbc1d32\", \"Nme7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Bckdhb BCKDHB brain endothelial metabolism vascular\", \"research_phase\": \"gap\", \"target_genes\": [\"Bckdhb\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"20301495\", \"33131499\"], \"research_phase\": \"supplied_gene\", \"target_genes\": [\"Bckdhb\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"29500191\", \"29030052\", \"30571172\", \"30733609\"], \"research_phase\": \"theme\", \"target_genes\": [\"Bbs9\", \"Ift74\", \"Cep164\", \"Wdpcp\", \"Cc2d2a\", \"Sdccag8\", \"Tbc1d32\", \"Nme7\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"gene_terms\": [\"Bbs9\", \"Cc2d2a\", \"Ift74\", \"Cep164\", \"Sdccag8\", \"Wdpcp\", \"Tbc1d32\", \"Nme7\", \"BBSome\", \"IFT\"], \"identity_terms\": [\"brain endothelial cell\", \"brain\", \"cranial vasculature\"], \"mechanism_name\": \"Primary cilia biogenesis and f...",
+              "attempt": 1,
+              "tool": "mcp__literature__expand_openalex_citations"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cfap36 mouse mutant phenotype cilia\", \"research_phase\": \"gap\", \"target_genes\": [\"Cfap36\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Clybl CLYBL function gene mouse\", \"research_phase\": \"gap\", \"target_genes\": [\"Clybl\"]}",
+              "attempt": 1,
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P10 is dominated by genes encoding core components of the primary cilia biogenesis and signaling machinery \\u2014 including the BBSome (Bbs9), IFT-B complex (Ift74), CPLANE/transition zone effectors (Wdpcp, Cc2...",
+              "attempt": 1,
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": null
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "d2295db749d60c8dac3afefe178db31511c949e50765ea7bf1cf56ef14ab8864",
+      "audit_status": "incomplete",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.5,
+      "program_id": "P10",
+      "recorded_cost_usd": 1.3884880999999998,
+      "status": "research_complete"
+    }
+  }
+}

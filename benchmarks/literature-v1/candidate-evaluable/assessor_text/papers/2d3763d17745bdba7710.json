@@ -1,0 +1,14 @@
+{
+  "content_hash": "3c94845a07c9ac08f06772d62046f095ff38f290c51327e47133e8f7cafd45af",
+  "doi": "10.1074/jbc.275.17.12590",
+  "errors": [],
+  "paper_key": "2d3763d17745bdba7710",
+  "pmcid": null,
+  "pmid": "10777549",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Computer-based approaches identified three distinct human 2-hydroxy acid oxidase genes, HAOX1, HAOX2, and HAOX3, that encode proteins with significant sequence similarity to plant glycolate oxidase, a prototypical 2-hydroxy acid oxidase. The products of these genes are targeted to peroxisomes and have 2-hydroxy acid oxidase activities. Each gene displays a distinct tissue-specific pattern of expression, and each enzyme exhibits distinct substrate preferences. HAOX1 is expressed primarily in liver and pancreas and is most active on the two-carbon substrate, glycolate, but is also active on 2-hydroxy fatty acids. HAOX2 is expressed predominantly in liver and kidney and displays highest activity toward 2-hydroxypalmitate. HAOX3 expression was detected only in pancreas, and this enzyme displayed a preference for the medium chain substrate 2-hydroxyoctanoate. These results indicate that all three human 2-hydroxy acid oxidases are involved in the oxidation of 2-hydroxy fatty acids and may also contribute to the general pathway of fatty acid alpha-oxidation. Primary hyperoxaluria type 1 (PH1) is caused by defects in peroxisomal alanine-glyoxylate aminotransferase, the enzyme that normally eliminates intraperoxisomal glyoxylate. The presence of HAOX1 in liver and kidney peroxisomes and the ability of HAOX1 to oxidize glyoxylate to oxalate implicate HAOX1 as a mediator of PH1 pathophysiology.",
+  "text_type": "abstract",
+  "title": "Identification and characterization of HAOX1, HAOX2, and HAOX3, three human peroxisomal 2-hydroxy acid oxidases."
+}

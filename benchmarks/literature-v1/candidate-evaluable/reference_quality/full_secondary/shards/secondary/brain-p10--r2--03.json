@@ -1,0 +1,122 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-c30b0610814d501b2881",
+    "RL-c6dc85e122c5ecb839a6",
+    "RL-ccaa69a0b61a920d774b",
+    "RL-ddf8878d8e24dac2310a"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1768,
+        "source_type": "abstract",
+        "start": 1627,
+        "text": "Thus, SDCCAG8 mutations are sufficient to cause BBS in 1-2% of our combined cohorts, and define this gene as the sixteenth BBS locus (BBS16)."
+      },
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "rationale": "Model-assessed: patient mutations establish SDCCAG8 as a causal BBS gene, but the study provides incomplete support for its specific ciliary mechanism. The human disease context is indirect to postnatal mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-c30b0610814d501b2881",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 530,
+        "source_type": "full_text",
+        "start": 334,
+        "text": "GRSF1 maintains branched-chain amino acid homeostasis and mitochondrial function by stabilizing BCKDHB (branched-chain keto acid dehydrogenase E1 subunit β) mRNA at the post-transcriptional level."
+      },
+      "function_supported_genes": [
+        "Bckdhb"
+      ],
+      "rationale": "Model-assessed: gene-specific perturbation and molecular data support BCKDHB as the E1β component involved in BCAA homeostasis. The cardiac and cardiomyocyte context is indirect to brain endothelial cells.",
+      "red_flags": [],
+      "review_id": "RL-c6dc85e122c5ecb839a6",
+      "studied_genes": [
+        "Bckdhb"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 48157,
+        "source_type": "full_text",
+        "start": 47934,
+        "text": "Our findings indicate a role for Cc2d2a in vesicle trafficking of transmembrane outer segment components such as opsins, based on the striking accumulation of vesicles and mislocalization of opsins in mutant photoreceptors."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "Model-assessed: Cc2d2a mutant data support a transition-zone-associated role in trafficking proteins into the ciliary compartment. Zebrafish photoreceptors and other ciliated cells are indirect to mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-ccaa69a0b61a920d774b",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 968,
+        "source_type": "abstract",
+        "start": 787,
+        "text": "In ciliated cells, we observe localization of recombinant CC2D2A at the basal body and colocalization with CEP290, whose cognate gene is mutated in multiple hereditary ciliopathies."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "Model-assessed: the paper supports CC2D2A localization and function at the cilium/basal body, but does not specifically establish transition-zone localization. Human ciliopathy and zebrafish kidney evidence are indirect, making the declared partial context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-ddf8878d8e24dac2310a",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 277248,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 306727,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 8473,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 177.942
+  }
+}

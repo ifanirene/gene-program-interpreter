@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "comparison_id",
+    "assessor_id",
+    "pair_scores",
+    "overall_rationale"
+  ],
+  "properties": {
+    "comparison_id": {
+      "type": "string"
+    },
+    "assessor_id": {
+      "type": "string"
+    },
+    "pair_scores": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "left_module",
+          "right_module",
+          "similarity",
+          "relationship",
+          "rationale"
+        ],
+        "properties": {
+          "left_module": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "right_module": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3
+          },
+          "similarity": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "relationship": {
+            "type": "string",
+            "enum": [
+              "same_core",
+              "meaningful_refinement",
+              "partial_overlap",
+              "context_only",
+              "different",
+              "opposed"
+            ]
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "overall_rationale": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

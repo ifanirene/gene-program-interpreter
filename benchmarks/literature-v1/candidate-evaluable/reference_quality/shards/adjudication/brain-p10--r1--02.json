@@ -1,0 +1,118 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-689f197748219170cfe5",
+    "RL-790a9c8ed4212eb9a4d8",
+    "RL-83a46fb3311eafce74e1",
+    "RL-9c41babf6664c0afdd85"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 875,
+        "source_type": "abstract",
+        "start": 725,
+        "text": "gain or loss of Norrin/Fz4 signaling results in a cell-autonomous gain or loss, respectively, of blood retina barrier and blood brain barrier function"
+      },
+      "function_supported_genes": [],
+      "rationale": "Genetic gain/loss experiments causally support regulator Fzd4's requirement in CNS endothelial barrier function, but Fzd4 is a perturbation regulator so supplied-gene arrays stay empty. Evidence is adult cerebellar BBB maintenance plus retinal development, so the postnatal brain-EC target is only partially matched, making the declared direct context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-689f197748219170cfe5",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 601,
+        "source_type": "abstract",
+        "start": 227,
+        "text": "We recently identified mutations in a gene encoding the centrosomal protein SDCCAG8 as causing NPHP type 10 in humans. To study the role of Sdccag8 in disease pathogenesis, we generated a Sdccag8 gene-trap mouse line. Homozygous Sdccag8(gt/gt) mice lacked the wild-type Sdccag8 transcript and protein, and recapitulated the human phenotypes of NPHP and retinal degeneration."
+      },
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "rationale": "The Sdccag8 gene-trap mouse recapitulates NPHP and retinal degeneration, fully supporting the citation-specific claim that Sdccag8 is a centrosomal ciliopathy gene whose loss causes nephronophthisis-related disease. The kidney/retina setting is indirect to brain endothelium, so the declared partial context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-790a9c8ed4212eb9a4d8",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 5047,
+        "source_type": "full_text",
+        "start": 4891,
+        "text": "Micro-CT scan performed at postnatal day 1 (P1) revealed random left/right symmetry dysregulation with situs inversus totalis present in most SDNme7−/− rats"
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "The rat CRISPR knockout causally phenocopies primary ciliary dyskinesia (situs inversus, hydrocephalus), directly supporting the explicit mechanism clause that Nme7 loss produces PCD, which is the selection reason. The untested Smo/Hedgehog readout is a non-entailed clause of the broad summary, not a wrong function; rat context is correctly indirect.",
+      "red_flags": [],
+      "review_id": "RL-83a46fb3311eafce74e1",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1979,
+        "source_type": "full_text",
+        "start": 1835,
+        "text": "BBSome, a stable complex of seven core BBS proteins (BBS1, BBS2, BBS4, BBS5, BBS7, BBS8, BBS9) is implicated in cilia trafficking and biogenesis"
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "Zebrafish and mouse IMCD3 knockdown causally establish Bbs9 as a required BBSome-core subunit for ciliary trafficking and biogenesis, the core of the assigned BBSome-trafficking mechanism, so Bbs9 is function-supported at a narrower level. Support is only partial because the specific Smo/GPR161 GPCR export and Hedgehog readout are not directly tested; the zebrafish/kidney-cell systems are correctly indirect.",
+      "red_flags": [],
+      "review_id": "RL-9c41babf6664c0afdd85",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.632649,
+    "duration_api_ms": 177858,
+    "duration_ms": 176035,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 177.34
+  }
+}

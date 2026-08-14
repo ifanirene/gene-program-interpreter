@@ -1,0 +1,14 @@
+{
+  "content_hash": "a54d010caf550b68ce87484738d42918b64beb9ecbf125bca7066ac2bc3490f6",
+  "doi": "10.1093/toxsci/kfn268",
+  "errors": [],
+  "paper_key": "8318e1f6f7e2b2471498",
+  "pmcid": null,
+  "pmid": "19131563",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Sulfotransferase-2A1 catalyzes the formation of bile acid-sulfates (BA-sulfates). Sulfation of BAs increases their solubility, decreases their intestinal absorption, and enhances their fecal and urinary excretion. BA-sulfates are also less toxic than their unsulfated counterparts. Therefore, sulfation is an important detoxification pathway of BAs. Major species differences in BA sulfation exist. In humans, only a small proportion of BAs in bile and serum are sulfated, whereas more than 70% of BAs in urine are sulfated, indicating their efficient elimination in urine. The formation of BA-sulfates increases during cholestatic diseases. Therefore, sulfation may play an important role in maintaining BA homeostasis under pathologic conditions. Farnesoid X receptor, pregnane X receptor, constitutive androstane receptor, and vitamin D receptor are potential nuclear receptors that may be involved in the regulation of BA sulfation. This review highlights current knowledge about the enzymes and transporters involved in the formation and elimination of BA-sulfates, the effect of sulfation on the pharmacologic and toxicologic properties of BAs, the role of BA sulfation in cholestatic diseases, and the regulation of BA sulfation.",
+  "text_type": "abstract",
+  "title": "Bile Acid sulfation: a pathway of bile acid elimination and detoxification."
+}

@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-cc6e56034be9f7e2fa89",
+    "RL-d542d0316e6592db0cac",
+    "RL-e0cde018c4ab700810f1",
+    "RL-eb6e41646ef46fd76567"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 8193,
+        "source_type": "full_text",
+        "start": 8033,
+        "text": "Analysis of mouse embryonic fibroblasts (MEFs) derived from WdpcpCys40 mutant embryos, referred to as WdpcpCys40 mutant MEFs, confirmed a defect in ciliogenesis"
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "Model-assessed: Wdpcp loss directly caused ciliogenesis defects, supporting its assigned ciliogenesis role. The embryonic tissues and fibroblasts are indirect to postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-cc6e56034be9f7e2fa89",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 19185,
+        "source_type": "full_text",
+        "start": 19123,
+        "text": "NME7 activates γTuRC-mediated microtubule nucleation in vitro."
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "Model-assessed: direct depletion and biochemical experiments establish NME7 as a γTuRC regulator of microtubule nucleation. Support is partial because primary-cilium assembly was not directly tested in the reported experiments.",
+      "red_flags": [],
+      "review_id": "RL-d542d0316e6592db0cac",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 8300,
+        "source_type": "full_text",
+        "start": 8243,
+        "text": "BBS1, BBS2, BBS7, and BBS9 constitute the core subcomplex"
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "Model-assessed: gene-specific interaction experiments support BBS9 as a core BBSome component. Support is partial because the SMO/GPR161 trafficking experiments perturb BBS1 rather than BBS9.",
+      "red_flags": [],
+      "review_id": "RL-e0cde018c4ab700810f1",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 54962,
+        "source_type": "full_text",
+        "start": 54783,
+        "text": "Our findings place Cc2d2a at this hub in a vertebrate model with direct relevance to a human ciliopathy disease state and support an active role for Cc2d2a as an entry-facilitator"
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "Model-assessed: mutant, localization, and Rab8-related experiments support Cc2d2a as a transition-zone entry and trafficking factor. Zebrafish photoreceptors and other ciliated cells are indirect to mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-eb6e41646ef46fd76567",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 157696,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 203666,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 6877,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 142.248
+  }
+}

@@ -35,19 +35,27 @@ import os
 import re
 import time
 import xml.etree.ElementTree as ET
-from typing import Any, Dict, List, Mapping, Optional, Sequence
+from typing import Any, Dict, List, Mapping, MutableSequence, Optional, Sequence
 from urllib.parse import quote
 
 import httpx
+
+from gpi.log_redaction import redact_text
 
 logger = logging.getLogger(__name__)
 
 NCBI_BASE_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 OPENALEX_BASE_URL = "https://api.openalex.org"
 CROSSREF_BASE_URL = "https://api.crossref.org"
+EUROPE_PMC_BASE_URL = "https://www.ebi.ac.uk/europepmc/webservices/rest"
 
 MAX_SEARCH_RESULTS = 15
 MAX_FETCH_IDS = 20
+MAX_ANCHORS_PER_MECHANISM = 2
+CITATION_REFERENCE_POOL = 20
+CITATION_CITING_POOL = 10
+CITATION_KEEP_PER_DIRECTION = 5
+MAX_CITATION_EXPANSIONS = 6
 
 _DOI_RE = re.compile(r"^10\.\d{4,9}/\S+$", re.IGNORECASE)
 _PMID_RE = re.compile(r"^\d{1,9}$")
@@ -98,6 +106,77 @@ def _bounded_limit(value: Any, maximum: int) -> int:
     return max(1, min(n, maximum))
 
 
+def _research_phase(value: Any) -> str:
+    phase = str(value or "unspecified").strip().casefold().replace("-", "_")
+    return phase[:64] or "unspecified"
+
+
+def _target_genes(values: Any) -> List[str]:
+    if not isinstance(values, (list, tuple)):
+        return []
+    return list(
+        dict.fromkeys(str(value).strip() for value in values if str(value).strip())
+    )[:100]
+
+
+class LiteratureTraceRecorder:
+    """Append allowlisted schema-v2 events at the literature execution boundary."""
+
+    def __init__(
+        self, events: MutableSequence[Dict[str, Any]], *, attempt: int = 1
+    ) -> None:
+        self.events = events
+        self.attempt = int(attempt)
+
+    def append(
+        self,
+        *,
+        source: str,
+        action: str,
+        research_phase: Any,
+        target_genes: Any,
+        status: str,
+        duration_ms: int,
+        query: Optional[str] = None,
+        identifiers: Optional[Sequence[str]] = None,
+        requested_limit: Optional[Any] = None,
+        effective_limit: Optional[int] = None,
+        returned_identifiers: Optional[Sequence[str]] = None,
+        error: Optional[str] = None,
+        result_metadata: Optional[Sequence[Mapping[str, Any]]] = None,
+    ) -> None:
+        event: Dict[str, Any] = {
+            "schema_version": 2,
+            "attempt": self.attempt,
+            "sequence": len(self.events) + 1,
+            "source": source,
+            "action": action,
+            "research_phase": _research_phase(research_phase),
+            "target_genes": _target_genes(target_genes),
+            "status": status,
+            "duration_ms": max(0, int(duration_ms)),
+            "returned_identifiers": list(
+                dict.fromkeys(str(value) for value in (returned_identifiers or []) if value)
+            ),
+        }
+        event["returned_count"] = len(event["returned_identifiers"])
+        if query is not None:
+            event["query"] = query
+        if identifiers is not None:
+            event["identifiers"] = list(
+                dict.fromkeys(str(value) for value in identifiers if value)
+            )
+        if requested_limit is not None:
+            event["requested_limit"] = requested_limit
+        if effective_limit is not None:
+            event["effective_limit"] = effective_limit
+        if error:
+            event["error"] = redact_text(str(error))[:500]
+        if result_metadata is not None:
+            event["result_metadata"] = [dict(item) for item in result_metadata]
+        self.events.append(event)
+
+
 # ------------------------------------------------------------------------------- client
 
 class _RateLimiter:
@@ -143,6 +222,7 @@ class LiteratureClient:
             "ncbi": _RateLimiter(ncbi_rps),
             "openalex": _RateLimiter(5.0),
             "crossref": _RateLimiter(5.0),
+            "europe_pmc": _RateLimiter(3.0),
         }
 
     async def aclose(self) -> None:
@@ -247,13 +327,104 @@ class LiteratureClient:
             payload = await self._get(
                 "crossref", f"{CROSSREF_BASE_URL}/works/{quote(doi, safe='')}", params=params
             )
-            return _crossref_record((payload or {}).get("message", {}))
+            record = _crossref_record((payload or {}).get("message", {}))
+            return await self._augment_doi_from_europe_pmc(record)
         payload = await self._get(
             "crossref", f"{CROSSREF_BASE_URL}/works",
             params={"query.bibliographic": identifier, "rows": 1, **params},
         )
         items = (payload or {}).get("message", {}).get("items", [])
-        return _crossref_record(items[0]) if items else None
+        record = _crossref_record(items[0]) if items else None
+        return await self._augment_doi_from_europe_pmc(record)
+
+    async def _augment_doi_from_europe_pmc(
+        self, record: Optional[Dict[str, Any]]
+    ) -> Optional[Dict[str, Any]]:
+        if not record or not record.get("doi"):
+            return record
+        try:
+            payload = await self._get(
+                "europe_pmc", f"{EUROPE_PMC_BASE_URL}/search",
+                params={
+                    "query": f'DOI:"{record["doi"]}"', "format": "json",
+                    "pageSize": 1, "resultType": "core",
+                },
+            )
+        except RuntimeError:
+            record["text_type"] = "unavailable"
+            return record
+        results = ((payload or {}).get("resultList") or {}).get("result") or []
+        if not results:
+            record["text_type"] = "unavailable"
+            return record
+        match = results[0]
+        record["pmid"] = normalize_pmid(match.get("pmid"))
+        record["pmcid"] = match.get("pmcid")
+        record["abstract"] = _clean(match.get("abstractText"))
+        record["text_type"] = "abstract" if record["abstract"] else "unavailable"
+        return record
+
+    async def expand_openalex_citations(
+        self,
+        openalex_id: str,
+        *,
+        gene_terms: Sequence[str] = (),
+        mechanism_terms: Sequence[str] = (),
+        identity_terms: Sequence[str] = (),
+    ) -> Dict[str, Any]:
+        """Return a deterministic, bounded one-hop discovery pool for one anchor."""
+        anchor_id = str(openalex_id).strip().rsplit("/", 1)[-1]
+        if not re.fullmatch(r"W\d+", anchor_id, flags=re.I):
+            raise ValueError("openalex_id must be a work id such as W123")
+        params = self._openalex_params()
+        anchor = await self._get(
+            "openalex", f"{OPENALEX_BASE_URL}/works/{anchor_id}", params=params
+        )
+        reference_ids = [
+            str(value).rsplit("/", 1)[-1]
+            for value in anchor.get("referenced_works", [])[:CITATION_REFERENCE_POOL]
+        ]
+        reference_records: List[Dict[str, Any]] = []
+        errors: Dict[str, str] = {}
+        if reference_ids:
+            try:
+                payload = await self._get(
+                    "openalex", f"{OPENALEX_BASE_URL}/works",
+                    params={
+                        "filter": "openalex_id:" + "|".join(reference_ids),
+                        "per-page": CITATION_REFERENCE_POOL, **params,
+                    },
+                )
+                reference_records = [
+                    _openalex_record(item) for item in payload.get("results", [])
+                ]
+            except RuntimeError as exc:
+                errors["references"] = redact_text(str(exc))
+        citing_records: List[Dict[str, Any]] = []
+        try:
+            citing_payload = await self._get(
+                "openalex", f"{OPENALEX_BASE_URL}/works",
+                params={
+                    "filter": f"cites:{anchor_id}", "per-page": CITATION_CITING_POOL, **params,
+                },
+            )
+            citing_records = [
+                _openalex_record(item) for item in citing_payload.get("results", [])
+            ]
+        except RuntimeError as exc:
+            errors["citing"] = redact_text(str(exc))
+        terms = list(gene_terms) + list(mechanism_terms) + list(identity_terms)
+        return {
+            "anchor_openalex_id": anchor_id,
+            "references": _rank_citation_candidates(
+                reference_records, terms, anchor_id, "reference"
+            ),
+            "citing": _rank_citation_candidates(citing_records, terms, anchor_id, "citing"),
+            "requested_pools": {
+                "references": CITATION_REFERENCE_POOL, "citing": CITATION_CITING_POOL
+            },
+            "errors": errors,
+        }
 
 
 # ------------------------------------------------------------------------------- parsers
@@ -337,6 +508,7 @@ def _openalex_record(item: Mapping[str, Any]) -> Dict[str, Any]:
     source = (item.get("primary_location") or {}).get("source") or {}
     return {
         "source": "openalex",
+        "openalex_id": str(item.get("id") or "").rsplit("/", 1)[-1] or None,
         "pmid": pmid,
         "doi": normalize_doi(ids.get("doi") or item.get("doi")),
         "title": item.get("display_name") or item.get("title") or "",
@@ -347,6 +519,43 @@ def _openalex_record(item: Mapping[str, Any]) -> Dict[str, Any]:
         "is_retracted": bool(item.get("is_retracted")),
         "cited_by_count": int(item.get("cited_by_count") or 0),
     }
+
+
+def _rank_citation_candidates(
+    records: Sequence[Dict[str, Any]],
+    terms: Sequence[str],
+    anchor_id: str,
+    direction: str,
+) -> List[Dict[str, Any]]:
+    """Filter and rank discovery titles deterministically; titles never become evidence."""
+    normalized_terms = [str(term).casefold() for term in terms if str(term).strip()]
+    seen: set[str] = set()
+    ranked: List[tuple[tuple[Any, ...], Dict[str, Any]]] = []
+    for record in records:
+        work_id = str(record.get("openalex_id") or "")
+        identifier = str(record.get("pmid") or record.get("doi") or work_id)
+        if not identifier or work_id.casefold() == anchor_id.casefold() or identifier in seen:
+            continue
+        if record.get("is_retracted"):
+            continue
+        seen.add(identifier)
+        title = str(record.get("title") or "").casefold()
+        overlap = sum(1 for term in normalized_terms if term in title)
+        primary = str(record.get("study_type") or "").casefold() not in {
+            "review", "meta-analysis"
+        }
+        score = {
+            "term_overlap": overlap,
+            "primary_paper": primary,
+            "cited_by_count": int(record.get("cited_by_count") or 0),
+        }
+        item = {**record, "direction": direction, "score_components": score}
+        key = (
+            -overlap, -int(primary), -score["cited_by_count"],
+            -(int(record.get("year") or 0)), work_id,
+        )
+        ranked.append((key, item))
+    return [item for _, item in sorted(ranked, key=lambda pair: pair[0])[:CITATION_KEEP_PER_DIRECTION]]
 
 
 def _crossref_record(item: Mapping[str, Any]) -> Optional[Dict[str, Any]]:
@@ -379,13 +588,17 @@ def _tool_result(payload: Any) -> Dict[str, List[Dict[str, str]]]:
 
 
 LITERATURE_SERVER_NAME = "literature"
-LITERATURE_TOOL_NAMES = ("search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi")
+LITERATURE_TOOL_NAMES = (
+    "search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi",
+    "expand_openalex_citations",
+)
 
 
 def build_literature_mcp_server(
     client: Optional[LiteratureClient] = None,
     *,
     max_results_per_search: int = 10,
+    trace_recorder: Optional[LiteratureTraceRecorder] = None,
 ) -> Any:
     """Create the in-process ``literature`` Agent SDK MCP server (lazy SDK import).
 
@@ -400,59 +613,287 @@ def build_literature_mcp_server(
 
     client = client or LiteratureClient()
     cap = _bounded_limit(max_results_per_search, MAX_SEARCH_RESULTS)
+    expansion_calls = 0
+    expansion_calls_by_mechanism: Dict[str, int] = {}
+
+    search_schema = {
+        "type": "object",
+        "properties": {
+            "query": {"type": "string"},
+            "max_results": {"type": "integer"},
+            "research_phase": {"type": "string"},
+            "target_genes": {"type": "array", "items": {"type": "string"}},
+        },
+        "required": ["query", "max_results", "research_phase", "target_genes"],
+        "additionalProperties": False,
+    }
+    fetch_schema = {
+        "type": "object",
+        "properties": {
+            "pmids": {"type": "array", "items": {"type": ["string", "integer"]}},
+            "research_phase": {"type": "string"},
+            "target_genes": {"type": "array", "items": {"type": "string"}},
+        },
+        "required": ["pmids", "research_phase", "target_genes"],
+        "additionalProperties": False,
+    }
+    resolve_schema = {
+        "type": "object",
+        "properties": {
+            "identifier": {"type": "string"},
+            "research_phase": {"type": "string"},
+            "target_genes": {"type": "array", "items": {"type": "string"}},
+        },
+        "required": ["identifier", "research_phase", "target_genes"],
+        "additionalProperties": False,
+    }
+    expansion_schema = {
+        "type": "object",
+        "properties": {
+            "openalex_id": {"type": "string"},
+            "gene_terms": {"type": "array", "items": {"type": "string"}},
+            "mechanism_terms": {"type": "array", "items": {"type": "string"}},
+            "mechanism_name": {"type": "string"},
+            "identity_terms": {"type": "array", "items": {"type": "string"}},
+            "research_phase": {"type": "string", "enum": ["expansion"]},
+            "target_genes": {"type": "array", "items": {"type": "string"}},
+        },
+        "required": [
+            "openalex_id", "gene_terms", "mechanism_name", "mechanism_terms", "identity_terms",
+            "research_phase", "target_genes",
+        ],
+        "additionalProperties": False,
+    }
 
     @tool("search_pubmed",
           "Search PubMed for a query. Returns PMIDs (discovery ids) — fetch_pubmed them for "
-          "canonical metadata + DOIs before citing.",
-          {"query": str, "max_results": int})
+          "canonical metadata + DOIs before citing. Declare research_phase and target_genes "
+          "so the search is auditable.",
+          search_schema)
     async def search_pubmed_tool(args: Mapping[str, Any]) -> Any:
+        started = time.monotonic()
+        requested = args.get("max_results", cap)
+        effective = _bounded_limit(requested, cap)
+        query = " ".join(str(args.get("query", "")).split())[:512]
         try:
-            return _tool_result(await client.search_pubmed(
-                str(args.get("query", "")), max_results=int(args.get("max_results", cap))))
+            result = await client.search_pubmed(query, max_results=effective)
+            if trace_recorder:
+                trace_recorder.append(
+                    source="pubmed", action="search",
+                    research_phase=args.get("research_phase"),
+                    target_genes=args.get("target_genes"), status="ok",
+                    duration_ms=round((time.monotonic() - started) * 1000),
+                    query=result["query"], requested_limit=requested,
+                    effective_limit=effective, returned_identifiers=result.get("pmids", []),
+                )
+            return _tool_result(result)
         except Exception as exc:  # noqa: BLE001 - surface a clean error to the agent, never crash the session
-            return _tool_result({"error": str(exc), "pmids": []})
+            if trace_recorder:
+                trace_recorder.append(
+                    source="pubmed", action="search",
+                    research_phase=args.get("research_phase"),
+                    target_genes=args.get("target_genes"), status="error",
+                    duration_ms=round((time.monotonic() - started) * 1000),
+                    query=query, requested_limit=requested, effective_limit=effective,
+                    error=str(exc),
+                )
+            return _tool_result({"error": redact_text(str(exc)), "pmids": []})
 
     @tool("fetch_pubmed",
           "Fetch canonical PubMed metadata (pmid, doi, title, year, journal, study_type, "
           "abstract, is_preprint, is_retracted) for up to 20 PMIDs.",
-          {"pmids": list})
+          fetch_schema)
     async def fetch_pubmed_tool(args: Mapping[str, Any]) -> Any:
+        started = time.monotonic()
+        identifiers = list(
+            dict.fromkeys(
+                pmid for pmid in (normalize_pmid(value) for value in args.get("pmids", []))
+                if pmid
+            )
+        )
+        effective_ids = identifiers[:MAX_FETCH_IDS]
         try:
-            return _tool_result(await client.fetch_pubmed(list(args.get("pmids", []))))
+            result = await client.fetch_pubmed(effective_ids)
+            if trace_recorder:
+                trace_recorder.append(
+                    source="pubmed", action="fetch",
+                    research_phase=args.get("research_phase"),
+                    target_genes=args.get("target_genes"), status="ok",
+                    duration_ms=round((time.monotonic() - started) * 1000),
+                    identifiers=effective_ids, requested_limit=len(identifiers),
+                    effective_limit=len(effective_ids),
+                    returned_identifiers=[record.get("pmid") for record in result],
+                )
+            return _tool_result(result)
         except Exception as exc:  # noqa: BLE001
-            return _tool_result({"error": str(exc), "records": []})
+            if trace_recorder:
+                trace_recorder.append(
+                    source="pubmed", action="fetch",
+                    research_phase=args.get("research_phase"),
+                    target_genes=args.get("target_genes"), status="error",
+                    duration_ms=round((time.monotonic() - started) * 1000),
+                    identifiers=effective_ids, requested_limit=len(identifiers),
+                    effective_limit=len(effective_ids), error=str(exc),
+                )
+            return _tool_result({"error": redact_text(str(exc)), "records": []})
 
     @tool("search_openalex",
           "Search OpenAlex (cross-publisher, includes preprints). Records carry doi/pmid for "
-          "verification. Requires OPENALEX_API_KEY; returns an error if unavailable.",
-          {"query": str, "max_results": int})
+          "verification. Requires OPENALEX_API_KEY; returns an error if unavailable. Declare "
+          "research_phase and target_genes so the search is auditable.",
+          search_schema)
     async def search_openalex_tool(args: Mapping[str, Any]) -> Any:
+        started = time.monotonic()
+        requested = args.get("max_results", cap)
+        effective = _bounded_limit(requested, cap)
+        query = " ".join(str(args.get("query", "")).split())[:512]
         try:
-            return _tool_result(await client.search_openalex(
-                str(args.get("query", "")), max_results=int(args.get("max_results", cap))))
+            result = await client.search_openalex(query, max_results=effective)
+            returned = []
+            for record in result.get("records", []):
+                if record.get("pmid"):
+                    returned.append(f"PMID:{record['pmid']}")
+                elif record.get("doi"):
+                    returned.append(f"DOI:{record['doi']}")
+            if trace_recorder:
+                trace_recorder.append(
+                    source="openalex", action="search",
+                    research_phase=args.get("research_phase"),
+                    target_genes=args.get("target_genes"), status="ok",
+                    duration_ms=round((time.monotonic() - started) * 1000),
+                    query=result["query"], requested_limit=requested,
+                    effective_limit=effective, returned_identifiers=returned,
+                )
+            return _tool_result(result)
         except Exception as exc:  # noqa: BLE001
-            return _tool_result({"error": str(exc), "records": []})
+            if trace_recorder:
+                trace_recorder.append(
+                    source="openalex", action="search",
+                    research_phase=args.get("research_phase"),
+                    target_genes=args.get("target_genes"), status="error",
+                    duration_ms=round((time.monotonic() - started) * 1000),
+                    query=query, requested_limit=requested, effective_limit=effective,
+                    error=str(exc),
+                )
+            return _tool_result({"error": redact_text(str(exc)), "records": []})
 
     @tool("resolve_doi",
           "Resolve a DOI or a bibliographic string against Crossref to get/verify a real DOI, "
           "title, and year.",
-          {"identifier": str})
+          resolve_schema)
     async def resolve_doi_tool(args: Mapping[str, Any]) -> Any:
+        started = time.monotonic()
+        identifier = " ".join(str(args.get("identifier", "")).split())[:512]
         try:
-            return _tool_result(await client.resolve_doi(str(args.get("identifier", ""))))
+            result = await client.resolve_doi(identifier)
+            returned = [f"DOI:{result['doi']}"] if result and result.get("doi") else []
+            if trace_recorder:
+                trace_recorder.append(
+                    source="crossref", action="resolve",
+                    research_phase=args.get("research_phase"),
+                    target_genes=args.get("target_genes"), status="ok",
+                    duration_ms=round((time.monotonic() - started) * 1000),
+                    identifiers=[identifier], returned_identifiers=returned,
+                )
+            return _tool_result(result)
         except Exception as exc:  # noqa: BLE001
-            return _tool_result({"error": str(exc)})
+            if trace_recorder:
+                trace_recorder.append(
+                    source="crossref", action="resolve",
+                    research_phase=args.get("research_phase"),
+                    target_genes=args.get("target_genes"), status="error",
+                    duration_ms=round((time.monotonic() - started) * 1000),
+                    identifiers=[identifier], error=str(exc),
+                )
+            return _tool_result({"error": redact_text(str(exc))})
+
+    @tool(
+        "expand_openalex_citations",
+        "Expand one selected OpenAlex anchor by one bounded citation hop. Discovery titles are "
+        "not evidence; fetch abstract/full text before selecting a paper.",
+        expansion_schema,
+    )
+    async def expand_openalex_citations_tool(args: Mapping[str, Any]) -> Any:
+        nonlocal expansion_calls
+        started = time.monotonic()
+        anchor_id = str(args.get("openalex_id", "")).strip()
+        mechanism_name = " ".join(str(args.get("mechanism_name", "")).split())
+        mechanism_key = mechanism_name.casefold()
+        mechanism_calls = expansion_calls_by_mechanism.get(mechanism_key, 0)
+        if (
+            expansion_calls >= MAX_CITATION_EXPANSIONS
+            or mechanism_calls >= MAX_ANCHORS_PER_MECHANISM
+        ):
+            error = f"citation expansion cap reached ({MAX_CITATION_EXPANSIONS})"
+            if trace_recorder:
+                trace_recorder.append(
+                    source="openalex", action="expand",
+                    research_phase="expansion", target_genes=args.get("target_genes"),
+                    status="error", duration_ms=0, identifiers=[anchor_id], error=error,
+                )
+            return _tool_result({"error": error, "references": [], "citing": []})
+        expansion_calls += 1
+        expansion_calls_by_mechanism[mechanism_key] = mechanism_calls + 1
+        try:
+            result = await client.expand_openalex_citations(
+                anchor_id,
+                gene_terms=args.get("gene_terms") or [],
+                mechanism_terms=args.get("mechanism_terms") or [],
+                identity_terms=args.get("identity_terms") or [],
+            )
+            returned = [
+                str(record.get("pmid") or record.get("doi") or record.get("openalex_id"))
+                for direction in ("references", "citing")
+                for record in result.get(direction, [])
+            ]
+            if trace_recorder:
+                metadata = [
+                    {
+                        "identifier": str(
+                            record.get("pmid") or record.get("doi") or record.get("openalex_id")
+                        ),
+                        "direction": record.get("direction"),
+                        "score_components": record.get("score_components") or {},
+                    }
+                    for direction in ("references", "citing")
+                    for record in result.get(direction, [])
+                ]
+                trace_recorder.append(
+                    source="openalex", action="expand",
+                    research_phase="expansion", target_genes=args.get("target_genes"),
+                    status="ok", duration_ms=round((time.monotonic() - started) * 1000),
+                    identifiers=[anchor_id], returned_identifiers=returned,
+                    requested_limit=CITATION_REFERENCE_POOL + CITATION_CITING_POOL,
+                    effective_limit=len(returned),
+                    result_metadata=metadata,
+                )
+            return _tool_result(result)
+        except Exception as exc:  # noqa: BLE001
+            if trace_recorder:
+                trace_recorder.append(
+                    source="openalex", action="expand",
+                    research_phase="expansion", target_genes=args.get("target_genes"),
+                    status="error", duration_ms=round((time.monotonic() - started) * 1000),
+                    identifiers=[anchor_id], error=str(exc),
+                )
+            return _tool_result({
+                "error": redact_text(str(exc)), "references": [], "citing": []
+            })
 
     server = create_sdk_mcp_server(
         name=LITERATURE_SERVER_NAME,
         version="0.1.0",
-        tools=[search_pubmed_tool, fetch_pubmed_tool, search_openalex_tool, resolve_doi_tool],
+        tools=[
+            search_pubmed_tool, fetch_pubmed_tool, search_openalex_tool, resolve_doi_tool,
+            expand_openalex_citations_tool,
+        ],
     )
     return server
 
 
 __all__ = [
     "LiteratureClient",
+    "LiteratureTraceRecorder",
     "build_literature_mcp_server",
     "normalize_doi",
     "normalize_pmid",
@@ -460,4 +901,9 @@ __all__ = [
     "LITERATURE_TOOL_NAMES",
     "MAX_SEARCH_RESULTS",
     "MAX_FETCH_IDS",
+    "MAX_ANCHORS_PER_MECHANISM",
+    "CITATION_REFERENCE_POOL",
+    "CITATION_CITING_POOL",
+    "CITATION_KEEP_PER_DIRECTION",
+    "MAX_CITATION_EXPANSIONS",
 ]

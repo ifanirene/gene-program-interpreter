@@ -503,6 +503,7 @@ def resolve_gene_summaries(
     ncbi_client: NcbiClient,
     harmonizome_client: Optional[HarmonizomeClient] = None,
     use_full_summaries: bool = False,
+    species_taxid: int = 10090,
 ) -> Dict[int, Dict[str, str]]:
     """
     @description
@@ -537,7 +538,9 @@ def resolve_gene_summaries(
         )
         # Two bulk NCBI phases; surface them as coarse sub-progress (the fetch is one call).
         emit_step_progress(0, 2, f"resolving Entrez IDs ({len(all_drivers)} genes)")
-        symbol_to_id = ncbi_client.normalize_genes(list(all_drivers))
+        symbol_to_id = ncbi_client.normalize_genes(
+            sorted(all_drivers), species_taxid=species_taxid
+        )
         valid_ids = sorted({gid for gid in symbol_to_id.values() if gid})
         logger.info("Fetching summaries for %d gene IDs...", len(valid_ids))
         emit_step_progress(1, 2, f"fetching {len(valid_ids)} gene summaries")
@@ -1590,6 +1593,7 @@ def main():
         program_ids=program_ids,
         ncbi_client=client,
         use_full_summaries=use_full_summaries,
+        species_taxid=args.species,
     )
 
     # =========================================================================
@@ -1796,6 +1800,43 @@ def main():
             total_targets += sum(r.get('n_program_targets', r.get('papers_found', 0)) or 0 
                                 for r in validation_result['negative_regulators'])
             logger.info(f"[Program {pid}] Validated {pos_count} positive + {neg_count} negative regulators, {total_targets} total STRING interactions")
+
+    # Resolve NCBI identity metadata once for every defining gene and surfaced regulator.
+    # This remains separate from legacy gene_summaries so old consumers need no migration.
+    metadata_genes: Set[str] = set()
+    relevant_by_program: Dict[int, Set[str]] = {}
+    for pid in program_ids:
+        relevant = set(programs[pid]["drivers"])
+        ctx = final_context[pid]
+        blocks = []
+        if ctx.get("regulator_validation"):
+            blocks.append(ctx["regulator_validation"])
+        blocks.extend((ctx.get("regulator_validation_by_condition") or {}).values())
+        for block in blocks:
+            for side in ("positive_regulators", "negative_regulators"):
+                relevant.update(
+                    str(record.get("regulator", "")).strip()
+                    for record in (block or {}).get(side, [])
+                    if str(record.get("regulator", "")).strip()
+                )
+        relevant_by_program[pid] = relevant
+        metadata_genes.update(relevant)
+
+    logger.info(
+        "Resolving NCBI Gene metadata for %d defining genes and regulators (taxid %s)...",
+        len(metadata_genes), args.species,
+    )
+    all_gene_metadata = client.resolve_gene_metadata(
+        sorted(metadata_genes), species_taxid=args.species
+    )
+    for pid in program_ids:
+        final_context[pid]["gene_metadata"] = {
+            gene: all_gene_metadata[gene]
+            for gene in sorted(
+                relevant_by_program[pid], key=lambda value: (value.casefold(), value)
+            )
+            if gene in all_gene_metadata
+        }
 
     # =========================================================================
     # Output

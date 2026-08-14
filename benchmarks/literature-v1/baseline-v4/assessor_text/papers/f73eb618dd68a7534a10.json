@@ -1,0 +1,16 @@
+{
+  "content_hash": "148dffe5af6860fb8b1730702e144135db868cc7a4cb710c8dd491c92283cbe2",
+  "doi": "10.1007/s10456-013-9370-9",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "f73eb618dd68a7534a10",
+  "pmcid": "PMC3793839",
+  "pmid": "23892628",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "GATA-binding protein 2 (GATA2) and LIM domain only 2 (Lmo2) form common transcription complexes during hematopoietic differentiation. Here we show that these two transcription factors also play a key role in endothelial cells (EC) and lymphatic EC (LEC) function. Primary EC and tumor-associated blood vessels expressed GATA2 and Lmo2. VEGF-induced sprouting angiogenesis in both differentiating embryonic stem cells (embryoid bodies) and primary EC increased GATA2 and Lmo2 levels. Conversely, silencing of GATA2 and Lmo2 expression in primary EC inhibited VEGF-induced angiogenic activity, including EC migration and sprouting in vitro, two key steps of angiogenesis in vivo. This inhibition of EC function was associated with downregulated expression of neuropilin-2 (NRP2), a co-receptor of VEGFRs for VEGF, at the protein, mRNA and promoter levels. NRP2 overexpression partially rescued the impaired angiogenic sprouting in the GATA2/Lmo2 knockdown EC, confirming that GATA2 and Lmo2 mediated EC function, at least in part, by directly regulating NRP2 gene expression. Furthermore, it was found that primary LEC expressed GATA2 and Lmo2 as well. Silencing of GATA2 and Lmo2 expression in LEC inhibited VEGF-induced LEC sprouting, also in a NRP2-dependent manner. In conclusion, our results demonstrate that GATA2 and Lmo2 cooperatively regulate VEGF-induced angiogenesis and lymphangiogenesis via NRP2.",
+  "text_type": "abstract",
+  "title": "GATA2 and Lmo2 control angiogenesis and lymphangiogenesis via direct transcriptional regulation of neuropilin-2."
+}

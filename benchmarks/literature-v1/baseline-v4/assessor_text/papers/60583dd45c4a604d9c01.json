@@ -1,0 +1,16 @@
+{
+  "content_hash": "9d5d8601370df6147310976d35a8143575d136e749ccec2019eaa9d21fa3cbbc",
+  "doi": "10.1002/hep.30765",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "60583dd45c4a604d9c01",
+  "pmcid": "PMC6893913",
+  "pmid": "31081165",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Nonalcoholic fatty liver disease (NAFLD) is characterized by excess lipid accumulation in hepatocytes and represents a huge public health problem owing to its propensity to progress to nonalcoholic steatohepatitis, fibrosis, and liver failure. The lipids stored in hepatic steatosis (HS) are primarily triglycerides (TGs) synthesized by two acyl-CoA:diacylglycerol acyltransferase (DGAT) enzymes. Either DGAT1 or DGAT2 catalyzes this reaction, and these enzymes have been suggested to differentially utilize exogenous or endogenously synthesized fatty acids, respectively. DGAT2 has been linked to storage of fatty acids from de novo lipogenesis, a process increased in NAFLD. However, whether DGAT2 is more responsible for lipid accumulation in NAFLD and progression to fibrosis is currently unknown. Also, it is unresolved whether DGAT2 can be safely inhibited as a therapy for NAFLD. Here, we induced NAFLD-like disease in mice by feeding a diet rich in fructose, saturated fat, and cholesterol and found that hepatocyte-specific Dgat2 deficiency reduced expression of de novo lipogenesis genes and lowered liver TGs by ~70%. Importantly, the reduction in steatosis was not accompanied by increased inflammation or fibrosis, and insulin and glucose metabolism were unchanged. Conclusion: This study suggests that hepatic DGAT2 deficiency successfully reduces diet-induced HS and supports development of DGAT2 inhibitors as a therapeutic strategy for treating NAFLD and preventing downstream consequences.",
+  "text_type": "abstract",
+  "title": "Hepatocyte Deletion of Triglyceride-Synthesis Enzyme Acyl CoA: Diacylglycerol Acyltransferase 2 Reduces Steatosis Without Increasing Inflammation or Fibrosis in Mice."
+}

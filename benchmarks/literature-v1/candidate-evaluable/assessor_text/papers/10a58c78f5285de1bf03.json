@@ -1,0 +1,16 @@
+{
+  "content_hash": "57e47801c0c8c8b94bb05a563183c80dfd2b897aaa1aa5ec21e13a34d178a57a",
+  "doi": "10.1093/biolre/ioz071",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "10a58c78f5285de1bf03",
+  "pmcid": "PMC6614581",
+  "pmid": "31004481",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Intraflagellar transport protein 74 (IFT74) is a component of the core intraflagellar transport complex, a bidirectional movement of large particles along the axoneme microtubules for cilia formation. In this study, we investigated its role in sperm flagella formation and discovered that mice deficiency in Ift74 gene in male germ cells were infertile with low sperm count and immotile sperm. The few developed spermatozoa displayed misshaped heads and short tails. Transmission electron microscopy revealed abnormal flagellar axonemes in the seminiferous tubules where sperm are made. Clusters of unassembled microtubules were present in the spermatids. Testicular expression levels of IFT27, IFT57, IFT81, IFT88, and IFT140 proteins were significantly reduced in the conditional Ift74 mutant mice, with the exception of IFT20 and IFT25. The levels of outer dense fiber 2 and sperm-associated antigen 16L proteins were also not changed. However, the processed A-Kinase anchor protein, a major component of the fibrous sheath, a unique structure of sperm tail, was significantly reduced. Our study demonstrates that IFT74 is essential for mouse sperm formation, probably through assembly of the core axoneme and fibrous sheath, and suggests that IFT74 may be a potential genetic factor affecting male reproduction in man.",
+  "text_type": "abstract",
+  "title": "Intraflagellar transport protein 74 is essential for spermatogenesis and male fertility in mice\u2020."
+}

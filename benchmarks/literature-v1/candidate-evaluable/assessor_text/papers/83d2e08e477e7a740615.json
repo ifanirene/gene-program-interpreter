@@ -1,0 +1,14 @@
+{
+  "content_hash": "0f7a69e849d08d64b2deea3b676859f7b86ffb910d25a6d080c1bec8cad39dfe",
+  "doi": "10.1016/j.bbalip.2014.07.006",
+  "errors": [],
+  "paper_key": "83d2e08e477e7a740615",
+  "pmcid": null,
+  "pmid": "25048193",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The enzyme 7-dehydrocholesterol reductase (DHCR7) catalyzes the final step of cholesterol synthesis via the Kandutsch-Russell pathway, and is crucial in maintaining cellular cholesterol levels. Its absence leads to the devastating fetal developmental disorder Smith-Lemli-Opitz Syndrome (SLOS). How this enzyme is regulated has implications in controlling not only cholesterol synthesis, but also the synthesis of Vitamin D - another product of 7-dehydrocholesterol. In this study, we look specifically at how DHCR7 is regulated by the sterol regulatory element-binding protein-2 (SREBP-2) transcription factor. Sterol regulation has previously been studied in the rat DHCR7 promoter, but we have found that its regulatory elements are not all conserved in humans. Rather, the human promoter contains two binding sites for SREBP-2 (at -155 and -55) and a binding site for the nuclear factor-Y (NF-Y) cofactor (at -136). The -155 site is a particularly responsive sterol regulatory element (SRE) which is well conserved in mammals, and was possibly overlooked in the rat promoter study. The exact location of the weaker -55 site (close to the known rat SRE) may have shifted during evolution. Furthermore, we established that the two SREs that bind SREBP-2 work in cooperation to synergistically activate DHCR7. We have previously characterized the SREs in DHCR24, the final enzyme in the alternate Bloch pathway of cholesterol synthesis. Here, comparison of the sterol regulation of these terminal enzymes demonstrates the unique cooperative system that helps to control cholesterol synthesis.",
+  "text_type": "abstract",
+  "title": "The sterol-based transcriptional control of human 7-dehydrocholesterol reductase (DHCR7): Evidence of a cooperative regulatory program in cholesterol synthesis."
+}

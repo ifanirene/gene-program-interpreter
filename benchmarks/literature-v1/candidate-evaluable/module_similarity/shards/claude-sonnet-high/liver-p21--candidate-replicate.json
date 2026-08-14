@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "liver-p21--candidate-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.93
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.9
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.65
+      }
+    ],
+    "moduleSemanticSimilarity": 0.826667,
+    "overall_rationale": "The two candidate sets describe essentially the same three biological modules for program P21 (core mevalonate/cholesterol enzymatic pathway, SREBP2/SCAP/INSIG1 transcriptional regulation, and MASLD-context lipid/cholesterol coupling), with modules 1-1, 2-2, and 3-3 as clear high-similarity matches and cross-pairs showing only weak contextual overlap from shared genes/regulators without shared core mechanism.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both catalogue the same complete mevalonate-to-cholesterol enzymatic cascade in hepatocytes with near-identical gene lists and mechanism.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.93
+      },
+      {
+        "left_module": 1,
+        "rationale": "Shares only the Erg28 scaffold gene; left is the enzymatic biosynthesis cascade while right's core mechanism is SREBP2 transcriptional control.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 1,
+        "rationale": "Only Acat2 overlaps and the right module's core focus (MASLD esterification/steatosis/export) differs entirely from left's biosynthetic enzyme cascade.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 2,
+        "rationale": "Left's core mechanism is SREBP2/SCAP/INSIG1 transcriptional regulation, which right module 1 mentions only as an upstream regulator of its primarily enzymatic biosynthesis pathway.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.35
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both describe the identical SCAP-SREBP2-INSIG1 axis co-regulating cholesterol genes, with Erg28 and Rdh11 as shared distinctive co-regulated targets.",
+        "relationship": "same_core",
+        "right_module": 2,
+        "similarity": 0.9
+      },
+      {
+        "left_module": 2,
+        "rationale": "Left's transcriptional control mechanism shares no meaningful mechanistic overlap with right's downstream MASLD lipid esterification/export module.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 3,
+        "rationale": "Acss2 acetyl-CoA provision is shared, but left's core focus on lipid-cholesterol export coupling (Dgat2/Mttp) is absent from right's primarily enzymatic biosynthesis module.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.3
+      },
+      {
+        "left_module": 3,
+        "rationale": "No mechanistic overlap between left's acetyl-CoA/lipid export coupling and right's transcriptional SREBP2 regulation core.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both describe the same MASLD hepatic lipid-cholesterol homeostasis network sharing Dgat2/Mttp/Acat2 roles, though left emphasizes acetyl-CoA carbon provision while right adds esterification/steatosis regulators (Ddr2, Fads2).",
+        "relationship": "meaningful_refinement",
+        "right_module": 3,
+        "similarity": 0.65
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.13418039999999998,
+    "duration_api_ms": 46834,
+    "duration_ms": 45289,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 3,
+    "wall_seconds": 46.242
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "8a807f4539c1de1da219aaf004d98f5d64222f701a41a9b0081eea7ebef233f0",
+  "doi": "10.1111/j.1440-1746.2010.06560.x",
+  "errors": [],
+  "paper_key": "fa552eaa7af97603c9c2",
+  "pmcid": null,
+  "pmid": "21488946",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND AND AIM: Cholesterol accumulation plays an important role in the progression of non-alcoholic fatty liver disease. We have demonstrated that inflammation aggravated cholesterol accumulation, causing tissue injury in the vessel and kidney. This study was undertaken to investigate whether inflammatory stress exacerbates hepatic cholesterol accumulation and we explored the underlying mechanisms.\n\nMETHODS: We used casein injection in C57BL/6J mice, interleukin-1\u03b2 and interleukin-6 stimulation in human hepatoblastoma cell line (HepG2) cells to induce inflammatory stress. Oil Red O staining and intracellular cholesterol assay were used to quantify cellular cholesterol levels. Real-time reverse transcription polymerase chain reaction and Western blot were used to measure messenger RNA (mRNA) and protein expression of target genes. HMGCoA reductase (HMGCoA-r) enzymatic activity and cellular cholesterol synthesis were measured by radioactive methods.\n\nRESULTS: We demonstrated that inflammatory stress increased hepatic cholesterol accumulation and enhanced sterol regulatory element binding protein 2 (SREBP2), low-density lipoprotein receptor (LDLr) and HMGCoA-r mRNA and protein expression in livers of C57BL/6J mice and in HepG2 cells. A high-fat diet in mice or LDL loading in HepG2 cells inhibited mRNA and protein expression of these genes. However, the suppressive effect was overridden by inflammatory stress both in vivo and in vitro. Inflammatory stress increased HMGCoA-r enzymatic activity and cellular cholesterol synthesis in HepG2 cells in the absence or presence of LDL loading.\n\nCONCLUSION: Inflammatory stress disrupted hepatic SREBP2-mediated low-density lipoprotein receptor and HMGCoA-r feedback regulation resulting in exacerbated cholesterol accumulation in livers of C57BL/6J mice and HepG2 cells.",
+  "text_type": "abstract",
+  "title": "Inflammatory stress exacerbates hepatic cholesterol accumulation via increasing cholesterol uptake and de novo synthesis."
+}

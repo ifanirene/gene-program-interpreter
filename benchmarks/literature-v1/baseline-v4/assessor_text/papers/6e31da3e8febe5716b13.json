@@ -1,0 +1,16 @@
+{
+  "content_hash": "53ab25d3efd22780b6b61513254fc5a07ec16e0430d9443d737b20630f2e6cc7",
+  "doi": "10.1074/jbc.m111.328237",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "6e31da3e8febe5716b13",
+  "pmcid": "PMC3307252",
+  "pmid": "22203676",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Reduction of hydroxylamines and amidoximes is important for drug activation and detoxification of aromatic and heterocyclic amines. Such a reductase system was previously found to be of high activity in adipose tissue and liver, and furthermore, in vitro studies using recombinant truncated and purified enzymes suggested the participation of cytochrome b(5) reductase (CYB5R), cytochrome b(5) (CYB5), and molybdenum cofactor sulfurase C-terminal containing 1 and 2 (MOSC1 and -2). Here, we show that purified rat liver outer mitochondrial membrane contains high amidoxime reductase activity and that MOSC2 is exclusively localized to these membranes. Moreover, using the same membrane fraction, we could show direct binding of a radiolabeled benzamidoxime substrate to MOSC2. Following differentiation of murine 3T3-L1 cells into mature adipocytes, the MOSC2 levels as well as the amidoxime reductase activity were increased, indicating that the enzyme is highly regulated under lipogenic conditions. siRNA-mediated down-regulation of MOSC2 and the mitochondrial form of cytochrome b(5) type B (CYB5B) significantly inhibited the reductase activity in the differentiated adipocytes, whereas down-regulation of MOSC1, cytochrome b(5) type A (CYB5A), CYB5R1, CYB5R2, or CYB5R3 had no effect. Down-regulation of MOSC2 caused impaired lipid synthesis. These results demonstrate for the first time the direct involvement of MOSC2 and CYB5B in the amidoxime reductase activity in an intact cell system. We postulate the presence of a novel reductive enzyme system of importance for lipid synthesis that is exclusively localized to the outer mitochondrial membrane and is composed of CYB5B, MOSC2, and a third unknown component (a CYB5B reductase).",
+  "text_type": "abstract",
+  "title": "Amidoxime reductase system containing cytochrome b5 type B (CYB5B) and MOSC2 is of importance for lipid synthesis in adipocyte mitochondria."
+}

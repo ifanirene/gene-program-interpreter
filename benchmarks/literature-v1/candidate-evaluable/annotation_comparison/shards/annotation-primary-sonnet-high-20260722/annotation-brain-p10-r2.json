@@ -1,0 +1,41 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-brain-p10-r2",
+    "assessor_id": "annotation-primary-sonnet-high-20260722",
+    "candidate_additions": [
+      "New secondary mechanism: mitochondrial metabolic maintenance (Bckdhb/BCAA catabolism, Clybl/itaconate-B12, Chchd6/cristae integrity, Metap1d/mito protein processing), linked to Wdpcp's role in mitochondrial biogenesis in ciliated cells",
+      "Explicit ciliopathy syndrome framing (Joubert, Meckel, Bardet-Biedl, nephronophthisis, oro-facio-digital) tying the gene cluster to CNS malformation phenotypes",
+      "Brief mention of a Hedgehog-signaling role for endothelial cilia in developmental patterning"
+    ],
+    "candidate_removed_or_weakened": [
+      "Baseline's dedicated mechanosensing mechanism (cilia as blood-flow shear-stress sensors, KLF2 shear-response amplification, ciliary-length/rapamycin evidence) is absent from candidate",
+      "Baseline's fully elaborated regulatory mechanism (Norrin-Wnt-FZD4-β-catenin BBB genesis, ENG/ALK1-ALK5 TGF-β axis and HHT link, GATA2-VEGF sprouting angiogenesis) is reduced to one summary sentence in candidate with no dedicated mechanism entry",
+      "Nme7 and Cfap36, cited as ciliome/cilia-associated supporting genes in baseline, are dropped from candidate's explicit ciliary gene list"
+    ],
+    "core_interpretation_changed": false,
+    "decision_relevant_differences": [
+      "Candidate introduces a distinct mitochondrial-metabolism gene set (Bckdhb, Clybl, Chchd6, Metap1d) that could redirect follow-up toward metabolic assays, a hypothesis baseline does not raise",
+      "Baseline's specific, testable mechanosensory model (flow-sensing via cilia, KLF2 pathway) is not available to a reader of candidate",
+      "Baseline gives pathway-level detail on regulators (Wnt/Norrin, TGF-β/ALK, GATA2-VEGF) useful for choosing a validation target; candidate's regulator treatment is comparatively shallow"
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations agree on the central claim: P10 is a primary-cilia/ciliopathy gene program operating in postnatal brain endothelial cells, with Fzd4/Gata2/Eng regulators framing endothelial identity. The candidate retains this core but adds a genuinely new submechanism (mitochondrial metabolism, supported by a disjoint gene set) and reframes the cilia mechanism toward disease-syndrome annotation rather than the specific mechanosensory/BBB-genesis functional model baseline offered, while also compressing the regulator mechanism into a much thinner treatment. Per the rubric, 'adds a meaningful submechanism' and 'removes/weakens a prior conclusion' are the defining features of same_core_with_meaningful_refinement rather than materially_changed — no existing mechanism is contradicted or reversed, but real gains and losses in mechanistic detail occur across mitochondrial biology (added), endothelial mechanosensing (lost), and vascular regulatory signaling (weakened).",
+    "semantic_relation": "same_core_with_meaningful_refinement",
+    "shared_core_conclusions": [
+      "P10 is dominated by a coherent primary-cilia gene cluster (Cc2d2a, Cep164, Ift74, Bbs9, Wdpcp, Tbc1d32, Sdccag8) spanning transition zone, distal appendage, IFT, and BBSome trafficking components",
+      "The context is postnatal mouse brain endothelial cells, and primary cilia are functionally relevant to brain vascular development",
+      "Perturbation regulators Fzd4, Gata2, and Eng frame the endothelial/vascular identity and signaling backdrop in which the ciliary program operates"
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.1054459,
+    "duration_api_ms": 60002,
+    "duration_ms": 57078,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 58.575
+  }
+}

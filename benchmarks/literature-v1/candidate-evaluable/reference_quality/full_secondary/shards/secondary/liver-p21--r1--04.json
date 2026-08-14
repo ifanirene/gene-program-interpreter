@@ -1,0 +1,124 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-aa469413a31b091378a5",
+    "RL-abadb2ff1633b9762c56",
+    "RL-bb4358ce7362aadea933",
+    "RL-c7cfd3867b60bd50ce88"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 841,
+        "source_type": "abstract",
+        "start": 663,
+        "text": "We found that the pathway components, including MSMO1, CYP51A1, EBP and SC5D, function as potential suppressors of ferroptosis, whereas DHCR7 functions as a pro-ferroptotic gene."
+      },
+      "function_supported_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Sc5d",
+        "Dhcr7"
+      ],
+      "rationale": "The CRISPR-based study substantively investigates CYP51A1, MSMO1, SC5D, and DHCR7 as distal cholesterol-pathway components. Its cancer and kidney-injury systems are indirect to mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-aa469413a31b091378a5",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Sc5d",
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 8626,
+        "source_type": "full_text",
+        "start": 8312,
+        "text": "Finally, to test if hepatic ACSS2 is required for fructose to feed DNL, ACSS2 in the liver was silenced using an adeno-associated viral hairpin targeting Acss226 (Extended Data Fig. 8e–g). Depletion of hepatic ACSS2 strongly suppressed the labeling of fatty acids in circulating lipids from 13C-fructose (Fig. 3d)."
+      },
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "rationale": "Liver-specific ACSS2 silencing causally reduces fructose-derived fatty-acid synthesis in a mouse hepatic-steatosis setting. This directly supports hepatic ACSS2-dependent carbon provision for lipogenesis.",
+      "red_flags": [],
+      "review_id": "RL-abadb2ff1633b9762c56",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 458,
+        "source_type": "abstract",
+        "start": 0,
+        "text": "Sterol regulatory element-binding proteins (SREBPs), master transcriptional regulators of cholesterol and fatty acid synthesis, have been found to contribute to a diverse array of cellular processes. In this review, we focus on genetically engineered mice in which the activities of six components of the SREBP gene pathway, namely SREBP-1, SREBP-2, Scap, Insig-1, Insig-2, or Site-1 protease have been altered through gene knockout or transgenic approaches."
+      },
+      "function_supported_genes": [],
+      "rationale": "The review links Scap and Insig-1 to the SREBP pathway but does not establish their specific regulatory directions or hepatic action in the abstract. The evidence is therefore secondary, narrower than the claim, and indirect to the target context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-bb4358ce7362aadea933",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1366,
+        "source_type": "abstract",
+        "start": 1170,
+        "text": "Dual inhibition of ACLY and ACSS2 broke this cycle by reducing hepatic acetyl-CoA flux, suppressing DNL, enhancing fatty acid oxidation via PPAR-α activation, and improving mitochondrial function."
+      },
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "rationale": "Dual ACLY–ACSS2 inhibition causally reduces hepatic acetyl-CoA flux and DNL in a mouse NAFLD model. This directly supports ACSS2-mediated lipogenesis under ACLY inhibition in the target disease context.",
+      "red_flags": [],
+      "review_id": "RL-c7cfd3867b60bd50ce88",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 200704,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 237898,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 10502,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 208.187
+  }
+}

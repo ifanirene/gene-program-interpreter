@@ -1,0 +1,14 @@
+{
+  "content_hash": "817d6429fa8713931380778314ec644ef02fd2b4b55ba2ddf549401223987d0f",
+  "doi": "10.2174/1573402111666150630140615",
+  "errors": [],
+  "paper_key": "6f78d25b27ce70925fc3",
+  "pmcid": null,
+  "pmid": "26122329",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Primary cilia are sensory organelles that extend from the cell surface and sense extracellular signals. Endothelial primary cilia protruding from the inner surface of blood vessel walls sense changes in blood flow and convert this mechanosensation into an intracellular biochemical/molecular signal, which triggers a cellular response. Primary endothelial cilia dysfunction may contribute to the impairment of this response and thus be directly implicated in the development of vascular abnormalities such as hypertension and aneurysms. Using both in vitro techniques as well as in vivo animal models, we and others have investigated fluid flow mechanosensory functions of endothelial cilia in cultured cells, animal models and autosomal dominant polycystic kidney disease (ADPKD) patients. More in-depth studies directed at identification of the mechanisms of fluid flow sensing will further enhance our knowledge of cilia-dependent vascular pathology. Although the current treatments aimed at treating the cardiovascular symptoms in ADPKD patients successfully slowed the progression of cyst growth, there is growing evidence which suggests that drugs which interfere with primary cilia function or structure could reduce cardiovascular complications in ADPKD. This review is to summarize the most recent studies on primary endothelial cilia function in the vascular system and to present primary cilia as a novel therapeutic target for vascular hypertension.",
+  "text_type": "abstract",
+  "title": "Vascular Endothelial Primary Cilia: Mechanosensation and Hypertension."
+}

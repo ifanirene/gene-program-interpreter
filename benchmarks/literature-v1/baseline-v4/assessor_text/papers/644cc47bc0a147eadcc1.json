@@ -1,0 +1,14 @@
+{
+  "content_hash": "4b944e9a42db328642d806a818d4140cb3f53df706fba0b047650a0dedc67a34",
+  "doi": "10.1210/endocr/bqab166",
+  "errors": [],
+  "paper_key": "644cc47bc0a147eadcc1",
+  "pmcid": null,
+  "pmid": "34431998",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "In the liver, the sterol response element binding protein (SREBP) and the SREBP cleavage-activated protein (SCAP) complex upregulate cholesterol biosynthesis by gene induction of de novo cholesterol synthetic enzymes (Hmgcr, Cyp51, and Dhcr7). Insulin induced gene 1 (INSIG1) negatively regulates cholesterol biosynthesis by the inhibition of de novo cholesterol biosynthetic gene expression. In the ovary, cholesterol is de novo synthesized; however, the roles of SREBP and its regulators (SCAP and INSIG1) are not well understood. In this study, when immature mice were treated with gonadotropins (eCG followed by hCG), eCG induced and hCG maintained the expression of SREBP-1a, -2, and SCAP granulosa cells, whereas INSIG1 expression was dramatically downregulated after hCG injection. Downregulation of INSIG1 led to generate the SREBPs active form and translocate the SREBPs active form to nuclei. Inhibition of generation of the SREBPs active form by fatostatin or Scap siRNA in both in vivo and in vitro significantly decreased the expressions of de novo cholesterol biosynthetic enzymes, cholesterol accumulation, and progesterone (P4) production compared with the control group. Fatostatin treatment inhibited the ovulation and increased the formation of abnormal corpus luteum which trapped the matured oocyte in the corpus luteum; however, the phenomenon was abolished by P4 administration. The results showed that decreasing INSIG1 level after hCG stimulation activated SREBP-induced de novo cholesterol biosynthesis in granulosa cells of preovulatory follicles, which is essential for P4 production and the rupture of matured oocyte during ovulation process.",
+  "text_type": "abstract",
+  "title": "LH Induces De Novo Cholesterol Biosynthesis via SREBP Activation in Granulosa Cells During Ovulation in Female Mice."
+}

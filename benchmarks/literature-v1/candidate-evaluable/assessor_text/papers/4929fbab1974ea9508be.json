@@ -1,0 +1,16 @@
+{
+  "content_hash": "1ab4cb3643dc843e6420ef04c67c3d5b48cbdaf02f0b95a49555c9d677c0e516",
+  "doi": "10.1194/jlr.m001586",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "4929fbab1974ea9508be",
+  "pmcid": "PMC3035494",
+  "pmid": "20037138",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The Forkhead transcription factors FoxO1, FoxO3a, and FoxO4 play a prominent role in regulating cell survival and cell cycle. Whereas FOXO1 was shown to mediate insulin sensitivity and adipocyte differentiation, the role of the transcription factor FoxO4 in metabolism remains ill defined. To uncover the effects of FoxO4, we generated a cellular model of stable FoxO4 overexpression and subjected it to microarray-based gene expression profiling. While pathway analysis revealed a disruption of cholesterol biosynthesis gene expression, biochemical studies revealed an inhibition of cholesterol biosynthesis, which was coupled with decreased mRNA levels of lanosterol 14alpha demethylase (CYP51). FoxO4-mediated repression of CYP51 led to the accumulation of 24,25 dihydrolano-sterol (DHL), which independently and unlike lanosterol inhibited cholesterol biosynthesis. Furthermore, FoxO4-overexpressing cells accumulated lipid droplets and triacylglycerols and had an increase in basal glucose uptake. Recapitulation of these effects was obtained following treatment with CYP51 inhibitors, which also induce DHL buildup. Moreover, DHL but not lanosterol strongly stimulated liver X receptor alpha (LXRalpha) activity, suggesting that DHL and LXRalpha mediate the downstream effects initiated by FoxO4. Together, these studies suggest that FoxO4 acts on CYP51 to regulate the late steps of cholesterol biosynthesis.",
+  "text_type": "abstract",
+  "title": "Effects of FoxO4 overexpression on cholesterol biosynthesis, triacylglycerol accumulation, and glucose uptake."
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "6718ca93d9fb7675c5fb7be94a899a98c400f435678001182ec127cdbc4ee7a9",
+  "doi": "10.1002/dvdy.20148",
+  "errors": [],
+  "paper_key": "df14daa24496a0c9a90f",
+  "pmcid": null,
+  "pmid": "15376331",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Recent evidence indicates that sprouting angiogenesis in the central nervous system (CNS) is a guided process similar to the guidance of axons and insect tracheal tubes. Specialized tip cells of vessel sprouts navigate in response to local depots or gradients of vascular endothelial growth factor (VEGF-A). Neuropilin-1 (Nrp-1) is a transmembrane receptor with a repulsive function in axon guidance. Nrp-1 also binds the VEGF-A splice isoform VEGF165, stimulates angiogenesis, and is necessary for vascular development in the mouse. However, the morphogenetic events controlled by Nrp-1 in angiogenesis have not been defined. Here, we analyzed endothelial tip cell guidance in the CNS of Nrp-1-deficient mice. We focused our attention on the developing hindbrain, which is normally vascularized in a stereotyped manner. Initially, angiogenic sprouts extend along radial glia from the pial surface toward the ventricles, but in the subventricular zone (SVZ), they leave the radial path, turn laterally, and fuse to form a capillary plexus. Radial sprout elongation correlated with tip cell filopodia extensions along nestin-positive radial glial processes, but in the SVZ, the tip cell filopodia also extended perpendicular to the glial tracks and made contact with filopodia of the neighboring sprouts. In Nrp-1-deficient mice, the tip cell filopodia remained associated with the radial glia in the SVZ, which correlated with a failure of sprout turning and elongation across this region. As a result, the sprouts remained blind-ended forming glomeruloid tufts in the SVZ. These observations suggest that Nrp-1 plays an important role in allowing the endothelial tip cell filopodia to switch substrate and protrude in a new direction at a specific location in the developing brain.",
+  "text_type": "abstract",
+  "title": "Neuropilin-1 is required for endothelial tip cell guidance in the developing central nervous system."
+}

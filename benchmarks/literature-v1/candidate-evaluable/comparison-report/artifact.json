@@ -1,0 +1,1678 @@
+{
+  "manifest": {
+    "blocks": [
+      {
+        "body": "# Baseline vs candidate annotation",
+        "id": "title",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "body": "## Technical summary\n\n**The candidate improves evidence coverage and claim grounding, but it does not produce a clearly better biological annotation overall.** Adjudicated function-supported coverage rises from **38.6%** to **51.6%**, and the share of module gene claims backed by the audit rises from **67.6%** to **94.1%**. However, unordered three-module replicate similarity falls from **0.758** to **0.654**, two source-opposed claims appear, and operational turns rise from **37.4** to at least **120.9**. P21 clearly benefits; P10 and P25 gain evidence but lose interpretive stability; P11 remains intrinsically heterogeneous. The best next design is a hybrid: keep candidate evidence retrieval, but update a stable module skeleton only when new evidence justifies a semantic change.",
+        "id": "technical-summary",
+        "layout": "full",
+        "sourceId": "comparison",
+        "type": "markdown"
+      },
+      {
+        "cardIds": [
+          "coverage-card",
+          "grounding-card",
+          "semantic-card",
+          "turn-card"
+        ],
+        "id": "headline-metrics",
+        "layout": "full",
+        "type": "metric-strip"
+      },
+      {
+        "body": "## Fewer genes in a module can coexist with higher paper coverage\n\n**The apparent contradiction comes from two different denominators.** `Annotation claimed genes` counts the unique genes the generated three modules assign as supporting genes. `Audited function genes` counts supplied genes for which retained papers were adjudicated to support the assigned function. Baseline modules often named genes more broadly than their citations justified. Across all runs, claimed genes change only from **13.1** to **12.6** per run, while audited function genes rise from **8.9** to **11.9**. In P11 r1, claimed genes fall 11→8 while audited support rises 5→7; in P25 r1 they fall 17→13 while audited support rises 8→12. The candidate is narrower in what it places inside modules, but those assignments are more often trace-backed.",
+        "id": "coverage-explanation",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "type": "markdown"
+      },
+      {
+        "chartId": "coverage-reconciliation-chart",
+        "id": "coverage-chart-block",
+        "layout": "full",
+        "type": "chart"
+      },
+      {
+        "id": "coverage-table-block",
+        "layout": "full",
+        "tableId": "coverage-reconciliation-table",
+        "type": "table"
+      },
+      {
+        "body": "## Deeper research does not make the three-module interpretation more stable\n\n**Module order is ignored.** Two independent reviewers scored all nine possible module pairs from 0 to 1; scores were averaged, then the best one-to-one matching was selected deterministically. A missing module scores zero. The reviewers selected the same matching in **15/16** comparisons, and their mean score difference was **0.052**. Baseline replicate similarity averages **0.758** versus **0.654** for the candidate. This aggregate hides strong heterogeneity: candidate improves P21, is nearly flat for P11, and is less stable for P10 and P25. The cross-setting mean of **0.678** shows that the two strategies often change more than wording, especially in P10.",
+        "id": "semantic-explanation",
+        "layout": "full",
+        "sourceId": "module-similarity",
+        "type": "markdown"
+      },
+      {
+        "chartId": "semantic-similarity-chart",
+        "id": "semantic-chart-block",
+        "layout": "full",
+        "type": "chart"
+      },
+      {
+        "id": "semantic-table-block",
+        "layout": "full",
+        "tableId": "semantic-table",
+        "type": "table"
+      },
+      {
+        "body": "## Biological value depends on the program\n\n**Coverage is not the same as biological coherence.** Direct gene-level evidence is especially useful for P21, where a canonical cholesterol program provides a strong prior and the candidate resolves direction inconsistencies. In P10 and P25, deeper retrieval finds valid gene functions but also promotes secondary processes into module-level conclusions, changing the program summary. P11 spans tip-cell angiogenesis, arteriovenous identity, mechanosensing, BBB transport, and survival; its low replicate scores under both strategies are evidence of genuine program heterogeneity rather than a simple search failure.",
+        "id": "biology-explanation",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "type": "markdown"
+      },
+      {
+        "id": "biology-table-block",
+        "layout": "full",
+        "tableId": "biology-table",
+        "type": "table"
+      },
+      {
+        "body": "## Candidate research is more systematic, but most extra work occurs before themes\n\nBaseline uses **33.1 mixed retrieval turns per run** with genes, regulators, and hypothesized themes interleaved. Candidate final-output attempts spend **53.8 turns per run on supplied genes alone**, plus 12.1 on regulators and 7.3 on the gap pass. Including retries raises supplied-gene work to 74.6 turns per run. The candidate's ordering is scientifically cleaner, but the resource cost is not currently bounded by phase.",
+        "id": "strategy-explanation",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "type": "markdown"
+      },
+      {
+        "chartId": "strategy-turns-chart",
+        "id": "strategy-chart-block",
+        "layout": "full",
+        "type": "chart"
+      },
+      {
+        "id": "strategy-table-block",
+        "layout": "full",
+        "tableId": "strategy-table",
+        "type": "table"
+      },
+      {
+        "body": "## Per-step resource control is feasible, but it is not implemented yet\n\n**Today the runner hard-controls only whole-session turns, cost, and timeout.** Research-phase labels provide telemetry; prompt instructions such as a capped regulator pass or six expansion calls are not hard enforcement. Real control must sit at the literature-tool boundary: count calls by `research_phase`, target gene, and tool class before execution; return a structured budget-exhausted result; persist the counters with the evidence ledger; reserve finalization turns; and resume from checkpoints after transient failures.",
+        "id": "control-explanation",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "type": "markdown"
+      },
+      {
+        "id": "control-table-block",
+        "layout": "full",
+        "tableId": "phase-control-table",
+        "type": "table"
+      },
+      {
+        "body": "## Neither strategy dominates; use a hybrid\n\nCandidate wins on evidence coverage, gene-level grounding, and several error types. Baseline wins on semantic replicate stability, direction safety, and resource efficiency. Context overclaim is effectively tied. Therefore the biologically defensible choice is not baseline versus candidate as a package: use candidate retrieval and exact evidence edges, but preserve a stable module prior and require explicit evidence before changing its meaning.",
+        "id": "decision-explanation",
+        "layout": "full",
+        "sourceId": "comparison",
+        "type": "markdown"
+      },
+      {
+        "id": "decision-table-block",
+        "layout": "full",
+        "tableId": "decision-table",
+        "type": "table"
+      },
+      {
+        "body": "## Scope, definitions, and uncertainty\n\nThe cohort contains four programs with two repeats each and 23 supplied genes per session. Function coverage requires adjudicated paper support for the assigned gene function. Claim-backed rate is the fraction of unique module supporting genes also present in that session's adjudicated function-supported set. Module semantic similarity is a two-model score, not human ground truth; it weights mechanism, output, gene/regulator direction, and context, and penalizes missing modules. Baseline research turns are exact, but its unlabelled literature calls cannot be split reliably among gene, regulator, and theme steps. Candidate operational turns are lower bounds for two failed P21 attempts with incomplete terminal telemetry. The experiment changes retrieval order, evidence-link requirements, and resource limits together, so it does not identify a single causal reason for annotation changes.",
+        "id": "definitions",
+        "layout": "full",
+        "type": "markdown"
+      },
+      {
+        "body": "## Recommended next experiment\n\nImplement the hybrid module prior, hard phase budgets, checkpoint/resume, module diffs, and direction checks together. Then rerun the same eight sessions at the bounded **60 turns / $1.25 / 900 seconds** setting. Promotion should require completion without recovery, at least +10 percentage points of function coverage over baseline, ≥90% claim-backed genes, zero source-opposed claims, and module replicate similarity ≥0.75 without a large program-level regression.",
+        "id": "next-steps",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "type": "markdown"
+      },
+      {
+        "id": "recommendations-table-block",
+        "layout": "full",
+        "tableId": "recommendations-table",
+        "type": "table"
+      },
+      {
+        "body": "## Further questions\n\nShould P11 be allowed more than three modules or a hierarchical module with subprograms? Does preserving a baseline-derived module prior improve candidate replicate similarity without hiding genuinely new biology? Which gene-level evidence states require a second search, and can this be learned from the current ledger rather than fixed uniformly?",
+        "id": "further-questions",
+        "layout": "full",
+        "type": "markdown"
+      }
+    ],
+    "cards": [
+      {
+        "dataset": "summary",
+        "description": "Share of 23 supplied genes with adjudicated function support.",
+        "id": "coverage-card",
+        "metrics": [
+          {
+            "field": "candidateFunction",
+            "format": "percent",
+            "label": "Candidate coverage"
+          },
+          {
+            "field": "baselineFunction",
+            "format": "percent",
+            "label": "Baseline"
+          },
+          {
+            "field": "functionDelta",
+            "format": "percent",
+            "label": "Change",
+            "signed": true
+          }
+        ],
+        "sourceId": "comparison"
+      },
+      {
+        "dataset": "summary",
+        "description": "Module supporting genes also present in the factual audit.",
+        "id": "grounding-card",
+        "metrics": [
+          {
+            "field": "candidateClaimBackedRate",
+            "format": "percent",
+            "label": "Candidate claim-backed rate"
+          },
+          {
+            "field": "baselineClaimBackedRate",
+            "format": "percent",
+            "label": "Baseline"
+          }
+        ],
+        "sourceId": "diagnostics"
+      },
+      {
+        "dataset": "summary",
+        "description": "Mean best-matched similarity of the unordered module sets.",
+        "id": "semantic-card",
+        "metrics": [
+          {
+            "field": "candidateReplicateSemanticSimilarity",
+            "format": "percent",
+            "label": "Candidate replicate similarity"
+          },
+          {
+            "field": "baselineReplicateSemanticSimilarity",
+            "format": "percent",
+            "label": "Baseline"
+          },
+          {
+            "field": "crossSettingSemanticSimilarity",
+            "format": "percent",
+            "label": "Baseline–candidate"
+          }
+        ],
+        "sourceId": "module-similarity"
+      },
+      {
+        "dataset": "summary",
+        "description": "Candidate includes every recorded failed and recovery attempt.",
+        "id": "turn-card",
+        "metrics": [
+          {
+            "field": "candidateMeanOperationalMinimumTurns",
+            "format": "number",
+            "label": "Candidate operational turns ≥"
+          },
+          {
+            "field": "baselineMeanTurns",
+            "format": "number",
+            "label": "Baseline"
+          }
+        ],
+        "sourceId": "diagnostics"
+      }
+    ],
+    "charts": [
+      {
+        "dataset": "coverage_chart",
+        "encodings": {
+          "color": {
+            "field": "measure",
+            "label": "Measure",
+            "type": "nominal"
+          },
+          "tooltip": [
+            {
+              "field": "candidateClaimBackedRate",
+              "format": "percent",
+              "label": "Candidate claim-backed rate",
+              "type": "quantitative"
+            }
+          ],
+          "x": {
+            "field": "session",
+            "label": "Session",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "delta",
+            "label": "Gene-count change",
+            "type": "quantitative"
+          }
+        },
+        "id": "coverage-reconciliation-chart",
+        "intent": "comparison",
+        "layout": "full",
+        "maxRows": 16,
+        "options": {
+          "grouping": "grouped",
+          "orientation": "vertical"
+        },
+        "question": "Why can annotation supporting genes fall while factual coverage rises?",
+        "rationale": "Signed grouped bars separate claim breadth from audited support.",
+        "sourceId": "diagnostics",
+        "subtitle": "Candidate minus baseline counts by paired session; audited support rises in all runs",
+        "title": "Change in annotation gene claims and audited support",
+        "type": "bar",
+        "valueFormat": "number"
+      },
+      {
+        "dataset": "semantic_chart",
+        "encodings": {
+          "color": {
+            "field": "comparison",
+            "label": "Comparison",
+            "type": "nominal"
+          },
+          "x": {
+            "field": "program",
+            "label": "Program",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "similarity",
+            "format": "percent",
+            "label": "Semantic similarity",
+            "type": "quantitative"
+          }
+        },
+        "id": "semantic-similarity-chart",
+        "intent": "comparison",
+        "layout": "full",
+        "maxRows": 16,
+        "options": {
+          "grouping": "grouped",
+          "orientation": "vertical"
+        },
+        "question": "Are module meanings stable across replicates and settings?",
+        "rationale": "Grouped program bars make within- and cross-setting stability comparable.",
+        "sourceId": "module-similarity",
+        "subtitle": "0–1 score after best one-to-one matching; missing modules score zero",
+        "title": "Unordered module-set semantic similarity",
+        "type": "bar",
+        "valueFormat": "percent"
+      },
+      {
+        "dataset": "strategy_chart",
+        "encodings": {
+          "color": {
+            "field": "setting",
+            "label": "Setting",
+            "type": "nominal"
+          },
+          "x": {
+            "field": "step",
+            "label": "Major step",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "turns",
+            "label": "Mean turns per session",
+            "type": "quantitative"
+          }
+        },
+        "id": "strategy-turns-chart",
+        "intent": "comparison",
+        "layout": "full",
+        "maxRows": 27,
+        "options": {
+          "grouping": "grouped",
+          "orientation": "horizontal"
+        },
+        "question": "Where does each strategy spend its agent turns?",
+        "rationale": "Grouped bars expose candidate phase cost and baseline attribution limits.",
+        "sourceId": "diagnostics",
+        "subtitle": "Baseline retrieval is exact but unphased; candidate shows final-output and all-attempt operational usage",
+        "title": "Mean turns by major research step",
+        "type": "bar",
+        "valueFormat": "number"
+      }
+    ],
+    "description": "Paired assessment of evidence coverage, module semantics, biological value, and research resource use.",
+    "generatedAt": "2026-07-23T07:41:16.660658Z",
+    "sources": [
+      {
+        "id": "comparison",
+        "label": "Paired benchmark comparison",
+        "path": "benchmarks/literature-v1/candidate-evaluable/comparison-report/comparison_metrics.json",
+        "query": {
+          "description": "Read the saved paired benchmark comparison JSON artifact.",
+          "engine": "duckdb",
+          "executed_at": "2026-07-23T07:41:16.660658Z",
+          "language": "sql",
+          "metric_definitions": [
+            "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+            "Paired changes are candidate minus baseline on identical session IDs."
+          ],
+          "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/comparison-report/comparison_metrics.json');",
+          "tables_used": [
+            "benchmarks/literature-v1/candidate-evaluable/comparison-report/comparison_metrics.json"
+          ]
+        }
+      },
+      {
+        "id": "diagnostics",
+        "label": "Coverage, semantic, replicate, and turn diagnostics",
+        "path": "benchmarks/literature-v1/candidate-evaluable/comparison-report/diagnostics.json",
+        "query": {
+          "description": "Read the saved coverage, semantic, replicate, and turn diagnostics JSON artifact.",
+          "engine": "duckdb",
+          "executed_at": "2026-07-23T07:41:16.660658Z",
+          "language": "sql",
+          "metric_definitions": [
+            "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+            "Paired changes are candidate minus baseline on identical session IDs."
+          ],
+          "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/comparison-report/diagnostics.json');",
+          "tables_used": [
+            "benchmarks/literature-v1/candidate-evaluable/comparison-report/diagnostics.json"
+          ]
+        }
+      },
+      {
+        "id": "module-similarity",
+        "label": "Two-reviewer unordered module semantic similarity",
+        "path": "benchmarks/literature-v1/candidate-evaluable/module_similarity/final.json",
+        "query": {
+          "description": "Read the saved two-reviewer unordered module semantic similarity JSON artifact.",
+          "engine": "duckdb",
+          "executed_at": "2026-07-23T07:41:16.660658Z",
+          "language": "sql",
+          "metric_definitions": [
+            "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+            "Paired changes are candidate minus baseline on identical session IDs."
+          ],
+          "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/module_similarity/final.json');",
+          "tables_used": [
+            "benchmarks/literature-v1/candidate-evaluable/module_similarity/final.json"
+          ]
+        }
+      },
+      {
+        "id": "baseline",
+        "label": "Baseline adjudicated reference-quality audit",
+        "path": "benchmarks/literature-v1/baseline-v4/reference_quality/metrics.json",
+        "query": {
+          "description": "Read the saved baseline adjudicated reference-quality audit JSON artifact.",
+          "engine": "duckdb",
+          "executed_at": "2026-07-23T07:41:16.660658Z",
+          "language": "sql",
+          "metric_definitions": [
+            "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+            "Paired changes are candidate minus baseline on identical session IDs."
+          ],
+          "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/baseline-v4/reference_quality/metrics.json');",
+          "tables_used": [
+            "benchmarks/literature-v1/baseline-v4/reference_quality/metrics.json"
+          ]
+        }
+      },
+      {
+        "id": "candidate",
+        "label": "Candidate adjudicated reference-quality audit",
+        "path": "benchmarks/literature-v1/candidate-evaluable/reference_quality/audit/metrics.json",
+        "query": {
+          "description": "Read the saved candidate adjudicated reference-quality audit JSON artifact.",
+          "engine": "duckdb",
+          "executed_at": "2026-07-23T07:41:16.660658Z",
+          "language": "sql",
+          "metric_definitions": [
+            "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+            "Paired changes are candidate minus baseline on identical session IDs."
+          ],
+          "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/reference_quality/audit/metrics.json');",
+          "tables_used": [
+            "benchmarks/literature-v1/candidate-evaluable/reference_quality/audit/metrics.json"
+          ]
+        }
+      },
+      {
+        "id": "structural",
+        "label": "Structural and operational comparison",
+        "path": "benchmarks/literature-v1/candidate-evaluable/structural_comparison.json",
+        "query": {
+          "description": "Read the saved structural and operational comparison JSON artifact.",
+          "engine": "duckdb",
+          "executed_at": "2026-07-23T07:41:16.660658Z",
+          "language": "sql",
+          "metric_definitions": [
+            "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+            "Paired changes are candidate minus baseline on identical session IDs."
+          ],
+          "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/structural_comparison.json');",
+          "tables_used": [
+            "benchmarks/literature-v1/candidate-evaluable/structural_comparison.json"
+          ]
+        }
+      }
+    ],
+    "surface": "report",
+    "tables": [
+      {
+        "columns": [
+          {
+            "field": "session",
+            "label": "Session",
+            "type": "text"
+          },
+          {
+            "field": "baselineAnnotationClaimedGenes",
+            "format": "number",
+            "label": "Baseline claimed"
+          },
+          {
+            "field": "candidateAnnotationClaimedGenes",
+            "format": "number",
+            "label": "Candidate claimed"
+          },
+          {
+            "field": "baselineAuditedFunctionGenes",
+            "format": "number",
+            "label": "Baseline audited"
+          },
+          {
+            "field": "candidateAuditedFunctionGenes",
+            "format": "number",
+            "label": "Candidate audited"
+          },
+          {
+            "field": "baselineClaimBackedRate",
+            "format": "percent",
+            "label": "Baseline claim-backed"
+          },
+          {
+            "field": "candidateClaimBackedRate",
+            "format": "percent",
+            "label": "Candidate claim-backed"
+          }
+        ],
+        "dataset": "coverage_reconciliation",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "session"
+        },
+        "density": "spacious",
+        "id": "coverage-reconciliation-table",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "subtitle": "Exact supplied-gene counts for all eight paired sessions.",
+        "title": "Claim breadth versus audited function support"
+      },
+      {
+        "columns": [
+          {
+            "field": "program",
+            "label": "Program",
+            "type": "text"
+          },
+          {
+            "field": "baselineReplicateSimilarity",
+            "format": "percent",
+            "label": "Baseline r1–r2"
+          },
+          {
+            "field": "candidateReplicateSimilarity",
+            "format": "percent",
+            "label": "Candidate r1–r2"
+          },
+          {
+            "field": "replicateSimilarityDelta",
+            "format": "percent",
+            "label": "Candidate change",
+            "movement": true
+          },
+          {
+            "field": "crossSettingR1Similarity",
+            "format": "percent",
+            "label": "Baseline–candidate r1"
+          },
+          {
+            "field": "crossSettingR2Similarity",
+            "format": "percent",
+            "label": "Baseline–candidate r2"
+          }
+        ],
+        "dataset": "semantic_program",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "program"
+        },
+        "density": "spacious",
+        "id": "semantic-table",
+        "layout": "full",
+        "sourceId": "module-similarity",
+        "subtitle": "Two-reviewer mean after deterministic best matching; each cross-setting score compares the same replicate.",
+        "title": "Module semantic similarity by program"
+      },
+      {
+        "columns": [
+          {
+            "field": "program",
+            "label": "Program",
+            "type": "text"
+          },
+          {
+            "field": "stableCore",
+            "label": "Stable biological core",
+            "type": "text"
+          },
+          {
+            "field": "candidateBenefit",
+            "label": "Candidate benefit",
+            "type": "text"
+          },
+          {
+            "field": "candidateRisk",
+            "label": "Candidate risk",
+            "type": "text"
+          },
+          {
+            "field": "assessment",
+            "label": "Assessment",
+            "type": "text"
+          }
+        ],
+        "dataset": "biology_assessment",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "program"
+        },
+        "density": "spacious",
+        "id": "biology-table",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "subtitle": "Evidence grounding and interpretive stability are evaluated separately.",
+        "title": "Biological assessment by program"
+      },
+      {
+        "columns": [
+          {
+            "field": "order",
+            "format": "number",
+            "label": "#"
+          },
+          {
+            "field": "step",
+            "label": "Step",
+            "type": "text"
+          },
+          {
+            "field": "baselineStrategy",
+            "label": "Baseline strategy",
+            "type": "text"
+          },
+          {
+            "field": "baselineAverageTurns",
+            "format": "number",
+            "label": "Baseline turns"
+          },
+          {
+            "field": "candidateStrategy",
+            "label": "Candidate strategy",
+            "type": "text"
+          },
+          {
+            "field": "candidateFinalAverageTurns",
+            "format": "number",
+            "label": "Candidate final"
+          },
+          {
+            "field": "candidateOperationalAverageTurns",
+            "format": "number",
+            "label": "Candidate operational ≥"
+          },
+          {
+            "field": "phaseControlToday",
+            "label": "Control today",
+            "type": "text"
+          }
+        ],
+        "dataset": "strategy_turns",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "order"
+        },
+        "density": "spacious",
+        "id": "strategy-table",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "subtitle": "Turns are per-session means; candidate operational values include failed attempts.",
+        "title": "Baseline and candidate research strategy"
+      },
+      {
+        "columns": [
+          {
+            "field": "order",
+            "format": "number",
+            "label": "#"
+          },
+          {
+            "field": "control",
+            "label": "Resource control",
+            "type": "text"
+          },
+          {
+            "field": "currentState",
+            "label": "Current state",
+            "type": "text"
+          },
+          {
+            "field": "how",
+            "label": "How to hard-control it",
+            "type": "text"
+          }
+        ],
+        "dataset": "phase_controls",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "order"
+        },
+        "density": "spacious",
+        "id": "phase-control-table",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "subtitle": "Current enforcement versus the required hard-control mechanism.",
+        "title": "What can actually be controlled per step"
+      },
+      {
+        "columns": [
+          {
+            "field": "dimension",
+            "label": "Dimension",
+            "type": "text"
+          },
+          {
+            "field": "baseline",
+            "label": "Baseline",
+            "type": "text"
+          },
+          {
+            "field": "candidate",
+            "label": "Candidate",
+            "type": "text"
+          },
+          {
+            "field": "favours",
+            "label": "Favours",
+            "type": "text"
+          },
+          {
+            "field": "interpretation",
+            "label": "Biological / technical meaning",
+            "type": "text"
+          }
+        ],
+        "dataset": "decision_scorecard",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "dimension"
+        },
+        "density": "spacious",
+        "id": "decision-table",
+        "layout": "full",
+        "sourceId": "comparison",
+        "subtitle": "The answer changes by decision dimension; no single strategy dominates.",
+        "title": "Which strategy is better?"
+      },
+      {
+        "columns": [
+          {
+            "field": "priority",
+            "format": "number",
+            "label": "Priority"
+          },
+          {
+            "field": "change",
+            "label": "Change",
+            "type": "text"
+          },
+          {
+            "field": "operation",
+            "label": "Concrete operation",
+            "type": "text"
+          },
+          {
+            "field": "acceptance",
+            "label": "Acceptance test",
+            "type": "text"
+          }
+        ],
+        "dataset": "recommendations",
+        "defaultSort": {
+          "direction": "asc",
+          "field": "priority"
+        },
+        "density": "spacious",
+        "id": "recommendations-table",
+        "layout": "full",
+        "sourceId": "diagnostics",
+        "subtitle": "The next pilot should improve evidence without sacrificing module stability.",
+        "title": "Recommended hybrid process and acceptance tests"
+      }
+    ],
+    "title": "Baseline vs candidate annotation",
+    "version": 1
+  },
+  "snapshot": {
+    "datasets": {
+      "biology_assessment": [
+        {
+          "assessment": "Baseline is more context-coherent and reproducible; candidate is better grounded but fragments the secondary interpretation.",
+          "candidateBenefit": "Audited function support rises from 9→10 and 7→10 genes; claimed genes are more often evidence-backed.",
+          "candidateRisk": "Candidate replicate similarity is 0.560 versus 0.972 baseline. Endothelial mechanosensing/BBB modules shift toward Hedgehog output and mitochondrial metabolism; candidate r2 reports only two modules.",
+          "program": "P10",
+          "stableCore": "Primary-cilium assembly is stable in both settings."
+        },
+        {
+          "assessment": "Candidate improves evidence, not interpretive convergence. P11 is biologically heterogeneous and should not be forced into one stable three-module answer.",
+          "candidateBenefit": "Audited support rises from 5→7 and 2→6 genes, adding Kcnj2, Rgs6, Slc1a1, and Tnfrsf11b evidence.",
+          "candidateRisk": "Replicate similarity remains low (0.587 candidate, 0.577 baseline); arteriovenous identity, BBB transport, TGF-β, and survival modules are repartitioned.",
+          "program": "P11",
+          "stableCore": "Tip-cell sprouting is the only consistently recovered anchor."
+        },
+        {
+          "assessment": "Candidate is clearly better here: it improves evidence coverage and resolves baseline direction inconsistencies while preserving the core biology.",
+          "candidateBenefit": "Audited support rises from 17→18 and 13→20 genes; candidate replicate similarity is 0.847 versus 0.540 baseline.",
+          "candidateRisk": "The third MASLD/lipid-output module remains broader and less specific than the first two.",
+          "program": "P21",
+          "stableCore": "Mevalonate/cholesterol enzymes and SCAP–INSIG1–SREBP2 regulation dominate."
+        },
+        {
+          "assessment": "Candidate is more defensible gene by gene; baseline has more stable module boundaries. Neither is unambiguously better as a biological summary.",
+          "candidateBenefit": "Audited support rises from 8→12 and 10→12 genes; claim-backed rates rise strongly.",
+          "candidateRisk": "Candidate replicate similarity is 0.622 versus 0.943 baseline. Bile-acid sulfation, taurine/cysteine metabolism, and nitrogen disposal move between modules.",
+          "program": "P25",
+          "stableCore": "Detoxification/conjugation, peroxisomal lipid metabolism, and sulfur metabolism are recurrent."
+        }
+      ],
+      "coverage_chart": [
+        {
+          "candidateClaimBackedRate": 1.0,
+          "delta": 0,
+          "measure": "Claimed genes",
+          "session": "brain-p10--r1"
+        },
+        {
+          "candidateClaimBackedRate": 1.0,
+          "delta": 1,
+          "measure": "Audited support",
+          "session": "brain-p10--r1"
+        },
+        {
+          "candidateClaimBackedRate": 0.909091,
+          "delta": 2,
+          "measure": "Claimed genes",
+          "session": "brain-p10--r2"
+        },
+        {
+          "candidateClaimBackedRate": 0.909091,
+          "delta": 3,
+          "measure": "Audited support",
+          "session": "brain-p10--r2"
+        },
+        {
+          "candidateClaimBackedRate": 0.875,
+          "delta": -3,
+          "measure": "Claimed genes",
+          "session": "brain-p11--r1"
+        },
+        {
+          "candidateClaimBackedRate": 0.875,
+          "delta": 2,
+          "measure": "Audited support",
+          "session": "brain-p11--r1"
+        },
+        {
+          "candidateClaimBackedRate": 1.0,
+          "delta": 1,
+          "measure": "Claimed genes",
+          "session": "brain-p11--r2"
+        },
+        {
+          "candidateClaimBackedRate": 1.0,
+          "delta": 4,
+          "measure": "Audited support",
+          "session": "brain-p11--r2"
+        },
+        {
+          "candidateClaimBackedRate": 0.947368,
+          "delta": 1,
+          "measure": "Claimed genes",
+          "session": "liver-p21--r1"
+        },
+        {
+          "candidateClaimBackedRate": 0.947368,
+          "delta": 1,
+          "measure": "Audited support",
+          "session": "liver-p21--r1"
+        },
+        {
+          "candidateClaimBackedRate": 1.0,
+          "delta": 2,
+          "measure": "Claimed genes",
+          "session": "liver-p21--r2"
+        },
+        {
+          "candidateClaimBackedRate": 1.0,
+          "delta": 7,
+          "measure": "Audited support",
+          "session": "liver-p21--r2"
+        },
+        {
+          "candidateClaimBackedRate": 0.923077,
+          "delta": -4,
+          "measure": "Claimed genes",
+          "session": "liver-p25--r1"
+        },
+        {
+          "candidateClaimBackedRate": 0.923077,
+          "delta": 4,
+          "measure": "Audited support",
+          "session": "liver-p25--r1"
+        },
+        {
+          "candidateClaimBackedRate": 0.857143,
+          "delta": -3,
+          "measure": "Claimed genes",
+          "session": "liver-p25--r2"
+        },
+        {
+          "candidateClaimBackedRate": 0.857143,
+          "delta": 2,
+          "measure": "Audited support",
+          "session": "liver-p25--r2"
+        }
+      ],
+      "coverage_reconciliation": [
+        {
+          "annotationClaimedDelta": 0,
+          "auditedFunctionDelta": 1,
+          "baselineAnnotationClaimedGenes": 10,
+          "baselineAuditedFunctionGenes": 9,
+          "baselineClaimBackedGenes": 9,
+          "baselineClaimBackedRate": 0.9,
+          "baselineClaimedButNotAudited": "Cfap36",
+          "candidateAnnotationClaimedGenes": 10,
+          "candidateAuditedFunctionGenes": 10,
+          "candidateClaimBackedGenes": 10,
+          "candidateClaimBackedRate": 1.0,
+          "candidateClaimedButNotAudited": "",
+          "case": "brain-p10",
+          "program": "P10",
+          "session": "brain-p10--r1"
+        },
+        {
+          "annotationClaimedDelta": 2,
+          "auditedFunctionDelta": 3,
+          "baselineAnnotationClaimedGenes": 9,
+          "baselineAuditedFunctionGenes": 7,
+          "baselineClaimBackedGenes": 7,
+          "baselineClaimBackedRate": 0.777778,
+          "baselineClaimedButNotAudited": "Cfap36, Sdccag8",
+          "candidateAnnotationClaimedGenes": 11,
+          "candidateAuditedFunctionGenes": 10,
+          "candidateClaimBackedGenes": 10,
+          "candidateClaimBackedRate": 0.909091,
+          "candidateClaimedButNotAudited": "Cep164",
+          "case": "brain-p10",
+          "program": "P10",
+          "session": "brain-p10--r2"
+        },
+        {
+          "annotationClaimedDelta": -3,
+          "auditedFunctionDelta": 2,
+          "baselineAnnotationClaimedGenes": 11,
+          "baselineAuditedFunctionGenes": 5,
+          "baselineClaimBackedGenes": 5,
+          "baselineClaimBackedRate": 0.454545,
+          "baselineClaimedButNotAudited": "Cacna1c, Cdc42ep3, Jph1, Prdm1, Rgs6, Syt12",
+          "candidateAnnotationClaimedGenes": 8,
+          "candidateAuditedFunctionGenes": 7,
+          "candidateClaimBackedGenes": 7,
+          "candidateClaimBackedRate": 0.875,
+          "candidateClaimedButNotAudited": "Cdc42ep3",
+          "case": "brain-p11",
+          "program": "P11",
+          "session": "brain-p11--r1"
+        },
+        {
+          "annotationClaimedDelta": 1,
+          "auditedFunctionDelta": 4,
+          "baselineAnnotationClaimedGenes": 5,
+          "baselineAuditedFunctionGenes": 2,
+          "baselineClaimBackedGenes": 2,
+          "baselineClaimBackedRate": 0.4,
+          "baselineClaimedButNotAudited": "Cdc42ep3, Hopx, Prdm1",
+          "candidateAnnotationClaimedGenes": 6,
+          "candidateAuditedFunctionGenes": 6,
+          "candidateClaimBackedGenes": 6,
+          "candidateClaimBackedRate": 1.0,
+          "candidateClaimedButNotAudited": "",
+          "case": "brain-p11",
+          "program": "P11",
+          "session": "brain-p11--r2"
+        },
+        {
+          "annotationClaimedDelta": 1,
+          "auditedFunctionDelta": 1,
+          "baselineAnnotationClaimedGenes": 18,
+          "baselineAuditedFunctionGenes": 17,
+          "baselineClaimBackedGenes": 17,
+          "baselineClaimBackedRate": 0.944444,
+          "baselineClaimedButNotAudited": "Erg28",
+          "candidateAnnotationClaimedGenes": 19,
+          "candidateAuditedFunctionGenes": 18,
+          "candidateClaimBackedGenes": 18,
+          "candidateClaimBackedRate": 0.947368,
+          "candidateClaimedButNotAudited": "Mvk",
+          "case": "liver-p21",
+          "program": "P21",
+          "session": "liver-p21--r1"
+        },
+        {
+          "annotationClaimedDelta": 2,
+          "auditedFunctionDelta": 7,
+          "baselineAnnotationClaimedGenes": 18,
+          "baselineAuditedFunctionGenes": 13,
+          "baselineClaimBackedGenes": 13,
+          "baselineClaimBackedRate": 0.722222,
+          "baselineClaimedButNotAudited": "Acss2, Erg28, Hsd17b7, Sc5d, Tm7sf2",
+          "candidateAnnotationClaimedGenes": 20,
+          "candidateAuditedFunctionGenes": 20,
+          "candidateClaimBackedGenes": 20,
+          "candidateClaimBackedRate": 1.0,
+          "candidateClaimedButNotAudited": "",
+          "case": "liver-p21",
+          "program": "P21",
+          "session": "liver-p21--r2"
+        },
+        {
+          "annotationClaimedDelta": -4,
+          "auditedFunctionDelta": 4,
+          "baselineAnnotationClaimedGenes": 17,
+          "baselineAuditedFunctionGenes": 8,
+          "baselineClaimBackedGenes": 8,
+          "baselineClaimBackedRate": 0.470588,
+          "baselineClaimedButNotAudited": "Agmat, Akr1c6, Cyb5b, Eci2, Hao2, Sord, Sult2a5, Sult2a7, Sult2a8",
+          "candidateAnnotationClaimedGenes": 13,
+          "candidateAuditedFunctionGenes": 12,
+          "candidateClaimBackedGenes": 12,
+          "candidateClaimBackedRate": 0.923077,
+          "candidateClaimedButNotAudited": "Eci2",
+          "case": "liver-p25",
+          "program": "P25",
+          "session": "liver-p25--r1"
+        },
+        {
+          "annotationClaimedDelta": -3,
+          "auditedFunctionDelta": 2,
+          "baselineAnnotationClaimedGenes": 17,
+          "baselineAuditedFunctionGenes": 10,
+          "baselineClaimBackedGenes": 10,
+          "baselineClaimBackedRate": 0.588235,
+          "baselineClaimedButNotAudited": "Akr1c6, Alad, Eci2, Lonp2, Sult2a5, Sult2a7, Sult2a8",
+          "candidateAnnotationClaimedGenes": 14,
+          "candidateAuditedFunctionGenes": 12,
+          "candidateClaimBackedGenes": 12,
+          "candidateClaimBackedRate": 0.857143,
+          "candidateClaimedButNotAudited": "Akr1c6, Aldh1a1",
+          "case": "liver-p25",
+          "program": "P25",
+          "session": "liver-p25--r2"
+        }
+      ],
+      "decision_scorecard": [
+        {
+          "baseline": "38.6%",
+          "candidate": "51.6%",
+          "dimension": "Audited function-supported coverage",
+          "favours": "Candidate",
+          "interpretation": "More supplied genes have paper-supported functional assignments."
+        },
+        {
+          "baseline": "67.6%",
+          "candidate": "94.1%",
+          "dimension": "Annotation claims backed by audited support",
+          "favours": "Candidate",
+          "interpretation": "Shorter module gene lists can still be more defensible."
+        },
+        {
+          "baseline": "0.758",
+          "candidate": "0.654",
+          "dimension": "Three-module replicate semantic similarity",
+          "favours": "Baseline",
+          "interpretation": "Candidate modules are not more reproducible overall."
+        },
+        {
+          "baseline": "0.120",
+          "candidate": "0.184",
+          "dimension": "Paper-set replicate Jaccard",
+          "favours": "Candidate, weakly",
+          "interpretation": "Source identity improves but remains highly unstable."
+        },
+        {
+          "baseline": "34.9%",
+          "candidate": "34.6%",
+          "dimension": "Context overclaim rate",
+          "favours": "Tie",
+          "interpretation": "Deeper retrieval does not improve context calibration."
+        },
+        {
+          "baseline": "0",
+          "candidate": "2",
+          "dimension": "Source-opposed claims",
+          "favours": "Baseline",
+          "interpretation": "Candidate introduces two direction-sensitive factual errors."
+        },
+        {
+          "baseline": "37.4",
+          "candidate": "≥120.9",
+          "dimension": "Mean operational turns",
+          "favours": "Baseline",
+          "interpretation": "Candidate uses at least 3.23× as much agent work."
+        }
+      ],
+      "phase_controls": [
+        {
+          "control": "Whole-session turns, cost, and timeout",
+          "currentState": "Hard controlled",
+          "how": "Client-counted assistant turns back up the SDK limit; session cost and wall time are enforced separately.",
+          "order": 1
+        },
+        {
+          "control": "Per-phase turns or tool calls",
+          "currentState": "Not hard controlled",
+          "how": "Add a PhaseBudget configuration and check research_phase before every literature tool execution. Return a structured phase_budget_exhausted result so the agent moves on instead of terminating the session.",
+          "order": 2
+        },
+        {
+          "control": "Per-gene search allocation",
+          "currentState": "Not hard controlled",
+          "how": "Persist per-gene query/fetch counters with the terminal ledger; allow additional queries only when the gene lacks function evidence or has unresolved direction.",
+          "order": 3
+        },
+        {
+          "control": "Finalization reserve",
+          "currentState": "Not controlled",
+          "how": "Reserve the last two turns for validation and submit_result; reject further retrieval once the reserve is reached.",
+          "order": 4
+        },
+        {
+          "control": "Retry and recovery work",
+          "currentState": "Attempts are counted but retrieval restarts",
+          "how": "Checkpoint ledgers, verified paper–gene edges, phase counters, and cursor after each tool result; resume only unfinished genes after transient failure.",
+          "order": 5
+        }
+      ],
+      "recommendations": [
+        {
+          "acceptance": "Mean module replicate similarity ≥0.75 and no program falls >0.15 below baseline.",
+          "change": "Use candidate retrieval under a stable module prior",
+          "operation": "Carry the previous three-module skeleton into the next run. Update a module only when new exact gene–paper edges change its mechanism, direction, or predicted phenotype; otherwise add evidence without renaming the module.",
+          "priority": 1
+        },
+        {
+          "acceptance": "All eight sessions complete within 60 turns without recovery.",
+          "change": "Hard-enforce phase and per-gene budgets",
+          "operation": "At the tool boundary, cap supplied-gene, regulator, theme, expansion, and gap calls; reserve finalization turns and stop further retrieval at the limit.",
+          "priority": 2
+        },
+        {
+          "acceptance": "Retry/failure work <10% of operational turns.",
+          "change": "Checkpoint and resume evidence state",
+          "operation": "Persist ledgers, verified edges, phase counters, and cursor after each tool result; retry only the unfinished portion.",
+          "priority": 3
+        },
+        {
+          "acceptance": "Every module below 0.75 similarity has a cited change rationale.",
+          "change": "Make annotation changes explicit",
+          "operation": "Emit matched-module scores and an added/removed/reassigned claim diff before replacing a module.",
+          "priority": 4
+        },
+        {
+          "acceptance": "Zero source-opposed claims; function coverage remains at least baseline +10 points and claim-backed rate remains ≥90%.",
+          "change": "Add direction and context checks",
+          "operation": "Compare paper direction with each claim and require species, developmental, and disease-state qualifiers for context-dependent findings.",
+          "priority": 5
+        }
+      ],
+      "semantic_chart": [
+        {
+          "comparison": "Base rep",
+          "program": "P10",
+          "similarity": 0.971667
+        },
+        {
+          "comparison": "Cand rep",
+          "program": "P10",
+          "similarity": 0.56
+        },
+        {
+          "comparison": "Cross r1",
+          "program": "P10",
+          "similarity": 0.485
+        },
+        {
+          "comparison": "Cross r2",
+          "program": "P10",
+          "similarity": 0.386667
+        },
+        {
+          "comparison": "Base rep",
+          "program": "P11",
+          "similarity": 0.576667
+        },
+        {
+          "comparison": "Cand rep",
+          "program": "P11",
+          "similarity": 0.586667
+        },
+        {
+          "comparison": "Cross r1",
+          "program": "P11",
+          "similarity": 0.68
+        },
+        {
+          "comparison": "Cross r2",
+          "program": "P11",
+          "similarity": 0.483333
+        },
+        {
+          "comparison": "Base rep",
+          "program": "P21",
+          "similarity": 0.54
+        },
+        {
+          "comparison": "Cand rep",
+          "program": "P21",
+          "similarity": 0.846667
+        },
+        {
+          "comparison": "Cross r1",
+          "program": "P21",
+          "similarity": 0.913333
+        },
+        {
+          "comparison": "Cross r2",
+          "program": "P21",
+          "similarity": 0.846667
+        },
+        {
+          "comparison": "Base rep",
+          "program": "P25",
+          "similarity": 0.943333
+        },
+        {
+          "comparison": "Cand rep",
+          "program": "P25",
+          "similarity": 0.621667
+        },
+        {
+          "comparison": "Cross r1",
+          "program": "P25",
+          "similarity": 0.723333
+        },
+        {
+          "comparison": "Cross r2",
+          "program": "P25",
+          "similarity": 0.906667
+        }
+      ],
+      "semantic_program": [
+        {
+          "baselineReplicateSimilarity": 0.971667,
+          "candidateReplicateSimilarity": 0.56,
+          "crossSettingMeanSimilarity": 0.435833,
+          "crossSettingR1Similarity": 0.485,
+          "crossSettingR2Similarity": 0.386667,
+          "program": "P10",
+          "replicateSimilarityDelta": -0.411667
+        },
+        {
+          "baselineReplicateSimilarity": 0.576667,
+          "candidateReplicateSimilarity": 0.586667,
+          "crossSettingMeanSimilarity": 0.581667,
+          "crossSettingR1Similarity": 0.68,
+          "crossSettingR2Similarity": 0.483333,
+          "program": "P11",
+          "replicateSimilarityDelta": 0.01
+        },
+        {
+          "baselineReplicateSimilarity": 0.54,
+          "candidateReplicateSimilarity": 0.846667,
+          "crossSettingMeanSimilarity": 0.88,
+          "crossSettingR1Similarity": 0.913333,
+          "crossSettingR2Similarity": 0.846667,
+          "program": "P21",
+          "replicateSimilarityDelta": 0.306667
+        },
+        {
+          "baselineReplicateSimilarity": 0.943333,
+          "candidateReplicateSimilarity": 0.621667,
+          "crossSettingMeanSimilarity": 0.815,
+          "crossSettingR1Similarity": 0.723333,
+          "crossSettingR2Similarity": 0.906667,
+          "program": "P25",
+          "replicateSimilarityDelta": -0.321666
+        }
+      ],
+      "strategy_chart": [
+        {
+          "order": 1,
+          "setting": "Baseline",
+          "step": "Setup",
+          "turns": 2.25
+        },
+        {
+          "order": 1,
+          "setting": "Candidate final",
+          "step": "Setup",
+          "turns": 5.125
+        },
+        {
+          "order": 1,
+          "setting": "Candidate all",
+          "step": "Setup",
+          "turns": 7.75
+        },
+        {
+          "order": 2,
+          "setting": "Baseline",
+          "step": "Mixed evidence retrieval",
+          "turns": 33.125
+        },
+        {
+          "order": 2,
+          "setting": "Candidate final",
+          "step": "Mixed evidence retrieval",
+          "turns": 0
+        },
+        {
+          "order": 2,
+          "setting": "Candidate all",
+          "step": "Mixed evidence retrieval",
+          "turns": 0
+        },
+        {
+          "order": 3,
+          "setting": "Baseline",
+          "step": "Supplied-gene pass",
+          "turns": 0
+        },
+        {
+          "order": 3,
+          "setting": "Candidate final",
+          "step": "Supplied-gene pass",
+          "turns": 53.75
+        },
+        {
+          "order": 3,
+          "setting": "Candidate all",
+          "step": "Supplied-gene pass",
+          "turns": 74.625
+        },
+        {
+          "order": 4,
+          "setting": "Baseline",
+          "step": "Regulator pass",
+          "turns": 0
+        },
+        {
+          "order": 4,
+          "setting": "Candidate final",
+          "step": "Regulator pass",
+          "turns": 12.125
+        },
+        {
+          "order": 4,
+          "setting": "Candidate all",
+          "step": "Regulator pass",
+          "turns": 19.875
+        },
+        {
+          "order": 5,
+          "setting": "Baseline",
+          "step": "Theme formation",
+          "turns": 0
+        },
+        {
+          "order": 5,
+          "setting": "Candidate final",
+          "step": "Theme formation",
+          "turns": 3.0
+        },
+        {
+          "order": 5,
+          "setting": "Candidate all",
+          "step": "Theme formation",
+          "turns": 4.25
+        },
+        {
+          "order": 6,
+          "setting": "Baseline",
+          "step": "Citation expansion",
+          "turns": 0
+        },
+        {
+          "order": 6,
+          "setting": "Candidate final",
+          "step": "Citation expansion",
+          "turns": 1.5
+        },
+        {
+          "order": 6,
+          "setting": "Candidate all",
+          "step": "Citation expansion",
+          "turns": 1.875
+        },
+        {
+          "order": 7,
+          "setting": "Baseline",
+          "step": "Gap pass",
+          "turns": 0
+        },
+        {
+          "order": 7,
+          "setting": "Candidate final",
+          "step": "Gap pass",
+          "turns": 7.25
+        },
+        {
+          "order": 7,
+          "setting": "Candidate all",
+          "step": "Gap pass",
+          "turns": 9.25
+        },
+        {
+          "order": 8,
+          "setting": "Baseline",
+          "step": "Finalize",
+          "turns": 2.0
+        },
+        {
+          "order": 8,
+          "setting": "Candidate final",
+          "step": "Finalize",
+          "turns": 2.0
+        },
+        {
+          "order": 8,
+          "setting": "Candidate all",
+          "step": "Finalize",
+          "turns": 2.5
+        },
+        {
+          "order": 9,
+          "setting": "Baseline",
+          "step": "Total",
+          "turns": 37.375
+        },
+        {
+          "order": 9,
+          "setting": "Candidate final",
+          "step": "Total",
+          "turns": 85.375
+        },
+        {
+          "order": 9,
+          "setting": "Candidate all",
+          "step": "Total",
+          "turns": 120.875
+        }
+      ],
+      "strategy_turns": [
+        {
+          "baselineAverageTurns": 2.25,
+          "baselineStrategy": "Read bundle and discover literature tools.",
+          "candidateFinalAverageTurns": 5.125,
+          "candidateOperationalAverageTurns": 7.75,
+          "candidateStrategy": "Read bundle, discover tools, initialize ledgers.",
+          "order": 1,
+          "phaseControlToday": "Measured; no phase-specific ceiling.",
+          "step": "Setup"
+        },
+        {
+          "baselineAverageTurns": 33.125,
+          "baselineStrategy": "Gene, regulator, and hypothesized-theme searches are interleaved and unlabelled.",
+          "candidateFinalAverageTurns": 0,
+          "candidateOperationalAverageTurns": 0,
+          "candidateStrategy": "Replaced by labelled passes below.",
+          "order": 2,
+          "phaseControlToday": "Cannot be separated retrospectively.",
+          "step": "Mixed evidence retrieval"
+        },
+        {
+          "baselineAverageTurns": 0,
+          "baselineStrategy": "No separate pass or complete terminal ledger.",
+          "candidateFinalAverageTurns": 53.75,
+          "candidateOperationalAverageTurns": 74.625,
+          "candidateStrategy": "Research all 23 supplied genes and assign a terminal evidence state.",
+          "order": 3,
+          "phaseControlToday": "Labelled and measured; not hard-capped.",
+          "step": "Supplied-gene pass"
+        },
+        {
+          "baselineAverageTurns": 0,
+          "baselineStrategy": "Regulators are mixed into theme searches.",
+          "candidateFinalAverageTurns": 12.125,
+          "candidateOperationalAverageTurns": 19.875,
+          "candidateStrategy": "Separate regulator ledger after supplied-gene research.",
+          "order": 4,
+          "phaseControlToday": "Called capped in the prompt, but no numeric hard cap.",
+          "step": "Regulator pass"
+        },
+        {
+          "baselineAverageTurns": 0,
+          "baselineStrategy": "Themes guide early retrieval.",
+          "candidateFinalAverageTurns": 3.0,
+          "candidateOperationalAverageTurns": 4.25,
+          "candidateStrategy": "Form one to three modules only after evidence retrieval.",
+          "order": 5,
+          "phaseControlToday": "Labelled and measured; not hard-capped.",
+          "step": "Theme formation"
+        },
+        {
+          "baselineAverageTurns": 0,
+          "baselineStrategy": "OpenAlex searches may occur inside mixed retrieval.",
+          "candidateFinalAverageTurns": 1.5,
+          "candidateOperationalAverageTurns": 1.875,
+          "candidateStrategy": "At most two anchors per module, one hop each.",
+          "order": 6,
+          "phaseControlToday": "Six-call maximum is prompt-enforced, not runner-enforced.",
+          "step": "Citation expansion"
+        },
+        {
+          "baselineAverageTurns": 0,
+          "baselineStrategy": "No explicit terminal gap pass.",
+          "candidateFinalAverageTurns": 7.25,
+          "candidateOperationalAverageTurns": 9.25,
+          "candidateStrategy": "Target genes still lacking evidence.",
+          "order": 7,
+          "phaseControlToday": "Labelled and measured; not hard-capped.",
+          "step": "Gap pass"
+        },
+        {
+          "baselineAverageTurns": 2.0,
+          "baselineStrategy": "Submit three modules.",
+          "candidateFinalAverageTurns": 2.0,
+          "candidateOperationalAverageTurns": 2.5,
+          "candidateStrategy": "Validate ledgers, evidence links, and submit.",
+          "order": 8,
+          "phaseControlToday": "Global turn limit applies; no reserved finalization budget.",
+          "step": "Finalize"
+        },
+        {
+          "baselineAverageTurns": 37.375,
+          "baselineStrategy": "Whole accepted run.",
+          "candidateFinalAverageTurns": 85.375,
+          "candidateOperationalAverageTurns": 120.875,
+          "candidateStrategy": "Final-output attempt / all recorded attempts.",
+          "order": 9,
+          "phaseControlToday": "Only whole-session turns, cost, and timeout are hard limits.",
+          "step": "Total"
+        }
+      ],
+      "summary": [
+        {
+          "baselineCitation": 0.407608,
+          "baselineClaimBackedRate": 0.67619,
+          "baselineFunction": 0.385869,
+          "baselineMeanTurns": 37.375,
+          "baselineReplicateSemanticSimilarity": 0.757917,
+          "candidateCitation": 0.532609,
+          "candidateClaimBackedRate": 0.940594,
+          "candidateFunction": 0.516304,
+          "candidateMeanOperationalMinimumTurns": 120.875,
+          "candidateReplicateSemanticSimilarity": 0.65375,
+          "citationDelta": 0.125,
+          "crossSettingSemanticSimilarity": 0.678125,
+          "functionDelta": 0.130435,
+          "maximumCaseFunctionDelta": 0.173913,
+          "minimumCaseFunctionDelta": 0.086957,
+          "positiveFunctionSessions": 8,
+          "sessionCount": 8
+        }
+      ]
+    },
+    "generatedAt": "2026-07-23T07:41:16.660658Z",
+    "status": "ready",
+    "version": 1
+  },
+  "sources": [
+    {
+      "id": "comparison",
+      "label": "Paired benchmark comparison",
+      "path": "benchmarks/literature-v1/candidate-evaluable/comparison-report/comparison_metrics.json",
+      "query": {
+        "description": "Read the saved paired benchmark comparison JSON artifact.",
+        "engine": "duckdb",
+        "executed_at": "2026-07-23T07:41:16.660658Z",
+        "language": "sql",
+        "metric_definitions": [
+          "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+          "Paired changes are candidate minus baseline on identical session IDs."
+        ],
+        "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/comparison-report/comparison_metrics.json');",
+        "tables_used": [
+          "benchmarks/literature-v1/candidate-evaluable/comparison-report/comparison_metrics.json"
+        ]
+      }
+    },
+    {
+      "id": "diagnostics",
+      "label": "Coverage, semantic, replicate, and turn diagnostics",
+      "path": "benchmarks/literature-v1/candidate-evaluable/comparison-report/diagnostics.json",
+      "query": {
+        "description": "Read the saved coverage, semantic, replicate, and turn diagnostics JSON artifact.",
+        "engine": "duckdb",
+        "executed_at": "2026-07-23T07:41:16.660658Z",
+        "language": "sql",
+        "metric_definitions": [
+          "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+          "Paired changes are candidate minus baseline on identical session IDs."
+        ],
+        "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/comparison-report/diagnostics.json');",
+        "tables_used": [
+          "benchmarks/literature-v1/candidate-evaluable/comparison-report/diagnostics.json"
+        ]
+      }
+    },
+    {
+      "id": "module-similarity",
+      "label": "Two-reviewer unordered module semantic similarity",
+      "path": "benchmarks/literature-v1/candidate-evaluable/module_similarity/final.json",
+      "query": {
+        "description": "Read the saved two-reviewer unordered module semantic similarity JSON artifact.",
+        "engine": "duckdb",
+        "executed_at": "2026-07-23T07:41:16.660658Z",
+        "language": "sql",
+        "metric_definitions": [
+          "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+          "Paired changes are candidate minus baseline on identical session IDs."
+        ],
+        "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/module_similarity/final.json');",
+        "tables_used": [
+          "benchmarks/literature-v1/candidate-evaluable/module_similarity/final.json"
+        ]
+      }
+    },
+    {
+      "id": "baseline",
+      "label": "Baseline adjudicated reference-quality audit",
+      "path": "benchmarks/literature-v1/baseline-v4/reference_quality/metrics.json",
+      "query": {
+        "description": "Read the saved baseline adjudicated reference-quality audit JSON artifact.",
+        "engine": "duckdb",
+        "executed_at": "2026-07-23T07:41:16.660658Z",
+        "language": "sql",
+        "metric_definitions": [
+          "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+          "Paired changes are candidate minus baseline on identical session IDs."
+        ],
+        "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/baseline-v4/reference_quality/metrics.json');",
+        "tables_used": [
+          "benchmarks/literature-v1/baseline-v4/reference_quality/metrics.json"
+        ]
+      }
+    },
+    {
+      "id": "candidate",
+      "label": "Candidate adjudicated reference-quality audit",
+      "path": "benchmarks/literature-v1/candidate-evaluable/reference_quality/audit/metrics.json",
+      "query": {
+        "description": "Read the saved candidate adjudicated reference-quality audit JSON artifact.",
+        "engine": "duckdb",
+        "executed_at": "2026-07-23T07:41:16.660658Z",
+        "language": "sql",
+        "metric_definitions": [
+          "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+          "Paired changes are candidate minus baseline on identical session IDs."
+        ],
+        "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/reference_quality/audit/metrics.json');",
+        "tables_used": [
+          "benchmarks/literature-v1/candidate-evaluable/reference_quality/audit/metrics.json"
+        ]
+      }
+    },
+    {
+      "id": "structural",
+      "label": "Structural and operational comparison",
+      "path": "benchmarks/literature-v1/candidate-evaluable/structural_comparison.json",
+      "query": {
+        "description": "Read the saved structural and operational comparison JSON artifact.",
+        "engine": "duckdb",
+        "executed_at": "2026-07-23T07:41:16.660658Z",
+        "language": "sql",
+        "metric_definitions": [
+          "Coverage rates use 23 supplied genes per session; perturbation regulators are excluded.",
+          "Paired changes are candidate minus baseline on identical session IDs."
+        ],
+        "sql": "SELECT * FROM read_json_auto('benchmarks/literature-v1/candidate-evaluable/structural_comparison.json');",
+        "tables_used": [
+          "benchmarks/literature-v1/candidate-evaluable/structural_comparison.json"
+        ]
+      }
+    }
+  ],
+  "surface": "report"
+}

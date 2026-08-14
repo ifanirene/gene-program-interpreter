@@ -1,0 +1,48 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-ddf8878d8e24dac2310a"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1467,
+        "source_type": "abstract",
+        "start": 1258,
+        "text": "Knockdown of cep290 function in sentinel fish results in a synergistic pronephric cyst phenotype, revealing a genetic interaction between CC2D2A and CEP290 and implicating CC2D2A in cilium/basal body function."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "Human loss-of-function mutations plus zebrafish knockdown and CEP290 genetic interaction causally implicate CC2D2A in ciliary/basal-body function, supporting its ciliopathy-gene role for cilium assembly. Evidence from human patients and zebrafish kidney is indirect to mouse brain endothelial cilia, so the declared partial context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-ddf8878d8e24dac2310a",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.14901099999999998,
+    "duration_api_ms": 33184,
+    "duration_ms": 31956,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 33.157
+  }
+}

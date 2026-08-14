@@ -1,0 +1,16 @@
+{
+  "content_hash": "992a42c38aae09296d09b2b4188c47b93b193685dc2e5f02ebaf51b56471a6c5",
+  "doi": "10.1194/jlr.m016089",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "65f4179ac763a9667e95",
+  "pmcid": "PMC3196227",
+  "pmid": "21903868",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Statins and nitrogenous bisphosphonates (NBP) inhibit 3-hydroxy-3-methylglutaryl-coenzyme-A reductase (HMGCR) and farnesyl diphosphate synthase (FDPS), respectively, leading to depletion of farnesyl diphosphate (FPP) and disruption of protein prenylation. Squalene synthase (SQS) utilizes FPP in the first committed step from the mevalonate pathway toward cholesterol biosynthesis. Herein, we have identified novel bisphosphonates as potent and specific inhibitors of SQS, including the tetrasodium salt of 9-biphenyl-4,8-dimethyl-nona-3,7-dienyl-1,1-bisphosphonic acid (compound 5). Compound 5 reduced cholesterol biosynthesis and lead to a substantial intracellular accumulation of FPP without reducing cell viability in HepG2 cells. At high concentrations, lovastatin and zoledronate impaired protein prenylation and decreased cell viability, which limits their potential use for cholesterol depletion. When combined with lovastatin, compound 5 prevented lovastatin-induced FPP depletion and impairment of protein farnesylation. Compound 5 in combination with the NBP zoledronate completely prevented zoledronate-induced impairment of both protein farnesylation and geranylgeranylation. Cotreatment of cells with compound 5 and either lovastatin or zoledronate was able to significantly prevent the reduction of cell viability caused by lovastatin or zoledronate alone. The combination of an SQS inhibitor with an HMGCR or FDPS inhibitor provides a rational approach for reducing cholesterol synthesis while preventing nonsterol isoprenoid depletion.",
+  "text_type": "abstract",
+  "title": "A novel bisphosphonate inhibitor of squalene synthase combined with a statin or a nitrogenous bisphosphonate in vitro."
+}

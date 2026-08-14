@@ -1,0 +1,129 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-706e258c97dffbb8395e",
+    "RL-80f9c513752ed89483c1",
+    "RL-d441a59c5a1311c12a1e",
+    "RL-d788e150ed0b8eeaf9d6"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "unclear",
+      "evidence_span": {
+        "end": 26317,
+        "source_type": "full_text",
+        "start": 26196,
+        "text": "FDPs act as a key regulator, directly interacting with G6PD to establish a functional link between the mevalonate and PPP"
+      },
+      "function_supported_genes": [],
+      "rationale": "FDPS is investigated directly in HCC, but the experiments address its G6PD interaction and oncogenic effects rather than establishing its enzymatic role in cholesterol synthesis. The evidence therefore supports only a pathway-level link.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-706e258c97dffbb8395e",
+      "studied_genes": [
+        "Fdps"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 16661,
+        "source_type": "full_text",
+        "start": 16412,
+        "text": "Together, these data confirm the responsiveness of RDH11 mRNA expression to altered cholesterol levels per se, and further highlight the similarity in the transcriptional profile of RDH11 to other SREBP2 target genes in both mouse and human systems."
+      },
+      "function_supported_genes": [
+        "Rdh11"
+      ],
+      "rationale": "The study shows that hepatic RDH11 responds to cholesterol conditions in parallel with established SREBP2 targets. Mouse liver and primary hepatocytes are relevant, but the aging/MASLD condition is only approximated by altered cholesterol and western-diet settings.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-80f9c513752ed89483c1",
+      "studied_genes": [
+        "Rdh11",
+        "Nsdhl",
+        "Acss2",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Idi1",
+        "Lss"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 869,
+        "source_type": "abstract",
+        "start": 698,
+        "text": "FoxO4-mediated repression of CYP51 led to the accumulation of 24,25 dihydrolano-sterol (DHL), which independently and unlike lanosterol inhibited cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "FoxO4 perturbation, CYP51 repression, sterol accumulation, and CYP51-inhibitor experiments support CYP51 function in late cholesterol biosynthesis. The abstract does not identify the cell type, tissue, species, or disease context.",
+      "red_flags": [],
+      "review_id": "RL-d441a59c5a1311c12a1e",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 15760,
+        "source_type": "full_text",
+        "start": 15673,
+        "text": "Taken together, these data showed that CSN6‐HMGCS1 axis regulates mevalonate metabolism"
+      },
+      "function_supported_genes": [
+        "Hmgcs1"
+      ],
+      "rationale": "HMGCS1 perturbation and rescue experiments in liver-cancer models causally connect HMGCS1 to mevalonate metabolism and cholesterol-related outputs. The hepatic setting is relevant, but HCC is not the target aging/MASLD hepatocyte context.",
+      "red_flags": [],
+      "review_id": "RL-d788e150ed0b8eeaf9d6",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 243968,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 287356,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 8975,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 175.112
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "approval": {
+    "max_api_equivalent_usd": 20.0,
+    "record_approval_before_launch": true,
+    "status": "required"
+  },
+  "benchmark_id": "literature-v1",
+  "execution": {
+    "auth": "subscription",
+    "concurrency": 1,
+    "cost_basis": "api-equivalent",
+    "max_attempts": 2,
+    "max_budget_usd": 10.0,
+    "max_turns": null,
+    "model": "claude-sonnet-4-6",
+    "per_program_timeout_seconds": 3600
+  },
+  "manifest_sha256": "9b397154bdceb755f3e899599eae30cf0530377a7a3c0f25a5bbbe2a0387fe05",
+  "notes": [
+    "Launch each session in its own directory; repeated sentinels must never overwrite.",
+    "With subscription auth, withhold ANTHROPIC_API_KEY from the Agent-SDK process.",
+    "Run the first session as a serial canary before concurrent fan-out.",
+    "Persist immutable per-attempt artifacts and cumulative telemetry for every retry."
+  ],
+  "schema_version": 1,
+  "sessions": [
+    {
+      "audit_dir": "sessions/liver-p21--r1/research_audit",
+      "bundle": "sessions/liver-p21--r1/program_bundles/P21.json",
+      "case_id": "liver-p21",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P21",
+      "repeat": 1,
+      "result_dir": "sessions/liver-p21--r1/research_results",
+      "sentinel": false,
+      "session_id": "liver-p21--r1"
+    }
+  ]
+}

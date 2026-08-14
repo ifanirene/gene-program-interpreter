@@ -630,13 +630,22 @@ def format_research_evidence_context(ctx: Dict[str, Any]) -> str:
         if not module_name:
             continue
         genes = ", ".join(module.get("supporting_genes", [])) or "None listed"
-        evidence_ids = ", ".join(module.get("evidence_ids", [])) or "None listed"
+        identifiers = module.get("evidence_ids", [])
+        pmids = ", ".join(
+            str(value).split(":", 1)[1] for value in identifiers
+            if str(value).upper().startswith("PMID:")
+        ) or "None listed"
+        dois = ", ".join(
+            str(value).split(":", 1)[1] for value in identifiers
+            if str(value).upper().startswith("DOI:")
+        ) or "None listed"
         summary = str(module.get("literature_summary", "")).strip()
         lines.extend(
             [
                 f"Module {rank}: {module_name}",
                 f"- Supporting genes: {genes}",
-                f"- Supporting evidence (PMID): {evidence_ids}",
+                f"- Supporting PMIDs: {pmids}",
+                f"- Supporting DOIs: {dois}",
                 f"- Literature summary: {summary}",
                 "",
             ]
@@ -1411,7 +1420,7 @@ You are a {annotation_role}. Interpret Program {program_id}, {annotation_context
 - Treat research-evidence modules as candidate modules, not fixed final boundaries.
 - Add 1-2 de novo functional theme candidates when primary gene descriptions, regulators, or enrichments support them.
 - Do not automatically select all research-evidence candidates; a de novo candidate may replace a research-evidence candidate when it is more specific or clearly supported by evidence.
-- Do not refer to upstream labels such as "research-evidence Module 1", "research module", or "candidate module" anywhere in the final output, including the evidence used field; use genes, pathways, regulator evidence, and Supporting PMIDs to trace evidence instead.
+- Do not refer to upstream labels such as "research-evidence Module 1", "research module", or "candidate module" anywhere in the final output, including the evidence used field; use genes, pathways, regulator evidence, Supporting PMIDs, and Supporting DOIs to trace evidence instead.
 - Include all supplied PMIDs, only if a final module strongly overlaps a research-evidence module.
 - Select 1-3 final modules from this candidate pool, ranked by specificity and reasoning; generic-theme-dominated modules should be down-weighted (refer to generic themes to down-weight section).
 - Final program label should be decided after considering all selected modules and should be a coherent, human-readable biological phrase; If the selected modules are distinct and do not naturally relate, pick a label based on the most representative module. Avoid generic dictionary terms, cell-type filler such as "state/identity" unless necessary.
@@ -1439,6 +1448,7 @@ Then provide the following sections:
    A 2-4 sentence summary — directly reuse or refine the matching research-evidence module's literature summary, folding in notable additional evidence (regulator perturbation, gene summaries, or {context_phrase} context) only when it adds specificity. For a de novo module with no literature summary, write a concise evidence-anchored summary.
    Key genes: list 2-10
    Supporting PMIDs: comma-separated PMIDs directly supporting this final module, or None
+   Supporting DOIs: comma-separated DOI-only papers directly supporting this final module, or None
    evidence used: cite any of the supplied evidence that supports this module — program genes, regulator perturbations, enrichment terms, cell-type context, NCBI gene summaries, and/or literature — not only genes and PMIDs. Refer to evidence by its content (gene names, term/pathway names, regulator names), never by upstream labels.
    ```
 

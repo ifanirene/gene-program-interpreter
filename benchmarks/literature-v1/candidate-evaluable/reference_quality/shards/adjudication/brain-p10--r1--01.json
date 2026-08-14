@@ -1,0 +1,116 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0e92bfb5cf811a272d0a",
+    "RL-30c576a064cee4c29b51",
+    "RL-338245f2c6d2246dfb13",
+    "RL-4a8f23e3d003c28cf3b6"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 963,
+        "source_type": "abstract",
+        "start": 893,
+        "text": "hydrocephalus and excessive nasal exudates were seen in Nme7(-/-) mice"
+      },
+      "function_supported_genes": [],
+      "rationale": "The Nme7-/- KO causally reproduces the situs inversus/hydrocephalus motile-cilia clause stated in the summary, so the selection-specific claim is supported. However, mechanism 2's assigned function is Smo/Hedgehog ciliary output, which the motile-cilia phenotype does not establish, so Nme7 is not function-supported here.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-0e92bfb5cf811a272d0a",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 381,
+        "source_type": "full_text",
+        "start": 197,
+        "text": "The antibodies against CMG-1 allowed us to detect primary cilia in cultured human umbilical vein endothelial cells (HUVEC) and find conditions eliciting the disassembly of these cilia."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper directly demonstrates the selection-specific context claim that endothelial cells bear primary cilia with IFT machinery, localizing the IFT74 ortholog CMG-1 to HUVEC cilia. It is observational localization and never tests loss of function, so the assigned essential-assembly role is not function-supported; HUVEC is a transferable but distinct vascular bed matching the declared partial label.",
+      "red_flags": [],
+      "review_id": "RL-30c576a064cee4c29b51",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1227,
+        "source_type": "abstract",
+        "start": 1089,
+        "text": "Our study demonstrates that IFT74 is essential for mouse sperm formation, probably through assembly of the core axoneme and fibrous sheath"
+      },
+      "function_supported_genes": [
+        "Ift74"
+      ],
+      "rationale": "Conditional Ift74 KO causally disrupts axoneme assembly with unassembled microtubules and reduced IFT proteins, directly supporting the essential IFT-B assembly function assigned in the mechanism. The sperm-flagella context is indirect relative to brain endothelial primary cilia, but context does not downgrade the functional support, so this resolves to supports rather than partial.",
+      "red_flags": [],
+      "review_id": "RL-338245f2c6d2246dfb13",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 921,
+        "source_type": "abstract",
+        "start": 798,
+        "text": "These findings indicate that one of the major functions of Cep164 in ciliogenesis is to recruit active TTBK2 to centrioles."
+      },
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "rationale": "Loss-of-function, interaction, and rescue experiments causally establish Cep164 recruiting TTBK2 to basal bodies to trigger ciliogenesis, matching the assigned distal-appendage function. The abstract names only 'Cep164-depleted cells' without organism or cell type, so context cannot be assessed and the declared indirect label cannot be verified.",
+      "red_flags": [],
+      "review_id": "RL-4a8f23e3d003c28cf3b6",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5784210000000001,
+    "duration_api_ms": 175064,
+    "duration_ms": 172737,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 174.191
+  }
+}

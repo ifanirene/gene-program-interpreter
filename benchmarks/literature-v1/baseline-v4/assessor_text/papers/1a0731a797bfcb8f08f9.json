@@ -1,0 +1,16 @@
+{
+  "content_hash": "1a829a5b78db2443018891f4bca186b516c59f9bfce633b43ef23e63ea9764ae",
+  "doi": "10.1152/ajpcell.00140.2026",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "1a0731a797bfcb8f08f9",
+  "pmcid": "PMC13339919",
+  "pmid": "42132410",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Prenatal alcohol exposure (PAE) has a strongly documented effect on the structure and function of brain vasculature including effects on brain microvascular endothelial cell (BMVEC) behavior, impacting appropriate angiogenesis in development. We previously demonstrated that the effects of PAE on BMVEC behavior are partially mediated by the upregulation of miR-150-5p, a negative regulator of angiogenesis. Here, we characterize transcriptional mechanisms by which alcohol exposure results in upregulated miR-150-5p in BMVECs. We provide evidence for increased transcription of the miR-150 gene with alcohol exposure; specifically, we show elevated pri-miR-150 abundance, an altered miR-150 promoter methylation landscape, and overall increased miR-150 promoter activity. The alterations to the methylation landscape prompted investigation of enzymes responsible for DNA methylation dynamics, and we show altered expression of DNA methyltransferase (Dnmt) genes and Tet methylcytosine dioxygenase 1 (Tet1). We also illuminate alterations to the activation of a wide array of transcription factors throughout the nucleus as well as altered association between transcription factors and the miR-150 promoter. Overall, we uncover a novel mechanism of gene expression dysregulation by alcohol exposure in BMVECs through differential transcription factor binding as a result of altered DNA methylation mediated primarily by elevated Tet1.NEW & NOTEWORTHY Elevation of miR-150-5p in the brain vasculature during prenatal alcohol exposure occurs partially through increased transcription. This increase in transcription is mediated by the upregulation of Tet1; the elevated TET1 protein partially demethylates the miR-150 promoter into a 5hmC-rich sequence. Consequently, transcription factor binding to the promoter sequence is altered, resulting in increased miR-150 transcription.",
+  "text_type": "abstract",
+  "title": "Prenatal alcohol exposure-mediated Tet1 upregulation promotes DNA demethylation and elevated transcription at the miR-150 promoter."
+}

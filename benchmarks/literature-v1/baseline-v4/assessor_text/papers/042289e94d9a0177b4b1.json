@@ -1,0 +1,14 @@
+{
+  "content_hash": "7cbb61e2f0d9eca4c820afa978e57fd5940d9ae0db9c24a1c265cb4232f6c74e",
+  "doi": "10.1247/csf.09016",
+  "errors": [],
+  "paper_key": "042289e94d9a0177b4b1",
+  "pmcid": null,
+  "pmid": "20215702",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Nucleoside diphosphate (NDP) kinase is an enzyme that synthesizes the nucleoside triphosphates. In mammals, nine sequences (NDK1-NDK9) have been found with domain(s) homologous to the catalytic domain of NDP kinase, and some of them have been shown to associate with sperm flagella. The present study examines the localization of NDK7, for which little information has been available. Database analysis showed that the NDK7 gene is present in organisms with cilia and flagella. Western blotting analyses of various mouse tissues consistently indicated that NDK7 is preferentially expressed in tissues with motile cilia as well as in sperm. Immunofluorescence microscopy revealed that this protein is localized along the entire length of the TritonX-100-insoluble fraction of sperm flagella, possibly in the axonemes. Unexpectedly, however, NDK7 in tracheal epithelia was found in the cell body but not in cilia. Finally, in vitro co-sedimentation assays using recombinant proteins showed that both mouse and Chlamydomonas NDK7 directly bind to microtubules.",
+  "text_type": "abstract",
+  "title": "NDP kinase 7 is a conserved microtubule-binding protein preferentially expressed in ciliated cells."
+}

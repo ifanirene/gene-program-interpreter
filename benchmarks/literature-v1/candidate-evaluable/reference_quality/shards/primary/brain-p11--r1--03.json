@@ -1,0 +1,44 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-e083affdd600ee732138"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 23856,
+        "source_type": "full_text",
+        "start": 23678,
+        "text": "our observations establish that NRP1 enables CDC42 activation and CDC42-dependent actin dynamics and filopodia extension in ECM-stimulated ECs, independently of VEGF-A signaling."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper causally demonstrates that Nrp1 (regulator) enables CDC42 activation to drive tip-cell filopodia/sprouting in mouse hindbrain, zebrafish ISVs, and human ECs, supporting the Nrp1→CDC42 arm of the mechanism, but it never investigates Cdc42ep3 (a distinct CDC42-effector gene, aka Borg2) with gene-specific data. Because the supplied gene Cdc42ep3 is not studied, no supplied gene can be credited as studied or function-supported here.",
+      "red_flags": [
+        "wrong_gene"
+      ],
+      "review_id": "RL-e083affdd600ee732138",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.1979935,
+    "duration_api_ms": 68380,
+    "duration_ms": 63606,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 65.738
+  }
+}

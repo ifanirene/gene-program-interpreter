@@ -1,0 +1,16 @@
+{
+  "content_hash": "d0745a226696d6cfba7bbd139e33b269664aec9711d41fe99577fe4d66e66088",
+  "doi": "10.1074/jbc.m900754200",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "2270252f225e6e6ad355",
+  "pmcid": "PMC2670120",
+  "pmid": "19258313",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Major urinary protein (MUP) 1 is a lipocalin family member abundantly secreted into the circulation by the liver. MUP1 binds to lipophilic pheromones and is excreted in urine. Urinary MUP1/pheromone complexes mediate chemical communication in rodents. However, it is unclear whether circulatory MUP1 has additional physiological functions. Here we show that MUP1 regulates glucose and lipid metabolism. MUP1 expression was markedly reduced in both genetic and dietary fat-induced obesity and diabetes. Mice were infected with MUP1 adenoviruses via tail vein injection, and recombinant MUP1 was overexpressed in the liver and secreted into the bloodstream. Recombinant MUP1 markedly attenuated hyperglycemia and glucose intolerance in genetic (db/db) and dietary fat-induced type 2 diabetic mice as well as in streptozotocin-induced type 1 diabetic mice. MUP1 inhibited the expression of both gluconeogenic genes and lipogenic genes in the liver. Moreover, recombinant MUP1 directly decreased glucose production in primary hepatocyte cultures by inhibiting the expression of gluconeogenic genes. These data suggest that MUP1 regulates systemic glucose and/or lipid metabolism through the paracrine/autocrine regulation of the hepatic gluconeogenic and/or lipogenic programs, respectively.",
+  "text_type": "abstract",
+  "title": "Identification of MUP1 as a regulator for glucose and lipid metabolism in mice."
+}

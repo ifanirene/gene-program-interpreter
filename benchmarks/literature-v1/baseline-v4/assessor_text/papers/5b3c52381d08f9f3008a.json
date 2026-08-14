@@ -1,0 +1,16 @@
+{
+  "content_hash": "5acf5594e173600efb5aee7999615a95c5a959df387704fcd78b83adc59b90b1",
+  "doi": "10.1016/j.cmet.2023.12.001",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "5b3c52381d08f9f3008a",
+  "pmcid": "PMC11892390",
+  "pmid": "38171330",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The folate-dependent enzyme serine hydroxymethyltransferase (SHMT) reversibly converts serine into glycine and a tetrahydrofolate-bound one-carbon unit. Such one-carbon unit production plays a critical role in development, the immune system, and cancer. Using rodent models, here we show that the whole-body SHMT flux acts to net consume rather than produce glycine. Pharmacological inhibition of whole-body SHMT1/2 and genetic knockout of liver SHMT2 elevated circulating glycine levels up to eight-fold. Stable-isotope tracing revealed that the liver converts glycine to serine, which is then converted by serine dehydratase into pyruvate and burned in the tricarboxylic acid cycle. In response to diets deficient in serine and glycine, de novo biosynthetic flux was unaltered, but SHMT2- and serine-dehydratase-mediated catabolic flux was lower. Thus, glucose-derived serine synthesis is largely insensitive to systemic demand. Instead, circulating serine and glycine homeostasis is maintained through variable consumption, with liver SHMT2 a major glycine-consuming enzyme.",
+  "text_type": "abstract",
+  "title": "Glycine homeostasis requires reverse SHMT flux."
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "d703f7eb1a45fb61623271c58fbfc8841d9c6a578bfa6b30b01b06fbac87fb1a",
+  "doi": "10.1016/j.bbrc.2021.04.113",
+  "errors": [],
+  "paper_key": "c6d63dfcba5a0f3e7d05",
+  "pmcid": null,
+  "pmid": "34030040",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Bile acids play essential roles in facilitating the intestinal absorption of lipophilic nutrients as well as regulation of glucose, lipid, and energy homeostasis via activation of some receptors. Bile acids are cytotoxic, and consequently their concentrations are tightly controlled. A critical pathway for bile acid elimination and detoxification is sulfation. The pattern of bile acid sulfation differs by species. Sulfation preferentially occurs at the 3\u03b1-OH of bile acids in humans, but at the 7\u03b1-OH in mice. A recent study identified mouse cytosolic sulfotransferase 2A8 (mSULT2A8) as the major hepatic 7\u03b1-hydroxyl bile acid-sulfating enzyme. To elucidate the 7\u03b1-OH specific sulfation mechanism of mSULT2A8, instead of 3\u03b1-OH specific sulfation in humans, we determined a crystal structure of mSULT2A8 in complex with cholic acid, a major bile acid, and 3'-phosphoadenosine-5'-phosphate, the sulfate donor product. Our study shows that bile acid-binding mode of mSULT2A8 and how the enzyme holds the 7\u03b1-OH group of bile acids at the catalytic center, revealing that the mechanism underlying 7\u03b1-OH specific sulfation. The structure shows the substrate binds to mSULT2A8 in an orientation perpendicular to that of human 3\u03b1-hydroxyl bile acid-sulfotransferase (hSULT2A1). The structure of the complex provides new insight into species different bile acid metabolism.",
+  "text_type": "abstract",
+  "title": "The crystal structure of mouse SULT2A8 reveals the mechanism of 7\u03b1-hydroxyl, bile acid sulfation."
+}

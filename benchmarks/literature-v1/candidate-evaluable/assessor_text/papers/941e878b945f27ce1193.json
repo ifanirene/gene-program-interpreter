@@ -1,0 +1,14 @@
+{
+  "content_hash": "4e45e52edf89c5d1986f77c47c20d18ccb3f7965ac8d6b98b62e3bcc249c0f5d",
+  "doi": "10.1002/humu.22477",
+  "errors": [],
+  "paper_key": "941e878b945f27ce1193",
+  "pmcid": null,
+  "pmid": "24285566",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Clinical syndromes caused by defects in the primary cilium are heterogeneous but there are recurrent phenotypic manifestations that define them as a collective group known as ciliopathies. Dozens of genes have been linked to various ciliopathies but large patient cohorts have clearly revealed the existence of additional genetic heterogeneity, which is yet to be fully appreciated. In our search for novel ciliopathy-linked genes through the study of unmapped ciliopathy phenotypes, we have identified two simplex cases with a severe ciliopathy phenotype consistent with oro-facio-digital syndrome type IX featuring midline cleft, microcephaly, and colobomatous microphathalmia/anophthalmia. In addition, there was variable presence of polydactyly, absent pituitary, and congenital heart disease. The autozygome of each index harbored a single novel truncating variant as revealed by exome sequencing, and the affected genes (SCLT1 and TBC1D32/C6orf170) have established roles in centrosomal biology and ciliogenesis. Our findings suggest a previously unrecognized role of SCLT1 and TBC1D32 in the pathogenesis of ciliopathy in humans.",
+  "text_type": "abstract",
+  "title": "Ciliary genes TBC1D32/C6orf170 and SCLT1 are mutated in patients with OFD type IX."
+}

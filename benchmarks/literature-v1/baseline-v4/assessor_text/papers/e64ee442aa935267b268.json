@@ -1,0 +1,16 @@
+{
+  "content_hash": "332c1d0c602902be8c376a50469f54ea080dc8d75576db7e66b885bb5cf37963",
+  "doi": "10.1172/jci206628",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "e64ee442aa935267b268",
+  "pmcid": "PMC13367955",
+  "pmid": "42454495",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Metabolic dysfunction-associated steatohepatitis (MASH) affects 1.5%-6.5% of the global population, yet its mechanisms remain incompletely understood. Cholesterol overload is a key driver of MASH, suggesting that targeting cholesterol sensing may offer therapeutic benefits. In this issue, Deng et al. identified nuclear factor erythroid 2-related factor 1 (NFE2L1) as a critical regulator linking cholesterol sensing to VLDL-mediated lipid export. Mechanistically, NFE2L1 interacts with insulin-induced gene 1 (INSIG1) and promotes its degradation in hepatocytes. This cholesterol-dependent NFE2L1-INSIG1 interaction sustains SREBP activation and VLDL secretion to maintain hepatic and systemic lipid homeostasis. Moreover, the study by Deng et al. indicates that hepatic NFE2L1 overexpression decreases INSIG1 abundance and ameliorates MASH progression, highlighting its therapeutic potential.",
+  "text_type": "abstract",
+  "title": "Targeting hepatic cholesterol sensing to tackle metabolic dysfunction-associated steatohepatitis."
+}

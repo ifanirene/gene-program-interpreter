@@ -1,0 +1,14 @@
+{
+  "content_hash": "1b30ce980ade17c88df8acd8c751b57f1d81389d4d52ca74bbdb4f843c2711c8",
+  "doi": "10.1007/s10456-008-9101-9",
+  "errors": [],
+  "paper_key": "531e0d33e81478984f7a",
+  "pmcid": null,
+  "pmid": "18283546",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Endoglin is a transmembrane auxillary receptor for transforming growth factor-beta (TGF-beta) that is predominantly expressed on proliferating endothelial cells. Endoglin deficient mice die during midgestation due to cardiovascular defects. Mutations in endoglin and activin receptor-like kinase 1 (ALK1), an endothelial specific TGF-beta type I receptor, have been linked to hereditary hemorrhagic telangiectasia (HHT), an autosomal dominant vascular dysplasia characterized by telangiectases and arteriovenous malformations. Endoglin heterozygote mice develop HHT-like vascular abnormalities, have impaired tumor and post-ischemic angiogenesis and demonstrate an endothelial nitric oxide synthase-dependent deterioration in the regulation of vascular tone. In pre-eclampsia, placenta-derived endoglin has been shown to be strongly upregulated and high levels of soluble endoglin are released into the circulation. Soluble endoglin was found to cooperate with a soluble form of vascular endothelial growth factor receptor 1 in the pathogenesis of pre-eclampsia by inducing endothelial cell dysfunction. Endoglin is highly expressed in tumor-associated endothelium, and endoglin antibodies have been successfully used to target activated endothelial cells and elicit anti-angiogenic effects in tumor mouse models. These exciting advances provide opportunities for the development of new therapies for diseases with vascular abnormalities.",
+  "text_type": "abstract",
+  "title": "Endoglin in angiogenesis and vascular diseases."
+}

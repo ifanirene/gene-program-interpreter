@@ -1,0 +1,316 @@
+{
+  "approval": {
+    "max_api_equivalent_usd": 28.0,
+    "record_approval_before_launch": true,
+    "status": "required"
+  },
+  "benchmark_id": "literature-v1",
+  "execution": {
+    "auth": "subscription",
+    "concurrency": 8,
+    "cost_basis": "api-equivalent",
+    "max_attempts": 2,
+    "max_budget_usd": 1.0,
+    "max_turns": 30,
+    "model": "claude-sonnet-4-6",
+    "per_program_timeout_seconds": 600
+  },
+  "manifest_sha256": "01fdb65b048abbe386ef6eb89a6aa71080d49559c26195a72bbe5ef50ea735cd",
+  "notes": [
+    "Launch each session in its own directory; repeated sentinels must never overwrite.",
+    "With subscription auth, withhold ANTHROPIC_API_KEY from the Agent-SDK process.",
+    "Run the first session as a serial canary before concurrent fan-out.",
+    "Persist immutable per-attempt artifacts and cumulative telemetry for every retry."
+  ],
+  "schema_version": 1,
+  "sessions": [
+    {
+      "audit_dir": "sessions/brain-p8--r1/research_audit",
+      "bundle": "sessions/brain-p8--r1/program_bundles/P8.json",
+      "case_id": "brain-p8",
+      "context": {
+        "cell_type": "brain endothelial cell",
+        "conditions": [
+          "postnatal development"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "brain"
+      },
+      "experiment": "brain-endothelial",
+      "program_id": "P8",
+      "repeat": 1,
+      "result_dir": "sessions/brain-p8--r1/research_results",
+      "sentinel": false,
+      "session_id": "brain-p8--r1"
+    },
+    {
+      "audit_dir": "sessions/brain-p9--r1/research_audit",
+      "bundle": "sessions/brain-p9--r1/program_bundles/P9.json",
+      "case_id": "brain-p9",
+      "context": {
+        "cell_type": "brain endothelial cell",
+        "conditions": [
+          "postnatal development"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "brain"
+      },
+      "experiment": "brain-endothelial",
+      "program_id": "P9",
+      "repeat": 1,
+      "result_dir": "sessions/brain-p9--r1/research_results",
+      "sentinel": false,
+      "session_id": "brain-p9--r1"
+    },
+    {
+      "audit_dir": "sessions/brain-p10--r1/research_audit",
+      "bundle": "sessions/brain-p10--r1/program_bundles/P10.json",
+      "case_id": "brain-p10",
+      "context": {
+        "cell_type": "brain endothelial cell",
+        "conditions": [
+          "postnatal development"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "brain"
+      },
+      "experiment": "brain-endothelial",
+      "program_id": "P10",
+      "repeat": 1,
+      "result_dir": "sessions/brain-p10--r1/research_results",
+      "sentinel": true,
+      "session_id": "brain-p10--r1"
+    },
+    {
+      "audit_dir": "sessions/brain-p10--r2/research_audit",
+      "bundle": "sessions/brain-p10--r2/program_bundles/P10.json",
+      "case_id": "brain-p10",
+      "context": {
+        "cell_type": "brain endothelial cell",
+        "conditions": [
+          "postnatal development"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "brain"
+      },
+      "experiment": "brain-endothelial",
+      "program_id": "P10",
+      "repeat": 2,
+      "result_dir": "sessions/brain-p10--r2/research_results",
+      "sentinel": true,
+      "session_id": "brain-p10--r2"
+    },
+    {
+      "audit_dir": "sessions/brain-p11--r1/research_audit",
+      "bundle": "sessions/brain-p11--r1/program_bundles/P11.json",
+      "case_id": "brain-p11",
+      "context": {
+        "cell_type": "brain endothelial cell",
+        "conditions": [
+          "postnatal development"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "brain"
+      },
+      "experiment": "brain-endothelial",
+      "program_id": "P11",
+      "repeat": 1,
+      "result_dir": "sessions/brain-p11--r1/research_results",
+      "sentinel": true,
+      "session_id": "brain-p11--r1"
+    },
+    {
+      "audit_dir": "sessions/brain-p11--r2/research_audit",
+      "bundle": "sessions/brain-p11--r2/program_bundles/P11.json",
+      "case_id": "brain-p11",
+      "context": {
+        "cell_type": "brain endothelial cell",
+        "conditions": [
+          "postnatal development"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "brain"
+      },
+      "experiment": "brain-endothelial",
+      "program_id": "P11",
+      "repeat": 2,
+      "result_dir": "sessions/brain-p11--r2/research_results",
+      "sentinel": true,
+      "session_id": "brain-p11--r2"
+    },
+    {
+      "audit_dir": "sessions/liver-p20--r1/research_audit",
+      "bundle": "sessions/liver-p20--r1/program_bundles/P20.json",
+      "case_id": "liver-p20",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P20",
+      "repeat": 1,
+      "result_dir": "sessions/liver-p20--r1/research_results",
+      "sentinel": false,
+      "session_id": "liver-p20--r1"
+    },
+    {
+      "audit_dir": "sessions/liver-p21--r1/research_audit",
+      "bundle": "sessions/liver-p21--r1/program_bundles/P21.json",
+      "case_id": "liver-p21",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P21",
+      "repeat": 1,
+      "result_dir": "sessions/liver-p21--r1/research_results",
+      "sentinel": true,
+      "session_id": "liver-p21--r1"
+    },
+    {
+      "audit_dir": "sessions/liver-p21--r2/research_audit",
+      "bundle": "sessions/liver-p21--r2/program_bundles/P21.json",
+      "case_id": "liver-p21",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P21",
+      "repeat": 2,
+      "result_dir": "sessions/liver-p21--r2/research_results",
+      "sentinel": true,
+      "session_id": "liver-p21--r2"
+    },
+    {
+      "audit_dir": "sessions/liver-p22--r1/research_audit",
+      "bundle": "sessions/liver-p22--r1/program_bundles/P22.json",
+      "case_id": "liver-p22",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P22",
+      "repeat": 1,
+      "result_dir": "sessions/liver-p22--r1/research_results",
+      "sentinel": false,
+      "session_id": "liver-p22--r1"
+    },
+    {
+      "audit_dir": "sessions/liver-p23--r1/research_audit",
+      "bundle": "sessions/liver-p23--r1/program_bundles/P23.json",
+      "case_id": "liver-p23",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P23",
+      "repeat": 1,
+      "result_dir": "sessions/liver-p23--r1/research_results",
+      "sentinel": false,
+      "session_id": "liver-p23--r1"
+    },
+    {
+      "audit_dir": "sessions/liver-p24--r1/research_audit",
+      "bundle": "sessions/liver-p24--r1/program_bundles/P24.json",
+      "case_id": "liver-p24",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P24",
+      "repeat": 1,
+      "result_dir": "sessions/liver-p24--r1/research_results",
+      "sentinel": false,
+      "session_id": "liver-p24--r1"
+    },
+    {
+      "audit_dir": "sessions/liver-p25--r1/research_audit",
+      "bundle": "sessions/liver-p25--r1/program_bundles/P25.json",
+      "case_id": "liver-p25",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P25",
+      "repeat": 1,
+      "result_dir": "sessions/liver-p25--r1/research_results",
+      "sentinel": true,
+      "session_id": "liver-p25--r1"
+    },
+    {
+      "audit_dir": "sessions/liver-p25--r2/research_audit",
+      "bundle": "sessions/liver-p25--r2/program_bundles/P25.json",
+      "case_id": "liver-p25",
+      "context": {
+        "cell_type": "hepatocyte",
+        "conditions": [
+          "aging",
+          "MASLD"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "liver"
+      },
+      "experiment": "hepatocyte",
+      "program_id": "P25",
+      "repeat": 2,
+      "result_dir": "sessions/liver-p25--r2/research_results",
+      "sentinel": true,
+      "session_id": "liver-p25--r2"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "bf87e75042fb9d67027d585b83f942e2bfbdcf6eed4b06602ea2164f68d49712",
+  "doi": "10.1002/1873-3468.13895",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "294a945400e60e8db2ca",
+  "pmcid": "PMC7722243",
+  "pmid": "32749667",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "C1q/TNF-related protein 12 (CTRP12) is an antidiabetic adipokine whose circulating levels are reduced in obesity and diabetes. Although partial and complete loss-of-function mouse models suggest a role for CTRP12 in modulating lipid metabolism and adiposity, its effect on cellular lipid metabolism remains poorly defined. Here, we demonstrate a direct action of CTRP12 in regulating lipid synthesis and secretion. In hepatoma cells and primary mouse hepatocytes, CTRP12 treatment inhibits triglyceride synthesis by suppressing glycerophosphate acyltransferase (GPAT) and diacylglycerol acyltransferase (DGAT) expression. CTRP12 treatment also downregulates the expression of hepatocyte nuclear factor-4\u03b1 (HNF-4\u03b1) and its target gene microsomal triglyceride transfer protein (MTTP), leading to reduced very-low-density lipoprotein (VLDL)-triglyceride export from hepatocytes. Consistent with the in vitro findings, overexpressing CTRP12 lowers fasting and postprandial serum triglyceride levels in mice. These results underscore the important function of CTRP12 in lipid metabolism in hepatocytes.",
+  "text_type": "abstract",
+  "title": "CTRP12 inhibits triglyceride synthesis and export in hepatocytes by suppressing HNF-4\u03b1 and DGAT2 expression."
+}

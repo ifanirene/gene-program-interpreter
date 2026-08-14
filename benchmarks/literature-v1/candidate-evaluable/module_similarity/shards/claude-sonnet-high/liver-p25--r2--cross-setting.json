@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "liver-p25--r2--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.9
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.85
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.9
+      }
+    ],
+    "moduleSemanticSimilarity": 0.883333,
+    "overall_rationale": "The two module sets are strongly congruent one-to-one: L1↔R1 (Phase II bile acid/steroid sulfation/conjugation), L2↔R2 (peroxisomal fatty acid oxidation and lipid droplet homeostasis), and L3↔R3 (cysteine/taurine/sulfur-nitrogen catabolism with hepatocyte aging signature) each share core mechanism, dominant genes, and key regulators, while all cross-pairs are biologically distinct processes linked only by incidental shared regulators or a single overlapping gene with divergent roles.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the same hepatic Phase II sulfotransferase/glutathione-conjugation program for bile acids and hydroxysteroids, sharing Sult2a-family, Gsta3, Akr1c6, Aldh1a1 genes and Abcg5/Tpst1 regulators, with L1 additionally naming Cyp2c50 and explicit Nrf2/CAR upstream control.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.9
+      },
+      {
+        "left_module": 1,
+        "rationale": "Both are hepatocyte metabolic programs and share the Cyb5b gene, but L1's mechanism is xenobiotic/steroid conjugation while R2's is peroxisomal fatty acid oxidation and lipid droplet biology, and Cyb5b is assigned a different functional role in each.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 1,
+        "rationale": "L1's xenobiotic/steroid conjugation mechanism and R3's sulfur/nitrogen catabolism and aging signature are distinct processes with no shared genes and only an incidental shared Abcg5 regulator.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's peroxisomal fatty acid catabolism and R1's Phase II sulfation/conjugation program share no genes, regulators, or mechanistic overlap beyond generic hepatocyte metabolism.",
+        "relationship": "different",
+        "right_module": 1,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both center on peroxisomal/microsomal fatty acid and lipid-droplet handling with near-identical core genes (Hao2, Aldh3a2, Fitm1) and the Dgat2 regulator, with R2 adding Psmd1/Cyb5b as a minor refinement.",
+        "relationship": "same_core",
+        "right_module": 2,
+        "similarity": 0.85
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's fatty acid/lipid aldehyde catabolism and R3's sulfur/nitrogen catabolism and aging signature share no genes or mechanistic overlap.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's cysteine/taurine and nitrogen metabolism program is mechanistically unrelated to R1's bile acid/steroid sulfation program, with only a peripheral shared Insig1 regulator.",
+        "relationship": "different",
+        "right_module": 1,
+        "similarity": 0.08
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's sulfur amino acid catabolism and R2's peroxisomal lipid oxidation/droplet program are distinct mechanisms that only share the peripheral Insig1 regulator.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.12
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both describe the Cdo1-driven cysteine/taurine catabolism axis coupled to Rgn-marked hepatocyte aging, sharing Cdo1, Rgn, Sord, Alad genes and the G6pc regulator, with R3 adding an explicit Car5a/urea-cycle refinement already implied in L3's summary.",
+        "relationship": "same_core",
+        "right_module": 3,
+        "similarity": 0.9
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.10377800000000001,
+    "duration_api_ms": 45648,
+    "duration_ms": 44254,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 45.231
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-brain-p10-r1",
+    "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+    "candidate_additions": [
+      "Hedgehog signaling through BBSome-mediated Smo/GPR161 trafficking, assigned to Bbs9, Nme7, and Tbc1d32.",
+      "A secondary mitochondrial cristae/protein-biogenesis module based on Chchd6 and Metap1d."
+    ],
+    "candidate_removed_or_weakened": [
+      "The baseline’s endothelial primary-cilium mechanosensing interpretation, including blood-flow shear sensing and vascular remodeling, is absent.",
+      "The CNS endothelial identity/BBB module is substantially weakened: Gata2, Eng, and Tet1 assignments are omitted, leaving only Fzd4 as context."
+    ],
+    "core_interpretation_changed": true,
+    "decision_relevant_differences": [
+      "Ciliary function changes from endothelial flow mechanotransduction to Hedgehog GPCR trafficking and developmental signaling.",
+      "The coupled cilia-plus-CNS-vascular-identity model becomes primarily a ciliogenesis/Hedgehog model with a mitochondrial secondary theme."
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations identify primary-cilia assembly as the dominant structural program. However, the candidate replaces the baseline’s central endothelial mechanosensing output with Hedgehog signaling, substantially reduces the BBB/vascular-regulatory interpretation, and adds a mitochondrial module. These changes could lead a reader to prioritize different biological functions and experiments.",
+    "semantic_relation": "materially_changed",
+    "shared_core_conclusions": [
+      "P10 is dominated by a coherent primary-cilia biogenesis and trafficking program.",
+      "Bbs9, Cc2d2a, Wdpcp, Ift74, Sdccag8, Tbc1d32, Cep164, and Nme7 support the ciliary interpretation.",
+      "Fzd4 places the program in postnatal brain endothelial and CNS vascular context."
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 17207,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 654,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 19.856
+  }
+}

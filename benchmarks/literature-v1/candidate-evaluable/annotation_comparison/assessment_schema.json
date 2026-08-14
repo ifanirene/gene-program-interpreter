@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "assessment_id",
+    "assessor_id",
+    "semantic_relation",
+    "core_interpretation_changed",
+    "evidence_depth_change",
+    "shared_core_conclusions",
+    "candidate_additions",
+    "candidate_removed_or_weakened",
+    "decision_relevant_differences",
+    "rationale"
+  ],
+  "properties": {
+    "assessment_id": {"type": "string"},
+    "assessor_id": {"type": "string"},
+    "semantic_relation": {
+      "type": "string",
+      "enum": [
+        "same_core_interpretation",
+        "same_core_with_meaningful_refinement",
+        "materially_changed",
+        "incomparable"
+      ]
+    },
+    "core_interpretation_changed": {"type": "boolean"},
+    "evidence_depth_change": {
+      "type": "string",
+      "enum": [
+        "no_material_change",
+        "more_gene_specific",
+        "more_context_specific",
+        "mixed"
+      ]
+    },
+    "shared_core_conclusions": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "candidate_additions": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "candidate_removed_or_weakened": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "decision_relevant_differences": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "rationale": {"type": "string"}
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-d162c70104d6ae924862",
+    "RL-de90fb0fa8e1c18beac0",
+    "RL-ecd7fb527c49603945e4"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "not_applicable",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "This is a circRNA/miRNA-focused review that only lists LSS, FDPS, and PMVK (as PMK) as known KEGG pathway members in background/introductory text; it presents no original gene-specific data or experimental system for any of these genes. Declared 'indirect' context implies a specific comparator biological system, but the source is a pure biochemistry synthesis with no experimental context at all.",
+      "red_flags": [
+        "background_only",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-d162c70104d6ae924862",
+      "studied_genes": [],
+      "support": "no"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4727,
+        "source_type": "full_text",
+        "start": 4513,
+        "text": "we generated ERG28 KO human liver cell lines and showed they have reduced production and, under sterol-depleted conditions, when cells depend on de novo cholesterol synthesis, reduced overall levels of cholesterol."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "CRISPR KO of ERG28 in the human liver cell line Huh7 causally reduces de novo cholesterol synthesis and impairs SREBP-2 processing, directly supporting Erg28's assigned non-catalytic scaffold role in hepatocyte cholesterol biosynthesis; NanoBiT interaction assays also generated gene-specific data for Nsdhl and Msmo1 (as SC4MOL) but only as ERG28-binding partners, not as tests of their own catalytic function. Human hepatoma cell line context reasonably matches the declared 'partial' context relative to mouse primary hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-de90fb0fa8e1c18beac0",
+      "studied_genes": [
+        "Erg28",
+        "Nsdhl",
+        "Msmo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "background",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "The abstract cites MVK mutation/Mevalonate kinase deficiency only as disease-context motivation; the actual experiment uses Lovastatin to block the pathway and tests 25-hydroxycholesterol in a human glioblastoma line, with no MVK-specific perturbation or gene-specific data generated. MVK is background-only here, so it cannot be credited as studied or function-supported for the hepatocyte mevalonate-pathway mechanism.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-ecd7fb527c49603945e4",
+      "studied_genes": [],
+      "support": "no"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5700055,
+    "duration_api_ms": 266482,
+    "duration_ms": 264197,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 265.183
+  }
+}

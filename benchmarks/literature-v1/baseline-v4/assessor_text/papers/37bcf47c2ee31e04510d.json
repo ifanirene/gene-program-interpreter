@@ -1,0 +1,14 @@
+{
+  "content_hash": "c082529e8b8b8a8322646a21555edfd6bc935e78e7d2f0cae9470d8e2c435ff0",
+  "doi": "10.1002/dvdy.21472",
+  "errors": [],
+  "paper_key": "37bcf47c2ee31e04510d",
+  "pmcid": null,
+  "pmid": "18297727",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Primary cilia are mechanosensors for fluid shear stress, and are involved in a number of syndromes and congenital anomalies. We identified endothelial cilia in areas of low shear stress in the embryonic heart. The objective of the present study was to demonstrate the role of primary cilia in mechanosensing. Ciliated embryonic endothelial cells were cultured from the heart, and non-ciliated cells from the arteries. Non-ciliated cells that were subjected to fluid shear stress showed significantly less induction of the shear marker Kr\u00fcppel-Like Factor-2, as compared to ciliated cells. In addition, ciliated cells from which the cilia were chemically removed show a similar decrease in flow response. This shows that primary cilia sensitize endothelial cells for fluid shear stress. In addition, we targeted and stabilized the connection of the cilium to the cytoplasm by treatment with Colchicine and Taxol/Paclitaxel, respectively, and show that microtubular integrity is essential to sense shear stress.",
+  "text_type": "abstract",
+  "title": "Primary cilia sensitize endothelial cells for fluid shear stress."
+}

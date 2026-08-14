@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "brain-p11--r2--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.8
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.0
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.45
+      }
+    ],
+    "moduleSemanticSimilarity": 0.416667,
+    "overall_rationale": "The strongest correspondence is L1↔R1 (shared Nrp1-CDC42 tip-cell filopodia mechanism), with moderate partial overlaps for the Notch/arterial-specification (L2↔R1) and TGF-β vascular-integrity (L3↔R3, L3↔R1) themes; R2's flow-sensing Kcnj2 module has no counterpart in the left set and scores near zero against all three left modules.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe brain endothelial tip-cell sprouting driven by Nrp1-CDC42 filopodia formation with Cxcr4 and Angpt2 as shared markers, though R1 folds in an added Rgs6/Notch-arterial-specification submechanism and explicit Tek regulator not present in L1.",
+        "relationship": "meaningful_refinement",
+        "right_module": 1,
+        "similarity": 0.8
+      },
+      {
+        "left_module": 1,
+        "rationale": "Tip-cell filopodial guidance shares no mechanism with flow-sensing K+ channel mechanotransduction.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 1,
+        "rationale": "Both occur in brain vasculature but tip-cell filopodial sprouting is mechanistically unrelated to endothelial survival/metabolic support signaling.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both invoke Notch-driven arterial specification and Cxcr4, but L2's central story is Notch-CXCR4-arterial coupling with a tip-to-stalk TGF-β transition while R1's core is Angpt2/TEK-driven tip-cell sprouting with Notch/Rgs6 as a secondary element.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.45
+      },
+      {
+        "left_module": 2,
+        "rationale": "Notch-CXCR4-arterial specification is unrelated to shear-stress-activated Kcnj2 mechanotransduction.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 2,
+        "rationale": "Only a peripheral tissue/pathway label overlap exists; L2's Notch-CXCR4-arterial axis differs fundamentally from R3's OPG/Slc1a1 survival-metabolic mechanism.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both link elevated Angpt2 to vessel destabilization, but L3 frames this as TGF-β-repressed pathological hemorrhage risk while R1 frames it as a normal TEK-coupled proangiogenic sprouting trigger.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.35
+      },
+      {
+        "left_module": 3,
+        "rationale": "TGF-β/Angpt2 vascular integrity signaling has no mechanistic connection to Kcnj2 flow-sensing.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both center on Tgfbr1/Tgfbr2-dependent support of brain vascular integrity/development, but L3's specific mechanism is TGF-β repression of Angpt2 versus R3's OPG-mediated anti-apoptosis and Slc1a1 metabolic fueling.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.45
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.10542800000000001,
+    "duration_api_ms": 57890,
+    "duration_ms": 56503,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 57.429
+  }
+}

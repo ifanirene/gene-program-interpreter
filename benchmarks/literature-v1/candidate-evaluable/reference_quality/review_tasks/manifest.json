@@ -1,0 +1,49 @@
+{
+  "assessment_type": "model",
+  "assessor_index_path": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/candidate-evaluable/assessor_text/index.json",
+  "packet_path": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/candidate-evaluable/review/review_packet.json",
+  "schema_version": 1,
+  "sessions": [
+    {
+      "review_links": 23,
+      "session_id": "brain-p10--r1",
+      "task_path": "brain-p10--r1.json"
+    },
+    {
+      "review_links": 16,
+      "session_id": "brain-p10--r2",
+      "task_path": "brain-p10--r2.json"
+    },
+    {
+      "review_links": 17,
+      "session_id": "brain-p11--r1",
+      "task_path": "brain-p11--r1.json"
+    },
+    {
+      "review_links": 13,
+      "session_id": "brain-p11--r2",
+      "task_path": "brain-p11--r2.json"
+    },
+    {
+      "review_links": 27,
+      "session_id": "liver-p21--r1",
+      "task_path": "liver-p21--r1.json"
+    },
+    {
+      "review_links": 30,
+      "session_id": "liver-p21--r2",
+      "task_path": "liver-p21--r2.json"
+    },
+    {
+      "review_links": 22,
+      "session_id": "liver-p25--r1",
+      "task_path": "liver-p25--r1.json"
+    },
+    {
+      "review_links": 17,
+      "session_id": "liver-p25--r2",
+      "task_path": "liver-p25--r2.json"
+    }
+  ],
+  "total_review_links": 165
+}

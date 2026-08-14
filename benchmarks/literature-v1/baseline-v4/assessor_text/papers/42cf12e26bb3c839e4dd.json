@@ -1,0 +1,16 @@
+{
+  "content_hash": "5a30222694fa3fa5f9220c3eddda379161662f1138b2caed3410cf9e7844bf48",
+  "doi": "10.1128/mcb.24.4.1758-1768.2004",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "42cf12e26bb3c839e4dd",
+  "pmcid": "PMC344171",
+  "pmid": "14749390",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cotranslational insertion of type I collagen chains into the lumen of the endoplasmic reticulum (ER) and their subsequent folding into a heterotrimeric helix is a complex process which requires coordinated action of the translation machinery, components of translocons, molecular chaperones, and modifying enzymes. Here we describe a role for the protein TRAM2 in collagen type I expression in hepatic stellate cells (HSCs) and fibroblasts. Activated HSCs are collagen-producing cells in the fibrotic liver. Quiescent HSCs produce trace amounts of type I collagen, while upon activation collagen synthesis increases 50- to 70-fold. Likewise, expression of TRAM2 dramatically increases in activated HSCs. TRAM2 shares 53% amino acid identity with the protein TRAM, which is a component of the translocon. However, TRAM2 has a C terminus with only a 15% identity. The C-terminal part of TRAM2 interacts with the Ca(2+) pump of the ER, SERCA2b, as demonstrated in a Saccharomyces cerevisiae two-hybrid screen and by immunoprecipitations in human cells. TRAM2 also coprecipitates with anticollagen antibody, suggesting that these two proteins interact. Deletion of the C-terminal part of TRAM2 inhibits type I collagen synthesis during activation of HSCs. The pharmacological inhibitor of SERCA2b, thapsigargin, has a similar effect. Depletion of ER Ca(2+) with thapsigargin results in inhibition of triple helical collagen folding and increased intracellular degradation. We propose that TRAM2, as a part of the translocon, is required for the biosynthesis of type I collagen by coupling the activity of SERCA2b with the activity of the translocon. This coupling may increase the local Ca(2+) concentration at the site of collagen synthesis, and a high Ca(2+) concentration may be necessary for the function of molecular chaperones involved in collagen folding.",
+  "text_type": "abstract",
+  "title": "TRAM2 protein interacts with endoplasmic reticulum Ca2+ pump Serca2b and is necessary for collagen type I synthesis."
+}

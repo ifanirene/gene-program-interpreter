@@ -1,0 +1,14 @@
+{
+  "content_hash": "93058dd7a710b16f1874ac83dd2cf85ce0a3908870aa70f443d5f63aacbb4975",
+  "doi": "10.1016/j.biocel.2017.09.007",
+  "errors": [],
+  "paper_key": "05fdbfac364ed4f0125c",
+  "pmcid": null,
+  "pmid": "28918367",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Mevalonate pathway deregulation has been observed in several diseases, including Mevalonate kinase deficiency (MKD). MKD is a hereditary auto-inflammatory disorder, due to mutations at mevalonate kinase gene (MVK), encoding mevalonate kinase (MK) enzyme. MVK mutations have been reported as associated with impairment of mevalonate pathway with consequent decrease of protein prenylation levels, defective autophagy and increase of IL-1\u03b2 secretion, followed by cell death. Since 25-hydroxycholesterol (25-HC), a metabolite of cholesterol, can suppress IL-1\u03b2 production, thus reducing inflammation, we evaluated the effect of 25-HC in an in vitro model of mevalonate pathway alteration, obtained using Lovastatin. Human glioblastoma cell line (U87-MG) was chosen to mimic, at least in part, the central nervous system impairment observed in MKD; 25-HC effects were evaluated aimed at disclosing if this compound could be considered as novel potential drug for MKD. Our results showed that 25-HC is able to reduce inflammation but it is ineffective to restore autophagy flux and to decrease apoptosis levels, both caused by lower protein prenylation; so, in spite of its anti-inflammatory action it is not useful to rescue defective prenylation/autophagy impairment-driven apoptosis in Lovastatin impaired mevalonate pathway. We hypothesize the presence in the mevalonate pathway of alternative mechanisms acting between inflammation and apoptotic autophagy impairment.",
+  "text_type": "abstract",
+  "title": "25-Hydroxycholesterol and inflammation in Lovastatin-deregulated mevalonate pathway."
+}

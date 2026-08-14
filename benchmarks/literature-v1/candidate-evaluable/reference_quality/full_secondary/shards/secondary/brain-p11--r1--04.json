@@ -1,0 +1,46 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-e083affdd600ee732138"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "underclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3755,
+        "source_type": "full_text",
+        "start": 3472,
+        "text": "Here, we have combined the analysis of vascular development in the mouse hindbrain with functional studies in primary human ECs, zebrafish embryos, and mouse retina to demonstrate that NRP1 is dispensable for the genetic specification of tip cells but essential for CDC42 activation."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper causally supports NRP1-dependent CDC42 activation and tip-cell angiogenic function in mouse neural vasculature, but it does not substantively investigate the supplied gene Cdc42ep3. The declared partial context is conservative because mouse hindbrain endothelial angiogenesis directly matches the target brain-endothelial developmental context.",
+      "red_flags": [
+        "wrong_gene"
+      ],
+      "review_id": "RL-e083affdd600ee732138",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 22581,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 1260,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 26.299
+  }
+}

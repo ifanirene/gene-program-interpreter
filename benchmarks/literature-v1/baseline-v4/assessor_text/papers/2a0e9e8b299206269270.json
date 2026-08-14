@@ -1,0 +1,16 @@
+{
+  "content_hash": "86628c43833438da88c5218cd9e49592119f947bd00fd887ac3c695886ae5882",
+  "doi": "10.1161/circresaha.121.319955",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "2a0e9e8b299206269270",
+  "pmcid": "PMC9624262",
+  "pmid": "35894043",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "RATIONALE: Jacobsen syndrome is a rare chromosomal disorder caused by deletions in the long arm of human chromosome 11, resulting in multiple developmental defects including congenital heart defects. Combined studies in humans and genetically engineered mice implicate that loss of ETS1 (E26 transformation specific 1) is the cause of congenital heart defects in Jacobsen syndrome, but the underlying molecular and cellular mechanisms are unknown.\n\nOBJECTIVE: To determine the role of ETS1 in heart development, specifically its roles in coronary endothelium and endocardium and the mechanisms by which loss of ETS1 causes coronary vascular defects and ventricular noncompaction.\n\nMETHODS AND RESULTS: ETS1 global and endothelial-specific knockout mice were used. Phenotypic assessments, RNA sequencing, and chromatin immunoprecipitation analysis were performed together with expression analysis, immunofluorescence and RNAscope in situ hybridization to uncover phenotypic and transcriptomic changes in response to loss of ETS1. Loss of ETS1 in endothelial cells causes ventricular noncompaction, reproducing the phenotype arising from global deletion of ETS1. Endothelial-specific deletion of ETS1 decreased the levels of Alk1 (activin receptor-like kinase 1), Cldn5 (claudin 5), Sox18 (SRY-box transcription factor 18), Robo4 (roundabout guidance receptor 4), Esm1 (endothelial cell specific molecule 1) and Kdr (kinase insert domain receptor), 6 important angiogenesis-relevant genes in endothelial cells, causing a coronary vasculature developmental defect in association with decreased compact zone cardiomyocyte proliferation. Downregulation of ALK1 expression in endocardium due to the loss of ETS1, along with the upregulation of TGF (transforming growth factor)-\u03b21 and TGF-\u03b23, occurred with increased TGFBR2/TGFBR1/SMAD2 signaling and increased extracellular matrix expression in the trabecular layer, in association with increased trabecular cardiomyocyte proliferation.\n\nCONCLUSIONS: These results demonstrate the importance of endothelial and endocardial ETS1 in cardiac development. Delineation of the gene regulatory network involving ETS1 in heart development will enhance our understanding of the molecular mechanisms underlying ventricular and coronary vascular developmental defects and will lead to improved approaches for the treatment of patients with congenital heart disease.",
+  "text_type": "abstract",
+  "title": "Endothelial Loss of ETS1 Impairs Coronary Vascular Development and Leads to Ventricular Non-Compaction."
+}

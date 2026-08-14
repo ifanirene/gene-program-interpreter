@@ -1,0 +1,14 @@
+{
+  "content_hash": "c8c1d95b44d3d9b3b19d84c41ed2dd31db21668076ee715d291a0b985d640d4d",
+  "doi": "10.1074/jbc.m314111200",
+  "errors": [],
+  "paper_key": "70cf844f7e4188a4b1e2",
+  "pmcid": null,
+  "pmid": "15004017",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The ABC transporter, Mrp4, transports the sulfated steroid DHEA-s, and sulfated bile acids interact with Mrp4 with high affinity. Hepatic Mrp4 levels are low, but increase under cholestatic conditions. We therefore inferred that up-regulation of Mrp4 during cholestasis is a compensatory mechanism to protect the liver from accumulation of hydrophobic bile acids. We determined that the nuclear receptor CAR is required to coordinately up-regulate hepatic expression of Mrp4 and an enzyme known to sulfate hydroxy-bile acids and steroids, Sult2a1. CAR activators increased Mrp4 and Sult2a1 expression in primary human hepatocytes and HepG2, a human liver cell line. Sult2a1 was down-regulated in Mrp4-null mice, further indicating an inter-relation between Mrp4 and Sult2a1 gene expression. Based on the hydrophilic nature of sulfated bile acids and the Mrp4 capability to transport sulfated steroids, our findings suggest that Mrp4 and Sult2a1 participate in an integrated pathway mediating elimination of sulfated steroid and bile acid metabolites from the liver.",
+  "text_type": "abstract",
+  "title": "Interactions between hepatic Mrp4 and Sult2a as revealed by the constitutive androstane receptor and Mrp4 knockout mice."
+}

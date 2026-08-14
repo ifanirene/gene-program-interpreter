@@ -1,0 +1,14 @@
+{
+  "content_hash": "384efa7ffb67a0e5b366247e9462cbdd787aaf8a1f2ed4e6270b75cba248c998",
+  "doi": "10.1093/jn/nxaa094",
+  "errors": [],
+  "paper_key": "64e116d26b7cb9c8c321",
+  "pmcid": null,
+  "pmid": "33000151",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Metabolism of excess methionine (Met) to homocysteine (Hcy) by transmethylation is facilitated by the expression of methionine adenosyltransferase (MAT) I/III and glycine N-methyltransferase (GNMT) in liver, and a lack of either enzyme results in hypermethioninemia despite normal concentrations of MATII and methyltransferases other than GNMT. The further metabolism of Hcy by the transsulfuration pathway is facilitated by activation of cystathionine \u03b2-synthase (CBS) by S-adenosylmethionine (SAM) as well as the relatively high KM of CBS for Hcy. Transmethylation plus transsulfuration effects catabolism of the Met molecule along with transfer of the sulfur atom of Met to serine to synthesize cysteine (Cys). Oxidation and excretion of Met sulfur depend upon Cys catabolism and sulfur oxidation pathways. Excess Cys is oxidized by cysteine dioxygenase 1 (CDO1) and further metabolized to taurine or sulfate. Some Cys is normally metabolized by desulfhydration pathways, and the hydrogen sulfide (H2S) produced is further oxidized to sulfate. If Cys or Hcy concentrations are elevated, Cys or Hcy desulfhydration can result in excess H2S and thiosulfate production. Excess Cys or Met may also promote their limited metabolism by transamination pathways.",
+  "text_type": "abstract",
+  "title": "Metabolism of Sulfur-Containing Amino Acids: How the Body Copes with Excess Methionine, Cysteine, and Sulfide."
+}

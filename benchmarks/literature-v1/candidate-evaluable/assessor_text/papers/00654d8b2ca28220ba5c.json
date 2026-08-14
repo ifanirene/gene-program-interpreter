@@ -1,0 +1,14 @@
+{
+  "content_hash": "eca68e7b607e75bd4b07acbad4fb598a36942d949d15866f3c24508f7f9a2a8b",
+  "doi": "10.1002/pmic.201400202",
+  "errors": [],
+  "paper_key": "00654d8b2ca28220ba5c",
+  "pmcid": null,
+  "pmid": "25175814",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Insulin resistance contributes to the development of Type 2 diabetes, and is associated with lipid oversupply. Deletion of isoforms of the lipid-activated protein kinase C (PKC) family, PKC\u03b4 or PKC\u03b5, improves insulin action in fat-fed mice, but differentially affects hepatic lipid metabolism. To investigate the mechanisms involved, we employed an in vivo adaptation of SILAC to examine the effects of a fat diet together with deletion of PKC\u03b4 or PKC\u03b5 on the expression of liver proteins. We identified a total of 3359 and 3488 proteins from the PKC\u03b4 and PKC\u03b5 knockout study groups, respectively, and showed that several enzymes of lipid metabolism were affected by the fat diet. In fat-fed mice, 23 proteins showed changes upon PKC\u03b4 deletion while 19 proteins were affected by PKC\u03b5 deletion. Enzymes of retinol metabolism were affected by the absence of either PKC. Pathway analysis indicated that monosaccharide metabolism was affected only upon PKC\u03b4 deletion, while isoprenoid biosynthesis was affected in a PKC\u03b5-specific manner. Certain proteins were regulated inversely, including HIV-1 tat interactive protein 2 (Htatip2). Overexpression or knockdown of Htatip2 in hepatocytes affected fatty acid storage and oxidation, consistent with a novel role in mediating the differential effects of PKC isoforms on lipid metabolism. All MS data have been deposited in the ProteomeXchange with identifier PXD000971 (http://proteomecentral.proteomexchange.org/dataset/PXD000971).",
+  "text_type": "abstract",
+  "title": "Proteomic analysis of livers from fat-fed mice deficient in either PKC\u03b4 or PKC\u03b5 identifies Htatip2 as a regulator of lipid metabolism."
+}

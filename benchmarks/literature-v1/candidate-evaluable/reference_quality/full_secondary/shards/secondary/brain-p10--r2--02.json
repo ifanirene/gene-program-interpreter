@@ -1,0 +1,122 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-7139315235492569ad76",
+    "RL-98c69c822d79aec67b0f",
+    "RL-a9e2ecbeee798dc7b6b0",
+    "RL-bf6376e48bfe2af991ef"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 14649,
+        "source_type": "full_text",
+        "start": 14522,
+        "text": "HSECs that lacked WDPCP at the beginning of ciliogenesis differentiated into fewer and shorter cilia compared with the controls"
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "WDPCP silencing impaired ciliogenesis in human sinonasal epithelial cells. This directly supports its ciliary function, although the cellular and species context differs from mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-7139315235492569ad76",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 600,
+        "source_type": "abstract",
+        "start": 519,
+        "text": "CHCM1/CHCHD6 knockdown causes severe defects in mitochondrial cristae morphology."
+      },
+      "function_supported_genes": [
+        "Chchd6"
+      ],
+      "rationale": "CHCHD6 knockdown directly disrupted mitochondrial cristae, with the abstract also reporting reduced ATP production and oxygen consumption. The experiments were outside the target brain-endothelial context.",
+      "red_flags": [],
+      "review_id": "RL-98c69c822d79aec67b0f",
+      "studied_genes": [
+        "Chchd6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 812,
+        "source_type": "abstract",
+        "start": 683,
+        "text": "TBC1D32 is involved in the development and function of cilia and is expressed in the developing hypothalamus and pituitary gland."
+      },
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "rationale": "The paper explicitly links TBC1D32 to ciliary development and function while reporting gene-specific patient variants. Developing human hypothalamus and pituitary are indirect, not partial, contexts for postnatal mouse brain endothelial cells.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a9e2ecbeee798dc7b6b0",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 532,
+        "source_type": "abstract",
+        "start": 217,
+        "text": "We have cloned, expressed in Escherichia coli, and purified the recombinant human mitochondrial MetAP isoform (MetAP1D). The full-length enzyme and a truncated form lacking the mitochondrial targeting sequence (residues 1-55) have been characterized as metal-requiring proteases, with Co2+ being the best activator."
+      },
+      "function_supported_genes": [
+        "Metap1d"
+      ],
+      "rationale": "Direct biochemical characterization establishes METAP1D as a mitochondrial metal-dependent protease, consistent with methionine aminopeptidase processing. The recombinant in-vitro system is indirect to mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-bf6376e48bfe2af991ef",
+      "studied_genes": [
+        "Metap1d"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 126720,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 157606,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 5238,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 103.806
+  }
+}

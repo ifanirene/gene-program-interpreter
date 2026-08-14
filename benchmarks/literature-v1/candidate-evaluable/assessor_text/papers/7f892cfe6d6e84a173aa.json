@@ -1,0 +1,14 @@
+{
+  "content_hash": "8463092b8061f0ea982a10a1e063b07691340cbaa6e5eaf6f39f6e1bec44cfbe",
+  "doi": "10.1194/jlr.m200399-jlr200",
+  "errors": [],
+  "paper_key": "7f892cfe6d6e84a173aa",
+  "pmcid": null,
+  "pmid": "12562828",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "A subclass of hydroxysteroid dehydrogenases (HSD) are NADP(H)-dependent oxidoreductases that belong to the aldo-keto reductase (AKR) superfamily. They are involved in prereceptor or intracrine steroid modulation, and also act as bile acid-binding proteins. The HSD family members characterized thus far in human and rat have a high degree of protein sequence similarity but exhibit distinct substrate specificity. Here we report the identification of nine murine AKR genes in a cluster on chromosome 13 by a combination of molecular cloning and in silico analysis of this region. These include four previously isolated mouse HSD genes (Akr1c18, Akr1c6, Akr1c12, Akr1c13), the more distantly related Akr1e1, and four novel HSD genes. These genes exhibit highly conserved exon/intron organization and protein sequence predictions indicate 75% amino acid similarity. The previously identified AKR protein active site residues are invariant among all nine proteins, but differences are observed in regions that have been implicated in determining substrate specificity. Differences also occur in tissue expression patterns, with expression of some genes restricted to specific tissues and others expressed at high levels in multiple tissues. Our findings dramatically expand the repertoire of AKR genes and identify unrecognized family members with potential roles in the regulation of steroid metabolism.",
+  "text_type": "abstract",
+  "title": "A cluster of eight hydroxysteroid dehydrogenase genes belonging to the aldo-keto reductase supergene family on mouse chromosome 13."
+}

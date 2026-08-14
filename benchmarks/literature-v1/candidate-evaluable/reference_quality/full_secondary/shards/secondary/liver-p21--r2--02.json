@@ -1,0 +1,149 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-40d78e992150c1f1e610",
+    "RL-48196647472e2225acb4",
+    "RL-502a14189be4e1c2dff2",
+    "RL-53157633a89ca27ca997"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 35056,
+        "source_type": "full_text",
+        "start": 34932,
+        "text": "In addition, ERG28 interacts with both SC4MOL and NSDHL (Fig. 3B), akin to their yeast homologs (Erg25p and Erg26p) (7, 47)."
+      },
+      "function_supported_genes": [
+        "Fdps",
+        "Msmo1",
+        "Nsdhl",
+        "Fdft1",
+        "Hsd17b7",
+        "Erg28"
+      ],
+      "rationale": "Model-assessed: direct interaction and pathway-perturbation data support these cholesterol-pathway roles, but the ERG28 KO lesion was not localized to C4-demethylation, weakening the scaffold-function claim.",
+      "red_flags": [
+        "wrong_function",
+        "context_overclaim"
+      ],
+      "review_id": "RL-40d78e992150c1f1e610",
+      "studied_genes": [
+        "Fdps",
+        "Msmo1",
+        "Nsdhl",
+        "Fdft1",
+        "Hsd17b7",
+        "Erg28"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 17613,
+        "source_type": "full_text",
+        "start": 17491,
+        "text": "genes involved in de novo cholesterol biosynthesis (Hmgcs1, Hmgcr, Mvd, Idi1, Sqle and Dhcr7) were significantly increased"
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Dhcr7",
+        "Mvd"
+      ],
+      "rationale": "Model-assessed: rat-islet qPCR substantively tests seven supplied genes, but only Hmgcs1, Mvd, Idi1, and Dhcr7 have reported positive results and catalytic functions were not directly tested.",
+      "red_flags": [],
+      "review_id": "RL-48196647472e2225acb4",
+      "studied_genes": [
+        "Hmgcs1",
+        "Mvk",
+        "Pmvk",
+        "Idi1",
+        "Fdft1",
+        "Dhcr7",
+        "Mvd"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 32428,
+        "source_type": "full_text",
+        "start": 32153,
+        "text": "SC4MOL, NSDHL, or ERG28, implicated in the C4-demethylation complex (15) and measured total cell cholesterol via an Amplex Red assay. After successful knockdown of all transcripts (Fig. 5D), cholesterol levels were significantly decreased compared with the control (Fig. 5E)."
+      },
+      "function_supported_genes": [
+        "Msmo1",
+        "Nsdhl",
+        "Erg28"
+      ],
+      "rationale": "Model-assessed: siRNA depletion causally links Msmo1, Nsdhl, and Erg28 to cholesterol levels, but Hsd17b7's C4-enzyme role is not functionally tested here.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-502a14189be4e1c2dff2",
+      "studied_genes": [
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Erg28"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 847,
+        "source_type": "abstract",
+        "start": 766,
+        "text": "The stable transfectants of Hsd17b7 were able to grow independent of cholesterol."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "Model-assessed: Hsd17b7 overexpression rescues cholesterol auxotrophy, and the abstract identifies it as the pathway's 3-ketoreductase.",
+      "red_flags": [],
+      "review_id": "RL-53157633a89ca27ca997",
+      "studied_genes": [
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 490496,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 536722,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 18039,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 369.22
+  }
+}

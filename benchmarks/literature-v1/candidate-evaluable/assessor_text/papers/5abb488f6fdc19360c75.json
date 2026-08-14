@@ -1,0 +1,14 @@
+{
+  "content_hash": "86d6df114c5f39c4222a199e0dcc6e6aeccf57837d4501ceca21c1b2c9c5445e",
+  "doi": "10.1016/j.cmet.2025.11.015",
+  "errors": [],
+  "paper_key": "5abb488f6fdc19360c75",
+  "pmcid": null,
+  "pmid": "41500198",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Metabolic dysfunction-associated steatohepatitis (MASH) is characterized by steatosis, inflammation, and fibrosis driven by hepatic stellate cell (HSC) activation. Acetyl-CoA is central to de novo lipogenesis (DNL) and cholesterol synthesis and is generated from citrate via ATP citrate lyase (ACLY) or from acetate via acetyl-CoA synthetase (ACSS2). Here, we demonstrate that a dual inhibitor of ACLY and ACSS2, EVT0185, reduces serum and liver triglycerides, insulin resistance, and fibrosis. EVT0185 directly suppresses HSC activation in vivo and in vitro, with spatial transcriptomics and single-cell RNA sequencing revealing inhibition of acetate metabolism via ACSS2 and cholesterol synthesis as key drivers of the phenotype. EVT0185 also inhibits de novo lipogenesis in human liver slices and blocks TGF\u03b21-induced activation of primary human HSCs. These findings suggest that targeting cholesterol and acetate metabolism through dual ACLY and ACSS2 inhibition represents a promising therapeutic approach for MASH and liver fibrosis.",
+  "text_type": "abstract",
+  "title": "Dual inhibition of ACLY and ACSS2 by EVT0185 reduces steatosis, hepatic stellate cell activation, and fibrosis in mouse models of MASH."
+}

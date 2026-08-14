@@ -1,0 +1,14 @@
+{
+  "content_hash": "e7a727fcc1044d591dbc7e7bd5993a25f29bb445b8a4886063f93d0675033e7c",
+  "doi": "10.1124/mol.104.005389",
+  "errors": [],
+  "paper_key": "b272b56932484da061c1",
+  "pmcid": null,
+  "pmid": "15635043",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Human hydroxysteroid sulfotransferase or (HUMAN)SULT2A1 catalyzes the sulfonation of procarcinogen xenobiotics, hydroxysteroids, and bile acids and plays a dynamic role in hepatic cholesterol homeostasis. The treatment of primary cultured human hepatocytes with a peroxisome proliferator-activated receptor alpha (PPARalpha)-activating concentration of ciprofibrate (10(-) (4) M) increased (HUMAN)SULT2A1 mRNA, immunoreactive protein, and enzymatic activity levels by approximately 2-fold. By contrast, expression of (RAT)SULT2A3, the rat counterpart to (HUMAN)SULT2A1, was induced by treatment of primary hepatocyte cultures with an activator of the pregnane X receptor, but not PPARalpha. In HepG2 cells, transient transfection analyses of luciferase reporter constructs containing upstream regions of the (HUMAN)SULT2A1 gene implicated a candidate peroxisome proliferator response element (PPRE) at nucleotides (nt) -5949 to -5929 relative to the transcription start site. Site-directed mutagenesis and electrophoretic mobility shift assay studies confirmed that this distal PPRE (dPPRE), a direct repeat nuclear receptor motif containing one intervening nt, represented a functional PPRE. Chromatin immunoprecipitation analysis indicated that the (HUMAN)SULT2A1 dPPRE was also a functional element in the context of the human genome. These data support a major role for the PPARalpha transcription factor in the regulation of hepatic (HUMAN)SULT2A1. Results also indicate that important species differences govern the transactivation of SULT2A gene transcription by nuclear receptors.",
+  "text_type": "abstract",
+  "title": "Regulation of human hepatic hydroxysteroid sulfotransferase gene expression by the peroxisome proliferator-activated receptor alpha transcription factor."
+}

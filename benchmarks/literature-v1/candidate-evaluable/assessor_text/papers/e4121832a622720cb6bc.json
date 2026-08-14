@@ -1,0 +1,14 @@
+{
+  "content_hash": "26b703c5e417e1c6950036048263c79869876a297964623976f407853234c009",
+  "doi": "10.1016/0014-5793(93)81590-v",
+  "errors": [],
+  "paper_key": "e4121832a622720cb6bc",
+  "pmcid": null,
+  "pmid": "8486162",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "This investigation was undertaken in order to elucidate the human enzymes which participate in metabolism of the double bonds of unsaturated fatty acids during beta-oxidation. The results indicate that the human monofunctional delta 3, delta 2-enoyl-CoA isomerase (EC 5.3.3.8) with the native M(r) of 70,000 differed significantly from its rat counterpart [Palosaari et al. (1990) J. Biol. Chem. 265, 3347-3353]; the isoelectric point of the human isoform was over three pH-units more acidic, it showed different chromatographic behaviour, the human enzyme did not show any clear-cut substrate chain-length specificity and only a weak immunological cross-reactivity was detected with the antibody to rat liver mitochondrial short-chain enzyme. This explains the failure of attempts to apply the rat data directly to human beings. Another isomerase activity from human liver was found to be a part of the isomerase-hydratase-dehydrogenase polypeptide showing immunological cross-reactivity with the previously characterized peroxisomal multifunctional enzyme (MFE) from rat liver.",
+  "text_type": "abstract",
+  "title": "Beta-oxidation of unsaturated fatty acids in humans. Isoforms of delta 3, delta 2-enoyl-CoA isomerase."
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "165d0790a7e99cc04b52ed91358a367b6ad62c55f30cca2d874a8a10ee7cbfb4",
+  "doi": "10.1152/ajpgi.00235.2025",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "fed1268d81ef50a1c062",
+  "pmcid": "PMC12765227",
+  "pmid": "41138206",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Excessive intake of fructose and fats disrupts hepatocyte function by overwhelming endoplasmic reticulum (ER) capacity, leading to unresolved protein stress and progression to metabolic dysfunction-associated steatohepatitis (Shepherd EL, Saborano R, Northall E, Matsuda K, Ogino H, Yashiro H, Pickens J, Feaver RE, Cole BK, Hoang SA, Lawson MJ, Olson M, Figler RA, Reardon JE, Nishigaki N, Wamhoff BR, G\u00fcnther UL, Hirschfield G, Erion DM, Lalor PF. JHEP Rep 3: 100217, 2021). Ketohexokinase (KHK), the primary enzyme for fructose metabolism, is increasingly recognized for nonmetabolic roles (Peng C, Yang P, Zhang D, Jin C, Peng W, Wang T, Sun Q, Chen Z, Feng Y, Sun Y. Acta Pharm Sin B 14: 2959-2976, 2024; Li X, Qian X, Peng LX, Jiang Y, Hawke DH, Zheng Y, Xia Y, Lee JH, Cote G, Wang H, Wang L, Qian CN, Lu Z. Nat Cell Biol 18: 561-571, 2016), but its function in regulating ER proteostasis under nutrient stress remains unclear. We show that steatogenic conditions synergistically induce lipid accumulation and robust KHK expression, accompanied by activation of the IRE1\u03b1-XBP1 branch of the unfolded protein response. This adaptive axis was observed in HepG2 cells, primary hepatocytes from Gubra Amylin NASH, (GAN) diet-fed mice, and liver biopsies from MASLD patients, establishing a conserved KHK-IRE1\u03b1 axis across species. Khk knockdown disrupted this balance, causing accumulation of misfolded and ubiquitinated proteins, proteotoxic stress, and a shift toward PERK-CHOP-driven apoptosis. Similar signatures in Khk-deficient mouse livers further underscore KHK's role in sustaining ER homeostasis. Our findings identify KHK as a dual-function enzyme: a metabolic gatekeeper of fructose flux and a proteostatic regulator that safeguards hepatocyte survival. Although KHK contributes to steatosis, its complete loss destabilizes ER proteostasis, suggesting that selective inhibition of KHK enzymatic activity may offer therapeutic benefit without compromising ER function.NEW & NOTEWORTHY This study uncovers a noncanonical role for ketohexokinase (KHK) in maintaining ER proteostasis during nutrient overload. In hepatocytes exposed to fructose and saturated fat, KHK promotes adaptive IRE1\u03b1-XBP1 signaling and prevents proteotoxic stress and apoptosis. These findings position KHK as a metabolic checkpoint linking fructose metabolism to ER stress resolution and offer new insight into liver survival pathways relevant to MASLD and MASH.",
+  "text_type": "abstract",
+  "title": "Beyond fructolysis: ketohexokinase orchestrates ER proteostasis in nutrient-stressed hepatocytes."
+}

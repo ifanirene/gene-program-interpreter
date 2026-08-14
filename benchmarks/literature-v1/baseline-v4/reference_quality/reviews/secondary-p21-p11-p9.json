@@ -1,0 +1,409 @@
+{
+  "schema_version": 1,
+  "assessor_id": "secondary-a",
+  "reviews": [
+    {
+      "review_id": "RL-242b5a9c5abc75abc94d",
+      "assessor_id": "secondary-a",
+      "support": "partial",
+      "studied_genes": [
+        "Hmgcs1",
+        "Fdps",
+        "Msmo1",
+        "Nsdhl",
+        "Idi1",
+        "Fdft1",
+        "Dhcr7",
+        "Lss",
+        "Mvk",
+        "Mvd",
+        "Acat2",
+        "Cyp51"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Fdps",
+        "Msmo1",
+        "Nsdhl",
+        "Idi1",
+        "Fdft1",
+        "Dhcr7",
+        "Lss",
+        "Mvk",
+        "Mvd",
+        "Cyp51"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "The mRNA transcript levels that were repressed at a greater than 2 fold level of significance included HMG CoA synthase (Hmgcs1), HMG CoA reductase (Hmgcr), sterol receptor binding factor-2 (Srebf2) and lanosterol 14 α-demethylase (Cyp51a1) (involved in cholesterol metabolism), and others including fatty acid synthase (Fasn), fatty acid binding protein (Fabp), farnesyl diphosphate synthase (Fdps), acetyl-coA carboxylase (Acaca), acetyl-coA dehydrogenase (Acadm), acetyl-coA acetyl transferase (Acat2), peroxisome proliferative activated receptor, gamma (Pparγ) and a variety of apolipoproteins that are involved in fatty acid and triglyceride metabolism.",
+        "start": 17762,
+        "end": 18420,
+        "source_type": "full_text"
+      },
+      "rationale": "TSA causally represses a broad sterol program and the paper substantively investigates 12 supplied genes. However, several genes named in the selection reason are shown in F9 cells rather than HepG2, so the HepG2-specific gene claim is only partial. HepG2 is transferable but not the target mouse MASLD hepatocyte context.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-61540a022c6b44664286",
+      "assessor_id": "secondary-a",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Absence of Insig1 in the liver (Figure 2A) resulted in a marked upregulation of SREBP1 and SREBP2 target genes, leading to enhanced lipid/cholesterol synthesis and remodelling (Figure 2B).",
+        "start": 13186,
+        "end": 13374,
+        "source_type": "full_text"
+      },
+      "rationale": "Insig1 knockout in a mouse NASH model directly increases hepatic SREBP target programs and cholesterol synthesis, matching the regulator claim. The cached text does not name any supplied P21 gene as an individual result, so this strong regulator citation contributes no supplied-gene coverage.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-6dcde1c34bce3dbdd012",
+      "assessor_id": "secondary-a",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "unclear",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "We demonstrated that inflammatory stress increased hepatic cholesterol accumulation and enhanced sterol regulatory element binding protein 2 (SREBP2), low-density lipoprotein receptor (LDLr) and HMGCoA-r mRNA and protein expression in livers of C57BL/6J mice and in HepG2 cells.",
+        "start": 977,
+        "end": 1255,
+        "source_type": "abstract"
+      },
+      "rationale": "The paper supports inflammatory activation of the hepatic SREBP2-LDLR-HMGCR axis, but it does not perturb LDLR or show that LDLR loss causes compensatory synthesis as claimed. LDLR and HMGCR are not supplied P21 genes. The inflammatory liver models are closely relevant, not the target aging/MASLD context itself.",
+      "red_flags": [
+        "wrong_function",
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-85775391149b8f392d5d",
+      "assessor_id": "secondary-a",
+      "support": "supports",
+      "studied_genes": [
+        "Hmgcs1",
+        "Fdft1",
+        "Lss",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Sc5d",
+        "Dhcr7",
+        "Idi1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Fdft1",
+        "Lss",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Sc5d",
+        "Dhcr7",
+        "Idi1"
+      ],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Taken together, many genes play a central role in cholesterol synthesis, including HMGCR, SQLE, HMGCS1, FDFT1, LSS, MVK, PMK, MVD, FDPS, CYP51, TM7SF2, LBR, MSMO1, NSDHL, HSD17B7, DHCR24, EBP, SC5D, DHCR7, IDI1/2 (Fig. 1).",
+        "start": 6610,
+        "end": 6832,
+        "source_type": "full_text"
+      },
+      "rationale": "This review substantively describes the exact enzymes and their sequential cholesterol-synthesis roles, including PMK as the PMVK enzyme alias, so it supports 15 supplied genes. It is secondary pathway synthesis without the target mouse hepatocyte disease context; the agent labeled it direct.",
+      "red_flags": [
+        "context_overclaim",
+        "secondary_as_direct"
+      ]
+    },
+    {
+      "review_id": "RL-e02070e104a3f6abe459",
+      "assessor_id": "secondary-a",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "It catalyzes the first step following cyclization in sterol biosynthesis such as removal of the 14 alpha-methyl group from lanosterol in the cholesterol biosynthetic pathway, leading to formation of the initial substrate in steroid hormone biosynthesis.",
+        "start": 220,
+        "end": 473,
+        "source_type": "abstract"
+      },
+      "rationale": "The review directly assigns CYP51 its sterol 14-demethylase function in cholesterol synthesis, supporting Cyp51. It is a broad cross-phyla synthesis rather than evidence in mouse hepatocytes or MASLD, so both direct context and direct-evidence presentation are overstated.",
+      "red_flags": [
+        "context_overclaim",
+        "secondary_as_direct"
+      ]
+    },
+    {
+      "review_id": "RL-c0149ee32fcc6767c368",
+      "assessor_id": "secondary-a",
+      "support": "partial",
+      "studied_genes": [
+        "Hmgcs1",
+        "Fdft1"
+      ],
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Fdft1"
+      ],
+      "directness": "causal",
+      "direction": "unclear",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Knockdown of PAQR3 significantly reduced cholesterol and TG levels in primary hepatocytes (Fig. 1b). Consistently, knockdown of PAQR3 in primary hepatocytes significantly reduced the mRNA levels of critical cholesterol-synthesizing and uptaking genes including 3-hydroxy-3-methylglutaryl-CoA reductase (HMGCR), HMGC synthase (HMGCS), LDL receptor (LDLR) and squalene synthase (SS) (Fig. 1c).",
+        "start": 5857,
+        "end": 6248,
+        "source_type": "full_text"
+      },
+      "rationale": "The study causally supports PAQR3-SCAP-SREBP control and measures HMGCS1 and squalene synthase/FDFT1 in primary mouse hepatocytes. The selection reason incorrectly attributes the liver knockdown result to Scap; PAQR3 was knocked down. Normal liver/hepatocyte experiments are transferable but not the aging/MASLD condition.",
+      "red_flags": [
+        "wrong_function",
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-fa25d9f81d5e685add1e",
+      "assessor_id": "secondary-a",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "not_assessable",
+      "context_label_accuracy": "not_assessable",
+      "evidence_span": {
+        "text": "SREBP processing is not restored by addition of LY295427, but is restored by increasing the levels of SREBP cleavage-activating protein (SCAP). These findings suggest that the INSIG-1 protein alters sterol balance by modulating SREBP processing jointly with SCAP.",
+        "start": 638,
+        "end": 901,
+        "source_type": "abstract"
+      },
+      "rationale": "INSIG1 gain- and loss-of-function data support joint control of SREBP processing with SCAP, but the abstract does not establish ER retention or directly report suppression of cholesterol biosynthesis. It also does not identify the experimental cell context, and no supplied P21 gene is studied.",
+      "red_flags": [
+        "insufficient_text"
+      ]
+    },
+    {
+      "review_id": "RL-54dff275faab78dc35a5",
+      "assessor_id": "secondary-a",
+      "support": "supports",
+      "studied_genes": [
+        "Gabarapl1"
+      ],
+      "function_supported_genes": [
+        "Gabarapl1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Simply put, miR-195 regulates proliferation, migration, angiogenesis and autophagy of hEPCs by targeting GABARAPL1.",
+        "start": 25083,
+        "end": 25198,
+        "source_type": "full_text"
+      },
+      "rationale": "Targeting, knockdown, and rescue experiments support a causal GABARAPL1 role in endothelial-progenitor autophagy and angiogenic behaviors. Human EPCs under hypoxia are a closely transferable endothelial context rather than postnatal mouse brain endothelium.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-324ec6f55da876ef1562",
+      "assessor_id": "secondary-a",
+      "support": "supports",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "It inhibited the expression of genes enriched in tip cells, such as angiopoietin-2, ESM1, and Apelin, and impaired tip cell formation.",
+        "start": 1182,
+        "end": 1316,
+        "source_type": "abstract"
+      },
+      "rationale": "SYNJ2BP-enhanced Notch signaling causally suppresses angiopoietin-2 and tip-cell formation, supporting Angpt2 as a tip-enriched gene opposed by stalk-cell Notch. The work uses endothelial systems without the target postnatal brain context, so partial is appropriate.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-5551cbd4f12617c28768",
+      "assessor_id": "secondary-a",
+      "support": "partial",
+      "studied_genes": [
+        "Hopx"
+      ],
+      "function_supported_genes": [],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Another gene that we found to be highly expressed in the intracranial arterial ECs compared to the extracranial arterial ECs is the transcription factor HOPX.",
+        "start": 42529,
+        "end": 42687,
+        "source_type": "full_text"
+      },
+      "rationale": "The human artery comparison and protein validation substantively study HOPX and support intracranial endothelial enrichment. They do not test an arterial-identity function, which remains a suggestion. Human adult intracranial artery ECs are closely relevant but not the target mouse postnatal brain setting.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-8e8098d397b5ef463914",
+      "assessor_id": "secondary-a",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Our results identify a significant overactivation of the Smad2/3 pathway in Nrp1-deficient cells as the key determinant of loss of tip cell capacity and sprouting. They are consistent with a model in which Notch activation in stalk cells decreases Nrp1 levels, which induces stalk cell behaviour by suppressing Smad2/3 activation downstream of Alk1 and Alk5.",
+        "start": 16936,
+        "end": 17294,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper causally supports the Notch-NRP1-ALK1/ALK5 tip-stalk mechanism, but it never studies CXCR4 or an arteriovenous boundary. Thus the added CXCR4-NRP1 linkage is unsupported and no supplied P11 gene receives coverage from this citation.",
+      "red_flags": [
+        "wrong_gene",
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-a278001bc49e2e9e1781",
+      "assessor_id": "secondary-a",
+      "support": "supports",
+      "studied_genes": [
+        "Cxcr4",
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Cxcr4",
+        "Angpt2"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Genes enriched in tip cells include ESM-1, angiopoietin-2, and SLP-76. CXCR4, a receptor for the chemokine stromal-cell derived factor-1, was also identified as a tip cell-enriched gene, and we provide evidence for a novel role for this receptor in mediating tip cell morphology and vascular patterning in the neonatal retina.",
+        "start": 768,
+        "end": 1094,
+        "source_type": "abstract"
+      },
+      "rationale": "Isolated-tip-cell transcriptomics directly identifies both ANGPT2 and CXCR4 as tip-enriched, and the abstract reports additional evidence for CXCR4 in tip morphology. The cited gene-enrichment claim is observational. Neonatal retinal endothelium is closely transferable to postnatal brain sprouting, not the exact target context.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-bfd8007f2b08a42926ff",
+      "assessor_id": "secondary-a",
+      "support": "partial",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Herein, we establish that the TGFβ/ALK5 pathway robustly represses ANGPT2 (angiopoietin-2) in pericytes via epigenetic remodeling. TGFβ-driven SMAD (suppressor of mothers against decapentaplegic) 3/4 associates with TGIF1 (TGFβ-induced factor homeobox 1) and HDAC (histone deacetylase) 5 to form a corepressor complex at the Angpt2 promoter, resulting in promoter deacetylation and gene repression.",
+        "start": 966,
+        "end": 1364,
+        "source_type": "abstract"
+      },
+      "rationale": "Genetic and pharmacological experiments causally support ALK5-SMAD repression of Angpt2 and its role in germinal-matrix hemorrhage. However, the paper identifies pericytes, not endothelial cells, as the excessive ANGPT2 source. This is a relevant brain vascular cross-talk context, but the direct endothelial label is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-ff25a8b2a5f5c0c87200",
+      "assessor_id": "secondary-a",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "NRP1 therefore promotes brain angiogenesis cell autonomously in endothelium, independently of heterotypic interactions with nonendothelial cells. Genetic mosaic analyses demonstrated a key role for NRP1 in endothelial tip rather than stalk cells during vessel sprouting.",
+        "start": 932,
+        "end": 1202,
+        "source_type": "abstract"
+      },
+      "rationale": "Cell-type-specific targeting and genetic mosaics directly support NRP1 as a brain endothelial tip-cell regulator. NRP1 is a perturbation regulator rather than a supplied gene, so the citation adds no P11 gene coverage. Developing brain angiogenesis is closely related to, but not identical with, the postnatal target setting.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-b9f6789f11d353be3566",
+      "assessor_id": "secondary-a",
+      "support": "supports",
+      "studied_genes": [
+        "Tram2"
+      ],
+      "function_supported_genes": [
+        "Tram2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Deletion of the C-terminal part of TRAM2 inhibits type I collagen synthesis during activation of HSCs.",
+        "start": 1149,
+        "end": 1251,
+        "source_type": "abstract"
+      },
+      "rationale": "TRAM2 perturbation directly reduces type I collagen synthesis, supporting its assigned ER-translocon/ECM-production function. The experiments are in hepatic stellate cells and fibroblasts, so they inform the general mechanism but are indirect for brain endothelial BBB maturation.",
+      "red_flags": []
+    }
+  ]
+}

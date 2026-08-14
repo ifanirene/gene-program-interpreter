@@ -1,0 +1,14 @@
+{
+  "content_hash": "008232bfb0bd477fdb8e543555d527ee3f475293f655d1103b5d229d2efc3b2e",
+  "doi": "10.1002/hep.21655",
+  "errors": [],
+  "paper_key": "840ba213bbecf505fad2",
+  "pmcid": null,
+  "pmid": "17476695",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "UNLABELLED: In the early stages of nonalcoholic fatty liver disease (NAFLD), triglycerides accumulate in hepatocytes. Diacylglycerol acyltransferase 2 (DGAT2) catalyzes the final step in hepatocyte triglyceride biosynthesis. DGAT2 antisense oligonucleotide (ASO) treatment improved hepatic steatosis dramatically in a previous study of obese mice. According to the 2-hit hypothesis for progression of NAFLD, hepatic steatosis is a risk factor for nonalcoholic steatohepatitis (NASH) and fibrosis. To evaluate this hypothesis, we inhibited DGAT2 in a mouse model of NASH induced by a diet deficient in methionine and choline (MCD). Six-week-old genetically obese and diabetic male db/db mice were fed either the control or the MCD diet for 4 or 8 weeks. The MCD diet group was treated with either 25 mg/kg DGAT2 ASO or saline intraperitoneally twice weekly. Hepatic steatosis, injury, fibrosis, markers of lipid peroxidation/oxidant stress, and systemic insulin sensitivity were evaluated. Hepatic steatosis, necroinflammation, and fibrosis were increased in saline-treated MCD diet-fed mice compared to controls. Treating MCD diet-fed mice with DGAT2 ASO for 4 and 8 weeks decreased hepatic steatosis, but increased hepatic free fatty acids, cytochrome P4502E1, markers of lipid peroxidation/oxidant stress, lobular necroinflammation, and fibrosis. Progression of liver damage occurred despite reduced hepatic expression of tumor necrosis factor alpha, increased serum adiponectin, and striking improvement in systemic insulin sensitivity.\n\nCONCLUSION: Results from this mouse model would suggest accumulation of triglycerides may be a protective mechanism to prevent progressive liver damage in NAFLD.",
+  "text_type": "abstract",
+  "title": "Inhibiting triglyceride synthesis improves hepatic steatosis but exacerbates liver damage and fibrosis in obese mice with nonalcoholic steatohepatitis."
+}

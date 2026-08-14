@@ -1,0 +1,16 @@
+{
+  "content_hash": "6a3545dd5d79a2cb7ae00d34741287051f0cf81ade6c694b8c49e62c77391d4a",
+  "doi": "10.1172/jci6576",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "2b8d6891e4bfced0035f",
+  "pmcid": "PMC408359",
+  "pmid": "10225972",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "A deficiency in microsomal triglyceride transfer protein (MTP) causes the human lipoprotein deficiency syndrome abetalipoproteinemia. However, the role of MTP in the assembly and secretion of VLDL in the liver is not precisely understood. It is not clear, for instance, whether MTP is required to move the bulk of triglycerides into the lumen of the endoplasmic reticulum (ER) during the assembly of VLDL particles. To define MTP's role in hepatic lipoprotein assembly, we recently knocked out the mouse MTP gene (Mttp). Unfortunately, achieving our objective was thwarted by a lethal embryonic phenotype. In this study, we produced mice harboring a \"floxed\" Mttp allele and then used Cre-mediated recombination to generate liver-specific Mttp knockout mice. Inactivating the Mttp gene in the liver caused a striking reduction in VLDL triglycerides and large reductions in both VLDL/LDL and HDL cholesterol levels. The Mttp inactivation lowered apo B-100 levels in the plasma by >95% but reduced plasma apo B-48 levels by only approximately 20%. Histologic studies in liver-specific knockout mice revealed moderate hepatic steatosis. Ultrastructural studies of wild-type mouse livers revealed numerous VLDL-sized lipid-staining particles within membrane-bound compartments of the secretory pathway (ER and Golgi apparatus) and few cytosolic lipid droplets. In contrast, VLDL-sized lipid-staining particles were not observed in MTP-deficient hepatocytes, either in the ER or in the Golgi apparatus, and there were numerous cytosolic fat droplets. We conclude that MTP is essential for transferring the bulk of triglycerides into the lumen of the ER for VLDL assembly and is required for the secretion of apo B-100 from the liver.",
+  "text_type": "abstract",
+  "title": "Analysis of the role of microsomal triglyceride transfer protein in the liver of tissue-specific knockout mice."
+}

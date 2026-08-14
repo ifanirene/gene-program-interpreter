@@ -1,0 +1,137 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-16f57f20ddb8f8436776",
+    "RL-177f26e45743a987f8be",
+    "RL-3094cd650bd5570968ca",
+    "RL-7fa2530b6e396a5d70e6"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10409,
+        "source_type": "full_text",
+        "start": 10082,
+        "text": "As shown in Table I, seven genes, termed in the gene ontology as ‘cholesterol biosynthetic process’ (GO: 0006695), were significantly upregulated in group treated with high levels of glucose. The qPCR results for Hmgcs1, Hmgcr, Mvd, Idi1, Sqle and Dhcr7 confirmed the genomic analyses, whereas those for Fdft1 did not (Fig. 1)."
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Mvd",
+        "Idi1",
+        "Dhcr7"
+      ],
+      "rationale": "Gene-specific expression data support Hmgcs1, Mvd, Idi1, and Dhcr7 as cholesterol-biosynthesis genes. The rat-islet context is indirect to mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-16f57f20ddb8f8436776",
+      "studied_genes": [
+        "Hmgcs1",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 14007,
+        "source_type": "full_text",
+        "start": 13893,
+        "text": "The hepatocyte loss of Cyp51 illustrates the importance of intact cholesterol synthesis for normal liver function."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Hepatocyte-specific Cyp51 deletion causally disrupts hepatic cholesterol synthesis and produces liver pathology. Tm7sf2 expression was also measured, but its assigned enzymatic function was not directly established.",
+      "red_flags": [],
+      "review_id": "RL-177f26e45743a987f8be",
+      "studied_genes": [
+        "Cyp51",
+        "Tm7sf2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1514,
+        "source_type": "abstract",
+        "start": 1245,
+        "text": "Nevertheless, HSCs were sensitive to FC accumulation because the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper supports SCAP–INSIG control of SREBP2 feedback in NASH, but specifically in hepatic stellate cells. That distinct cell type makes the hepatocyte context indirect, so the declared direct match is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-3094cd650bd5570968ca",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 7903,
+        "source_type": "full_text",
+        "start": 7753,
+        "text": "DHCR7 is an enzyme that acts in the final step of the cholesterol biosynthesis pathway and converts 7-DHC possessing conjugated diene to cholesterol9."
+      },
+      "function_supported_genes": [
+        "Dhcr7",
+        "Sc5d",
+        "Tm7sf2"
+      ],
+      "rationale": "Direct genetic and pharmacological experiments establish DHCR7's terminal cholesterol-pathway role; SC5D and TM7SF2 also receive gene-specific functional tests. The liver and hepatocyte setting matches, but the injury and ferroptosis conditions differ from aging or MASLD.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-7fa2530b6e396a5d70e6",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d",
+        "Tm7sf2",
+        "Hmgcs1",
+        "Fdps",
+        "Cyp51"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 223744,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 269690,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 11139,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 214.929
+  }
+}

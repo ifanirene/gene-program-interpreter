@@ -1,0 +1,14 @@
+{
+  "content_hash": "b6c4a69b8520faa47fc85eaf6fd981ceb6a6086539fd9f063b7d6edfc1a86a06",
+  "doi": "10.1038/s41586-020-2183-2",
+  "errors": [],
+  "paper_key": "932131dd57b899b31764",
+  "pmcid": null,
+  "pmid": "32322062",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cancer cells increase lipogenesis for their proliferation and the activation of sterol regulatory element-binding proteins (SREBPs) has a central role in this process. SREBPs are inhibited by a complex composed of INSIG proteins, SREBP cleavage-activating protein (SCAP) and sterols in the endoplasmic reticulum. Regulation of the interaction between INSIG proteins and SCAP by sterol levels is critical for the dissociation of the SCAP-SREBP complex from the endoplasmic reticulum and the activation of SREBPs1,2. However, whether this protein interaction is regulated by a mechanism other than the abundance of sterol-and in particular, whether oncogenic signalling has a role-is unclear. Here we show that activated AKT in human hepatocellular carcinoma (HCC) cells phosphorylates cytosolic phosphoenolpyruvate carboxykinase 1 (PCK1), the rate-limiting enzyme in gluconeogenesis, at Ser90. Phosphorylated PCK1 translocates to the endoplasmic reticulum, where it uses GTP as a phosphate donor to phosphorylate INSIG1 at Ser207 and INSIG2 at Ser151. This phosphorylation reduces the binding of sterols to INSIG1 and INSIG2 and disrupts the interaction between INSIG proteins and SCAP, leading to the translocation of the SCAP-SREBP complex to the Golgi apparatus, the activation of SREBP proteins (SREBP1 or SREBP2) and the transcription of downstream lipogenesis-related genes, proliferation of tumour cells, and tumorigenesis in mice. In addition, phosphorylation of PCK1 at Ser90, INSIG1 at Ser207 and INSIG2 at Ser151 is not only positively correlated with the nuclear accumulation of SREBP1 in samples from patients with HCC, but also associated with poor HCC prognosis. Our findings highlight the importance of the protein kinase activity of PCK1 in the activation of SREBPs, lipogenesis and the development of HCC.",
+  "text_type": "abstract",
+  "title": "The gluconeogenic enzyme PCK1 phosphorylates INSIG1/2 for lipogenesis."
+}

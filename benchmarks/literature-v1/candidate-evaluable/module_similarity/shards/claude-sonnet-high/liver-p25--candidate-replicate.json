@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "liver-p25--candidate-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.5
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 3,
+        "similarity": 0.4
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 2,
+        "similarity": 0.85
+      }
+    ],
+    "moduleSemanticSimilarity": 0.583333,
+    "overall_rationale": "Strong correspondence is limited to L3↔R2 (peroxisomal fatty acid oxidation/lipid droplet biogenesis, high gene and regulator overlap); the remaining pairs show only partial gene/mechanism overlap (detox battery vs. bile-acid sulfation, taurine conjugation vs. sulfation or sulfur/nitrogen catabolism) or no relation at all (lipid metabolism vs. detox/bile-acid modules).",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe hepatic Phase II detoxification and share Aldh1a1/Gsta3/Akr1c6, but L1's core mechanism is a CYP450-anchored xenobiotic battery while R1's core mechanism is SULT2A-driven bile acid/hydroxysteroid sulfation.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.5
+      },
+      {
+        "left_module": 1,
+        "rationale": "L1's xenobiotic/endobiotic detoxification enzymes share no genes or mechanistic overlap with R2's peroxisomal fatty acid oxidation and lipid droplet program.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 1,
+        "rationale": "L1's CYP450/Phase II detox battery and R3's sulfur/nitrogen catabolism-urea cycle-aging signature share no genes or core mechanism.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both center on Sult2a8-mediated bile acid sulfation with shared Abcg5 regulation, but L2 emphasizes complementary taurine conjugation (Cdo1) while R1 broadens into general xenobiotic/steroid Phase II conjugation (Gsta3, Akr1c6, Aldh1a1) absent from L2.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's bile acid sulfonation/taurine conjugation axis has no mechanistic or gene overlap with R2's peroxisomal fatty acid oxidation and lipid droplet program.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both modules feature Cdo1 driving cysteine-to-taurine flux relevant to bile acid conjugation, but R3's overall mechanism centers on urea cycle, heme synthesis, and an aging signature that L2 does not address.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.4
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's lipid droplet/peroxisomal fatty acid oxidation/polyol pathway genes do not overlap with R1's bile acid and xenobiotic sulfation mechanism.",
+        "relationship": "different",
+        "right_module": 1,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both modules describe the same core mechanism of peroxisomal fatty acid oxidation coupled to lipid droplet biogenesis, sharing Fitm1, Hao2, Cyb5b and the Dgat2 regulator, with R2 narrowing scope (dropping the polyol-fructose arm) while adding a proteasomal (Psmd1) submechanism.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.85
+      },
+      {
+        "left_module": 3,
+        "rationale": "The two modules share only the Sord-driven polyol-to-fructose step, while their overarching mechanisms (lipid droplet/peroxisomal FA oxidation vs. urea cycle/heme/aging) are otherwise unrelated.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.2
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.11379299999999999,
+    "duration_api_ms": 58976,
+    "duration_ms": 57424,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 58.413
+  }
+}

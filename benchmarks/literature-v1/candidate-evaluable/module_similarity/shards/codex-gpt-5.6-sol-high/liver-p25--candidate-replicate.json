@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "liver-p25--candidate-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.62
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 3,
+        "similarity": 0.48
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 2,
+        "similarity": 0.88
+      }
+    ],
+    "moduleSemanticSimilarity": 0.66,
+    "overall_rationale": "The sets reproduce the bile-acid sulfation and lipid-droplet/peroxisomal programs strongly, while the remaining annotations redistribute detoxification, taurine synthesis, and polyol metabolism across broader mixed modules.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe hepatic detoxification and share aldehyde-, glutathione-, and aldo-keto-dependent Phase II functions, but the right module centers bile acid and hydroxysteroid sulfation rather than the left module's coordinated Phase I/II xenobiotic battery.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.62
+      },
+      {
+        "left_module": 1,
+        "rationale": "The shared Aldh3a2-mediated clearance of lipid-derived aldehydes links the modules, but the right module chiefly concerns fatty-acid oxidation and lipid-droplet storage rather than xenobiotic detoxification.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.27
+      },
+      {
+        "left_module": 1,
+        "rationale": "These modules share only a broad hepatic metabolic and stress-response context, with no matching central mechanism or predicted output.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.08
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both center Sult2a8-dependent hepatic bile-acid sulfation and sterol elimination, while the left adds taurine synthesis and the right broadens into hydroxysteroid and xenobiotic conjugation.",
+        "relationship": "meaningful_refinement",
+        "right_module": 1,
+        "similarity": 0.8
+      },
+      {
+        "left_module": 2,
+        "rationale": "Bile-acid and sterol homeostasis provides limited physiological context, but sulfation and taurine conjugation differ from the right module's lipid-droplet and fatty-acid oxidation mechanisms.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.14
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both invoke Cdo1-driven cysteine-to-taurine metabolism supporting taurine-conjugated bile acids, but the right module omits sulfotransferase biotransformation and adds unrelated nitrogen, heme, carbohydrate, and aging functions.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.48
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both concern hepatic lipid handling, but the left centers lipid droplets and fatty-acid oxidation whereas the right centers sulfation and Phase II conjugation.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.18
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both define the same hepatic lipid-droplet and peroxisomal fatty-acid oxidation program through Fitm1, Hao2, Cyb5b, and Dgat2, with each adding secondary metabolic components.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.88
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both include Sord-mediated sorbitol-to-fructose metabolism, but this is only one subcomponent within otherwise distinct lipid-homeostasis and mixed catabolic programs.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.31
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16482,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 1164,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 27.074
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "1ecdc01c83099a98cbcebea881571af531ea90acb2ab9c056084f24f2dc829c6",
+  "doi": "10.1172/jci197094",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "be2d2203df5b16827b59",
+  "pmcid": "PMC13367976",
+  "pmid": "42454498",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cholesterol overload contributes to metabolic dysfunction-associated steatohepatitis (MASH) progression. One major pathway that limits hepatic cholesterol accumulation is export via VLDL secretion. While sterol regulatory element-binding protein (SREBP) activity is suppressed by insulin-induced gene 1 (INSIG1) under high sterol conditions, VLDL secretion nonetheless persists to prevent lipotoxicity and liver injury, presenting an unresolved paradox in cholesterol sensing and lipoprotein export. Here, we identified a cholesterol-responsive interaction between nuclear factor erythroid 2 related factor-1 (NFE2L1) and INSIG1 that preserved cholesterol homeostasis by sustaining VLDL secretion. Liver-specific NFE2L1 deletion elevated INSIG1 abundance, suppressed SREBP1 activation, and impaired VLDL secretion, leading to hepatic cholesterol accumulation and liver injury. Mechanistically, NFE2L1 bound to INSIG1 via its N-terminal homology box 2 (NHB2) domain; free cholesterol strengthened this interaction to promote INSIG1 degradation, thereby enabling SREBP1 activation and VLDL export. In NFE2L1-deficient mice, WT NFE2L1, but not a mutant NFE2L1 form unable to interact with INSIG1 (NHB2-deleted mutant, \u0394NHB2), restored SREBP1 activity and VLDL secretion. Lipidomics analysis revealed that NFE2L1 deficiency reduced serum triglyceride composition, which was restored exclusively by WT NFE2L1. In a murine MASH model, NFE2L1 overexpression activated SREBP1/2, lowered hepatic cholesterol, and attenuated liver injury, inflammation, and fibrosis, without elevating atherogenic lipoproteins owing to compensatory LDL receptor upregulation. Together, these findings explain how VLDL secretion capacity was maintained under cholesterol excess and identify the NFE2L1/INSIG1 axis as a sterol-responsive safeguard for hepatic lipid homeostasis and a potential therapeutic target for MASH.",
+  "text_type": "abstract",
+  "title": "Cholesterol-responsive NFE2L1-INSIG1 interaction controls VLDL secretion and metabolic dysfunction-associated steatohepatitis pathogenesis in mice."
+}

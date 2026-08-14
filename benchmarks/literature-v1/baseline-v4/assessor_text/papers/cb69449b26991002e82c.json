@@ -1,0 +1,16 @@
+{
+  "content_hash": "ee4c7a7fee1a101352fab4f7118452b3ea57f7fd956860a5ffb8359d35f57617",
+  "doi": "10.1038/s41580-023-00698-5",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "cb69449b26991002e82c",
+  "pmcid": "PMC11199107",
+  "pmid": "38366037",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Primary cilia are solitary, immotile sensory organelles present on most cells in the body that participate broadly in human health, physiology and disease. Cilia generate a unique environment for signal transduction with tight control of protein, lipid and second messenger concentrations within a relatively small compartment, enabling reception, transmission and integration of biological information. In this Review, we discuss how cilia function as signalling hubs in cell-cell communication using three signalling pathways as examples: ciliary G-protein-coupled receptors (GPCRs), the Hedgehog (Hh) pathway and polycystin ion channels. We review how defects in these ciliary signalling pathways lead to a heterogeneous group of conditions known as 'ciliopathies', including metabolic syndromes, birth defects and polycystic kidney disease. Emerging understanding of these pathways' transduction mechanisms reveals common themes between these cilia-based signalling pathways that may apply to other pathways as well. These mechanistic insights reveal how cilia orchestrate normal and pathophysiological signalling outputs broadly throughout human biology.",
+  "text_type": "abstract",
+  "title": "Emerging mechanistic understanding of cilia function in cellular signalling."
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "67cec2858cbe72b832a20a114fcd5e66ecadacbfd605b0939d71c2e4dde018f2",
+  "doi": "10.1111/apt.17566",
+  "errors": [],
+  "paper_key": "977dc2857d253cf918f2",
+  "pmcid": null,
+  "pmid": "37248657",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Genetic inactivation and pharmacologic inhibition of the microsomal triglyceride transfer protein (MTP; gene name MTTP) inhibits hepatic secretion of VLDL, thereby reducing serum lipids and apoB at the expense of increasing hepatic steatosis.\n\nAIM: To examine the effects of missense variants in MTTP on hepatic and circulating lipids.\n\nMETHODS: We analysed the association of MTTP missense variants with metabolic, hepatic and clinical phenotypes in the Penn Medicine Biobank (PMBB; n = 37,960) and the UKBiobank (UKB; n = 451,444).\n\nRESULTS: We analysed 24 missense variants in MTTP in PMBB for association with biopsy-proven hepatic steatosis and found that an isoleucine 128 to threonine variant (I128T: rs3816873-A, frequency 26%) was associated with reduced steatosis (p < 0.001). PMBB subjects with imaging-proven steatosis also revealed significantly fewer carriers of MTTP I128T compared to controls. Analysis in UKB also showed that MTTP I128T was associated with reduced risk of hepatic steatosis. Unexpectedly, MTTP I128T was found to be associated with reduced plasma levels of LDL-cholesterol and apoB (all p < 0.001). Functional studies indicated that MTTP I128T is neither a classic loss nor gain of function allele.\n\nCONCLUSIONS: MTTP I128T is associated with reduced hepatic steatosis as well as reduced plasma lipids and apoB. This paradoxical profile is not consistent with a simple gain or loss of function in MTP activity and suggests a more complex effect on MTP function. Further investigation of MTTP I128T will provide insight into the structure-function of MTP and potentially new approaches to modulate MTP activity that could both reduce hepatic and circulating lipids.",
+  "text_type": "abstract",
+  "title": "A coding variant in the microsomal triglyceride transfer protein reduces both hepatic steatosis and plasma lipids."
+}

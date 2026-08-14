@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-bb4358ce7362aadea933",
+    "RL-c70b6666365c8ced88d9",
+    "RL-cb8ac4e04cfd8021e22e",
+    "RL-d162c70104d6ae924862"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 458,
+        "source_type": "abstract",
+        "start": 0,
+        "text": "Sterol regulatory element-binding proteins (SREBPs), master transcriptional regulators of cholesterol and fatty acid synthesis, have been found to contribute to a diverse array of cellular processes. In this review, we focus on genetically engineered mice in which the activities of six components of the SREBP gene pathway, namely SREBP-1, SREBP-2, Scap, Insig-1, Insig-2, or Site-1 protease have been altered through gene knockout or transgenic approaches."
+      },
+      "function_supported_genes": [],
+      "rationale": "This review names Scap/Insig-1 as SREBP-pathway master regulators (perturbation regulators, not supplied genes) but gives no regulatory direction and no data on supplied genes Erg28/Rdh11, and is framed around extrahepatic/developmental functions. Declared direct context is overclaimed for a secondary, extrahepatic synthesis.",
+      "red_flags": [
+        "context_overclaim",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-bb4358ce7362aadea933",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1553,
+        "source_type": "abstract",
+        "start": 1373,
+        "text": "The combination of an SQS inhibitor with an HMGCR or FDPS inhibitor provides a rational approach for reducing cholesterol synthesis while preventing nonsterol isoprenoid depletion."
+      },
+      "function_supported_genes": [
+        "Fdps",
+        "Fdft1"
+      ],
+      "rationale": "Novel squalene-synthase (Fdft1) inhibitors reduce cholesterol biosynthesis in HepG2 cells, and the FDPS inhibitor zoledronate is experimentally used showing FDPS's FPP-synthase role upstream of cholesterol synthesis, so both genes have gene-specific causal support. HepG2 is a transferable hepatic context, matching the declared partial label.",
+      "red_flags": [],
+      "review_id": "RL-c70b6666365c8ced88d9",
+      "studied_genes": [
+        "Fdps",
+        "Fdft1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 10679,
+        "source_type": "full_text",
+        "start": 10490,
+        "text": "Conversely, the direct product of CYP51 demethylation, follicular fluid meiosis-activating sterol (FF-MAS), was decreased 2.6- and 2.1-fold in 6-week HCyp51−/− mice and runts, respectively."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Hepatocyte-specific Cyp51 knockout causally lowers the CYP51 demethylation product FF-MAS and causes progressive liver injury, directly supporting its biosynthetic enzyme role. The model is a developmental (pubertal) mouse liver rather than the aging/MASLD condition, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-cb8ac4e04cfd8021e22e",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 6832,
+        "source_type": "full_text",
+        "start": 6610,
+        "text": "Taken together, many genes play a central role in cholesterol synthesis, including HMGCR, SQLE, HMGCS1, FDFT1, LSS, MVK, PMK, MVD, FDPS, CYP51, TM7SF2, LBR, MSMO1, NSDHL, HSD17B7, DHCR24, EBP, SC5D, DHCR7, IDI1/2 (Fig. 1)."
+      },
+      "function_supported_genes": [],
+      "rationale": "This circRNA/miRNA review only catalogs the pathway genes from KEGG in background text without gene-specific investigation, so no gene qualifies as studied, but it secondarily supports the general claim that these are cholesterol-biosynthesis enzymes. 'No' understated this and B's 15 function-supported genes overclaimed pathway-list mentions.",
+      "red_flags": [
+        "background_only",
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-d162c70104d6ae924862",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7092195,
+    "duration_api_ms": 216331,
+    "duration_ms": 213048,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 214.294
+  }
+}

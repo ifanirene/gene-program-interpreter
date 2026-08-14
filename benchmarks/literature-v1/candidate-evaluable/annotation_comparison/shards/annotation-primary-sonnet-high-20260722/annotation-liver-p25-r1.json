@@ -1,0 +1,45 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-liver-p25-r1",
+    "assessor_id": "annotation-primary-sonnet-high-20260722",
+    "candidate_additions": [
+      "Htatip2 added as a hepatic fatty acid storage/oxidation regulator gene",
+      "More specific enzymatic assignments: Cyp2c50 as an arachidonic-acid epoxygenase/EET synthase, Sult2a8 specifically as the major PPARalpha-regulated 7alpha-OH bile acid sulfotransferase, Sord placed in the polyol-fructose pathway under NRF2 regulation",
+      "New dedicated 'bile acid biotransformation' mechanism explicitly pairing Sult2a8 sulfonation with Cdo1 taurine conjugation as complementary elimination routes",
+      "Transcription-factor context (Nrf2, CAR, PXR, PPARalpha) added for the detoxification battery"
+    ],
+    "candidate_removed_or_weakened": [
+      "Entire nitrogen/ammonia disposal-urea cycle mechanism dropped: Car5a (bicarbonate supply to CPS1) and Agmat (agmatine/polyamine-urea handling) no longer appear in any candidate mechanism",
+      "Lonp2 (peroxisomal Lon protease, oxidized-protein clearance) dropped from the lipid mechanism",
+      "Perturbation regulators Tpst1, Insig1, G6pc, and Insr dropped entirely; only Abcg5 and Dgat2 retained",
+      "Sult2a5 and Sult2a7 downgraded from credited detox-mechanism members to unsupported 'likely paralog' mentions"
+    ],
+    "core_interpretation_changed": true,
+    "decision_relevant_differences": [
+      "Baseline supports a distinct conclusion that P25 contributes to hepatic ammonia/nitrogen disposal (urea cycle support) relevant to aging/MASLD; candidate provides no basis for this conclusion since Car5a and Agmat are absent from all mechanisms",
+      "Cdo1's functional role is reassigned from 'sulfur amino acid catabolism/nitrogen disposal' (baseline) to 'bile acid taurine conjugation partner of Sult2a8' (candidate), changing which pathway a reader would attribute this gene to",
+      "Loss of perturbation regulators G6pc/Insr (urea cycle/nitrogen context) and Tpst1/Insig1 (sulfation/sterol context) removes evidence links that anchored the dropped nitrogen-disposal theme and part of the sulfation theme"
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations agree on two of three core themes: a pericentral Phase I/II detox battery and a lipid-droplet/peroxisomal fatty-acid-oxidation program, with the candidate adding gene-specific mechanistic detail (Htatip2, EET synthesis, PPARalpha regulation of Sult2a8) that refines rather than changes these two themes. However, baseline's third mechanism — sulfur amino acid catabolism feeding hepatic nitrogen/ammonia disposal via the urea cycle, built on Cdo1+Car5a+Agmat — is absent from the candidate. Car5a and Agmat disappear entirely, and Cdo1 is reassigned into a new bile-acid-taurine-conjugation mechanism instead. This is not merely added detail or a qualifier on an existing conclusion; it is the loss of one of three central program mechanisms and a re-attribution of a shared gene's function, which would lead a reader to a different conclusion about what the program does biologically (nitrogen/ammonia handling vs. bile acid conjugation only). That crosses into materially_changed rather than refinement.",
+    "semantic_relation": "materially_changed",
+    "shared_core_conclusions": [
+      "Phase I/II xenobiotic detoxification battery (Cyp2c50, Aldh1a1, Aldh3a2, Gsta3, Akr1c6) characteristic of pericentral hepatocytes",
+      "Bile acid/steroid sulfation via SULT2A enzymes supports elimination",
+      "Lipid droplet biogenesis (Fitm1) coupled to peroxisomal/ER fatty acid oxidation (Eci2, Hao2, Cyb5b)",
+      "Program is relevant to hepatocyte aging and MASLD lipid dyshomeostasis",
+      "Cdo1 channels cysteine catabolism toward taurine production"
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.1170369,
+    "duration_api_ms": 60647,
+    "duration_ms": 59289,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 60.169
+  }
+}

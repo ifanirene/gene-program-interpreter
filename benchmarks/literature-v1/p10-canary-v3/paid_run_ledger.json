@@ -1,0 +1,17 @@
+{
+  "approval_file_sha256": "5d4ee10bb699e094a266753918ff42cb9b416c3e27a6556e8768e10f06754b00",
+  "approved_ceiling_usd": 2.5,
+  "benchmark_id": "literature-v1",
+  "canary_session_id": "brain-p10--r1",
+  "fanout_status": "canary_running",
+  "schema_version": 1,
+  "sessions": {
+    "brain-p10--r1": {
+      "attempt_records": [],
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.5,
+      "program_id": "P10",
+      "status": "started"
+    }
+  }
+}

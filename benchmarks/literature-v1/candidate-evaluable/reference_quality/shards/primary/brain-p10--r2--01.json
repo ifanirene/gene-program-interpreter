@@ -1,0 +1,218 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-051ed77bab8c2398ab6a",
+    "RL-23792fc596b05a7bd26c",
+    "RL-5c1ad05f4b58cd61e436",
+    "RL-67217474f94081d5e6a6",
+    "RL-7139315235492569ad76",
+    "RL-7b3938f58c0d76d9fef5",
+    "RL-98c69c822d79aec67b0f",
+    "RL-a9e2ecbeee798dc7b6b0"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "reversed",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1106,
+        "source_type": "abstract",
+        "start": 1059,
+        "text": "Cep164 is dispensable for ciliogenesis in flies"
+      },
+      "function_supported_genes": [],
+      "rationale": "This Drosophila study found that unlike Fbf1 and Cep89, the Cep164 homolog is dispensable for ciliogenesis, the opposite of the mechanism's claim that Cep164 is a required transition-zone/gate component. The species context (Drosophila) is indirect, which the agent correctly labeled.",
+      "red_flags": [
+        "reversed_direction"
+      ],
+      "review_id": "RL-051ed77bab8c2398ab6a",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "support": "contradicts"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 730,
+        "source_type": "abstract",
+        "start": 685,
+        "text": "We identified IFT74 as a JBTS-associated gene"
+      },
+      "function_supported_genes": [
+        "Ift74"
+      ],
+      "rationale": "IFT74 variants were shown to cause Joubert syndrome with attenuated ciliogenesis and disrupted hedgehog signaling in zebrafish morphants and patient fibroblasts, directly supporting its IFT-machinery function. The study system (human JBTS patient fibroblasts/zebrafish) is not closely transferable to postnatal mouse brain endothelium, so 'partial' context is an overclaim relative to 'indirect'.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-23792fc596b05a7bd26c",
+      "studied_genes": [
+        "Ift74"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 15977,
+        "source_type": "full_text",
+        "start": 15885,
+        "text": "WDPCP silencing or inhibition of the MAPK/ERK pathway could reduce mitochondrial biogenesis."
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "WDPCP knockdown reduced mtDNA copy number, mitochondrial biogenesis markers, and ATP via MAPK/ERK signaling in human nasal epithelial cells, supporting a coupling between this ciliary gene and mitochondrial homeostasis rather than an intrinsic mitochondrial structural/metabolic function, so it is a narrower/partial match to Mechanism 2's framing. Context (human nasal epithelium) is indirect relative to mouse brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-5c1ad05f4b58cd61e436",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 17289,
+        "source_type": "full_text",
+        "start": 17186,
+        "text": "Knockdown of Bbs9 using mouse specific shRNA constructs negatively affected ciliogenesis in IMCD3 cells"
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "Zebrafish morphant and mouse IMCD3 shRNA knockdown experiments show Bbs9 is required for BBSome-mediated cilia biogenesis, directly supporting the mechanism's ciliogenesis claim. The zebrafish/kidney-cell system is an indirect (not brain endothelial) context, correctly labeled by the agent.",
+      "red_flags": [],
+      "review_id": "RL-67217474f94081d5e6a6",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 14649,
+        "source_type": "full_text",
+        "start": 14522,
+        "text": "HSECs that lacked WDPCP at the beginning of ciliogenesis differentiated into fewer and shorter cilia compared with the controls"
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "siRNA silencing of WDPCP in human nasal epithelial cells reduced cilia number/length and beating frequency, directly supporting its role as a ciliogenesis/cilia-beating effector as claimed in Mechanism 1. Context (human nasal epithelium) is indirect relative to mouse brain endothelium, matching the agent's declaration.",
+      "red_flags": [],
+      "review_id": "RL-7139315235492569ad76",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2678,
+        "source_type": "full_text",
+        "start": 2558,
+        "text": "Mutations in CC2D2A (Coiled-coil and C2-domains containing protein 2A) are the second most common genetic cause for JBTS"
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "The paper extensively characterizes CC2D2A as a ciliary transition-zone protein, using mouse and zebrafish mutants to show it is required for correct ciliary/vesicle-trafficking protein localization, directly supporting the transition-zone mechanism. The zebrafish photoreceptor/human patient system is indirect relative to mouse brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-7b3938f58c0d76d9fef5",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 600,
+        "source_type": "abstract",
+        "start": 519,
+        "text": "CHCM1/CHCHD6 knockdown causes severe defects in mitochondrial cristae morphology."
+      },
+      "function_supported_genes": [
+        "Chchd6"
+      ],
+      "rationale": "CHCHD6 knockdown directly caused loss of cristae structural integrity and reduced ATP/oxygen consumption, precisely matching the mechanism's claim that Chchd6 is required for cristae integrity and oxidative phosphorylation. The study used human cancer cell lines, an indirect context relative to brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-98c69c822d79aec67b0f",
+      "studied_genes": [
+        "Chchd6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 812,
+        "source_type": "abstract",
+        "start": 683,
+        "text": "TBC1D32 is involved in the development and function of cilia and is expressed in the developing hypothalamus and pituitary gland."
+      },
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "rationale": "This case-series/review reports new probands with TBC1D32 variants and states a ciliary developmental role, but the abstract provides only clinical/genetic association evidence rather than gene-specific mechanistic data, so it partially supports the claim. The reported context (human patients, hypothalamus/pituitary) is indirect, not the closely transferable 'partial' context declared.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a9e2ecbeee798dc7b6b0",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.6408985,
+    "duration_api_ms": 237680,
+    "duration_ms": 236138,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 237.181
+  }
+}

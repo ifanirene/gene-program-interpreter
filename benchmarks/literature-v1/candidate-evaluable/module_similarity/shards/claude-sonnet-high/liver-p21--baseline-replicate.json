@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "liver-p21--baseline-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 1.0
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.35
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.35
+      }
+    ],
+    "moduleSemanticSimilarity": 0.566667,
+    "overall_rationale": "Module 1 pairs are a near-verbatim match of the mevalonate/cholesterol biosynthesis enzyme cascade; module 2 pairs share the identical Scap/Insig1/Ldlr regulatory trio but assert directly conflicting functional directions for the same fold-change signs; module 3 pairs share the same Dgat2/Mttp VLDL-export coupling mechanism but likewise conflict on whether their knockdown activates or attenuates the program, while cross-module pairs show only weak gene/context overlap.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the identical near-complete mevalonate-to-cholesterol enzymatic cascade with the same ~18 gene set and same stepwise mechanism.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 1.0
+      },
+      {
+        "left_module": 1,
+        "rationale": "R2 cites four of L1's pathway enzymes only as downstream SREBP2 targets within a transcriptional-control module, so the mechanism (enzymatic cascade vs. regulatory circuit) differs despite gene overlap.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.3
+      },
+      {
+        "left_module": 1,
+        "rationale": "R3 references a subset of L1's biosynthetic genes but reframes them around MASLD/senescence dysregulation rather than the biosynthetic pathway itself.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's SCAP/INSIG1 regulatory circuit has no counterpart in R1's purely enzymatic pathway description beyond the shared broad biosynthesis context.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both identify the same Scap/Insig1/Ldlr feedback circuit, but L2 states negative Scap FC/positive Insig1 FC reduce/increase the program respectively while R2 asserts the opposite functional direction for the identical sign values.",
+        "relationship": "opposed",
+        "right_module": 2,
+        "similarity": 0.35
+      },
+      {
+        "left_module": 2,
+        "rationale": "Scap and Insig1 appear as regulators in both, but R3's primary framing is MASLD/senescence dysregulation coupled to Dgat2/Mttp rather than the SREBP2 feedback mechanism itself.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.3
+      },
+      {
+        "left_module": 3,
+        "rationale": "Only the Acss2 gene links L3's VLDL-export regulator module to R1's enzymatic pathway, with no shared mechanism.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's Dgat2/Mttp VLDL-export focus shares no regulators or mechanism with R2's Scap/Insig1/Ldlr transcriptional-control module beyond the general liver cholesterol context.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both center on Dgat2/Mttp linking VLDL-TG export to cholesterol synthesis, but L3 states their knockdown attenuates the program while R3 states their knockdown is 'the strongest activator' of the same program.",
+        "relationship": "opposed",
+        "right_module": 3,
+        "similarity": 0.35
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.10893100000000001,
+    "duration_api_ms": 64179,
+    "duration_ms": 62764,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 63.631
+  }
+}

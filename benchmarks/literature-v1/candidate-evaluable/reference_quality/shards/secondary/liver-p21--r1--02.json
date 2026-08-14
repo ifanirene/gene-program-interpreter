@@ -1,0 +1,101 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-96caf1f9350d2ce119e3",
+    "RL-b86ef285975d5bb08e0f",
+    "RL-c70b6666365c8ced88d9"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1381,
+        "source_type": "abstract",
+        "start": 1238,
+        "text": "In the liver, the proportion of NSDHL negative cells dropped from approximately 50% at postnatal day 6 to approximately 20% at one year of age."
+      },
+      "function_supported_genes": [],
+      "rationale": "NSDHL-deficient cells are progressively depleted in mouse liver, but the abstract does not identify them as hepatocytes or experimentally connect depletion to cholesterol biosynthesis. The assigned enzymatic role appears only as background.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-96caf1f9350d2ce119e3",
+      "studied_genes": [
+        "Nsdhl"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 993,
+        "source_type": "abstract",
+        "start": 925,
+        "text": "Three patients had MVD mutations, and 2 patients had PMVK mutations."
+      },
+      "function_supported_genes": [
+        "Mvd",
+        "Pmvk"
+      ],
+      "rationale": "Gene-specific mutations support MVD and PMVK involvement in the mevalonate pathway, but the abstract does not establish their precise enzymatic reactions. The human skin-disease setting is indirect to mouse hepatocytes.",
+      "red_flags": [
+        "insufficient_text"
+      ],
+      "review_id": "RL-b86ef285975d5bb08e0f",
+      "studied_genes": [
+        "Mvd",
+        "Pmvk"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1553,
+        "source_type": "abstract",
+        "start": 1373,
+        "text": "The combination of an SQS inhibitor with an HMGCR or FDPS inhibitor provides a rational approach for reducing cholesterol synthesis while preventing nonsterol isoprenoid depletion."
+      },
+      "function_supported_genes": [
+        "Fdps"
+      ],
+      "rationale": "Pharmacologic FDPS inhibition supports its causal role upstream of cholesterol synthesis and nonsterol isoprenoids. HepG2 cells provide a related hepatic but transformed human context.",
+      "red_flags": [],
+      "review_id": "RL-c70b6666365c8ced88d9",
+      "studied_genes": [
+        "Fdps"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 61696,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 87579,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 7249,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 137.52
+  }
+}

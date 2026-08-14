@@ -1,0 +1,14 @@
+{
+  "content_hash": "dce437a1818ff2354e15b18e89217d14e37e001b355bd4924294b403d46677c7",
+  "doi": "10.1002/glia.22321",
+  "errors": [],
+  "paper_key": "44517af936f41010d75d",
+  "pmcid": null,
+  "pmid": "22392649",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The concentration of the excitotoxic amino acid, L-glutamate, in brain interstitial fluid is tightly regulated by uptake transporters and metabolism in astrocytes and neurons. The aim of this study was to investigate the possible role of the blood-brain barrier endothelium in brain L-glutamate homeostasis. Transendothelial transport- and accumulation studies of (3) H-L-glutamate, (3) H-L-aspartate, and (3) H-D-aspartate in an electrically tight bovine endothelial/rat astrocyte blood-brain barrier coculture model were performed. After 6 days in culture, the endothelium displayed transendothelial resistance values of 1014 \u00b1 70 \u03a9 cm(2) , and (14) C-D-mannitol permeability values of 0.88 \u00b1 0.13 \u00d7 10(-6) cm s(-1) . Unidirectional flux studies showed that L-aspartate and L-glutamate, but not D-aspartate, displayed polarized transport in the brain-to-blood direction, however, all three amino acids accumulated in the cocultures when applied from the abluminal side. The transcellular transport kinetics were characterized with a K(m) of 69 \u00b1 15 \u03bcM and a J(max) of 44 \u00b1 3.1 pmol min(-1) cm(-2) for L-aspartate and a K(m) of 138 \u00b1 49 \u03bcM and J(max) of 28 \u00b1 3.1 pmol min(-1) cm(-2) for L-glutamate. The EAAT inhibitor, DL-threo-\u00df-Benzyloxyaspartate, inhibited transendothelial brain-to-blood fluxes of L-glutamate and L-aspartate. Expression of EAAT-1 (Slc1a3), -2 (Slc1a2), and -3 (Slc1a1) mRNA in the endothelial cells was confirmed by conventional PCR and localization of EAAT-1 and -3 in endothelial cells was shown with immunofluorescence. Overall, the findings suggest that the blood-brain barrier itself may participate in regulating brain L-glutamate concentrations.",
+  "text_type": "abstract",
+  "title": "In vitro evidence for the brain glutamate efflux hypothesis: brain endothelial cells cocultured with astrocytes display a polarized brain-to-blood transport of glutamate."
+}

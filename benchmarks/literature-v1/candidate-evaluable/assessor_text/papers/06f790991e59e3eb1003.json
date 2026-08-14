@@ -1,0 +1,16 @@
+{
+  "content_hash": "b53c25810066e0ee3e2b83dd08d6301799170a86ecd59ce3fe53c5b17cc12f1a",
+  "doi": "10.1016/j.ajhg.2008.10.002",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "06f790991e59e3eb1003",
+  "pmcid": "PMC2668034",
+  "pmid": "18950740",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Joubert syndrome and related disorders (JSRD) are primarily autosomal-recessive conditions characterized by hypotonia, ataxia, abnormal eye movements, and intellectual disability with a distinctive mid-hindbrain malformation. Variable features include retinal dystrophy, cystic kidney disease, and liver fibrosis. JSRD are included in the rapidly expanding group of disorders called ciliopathies, because all six gene products implicated in JSRD (NPHP1, AHI1, CEP290, RPGRIP1L, TMEM67, and ARL13B) function in the primary cilium/basal body organelle. By using homozygosity mapping in consanguineous families, we identify loss-of-function mutations in CC2D2A in JSRD patients with and without retinal, kidney, and liver disease. CC2D2A is expressed in all fetal and adult tissues tested. In ciliated cells, we observe localization of recombinant CC2D2A at the basal body and colocalization with CEP290, whose cognate gene is mutated in multiple hereditary ciliopathies. In addition, the proteins can physically interact in vitro, as shown by yeast two-hybrid and GST pull-down experiments. A nonsense mutation in the zebrafish CC2D2A ortholog (sentinel) results in pronephric cysts, a hallmark of ciliary dysfunction analogous to human cystic kidney disease. Knockdown of cep290 function in sentinel fish results in a synergistic pronephric cyst phenotype, revealing a genetic interaction between CC2D2A and CEP290 and implicating CC2D2A in cilium/basal body function. These observations extend the genetic spectrum of JSRD and provide a model system for studying extragenic modifiers in JSRD and other ciliopathies.",
+  "text_type": "abstract",
+  "title": "CC2D2A is mutated in Joubert syndrome and interacts with the ciliopathy-associated basal body protein CEP290."
+}

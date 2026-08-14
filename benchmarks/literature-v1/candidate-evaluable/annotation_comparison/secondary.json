@@ -1,0 +1,256 @@
+{
+  "assessment_type": "model",
+  "assessments": [
+    {
+      "assessment_id": "annotation-brain-p10-r1",
+      "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+      "candidate_additions": [
+        "Hedgehog signaling through BBSome-mediated Smo/GPR161 trafficking, assigned to Bbs9, Nme7, and Tbc1d32.",
+        "A secondary mitochondrial cristae/protein-biogenesis module based on Chchd6 and Metap1d."
+      ],
+      "candidate_removed_or_weakened": [
+        "The baseline’s endothelial primary-cilium mechanosensing interpretation, including blood-flow shear sensing and vascular remodeling, is absent.",
+        "The CNS endothelial identity/BBB module is substantially weakened: Gata2, Eng, and Tet1 assignments are omitted, leaving only Fzd4 as context."
+      ],
+      "core_interpretation_changed": true,
+      "decision_relevant_differences": [
+        "Ciliary function changes from endothelial flow mechanotransduction to Hedgehog GPCR trafficking and developmental signaling.",
+        "The coupled cilia-plus-CNS-vascular-identity model becomes primarily a ciliogenesis/Hedgehog model with a mitochondrial secondary theme."
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "Both annotations identify primary-cilia assembly as the dominant structural program. However, the candidate replaces the baseline’s central endothelial mechanosensing output with Hedgehog signaling, substantially reduces the BBB/vascular-regulatory interpretation, and adds a mitochondrial module. These changes could lead a reader to prioritize different biological functions and experiments.",
+      "semantic_relation": "materially_changed",
+      "shared_core_conclusions": [
+        "P10 is dominated by a coherent primary-cilia biogenesis and trafficking program.",
+        "Bbs9, Cc2d2a, Wdpcp, Ift74, Sdccag8, Tbc1d32, Cep164, and Nme7 support the ciliary interpretation.",
+        "Fzd4 places the program in postnatal brain endothelial and CNS vascular context."
+      ]
+    },
+    {
+      "assessment_id": "annotation-brain-p10-r2",
+      "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+      "candidate_additions": [
+        "Adds a secondary mitochondrial-maintenance theme involving Bckdhb, Clybl, Chchd6, Metap1d, and Wdpcp.",
+        "Adds ciliopathy/CNS-malformation and cilia-dependent Hedgehog signaling context."
+      ],
+      "candidate_removed_or_weakened": [
+        "Weakens the explicit endothelial cilia mechanosensing, shear-response, and postnatal BBB-maturation interpretation.",
+        "Reduces Fzd4, Gata2, and Eng from a developed BBB/angiogenic regulatory mechanism to brief endothelial-context framing.",
+        "Omits Nme7 and Cfap36 from the primary cilia gene set."
+      ],
+      "core_interpretation_changed": false,
+      "decision_relevant_differences": [
+        "The candidate supports considering mitochondrial homeostasis as a secondary program component.",
+        "The baseline more strongly supports a flow-sensing and BBB-maturation interpretation of the ciliary program."
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "Both annotations identify primary cilia biogenesis, transition-zone organization, and intraflagellar/BBSome trafficking as the dominant program and place it in developing brain endothelium using Fzd4, Gata2, and Eng. The candidate meaningfully adds a mitochondrial subprogram and ciliopathy/Hedgehog context, while weakening the baseline's explicit mechanosensing and BBB-maturation mechanism. These refinements could affect secondary follow-up choices but do not replace the central ciliary interpretation.",
+      "semantic_relation": "same_core_with_meaningful_refinement",
+      "shared_core_conclusions": [
+        "P10 is dominated by genes supporting primary cilia assembly and function.",
+        "Bbs9, Cc2d2a, Tbc1d32, Wdpcp, Ift74, Cep164, and Sdccag8 support ciliary trafficking, gating, and ciliogenesis.",
+        "Fzd4, Gata2, and Eng place the program in a developing brain-endothelial vascular context."
+      ]
+    },
+    {
+      "assessment_id": "annotation-brain-p11-r1",
+      "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+      "candidate_additions": [
+        "A distinct arteriovenous identity module involving Hopx, Angpt2, Cxcr4, Rgs6, and Tek.",
+        "BBB glutamate transport through Slc1a1/EAAT-3.",
+        "Angiogenic roles for Tnfrsf11b/OPG."
+      ],
+      "candidate_removed_or_weakened": [
+        "The CNS-specific TGF-β/ALK5 requirement for diving-tip-cell identity and deep plexus formation is replaced by a broader BBB morphogenesis and integrity interpretation.",
+        "The membrane–ER calcium-signaling module involving Cacna1c, Jph1, Syt12, and Rgs6 is largely removed.",
+        "The proposed neurovascular-coupling interpretation of the ion-channel module is weakened to general flow mechanosensing."
+      ],
+      "core_interpretation_changed": true,
+      "decision_relevant_differences": [
+        "Both annotations identify angiogenic tip-cell sprouting as a central program.",
+        "The baseline interprets Tgfbr1/Tgfbr2 as specifying CNS diving-tip cells, whereas the candidate interprets them mainly as supporting BBB formation and barrier integrity.",
+        "The candidate elevates arteriovenous specification and BBB transport to major themes while de-emphasizing calcium microdomains and neurovascular coupling."
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "The shared tip-cell mechanism remains, including Angpt2, Cxcr4, Cdc42ep3, Nrp1, and opposing Tek activity. However, two other central modules are substantially recast: CNS-specific TGF-β-dependent diving-tip identity becomes BBB maintenance, and the calcium-signaling/neurovascular module becomes arteriovenous specification plus BBB transport. These shifts could lead a reader to prioritize different biological functions and experiments, so this is more than added evidence coverage.",
+      "semantic_relation": "materially_changed",
+      "shared_core_conclusions": [
+        "P11 represents active angiogenic sprouting and tip-cell behavior in postnatal brain endothelium.",
+        "Angpt2, Cxcr4, and Cdc42ep3 support the tip-cell interpretation.",
+        "Nrp1 promotes the program, whereas Tek/Tie2 opposes it.",
+        "Kcnj2 supports endothelial mechanosensing.",
+        "Tgfbr1 and Tgfbr2 signaling positively supports P11."
+      ]
+    },
+    {
+      "assessment_id": "annotation-brain-p11-r2",
+      "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+      "candidate_additions": [
+        "Kcnj2-mediated endothelial shear/flow sensing and vasodilation.",
+        "Tnfrsf11b-mediated endothelial survival and tube formation.",
+        "Slc1a1-mediated metabolic support of endothelial migration and angiogenesis.",
+        "Rgs6 involvement in Notch-dependent arterial specification."
+      ],
+      "candidate_removed_or_weakened": [
+        "The Dll4-Notch-CXCR4 mechanism coupling tip-cell migration to arterial connection is substantially weakened.",
+        "Hopx-supported intracranial arterial endothelial identity is no longer interpreted.",
+        "TGF-β control of Angpt2, angiogenic-front migration, and postnatal CNS vascular integrity is reduced from a central mechanism to a brief supporting statement.",
+        "The Nrp1–Alk1/Alk5 link between tip/stalk transition and TGF-β balance is omitted."
+      ],
+      "core_interpretation_changed": true,
+      "decision_relevant_differences": [
+        "Both annotations identify a postnatal brain endothelial sprouting/tip-cell program.",
+        "The baseline centers arterial specification and TGF-β-dependent vascular integrity alongside sprouting.",
+        "The candidate instead elevates mechanosensitive flow sensing and endothelial survival/metabolism as the other two major themes.",
+        "This changes which biological processes would be prioritized for follow-up experiments."
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "The dominant angiogenic tip-cell interpretation is retained through Angpt2, Cxcr4, and Nrp1. However, two of the baseline's three central mechanisms—arterial fate coupling and TGF-β/Angpt2 homeostatic control—are largely displaced by flow sensing and survival/metabolic support. This is more than added evidence coverage and could redirect biological follow-up.",
+      "semantic_relation": "materially_changed",
+      "shared_core_conclusions": [
+        "P11 represents a postnatal mouse brain endothelial program.",
+        "Sprouting angiogenesis and tip-cell identity are the dominant shared interpretation.",
+        "Angpt2, Cxcr4, and Nrp1 support active tip-cell migration and filopodial behavior.",
+        "Tgfbr1 and Tgfbr2 support brain vascular development, although their mechanistic prominence differs."
+      ]
+    },
+    {
+      "assessment_id": "annotation-liver-p21-r1",
+      "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+      "candidate_additions": [
+        "Assigns ERG28 a non-catalytic scaffold role in the sterol C4-demethylation complex and links it to SREBP-2 regulation.",
+        "Adds RDH11 as an SREBP-2-regulated hepatic cholesterol-homeostasis gene.",
+        "Specifies MTTP–ACAT2 coupling between cholesterol esterification and VLDL export.",
+        "Identifies Ddr2, Cetn2, Zfp839, and Tas2r138 as lacking pathway evidence."
+      ],
+      "candidate_removed_or_weakened": [
+        "Changes the pathway description from complete to nearly complete.",
+        "No longer explicitly interprets SCAP, INSIG1, and LDLR perturbation directions as knockout-dependent suppression, hyperactivation, and compensatory induction.",
+        "Weakens the claim that reduced DGAT2/MTTP activity directly attenuates upstream cholesterol biosynthesis and instead emphasizes broader lipid-export coupling.",
+        "Drops the claim that the SCAP–INSIG1–LDLR circuit gates the program in both young and aged hepatocytes."
+      ],
+      "core_interpretation_changed": false,
+      "decision_relevant_differences": [
+        "ACAT2 is reassigned from an early HMG-CoA-generating role in the baseline to cholesterol esterification in the candidate.",
+        "ERG28 and RDH11 receive specific functional assignments that expand the program beyond catalytic pathway enzymes.",
+        "The candidate is more cautious about pathway completeness and the causal interpretation of perturbation effects."
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "Both annotations identify P21 as a hepatocyte mevalonate-to-cholesterol biosynthesis program controlled by SCAP–INSIG1–SREBP2 and coupled to acetyl-CoA supply and DGAT2/MTTP-dependent lipid export. The candidate preserves that central interpretation but meaningfully refines individual gene roles, especially ACAT2, ERG28, and RDH11, while weakening some causal and perturbation-direction claims.",
+      "semantic_relation": "same_core_with_meaningful_refinement",
+      "shared_core_conclusions": [
+        "P21 represents de novo hepatic cholesterol biosynthesis through the mevalonate and post-squalene pathways.",
+        "SCAP–INSIG1-dependent SREBP-2 signaling transcriptionally regulates the program, with LDLR representing the uptake/homeostasis arm.",
+        "ACSS2 supplies acetyl-CoA for lipid and cholesterol synthesis.",
+        "DGAT2 and MTTP connect the sterol program to triglyceride handling, VLDL assembly, and MASLD-related lipid metabolism."
+      ]
+    },
+    {
+      "assessment_id": "annotation-liver-p21-r2",
+      "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+      "candidate_additions": [
+        "Assigns Erg28 as a scaffold for the post-squalene C4-demethylation complex and notes feedback from ERG28 loss to SREBP-2 activation.",
+        "Adds direct SREBP-2-responsive regulation of Erg28, Dhcr7, and distinctive gene Rdh11.",
+        "Adds a secondary MASLD lipid-homeostasis axis involving Ddr2–AMPK/ACC and regulator Fads2."
+      ],
+      "candidate_removed_or_weakened": [
+        "Drops the baseline conclusion that the program is elevated in liver aging and drives senescence through a mevalonate–ERRα–mitochondrial axis.",
+        "Weakens the proposed Dgat2/Mttp-loss feedback mechanism that impaired VLDL export activates mevalonate-pathway transcription.",
+        "Omits Ldlr as the SREBP2-driven cholesterol-uptake arm."
+      ],
+      "core_interpretation_changed": false,
+      "decision_relevant_differences": [
+        "The candidate supports a broader MASLD lipid-homeostasis interpretation through Ddr2 and Fads2.",
+        "The candidate no longer supports using P21 as specifically linked to aging-associated hepatic senescence.",
+        "The causal interpretation of Dgat2/Mttp perturbations is reduced from a proposed biosynthetic feedback mechanism to general lipid-homeostasis context."
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "Both annotations identify P21 primarily as a near-complete hepatic mevalonate-to-cholesterol biosynthesis program controlled by SCAP–INSIG1–SREBP2. The candidate meaningfully refines gene-level assignments and adds a Ddr2/Fads2 MASLD axis, while removing the aging/senescence interpretation and weakening the VLDL-feedback claim. These changes affect secondary context and mechanism detail but do not replace the central biological interpretation.",
+      "semantic_relation": "same_core_with_meaningful_refinement",
+      "shared_core_conclusions": [
+        "P21 represents coordinated de novo hepatic cholesterol synthesis across mevalonate and post-squalene steps.",
+        "SCAP and INSIG1 regulate the program through SREBP2 activation.",
+        "Acss2 supports pathway carbon supply, while Acat2 connects cholesterol synthesis to esterification.",
+        "Dgat2 and Mttp connect the program to hepatic lipid handling and MASLD context."
+      ]
+    },
+    {
+      "assessment_id": "annotation-liver-p25-r1",
+      "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+      "candidate_additions": [
+        "Assigns Cyp2c50 specifically to arachidonic acid/EET epoxygenase activity.",
+        "Defines a Sult2a8–Cdo1 bile acid axis linking sulfation and taurine conjugation to cholesterol handling.",
+        "Adds Htatip2-mediated lipid storage/oxidation and Sord-linked polyol–fructose metabolism.",
+        "Adds CAR/PXR/Nrf2 and PPARalpha regulatory context."
+      ],
+      "candidate_removed_or_weakened": [
+        "Drops the Car5a-supported urea-cycle/ammonia-detoxification conclusion.",
+        "Drops Agmat-mediated arginine/polyamine nitrogen disposal.",
+        "Weakens the broader sulfur amino acid and nitrogen-disposal theme by reassigning Cdo1 mainly to bile acid conjugation.",
+        "Omits Lonp2-mediated peroxisomal protein quality control."
+      ],
+      "core_interpretation_changed": false,
+      "decision_relevant_differences": [
+        "The candidate no longer supports nitrogen/ammonia disposal as a distinct third program mechanism.",
+        "Cdo1 is reframed from general sulfur catabolism toward taurine-dependent bile acid biotransformation.",
+        "The lipid theme expands to polyol–fructose metabolism and Htatip2 regulation."
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "Both annotations retain the same dominant interpretation: a hepatocyte program coupling xenobiotic/endobiotic detoxification, bile acid handling, and lipid metabolism in an aging/MASLD context. The candidate adds specific enzyme and regulatory assignments, but meaningfully removes the baseline Car5a/Agmat nitrogen-disposal mechanism and reframes Cdo1. This is a meaningful refinement, not a change to the central program identity.",
+      "semantic_relation": "same_core_with_meaningful_refinement",
+      "shared_core_conclusions": [
+        "Coordinated Phase I/II hepatic detoxification involving CYP, ALDH, GST, AKR, and SULT enzymes.",
+        "Bile acid/steroid processing and elimination are major program functions.",
+        "FITM1, ECI2, HAO2, CYB5B, and related genes support hepatic lipid storage and fatty-acid metabolism.",
+        "The program is interpreted in a hepatocyte aging/MASLD context."
+      ]
+    },
+    {
+      "assessment_id": "annotation-liver-p25-r2",
+      "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+      "candidate_additions": [
+        "Assigns Sult2a8 specifically to 7α-hydroxyl bile acid sulfation.",
+        "Adds Psmd1-mediated lipid-droplet regulation to the lipid-storage theme.",
+        "Adds Car5a-supported ureagenesis and Alad-mediated heme biosynthesis to sulfur/nitrogen metabolism.",
+        "Frames the program as periportal/metabolically active."
+      ],
+      "candidate_removed_or_weakened": [
+        "Drops the explicit Nrf2/CAR co-regulatory interpretation and associated cholestasis-protective mechanism.",
+        "Omits Cyp2c50-driven Phase I oxidation from the detoxification module.",
+        "Omits Eci2 unsaturated-fatty-acid oxidation and Lonp2 peroxisomal quality control.",
+        "Weakens the direct Cdo1–cysteine–gluconeogenesis connection and omits Agmat.",
+        "Changes the spatial context from baseline pericentral hepatocytes to candidate periportal hepatocytes."
+      ],
+      "core_interpretation_changed": false,
+      "decision_relevant_differences": [
+        "The detoxification program is narrowed from coordinated Phase I/II Nrf2/CAR activity to predominantly Phase II sulfation and conjugation.",
+        "The lipid axis shifts emphasis from fatty-acid oxidation and peroxisomal maintenance toward lipid-droplet control.",
+        "The opposing pericentral versus periportal assignments could affect conclusions about hepatocyte zonation."
+      ],
+      "evidence_depth_change": "mixed",
+      "rationale": "Both annotations retain the same three central biological themes: bile acid/xenobiotic detoxification, peroxisomal-lipid metabolism, and sulfur metabolism with an aging signature. The candidate adds useful gene-level functions for Sult2a8, Psmd1, Car5a, and Alad, but removes major regulatory and enzymatic details and introduces a conflicting zonation qualifier. These are meaningful refinements and weakenings, not a replacement of the core program interpretation.",
+      "semantic_relation": "same_core_with_meaningful_refinement",
+      "shared_core_conclusions": [
+        "SULT2A enzymes, Gsta3, Akr1c6, and Aldh1a1 define hepatic bile acid/steroid and xenobiotic detoxification.",
+        "Hao2, Aldh3a2, and Fitm1 support a peroxisomal/microsomal fatty-acid and lipid-homeostasis axis.",
+        "Cdo1 links hepatic cysteine catabolism to taurine, glutathione, and bile-acid metabolism.",
+        "Rgn/SMP30 provides an aging-related hepatocyte signature.",
+        "The program is connected to hepatic lipid dysregulation in MASLD."
+      ]
+    }
+  ],
+  "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+  "mode": "independent",
+  "schema_version": 1,
+  "telemetry": {
+    "configured_concurrency": 6,
+    "cost_telemetry_shards": 0,
+    "known_cost_usd_equivalent": null,
+    "known_duration_seconds": 142.536,
+    "model": "gpt-5.6-sol",
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "shards": 8,
+    "unknown_cost_shards": 8
+  }
+}

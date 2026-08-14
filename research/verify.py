@@ -49,6 +49,7 @@ from research.schema import (
     AgentResearchResult,
     CandidateMechanism,
     Evidence,
+    EvidenceLink,
     ResearchResult,
 )
 
@@ -222,6 +223,8 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
         ev.study_type = ev.study_type or p.study_type
         ev.context_match = ev.context_match or p.context_match
         ev.relevance_note = ev.relevance_note or p.note
+        if ev.text_type == "unavailable" and p.text_type != "unavailable":
+            ev.text_type = p.text_type
 
     def _absorb_evidence(ev: Evidence, other: Evidence) -> None:
         if not ev.pmid and other.pmid:
@@ -233,6 +236,8 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
         ev.study_type = ev.study_type or other.study_type
         ev.context_match = ev.context_match or other.context_match
         ev.relevance_note = ev.relevance_note or other.relevance_note
+        if ev.text_type == "unavailable" and other.text_type != "unavailable":
+            ev.text_type = other.text_type
 
     def _intern(p: AgentPaper) -> Optional[str]:
         ks = _keys(p)
@@ -259,6 +264,7 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
                     study_type=p.study_type,
                     context_match=p.context_match,
                     relevance_note=p.note,
+                    text_type=p.text_type,
                 )
             )
         else:
@@ -284,16 +290,36 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
     # Hard 3-cap: truncate FIRST, then build the pool only from the kept mechanisms
     # (so no orphan evidence from dropped 4th+ mechanisms enters the pool).
     kept = agent.candidate_mechanisms[:MAX_MECHANISMS]
-    mechanisms = [
-        CandidateMechanism(
-            name=m.name,
-            summary=m.summary,
-            supporting_genes=m.supporting_genes,
-            supporting_regulators=m.supporting_regulators,
-            evidence_ids=_ids(m.papers),
+    mechanisms: list[CandidateMechanism] = []
+    for mechanism in kept:
+        links: list[EvidenceLink] = []
+        for paper in mechanism.papers:
+            evidence_id = _intern(paper)
+            if evidence_id and not any(link.evidence_id == evidence_id for link in links):
+                links.append(
+                    EvidenceLink(
+                        evidence_id=evidence_id,
+                        role=paper.role,
+                        selection_reason=paper.selection_reason or paper.note or "legacy evidence link",
+                        studied_genes=paper.studied_genes,
+                        function_supported_genes=paper.function_supported_genes,
+                        finding=paper.finding,
+                        direction=paper.direction,
+                        context=paper.context,
+                        limitation=paper.limitation,
+                        evidence_span=paper.evidence_span,
+                    )
+                )
+        mechanisms.append(
+            CandidateMechanism(
+                name=mechanism.name,
+                summary=mechanism.summary,
+                supporting_genes=mechanism.supporting_genes,
+                supporting_regulators=mechanism.supporting_regulators,
+                evidence_ids=[link.evidence_id for link in links],
+                evidence_links=links,
+            )
         )
-        for m in kept
-    ]
 
     # Collapse any records unified mid-build: drop the aliased pool entries and remap every
     # mechanism's evidence_ids onto their canonical id (order-preserving, deduped).
@@ -306,6 +332,8 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
                 if c not in remapped:
                     remapped.append(c)
             mech.evidence_ids = remapped
+            for link in mech.evidence_links:
+                link.evidence_id = _canon(link.evidence_id)
 
     ev_by_id = {e.evidence_id: e for e in pool}
     for mech in mechanisms:
@@ -319,6 +347,8 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
         queries=agent.queries,
         candidate_mechanisms=mechanisms,
         evidence=pool,
+        supplied_gene_ledger=agent.supplied_gene_ledger,
+        regulator_ledger=agent.regulator_ledger,
         contradictions=agent.contradictions,
         evidence_gaps=agent.evidence_gaps,
         agent_summary=agent.agent_summary,
@@ -368,6 +398,23 @@ def _resolve_evidence(rr: ResearchResult) -> None:
             if pr and pr.get("doi"):
                 doi = pr["doi"]
                 e.doi = doi
+
+        # A supplied PMID+DOI pair must describe the same record. A proven mismatch is
+        # quarantined rather than allowing either valid identifier to make the pair supportive.
+        if doi and pmid:
+            pmid_record = pmid_res.get(pmid)
+            pmid_doi = _norm_doi(pmid_record.get("doi")) if pmid_record else None
+            if pmid_record and pmid_record.get("resolved") is True and pmid_doi:
+                if pmid_doi != _norm_doi(doi):
+                    e.identifier_status = "conflict"
+                    e.resolved = False
+                    e.registry = None
+                    e.retracted = None
+                    e.verify_error = f"identifier conflict: PMID maps to DOI {pmid_doi}"
+                    continue
+                e.identifier_status = "matching"
+            else:
+                e.identifier_status = "unverified"
 
         outcomes: list[Optional[bool]] = []
         errs: list[str] = []

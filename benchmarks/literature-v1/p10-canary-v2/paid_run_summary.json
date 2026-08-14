@@ -1,0 +1,45 @@
+{
+  "api_equivalent_cost_usd_recorded": 1.3884880999999998,
+  "approval": {
+    "approval_file_sha256": "daba94edbcd3d43476efb358b1543e569595d4eb8c5463ebd2e96a0946072773",
+    "approved": true,
+    "approved_at": "2026-07-22T14:59:00-07:00",
+    "approved_by": "workspace user (standing subscription research authorization; generous limits authorized)",
+    "auth_preflight": {
+      "api_provider": "firstParty",
+      "auth_method": "claude.ai",
+      "command_exit_code": 0,
+      "logged_in": true
+    },
+    "benchmark_id": "literature-v1",
+    "max_api_equivalent_usd": 2.5,
+    "run_dir": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/p10-canary-v2"
+  },
+  "benchmark_id": "literature-v1",
+  "blocking_reason": "canary was not successful on its first attempt; remaining sessions were not launched",
+  "execution": {
+    "auth": "subscription",
+    "concurrency": 8,
+    "cost_basis": "api-equivalent",
+    "max_attempts": 1,
+    "max_budget_usd": 2.5,
+    "max_turns": 120,
+    "model": "claude-sonnet-4-6",
+    "per_program_timeout_seconds": 1800
+  },
+  "freezable": false,
+  "schema_version": 1,
+  "sessions": [
+    {
+      "attempts": 1,
+      "cost_usd": 1.3884880999999998,
+      "duration_ms": 779951,
+      "ledger_status": "research_complete",
+      "num_turns": 73,
+      "program_id": "P10",
+      "session_id": "brain-p10--r1",
+      "status": "incomplete",
+      "telemetry_complete": true
+    }
+  ]
+}

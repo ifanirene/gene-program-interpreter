@@ -1,0 +1,2952 @@
+{
+  "approval_file_sha256": "0d53bc8daf176598c03abdedb6eaddc5ad9719c4fb3ab81248e510ed61c60093",
+  "approved_ceiling_usd": 28.0,
+  "benchmark_id": "literature-v1",
+  "canary_session_id": "brain-p8--r1",
+  "fanout_status": "complete",
+  "schema_version": 1,
+  "sessions": {
+    "brain-p10--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "1297054c879f797d4783d551e9f31bb53bba74729b2fa2da8e180b6c0593cbed",
+          "cost_usd": 0.6696941000000001,
+          "duration_ms": 323966,
+          "error": null,
+          "is_error": false,
+          "num_turns": 42,
+          "result_sha256": "73ea7a1d852616f5b7a38be16c5c4cd527ecef82a148619c3763cf3b59513af2",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 43616,
+            "cache_read": 428247,
+            "input": 43,
+            "output": 18584,
+            "total": 490490
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/program_bundles/P10.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"file_path\": \"/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v4/sessions/brain-p10--r1/workspaces/P10/program_bundles/P10.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"primary cilia endothelial cells brain blood vessel mechanosensing\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"BBS9 Cc2d2a Wdpcp Ift74 cilia biogenesis brain development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Cep164 Sdccag8 ciliopathy ciliary transition zone centrosome\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"primary cilia endothelial cells mechanosensing flow\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"BBSome BBS9 cilia assembly intraflagellar transport\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Cc2d2a ciliopathy Joubert syndrome cilia transition zone\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"26122329\", \"41969033\", \"18297727\", \"21875563\", \"28529994\", \"23976901\", \"20301537\", \"33517424\", \"30970040\", \"26485645\", \"21816947\", \"22983010\", \"36533556\", \"21725307\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cep164 cilia biogenesis distal appendage basal body\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"IFT74 intraflagellar transport cilia assembly tubulin\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"30131441\", \"24469809\", \"20301301\", \"27068536\", \"36533556\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Wdpcp planar cell polarity cilia WD repeat\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Nme7 dynein arm axoneme cilia\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Fzd4 Frizzled4 blood-brain barrier endothelial Wnt signaling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"20301537\", \"33598458\", \"23217714\", \"28675177\", \"25373781\", \"30478038\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sdccag8 NPHP10 nephronophthisis cilia centrosome\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Gata2 endothelial cell transcription factor vascular development brain\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"40963808\", \"34848385\", \"20301537\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sdccag8 serologically defined colon cancer antigen cilia centrosome kidney\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Endoglin ENG TGF-beta endothelial angiogenesis blood-brain barrier\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"primary cilia endothelial cells blood-brain barrier brain vasculature postnatal\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"35131266\", \"41955593\", \"20301537\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Endoglin endothelial TGF-beta angiogenesis cerebrovascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Tbc1d32 cilia hedgehog signaling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"BBS9 Bardet-Biedl syndrome BBSome complex cilia trafficking\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"22479622\", \"29590217\", \"27312011\", \"33382037\", \"29487109\", \"27352867\", \"32246621\", \"20301537\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tet1 DNA methylation epigenetic endothelial cells brain vasculature\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Map2k6 MKK6 p38 MAPK endothelial angiogenesis stress\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"42132410\", \"10987301\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Gata2 blood vessel endothelial specification transcription factor\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cfap36 cilia flagella associated protein function\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Nme7 NME nucleoside diphosphate kinase cilia motility\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"36806681\", \"36197446\", \"29035278\", \"21666600\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cfap36 cilia flagella associated protein ciliopathy\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Nme7 nucleoside diphosphate kinase cilia left-right asymmetry\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"20215702\", \"28877983\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Gata2 endothelial identity vascular angiogenesis gene regulation\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"endothelial primary cilia Notch Wnt VEGF blood brain barrier\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P10 brain endothelial genes are dominated by a cilia biogenesis and ciliary trafficking module (Bbs9/BBSome, Cc2d2a, Ift74, Sdccag8, Tbc1d32, Cep164, Wdpcp, Nme7, Cfap36) whose shared function in endothelial ce...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 43616,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 43616,
+            "cache_read_input_tokens": 428247,
+            "inference_geo": "not_available",
+            "input_tokens": 43,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 8360,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 8360,
+                "cache_read_input_tokens": 49248,
+                "input_tokens": 3,
+                "output_tokens": 656,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 18584,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "ada402056595403a8f2e8ff5669c28bcd06722a9f3ad610cbb855d049b3c4109",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P10",
+      "recorded_cost_usd": 0.6696941000000001,
+      "status": "verified",
+      "verification_summary_sha256": "b9ce43eb175b938ed7f804a780ecc314ed877f438e79db747c94bc5fda9766b4"
+    },
+    "brain-p10--r2": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "0fe27b4885efd51de9e9e2396f70092546cc3b7d195d91429bbd2aa3388f3d7f",
+          "cost_usd": 0.6100148000000001,
+          "duration_ms": 317838,
+          "error": null,
+          "is_error": false,
+          "num_turns": 32,
+          "result_sha256": "0881778e9175e1994dc45e5303a696b583611d04ba896a16da36a27025eff7fc",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 40795,
+            "cache_read": 330926,
+            "input": 34,
+            "output": 17682,
+            "total": 389437
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/program_bundles/P10.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"file_path\": \"/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v4/sessions/brain-p10--r2/workspaces/P10/program_bundles/P10.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"primary cilia brain endothelial cells blood-brain barrier development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"IFT74 CEP164 BBS9 SDCCAG8 cilia vascular endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Cc2d2a Wdpcp Tbc1d32 cilia ciliopathy transition zone\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Gata2 brain endothelial blood-brain barrier postnatal development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Fzd4 Norrin retinal blood-brain barrier Wnt signaling angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cc2d2a ciliary transition zone Joubert syndrome cilia\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"CEP164 centriole ciliogenesis centrosome\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Wdpcp planar cell polarity cilia WD repeat\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Gata2 endothelial angiogenesis vasculature transcription factor\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Endoglin Eng brain endothelial TGF-beta blood-brain barrier\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"BBS9 Bardet-Biedl syndrome BBSome cilia assembly\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"SDCCAG8 nephronophthisis centrosome cilia\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"IFT74 intraflagellar transport cilia assembly\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Endoglin TGF-beta angiogenesis endothelial hereditary hemorrhagic telangiectasia\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"primary cilia mechanosensing endothelial cells shear stress flow sensing\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"35269595\", \"33643074\", \"41955593\", \"23124509\", \"30970040\", \"26485645\", \"22983010\", \"21725307\", \"24982133\", \"23253480\", \"20301537\", \"33598458\", \"26085087\", \"31530639\", \"20301301\", \"27068536\", \"24722439\", \"22499991\", \"23892628\"...",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"37268690\", \"37947657\", \"28675177\", \"38352533\", \"37315795\", \"16595794\", \"28796572\", \"41969033\", \"18297727\", \"28529994\", \"23976901\", \"34995479\", \"39696441\", \"36533556\", \"23012439\", \"37555648\", \"27068536\", \"36865301\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Nme7 NME family cilia axoneme\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cfap36 cilia flagella associated protein\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tbc1d32 cilia ciliopathy hedgehog signaling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"20301537\", \"20301301\", \"10640707\", \"24052951\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"33382037\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"NME7 axoneme dynein cilia flagella motility\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"endothelial primary cilia postnatal brain vascular development angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"NME7 left-right asymmetry cilia dynein arm\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"NME7 cilia motile primary ciliopathy\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"33916973\", \"38366037\", \"29674126\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P10 in mouse postnatal brain endothelial cells is dominated by a primary cilia gene set: at least nine program and distinctive genes (Cc2d2a, Cep164, Ift74, Bbs9, Wdpcp, Nme7, Sdccag8, Tbc1d32, Cfap36) encode c...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 40795,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 40795,
+            "cache_read_input_tokens": 330926,
+            "inference_geo": "not_available",
+            "input_tokens": 34,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 9398,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 9398,
+                "cache_read_input_tokens": 45389,
+                "input_tokens": 3,
+                "output_tokens": 610,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 17682,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "feaeff56bbb23b2cfd6f0a611316187372e1bf3e220c3ba3c9e4d9a4e7e543d9",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P10",
+      "recorded_cost_usd": 0.6100148000000001,
+      "status": "verified",
+      "verification_summary_sha256": "235af0ffad23c9826d97cd3d322d5a4d4de2e0296ea883274c312cba98e9ae11"
+    },
+    "brain-p11--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "4575480da822c222c506d715bc48d41c729de0bc08a03d98c2c59b25ab40e079",
+          "cost_usd": 0.8020594999999999,
+          "duration_ms": 461609,
+          "error": null,
+          "is_error": false,
+          "num_turns": 42,
+          "result_sha256": "e27f84dc2bdbffd7fcdb39d3a6d0da9594a077fc5e0c74ca138bf3c4e5826488",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 51119,
+            "cache_read": 354075,
+            "input": 36,
+            "output": 25892,
+            "total": 431122
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P11.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Angpt2 Cxcr4 brain endothelial tip cell angiogenesis postnatal development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Tgfbr1 Tgfbr2 brain endothelial blood-brain barrier maturation TGF-beta\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Kcnj2 Kir2.1 brain endothelial cell mechanotransduction vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Nrp1 Tek brain vasculature postnatal angiogenesis tip stalk cell\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Angiopoietin-2 brain endothelial tip cell sprouting angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"TGF-beta signaling brain endothelial blood-brain barrier\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Angpt2 Cxcr4 brain endothelial tip cell angiogenesis postnatal\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"TGF-beta Tgfbr brain endothelial blood-brain barrier maturation\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"33375813\", \"36941369\", \"35642214\", \"38748577\", \"29629621\", \"33200702\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Angiopoietin-2 Angpt2 brain endothelium vascular remodeling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"CXCR4 CXCL12 brain endothelial angiogenesis vessel sprouting\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Neuropilin-1 Nrp1 tip cell VEGF brain vasculature\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39129597\", \"38532508\", \"40074350\", \"27035626\", \"26051942\", \"20404134\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hopx endothelial cell venous arterial identity vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Prdm1 Blimp1 endothelial cell vascular development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"brain endothelial tip cell transcriptome single-cell RNA sequencing mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"30188322\", \"30988181\", \"40641462\", \"25713110\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Angiopoietin-2 Tie2 brain tip cell venous endothelial mouse postnatal\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Kcnj2 Kir2.1 inward rectifier potassium channel endothelial vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Junctophilin calcium endothelial membrane contact site vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"brain endothelial cell venous tip cell Angpt2 Cxcr4 Hopx single-cell transcriptome\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39212765\", \"27652592\", \"32698687\", \"32449050\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Angiopoietin-2 venous endothelial marker arteriovenous specification\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"CXCR4 brain vasculature postnatal development vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"TGF-beta endothelial sprouting angiogenesis ALK5 tip cell\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hopx homeobox endothelial cell brain vasculature quiescence\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"23344887\", \"20179352\", \"34273276\", \"28114883\", \"31610812\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sortilin Sort1 endothelial cell vascular function\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Gabarapl1 autophagy endothelial angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Angpt2 Cxcr4 endothelial tip stalk cell Notch VEGF sprouting\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"33710668\", \"27623937\", \"32393046\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cacna1c L-type calcium channel endothelial cell vascular tone\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Junctophilin Jph1 vascular smooth muscle calcium junction\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Kir2.1 Kcnj2 brain capillary endothelial calcium potassium mechanosensing\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Angpt2 Angiopoietin-2 venous endothelial arteriovenous marker brain postnatal\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39791443\", \"31308177\", \"34394822\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Rgs6 regulator G protein signaling cardiovascular endothelial vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"brain endothelial postnatal angiogenesis Angpt2 venous tip cell Cxcr4 Nrp1 TGF-beta\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P11 brain endothelial cells are defined by active sprouting angiogenesis with tip cell identity during postnatal brain vascularization: the core tip cell markers Angpt2 and Cxcr4, the CDC42 effector Cdc42ep3 (d...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 51119,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 51119,
+            "cache_read_input_tokens": 354075,
+            "inference_geo": "not_available",
+            "input_tokens": 36,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 11604,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 11604,
+                "cache_read_input_tokens": 51635,
+                "input_tokens": 3,
+                "output_tokens": 726,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 25892,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "88830773b55577680ecd19f2d2816fe39561f7b46ea467f270711bf14395e5b3",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P11",
+      "recorded_cost_usd": 0.8020594999999999,
+      "status": "verified",
+      "verification_summary_sha256": "0f3858b0603a774cf1371be5af1ee42d6757d9196bbd208a27ac45dc6b9eefb4"
+    },
+    "brain-p11--r2": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "b05d72fbf76b4c4e123eccfe894dff4c4e5c2dd4ba217e783b08f7d9cfe81d66",
+          "cost_usd": 0.5412558,
+          "duration_ms": 285437,
+          "error": null,
+          "is_error": false,
+          "num_turns": 29,
+          "result_sha256": "44ca20cd02f8cf3014b50a4410ce32bda2addb720e1b777aa8ad9680ad91cab4",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 36360,
+            "cache_read": 247536,
+            "input": 30,
+            "output": 16583,
+            "total": 300509
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P11.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Cxcr4 Angpt2 tip cell angiogenesis brain endothelial postnatal\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Prdm1 Hopx arterial endothelial cell identity brain vasculature\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Tgfbr1 Tgfbr2 TGF-beta brain endothelial blood-brain barrier vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Nrp1 neuropilin VEGF tip cell sprouting angiogenesis endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"CXCR4 endothelial tip cell angiogenesis sprouting\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Angiopoietin-2 brain angiogenesis vascular remodeling endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Prdm1 Blimp1 arterial endothelial identity vascular zonation\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Kcnj2 Kir2.1 endothelial mechanotransduction blood flow\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Hopx arterial endothelial brain vasculature quiescent\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Tek Tie2 angiopoietin endothelial brain postnatal vascular development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Jph1 junctophilin calcium endothelial cell signaling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cacna1c L-type calcium channel endothelial mechanotransduction vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"30208313\", \"23315162\", \"26051942\", \"15376331\", \"20404134\", \"26081042\", \"34882832\", \"31278420\", \"20181837\", \"20154215\", \"28714968\", \"31156639\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"34460911\", \"39129597\", \"17627476\", \"12183511\", \"24796880\", \"32698687\", \"31610812\", \"40709455\", \"28714969\", \"28223275\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Tek Tie2 angiopoietin vascular endothelial stability remodeling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Sort1 sortilin endothelial vascular signaling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Angpt2 Angiopoietin-2 Tie2 endothelial tip cell marker angiogenic sprouting\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Dll4 Notch CXCR4 sprouting angiogenesis arterial endothelial specification\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"TGF-beta Tgfbr2 Angiopoietin-2 brain vascular remodeling blood-brain barrier\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"41009743\", \"40991251\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"angiopoietin-2 tip cell enriched endothelial vascular sprouting\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"TGF-beta signaling brain endothelial angiogenesis postnatal\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Nrp1 neuropilin-1 TGF-beta Notch stalk cell suppression tip cell\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Rgs6 endothelial vascular G protein signaling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"20705756\", \"24025447\", \"36348215\", \"35753346\", \"22745736\", \"14504426\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P11 marks a postnatal brain endothelial cell state centered on angiogenic tip cell identity, with Cxcr4, Angpt2, and Nrp1 (perturbation regulator) forming the core tip-cell gene signature validated in retinal a...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 36360,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 36360,
+            "cache_read_input_tokens": 247536,
+            "inference_geo": "not_available",
+            "input_tokens": 30,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 8416,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 8416,
+                "cache_read_input_tokens": 40064,
+                "input_tokens": 3,
+                "output_tokens": 761,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 16583,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "b85513cdb0a842062682dc9bbc2cf618e86b2543502513be4d85029dd8fc59ef",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P11",
+      "recorded_cost_usd": 0.5412558,
+      "status": "verified",
+      "verification_summary_sha256": "e2d5b27815cbb884cbd5ee069b0f162618deab2167cd7484753ecb1b356e191b"
+    },
+    "brain-p8--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "a4127c6d6ce9db5e0f87d714b23a9c76bc866219f29e16cd5ee2f3c17e03e8d8",
+          "cost_usd": 0.6150518,
+          "duration_ms": 292653,
+          "error": null,
+          "is_error": false,
+          "num_turns": 38,
+          "result_sha256": "8e838a7d6a4418c784d09e2c1c3b7d5c30b78b4542c78ea2bbbf48e91bdccd3b",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 42287,
+            "cache_read": 322906,
+            "input": 36,
+            "output": 17581,
+            "total": 382810
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P8.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Notch1 Ets1 Lmo2 arteriovenous specification brain endothelial cells\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Tiam1 Srgap2 Arhgap18 Rho GTPase endothelial angiogenesis tip cell\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Eng Tgfbr1 Fzd4 blood-brain barrier TGF-beta Wnt brain vascular development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Quaking Qk brain endothelial cell blood-brain barrier mRNA splicing\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Notch1 arteriovenous specification brain endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Tiam1 Rac1 endothelial cell angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Fzd4 Wnt signaling retinal vascular blood-brain barrier\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Quaking endothelial cell vascular development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Lmo2 endothelial cell transcription factor angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Ets1 transcription factor vascular endothelial angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Eng endoglin TGF-beta brain blood vessel development postnatal\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Itga4 integrin alpha4 endothelial cell angiogenesis vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Kdr VEGFR2 Notch brain vascular arteriovenous postnatal development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Adamts5 Adamts12 extracellular matrix remodeling endothelial brain\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Arhgap18 Rho GTPase endothelial cell vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Arid5b transcription factor endothelial vascular development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Fut8 fucosylation Notch signaling endothelial angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Srgap2 Rho GTPase endothelial migration cytoskeleton\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hmcn1 hemicentin extracellular matrix vascular basement membrane\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"37978175\", \"36993588\", \"18006851\", \"17702746\", \"16195373\", \"27588399\", \"22825554\", \"37947657\", \"23217714\", \"25083995\", \"36149648\", \"30478038\", \"33643817\", \"30918328\", \"21189687\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"35508511\", \"28954807\", \"10618416\", \"25721045\", \"34330825\", \"8689573\", \"38754983\", \"28851877\", \"35894043\", \"11795259\", \"9673360\", \"37384248\", \"25425145\", \"28251925\", \"30630384\", \"32013974\", \"32016689\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Notch1 Kdr VEGFR2 arteriovenous endothelial identity postnatal brain vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Rasgrp3 RAS signaling endothelial vascular development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"21474816\", \"29048643\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Eng endoglin TGF-beta endothelial cell arteriovenous malformation vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Sorbs1 sorbin scaffold endothelial cell adhesion actin\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"brain endothelial cell postnatal angiogenesis transcription factor arterial venous specification\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"30761306\", \"29438260\", \"33167572\", \"24252708\", \"18283546\", \"16595794\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Tgfbr1 ALK5 endothelial BBB blood-brain barrier TGF-beta signaling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Lmo2 Ets1 Notch endothelial tip stalk cell arterial specification angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"31336100\", \"29456135\", \"26120030\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ncoa1 SRC1 nuclear receptor coactivator endothelial vascular Notch\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ntm neurotrimin cell adhesion molecule endothelial brain vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Arap2 ArfGAP RhoGAP endothelial angiogenesis vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P8 in mouse brain endothelial cells during postnatal development is organized around three interlocking functional themes. First, a Rho/Ras GTPase cytoskeletal module (Tiam1, Arhgap18, Srgap2, Rasgrp3, Itga4) c...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 42287,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 42287,
+            "cache_read_input_tokens": 322906,
+            "inference_geo": "not_available",
+            "input_tokens": 36,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 10363,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 10363,
+                "cache_read_input_tokens": 45916,
+                "input_tokens": 3,
+                "output_tokens": 626,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 17581,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "0e5a56350cd7a263a9247fe02ee6ff59ec1ac80fa1712431a5abca5ca3681740",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P8",
+      "recorded_cost_usd": 0.6150518,
+      "status": "verified",
+      "verification_summary_sha256": "3dd3bb029b263e2caeb91c348968a8a01e78696513403d88512408c2e57a0320"
+    },
+    "brain-p9--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "1606942b63713d204d8599ac9e39036d9ad4f42761069dd297fc52282f66ab99",
+          "cost_usd": 0.9472508000000001,
+          "duration_ms": 516946,
+          "error": null,
+          "is_error": false,
+          "num_turns": 62,
+          "result_sha256": "bf83665b4ae00e62382a2c0bb21a8af876c3329c1de5acbca41a60fe4869731a",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 57542,
+            "cache_read": 504316,
+            "input": 43,
+            "output": 29996,
+            "total": 591897
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/.claude/projects/-Volumes-IF-PHAGE-gene-program-interpreter/program_bundles/P9.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"file_path\": \"/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v4/sessions/brain-p9--r1/workspaces/P9/program_bundles/P9.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"TGF-beta signaling blood-brain barrier brain endothelial cells\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Skil SnoN TGF-beta SMAD signaling endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ldlrad4 TGF-beta signaling inhibitor endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cyfip2 actin cytoskeleton endothelial brain\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Notch1 brain endothelial arteriovenous specification postnatal\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Htra3 TGF-beta antagonist extracellular matrix\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Adamtsl2 fibrillin extracellular matrix TGF-beta BMP\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Nrp1 neuropilin blood-brain barrier endothelial VEGF\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Notch signaling brain angiogenesis arteriovenous\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Lrp8 apoER2 brain endothelial cell\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Tgfbr1 Tgfbr2 brain endothelial blood-brain barrier development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"35642214\", \"38748577\", \"25078775\", \"33200702\", \"25838983\", \"22567107\", \"16314499\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"15206957\", \"23659962\", \"37240099\", \"33540664\", \"36009579\", \"29298116\", \"19812212\", \"19546852\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Adamtsl2 vascular development angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cyfip2 WAVE actin Arp2/3 complex\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Hip1 huntingtin interacting endocytosis clathrin\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"31242033\", \"28692454\", \"34327661\", \"11532990\", \"15533940\", \"39892386\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ldlrad4 C18orf1 LRAD3 TGF-beta inhibitor receptor\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Ccm2 cerebral cavernous malformation endothelial TGF-beta Notch\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Vezf1 vascular endothelial zinc finger transcription factor angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Asap3 ArfGAP actin cytoskeleton endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tram2 collagen endoplasmic reticulum endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"29970794\", \"9986727\", \"16162438\", \"15031128\", \"33613188\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Wnt beta-catenin extracellular matrix brain endothelial blood-brain barrier maturation\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Skil SnoN TGF-beta brain vascular endothelial Smad\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Ccm2 KRIT1 cerebral cavernous malformation brain endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Lrp8 apoER2 reelin brain vascular blood-brain barrier\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"TGF-beta Tgfbr1 Tgfbr2 brain vascular endothelial postnatal development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38570687\", \"32747434\", \"33665890\", \"26283324\", \"36285625\", \"20301470\", \"26096872\", \"40506610\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Map7 microtubule associated protein endothelial cell migration\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Bpgm bisphosphoglycerate mutase red blood cell oxygen\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tram2 TRAP complex collagen hydroxylation ER\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Nrp1 neuropilin TGF-beta Notch signaling brain endothelial development\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"41382187\", \"39924931\", \"20301470\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ldlrad4 LRAD3 low density lipoprotein receptor domain\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Spsb1 SPRY domain suppressor cytokine signaling endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Skil SnoN brain vascular angiogenesis TGF-beta\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Lrp8 LDL receptor blood-brain barrier selenium transport\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Adamtsl2 Htra3 brain endothelial ECM extracellular matrix blood-brain barrier\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38661671\", \"41353666\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Tram2 translocon associated membrane protein collagen secretion fibroblast\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"SnoN SKIL TGF-beta Smad endothelial vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Notch1 Nrp1 VEGF brain endothelial tip cell sprouting angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Ldlrad4 LDL receptor class A domain TGF-beta SMAD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"TGF-beta Tgfbr2 Tgfbr1 brain endothelial blood-brain barrier Skil SnoN postnatal\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"14749390\", \"24019535\", \"33148887\", \"29794136\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Notch1 Nrp1 neuropilin angiogenesis tip cell stalk cell brain\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Vezf1 endothelial blood-brain barrier brain vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Cyfip2 WAVE regulatory complex endothelial actin angiogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ccm2 KRIT1 TGF-beta endothelial mesenchymal transition brain vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"41668336\", \"23748444\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Nrp1 neuropilin TGF-beta ALK1 endothelial angiogenesis signaling\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Hip1 huntingtin interacting protein endocytosis receptor trafficking endothelial vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Cyfip1 WAVE complex endothelial angiogenesis Rac1 actin\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"26081042\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Pcnx pecanex Notch signaling endothelial vascular\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Dennd2c DENN domain Rab GTPase brain endothelial\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P9 brain endothelial cells express a TGF-\\u03b2/Wnt/\\u03b2-catenin-regulated ECM secretory program for CNS vascular maturation: Adamtsl2 and Htra3 are directly named in two independent studies as brain endothel...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 57542,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 57542,
+            "cache_read_input_tokens": 504316,
+            "inference_geo": "not_available",
+            "input_tokens": 43,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 10741,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 10741,
+                "cache_read_input_tokens": 60793,
+                "input_tokens": 3,
+                "output_tokens": 851,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 29996,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "9c9478e6a571315c45759fd8ed384e966b340de0f2a38f881b527e24f2932f19",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P9",
+      "recorded_cost_usd": 0.9472508000000001,
+      "status": "verified",
+      "verification_summary_sha256": "a0ef5ac0a774d6be66f20aff47578fc283b4bbabd5f7c5e733b68d300025f7a2"
+    },
+    "liver-p20--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "0f449ed2852e96de16d34edb69f368597c18c5486ba95f345e811332f50de0a4",
+          "cost_usd": 0.5746712,
+          "duration_ms": 293534,
+          "error": null,
+          "is_error": false,
+          "num_turns": 25,
+          "result_sha256": "69e6af8dae8e7918c90c9120905b14a3cbcaa9499bcbff6e83399f2e881b4fa0",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 40904,
+            "cache_read": 274564,
+            "input": 31,
+            "output": 16410,
+            "total": 331909
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/program_bundles/P20.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"file_path\": \"/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v4/sessions/liver-p20--r1/workspaces/P20/program_bundles/P20.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"P450 oxidoreductase POR CYP4A hepatocyte lipid metabolism mouse liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Slc27a2 FATP2 fatty acid transport protein hepatocyte NAFLD MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Dgat2 Insig1 SREBP hepatic lipid metabolism triglyceride MASLD aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"P450 oxidoreductase POR CYP4A hepatocyte lipid fatty acid hydroxylation liver\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"FATP2 SLC27A2 fatty acid transport hepatocyte steatosis NAFLD\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"DGAT2 INSIG1 SREBP triglyceride hepatic lipid metabolism MASLD\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"cytochrome P450 oxidoreductase POR liver microsomal electron transfer CYP enzymes\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"CYP4A12 fatty acid omega-hydroxylation mouse liver PPAR\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"SLC25A31 adenine nucleotide translocator mitochondria ANT4 liver\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cox6a1 cytochrome c oxidase subunit hepatocyte oxidative phosphorylation aging\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Scap INSIG1 SREBP cholesterol sterol sensing hepatocyte lipogenesis\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"ChREBP Mlxipl carbohydrate response element lipogenesis liver glucose\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"MTTP microsomal triglyceride transfer protein VLDL secretion liver steatosis\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"DGAT2 diacylglycerol acyltransferase liver triglyceride synthesis NAFLD hepatocyte\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"P450 oxidoreductase hepatocyte-specific knockout liver lipid cholesterol bile acid\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"SLC27A2 FATP2 fatty acid transport protein 2 liver very long chain fatty acid\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"40303331\", \"38586542\", \"20300478\", \"32124935\", \"24847272\", \"33859207\", \"38256181\", \"16100574\", \"31081165\", \"39583092\", \"22353470\", \"31275349\", \"28593021\", \"33920595\", \"22111624\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Retsat retinol saturase fatty acid dihydro-retinol hepatocyte lipid\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"folliculin FLCN mTORC1 lysosome lipid metabolism liver hepatocyte\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"10225972\", \"34206277\", \"32614804\", \"17476695\", \"18317565\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P20 in mouse hepatocytes (aging/MASLD context) clusters around two strongly supported and one weaker functional theme. The dominant themes are: (1) a microsomal CYP oxidative system in which Por provides electr...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 40904,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 40904,
+            "cache_read_input_tokens": 274564,
+            "inference_geo": "not_available",
+            "input_tokens": 31,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 7691,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 7691,
+                "cache_read_input_tokens": 45333,
+                "input_tokens": 3,
+                "output_tokens": 566,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 16410,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "0c4002b19a0569cd23e971008c9cb271caa2d6e0b8756f508a3f6a32b7a5393f",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P20",
+      "recorded_cost_usd": 0.5746712,
+      "status": "verified",
+      "verification_summary_sha256": "0f3858b0603a774cf1371be5af1ee42d6757d9196bbd208a27ac45dc6b9eefb4"
+    },
+    "liver-p21--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "0ab4c5ae3db9a0d5673127c9893f353e70f60e4b5027cc7fb34546fdfafae446",
+          "cost_usd": 0.6514011,
+          "duration_ms": 297458,
+          "error": null,
+          "is_error": false,
+          "num_turns": 39,
+          "result_sha256": "49fb9373f538823a1ff3a1190341bc18b1b02c78382d899b2e12d50e16e8a598",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 47334,
+            "cache_read": 422617,
+            "input": 39,
+            "output": 15991,
+            "total": 485981
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P21.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"mevalonate pathway cholesterol biosynthesis hepatocyte Hmgcs1 Fdps Idi1 Mvk\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"post-squalene sterol biosynthesis Cyp51 Lss Sc5d Dhcr7 Nsdhl liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"SCAP Insig1 SREBP cholesterol sensing feedback liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"cholesterol biosynthesis NAFLD MASLD aging liver mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"mevalonate pathway cholesterol biosynthesis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"SCAP SREBP cholesterol synthesis regulation liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cyp51 sterol demethylase cholesterol biosynthesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"mevalonate pathway cholesterol biosynthesis hepatocyte HMGCS1 FDPS IDI1\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"40911366\", \"38308184\", \"38992029\", \"8507678\", \"32805396\", \"21145825\", \"16741291\", \"23583456\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"32322062\", \"37324939\", \"39522165\", \"37066875\", \"37949368\", \"35659922\", \"11358865\", \"39240063\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Fdft1 squalene synthase Lss lanosterol synthase sterol biosynthesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Dhcr7 Sc5d sterol biosynthesis cholesterol hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39855563\", \"41311052\", \"42197235\", \"16440058\", \"26936141\", \"15580635\", \"20952551\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"15026190\", \"36413274\", \"10653142\", \"31663733\", \"19149177\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"mevalonate kinase Mvk Pmvk Mvd cholesterol isoprenoid pathway\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Acss2 acetyl-CoA synthetase lipid cholesterol synthesis liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"mevalonate kinase phosphomevalonate kinase MVK cholesterol isoprenoid biosynthesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Acat2 acetyl-CoA acetyltransferase cholesterol biosynthesis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Dgat2 Mttp VLDL triglyceride liver hepatocyte regulation\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insig1 Ldlr SREBP2 cholesterol feedback regulation hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"36410683\", \"38018277\", \"39481851\", \"36378328\", \"26546553\", \"33050310\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"32749667\", \"23180245\", \"41345099\", \"18959802\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"hepatic cholesterol biosynthesis SREBP2 aging liver gene expression\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"MASLD NAFLD hepatic de novo cholesterol synthesis upregulation\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"18486101\", \"35156712\", \"38101620\", \"40015656\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hmgcs1 HMG-CoA synthase mevalonate pathway cholesterol hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"SCAP Insig sterol sensing SREBP endoplasmic reticulum cholesterol homeostasis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Acss2 acetate acetyl-CoA lipid synthesis liver mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"34626855\", \"32214246\", \"40882627\", \"39471816\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insig1 SREBP sterol-sensing cholesterol synthesis suppression liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"LDLR LDL receptor upregulation de novo cholesterol synthesis feedback hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"21488946\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insig1 insulin induced gene 1 sterol cholesterol SREBP suppression\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"hepatic cholesterol synthesis aging mouse liver transcriptome\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"12242342\", \"33722690\", \"40228656\", \"23774190\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P21 in mouse hepatocytes represents the complete hepatic cholesterol biosynthesis program spanning the mevalonate pathway (Hmgcs1, Idi1, Fdps, Mvk, Pmvk, Mvd, Acat2) through the post-squalene route (Fdft1/squal...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 47334,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 47334,
+            "cache_read_input_tokens": 422617,
+            "inference_geo": "not_available",
+            "input_tokens": 39,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 6774,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 6774,
+                "cache_read_input_tokens": 52680,
+                "input_tokens": 3,
+                "output_tokens": 743,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 15991,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "ecac2972b5cbbb4fad26ccd14f3812b0c4ea3e7b9f811cd1887ca7dc4e8f1755",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P21",
+      "recorded_cost_usd": 0.6514011,
+      "status": "verified",
+      "verification_summary_sha256": "116450eaca2564d05407cacc1c0610d192a72a035278a6b5a7bc2f67dfb1010a"
+    },
+    "liver-p21--r2": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "439f37927c0d0027a4fff9289d76914926494ccc0ad85afde3df64557ef1cc49",
+          "cost_usd": 0.5904822999999999,
+          "duration_ms": 268646,
+          "error": null,
+          "is_error": false,
+          "num_turns": 34,
+          "result_sha256": "c1e793cb7267e1503d0d50a9ad9d1710529d5f06ceecd7e116e501cea29efad8",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 43121,
+            "cache_read": 383361,
+            "input": 36,
+            "output": 14400,
+            "total": 440918
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P21.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"cholesterol biosynthesis mevalonate pathway hepatocyte liver enzymes\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"SREBP Scap Insig1 cholesterol synthesis liver regulation\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cyp51 Lss Fdft1 lanosterol squalene sterol biosynthesis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"MASLD NAFLD cholesterol biosynthesis sterol hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"40699946\", \"34626855\", \"34224448\", \"28668359\", \"31685796\", \"27905068\", \"22361350\", \"30619997\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"32322062\", \"26311497\", \"28736205\", \"12242342\", \"20817058\", \"41668292\", \"34431998\", \"39168395\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"41698947\", \"39560367\", \"40617382\", \"41962267\", \"38101620\", \"38299233\", \"40062565\", \"41632287\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"aging liver cholesterol biosynthesis SREBP gene expression mouse hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Dhcr7 Sc5d Cyp51 sterol cholesterol biosynthesis liver mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Mvk Pmvk Mvd mevalonate kinase cholesterol synthesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Ldlr LDL receptor Scap SREBP cholesterol hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38622198\", \"32111832\", \"28490610\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hmgcs1 Fdps Idi1 Fdft1 mevalonate isoprenoid sterol synthesis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"mevalonate kinase MVK deficiency cholesterol isoprenoid pathway\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Dgat2 Mttp triglyceride VLDL secretion liver steatosis MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"20123130\", \"17989609\", \"34987591\", \"25622557\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"28901277\", \"36410683\", \"38131282\", \"30225156\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"SREBP2 target genes cholesterol biosynthesis Hmgcr Fdft1 Dhcr7 liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Dgat2 knockdown hepatocyte steatosis triglyceride lipid droplet\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"37324939\", \"28763157\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"cholesterol biosynthesis pathway aging liver senescence mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Acss2 acetyl-CoA cholesterol lipid synthesis liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38216569\", \"38797615\", \"39456234\", \"41615011\", \"34305573\", \"40228656\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"MASLD NAFLD de novo cholesterol synthesis sterol SREBP2 hepatocyte mouse model\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Mttp MTP microsomal triglyceride transfer protein VLDL liver cholesterol\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"24987866\", \"10856714\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"sterol biosynthesis MASLD NAFLD liver aging hepatocyte upregulated\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Acat2 acetyl-CoA acetyltransferase 2 cholesterol esterification liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"18502767\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"cholesterol synthesis genes upregulated fatty liver NAFLD single cell RNA sequencing hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P21 in mouse hepatocytes encodes a near-complete transcriptional upregulation of the mevalonate\\u2013to\\u2013cholesterol biosynthesis cascade: every program gene (Hmgcs1, Idi1, Fdps, Fdft1, Lss, Cyp51, Tm7sf2, ...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 43121,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 43121,
+            "cache_read_input_tokens": 383361,
+            "inference_geo": "not_available",
+            "input_tokens": 36,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 6647,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 6647,
+                "cache_read_input_tokens": 48594,
+                "input_tokens": 3,
+                "output_tokens": 626,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 14400,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "94f4d318e3c6864b929004800c6f0646aedca3c311b8828b7dd9f01f07260c91",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P21",
+      "recorded_cost_usd": 0.5904822999999999,
+      "status": "verified",
+      "verification_summary_sha256": "e2d5b27815cbb884cbd5ee069b0f162618deab2167cd7484753ecb1b356e191b"
+    },
+    "liver-p22--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "9ec3bc847488337ba22947b92d1b25660c2a35412d2dae309f825b5bd922b72e",
+          "cost_usd": 0.5515724000000001,
+          "duration_ms": 261764,
+          "error": null,
+          "is_error": false,
+          "num_turns": 28,
+          "result_sha256": "b3a705c63ed77d2369d530bde56fb17ec6c3b2cb5c90b88712d2ce7e914c6361",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 41019,
+            "cache_read": 249388,
+            "input": 34,
+            "output": 15327,
+            "total": 305768
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"/Users/fanxiaochen/program_bundles/P22.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"file_path\": \"/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v4/sessions/liver-p22--r1/workspaces/P22/program_bundles/P22.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Me1 Acly Pklr hepatocyte de novo lipogenesis fructose\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Mlxipl ChREBP hepatocyte carbohydrate responsive lipogenesis MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Gstm7 Gstp1 Aldh2 hepatocyte glutathione xenobiotic detoxification\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"ChREBP Mlxipl hepatocyte de novo lipogenesis carbohydrate\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"ATP citrate lyase ACLY hepatocyte lipogenesis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"malic enzyme ME1 hepatocyte NADPH lipid synthesis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"ketohexokinase KHK fructose metabolism liver NAFLD MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"glutathione S-transferase GSTP1 GSTM hepatocyte oxidative stress detoxification\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"metallothionein MT1 MT2 liver hepatocyte oxidative stress aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"metallothionein liver oxidative stress NAFLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"glutathione transferase liver detoxification xenobiotic\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Insig1 DGAT2 Scap lipid synthesis liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insig1 SREBP cholesterol lipid sensing liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"DGAT2 diacylglycerol acyltransferase triglyceride liver NAFLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"pyruvate kinase PKLR liver glycolysis lipogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"aldehyde dehydrogenase ALDH2 liver metabolism aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"cytochrome b5 reductase CYB5R3 liver electron transfer oxidative\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"UDP-glucose dehydrogenase UGDH liver glucuronidation hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"folliculin FLCN mTOR lipid metabolism liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"glucokinase regulatory protein GCKR fructose glucose liver metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"lipoic acid synthase LIAS mitochondria cofactor liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"37055547\", \"36759348\", \"30707786\", \"32698101\", \"33930463\", \"28123933\", \"35675800\", \"32214246\", \"40127788\", \"37620891\", \"31197036\", \"34981123\", \"41138206\", \"34512869\", \"42460009\", \"33190588\", \"38340721\", \"29552625\", \"42454498\"...",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38723301\", \"30006154\", \"24481563\", \"31705800\", \"36551794\", \"31905195\", \"26043917\", \"8204108\", \"24382882\", \"11744614\", \"30038465\", \"37540213\", \"24945955\", \"23743293\", \"27146014\", \"23621087\", \"24566088\", \"18845616\", \"14662765\",...",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P22 in mouse hepatocytes is organized around two strong functional themes and one regulatory theme. First, a carbohydrate-responsive de novo lipogenesis (DNL) arm\\u2014anchored by Acly, Me1, Pklr, and Khk and t...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 41019,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 41019,
+            "cache_read_input_tokens": 249388,
+            "inference_geo": "not_available",
+            "input_tokens": 34,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 9457,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 9457,
+                "cache_read_input_tokens": 43682,
+                "input_tokens": 3,
+                "output_tokens": 603,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 15327,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "38b4b3ba00343be08b0ba77c33392af299fdb921b8b4dec3bf9ecc6b591e9ace",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P22",
+      "recorded_cost_usd": 0.5515724000000001,
+      "status": "verified",
+      "verification_summary_sha256": "3dd3bb029b263e2caeb91c348968a8a01e78696513403d88512408c2e57a0320"
+    },
+    "liver-p23--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "294d2a74d79f702893d83777ebcd3560d8c241ef9a6c7e2a380bb23e38bb34b5",
+          "cost_usd": 0.5796095,
+          "duration_ms": 285432,
+          "error": null,
+          "is_error": false,
+          "num_turns": 38,
+          "result_sha256": "7a797768f331980cebbe8c29fd6b7be688d67bea3312b79df845bd6723d57b38",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 40309,
+            "cache_read": 331525,
+            "input": 36,
+            "output": 15837,
+            "total": 387707
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P23.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cyp2e1 hepatocyte xenobiotic drug metabolism mouse liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Acox1 Fitm1 Pon1 Ces1d lipid metabolism hepatocyte MASLD NAFLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Srebf1 Dgat2 Pparg Scap lipid metabolism hepatocyte aging liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Mgst1 microsomal glutathione transferase hepatocyte oxidative stress detoxification\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Acox1 peroxisomal fatty acid oxidation hepatocyte NAFLD liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Srebf1 SREBP1 hepatocyte lipid biosynthesis aging MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Dgat2 diacylglycerol acyltransferase triglyceride synthesis hepatocyte liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Pon1 paraoxonase hepatocyte HDL lipid metabolism liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Ces1d carboxylesterase hepatocyte lipid hydrolysis triglyceride\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Fitm1 fat storage inducing transmembrane protein lipid droplet liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Vnn1 vanin pantetheinase hepatocyte lipid oxidative stress liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cyp4b1 cytochrome P450 xenobiotic metabolism liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Mup major urinary protein mouse hepatocyte liver metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Sqle squalene epoxidase cholesterol biosynthesis hepatocyte liver MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39440550\", \"11812920\", \"25686096\", \"35405096\", \"19237511\", \"33190588\", \"37700498\", \"37572494\", \"29563328\", \"35051553\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"32622843\", \"20548972\", \"39611307\", \"42082151\", \"9493761\", \"20826229\", \"24856391\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"33730569\", \"28258223\", \"36455814\", \"19258313\", \"34345813\", \"39418169\", \"38851581\", \"31081165\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Mgst1 microsomal glutathione S-transferase liver oxidative stress NAFLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Chpt1 choline phosphotransferase phospholipid synthesis hepatocyte liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Fitm1 FIT1 lipid droplet biogenesis endoplasmic reticulum\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Mgst1 glutathione transferase lipid peroxidation hepatocyte protection\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cyp2e1 pericentral zone 3 hepatocyte metabolic zonation Wnt beta-catenin\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"26125130\", \"33359403\", \"15618652\", \"33730569\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"18160536\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Mgst1 MGST1 hepatocyte liver MASLD steatosis oxidative\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Pparg PPARgamma hepatocyte lipid accumulation aging liver MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Sqle squalene epoxidase SREBP1 lipogenesis hepatocyte NAFLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"MGST1 microsomal glutathione S-transferase liver oxidative stress\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"SQLE squalene epoxidase cholesterol SREBP hepatocyte NAFLD MASLD\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Mup17 Mup10 major urinary protein hepatocyte lipid glucose aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Pon1 paraoxonase-1 hepatocyte liver fatty liver NAFLD aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"16314419\", \"29362397\", \"41062796\", \"38312099\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Acox1 peroxisomal beta-oxidation PPAR hepatocyte aging liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"major urinary protein Mup NAFLD steatosis mouse liver aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P23 represents a mouse hepatocyte gene program centered on three interlocking functional themes in the context of aging and MASLD. First, a pericentral (zone 3) xenobiotic/drug metabolism cluster anchored by Cy...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 40309,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 40309,
+            "cache_read_input_tokens": 331525,
+            "inference_geo": "not_available",
+            "input_tokens": 36,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 5959,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 5959,
+                "cache_read_input_tokens": 46470,
+                "input_tokens": 3,
+                "output_tokens": 736,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 15837,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "fb44ec150d6729ac1ad58f4437d3b79f88d3de0261f697bd79b4e551036332e9",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P23",
+      "recorded_cost_usd": 0.5796095,
+      "status": "verified",
+      "verification_summary_sha256": "0f3858b0603a774cf1371be5af1ee42d6757d9196bbd208a27ac45dc6b9eefb4"
+    },
+    "liver-p24--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "10e5b15a79bb72e601c6fbb73acbadd74a5d1f83dba849e29a7fa272bf0a104f",
+          "cost_usd": 0.5706591999999999,
+          "duration_ms": 302026,
+          "error": null,
+          "is_error": false,
+          "num_turns": 32,
+          "result_sha256": "2c2486d691e569439a68433925e00873feda94b5d6353129a8027008fc2e99dd",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 40144,
+            "cache_read": 288404,
+            "input": 33,
+            "output": 16169,
+            "total": 344750
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P24.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Cps1 Gls2 urea cycle nitrogen metabolism hepatocyte periportal\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Pck1 gluconeogenesis hepatocyte periportal zonation aging MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hal Uroc1 histidine catabolism liver amino acid metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insr Irs1 insulin receptor hepatocyte gluconeogenesis aging metabolic\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Cps1 urea cycle liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Pck1 gluconeogenesis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"hepatocyte periportal metabolic zonation amino acid nitrogen\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insr insulin receptor liver gluconeogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Gls2 glutaminase liver nitrogen metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hal histidine ammonia lyase liver catabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sds serine dehydratase liver gluconeogenesis amino acid\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insig1 Dgat2 liver lipid metabolism MASLD steatosis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"serine dehydratase liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Insig1 liver lipid cholesterol\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Uox uricase purine catabolism liver mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Sfxn1 sideroflexin mitochondria serine one-carbon metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"29981428\", \"25700560\", \"36937980\", \"35285892\", \"39387452\", \"28868790\", \"32322062\", \"34020084\", \"37166978\", \"38085830\", \"20055990\", \"17690175\", \"34944530\", \"35502441\", \"38126089\", \"32641353\", \"24147127\", \"41313389\", \"7103928\",...",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"38684876\", \"38171330\", \"14596599\", \"15618015\", \"39627188\", \"34622799\", \"33900847\", \"28729031\", \"38237409\", \"30442778\", \"40468051\", \"33730581\", \"31177362\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sult2a2 sulfotransferase bile acid steroid liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Hsd17b6 hydroxysteroid dehydrogenase liver steroid metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Insig1 SREBP insulin liver MASLD aging metabolic\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Dgat2 triglyceride synthesis liver MASLD steatosis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39532263\", \"39896111\", \"39201759\", \"41090776\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"SULT2A hydroxysteroid sulfotransferase bile acid hepatocyte xenobiotic\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Insig1 SREBP liver lipogenesis cholesterol aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"15635043\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Insig1 SREBP liver cholesterol lipogenesis\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"hepatocyte gluconeogenesis urea cycle aging metabolic dysfunction liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P24 represents a periportal hepatocyte gene program centered on amino acid catabolism and nitrogen disposal via the urea cycle (Cps1, Gls2, Hal, Sds, Uox, Rida, Sfxn1) and on gluconeogenesis regulated by insuli...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 40144,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 40144,
+            "cache_read_input_tokens": 288404,
+            "inference_geo": "not_available",
+            "input_tokens": 33,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 7797,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 7797,
+                "cache_read_input_tokens": 44467,
+                "input_tokens": 3,
+                "output_tokens": 733,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 16169,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "74704fd4fc82c18759d00d5328c9e7817c0a05aa4b12994050c46ea83e36e7c9",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P24",
+      "recorded_cost_usd": 0.5706591999999999,
+      "status": "verified",
+      "verification_summary_sha256": "b5f35f36949d6cf82c078fbd72b9bdc783e82fd64fe3a6fedc930886eb7d83e0"
+    },
+    "liver-p25--r1": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "3f5f8484824ecdc3dab97a153d0158ea13390e8fbe95c701696a7594c266455c",
+          "cost_usd": 0.6926405,
+          "duration_ms": 356917,
+          "error": null,
+          "is_error": false,
+          "num_turns": 42,
+          "result_sha256": "22039eb1f16bca55540367182e88d36f1eafc8d9f9c9af0c9d76015d7396fb7a",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 45441,
+            "cache_read": 441915,
+            "input": 45,
+            "output": 19111,
+            "total": 506512
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P25.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Sult2a bile acid steroid sulfotransferase hepatocyte mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Cyp2c Gsta3 Aldh1a1 xenobiotic drug metabolism hepatocyte mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hao2 Eci2 Fitm1 peroxisomal fatty acid oxidation hepatocyte lipid\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sult2a8 bile acid sulfation hepatocyte liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Akr1c6 aldo-keto reductase steroid metabolism mouse liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Aldh1a1 aldehyde dehydrogenase hepatocyte xenobiotic retinol\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"sulfotransferase SULT2A bile acid conjugation liver zonation\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"cytochrome P450 glutathione S-transferase phase II detoxification liver aging MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sqle squalene epoxidase cholesterol hepatocyte aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"SULT2A bile acid sulfation liver hepatocyte\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"xenobiotic detoxification phase I II hepatocyte CYP GST ALDH aging\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cdo1 cysteine dioxygenase liver taurine sulfur metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"19131563\", \"15004017\", \"26213785\", \"21931700\", \"38428825\", \"33000151\", \"28849476\", \"16508162\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"hepatic lipid droplet fatty acid oxidation peroxisome FITM HAO ECi2 liver\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"squalene epoxidase SQLE cholesterol biosynthesis liver INSIG1 sterol sensing\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Fitm1 fat storage-inducing transmembrane protein lipid droplet liver\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"HAO2 hydroxyacid oxidase peroxisomal fatty acid oxidation liver\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"ALDH3A2 fatty aldehyde dehydrogenase peroxisomal ER hepatocyte lipid\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Insig1 SQLE cholesterol sterol liver aging NAFLD MASLD hepatocyte\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"22106267\", \"35528616\", \"35406736\", \"29718361\", \"26858947\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Gsta3 glutathione S-transferase alpha steroid delta-isomerase liver hepatocyte\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Eci2 enoyl-CoA isomerase peroxisomal fatty acid beta-oxidation liver MASLD\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Car5a carbonic anhydrase 5 mitochondrial urea cycle liver hepatocyte\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"36464834\", \"39521352\", \"21931700\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"CYP2C mouse liver pericentral xenobiotic drug hydroxylation zonation\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"ALDH1A1 ALDH3A2 aldehyde dehydrogenase liver NAFLD MASLD steatosis\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Abcg5 Dgat2 sterol cholesterol transport liver aging hepatocyte\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"ALDH1A1 liver retinoid alcohol metabolism hepatocytes MASLD\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"glutathione S-transferase alpha GSTA steroid biosynthesis delta isomerization hepatocyte\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Abcg5 biliary cholesterol sterol secretion liver mouse hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Dgat2 diacylglycerol acyltransferase triglyceride synthesis liver MASLD NAFLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"24252657\", \"16232124\", \"34803510\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"hepatic xenobiotic metabolism CYP2C ALDH phase I phase II mouse liver aging\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Sord sorbitol dehydrogenase fructose polyol pathway liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"18838502\", \"22446519\", \"33933676\", \"38248815\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 4, \"query\": \"Lonp2 peroxisomal lon protease protein quality control fatty acid oxidation\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"hepatocyte pericentral periportal zonation xenobiotic sterol sulfation AKR CYP SULT\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"32917959\", \"29502128\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P25 in mouse hepatocytes (aging, MASLD context) is dominated by a comprehensive Phase I/II xenobiotic and bile acid/steroid detoxification program: multiple CYP2C, ALDH, AKR1C, GST, and SULT2A enzymes act in co...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 45441,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 45441,
+            "cache_read_input_tokens": 441915,
+            "inference_geo": "not_available",
+            "input_tokens": 45,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 7725,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 7725,
+                "cache_read_input_tokens": 49836,
+                "input_tokens": 3,
+                "output_tokens": 754,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 19111,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "213256ec699f137b44f4e7579fa6e979b5b156986146c024be10ec5dc1788170",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P25",
+      "recorded_cost_usd": 0.6926405,
+      "status": "verified",
+      "verification_summary_sha256": "b577c36badc290afba7dcb1a2ad8d2dfce6f9d36ce01af7c401443bab21dd8a1"
+    },
+    "liver-p25--r2": {
+      "attempt_records": [
+        {
+          "attempt": 1,
+          "audit_sha256": "9df2eb85c44cb6b097010397c837b3f6b68f16130d221e77d0cba0324b40d20b",
+          "cost_usd": 0.6193652000000001,
+          "duration_ms": 310791,
+          "error": null,
+          "is_error": false,
+          "num_turns": 39,
+          "result_sha256": "e79493d81bdd09f5a172f2793dd1a77e15be4fe0f12cc6f497d5b67c431128df",
+          "status": "ok",
+          "stop_reason": "end_turn",
+          "subtype": "success",
+          "tokens": {
+            "cache_creation": 42567,
+            "cache_read": 332484,
+            "input": 36,
+            "output": 17566,
+            "total": 392653
+          },
+          "tool_trace": [
+            {
+              "args_summary": "{\"file_path\": \"program_bundles/P25.json\"}",
+              "tool": "Read"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"select:mcp__literature__search_pubmed,mcp__literature__fetch_pubmed,mcp__literature__search_openalex,mcp__literature__resolve_doi,mcp__gpi__submit_result\"}",
+              "tool": "ToolSearch"
+            },
+            {
+              "args_summary": "{\"max_results\": 8, \"query\": \"Sult2a bile acid sulfation hepatocyte mouse liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Hao2 hydroxyacid oxidase peroxisomal fatty acid oxidation liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Cdo1 cysteine dioxygenase taurine hepatocyte liver metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Akr1c6 Aldh1a1 aldo-keto reductase hepatocyte xenobiotic steroid metabolism mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Aldh1a1 aldehyde dehydrogenase liver xenobiotic metabolism hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Eci2 enoyl-CoA isomerase peroxisomal fatty acid oxidation liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sqle squalene epoxidase cholesterol liver hepatocyte MASLD aging\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Gsta3 glutathione S-transferase alpha hepatocyte steroid metabolism mouse liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cyp2c50 cytochrome P450 hepatocyte xenobiotic drug metabolism mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Sqle squalene epoxidase cholesterol biosynthesis liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Insig1 SREBP cholesterol lipid homeostasis liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Aldh3a2 fatty aldehyde dehydrogenase liver lipid metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Car5a carbonic anhydrase mitochondrial ureagenesis liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Agmat agmatinase urea cycle polyamine metabolism liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Lonp2 peroxisomal Lon protease protein quality control fatty acid oxidation\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"Gsta3 glutathione transferase alpha steroid bile acid liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"hepatocyte sulfotransferase bile acid conjugation zonation pericentral\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Abcg5 cholesterol sterol transporter liver bile MASLD\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Fitm1 fat storage inducing transmembrane lipid droplet liver\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Rgn regucalcin liver calcium metabolism aging hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Sord sorbitol dehydrogenase fructose metabolism liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Htatip2 liver lipid metabolism oxidoreductase\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 6, \"query\": \"hepatocyte xenobiotic metabolism aging MASLD peroxisomal oxidation sulfotransferase\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"15004017\", \"10777549\", \"40963025\", \"41427362\", \"38428825\", \"39819116\", \"24553827\", \"29871716\", \"33190588\", \"8486162\", \"2154476\", \"10585880\", \"22808024\", \"39836491\", \"38744443\", \"41005980\", \"29669855\", \"25787749\", \"36820075\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"39103107\", \"26311497\", \"32461046\", \"42454495\", \"16825483\", \"38923573\", \"26747651\", \"19965611\", \"14638678\", \"31342714\", \"9276483\", \"40094418\", \"22106267\", \"9920722\", \"8794449\", \"33933676\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Alad aminolevulinate dehydratase heme biosynthesis liver hepatocyte\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cyb5b cytochrome b5 reductase xenobiotic metabolism liver electron transfer\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"mouse liver sulfotransferase Sult2a steroid bile acid phase II metabolism pericentral CAR\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"hepatic peroxisomal beta-oxidation aging MASLD fatty liver mouse\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"19289130\", \"2484608\", \"19888908\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Lonp2 peroxisomal protease protein quality control oxidative stress\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Cyb5b cytochrome b5 outer mitochondrial membrane lipid metabolism\"}",
+              "tool": "mcp__literature__search_pubmed"
+            },
+            {
+              "args_summary": "{\"pmids\": [\"22203676\"]}",
+              "tool": "mcp__literature__fetch_pubmed"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"hepatocyte sulfotransferase Sult2a bile acid steroid sulfation pericentral zonation mouse liver\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"max_results\": 5, \"query\": \"Lonp2 peroxisomal lon protease liver fatty acid oxidation\"}",
+              "tool": "mcp__literature__search_openalex"
+            },
+            {
+              "args_summary": "{\"agent_summary\": \"Program P25 mouse hepatocyte genes converge on three inter-related metabolic defense programs. The dominant theme is a coordinated phase I/II xenobiotic and bile acid detoxification module\\u2014anchored by three sulfot...",
+              "tool": "mcp__gpi__submit_result"
+            }
+          ],
+          "usage": {
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 42567,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "cache_creation_input_tokens": 42567,
+            "cache_read_input_tokens": 332484,
+            "inference_geo": "not_available",
+            "input_tokens": 36,
+            "iterations": [
+              {
+                "cache_creation": {
+                  "ephemeral_1h_input_tokens": 7056,
+                  "ephemeral_5m_input_tokens": 0
+                },
+                "cache_creation_input_tokens": 7056,
+                "cache_read_input_tokens": 49503,
+                "input_tokens": 3,
+                "output_tokens": 699,
+                "type": "message"
+              }
+            ],
+            "output_tokens": 17566,
+            "server_tool_use": {
+              "web_fetch_requests": 0,
+              "web_search_requests": 0
+            },
+            "service_tier": "standard",
+            "speed": "standard"
+          }
+        }
+      ],
+      "attempts": 1,
+      "audit_sha256": "49ee4db92e96319fe0bf436222f2fed1a26aa680973d46d4d16f1539e1f4f062",
+      "audit_status": "ok",
+      "current_attempt": 1,
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P25",
+      "recorded_cost_usd": 0.6193652000000001,
+      "status": "verified",
+      "verification_summary_sha256": "e2d5b27815cbb884cbd5ee069b0f162618deab2167cd7484753ecb1b356e191b"
+    }
+  }
+}

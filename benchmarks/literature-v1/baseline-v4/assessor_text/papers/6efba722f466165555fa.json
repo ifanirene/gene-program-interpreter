@@ -1,0 +1,14 @@
+{
+  "content_hash": "b0e89ab28e837390228db60f8df42ecb1ef857f690bcc545f5045c7f73e363a3",
+  "doi": "10.2337/db19-0699",
+  "errors": [],
+  "paper_key": "6efba722f466165555fa",
+  "pmcid": null,
+  "pmid": "32641353",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Endosomes help activate the hepatic insulin-evoked Akt signaling pathway, but the underlying regulatory mechanisms are unclear. Previous studies have suggested that the endosome-located protein WD repeat and FYVE domain-containing 2 (WDFY2) might be involved in metabolic disorders, such as diabetes. Here, we generated Wdfy2 knockout (KO) mice and assessed the metabolic consequences. These KO mice exhibited systemic insulin resistance, with increased gluconeogenesis and suppressed glycogen accumulation in the liver. Mechanistically, we found that the insulin-stimulated activation of Akt2 and its substrates FoxO1 and GSK-3\u03b2 is attenuated in the Wdfy2 KO liver and H2.35 hepatocytes, suggesting that WDFY2 acts as an important regulator of hepatic Akt2 signaling. We further found that WDFY2 interacts with the insulin receptor (INSR) via its WD1-4 domain and localizes the INSR to endosomes after insulin stimulation. This process ensures that the downstream insulin receptor substrates 1 and 2 (IRS1/2) can be recruited to the endosomal INSR. IRS1/2-INSR binding promotes IRS1/2 phosphorylation and subsequent activation, initiating downstream Akt2 signaling in the liver. Interestingly, adeno-associated viral WDFY2 delivery ameliorated metabolic defects in db/db mice. These findings demonstrate that WDFY2 activates insulin-evoked Akt2 signaling by controlling endosomal localization of the INSR and IRS1/2 in hepatocytes. This pathway might constitute a new potential target for diabetes prevention or treatment.",
+  "text_type": "abstract",
+  "title": "WDFY2 Potentiates Hepatic Insulin Sensitivity and Controls Endosomal Localization of the Insulin Receptor and IRS1/2."
+}

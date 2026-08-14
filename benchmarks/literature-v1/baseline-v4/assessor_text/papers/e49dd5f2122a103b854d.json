@@ -1,0 +1,16 @@
+{
+  "content_hash": "403a24074fd149363b314c66406a5b76674afc95b60580f86868302712e00697",
+  "doi": "10.1182/blood-2012-05-424713",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "e49dd5f2122a103b854d",
+  "pmcid": "PMC3606070",
+  "pmid": "23315162",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Neuropilin (NRP) 1 is a receptor for the vascular endothelial growth factor (VEGF)-A and is essential for normal angiogenesis. Previous in vitro experiments identified NRP1 interactions with VEGF-A's main signaling receptor VEGFR2 within endothelial cells, but also between nonendothelial NRP1 and endothelial VEGFR2. Consistent with an endothelial role for NRP1 in angiogenesis, we found that VEGFR2 and NRP1 were coexpressed in endothelial tip and stalk cells in the developing brain. In addition, NRP1 was expressed on two cell types that interact with growing brain vessels-the neural progenitors that secrete VEGF-A to stimulate tip cell activity and the pro-angiogenic macrophages that promote tip cell anastomosis. Selective targeting of Nrp1 in each of these cell types demonstrated that neural progenitor- and macrophage-derived NRP1 were dispensable, whereas endothelial NRP1 was essential for normal brain vessel growth. NRP1 therefore promotes brain angiogenesis cell autonomously in endothelium, independently of heterotypic interactions with nonendothelial cells. Genetic mosaic analyses demonstrated a key role for NRP1 in endothelial tip rather than stalk cells during vessel sprouting. Thus, NRP1-expressing endothelial cells attained the tip cell position when competing with NRP1-negative endothelial cells in chimeric vessel sprouts. Taken together, these findings demonstrate that NRP1 promotes endothelial tip cell function during angiogenesis.",
+  "text_type": "abstract",
+  "title": "NRP1 acts cell autonomously in endothelium to promote tip cell function during sprouting angiogenesis."
+}

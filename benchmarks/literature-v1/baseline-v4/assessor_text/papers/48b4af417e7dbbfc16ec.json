@@ -1,0 +1,14 @@
+{
+  "content_hash": "0cc29a4a98fdf68dc8156b1b99e4d0d6e66d4c60671d3b713f7ec973e30ed299",
+  "doi": "10.1007/s11010-012-1516-3",
+  "errors": [],
+  "paper_key": "48b4af417e7dbbfc16ec",
+  "pmcid": null,
+  "pmid": "23180245",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "To investigate how cholesterol induces hepatocytic steatosis, we investigated the effect of cholesterol on hepatic lipogenesis and the assembly and secretion of very-low-density lipoprotein-triglycerides (VLDL-TGs) in goose primary hepatocytes. We found that cholesterol at 20 \u03bcg/ml increased the concentrations of extracellular VLDL, intracellular cholesterol, and intracellular TGs, while cholesterol at 30 \u03bcg/ml had a reduced effect (p < 0.05). Additionally, cholesterol at 20 \u03bcg/ml, but not at 10 or 30 \u03bcg/ml, increased the extracellular TG concentration. Cholesterol increased the fatty acid synthase (FAS) enzyme activity in a dose-dependent manner. Incubation with cholesterol increased the mRNA level of genes involved in lipogenesis, including sterol regulatory element-binding proteins (SREBPs), FAS, acetyl-CoA carboxylase-\u03b1 (ACC\u03b1), and liver X receptors. The mRNA level of the acyl-CoA: diacylglycerol acyltransferase 1 (DGAT1) gene changed in response to cholesterol treatment in a dose-dependent manner. Similar to the regulation of extracellular VLDL and intracellular TG accumulation, the mRNA levels of the microsomal triglyceride transfer protein, forkhead box O1, and DGAT2 increased with treatment with 10 or 20 \u03bcg/ml of cholesterol, but decreased with treatment with 30 \u03bcg/ml of cholesterol (p < 0.05). Cholesterol had no evident effect on the mRNA level of the apolipoprotein B gene. Incubation with cholesterol at 20 and 30 \u03bcg/ml increased the nuclear SREBP-1 protein level (p < 0.05) and the binding affinity of the nuclear SREBP-1 to ACC\u03b1 SRE probes. In conclusion, cholesterol not only activates the transcription of genes involved in fatty acid synthesis and TG accumulation, but also activates the transcription of genes involved in the assembly and secretion of VLDL-TG in goose primary hepatocytes.",
+  "text_type": "abstract",
+  "title": "Effect of cholesterol on lipogenesis and VLDL-TG assembly and secretion in goose primary hepatocytes."
+}

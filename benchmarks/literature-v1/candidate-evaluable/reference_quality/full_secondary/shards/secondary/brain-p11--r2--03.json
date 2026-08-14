@@ -1,0 +1,92 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-bcb8d8bbafcc60bae100",
+    "RL-eedf1854869a82bd0119",
+    "RL-fe80504bafd42b5f9584"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 23856,
+        "source_type": "full_text",
+        "start": 23662,
+        "text": "Taken together, our observations establish that NRP1 enables CDC42 activation and CDC42-dependent actin dynamics and filopodia extension in ECM-stimulated ECs, independently of VEGF-A signaling."
+      },
+      "function_supported_genes": [],
+      "rationale": "NRP1 knockdown and CDC42 inhibition causally support the regulator pathway controlling endothelial filopodia. The embryonic hindbrain and other endothelial models are closely related but not identical to postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-bcb8d8bbafcc60bae100",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 854,
+        "source_type": "abstract",
+        "start": 767,
+        "text": "The down-regulation of Kir2.1 reduced OSS-induced EPC mesenchymal transdifferentiation."
+      },
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "rationale": "Kir2.1 was directly perturbed under oscillating shear stress, supporting its shear-responsive endothelial function. The EPC and vascular-injury settings are indirect to postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-eedf1854869a82bd0119",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1443,
+        "source_type": "abstract",
+        "start": 1271,
+        "text": "Adult Pdgfbret/ret brains display ongoing angiogenic sprouting without concomitant cell proliferation providing unique insights into the endothelial tip cell transcriptome."
+      },
+      "function_supported_genes": [],
+      "rationale": "The study profiles angiogenic brain endothelial tip cells after pericyte loss, supporting the cited contextual claim; Angpt2 is studied for BBB reinforcement, not the assigned sprouting function. Adult pathological pericyte deficiency is only a partial match to normal postnatal development.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-fe80504bafd42b5f9584",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 36352,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 51047,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4497,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 86.583
+  }
+}

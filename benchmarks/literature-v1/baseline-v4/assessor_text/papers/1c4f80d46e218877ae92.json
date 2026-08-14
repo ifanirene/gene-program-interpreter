@@ -1,0 +1,16 @@
+{
+  "content_hash": "f6629e7460e1bcca8f44f442f5ba810a91e2e88c873c5ed5e2c1f3cb8e8a1554",
+  "doi": "10.3121/cmr.4.1.66",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "1c4f80d46e218877ae92",
+  "pmcid": "PMC1435660",
+  "pmid": "16595794",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Hereditary hemorrhagic telangiectasia (HHT) is caused by mutations in endoglin (ENG; HHT1) or ACVRL1/ALK1 (HHT2) genes and is an autosomal dominant vascular dysplasia. Clinically, HHT is characterized by epistaxis, telangiectases and arteriovenous malformations in some internal organs such as the lung, brain or liver. Endoglin and ALK1 proteins are specific endothelial receptors of the transforming growth factor (TGF)-beta superfamily that are essential for vascular integrity. Genetic studies in mice and humans have revealed the pivotal role of TGF-beta signaling during angiogenesis. Through binding to the TGF-beta type II receptor, TGF-beta can activate two distinct type I receptors (ALK1 and ALK5) in endothelial cells, each one leading to opposite effects on endothelial cell proliferation and migration. The recent isolation and characterization of circulating endothelial cells from HHT patients has revealed a decreased endoglin expression, impaired ALK1- and ALK5-dependent TGF-beta signaling, disorganized cytoskeleton and the failure to form cord-like structures which may lead to the fragility of small vessels with bleeding characteristic of HHT vascular dysplasia or to disrupted and abnormal angiogenesis after injuries and may explain the clinical symptoms associated with this disease.",
+  "text_type": "abstract",
+  "title": "Hereditary hemorrhagic telangiectasia, a vascular dysplasia affecting the TGF-beta signaling pathway."
+}

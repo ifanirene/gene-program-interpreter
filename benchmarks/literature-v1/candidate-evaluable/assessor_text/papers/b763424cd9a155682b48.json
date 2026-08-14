@@ -1,0 +1,16 @@
+{
+  "content_hash": "578e70d2a668957ea3e46396e29377d7c82d190be0d8819225c34f8ffe3c9f81",
+  "doi": "10.1161/atvbaha.123.319385",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "b763424cd9a155682b48",
+  "pmcid": "PMC10524982",
+  "pmid": "37288572",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Hereditary hemorrhagic telangiectasia (HHT) is a vascular disorder characterized by arteriovenous malformations and blood vessel enlargements. However, there are no effective drug therapies to combat arteriovenous malformation formation in patients with HHT. Here, we aimed to address whether elevated levels of ANG2 (angiopoietin-2) in the endothelium is a conserved feature in mouse models of the 3 major forms of HHT that could be neutralized to treat brain arteriovenous malformations and associated vascular defects. In addition, we sought to identify the angiogenic molecular signature linked to HHT.\n\nMETHODS: Cerebrovascular defects, including arteriovenous malformations and increased vessel calibers, were characterized in mouse models of the 3 common forms of HHT using transcriptomic and dye injection labeling methods.\n\nRESULTS: Comparative RNA sequencing analyses of isolated brain endothelial cells revealed a common, but unique proangiogenic transcriptional program associated with HHT. This included a consistent upregulation in cerebrovascular expression of ANG2 and downregulation of its receptor Tyr kinase with Ig and EGF homology domains (TIE2/TEK) in HHT mice compared with controls. Furthermore, in vitro experiments revealed TEK signaling activity was hampered in an HHT setting. Pharmacological blockade of ANG2 improved brain vascular pathologies in all HHT models, albeit to varying degrees. Transcriptomic profiling further indicated that ANG2 inhibition normalized the brain vasculature by impacting a subset of genes involved in angiogenesis and cell migration processes.\n\nCONCLUSIONS: Elevation of ANG2 in the brain vasculature is a shared trait among the mouse models of the common forms of HHT. Inhibition of ANG2 activity can significantly limit or prevent brain arteriovenous malformation formation and blood vessel enlargement in HHT mice. Thus, ANG2-targeted therapies may represent a compelling approach to treat arteriovenous malformations and vascular pathologies related to all forms of HHT.",
+  "text_type": "abstract",
+  "title": "ANG2 Blockade Diminishes Proangiogenic Cerebrovascular Defects Associated With Models of Hereditary Hemorrhagic Telangiectasia."
+}

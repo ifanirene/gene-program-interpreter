@@ -1,0 +1,124 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-524c0930970ba7d5a340",
+    "RL-54bc20dde80494cdd555",
+    "RL-6fe32566ea1756b7aab7",
+    "RL-9bb58929218910003e0f"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 784,
+        "source_type": "abstract",
+        "start": 614,
+        "text": "aldehyde dehydrogenase 1A1 (ALDH1A1, alternatively known as retinaldehyde dehydrogenase 1 or RALDH1), have also been identified as being associated with metabolic disease"
+      },
+      "function_supported_genes": [
+        "Aldh1a1"
+      ],
+      "rationale": "This model-assessed finding links ALDH1A1/RALDH1 to vitamin A metabolism and metabolic disease, with the review's scope including NAFLD/NASH. It provides secondary, incomplete support for the broader aldehyde-oxidation claim.",
+      "red_flags": [
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-524c0930970ba7d5a340",
+      "studied_genes": [
+        "Aldh1a1"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 728,
+        "source_type": "abstract",
+        "start": 619,
+        "text": "HAOX2 is expressed predominantly in liver and kidney and displays highest activity toward 2-hydroxypalmitate."
+      },
+      "function_supported_genes": [
+        "Hao2"
+      ],
+      "rationale": "This model-assessed gene-specific enzyme activity supports HAO2 oxidation of a 2-hydroxy fatty acid. The human biochemical system is indirect for aging/MASLD mouse hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-54bc20dde80494cdd555",
+      "studied_genes": [
+        "Hao2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1460,
+        "source_type": "abstract",
+        "start": 1339,
+        "text": "FIT1 and a FIT2 partial loss-of-function mutant, N80A, had significantly lower triolein binding and produced smaller LDs."
+      },
+      "function_supported_genes": [
+        "Fitm1"
+      ],
+      "rationale": "This model-assessed gene-specific result links FIT1 triglyceride binding to lipid-droplet formation. The biochemical and ectopic mouse-liver evidence is close to, but not directly within, aging/MASLD hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-6fe32566ea1756b7aab7",
+      "studied_genes": [
+        "Fitm1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 24313,
+        "source_type": "full_text",
+        "start": 24158,
+        "text": "The LD number in the siPSMD1, siPSMD2, and siPSMD1 + siPSMD2 cell groups was significantly less than the number of control group cells (p < 0.05, Fig. 3b)."
+      },
+      "function_supported_genes": [
+        "Psmd1"
+      ],
+      "rationale": "This model-assessed perturbation result supports PSMD1 as a positive regulator of cellular lipid-droplet accumulation. HepG2/Huh7 carcinoma cells are an indirect context for aging/MASLD mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-9bb58929218910003e0f",
+      "studied_genes": [
+        "Psmd1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 108544,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 143390,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 7588,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 149.398
+  }
+}

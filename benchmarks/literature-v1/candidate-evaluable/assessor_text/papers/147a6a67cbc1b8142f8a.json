@@ -1,0 +1,16 @@
+{
+  "content_hash": "880b0866cc2a58c3b3f37bc0e8ec4565f06ff5faf01e8102c39b5a578ffe832f",
+  "doi": "10.1210/en.2011-2104",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "147a6a67cbc1b8142f8a",
+  "pmcid": "PMC3380298",
+  "pmid": "22555438",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Recent data link vitamin A and its retinoid metabolites to the regulation of adipogenesis, insulin sensitivity, and glucose homeostasis. Retinoid metabolism is tightly controlled by an enzymatic network in which retinaldehyde dehydrogenases (Aldh1-3) are the rate-limiting enzymes that convert retinaldehyde to retinoic acid. Aldh1a1-deficient mice are protected from diet-induced obesity and hence diabetes. Here we investigated whether Aldh1a1 and the retinoid axis regulate hepatic glucose and lipid metabolism independent of adiposity. The impact of Aldh1a1 and the retinoid pathway on glucose homeostasis and lipid metabolism was analyzed in hepatocytes in vitro and in chow-fed, weight-matched Aldh1a1-deficient vs. wild-type (WT) mice in vivo. Aldh1a1-deficient mice displayed significantly decreased fasting glucose concentrations compared with WT controls as a result of attenuated hepatic glucose production. Expression of key gluconeogenic enzymes as well as the activity of Forkhead box O1 was decreased in Aldh1a1-deficient vs. WT livers. In vitro, retinoid or cAMP agonist stimulation markedly induced gluconeogenesis in WT but not Aldh1a1-deficient primary hepatocytes. Aldh1a1 deficiency increased AMP-activated protein kinase \u03b1 activity, decreased expression of lipogenic targets of AMP-activated protein kinase \u03b1 and significantly attenuated hepatic triacylglycerol synthesis. In metabolic cage studies, lean Aldh1a1-deficient mice manifested enhanced oxygen consumption and reduced respiratory quotient vs. WT controls, consistent with increased expression of fatty acid oxidation markers in skeletal muscle. Taken together, this work establishes a role for retinoid metabolism in glucose homeostasis in vivo and for Aldh1a1 as a novel determinant of gluconeogenesis and lipid metabolism independent of adiposity.",
+  "text_type": "abstract",
+  "title": "Retinaldehyde dehydrogenase 1 coordinates hepatic gluconeogenesis and lipid metabolism."
+}

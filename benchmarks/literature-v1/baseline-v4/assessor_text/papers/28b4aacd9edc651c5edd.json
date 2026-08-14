@@ -1,0 +1,16 @@
+{
+  "content_hash": "769d0b6af7dc585b9ed1590526c0c0a834b77f506a9cc58bcda3ad0b17222a48",
+  "doi": "10.1074/jbc.m115.649202",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "28b4aacd9edc651c5edd",
+  "pmcid": "PMC4528124",
+  "pmid": "26085087",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The Bardet-Biedl syndrome protein complex (BBSome) is an octameric complex that transports membrane proteins into the primary cilium signaling organelle in eukaryotes and is implicated in human disease. Here we have analyzed the 99-kDa human BBS9 protein, one of the eight BBSome components. The protein is composed of four structured domains, including a \u03b2-stranded N-terminal domain. The 1.8 \u00c5 crystal structure of the 46-kDa N-terminal domain reveals a seven-bladed \u03b2-propeller. A structure-based homology search suggests that it functions in protein-protein interactions. We show that the Bardet-Biedl syndrome-causing G141R mutation in BBS9 likely results in misfolding of the \u03b2-propeller. Although the C-terminal half of BBS9 dimerizes in solution, the N-terminal domain only does so in the crystal lattice. This C-terminal dimerization interface might be important for the assembly of the BBSome.",
+  "text_type": "abstract",
+  "title": "Structural Characterization of Bardet-Biedl Syndrome 9 Protein (BBS9)."
+}

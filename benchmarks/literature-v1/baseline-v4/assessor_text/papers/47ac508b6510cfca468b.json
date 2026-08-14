@@ -1,0 +1,14 @@
+{
+  "content_hash": "8197880f1de02ae2a6ebe410b758522bcfb48eef8815e3eac892586f0b550f9d",
+  "doi": "10.1097/hep.0000000000000716",
+  "errors": [],
+  "paper_key": "47ac508b6510cfca468b",
+  "pmcid": null,
+  "pmid": "38085830",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND AND AIMS: Ischemia-reperfusion (I/R) injury frequently occurs during liver surgery, representing a major reason for liver failure and graft dysfunction after operation. The metabolic shift from oxidative phosphorylation to glycolysis during ischemia increased glucose consumption and accelerated lactate production. We speculate that donor livers will initiate gluconeogenesis, the reverse process of glycolysis in theory, to convert noncarbohydrate carbon substrates (including lactate) to glucose to reduce the loss of hepatocellular energy and foster glycogen storage for use in the early postoperative period, thus improving post-transplant graft function.\n\nAPPROACH AND RESULTS: By analyzing human liver specimens before and after hepatic I/R injury, we found that the rate-limiting enzyme of gluconeogenesis, PCK1, was significantly induced during liver I/R injury. Mouse models with liver I/R operation and hepatocytes treated with hypoxia/reoxygenation confirmed upregulation of PCK1 during I/R stimulation. Notably, high PCK1 level in human post-I/R liver specimens was closely correlated with better outcomes of liver transplantation. However, blocking gluconeogenesis with PCK1 inhibitor aggravated hepatic I/R injury by decreasing glucose level and deepening lactate accumulation, while overexpressing PCK1 did the opposite. Further mechanistic study showed that methyltransferase 3-mediated RNA N6-methyladinosine modification contributes to PCK1 upregulation during hepatic I/R injury, and hepatic-specific knockout of methyltransferase 3 deteriorates liver I/R injury through reducing the N6-methyladinosine deposition on PCK1 transcript and decreasing PCK1 mRNA export and expression level.\n\nCONCLUSIONS: Our study found that activation of the methyltransferase 3/N6-methyladinosine-PCK1-gluconeogenesis axis is required to protect against hepatic I/R injury, providing potential intervention approaches for alleviating hepatic I/R injury during liver surgery.",
+  "text_type": "abstract",
+  "title": "m 6 A-mediated gluconeogenic enzyme PCK1 upregulation protects against hepatic ischemia-reperfusion injury."
+}

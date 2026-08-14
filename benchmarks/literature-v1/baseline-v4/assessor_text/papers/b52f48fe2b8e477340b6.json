@@ -1,0 +1,16 @@
+{
+  "content_hash": "cb044149d215e81338a974070f0ace6fa77e44a47e2ca9663a493bf40476c2a2",
+  "doi": "10.1242/dev.164236",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "b52f48fe2b8e477340b6",
+  "pmcid": "PMC5897601",
+  "pmid": "29487109",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The primary cilium is a microtubule-based organelle required for Hedgehog (Hh) signaling and consists of a basal body, a ciliary axoneme and a compartment between the first two structures, called the transition zone (TZ). The TZ serves as a gatekeeper to control protein composition in cilia, but less is known about its role in ciliary bud formation. Here, we show that centrosomal protein Dzip1l is required for Hh signaling between Smoothened and Sufu. Dzip1l colocalizes with basal body appendage proteins and Rpgrip1l, a TZ protein. Loss of Dzip1l results in reduced ciliogenesis and dysmorphic cilia in vivo Dzip1l interacts with, and acts upstream of, Cby, an appendage protein, in ciliogenesis. Dzip1l also has overlapping functions with Bromi (Tbc1d32) in ciliogenesis, cilia morphogenesis and neural tube patterning. Loss of Dzip1l arrests ciliogenesis at the stage of ciliary bud formation from the TZ. Consistent with this, Dzip1l mutant cells fail to remove the capping protein Cp110 (Ccp110) from the distal end of mother centrioles and to recruit Rpgrip1l to the TZ. Therefore, Dzip1l promotes ciliary bud formation and is required for the integrity of the TZ.",
+  "text_type": "abstract",
+  "title": "Centrosomal protein Dzip1l binds Cby, promotes ciliary bud formation, and acts redundantly with Bromi to regulate ciliogenesis in the mouse."
+}

@@ -1,0 +1,1191 @@
+{
+  "8": {
+    "meta": {
+      "query": "(Sorbs1 OR Itga4 OR Tiam1 OR Srgap2 OR Rasgrp3 OR Klhl6 OR Lmo2 OR Lrrn3 OR Zfp608 OR Ets1 OR Fut8 OR Tmtc2 OR Qk OR Hmcn1 OR Arhgap18 OR Ntm OR Adamts12 OR Tbc1d4 OR Grb14 OR Arap2 OR Adamts5 OR Pcca OR Arid5b) AND (\"brain endothelial cell\" OR brain OR \"postnatal development\" OR \"blood-brain barrier\" OR \"arteriovenous zonation\" OR \"tight junctions\" OR angiogenesis OR \"tip cells\" OR \"Notch signaling\" OR \"VEGF signaling\" OR mechanotransduction)",
+      "total_hits": 25
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Sorbs1": "This gene encodes a CBL-associated protein which functions in the signaling and stimulation of insulin. Mutations in this gene may be associated with human disorders of insulin resistance. Alternative splicing results in multiple transcript variants.",
+      "Itga4": "The gene encodes a member of the integrin alpha chain family of proteins. Integrins are heterodimeric integral membrane proteins composed of an alpha chain and a beta chain that function in cell surface adhesion and signaling. The encoded preproprotein is proteolytically processed to generate light and heavy chains that comprise the alpha 4 subunit. This subunit associates with a beta 1 or beta 7 subunit to form an integrin that may play a role in cell motility and migration. This integrin is a therapeutic target for the treatment of multiple sclerosis, Crohn's disease and inflammatory bowel disease. Alternative splicing results in multiple transcript variants.",
+      "Tiam1": "This gene encodes a RAC1-specific guanine nucleotide exchange factor (GEF). GEFs mediate the exchange of guanosine diphosphate (GDP) for guanosine triphosphate (GTP). The binding of GTP induces a conformational change in RAC1 that allows downstream effectors to bind and transduce a signal. This gene thus regulates RAC1 signaling pathways that affect cell shape, migration, adhesion, growth, survival, and polarity, as well as influencing actin cytoskeletal formation, endocytosis, and membrane trafficking. This gene thus plays an important role in cell invasion, metastasis, and carcinogenesis. In addition to RAC1, the encoded protein activates additional Rho-like GTPases such as CDC42, RAC2, RAC3 and RHOA. This gene encodes multiple protein isoforms that experience a diverse array of intramolecular, protein-protein, and phosphorylation interactions as well as phosphoinositide binding. Both the longer and shorter isoforms have C-terminal Dbl homology (DH) and pleckstrin homology (PH) domains while only the longer isoforms of this gene have the N-terminal myristoylation site and the downstream N-terminal PH domain, ras-binding domain (RBD), and PSD-95/DlgA/ZO-1 (PDZ) domain.",
+      "Srgap2": "This locus encodes a member of the SLIT-ROBO Rho GTPase activating protein family. The encoded protein stimulates GTPase activity of Rac1, and plays a role in cortical neuron development. This locus has several paralogs on human chromosome 1 resulting from segmental duplication. While this locus itself is conserved among various species, the paralogs are found only in the genus Homo, and not in the genomes of non-human great apes. Alternatively spliced transcript variants have been described for this locus.",
+      "Rasgrp3": "The protein encoded by this gene is a guanine nucleotide exchange factor that activates the oncogenes HRAS and RAP1A. Defects in this gene have been associated with systemic lupus erythematosus and several cancers.",
+      "Klhl6": "This gene encodes a member of the kelch-like (KLHL) family of proteins, which is involved in B-lymphocyte antigen receptor signaling and germinal-center B-cell maturation. The encoded protein contains an N-terminal broad-complex, tramtrack and bric a brac (BTB) domain that facilitates protein binding and dimerization, a BTB and C-terminal kelch (BACK) domain, and six C-terminal kelch repeat domains. Naturally occurring mutations in this gene are associated with chronic lymphocytic leukemia. Alternative splicing results in multiple transcript variants.",
+      "Lmo2": "LMO2 encodes a cysteine-rich, two LIM-domain protein that is required for yolk sac erythropoiesis. The LMO2 protein has a central and crucial role in hematopoietic development and is highly conserved. The LMO2 transcription start site is located approximately 25 kb downstream from the 11p13 T-cell translocation cluster (11p13 ttc), where a number T-cell acute lymphoblastic leukemia-specific translocations occur. Alternative splicing results in multiple transcript variants encoding different isoforms.",
+      "Lrrn3": "Predicted to act upstream of or within positive regulation of synapse assembly. Predicted to be located in membrane. Predicted to be active in extracellular matrix and extracellular space.",
+      "Ets1": "This gene encodes a member of the ETS family of transcription factors, which are defined by the presence of a conserved ETS DNA-binding domain that recognizes the core consensus DNA sequence GGAA/T in target genes. These proteins function either as transcriptional activators or repressors of numerous genes, and are involved in stem cell development, cell senescence and death, and tumorigenesis. Alternatively spliced transcript variants encoding different isoforms have been described for this gene.",
+      "Fut8": "This gene encodes an enzyme belonging to the family of fucosyltransferases. The product of this gene catalyzes the transfer of fucose from GDP-fucose to N-linked type complex glycopeptides. This enzyme is distinct from other fucosyltransferases which catalyze alpha1-2, alpha1-3, and alpha1-4 fucose addition. The expression of this gene may contribute to the malignancy of cancer cells and to their invasive and metastatic capabilities. Alternative splicing results in multiple transcript variants.",
+      "Tmtc2": "The protein encoded by this gene is an integral membrane protein localized to the endoplasmic reticulum (ER). The encoded protein contains many tetratricopeptide repeats, sequences known for being involved in protein-protein interactions. This protein binds both the calcium uptake pump SERCA2B and the carbohydrate-binding chaperone calnexin, and it appears to play a role in calcium homeostasis in the ER. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Qk": "The protein encoded by this gene is an RNA-binding protein that regulates pre-mRNA splicing, export of mRNAs from the nucleus, protein translation, and mRNA stability. The encoded protein is involved in myelinization and oligodendrocyte differentiation and may play a role in schizophrenia. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Hmcn1": "This gene encodes a large extracellular member of the immunoglobulin superfamily. A similar protein in C. elegans forms long, fine tracks at specific extracellular sites that are involved in many processes such as stabilization of the germline syncytium, anchorage of mechanosensory neurons to the epidermis, and organization of hemidesmosomes in the epidermis. Mutations in this gene may be associated with age-related macular degeneration.",
+      "Arhgap18": "Enables GTPase activator activity. Involved in several processes, including regulation of actin filament polymerization; regulation of small GTPase mediated signal transduction; and small GTPase-mediated signal transduction. Located in cytosol; nuclear speck; and plasma membrane. Part of cytoplasmic microtubule and ruffle. Implicated in schizophrenia.",
+      "Ntm": "This gene encodes a member of the IgLON (LAMP, OBCAM, Ntm) family of immunoglobulin (Ig) domain-containing glycosylphosphatidylinositol (GPI)-anchored cell adhesion molecules. The encoded protein may promote neurite outgrowth and adhesion via a homophilic mechanism. This gene is closely linked to a related family member, opioid binding protein/cell adhesion molecule-like (OPCML), on chromosome 11. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Adamts12": "This gene encodes a member of the ADAMTS (a disintegrin and metalloproteinase with thrombospondin motifs) protein family. Members of the family share several distinct protein modules, including a propeptide region, a metalloproteinase domain, a disintegrin-like domain, and a thrombospondin type 1 (TS-1) motif. Individual members of this family differ in the number of C-terminal TS-1 motifs, and some have unique C-terminal domains. The enzyme encoded by this gene contains eight TS-1 motifs. It may play roles in pulmonary cells during fetal development or in tumor processes through its proteolytic activity or as a molecule potentially involved in regulation of cell adhesion.",
+      "Tbc1d4": "This gene is a member of the Tre-2/BUB2/CDC16 domain family. The protein encoded by this gene is a Rab-GTPase-activating protein, and contains two phopshotyrosine-binding domains (PTB1 and PTB2), a calmodulin-binding domain (CBD), a Rab-GTPase domain, and multiple AKT phosphomotifs. This protein is thought to play an important role in glucose homeostasis by regulating the insulin-dependent trafficking of the glucose transporter 4 (GLUT4), important for removing glucose from the bloodstream into skeletal muscle and fat tissues. Reduced expression of this gene results in an increase in GLUT4 levels at the plasma membrane, suggesting that this protein is important in intracellular retention of GLUT4 under basal conditions. When exposed to insulin, this protein is phosphorylated, dissociates from GLUT4 vesicles, resulting in increased GLUT4 at the cell surface, and enhanced glucose transport. Phosphorylation of this protein by AKT is required for proper translocation of GLUT4 to the cell surface. Individuals homozygous for a mutation in this gene are at higher risk for type 2 diabetes and have higher levels of circulating glucose and insulin levels after glucose ingestion. Alternative splicing results in multiple transcript variants encoding different isoforms.",
+      "Grb14": "The product of this gene belongs to a small family of adapter proteins that are known to interact with a number of receptor tyrosine kinases and signaling molecules. This gene encodes a growth factor receptor-binding protein that interacts with insulin receptors and insulin-like growth-factor receptors. This protein likely has an inhibitory effect on receptor tyrosine kinase signaling and, in particular, on insulin receptor signaling. This gene may play a role in signaling pathways that regulate growth and metabolism. Alternative splicing results in multiple transcript variants.",
+      "Arap2": "The protein encoded by this gene contains ARF-GAP, RHO-GAP, ankyrin repeat, RAS-associating, and pleckstrin homology domains. The protein is a phosphatidylinositol (3,4,5)-trisphosphate-dependent Arf6 GAP that binds RhoA-GTP, but it lacks the predicted catalytic arginine in the RHO-GAP domain and does not have RHO-GAP activity. The protein associates with focal adhesions and functions downstream of RhoA to regulate focal adhesion dynamics.",
+      "Adamts5": "This gene encodes a member of the ADAMTS (a disintegrin and metalloproteinase with thrombospondin motifs) protein family. Members of the family share several distinct protein modules, including a propeptide region, a metalloproteinase domain, a disintegrin-like domain, and a thrombospondin type 1 (TS) motif. Individual members of this family differ in the number of C-terminal TS motifs, and some have unique C-terminal domains. The encoded preproprotein is proteolytically processed to generate the mature enzyme. This enzyme contains two C-terminal TS motifs and functions as an aggrecanase that cleaves aggrecan, a major proteoglycan of cartilage, and may mediate cartilage destruction in osteoarthritis.",
+      "Pcca": "The protein encoded by this gene is the alpha subunit of the heterodimeric mitochondrial enzyme Propionyl-CoA carboxylase. PCCA encodes the biotin-binding region of this enzyme. Mutations in either PCCA or PCCB (encoding the beta subunit) lead to an enzyme deficiency resulting in propionic acidemia. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Arid5b": "This gene encodes a member of the AT-rich interaction domain (ARID) family of DNA binding proteins. The encoded protein forms a histone H3K9Me2 demethylase complex with PHD finger protein 2 and regulates the transcription of target genes involved in adipogenesis and liver development. This gene also plays a role in cell growth and differentiation of B-lymphocyte progenitors, and single nucleotide polymorphisms in this gene are associated with acute lymphoblastic leukemia. Alternatively spliced transcript variants encoding multiple isoforms have been observed for this gene."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Lmo2": [],
+      "Zfp608": [],
+      "Hmcn1": [],
+      "Ntm": [],
+      "Tiam1": [],
+      "Arhgap18": [],
+      "Arid5b": [],
+      "Sorbs1": [],
+      "Fut8": [],
+      "Srgap2": [],
+      "Adamts5": [
+        "\"ADAMTS5 Promotes Permeability of the Blood-Brain Barrier during Treponema pallidum Subspecies pallidum Invading the Central Nervous System..\" (PMID:38536197)",
+        "\"Our study revealed that Tp caused an increase in human cortical microvascular endothelial cell/D3 (hCMEC/D3) barrier permeability and significantly enhanced ADAMTS5 expression.\" (PMID:38536197)"
+      ],
+      "Tmtc2": [],
+      "Klhl6": [],
+      "Pcca": [],
+      "Grb14": [],
+      "Ets1": [
+        "\"Disruption of blood-brain barrier and endothelial-to-mesenchymal transition are attenuated by Astragalus polysaccharides mediated through upregulation of ETS1 expression in experimental autoimmune encephalomyelitis..\" (PMID:39383730)",
+        "\"In addition, the transcription factor ETS1 is a central regulator of EndoMT related to the compromise of BBB.\" (PMID:39383730)",
+        "\"Transcriptomic profiling revealed convergence of pericyte-derived cues and Wnt/beta-catenin activation on ETS1, SMAD3/4, and PPARgamma transcriptional networks, establishing a gene signature closely matching the adult human BBB.\" (PMID:41601407)",
+        "\"Through ETS1-mediated vascular endothelial growth factor (VEGF) signaling, this work examines how the phoenixin-14/GPR173 axis promotes post-stroke angiogenesis.\" (PMID:41762941)",
+        "\"These results show that via ETS1-mediated VEGF signaling, the phoenixin-14/GPR173 axis promotes post-stroke angiogenesis, indicating a possible therapeutic target for ICH recovery.\" (PMID:41762941)"
+      ],
+      "Tbc1d4": [],
+      "Arap2": [],
+      "Qk": [],
+      "Lrrn3": [],
+      "Itga4": [
+        "\"We found that JEV infection activates vitamin A metabolism, which in turn induces the upregulation and activation of ITGA4.\" (PMID:42336219)",
+        "\"ITGA4 triggers cytoskeletal reorganization enhancing early viral replication in monocytes via the ITGA4-HSP70-pFAK-Rac1 signaling axis, and reinforces interactions between immune cells and brain microvascular endothelial cells, reducing the expression of tight junction proteins (ZO-1 and Occludin) and increasing blood-brain barrier permeability, thereby enabling viral neuroinvasion and inflammatory cell infiltration.\" (PMID:42336219)"
+      ],
+      "Adamts12": [],
+      "Rasgrp3": []
+    },
+    "regulator_validation": {
+      "positive_regulators": [
+        {
+          "regulator": "Fzd4",
+          "log2fc": -0.2895374239808133,
+          "adj_pvalue": null,
+          "pvalue": 3.331022793399184e-10,
+          "n_program_targets": 4,
+          "string_interactions": [
+            {
+              "target": "Lrp6",
+              "score": 998
+            },
+            {
+              "target": "Lef1",
+              "score": 559
+            },
+            {
+              "target": "Plcb1",
+              "score": 539
+            },
+            {
+              "target": "Prkcb",
+              "score": 451
+            }
+          ]
+        },
+        {
+          "regulator": "Ncoa1",
+          "log2fc": -0.1997567058433773,
+          "adj_pvalue": null,
+          "pvalue": 0.0001236555576629,
+          "n_program_targets": 3,
+          "string_interactions": [
+            {
+              "target": "Nrip1",
+              "score": 747
+            },
+            {
+              "target": "Rarg",
+              "score": 548
+            },
+            {
+              "target": "Nr4a1",
+              "score": 532
+            }
+          ]
+        },
+        {
+          "regulator": "Kdr",
+          "log2fc": -0.1286512650174067,
+          "adj_pvalue": null,
+          "pvalue": 0.003002509812498,
+          "n_program_targets": 28,
+          "string_interactions": [
+            {
+              "target": "Nrp1",
+              "score": 999
+            },
+            {
+              "target": "Flt1",
+              "score": 989
+            },
+            {
+              "target": "Plxnd1",
+              "score": 952
+            },
+            {
+              "target": "Gab1",
+              "score": 927
+            },
+            {
+              "target": "Jak2",
+              "score": 924
+            },
+            {
+              "target": "Cav1",
+              "score": 902
+            },
+            {
+              "target": "Tmem204",
+              "score": 859
+            },
+            {
+              "target": "Cd34",
+              "score": 852
+            },
+            {
+              "target": "Prom1",
+              "score": 758
+            },
+            {
+              "target": "Emcn",
+              "score": 700
+            },
+            {
+              "target": "Plcb1",
+              "score": 664
+            },
+            {
+              "target": "Cyyr1",
+              "score": 629
+            },
+            {
+              "target": "Fgf13",
+              "score": 606
+            },
+            {
+              "target": "Hbegf",
+              "score": 553
+            },
+            {
+              "target": "Plxna2",
+              "score": 526
+            },
+            {
+              "target": "Cav2",
+              "score": 515
+            },
+            {
+              "target": "Tgfb2",
+              "score": 514
+            },
+            {
+              "target": "Elmo1",
+              "score": 512
+            },
+            {
+              "target": "Lmo2",
+              "score": 504
+            },
+            {
+              "target": "Ets1",
+              "score": 483
+            },
+            {
+              "target": "App",
+              "score": 478
+            },
+            {
+              "target": "Dock4",
+              "score": 472
+            },
+            {
+              "target": "Abcg2",
+              "score": 470
+            },
+            {
+              "target": "Alcam",
+              "score": 452
+            },
+            {
+              "target": "Car4",
+              "score": 451
+            },
+            {
+              "target": "Sema6d",
+              "score": 441
+            },
+            {
+              "target": "Tnfrsf21",
+              "score": 406
+            },
+            {
+              "target": "Tfrc",
+              "score": 404
+            }
+          ]
+        }
+      ],
+      "negative_regulators": [
+        {
+          "regulator": "Eng",
+          "log2fc": 0.307234923517262,
+          "adj_pvalue": null,
+          "pvalue": 8.665295969656119e-26,
+          "n_program_targets": 12,
+          "string_interactions": [
+            {
+              "target": "Cd34",
+              "score": 926
+            },
+            {
+              "target": "Alcam",
+              "score": 852
+            },
+            {
+              "target": "Kdr",
+              "score": 851
+            },
+            {
+              "target": "Flt1",
+              "score": 766
+            },
+            {
+              "target": "Prom1",
+              "score": 737
+            },
+            {
+              "target": "Tgfb2",
+              "score": 718
+            },
+            {
+              "target": "Tfrc",
+              "score": 696
+            },
+            {
+              "target": "Itga4",
+              "score": 676
+            },
+            {
+              "target": "Itga6",
+              "score": 664
+            },
+            {
+              "target": "Emcn",
+              "score": 587
+            },
+            {
+              "target": "Cav1",
+              "score": 583
+            },
+            {
+              "target": "Abcg2",
+              "score": 450
+            }
+          ]
+        },
+        {
+          "regulator": "Tgfbr1",
+          "log2fc": 0.2674590033504431,
+          "adj_pvalue": null,
+          "pvalue": 6.202544051733466e-20,
+          "n_program_targets": 5,
+          "string_interactions": [
+            {
+              "target": "Tgfb2",
+              "score": 998
+            },
+            {
+              "target": "Cav1",
+              "score": 817
+            },
+            {
+              "target": "Map3k1",
+              "score": 481
+            },
+            {
+              "target": "Kdr",
+              "score": 461
+            },
+            {
+              "target": "Flt1",
+              "score": 401
+            }
+          ]
+        },
+        {
+          "regulator": "Notch1",
+          "log2fc": 0.2965215851005851,
+          "adj_pvalue": null,
+          "pvalue": 7.436089348250781e-13,
+          "n_program_targets": 22,
+          "string_interactions": [
+            {
+              "target": "Maml2",
+              "score": 999
+            },
+            {
+              "target": "Lef1",
+              "score": 831
+            },
+            {
+              "target": "Prom1",
+              "score": 747
+            },
+            {
+              "target": "Adam10",
+              "score": 744
+            },
+            {
+              "target": "Kdr",
+              "score": 645
+            },
+            {
+              "target": "App",
+              "score": 640
+            },
+            {
+              "target": "Cd34",
+              "score": 637
+            },
+            {
+              "target": "Jak2",
+              "score": 558
+            },
+            {
+              "target": "Igf1r",
+              "score": 555
+            },
+            {
+              "target": "Flt1",
+              "score": 541
+            },
+            {
+              "target": "Msi2",
+              "score": 539
+            },
+            {
+              "target": "Abcg2",
+              "score": 535
+            },
+            {
+              "target": "Lmo2",
+              "score": 527
+            },
+            {
+              "target": "Nr4a1",
+              "score": 488
+            },
+            {
+              "target": "Rere",
+              "score": 476
+            },
+            {
+              "target": "Ets1",
+              "score": 451
+            },
+            {
+              "target": "Adamts5",
+              "score": 423
+            },
+            {
+              "target": "Nrp1",
+              "score": 422
+            },
+            {
+              "target": "Itga6",
+              "score": 416
+            },
+            {
+              "target": "Tcf12",
+              "score": 412
+            },
+            {
+              "target": "Lrp6",
+              "score": 406
+            },
+            {
+              "target": "Tgfb2",
+              "score": 402
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "9": {
+    "meta": {
+      "query": "(Cyfip2 OR Ppm1h OR Spsb1 OR Dennd2c OR Bpgm OR Map7 OR Slc6a17 OR Htra3 OR Adamtsl2 OR Ldlrad4 OR Lrp8 OR Skil OR Proser2 OR Hip1 OR Ppp1r2 OR Tram2 OR Ddi2 OR Slc16a9 OR Usp3 OR Asap3 OR Dgkh OR Pcnx OR Chp2) AND (\"brain endothelial cell\" OR brain OR \"postnatal development\" OR \"blood-brain barrier\" OR \"arteriovenous zonation\" OR \"tight junctions\" OR angiogenesis OR \"tip cells\" OR \"Notch signaling\" OR \"VEGF signaling\" OR mechanotransduction)",
+      "total_hits": 25
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Cyfip2": "Predicted to enable small GTPase binding activity. Involved in several processes, including activation of cysteine-type endopeptidase activity; cell-cell adhesion; and regulation of postsynapse assembly. Located in perinuclear region of cytoplasm and synapse. Part of SCAR complex. Implicated in developmental and epileptic encephalopathy 65.",
+      "Ppm1h": "Enables identical protein binding activity and phosphoprotein phosphatase activity. Predicted to be involved in signal transduction. Located in cytoplasm and nucleoplasm.",
+      "Spsb1": "Enables ubiquitin-like ligase-substrate adaptor activity. Involved in protein ubiquitination and ubiquitin-dependent protein catabolic process. Located in cytosol.",
+      "Dennd2c": "Enables guanyl-nucleotide exchange factor activity. Located in nucleoplasm.",
+      "Bpgm": "2,3-diphosphoglycerate (2,3-DPG) is a small molecule found at high concentrations in red blood cells where it binds to and decreases the oxygen affinity of hemoglobin. This gene encodes a multifunctional enzyme that catalyzes 2,3-DPG synthesis via its synthetase activity, and 2,3-DPG degradation via its phosphatase activity. The enzyme also has phosphoglycerate phosphomutase activity. Deficiency of this enzyme increases the affinity of cells for oxygen. Mutations in this gene result in hemolytic anemia. Multiple alternatively spliced variants, encoding the same protein, have been identified.",
+      "Map7": "The product of this gene is a microtubule-associated protein that is predominantly expressed in cells of epithelial origin. Microtubule-associated proteins are thought to be involved in microtubule dynamics, which is essential for cell polarization and differentiation. This protein has been shown to be able to stabilize microtubules, and may serve to modulate microtubule functions. Studies of the related mouse protein also suggested an essential role in microtubule function required for spermatogenesis. Multiple alternatively spliced transcript variants encoding different isoforms have been found for this gene.",
+      "Slc6a17": "The protein encoded by this gene is a member of the SLC6 family of transporters, which are responsible for the presynaptic uptake of most neurotransmitters. The encoded vesicular transporter is selective for proline, glycine, leucine and alanine. In mouse, the strongest expression of this gene was in cortical and hippocampal tissues where expression increased during embryonic brain development and peaked postnatally. Defects in this gene cause a form of autosomal recessive intellectual disability.",
+      "Htra3": "Enables endopeptidase activity; identical protein binding activity; and serine-type peptidase activity. Involved in proteolysis. Predicted to be located in extracellular region.",
+      "Adamtsl2": "This gene encodes a member of the ADAMTS (a disintegrin and metalloproteinase with thrombospondin motifs) and ADAMTS-like protein family. Members of the family share several distinct protein modules, including a propeptide region, a metalloproteinase domain, a disintegrin-like domain, and a thrombospondin type 1 (TS) motif. Individual members of this family differ in the number of C-terminal TS motifs, and some have unique C-terminal domains. The protein encoded by this gene lacks the protease domain, and is therefore of a member of the the ADAMTS-like protein subfamily. It is a secreted glycoprotein that binds the cell surface and extracellular matrix; it also interacts with latent transforming growth factor beta binding protein 1. Mutations in this gene have been associated with geleophysic dysplasia.",
+      "Ldlrad4": "Enables R-SMAD binding activity. Involved in negative regulation of cell migration; negative regulation of epithelial to mesenchymal transition; and negative regulation of transmembrane receptor protein serine/threonine kinase signaling pathway. Located in early endosome membrane.",
+      "Lrp8": "This gene encodes a member of the low density lipoprotein receptor (LDLR) family. Low density lipoprotein receptors are cell surface proteins that play roles in both signal transduction and receptor-mediated endocytosis of specific ligands for lysosomal degradation. The encoded protein plays a critical role in the migration of neurons during development by mediating Reelin signaling, and also functions as a receptor for the cholesterol transport protein apolipoprotein E. Expression of this gene may be a marker for major depressive disorder. Alternatively spliced transcript variants encoding multiple isoforms have been observed for this gene.",
+      "Skil": "The protein encoded by this gene is a component of the SMAD pathway, which regulates cell growth and differentiation through transforming growth factor-beta (TGFB). In the absence of ligand, the encoded protein binds to the promoter region of TGFB-responsive genes and recruits a nuclear repressor complex. TGFB signaling causes SMAD3 to enter the nucleus and degrade this protein, allowing these genes to be activated. Four transcript variants encoding three different isoforms have been found for this gene.",
+      "Proser2": "proline and serine rich 2",
+      "Hip1": "The product of this gene is a membrane-associated protein that functions in clathrin-mediated endocytosis and protein trafficking within the cell. The encoded protein binds to the huntingtin protein in the brain; this interaction is lost in Huntington's disease. Alternative splicing results in multiple transcript variants.",
+      "Ppp1r2": "Protein phosphatase-1 (PP1) is one of the main eukaryotic serine/threonine phosphatases. The protein encoded by this gene binds to the catalytic subunit of PP1, strongly inhibiting its activity. Ten related pseudogenes have been found throughout the human genome. Several splice variants encoding different isoforms have been found for this gene.",
+      "Tram2": "TRAM2 is a component of the translocon, a gated macromolecular channel that controls the posttranslational processing of nascent secretory and membrane proteins at the endoplasmic reticulum (ER) membrane.[supplied by OMIM, Jul 2004]",
+      "Ddi2": "Enables aspartic-type endopeptidase activity; identical protein binding activity; and ubiquitin binding activity. Involved in several processes, including cellular response to hydroxyurea; proteolysis; and regulation of DNA stability. Located in cytosol and nucleoplasm.",
+      "Slc16a9": "Enables carnitine transmembrane transporter activity and creatine transmembrane transporter activity. Involved in carnitine transmembrane transport; creatine transmembrane transport; and urate metabolic process. Located in plasma membrane.",
+      "Usp3": "Enables deubiquitinase activity and histone binding activity. Involved in DNA repair and DNA repair-dependent chromatin remodeling. Located in several cellular components, including Flemming body; cytoplasmic ribonucleoprotein granule; and nucleoplasm.",
+      "Asap3": "This gene encodes a member of a subfamily of ADP-ribosylation factor(Arf) GTPase-activating proteins that contain additional ankyrin repeat and pleckstrin homology domains. The Arf GAP domain of this protein catalyzes the hydrolysis of GTP bound to Arf proteins. The encoded protein promotes cell differentiation and migration and has been implicated in cancer cell invasion. Alternative splicing results in multiple transcript variants.",
+      "Dgkh": "This gene encodes a member of the diacylglycerol kinase (DGK) enzyme family. Members of this family are involved in regulating intracellular concentrations of diacylglycerol and phosphatidic acid. Variation in this gene has been associated with bipolar disorder. Alternatively spliced transcript variants have been identified.",
+      "Pcnx": "This gene encodes an evolutionarily conserved transmembrane protein similar to the pecanex protein in Drosophila. The fly protein is a component of the Notch signaling pathway, which functions in several developmental processes.",
+      "Chp2": "This gene product is a small calcium-binding protein that regulates cell pH by controlling plasma membrane-type Na+/H+ exchange activity. This protein shares sequence similarity with calcineurin B and can bind to and stimulate the protein phosphatase activity of calcineurin A (CnA) and functions in the calcineurin/NFAT (nuclear factor of activated T cells) signaling pathway. Another member of the CHP subfamily, Calcineurin B homologous protein 1, is located on Chromosome 15 and is an inhibitor of calcineurin activity and has a genetic phenotype associated with Parkinson's Disease (OMIM:606988). This gene was initially identified as a tumor-associated antigen and was previously referred to as Hepatocellular carcinoma-associated antigen 520."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Dgkh": [],
+      "Asap3": [],
+      "Cyfip2": [],
+      "Skil": [],
+      "Spsb1": [],
+      "Dennd2c": [],
+      "Adamtsl2": [
+        "\"ADAMTSL2 facilitates ACLY-mediated lipid metabolism in colorectal cancer by activating Notch signaling pathway..\" (PMID:41407175)",
+        "\"Functional experiments using HCT116 and SW620 cell lines, along with patient-derived organoids, demonstrated that ADAMTSL2 knockdown suppressed proliferation and migration.\" (PMID:41407175)"
+      ],
+      "Bpgm": [],
+      "Slc16a9": [],
+      "Lrp8": [],
+      "Ppp1r2": [],
+      "Tram2": [],
+      "Usp3": [],
+      "Pcnx": [],
+      "Ddi2": [
+        "\"Proteolytic activation of angiomotin by DDI2 promotes angiogenesis..\" (PMID:37350545)",
+        "\"AMOT cleavage is mediated by aspartic protease DNA damage-inducible 1 homolog 2 (DDI2), and the process is tightly regulated by a signaling axis including neurofibromin 2 (NF2), tankyrase 1/2 (TNKS1/2), and RING finger protein 146 (RNF146), which induce AMOT membrane localization, poly ADP ribosylation, and ubiquitination, respectively.\" (PMID:37350545)"
+      ],
+      "Map7": [],
+      "Ldlrad4": [],
+      "Htra3": [
+        "\"HtrA3 paves the way for MSC migration and promotes osteogenesis..\" (PMID:38774457)",
+        "\"Local administration of recombinant HtrA3 in rat cranial bone defects significantly increases new bone formation and further validates the enhancement of MSC migration.\" (PMID:38774457)"
+      ],
+      "Proser2": [],
+      "Hip1": [],
+      "Ppm1h": [],
+      "Slc6a17": [],
+      "Chp2": []
+    },
+    "regulator_validation": {
+      "positive_regulators": [
+        {
+          "regulator": "Tgfbr1",
+          "log2fc": -1.0414466192997756,
+          "adj_pvalue": null,
+          "pvalue": 1.909246138397912e-96,
+          "n_program_targets": 11,
+          "string_interactions": [
+            {
+              "target": "Tgfbr2",
+              "score": 999
+            },
+            {
+              "target": "Smurf2",
+              "score": 994
+            },
+            {
+              "target": "Bambi",
+              "score": 974
+            },
+            {
+              "target": "Eng",
+              "score": 897
+            },
+            {
+              "target": "Skil",
+              "score": 659
+            },
+            {
+              "target": "Fn1",
+              "score": 620
+            },
+            {
+              "target": "Pdgfb",
+              "score": 619
+            },
+            {
+              "target": "Serpine1",
+              "score": 611
+            },
+            {
+              "target": "Cdh2",
+              "score": 522
+            },
+            {
+              "target": "Itgav",
+              "score": 446
+            },
+            {
+              "target": "Pmepa1",
+              "score": 435
+            }
+          ]
+        },
+        {
+          "regulator": "Tgfbr2",
+          "log2fc": -0.9863196251049092,
+          "adj_pvalue": null,
+          "pvalue": 3.525376652611606e-48,
+          "n_program_targets": 10,
+          "string_interactions": [
+            {
+              "target": "Eng",
+              "score": 975
+            },
+            {
+              "target": "Smurf2",
+              "score": 961
+            },
+            {
+              "target": "Src",
+              "score": 758
+            },
+            {
+              "target": "Bambi",
+              "score": 685
+            },
+            {
+              "target": "Fn1",
+              "score": 639
+            },
+            {
+              "target": "Serpine1",
+              "score": 574
+            },
+            {
+              "target": "Cdh2",
+              "score": 471
+            },
+            {
+              "target": "Cdkn1a",
+              "score": 452
+            },
+            {
+              "target": "Skil",
+              "score": 441
+            },
+            {
+              "target": "Itgav",
+              "score": 436
+            }
+          ]
+        },
+        {
+          "regulator": "Ccm2",
+          "log2fc": -0.1196028427373887,
+          "adj_pvalue": null,
+          "pvalue": 0.0019011146204595,
+          "n_program_targets": 0,
+          "string_interactions": []
+        }
+      ],
+      "negative_regulators": [
+        {
+          "regulator": "Notch1",
+          "log2fc": 0.3474661603095406,
+          "adj_pvalue": null,
+          "pvalue": 1.0411323112202026e-13,
+          "n_program_targets": 25,
+          "string_interactions": [
+            {
+              "target": "Maml3",
+              "score": 999
+            },
+            {
+              "target": "Mfng",
+              "score": 951
+            },
+            {
+              "target": "Lef1",
+              "score": 831
+            },
+            {
+              "target": "Adam10",
+              "score": 744
+            },
+            {
+              "target": "Cd40",
+              "score": 710
+            },
+            {
+              "target": "Src",
+              "score": 688
+            },
+            {
+              "target": "Cdh2",
+              "score": 633
+            },
+            {
+              "target": "Igf1r",
+              "score": 555
+            },
+            {
+              "target": "Lmo2",
+              "score": 527
+            },
+            {
+              "target": "Cdkn1a",
+              "score": 526
+            },
+            {
+              "target": "Fn1",
+              "score": 525
+            },
+            {
+              "target": "Akt3",
+              "score": 523
+            },
+            {
+              "target": "Mfap2",
+              "score": 521
+            },
+            {
+              "target": "Lrp8",
+              "score": 512
+            },
+            {
+              "target": "Tgfbr2",
+              "score": 499
+            },
+            {
+              "target": "Rere",
+              "score": 476
+            },
+            {
+              "target": "Flt4",
+              "score": 472
+            },
+            {
+              "target": "Birc3",
+              "score": 452
+            },
+            {
+              "target": "Ets1",
+              "score": 451
+            },
+            {
+              "target": "Itgav",
+              "score": 451
+            },
+            {
+              "target": "Pdgfb",
+              "score": 450
+            },
+            {
+              "target": "Tjp1",
+              "score": 419
+            },
+            {
+              "target": "Tcf12",
+              "score": 412
+            },
+            {
+              "target": "Tgfa",
+              "score": 411
+            },
+            {
+              "target": "Eng",
+              "score": 408
+            }
+          ]
+        },
+        {
+          "regulator": "Vezf1",
+          "log2fc": 0.182369891958789,
+          "adj_pvalue": null,
+          "pvalue": 6.52327136918028e-06,
+          "n_program_targets": 0,
+          "string_interactions": []
+        },
+        {
+          "regulator": "Nrp1",
+          "log2fc": 0.2096781319597678,
+          "adj_pvalue": null,
+          "pvalue": 5.985659474223226e-05,
+          "n_program_targets": 12,
+          "string_interactions": [
+            {
+              "target": "Flt4",
+              "score": 815
+            },
+            {
+              "target": "Ptprm",
+              "score": 716
+            },
+            {
+              "target": "Pdgfb",
+              "score": 699
+            },
+            {
+              "target": "Fn1",
+              "score": 637
+            },
+            {
+              "target": "Tgfbr2",
+              "score": 620
+            },
+            {
+              "target": "Src",
+              "score": 604
+            },
+            {
+              "target": "Sema6d",
+              "score": 591
+            },
+            {
+              "target": "Tfrc",
+              "score": 534
+            },
+            {
+              "target": "Cdh2",
+              "score": 523
+            },
+            {
+              "target": "Alcam",
+              "score": 487
+            },
+            {
+              "target": "Myo6",
+              "score": 478
+            },
+            {
+              "target": "Itgav",
+              "score": 420
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "10": {
+    "meta": {
+      "query": "(Map2k6 OR X1110051M20Rik OR Bbs9 OR Cfap36 OR D130040H23Rik OR Stxbp4 OR Wdpcp OR Metap1d OR Prkdc OR Nme7 OR Bckdhb OR Camkmt OR Cc2d2a OR Tbc1d32 OR Eml6 OR Clybl OR Tet1 OR Chchd6 OR Ift74 OR Elp4 OR Cep164 OR Tex9 OR Sdccag8) AND (\"brain endothelial cell\" OR brain OR \"postnatal development\" OR \"blood-brain barrier\" OR \"arteriovenous zonation\" OR \"tight junctions\" OR angiogenesis OR \"tip cells\" OR \"Notch signaling\" OR \"VEGF signaling\" OR mechanotransduction)",
+      "total_hits": 25
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Map2k6": "This gene encodes a member of the dual specificity protein kinase family, which functions as a mitogen-activated protein (MAP) kinase kinase. MAP kinases, also known as extracellular signal-regulated kinases (ERKs), act as an integration point for multiple biochemical signals. This protein phosphorylates and activates p38 MAP kinase in response to inflammatory cytokines or environmental stress. As an essential component of p38 MAP kinase mediated signal transduction pathway, this gene is involved in many cellular processes such as stress induced cell cycle arrest, transcription activation and apoptosis.",
+      "Bbs9": "This gene is downregulated by parathyroid hormone in osteoblastic cells, and therefore is thought to be involved in parathyroid hormone action in bones. The exact function of this gene has not yet been determined. Alternatively spliced transcript variants encoding different isoforms have been identified.",
+      "Cfap36": "Located in ciliary transition zone.",
+      "Stxbp4": "Enables syntaxin binding activity. Involved in several processes, including positive regulation of cell cycle G1/S phase transition; positive regulation of keratinocyte proliferation; and protein stabilization. Located in extracellular exosome.",
+      "Wdpcp": "This gene encodes a cytoplasmic WD40 repeat protein. A similar gene in frogs encodes a planar cell polarity protein that plays a critical role in collective cell movement and ciliogenesis by mediating septin localization. Mutations in this gene are associated with Bardet-Biedl syndrome 15 and may also play a role in Meckel-Gruber syndrome. Alternative splicing results in multiple transcript variants.",
+      "Metap1d": "The N-terminal methionine excision pathway is an essential process in which the N-terminal methionine is removed from many proteins, thus facilitating subsequent protein modification. In mitochondria, enzymes that catalyze this reaction are celled methionine aminopeptidases (MetAps, or MAPs; EC 3.4.11.18) (Serero et al., 2003 [PubMed 14532271]).[supplied by OMIM, Mar 2008]",
+      "Prkdc": "This gene encodes the catalytic subunit of the DNA-dependent protein kinase (DNA-PK). It functions with the Ku70/Ku80 heterodimer protein in DNA double strand break repair and recombination. The protein encoded is a member of the PI3/PI4-kinase family.",
+      "Nme7": "This gene encodes a member of the non-metastatic expressed family of nucleoside diphosphate kinases. Members of this family are enzymes that catalyzes phosphate transfer from nucleoside triphosphates to nucleoside diphosphates. This protein contains two kinase domains, one of which is involved in autophosphorylation and the other may be inactive. This protein localizes to the centrosome and functions as a component of the gamma-tubulin ring complex which plays a role in microtubule organization. Mutations in this gene may be associated with venous thromboembolism. Alternate splicing results in multiple transcript variants.",
+      "Bckdhb": "This gene encodes the E1 beta subunit of branched-chain keto acid dehydrogenase, which is a multienzyme complex associated with the inner membrane of mitochondria. This enzyme complex functions in the catabolism of branched-chain amino acids. Mutations in this gene have been associated with maple syrup urine disease (MSUD), type 1B, a disease characterized by a maple syrup odor to the urine in addition to mental and physical retardation and feeding problems. Alternative splicing at this locus results in multiple transcript variants.",
+      "Camkmt": "This gene encodes a class I protein methyltransferase that acts in the formation of trimethyllysine in calmodulin. The protein contains a AdoMet-binding motif and may play a role in calcium-dependent signaling.",
+      "Cc2d2a": "This gene encodes a coiled-coil and calcium binding domain protein that appears to play a critical role in cilia formation. Mutations in this gene cause Meckel syndrome type 6, as well as Joubert syndrome type 9. Alternative splicing results in multiple transcript variants.",
+      "Tbc1d32": "This gene encodes a TBC-domain containing protein. Studies of a similar protein in mouse and zebrafish suggest that the encoded protein is involved in sonic hedgehog signaling, and that it interacts with and stabilizes cell cycle-related kinase. Alternative splicing results in multiple transcript variants.",
+      "Eml6": "Predicted to enable microtubule binding activity. Predicted to be located in cytoplasm and microtubule.",
+      "Clybl": "Enables (S)-citramalyl-CoA lyase activity; magnesium ion binding activity; and malate synthase activity. Involved in protein homotrimerization and regulation of cobalamin metabolic process. Located in mitochondrion.",
+      "Tet1": "DNA methylation is an epigenetic mechanism that is important for controlling gene expression. The protein encoded by this gene is a demethylase that belongs to the TET (ten-eleven translocation) family. Members of the TET protein family play a role in the DNA methylation process and gene activation.",
+      "Chchd6": "Involved in DNA damage response and cristae formation. Located in cytosol and mitochondrial inner membrane. Part of MICOS complex.",
+      "Ift74": "This gene encodes a core intraflagellar transport (IFT) protein which belongs to a multi-protein complex involved in the transport of ciliary proteins along axonemal microtubules. IFT proteins are found at the base of the cilium as well as inside the cilium, where they assemble into long arrays between the ciliary base and tip. This protein, together with intraflagellar transport protein 81, binds and transports tubulin within cilia and is required for ciliogenesis. Naturally occurring mutations in this gene are associated with amyotrophic lateral sclerosis--frontotemporal dementia and Bardet-Biedl Syndrome.",
+      "Elp4": "This gene encodes a component of the six subunit elongator complex, a histone acetyltransferase complex that associates directly with RNA polymerase II during transcriptional elongation. The human gene can partially complement sensitivity phenotypes of yeast ELP4 deletion mutants. This gene has also been associated with Rolandic epilepsy. Alternative splicing results in multiple transcript variants.",
+      "Cep164": "This gene encodes a centrosomal protein involved in microtubule organization, DNA damage response, and chromosome segregation. The encoded protein is required for assembly of primary cilia and localizes to mature centrioles. Defects in this gene are a cause of nephronophthisis-related ciliopathies. Two transcript variants encoding different isoforms have been found for this gene.",
+      "Tex9": "Located in centriolar satellite.",
+      "Sdccag8": "This gene encodes a centrosome associated protein. This protein may be involved in organizing the centrosome during interphase and mitosis. Mutations in this gene are associated with retinal-renal ciliopathy."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Bckdhb": [],
+      "Metap1d": [],
+      "Ift74": [],
+      "Sdccag8": [],
+      "Cep164": [],
+      "Cfap36": [],
+      "Tex9": [],
+      "D130040H23Rik": [],
+      "X1110051M20Rik": [],
+      "Camkmt": [],
+      "Cc2d2a": [],
+      "Nme7": [],
+      "Bbs9": [],
+      "Clybl": [],
+      "Tet1": [
+        "\"Mechanistically, Tet1 downregulation results in hypermethylation of the Dll3 and Notch1 promoters and inhibition of Notch signaling, leading to reduced NSC proliferation.\" (PMID:34731622)",
+        "\"Overexpression of Tet1 activates Notch signaling, offsets the decline in neurogenesis, and enhances learning and memory abilities in FGR offspring.\" (PMID:34731622)"
+      ],
+      "Stxbp4": [],
+      "Tbc1d32": [],
+      "Prkdc": [],
+      "Chchd6": [],
+      "Wdpcp": [],
+      "Eml6": [],
+      "Map2k6": [],
+      "Elp4": []
+    },
+    "regulator_validation": {
+      "positive_regulators": [
+        {
+          "regulator": "Fzd4",
+          "log2fc": -0.1427604954985177,
+          "adj_pvalue": null,
+          "pvalue": 8.253605211489264e-05,
+          "n_program_targets": 1,
+          "string_interactions": [
+            {
+              "target": "Rora",
+              "score": 424
+            }
+          ]
+        },
+        {
+          "regulator": "Eng",
+          "log2fc": -0.0825280080333143,
+          "adj_pvalue": null,
+          "pvalue": 0.0029985877631933,
+          "n_program_targets": 0,
+          "string_interactions": []
+        }
+      ],
+      "negative_regulators": [
+        {
+          "regulator": "Gata2",
+          "log2fc": 0.1549220613533819,
+          "adj_pvalue": null,
+          "pvalue": 4.759972254071713e-09,
+          "n_program_targets": 1,
+          "string_interactions": [
+            {
+              "target": "Mnat1",
+              "score": 405
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "11": {
+    "meta": {
+      "query": "(Slc1a1 OR Ctdspl OR Cxcr4 OR Tnfrsf11b OR Dgki OR Megf6 OR Angpt2 OR Slc16a9 OR Kcnj2 OR Chst9 OR Cpe OR Cdc42ep3 OR Prdm1 OR Hopx OR Cacna1c OR Rgs6 OR Syt12 OR Rhod OR Bag2 OR Jph1 OR Sort1 OR Epb41l4b OR Gabarapl1) AND (\"brain endothelial cell\" OR brain OR \"postnatal development\" OR \"blood-brain barrier\" OR \"arteriovenous zonation\" OR \"tight junctions\" OR angiogenesis OR \"tip cells\" OR \"Notch signaling\" OR \"VEGF signaling\" OR mechanotransduction)",
+      "total_hits": 25
+    },
+    "top_papers": [
+      {
+        "pmid": 41712285,
+        "title": "Loss of Angiopoietin-2 leads to region-specific brain malformations and blood-brain barrier leakage.",
+        "score": 3,
+        "genes": [
+          "Kdr",
+          "Angpt2",
+          "Nrp1"
+        ]
+      }
+    ],
+    "gene_summaries": {
+      "Slc1a1": "This gene encodes a member of the high-affinity glutamate transporters that play an essential role in transporting glutamate across plasma membranes. In brain, these transporters are crucial in terminating the postsynaptic action of the neurotransmitter glutamate, and in maintaining extracellular glutamate concentrations below neurotoxic levels. This transporter also transports aspartate, and mutations in this gene are thought to cause dicarboxylicamino aciduria, also known as glutamate-aspartate transport defect.",
+      "Ctdspl": "Predicted to enable RNA polymerase II CTD heptapeptide repeat phosphatase activity. Predicted to be involved in chromatin remodeling and regulation of transcription by RNA polymerase II. Predicted to act upstream of or within negative regulation of G1/S transition of mitotic cell cycle and negative regulation of protein phosphorylation. Located in extracellular exosome. Biomarker of lung non-small cell carcinoma.",
+      "Cxcr4": "This gene encodes a CXC chemokine receptor specific for stromal cell-derived factor-1. The protein has 7 transmembrane regions and is located on the cell surface. It acts with the CD4 protein to support HIV entry into cells and is also highly expressed in breast cancer cells. Mutations in this gene have been associated with WHIM (warts, hypogammaglobulinemia, infections, and myelokathexis) syndrome. Alternate transcriptional splice variants, encoding different isoforms, have been characterized.",
+      "Tnfrsf11b": "The protein encoded by this gene is a member of the TNF-receptor superfamily. This protein is an osteoblast-secreted decoy receptor that functions as a negative regulator of bone resorption. This protein specifically binds to its ligand, osteoprotegerin ligand, both of which are key extracellular regulators of osteoclast development. Studies of the mouse counterpart also suggest that this protein and its ligand play a role in lymph-node organogenesis and vascular calcification. Alternatively spliced transcript variants of this gene have been reported, but their full length nature has not been determined.",
+      "Dgki": "This gene is a member of the type IV diacylglycerol kinase subfamily. Diacylglycerol kinases regulate the intracellular concentration of diacylglycerol through its phosphorylation, producing phosphatidic acid. The specific role of the enzyme encoded by this gene is undetermined, however, it may play a crucial role in the production of phosphatidic acid in the retina or in recessive forms of retinal degeneration.",
+      "Megf6": "Predicted to enable calcium ion binding activity and scavenger receptor activity. Predicted to be involved in vesicle-mediated transport. Predicted to be located in extracellular region.",
+      "Angpt2": "This gene belongs to the angiopoietin family of growth factors. The protein encoded by this gene is an antagonist of angiopoietin 1, and both angiopoietin 1 and angiopoietin 2 are ligands for the endothelial TEK receptor tyrosine kinase. Angiopoietin 2 is upregulated in multiple inflammatory diseases and is implicated in the direct control of inflammation-related signaling pathways. The encoded protein affects angiogenesis during embryogenesis and tumorigenesis, disrupts the vascular remodeling ability of angiopoietin 1, and may induce endothelial cell apoptosis. This gene serves a prognostic biomarker for acute respiratory distress syndrome.",
+      "Slc16a9": "Enables carnitine transmembrane transporter activity and creatine transmembrane transporter activity. Involved in carnitine transmembrane transport; creatine transmembrane transport; and urate metabolic process. Located in plasma membrane.",
+      "Kcnj2": "Potassium channels are present in most mammalian cells, where they participate in a wide range of physiologic responses. The protein encoded by this gene is an integral membrane protein and inward-rectifier type potassium channel. The encoded protein, which has a greater tendency to allow potassium to flow into a cell rather than out of a cell, probably participates in establishing action potential waveform and excitability of neuronal and muscle tissues. Mutations in this gene have been associated with Andersen syndrome, which is characterized by periodic paralysis, cardiac arrhythmias, and dysmorphic features.",
+      "Chst9": "The protein encoded by this gene belongs to the sulfotransferase 2 family. It is localized to the golgi membrane, and catalyzes the transfer of sulfate to position 4 of non-reducing N-acetylgalactosamine (GalNAc) residues in both N-glycans and O-glycans. Sulfate groups on carbohydrates confer highly specific functions to glycoproteins, glycolipids, and proteoglycans, and are critical for cell-cell interaction, signal transduction, and embryonic development. Alternatively spliced transcript variants have been described for this gene.",
+      "Cpe": "This gene encodes a member of the M14 family of metallocarboxypeptidases. The encoded preproprotein is proteolytically processed to generate the mature peptidase. This peripheral membrane protein cleaves C-terminal amino acid residues and is involved in the biosynthesis of peptide hormones and neurotransmitters, including insulin. This protein may also function independently of its peptidase activity, as a neurotrophic factor that promotes neuronal survival, and as a sorting receptor that binds to regulated secretory pathway proteins, including prohormones. Mutations in this gene are implicated in type 2 diabetes.",
+      "Cdc42ep3": "This gene encodes a member of a small family of guanosine triphosphate (GTP) metabolizing proteins that contain a CRIB (Cdc42, Rac interactive binding) domain. Members of this family of proteins act as effectors of CDC42 function. The encoded protein is involved in actin cytoskeleton re-organization during cell shape changes, including pseudopodia formation. A pseudogene of this gene is found on chromosome 19. Alternative splicing results in multiple transcript variants.",
+      "Prdm1": "This gene encodes a protein that acts as a repressor of beta-interferon gene expression. The protein binds specifically to the PRDI (positive regulatory domain I element) of the beta-IFN gene promoter. Transcription of this gene increases upon virus induction. Two alternatively spliced transcript variants that encode different isoforms have been reported.",
+      "Hopx": "The protein encoded by this gene is a homeodomain protein that lacks certain conserved residues required for DNA binding. It was reported that choriocarcinoma cell lines and tissues failed to express this gene, which suggested the possible involvement of this gene in malignant conversion of placental trophoblasts. Studies in mice suggest that this protein may interact with serum response factor (SRF) and modulate SRF-dependent cardiac-specific gene expression and cardiac development. Multiple alternatively spliced transcript variants have been identified for this gene.",
+      "Cacna1c": "This gene encodes an alpha-1 subunit of a voltage-dependent calcium channel. Calcium channels mediate the influx of calcium ions into the cell upon membrane polarization. The alpha-1 subunit consists of 24 transmembrane segments and forms the pore through which ions pass into the cell. The calcium channel consists of a complex of alpha-1, alpha-2/delta, beta, and gamma subunits in a 1:1:1:1 ratio. There are multiple isoforms of each of these proteins, either encoded by different genes or the result of alternative splicing of transcripts. The protein encoded by this gene binds to and is inhibited by dihydropyridine. Alternative splicing results in many transcript variants encoding different proteins. Some of the predicted proteins may not produce functional ion channel subunits.",
+      "Rgs6": "This gene encodes a member of the RGS (regulator of G protein signaling) family of proteins, which are defined by the presence of a RGS domain that confers the GTPase-activating activity of these proteins toward certain G alpha subunits. This protein also belongs to a subfamily of RGS proteins characterized by the presence of DEP and GGL domains, the latter a G beta 5-interacting domain. The RGS proteins negatively regulate G protein signaling, and may modulate neuronal, cardiovascular, lymphocytic activities, and cancer risk. Many alternatively spliced transcript variants encoding different isoforms with long or short N-terminal domains, complete or incomplete GGL domains, and distinct C-terminal domains, have been described for this gene, however, the full-length nature of some of these variants is not known.",
+      "Syt12": "This gene is a member of the synaptotagmin gene family and encodes a protein similar to other family members that mediate calcium-dependent regulation of membrane trafficking in synaptic transmission. Studies of the orthologous gene in rat have shown that the encoded protein selectively modulates spontaneous synaptic-vesicle exocytosis and may also be involved in regulating calcium independent secretion in nonneuronal cells. Alternative splicing results in multiple transcript variants. The gene has previously been referred to as synaptotagmin XI but has been renamed synaptotagmin XII to be standard with mouse and rat official nomenclature.",
+      "Rhod": "Ras homolog, or Rho, proteins interact with protein kinases and may serve as targets for activated GTPase. They play a critical role in muscle differentiation. The protein encoded by this gene binds GTP and is a member of the small GTPase superfamily. It is involved in endosome dynamics and reorganization of the actin cytoskeleton, and it may coordinate membrane transport with the function of the cytoskeleton. Two transcript variants encoding different isoforms have been found for this gene.",
+      "Bag2": "BAG proteins compete with Hip for binding to the Hsc70/Hsp70 ATPase domain and promote substrate release. All the BAG proteins have an approximately 45-amino acid BAG domain near the C terminus but differ markedly in their N-terminal regions. The predicted BAG2 protein contains 211 amino acids. The BAG domains of BAG1, BAG2, and BAG3 interact specifically with the Hsc70 ATPase domain in vitro and in mammalian cells. All 3 proteins bind with high affinity to the ATPase domain of Hsc70 and inhibit its chaperone activity in a Hip-repressible manner.",
+      "Jph1": "Junctional complexes between the plasma membrane and endoplasmic/sarcoplasmic reticulum are a common feature of all excitable cell types and mediate cross talk between cell surface and intracellular ion channels. The protein encoded by this gene is a component of junctional complexes and is composed of a C-terminal hydrophobic segment spanning the endoplasmic/sarcoplasmic reticulum membrane and a remaining cytoplasmic domain that shows specific affinity for the plasma membrane. This gene is a member of the junctophilin gene family.",
+      "Sort1": "This gene encodes a member of the VPS10-related sortilin family of proteins. The encoded preproprotein is proteolytically processed by furin to generate the mature receptor. This receptor plays a role in the trafficking of different proteins to either the cell surface, or subcellular compartments such as lysosomes and endosomes. Expression levels of this gene may influence the risk of myocardial infarction in human patients. Alternative splicing results in multiple transcript variants.",
+      "Epb41l4b": "Predicted to be a structural constituent of cytoskeleton. Involved in several processes, including positive regulation of cell adhesion; positive regulation of keratinocyte migration; and wound healing. Acts upstream of or within actomyosin structure organization. Located in apical part of cell; cytosol; and plasma membrane.",
+      "Gabarapl1": "Enables Tat protein binding activity; phospholipid binding activity; and ubiquitin protein ligase binding activity. Predicted to be involved in cellular response to nitrogen starvation and macroautophagy. Located in autophagosome and mitochondrion."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Cacna1c": [
+        "\"Conclusions: Our findings unveil a novel metabolic-epigenetic axis where Hcy-driven Cacna1c hypomethylation directly disrupts BMECs function to dismantle the hippocampal BBB.\" (PMID:42192804)",
+        "\"Mechanistically, Hcy reduced global DNA methylation in BMECs and specifically induced targeted DNA hypomethylation at the intro region of Cacna1c.\" (PMID:42192804)"
+      ],
+      "Rhod": [],
+      "Gabarapl1": [],
+      "Bag2": [],
+      "Syt12": [],
+      "Prdm1": [],
+      "Dgki": [],
+      "Sort1": [
+        "\"The identified barrier differences between wild-type and Sort1-/- brain endothelial cells can pave the way for a better understanding of sortilin's role in the healthy and diseased BBB.\" (PMID:34626084)"
+      ],
+      "Epb41l4b": [],
+      "Cxcr4": [],
+      "Hopx": [],
+      "Kcnj2": [],
+      "Cpe": [],
+      "Slc16a9": [],
+      "Rgs6": [],
+      "Megf6": [],
+      "Tnfrsf11b": [],
+      "Slc1a1": [],
+      "Angpt2": [
+        "\"The BBB-reinforcing role of ANGPT2 (angiopoietin 2) is paradoxical given its wider role as TIE2 (TEK receptor tyrosine kinase) receptor antagonist and may suggest a unique and context-dependent function of ANGPT2 in the brain.\" (PMID:33375813)",
+        "\"Angiopoietin-2 (ANGPT2) is known to destabilize vascular barriers in most peripheral organs; however, its role in the brain vasculature remains poorly understood.\" (PMID:41712285)",
+        "\"We showed that loss of ANGPT2 leads to region-specific vascular malformations and blood-brain barrier (BBB) dysfunction, resulting in differential permeability to 1 kDa and 70 kDa fluorescent tracers.\" (PMID:41712285)"
+      ],
+      "Ctdspl": [],
+      "Cdc42ep3": [],
+      "Jph1": [],
+      "Chst9": []
+    },
+    "regulator_validation": {
+      "positive_regulators": [
+        {
+          "regulator": "Tgfbr1",
+          "log2fc": -0.8617738635756993,
+          "adj_pvalue": null,
+          "pvalue": 5.679625008945916e-50,
+          "n_program_targets": 6,
+          "string_interactions": [
+            {
+              "target": "Eng",
+              "score": 897
+            },
+            {
+              "target": "Ccn2",
+              "score": 645
+            },
+            {
+              "target": "Cxcr4",
+              "score": 594
+            },
+            {
+              "target": "Map3k1",
+              "score": 481
+            },
+            {
+              "target": "Kdr",
+              "score": 461
+            },
+            {
+              "target": "Sox9",
+              "score": 401
+            }
+          ]
+        },
+        {
+          "regulator": "Tgfbr2",
+          "log2fc": -0.7749568188975982,
+          "adj_pvalue": null,
+          "pvalue": 8.010191071713168e-22,
+          "n_program_targets": 8,
+          "string_interactions": [
+            {
+              "target": "Eng",
+              "score": 975
+            },
+            {
+              "target": "Ccn2",
+              "score": 655
+            },
+            {
+              "target": "Nrp1",
+              "score": 620
+            },
+            {
+              "target": "Cst3",
+              "score": 489
+            },
+            {
+              "target": "Cdkn1a",
+              "score": 452
+            },
+            {
+              "target": "Cxcr4",
+              "score": 435
+            },
+            {
+              "target": "Bcl2",
+              "score": 420
+            },
+            {
+              "target": "Sox9",
+              "score": 415
+            }
+          ]
+        },
+        {
+          "regulator": "Nrp1",
+          "log2fc": -0.3563532504216233,
+          "adj_pvalue": null,
+          "pvalue": 4.408268277838071e-09,
+          "n_program_targets": 13,
+          "string_interactions": [
+            {
+              "target": "Kdr",
+              "score": 999
+            },
+            {
+              "target": "Plxnd1",
+              "score": 983
+            },
+            {
+              "target": "Flt4",
+              "score": 815
+            },
+            {
+              "target": "Sema6d",
+              "score": 591
+            },
+            {
+              "target": "Dll4",
+              "score": 565
+            },
+            {
+              "target": "Angpt2",
+              "score": 490
+            },
+            {
+              "target": "Thbd",
+              "score": 477
+            },
+            {
+              "target": "Pdgfd",
+              "score": 445
+            },
+            {
+              "target": "Cxcr4",
+              "score": 437
+            },
+            {
+              "target": "Ctsl",
+              "score": 436
+            },
+            {
+              "target": "Insr",
+              "score": 426
+            },
+            {
+              "target": "Cdh11",
+              "score": 418
+            },
+            {
+              "target": "Slit3",
+              "score": 413
+            }
+          ]
+        }
+      ],
+      "negative_regulators": [
+        {
+          "regulator": "Tek",
+          "log2fc": 0.3887150109168891,
+          "adj_pvalue": null,
+          "pvalue": 6.389033585779663e-06,
+          "n_program_targets": 20,
+          "string_interactions": [
+            {
+              "target": "Angpt2",
+              "score": 999
+            },
+            {
+              "target": "Ptpn11",
+              "score": 906
+            },
+            {
+              "target": "Eng",
+              "score": 846
+            },
+            {
+              "target": "Vwf",
+              "score": 783
+            },
+            {
+              "target": "Kdr",
+              "score": 776
+            },
+            {
+              "target": "Pdgfd",
+              "score": 755
+            },
+            {
+              "target": "Dll4",
+              "score": 707
+            },
+            {
+              "target": "Cxcr4",
+              "score": 649
+            },
+            {
+              "target": "Adgrl4",
+              "score": 642
+            },
+            {
+              "target": "Nrp1",
+              "score": 595
+            },
+            {
+              "target": "Mmrn2",
+              "score": 564
+            },
+            {
+              "target": "Hbegf",
+              "score": 542
+            },
+            {
+              "target": "Tmem204",
+              "score": 516
+            },
+            {
+              "target": "Thbd",
+              "score": 514
+            },
+            {
+              "target": "Itga4",
+              "score": 482
+            },
+            {
+              "target": "Cd93",
+              "score": 450
+            },
+            {
+              "target": "Apln",
+              "score": 446
+            },
+            {
+              "target": "Hey1",
+              "score": 440
+            },
+            {
+              "target": "Myct1",
+              "score": 438
+            },
+            {
+              "target": "Flt4",
+              "score": 424
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "e400141383df4f7a98ecb82d2c180a0ef743d1d7d69eb896c2e9da26540875b2",
+  "doi": "10.1182/blood-2010-02-270819",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "88da5634fe3f2afe8da5",
+  "pmcid": "PMC4314527",
+  "pmid": "20705756",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Sprouting of developing blood vessels is mediated by specialized motile endothelial cells localized at the tips of growing capillaries. Following behind the tip cells, endothelial stalk cells form the capillary lumen and proliferate. Expression of the Notch ligand Delta-like-4 (Dll4) in tip cells suppresses tip cell fate in neighboring stalk cells via Notch signaling. In DLL4(+/-) mouse mutants, most retinal endothelial cells display morphologic features of tip cells. We hypothesized that these mouse mutants could be used to isolate tip cells and so to determine their genetic repertoire. Using transcriptome analysis of retinal endothelial cells isolated from DLL4(+/-) and wild-type mice, we identified 3 clusters of tip cell-enriched genes, encoding extracellular matrix degrading enzymes, basement membrane components, and secreted molecules. Secreted molecules endothelial-specific molecule 1, angiopoietin 2, and apelin bind to cognate receptors on endothelial stalk cells. Knockout mice and zebrafish morpholino knockdown of apelin showed delayed angiogenesis and reduced proliferation of stalk cells expressing the apelin receptor APJ. Thus, tip cells may regulate angiogenesis via matrix remodeling, production of basement membrane, and release of secreted molecules, some of which regulate stalk cell behavior.",
+  "text_type": "abstract",
+  "title": "Identification and functional analysis of endothelial tip cell-enriched genes."
+}

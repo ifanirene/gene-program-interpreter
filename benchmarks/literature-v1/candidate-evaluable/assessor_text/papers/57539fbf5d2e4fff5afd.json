@@ -1,0 +1,16 @@
+{
+  "content_hash": "8c5c045915cc3b557036ebd6bd1038973810499a599c36b46e17bcfc1599f241",
+  "doi": "10.1016/j.jaad.2019.08.043",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "57539fbf5d2e4fff5afd",
+  "pmcid": "PMC7039698",
+  "pmid": "31449901",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Porokeratosis is associated with mevalonate pathway gene mutations. Therapeutic options are few and often limited in efficacy. We hypothesized that topical therapy that aims to replenish cholesterol, an essential mevalonate pathway end-product, and block the accumulation of mevalonate pathway toxic metabolites could alleviate porokeratosis.\n\nOBJECTIVE: To study the efficacy of topical cholesterol/lovastatin in different variants of porokeratosis.\n\nMETHODS: We enrolled a series of 5 porokeratosis patients,1 with disseminated superficial actinic porokeratosis, 2 with porokeratosis palmaris et plantaris disseminata, and 2 with linear porokeratosis. Patients were genotyped before initiation of therapy. Patients then applied topical cholesterol/lovastatin twice daily to a unilaterally defined treatment area for up to 3 months. The response was evaluated and patients photographed at every visit.\n\nRESULTS: Three patients had MVD mutations, and 2 patients had PMVK mutations. Treatment with topical cholesterol/lovastatin (but not cholesterol alone) resulted in near complete clearance of disseminated superficial actinic porokeratosis lesions after 4 weeks of therapy and moderate improvement of porokeratosis palmaris et plantaris disseminata lesions and linear porokeratosis lesions. There were no adverse events.\n\nLIMITATIONS: Case series design with a small number of patients.\n\nCONCLUSION: Topical cholesterol/lovastatin is an effective and well-tolerated therapy for porokeratosis that underscores the utility of a pathogenesis-based therapy that replaces deficient end products and prevents accumulation of potentially toxic precursors.",
+  "text_type": "abstract",
+  "title": "Topical cholesterol/lovastatin for the treatment of porokeratosis: A pathogenesis-directed therapy."
+}

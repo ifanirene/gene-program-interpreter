@@ -1,0 +1,124 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-3a33580a6464c5931f9d",
+    "RL-5dd4b5247c95cbc27365",
+    "RL-5f3a18841e1138ffe838",
+    "RL-6926b3be8d716db7aacc"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "causal",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper substantively perturbs hepatic Cdo1 (KO/OE) but assigns it a Camkk2-AMPK-FAO signaling role in NAFLD, not the taurine-mediated bile-acid conjugation function of this mechanism, and reports hepatic taurine was unchanged after knockout (attributed to extrahepatic compensation). This is a wrong-function mismatch rather than a directional refutation, so no support rather than contradicts.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-3a33580a6464c5931f9d",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "no"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1540,
+        "source_type": "abstract",
+        "start": 1468,
+        "text": "SULT2A8 is required to maintain the bile acid and cholesterol metabolism"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "In vivo Sult2a8-haplodeficient mice causally show reduced 7α-OH bile-acid sulfonation and altered bile-acid/cholesterol handling, supporting the assigned function. The mouse liver setting is under fasting rather than aging/MASLD, making the declared direct context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5dd4b5247c95cbc27365",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1167,
+        "source_type": "abstract",
+        "start": 1031,
+        "text": "narrow sulfonating activities toward 7α-hydroxyl primary bile acids, including cholic acid, chenodeoxycholic acid, and α-muricholic acid"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "This founding paper directly establishes Sult2a8 (mL-STL) as a liver-predominant, PPARα-dependent sulfotransferase acting on 7α-OH primary bile acids via recombinant-protein assays, matching the assigned function. The fasting/biochemical characterization setting is transferable but not the target aging/MASLD context, so declared direct is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5f3a18841e1138ffe838",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 364,
+        "source_type": "abstract",
+        "start": 246,
+        "text": "which binds to and inactivates aflatoxin B1 epoxide, preventing the epoxide from binding to DNA and causing mutations."
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "The GSTA3 knockout mouse study directly demonstrates GSTA3's aflatoxin B1 detoxification, matching the mechanism's Phase II detox/aflatoxin claim. The aflatoxin carcinogenesis setting differs from aging/MASLD, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-6926b3be8d716db7aacc",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.29047850000000003,
+    "duration_api_ms": 72214,
+    "duration_ms": 70366,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 71.32
+  }
+}

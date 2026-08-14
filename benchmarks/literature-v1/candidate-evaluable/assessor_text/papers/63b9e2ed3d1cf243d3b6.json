@@ -1,0 +1,14 @@
+{
+  "content_hash": "ce0aa8aecefb157a31a0a8a41bbc1ff678beaf83c4afc841688e722384aabb16",
+  "doi": "10.1016/j.phrs.2025.107706",
+  "errors": [],
+  "paper_key": "63b9e2ed3d1cf243d3b6",
+  "pmcid": null,
+  "pmid": "40127788",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Inhibiting de novo lipogenesis (DNL) in hepatocytes is a promising strategy for treating metabolic fatty liver diseases. ACLY, a key enzyme in the DNL pathway, has become a therapeutic target for non-alcoholic fatty liver disease (NAFLD). However, its inhibition shows mixed outcomes, depending on interventions and diets. Evidence suggests ACLY inhibition activates the ACSS2-mediated acetate metabolism and the subsequent DNL, though potential mechanisms and possible consequences remain unclear. This study found that targeting hepatic ACLY with AAV8-shRNA failed to improve NAFLD in mice fed a high-fat, high-fructose diet. Instead, it worsened inflammation and liver injury. ACLY inhibition conditionally upregulated DNL enzymes, but consistently activated the ACSS2-acetyl-CoA pathway and suppressed fatty acid oxidation. Further, ACLY inhibition led to polyunsaturated fatty acid accumulation, triggering mitochondrial dysfunction. The resulting ROS redirected carbon flux into acetate, activating the ACSS2-acetyl-CoA pathway, which promoted lipid biosynthesis and exacerbated mitochondrial dysfunction-a vicious cycle that fueled inflammation and liver damage. Dual inhibition of ACLY and ACSS2 broke this cycle by reducing hepatic acetyl-CoA flux, suppressing DNL, enhancing fatty acid oxidation via PPAR-\u03b1 activation, and improving mitochondrial function. This combined targeting strategy reduced lipid accumulation, alleviated inflammation, and normalized aminotransferase levels, effectively reversing NAFLD progression.",
+  "text_type": "abstract",
+  "title": "Dual inhibition of hepatic ACLY and ACSS2: A synergistic approach to combat NAFLD through lipogenesis reduction and mitochondrial enhancement."
+}

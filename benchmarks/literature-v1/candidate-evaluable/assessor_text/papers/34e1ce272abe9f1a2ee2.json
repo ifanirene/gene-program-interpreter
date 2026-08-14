@@ -1,0 +1,14 @@
+{
+  "content_hash": "ec700c451f90bef0c6329d4a3c9cd5488df6592e48125cb2c18d895b0f6e5745",
+  "doi": "10.1124/dmd.110.035840",
+  "errors": [],
+  "paper_key": "34e1ce272abe9f1a2ee2",
+  "pmcid": null,
+  "pmid": "20952551",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Novel potential inhibitors of the postsqualene portion of cholesterol synthesis were screened in HepG2 cells. 2-(4-Phenethylpiperazin-1-yl)-1-(pyridine-3-yl)ethanol (LK-980) was identified as a prospective compound and was characterized further in cultures of human primary hepatocytes from seven donors. In vitro kinetic measurements show that the half-life of LK-980 is at least 4.3 h. LK-980 does not induce CYP3A4 mRNA nor enzyme activity. Target prediction was performed by gas chromatography-mass spectrometry, allowing simultaneous separation and quantification of nine late cholesterol intermediates. Experiments indicated that human sterol \u0394(7)-reductase (DHCR7) is the major target of LK-980 (34-fold increase of 7-dehydrocholesterol), whereas human sterol \u0394(14)-reductase (DHCR14), human sterol \u0394(24)-reductase (DHCR24), and human sterol C5-desaturase (SC5DL) represent minor targets. In the absence of purified enzymes, we used the mathematical model of cholesterol synthesis to evaluate whether indeed more than a single enzyme is inhibited. In silico inhibition of only DHCR7 modifies the flux of cholesterol intermediates, resulting in a sterol profile that does not support experimental data. Partial inhibition of the DHCR14, DHCR24, and SC5DL steps, in addition to DHCR7, supports the experimental sterol profile. In conclusion, we provide experimental and computational evidence that LK-980, a novel inhibitor from the late portion of cholesterol synthesis, inhibits primarily DHCR7 and to a lesser extent three other enzymes from this pathway.",
+  "text_type": "abstract",
+  "title": "Inhibition of human sterol \u03947-reductase and other postlanosterol enzymes by LK-980, a novel inhibitor of cholesterol synthesis."
+}

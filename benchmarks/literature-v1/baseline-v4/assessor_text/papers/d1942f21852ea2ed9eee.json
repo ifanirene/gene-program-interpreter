@@ -1,0 +1,14 @@
+{
+  "content_hash": "732d04c1220dca2fff928957206cca38b88afc26ec65b465311977bf3eee8e65",
+  "doi": "10.1038/ncb3555",
+  "errors": [],
+  "paper_key": "d1942f21852ea2ed9eee",
+  "pmcid": null,
+  "pmid": "28714968",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Endothelial sprouting and proliferation are tightly coordinated processes mediating the formation of new blood vessels during physiological and pathological angiogenesis. Endothelial tip cells lead sprouts and are thought to suppress tip-like behaviour in adjacent stalk endothelial cells by activating Notch. Here, we show with genetic experiments in postnatal mice that the level of active Notch signalling is more important than the direct Dll4-mediated cell-cell communication between endothelial cells. We identify endothelial expression of VEGF-A and of the chemokine receptor CXCR4 as key processes controlling Notch-dependent vessel growth. Surprisingly, genetic experiments targeting endothelial tip cells in vivo reveal that they retain their function without Dll4 and are also not replaced by adjacent, Dll4-positive cells. Instead, activation of Notch directs tip-derived endothelial cells into developing arteries and thereby establishes that Dll4-Notch signalling couples sprouting angiogenesis and artery formation.",
+  "text_type": "abstract",
+  "title": "Dll4 and Notch signalling couples sprouting angiogenesis and artery formation."
+}

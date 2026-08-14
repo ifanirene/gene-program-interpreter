@@ -1,0 +1,116 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-8bcd69ca787b12545d4a",
+    "RL-9fde2b6915b63651244f",
+    "RL-aa43395cb1c6b9bfed78",
+    "RL-ad3d7fb8300108d2a609"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1077,
+        "source_type": "abstract",
+        "start": 729,
+        "text": "We also examined the activity of the enzyme ALA dehydratase (ALAD), which is the second enzyme in the heme biosynthetic pathway, and ALAD gene expression during the fatigue and its recovery sessions. The ALAD activity, as well as its gene expression, in the liver of the fatigued animals was decreased as compared with those of the control animals."
+      },
+      "function_supported_genes": [
+        "Alad"
+      ],
+      "rationale": "The paper confirms Alad as the second hepatic heme-biosynthesis enzyme and shows its liver activity and expression change with metabolic condition (decreased in fatigue, restored on recovery), supporting the smallest cited claim; the PPARα component is untested but not required. Regulation is measured as an expression/activity response to a condition, so directness is observational, and rat-fatigue context is indirect to mouse aging/MASLD.",
+      "red_flags": [],
+      "review_id": "RL-8bcd69ca787b12545d4a",
+      "studied_genes": [
+        "Alad"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 717,
+        "source_type": "abstract",
+        "start": 542,
+        "text": "We found that bile acids strongly inhibited the cysteine dioxygenase type-1-mediated (CDO1-mediated) cysteine catabolic pathway via a farnesoid X receptor-dependent mechanism."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "Cholestyramine feeding and CDO1-overexpressing mouse hepatocytes causally demonstrate FXR-dependent bile acid control of the CDO1 cysteine catabolic pathway, exactly the cited mechanism. The mouse hepatocyte/liver system is the target cell type, tissue, and species, so the declared direct context is accurate even though the specific stressor is bile-acid manipulation rather than aging/MASLD.",
+      "red_flags": [],
+      "review_id": "RL-9fde2b6915b63651244f",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 167,
+        "source_type": "full_text",
+        "start": 0,
+        "text": "The 55 kDa membrane-bound enzyme fatty aldehyde dehydrogenase (EC 1.2.1.48) converts long-chain fatty aldehydes to the corresponding acid in an NAD-dependent reaction."
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "Direct biochemical assays with recombinant Aldh3a2 and rat/mouse liver microsomes establish FALDH conversion of long-chain fatty aldehydes to acids, matching the cited enzyme function. The healthy young rat/mouse liver assay context only partially matches aging/MASLD hepatocytes, so the declared partial label is accurate.",
+      "red_flags": [],
+      "review_id": "RL-aa43395cb1c6b9bfed78",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 498,
+        "source_type": "abstract",
+        "start": 384,
+        "text": "DHEA sulfotransferase (Sult2A1), which plays an important role in DHEA sulfation and detoxification of bile acids."
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper studies mouse Sult2A1, a paralog of the supplied Sult2a5/2a7/2a8 genes, so no supplied gene is substantively investigated and both gene arrays stay empty. It supports only a family-level/paralog form of the cited SULT2A sulfation-and-bile-acid-detox function, which is why it was cited as context, warranting partial; the mouse-liver APR/LPS setting partially matches aging/MASLD hepatocytes.",
+      "red_flags": [
+        "paralog_only"
+      ],
+      "review_id": "RL-ad3d7fb8300108d2a609",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5172645,
+    "duration_api_ms": 145140,
+    "duration_ms": 143596,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 145.219
+  }
+}

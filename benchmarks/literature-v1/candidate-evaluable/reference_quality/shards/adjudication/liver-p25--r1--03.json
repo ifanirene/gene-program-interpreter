@@ -1,0 +1,124 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-6a44877265e2c5747629",
+    "RL-767f3edaaf0c7a14d825",
+    "RL-8917eaf883f998bbc932",
+    "RL-a56a1e2fbb57a3ab037e"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 9878,
+        "source_type": "full_text",
+        "start": 9771,
+        "text": "The mRNA of Cyp2c50 and Cyp2c54 in Nrf2-null mice was 45 and 65% lower than in wild-type mice, respectively"
+      },
+      "function_supported_genes": [
+        "Cyp2c50",
+        "Aldh1a1",
+        "Gsta3"
+      ],
+      "rationale": "Graded genetic Nrf2 models give gene-specific mRNA data for Cyp2c50, Aldh1a1 (both lower in Nrf2-null, higher with activation) and Gsta3 (increased 20% in Keap1-HKO), supporting Nrf2-regulated xenobiotic-gene status; Aldh3a2 and Akr1c6 are measured but reported unchanged, so studied but not function-supported. Mouse whole-liver/hepatocyte model makes the declared direct context accurate.",
+      "red_flags": [],
+      "review_id": "RL-6a44877265e2c5747629",
+      "studied_genes": [
+        "Cyp2c50",
+        "Aldh1a1",
+        "Aldh3a2",
+        "Gsta3",
+        "Akr1c6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 600,
+        "source_type": "abstract",
+        "start": 444,
+        "text": "FIT1 and FIT2 are endoplasmic reticulum resident membrane proteins that induce lipid droplet accumulation in cell culture and when expressed in mouse liver."
+      },
+      "function_supported_genes": [
+        "Fitm1"
+      ],
+      "rationale": "FIT1 (Fitm1) gain-of-function expression in mouse liver causally induces ER-associated lipid droplet accumulation, directly supporting the smallest cited claim that FITM1 promotes hepatic lipid-droplet biogenesis; the unproven triglyceride-binding clause does not reduce support since the core function is demonstrated in the target mouse-liver context.",
+      "red_flags": [],
+      "review_id": "RL-767f3edaaf0c7a14d825",
+      "studied_genes": [
+        "Fitm1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 951,
+        "source_type": "abstract",
+        "start": 748,
+        "text": "Fatty aldehyde dehydrogenase had high activity towards saturated and unsaturated aliphatic aldehydes ranging from 6 to 24 carbons in length, as well as dihydrophytal, a 20-carbon branched chain aldehyde."
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "Purification and biochemical characterization establish ALDH3A2 (fatty aldehyde dehydrogenase) as a liver microsomal enzyme acting on long-chain aliphatic aldehydes, a narrower form of the cited lipid-peroxidation-aldehyde detoxification claim, so support is partial. Human liver with a conserved ortholog and matched tissue/cell type makes the declared partial context accurate.",
+      "red_flags": [],
+      "review_id": "RL-8917eaf883f998bbc932",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "unclear",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper causally establishes Aldh1a1 as a retinaldehyde dehydrogenase coordinating hepatic gluconeogenesis and lipid metabolism, an entirely different function from the cited lipid-peroxidation-aldehyde detoxification role, which it does not study; this is wrong function rather than a weaker form, so support is no not partial. Mouse liver/hepatocyte work makes the direct context accurate independent of the functional mismatch.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-a56a1e2fbb57a3ab037e",
+      "studied_genes": [
+        "Aldh1a1"
+      ],
+      "support": "no"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.6683575,
+    "duration_api_ms": 227293,
+    "duration_ms": 224782,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 225.973
+  }
+}

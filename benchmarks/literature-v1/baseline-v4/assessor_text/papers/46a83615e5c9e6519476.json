@@ -1,0 +1,14 @@
+{
+  "content_hash": "41b2c7eec6395c1db066e3312b7035ee93b703dd9c3bc37d6a12588a53cbd1ba",
+  "doi": "10.1161/circresaha.125.326471",
+  "errors": [],
+  "paper_key": "46a83615e5c9e6519476",
+  "pmcid": null,
+  "pmid": "40641462",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Cerebrovascular malformations are a pivotal cause of hemorrhage and neurological disability, orchestrated largely by aberrant vascular homeostasis. However, a malformed angiogenic regulation pattern remains elusive.\n\nMETHODS: Single-cell transcriptome analysis uncovered the endothelial features of human cerebral cavernous malformations and brain arteriovenous malformations, 2 typical cerebrovascular malformation diseases. Endothelial AR (androgen receptor, a steroid receptor in the nuclear receptor superfamily) overexpression was conducted to investigate its involvement in tip cell formation. ARD-2585, an AR degrader, was applied to mouse models of cerebral cavernous malformations (endothelial-specific Pdcd10 knockout mice) and brain arteriovenous malformations (endothelial-specific KrasG12D mutant [KrasG12D] mice) to evaluate its vascular rescue potential.\n\nRESULTS: We profiled single-cell transcriptomes of 13 human cerebrovascular malformation samples (10 cerebral cavernous malformations and 3 brain arteriovenous malformations) and 13 control brain samples, identifying a crucial pathological tip cell population in lesions. Integrative bioinformatics revealed a systemic endothelial regulatory network, with AR as a key regulator of this aberrant state. AR expression was elevated in endothelial cells from both human cerebrovascular malformations and Pdcd10 knockout/KrasG12D mice, correlating with suppressed Dll4 (delta-like canonical Notch ligand 4)-Notch signaling. AR overexpression augmented endothelial tube formation, filopodia extension, and polarization in vitro and fostered sex-independent vascular sprouting in vivo. High levels of AR facilitated proangiogenic gene transcription by recruiting coactivators EP300 (EP300 lysine acetyltransferase)/CBP (CREB binding lysine acetyltransferase), augmenting histone H3 lysine 18/histone H3 lysine 27 acetylation, and boosting chromatin accessibility, potentially independent of androgen. Notably, ARD-2585 treatment effectively normalized vascular anomalies and alleviated cerebral hemorrhage in Pdcd10 knockout and KrasG12D mice.\n\nCONCLUSIONS: We delineated a novel androgen-independent AR-mediated endothelial sprouting pattern in malformed cerebrovasculature, highlighting a promising foundation for developing interventions targeting tip cells in angiogenic diseases.",
+  "text_type": "abstract",
+  "title": "Androgen Receptor Governs Tip Cell Formation in Cerebrovascular Malformations."
+}

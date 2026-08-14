@@ -1,0 +1,150 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-081933ad9516de845c00",
+    "RL-0a849c76f65251620997",
+    "RL-40d78e992150c1f1e610",
+    "RL-48196647472e2225acb4"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 19154,
+        "source_type": "full_text",
+        "start": 18954,
+        "text": "Genes that code for enzymes in the cholesterol synthesis pathway (Idi1, Fdps, Sqle, Cyp51, Tm7sf2, Nsdhl, Hsd7b17, and Dhcr7) were upregulated in the TXNIP C247S mouse livers compared with WT controls"
+      },
+      "function_supported_genes": [
+        "Idi1",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Nsdhl",
+        "Hsd17b7",
+        "Dhcr7"
+      ],
+      "rationale": "RNA-seq and qPCR give gene-specific expression data upregulating these seven supplied cholesterol-synthesis genes in mouse liver, supporting pathway membership observationally rather than catalytic function. HFD/TXNIP-mutant mouse liver is a MASLD-adjacent condition, closely transferable but not the declared direct aging/MASLD state.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-081933ad9516de845c00",
+      "studied_genes": [
+        "Idi1",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Nsdhl",
+        "Hsd17b7",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 17216,
+        "source_type": "full_text",
+        "start": 17058,
+        "text": "Cyp51+/− males had significantly increased plasma total cholesterol, HDL and LDL cholesterol (20–35% higher than controls) and present hepatomegaly (Table 1)."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Heterozygous Cyp51 knockout causally alters hepatic cholesterol handling in mouse liver, supporting Cyp51's role in cholesterol biosynthesis; Nsdhl/Tm7sf2/Dhcr7 have gene-specific expression readouts (studied) but their function is not tested. Genetic model plus mixed diets is closely transferable but not the declared direct aging/MASLD context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0a849c76f65251620997",
+      "studied_genes": [
+        "Cyp51",
+        "Nsdhl",
+        "Tm7sf2",
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 51112,
+        "source_type": "full_text",
+        "start": 50858,
+        "text": "The phenotype of reduced cholesterol synthesis was able to be reversed in a dose-dependent manner by transiently expressing a CMV-ERG28-V5 construct in the KO cells (Fig. 5F), confirming the reduction in cholesterol synthesis is due to the loss of ERG28."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 KO plus rescue causally establishes its role in cholesterol synthesis, and NanoBiT data show gene-specific interaction with NSDHL and SC4MOL(Msmo1); B's added Fdps/Fdft1/Hsd17b7 are only inhibitor tools, not substantively investigated. Human Huh7 liver line is a species/in-vitro system change (indirect), above the declared partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-40d78e992150c1f1e610",
+      "studied_genes": [
+        "Erg28",
+        "Nsdhl",
+        "Msmo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10409,
+        "source_type": "full_text",
+        "start": 10274,
+        "text": "The qPCR results for Hmgcs1, Hmgcr, Mvd, Idi1, Sqle and Dhcr7 confirmed the genomic analyses, whereas those for Fdft1 did not (Fig. 1)."
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Mvd",
+        "Dhcr7"
+      ],
+      "rationale": "Supplied genes with dedicated qPCR primers are studied, but only Hmgcs1/Idi1/Mvd/Dhcr7 show confirmed upregulation (Fdft1 explicitly failed to confirm), an associative expression finding not catalytic testing. Rat pancreatic islets are a different tissue/species/cell type, correctly declared indirect.",
+      "red_flags": [],
+      "review_id": "RL-48196647472e2225acb4",
+      "studied_genes": [
+        "Hmgcs1",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.9384984999999999,
+    "duration_api_ms": 233783,
+    "duration_ms": 231430,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 232.447
+  }
+}

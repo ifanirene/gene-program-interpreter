@@ -97,7 +97,7 @@ DEFAULT_LEXICON: dict[str, Any] = {
 }
 
 _FIELD_RE = re.compile(
-    r"^\s*(Key genes|Supporting PMIDs|Evidence used|Proposed mechanism)\s*:\s*(.*)$",
+    r"^\s*(Key genes|Supporting PMIDs|Supporting DOIs|Evidence used|Proposed mechanism)\s*:\s*(.*)$",
     re.I,
 )
 _MODULE_HEAD_RE = re.compile(r"^\s*Module\s*\d*\s*:\s*(.*)$", re.I)

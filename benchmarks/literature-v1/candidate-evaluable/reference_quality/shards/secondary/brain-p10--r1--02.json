@@ -1,0 +1,72 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-9c41babf6664c0afdd85",
+    "RL-9f72d03c8a188627beb0"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 17365,
+        "source_type": "full_text",
+        "start": 17186,
+        "text": "Knockdown of Bbs9 using mouse specific shRNA constructs negatively affected ciliogenesis in IMCD3 cells, resulting in more cells with no cilia compared to the control transfection"
+      },
+      "function_supported_genes": [],
+      "rationale": "Model-assessed as partial: Bbs9 knockdown causally impairs ciliogenesis, but the paper does not directly test GPCR trafficking or Hedgehog signaling. The zebrafish and kidney-cell systems are indirect to postnatal mouse brain endothelium.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-9c41babf6664c0afdd85",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 13959,
+        "source_type": "full_text",
+        "start": 13852,
+        "text": "Quantification of GT335 and IFT88 revealed significant reductions in the cilium assembly upon NME7 knockout"
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "Model-assessed as supporting a causal requirement for Nme7 in primary-cilium assembly. Human RPE1 cells are an indirect context for postnatal mouse brain endothelial cells.",
+      "red_flags": [],
+      "review_id": "RL-9f72d03c8a188627beb0",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 78080,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 107905,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4471,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 95.789
+  }
+}

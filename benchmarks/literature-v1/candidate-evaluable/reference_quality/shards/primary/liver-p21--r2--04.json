@@ -1,0 +1,167 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-d788e150ed0b8eeaf9d6",
+    "RL-d9c0f210c10e0a1940fb",
+    "RL-de264669813fae7e23fd",
+    "RL-def9b33e9590b1c3d439",
+    "RL-e87be25ad05faf6b4ce2",
+    "RL-f68464687b9efe0c3810"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 11592,
+        "source_type": "full_text",
+        "start": 11519,
+        "text": "HMGCS1 converts acetyl‐CoA to HMG‐CoA and promotes mevalonate metabolism."
+      },
+      "function_supported_genes": [
+        "Hmgcs1"
+      ],
+      "rationale": "CSN6 KD/OE and Csn6 liver-KO mice show HMGCS1 protein levels causally drive hepatic cholesterol/TG output, directly supporting Hmgcs1's mevalonate-pathway enzyme role. Context is mouse liver/HCC (NAFLD-associated), a closely related but not identical setting to the non-cancer aging/MASLD hepatocyte target context, matching the agent's 'partial' label.",
+      "red_flags": [],
+      "review_id": "RL-d788e150ed0b8eeaf9d6",
+      "studied_genes": [
+        "Hmgcs1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 895,
+        "source_type": "abstract",
+        "start": 609,
+        "text": "Experiments indicated that human sterol Δ(7)-reductase (DHCR7) is the major target of LK-980 (34-fold increase of 7-dehydrocholesterol), whereas human sterol Δ(14)-reductase (DHCR14), human sterol Δ(24)-reductase (DHCR24), and human sterol C5-desaturase (SC5DL) represent minor targets."
+      },
+      "function_supported_genes": [
+        "Dhcr7"
+      ],
+      "rationale": "DHCR7 is strongly, causally established as a postlanosalene cholesterol-synthesis enzyme (major drug target with 34-fold substrate accumulation), but SC5DL/Sc5d is only a computationally-inferred 'minor target', a weaker basis for co-establishing it. Context is human HepG2/primary hepatocyte, not mouse, so 'direct' overstates transferability versus a 'partial' match.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-d9c0f210c10e0a1940fb",
+      "studied_genes": [
+        "Dhcr7",
+        "Sc5d"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2607,
+        "source_type": "full_text",
+        "start": 2471,
+        "text": "Overexpression of DDR2 activated the AMPK/ACC axis and inhibited hepatic lipid synthesis, thereby improving the symptoms of fatty liver."
+      },
+      "function_supported_genes": [
+        "Ddr2"
+      ],
+      "rationale": "DDR2 is shown downregulated in HFD/db/db mouse liver and its overexpression/knockdown causally regulates AMPK/ACC-dependent hepatic TG accumulation, exactly matching the mechanism claim. Context (mouse hepatocytes, MASLD models) is the direct target context.",
+      "red_flags": [],
+      "review_id": "RL-de264669813fae7e23fd",
+      "studied_genes": [
+        "Ddr2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 918,
+        "source_type": "abstract",
+        "start": 773,
+        "text": "the human promoter contains two binding sites for SREBP-2 (at -155 and -55) and a binding site for the nuclear factor-Y (NF-Y) cofactor (at -136)"
+      },
+      "function_supported_genes": [
+        "Dhcr7"
+      ],
+      "rationale": "The paper directly maps functional SREBP-2 binding sites in the DHCR7 promoter and shows they cooperatively activate DHCR7 transcription, matching the mechanism's claim that Dhcr7 carries SREs and is SREBP-2-regulated. The abstract does not specify cell type/tissue, so context cannot be assessed, but the agent's cautious 'indirect' label is a reasonable hedge.",
+      "red_flags": [],
+      "review_id": "RL-def9b33e9590b1c3d439",
+      "studied_genes": [
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1320,
+        "source_type": "full_text",
+        "start": 1196,
+        "text": "DGATs carry out the final step of TG synthesis by catalyzing the addition of acyl-CoAs to diacylglycerol (DAG), forming TGs."
+      },
+      "function_supported_genes": [],
+      "rationale": "Using DGAT2 inhibitor treatment, liver-specific knockout, and overexpression in mouse and rat liver, the paper causally links DGAT2-mediated TG synthesis to control of SREBP-1 cleavage and hepatic steatosis, matching the regulator description. As a perturbation regulator, no supplied-gene coverage applies; context is direct mouse hepatic MASLD.",
+      "red_flags": [],
+      "review_id": "RL-e87be25ad05faf6b4ce2",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4868,
+        "source_type": "full_text",
+        "start": 4738,
+        "text": "we found that ERG28 KO cells showed impaired SREBP-2 processing, resulting in a downregulation of many cholesterol synthesis genes"
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 KO liver cell lines show impaired SREBP-2 processing and reduced cholesterol synthesis gene expression, directly supporting mechanism 2's bidirectional Erg28-SREBP2 claim (also mapped SREs in the ERG28 promoter). NSDHL/MSMO1(SC4MOL) are gene-specifically studied only as ERG28 interaction partners, not for SREBP-2 transcriptional regulation, so they remain in studied but not function-supported for this mechanism; context is human hepatoma/embryonic kidney lines, a partial (not direct mouse hepatocyte) match.",
+      "red_flags": [],
+      "review_id": "RL-f68464687b9efe0c3810",
+      "studied_genes": [
+        "Erg28",
+        "Nsdhl",
+        "Msmo1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.5474165,
+    "duration_api_ms": 300765,
+    "duration_ms": 298944,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 300.029
+  }
+}

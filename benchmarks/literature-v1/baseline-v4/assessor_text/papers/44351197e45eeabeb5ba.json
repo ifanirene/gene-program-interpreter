@@ -1,0 +1,16 @@
+{
+  "content_hash": "cd3e6d363919d0e9870a86b1ee0dc197b554be10f4595180650815e218b8ba1e",
+  "doi": "10.1124/dmd.111.042697",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "44351197e45eeabeb5ba",
+  "pmcid": "PMC3362787",
+  "pmid": "22446519",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The ontogeny of the first four families of cytochromes P450 (P450s) (i.e., Cyp1-Cyp4) can affect the biotransformation of drugs and dietary chemicals in liver, resulting in unique pharmacological reactions in children. Because genome-scale investigations have identified many novel P450 isoforms, it is critical to perform a systematic characterization of these P450s during liver development. In this study, livers were collected from C57BL/6 mice 2 days before birth and at various postnatal ages (0-45 days of age). The mRNA levels for 75 P450 isoforms (Cyp1-Cyp4) were quantified with branched DNA assays and reverse transcription-polymerase chain reaction assays. More than half of the mouse P450s are conserved in humans, but there are more isoforms in mice. The P450 mRNA levels increased after birth in mouse liver, forming four distinct ontogenic patterns. The majority of P450s form a total of eight genomic clusters, namely, Cyp1a1 and Cyp1a2 genes on chromosome 9 (cluster 1), Cyp2a, Cyp2b, Cyp2f, Cyp2g, and Cyp2t genes on chromosome 7 (cluster 2), Cyp2c genes on chromosome 19 (cluster 3), Cyp2d genes on chromosome 15 (cluster 4), Cyp2j genes on chromosome 4 (cluster 5), Cyp3a genes on chromosome 5 (cluster 6), Cyp4a, Cyp4b, and Cyp4x genes on chromosome 4 (cluster 7), and Cyp4f genes on chromosome 17 (cluster 8). Some P450 isoforms within the same genomic cluster showed similar ontogenic patterns. In conclusion, the present study revealed four patterns of ontogeny for P450s in liver and showed that many P450s within a genomic cluster exhibited similar ontogenic patterns, which suggests that some P450s within a cluster are likely regulated by a common pathway during liver development.",
+  "text_type": "abstract",
+  "title": "Ontogeny of novel cytochrome P450 gene isoforms during postnatal liver maturation in mice."
+}

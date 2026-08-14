@@ -1,0 +1,16 @@
+{
+  "content_hash": "3a145b285d123d9367e062cff6d04113af1be344cce142bf65e00bb77df4c679",
+  "doi": "10.1126/science.aat9528",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "7c9c6b26a7b57464b848",
+  "pmcid": "PMC6300058",
+  "pmid": "30442778",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "One-carbon metabolism generates the one-carbon units required to synthesize many critical metabolites, including nucleotides. The pathway has cytosolic and mitochondrial branches, and a key step is the entry, through an unknown mechanism, of serine into mitochondria, where it is converted into glycine and formate. In a CRISPR-based genetic screen in human cells for genes of the mitochondrial pathway, we found sideroflexin 1 (SFXN1), a multipass inner mitochondrial membrane protein of unclear function. Like cells missing mitochondrial components of one-carbon metabolism, those null for SFXN1 are defective in glycine and purine synthesis. Cells lacking SFXN1 and one of its four homologs, SFXN3, have more severe defects, including being auxotrophic for glycine. Purified SFXN1 transports serine in vitro. Thus, SFXN1 functions as a mitochondrial serine transporter in one-carbon metabolism.",
+  "text_type": "abstract",
+  "title": "SFXN1 is a mitochondrial serine transporter required for one-carbon metabolism."
+}

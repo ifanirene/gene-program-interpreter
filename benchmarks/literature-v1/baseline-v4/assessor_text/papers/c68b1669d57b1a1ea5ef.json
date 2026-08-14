@@ -1,0 +1,14 @@
+{
+  "content_hash": "91bcfdbfbc4efa0ebecda71e743b990de0f34aad6dc84bb7d363dc5b10da4f96",
+  "doi": "10.1007/s10545-012-9574-y",
+  "errors": [],
+  "paper_key": "c68b1669d57b1a1ea5ef",
+  "pmcid": null,
+  "pmid": "23344887",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "This study investigates glio-vascular interactions in human fetal brain at midgestation, specifically examining the expression and immunolocalization of the CXCL12/CXCR4/CXCR7 ligand-receptor axis and its possible role in the vascular patterning of the developing brain. At midgestation, the telencephalic vesicles are characterized by well developed radial glia cells (RGCs), the first differentiated astrocytes and a basic vascular network mainly built of radial vessels. RGCs have been recognized to contribute to cerebral cortex neuro-vascular architecture and have also been demonstrated to act as a significant source of neural cells (Rakic, Brain Res 33:471-476, 1971; Malatesta et al, Development 127:5253-5263, 2000). According to our hypothesis CXCL12, a potent migration and differentiation chemokine released by RGCs, may act as a linking factor coordinating neuroblast migration with vessel growth and patterning through the activation of different ligand/receptor axes. The obtained results support this hypothesis showing that together with CXCR4/CXCR7-reactive neuroblasts, which migrate in close association with CXCL12 RGCs, layer-specific subsets of CXCL12 RGCs and astrocytes specifically contact the microvessel wall. Moreover, the CXCL12/CXCR4/CXCR7 system appears to be directly involved in microvessel growth, its members being differentially expressed in angiogenically activated microvessels and vascular sprouts.",
+  "text_type": "abstract",
+  "title": "The CXCL12/CXCR4/CXCR7 ligand-receptor system regulates neuro-glio-vascular interactions and vessel growth during human brain development."
+}

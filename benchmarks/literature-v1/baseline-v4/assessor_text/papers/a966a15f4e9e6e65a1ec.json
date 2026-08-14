@@ -1,0 +1,14 @@
+{
+  "content_hash": "59273a8c31b0f8bd3c238d5791e055ba6713d9c616aecedfd6fa7103c3d9d144",
+  "doi": "10.1152/ajpendo.00518.2020",
+  "errors": [],
+  "paper_key": "a966a15f4e9e6e65a1ec",
+  "pmcid": null,
+  "pmid": "33900847",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Uric acid is the end metabolite derived from the oxidation of purine compounds. Overwhelming evidence shows the vital interrelationship between hyperuricemia (HUA) and nonalcoholic fatty liver disease (NAFLD). However, the mechanisms for this association remain unclear. In this study, we established a urate oxidase-knockout (Uox-KO) mouse model by clustered regularly interspaced short palindromic repeats (CRISPR)-Cas9 technology. To study the correlation between HUA and NAFLD, human HepG2 hepatoma cells were treated in culture medium with high level of uric acid. In vivo, the Uox-KO mice spontaneously developed hyperuricemia and aberrant lipid-metabolism, concomitant with abnormal hepatic fat accumulation. HUA activated c-Jun N-terminal kinase (JNK) in vivo and in vitro. Furthermore, inhibiting JNK activation by a JNK-specific inhibitor, SP600125, decreased fat accumulation and lipogenic gene expression induced by HUA. Overexpression of the lipogenic enzymes fatty acid synthase and acetyl-CoA carboxylase 1 was via activation of JNK, which was blocked by the JNK inhibitor SP600125. HUA activated AP-1 to upregulate lipogenic gene expression via JNK activation. In addition, HUA caused mitochondrial dysfunction and reactive oxygen species production. Pretreatment with the antioxidant N-acetyl-l-cysteine could ameliorate HUA-activated JNK and hepatic steatosis. These data suggest that ROS/JNK/AP-1 signaling plays an important role in HUA-mediated fat accumulation in liver.NEW & NOTEWORTHY Hyperuricemia and nonalcoholic fatty liver disease are global public health problems, which are strongly associated with metabolic syndrome. In this study, we demonstrate that uric acid induces hepatic fat accumulation via the ROS/JNK/AP-1 pathway. This study identifies a new mechanism of NAFLD pathogenesis and new potential therapeutic strategies for HUA-induced NAFLD.",
+  "text_type": "abstract",
+  "title": "High uric acid induces liver fat accumulation via ROS/JNK/AP-1 signaling."
+}

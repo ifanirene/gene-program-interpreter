@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-49812ab40048330b300c",
+    "RL-4cd21b97b77a31ff5a05",
+    "RL-64dff063a63f09f71102",
+    "RL-920e5a6b1b1a04c491c2"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 627,
+        "source_type": "abstract",
+        "start": 494,
+        "text": "Zebrafish mutants for the chemokine receptor cxcr4a or its ligand cxcl12b establish a decreased number of arterial-venous connections"
+      },
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "rationale": "Cxcr4a mutation causally reduces arterial-venous connections during zebrafish brain vascularization. The different species makes the context indirect rather than partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-49812ab40048330b300c",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1116,
+        "source_type": "abstract",
+        "start": 1019,
+        "text": "Overall, our findings reveal a key role for PC ALK5 in regulating brain endothelial morphogenesis"
+      },
+      "function_supported_genes": [],
+      "rationale": "Pericyte-specific Alk5 depletion causally establishes regulation of brain endothelial morphogenesis. Because the perturbation is embryonic and pericyte-localized rather than postnatal endothelial, the context is partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-4cd21b97b77a31ff5a05",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 682,
+        "source_type": "abstract",
+        "start": 491,
+        "text": "In the present study we demonstrate the ability of OPG to support endothelial cell survival, as well as the formation of cord-like structures in vitro using a matrigel tubule formation assay."
+      },
+      "function_supported_genes": [
+        "Tnfrsf11b"
+      ],
+      "rationale": "Gene-specific OPG evidence supports endothelial survival and angiogenic cord formation. The human tumor and in-vitro setting is indirect to postnatal mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-64dff063a63f09f71102",
+      "studied_genes": [
+        "Tnfrsf11b"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 18119,
+        "source_type": "full_text",
+        "start": 17975,
+        "text": "More importantly, Cdc42EP3 is required for most of the hallmarks of CAFs, notably extracellular matrix remodelling and promotion of angiogenesis"
+      },
+      "function_supported_genes": [
+        "Cdc42ep3"
+      ],
+      "rationale": "This review reports gene-specific Cdc42EP3 involvement in stromal remodeling and promotion of angiogenesis. It supports the assigned function secondarily in an indirect cancer-associated fibroblast context.",
+      "red_flags": [],
+      "review_id": "RL-920e5a6b1b1a04c491c2",
+      "studied_genes": [
+        "Cdc42ep3"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 70912,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 97447,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4961,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 99.706
+  }
+}

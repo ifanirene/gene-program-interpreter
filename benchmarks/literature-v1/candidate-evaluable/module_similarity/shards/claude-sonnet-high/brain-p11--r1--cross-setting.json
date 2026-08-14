@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "brain-p11--r1--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.92
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.45
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.72
+      }
+    ],
+    "moduleSemanticSimilarity": 0.696667,
+    "overall_rationale": "Left P11 splits angiogenic tip-cell sprouting (L1) and TGF-β-driven CNS tip-cell specification (L2) as two related but mechanistically distinct facets, plus a separate ion-channel mechanosensing module (L3); Right P11 similarly separates tip-cell sprouting (R1), arteriovenous identity (R2), and BBB transport/mechanosensing (R3), giving strong same-core correspondence for the sprouting modules (L1-R1) and moderate-to-partial overlaps elsewhere driven by shared genes/regulators reassigned to different mechanistic roles, with L3-R3 as the next strongest match via shared Kcnj2 mechanosensing.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe sprouting angiogenesis/tip cell identity driven by Angpt2, Cxcr4, Cdc42ep3 with identical Nrp1 (promotes tip cell) and Tek (opposes, KO increases program) regulator logic.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.92
+      },
+      {
+        "left_module": 1,
+        "rationale": "Shares Angpt2, Cxcr4, Hopx and Tek regulator but the central mechanism shifts from tip-cell sprouting/filopodia formation to arteriovenous identity patterning, with Angpt2/Cxcr4 reassigned to venous/AV-boundary roles.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.48
+      },
+      {
+        "left_module": 1,
+        "rationale": "Both are brain endothelial programs but tip-cell sprouting biology shares no mechanistic, gene, or regulator overlap with BBB glutamate transport/ion-channel mechanosensing.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.12
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both target CNS endothelial tip cell identity and share Angpt2 and Nrp1, but the driving mechanism differs (TGF-β/ALK5-specified D-tip cells vs Nrp1-Cdc42-driven filopodial sprouting).",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.5
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both concern CNS endothelial identity specification and share Angpt2 and a Tek/Nrp1-adjacent regulatory theme, but TGF-β-driven tip cell specification differs mechanistically from Notch/Rgs6-driven arteriovenous patterning.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.45
+      },
+      {
+        "left_module": 2,
+        "rationale": "Identical Tgfbr1/Tgfbr2 regulators with the same direction (TGF-β promotes the program) anchor both modules, but the downstream output diverges from tip-cell/vascular-maturation identity to BBB transport and ion-channel mechanotransduction.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 3,
+        "rationale": "Ion channel/calcium mechanosensing genes and mechanism have no overlap with the angiogenic tip cell sprouting program.",
+        "relationship": "different",
+        "right_module": 1,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 3,
+        "rationale": "Rgs6 is shared but used for distinct roles (GPCR/calcium signaling modulation vs Notch-dependent arterial specification), leaving only peripheral brain-EC context overlap.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both center on Kcnj2-mediated flow-sensitive mechanotransduction in brain endothelium, with each module adding a distinct complementary facet (calcium signaling machinery vs glutamate transport/BBB integrity).",
+        "relationship": "meaningful_refinement",
+        "right_module": 3,
+        "similarity": 0.72
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.099711,
+    "duration_api_ms": 52630,
+    "duration_ms": 51210,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 52.2
+  }
+}

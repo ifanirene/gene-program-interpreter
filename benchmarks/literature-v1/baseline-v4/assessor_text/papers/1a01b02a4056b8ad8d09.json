@@ -1,0 +1,14 @@
+{
+  "content_hash": "5dc4e6560e11eb8ad7d46b8ce4a729556eeecdcfc6b1abbdd4bce512e310201f",
+  "doi": "10.1248/bpb.29.539",
+  "errors": [],
+  "paper_key": "1a01b02a4056b8ad8d09",
+  "pmcid": null,
+  "pmid": "16508162",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "AKR1C20, a member of the aldo-keto reductase (AKR) superfamily, found by mouse genomic analysis, exhibits the highest sequence identity (89%) with mouse liver 17beta-hydroxysteroid dehydrogenase (HSD) type 5, but its function remains unknown. In this report, we have expressed the recombinant AKR1C20 from its cDNA, and examined its properties. The purified enzyme was a 36-kDa monomer, and showed both 17beta-HSD and 3alpha-HSD activities in the presence of NADP(H) as the coenzymes. While the Km values for testosterone and 5alpha-dihydrotestosterone were high (>0.2 mM), those for 3alpha-hydroxy- and 3-keto-steroids were low (0.3-5 microM), resulting in high catalytic efficiency for the substrates. Although no significant dehydrogenase activity towards non-steroidal alcohols was observed, the enzyme highly reduced alpha-dicarbonyl compounds such as 16-ketoestrone, 9,10-phenanthrenequinone, acenaphthenequinone, 1-phenylisatin and camphorquinone. The pH optima of the dehydrogenase and reductase activities were 10.5 and 6.5-7.5, respectively. The enzyme was inhibited by sulfobromophthalein, hexestrol, indomethacin and flufenamic acid. The properties of AKR1C20 are distinct from those of previously known mouse 17beta-HSD type 5 (AKR1C6), 3alpha-HSD (AKR1C14) and other members of the AKR1C subfamily. Thus, AKR1C20 is a novel 3alpha(17beta)-HSD, which may also function as a reductase for xenobiotic alpha-dicarbonyl compounds.",
+  "text_type": "abstract",
+  "title": "Enzymatic properties of a member (AKR1C20) of the aldo-keto reductase family."
+}

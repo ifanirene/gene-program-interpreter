@@ -1,0 +1,16 @@
+{
+  "content_hash": "d7e8c5ec35dd6197bb21d634d1ffe6a720175bba2d2268bcff5d00bd36ed68eb",
+  "doi": "10.1016/j.devcel.2018.01.018",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "b6fa1358302c42863e9d",
+  "pmcid": "PMC5871595",
+  "pmid": "29456135",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The murine embryonic blood-brain barrier (BBB) consists of endothelial cells (ECs), pericytes (PCs), and basement membrane. Although PCs are critical for inducing vascular stability, signaling pathways in PCs that regulate EC morphogenesis during BBB development remain unexplored. Herein, we find that murine embryos lacking the transforming growth factor \u03b2 (TGF-\u03b2) receptor activin receptor-like kinase 5 (Alk5) in brain PCs (mutants) develop gross germinal matrix hemorrhage-intraventricular hemorrhage (GMH-IVH). The germinal matrix (GM) is a highly vascularized structure rich in neuronal and glial precursors. We show that GM microvessels of mutants display abnormal dilation, reduced PC coverage, EC hyperproliferation, reduced basement membrane collagen, and enhanced perivascular matrix metalloproteinase activity. Furthermore, ALK5-depleted PCs downregulate tissue inhibitor of matrix metalloproteinase 3 (TIMP3), and TIMP3 administration to mutants improves endothelial morphogenesis and attenuates GMH-IVH. Overall, our findings reveal a key role for PC ALK5 in regulating brain endothelial morphogenesis and a substantial therapeutic potential for TIMP3 during GMH-IVH.",
+  "text_type": "abstract",
+  "title": "Pericyte ALK5/TIMP3 Axis Contributes to Endothelial Morphogenesis in the Developing Brain."
+}

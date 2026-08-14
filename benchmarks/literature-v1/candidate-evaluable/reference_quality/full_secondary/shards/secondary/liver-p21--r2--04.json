@@ -1,0 +1,122 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-8ecdf7b6ae8e85092555",
+    "RL-9b1d86c1ff0c8dc62e7d",
+    "RL-9ed874a050c13e1ce2d6",
+    "RL-9efeb609b3c949a89c57"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 2528,
+        "source_type": "full_text",
+        "start": 2440,
+        "text": "Mechanistically, FDFT1 knockdown decreases cholesterol and bile acid levels in HCC cells"
+      },
+      "function_supported_genes": [
+        "Fdft1"
+      ],
+      "rationale": "FDFT1 perturbation directly altered cholesterol levels in hepatic cancer cells, supporting its role in cholesterol biosynthesis. HCC is a liver-derived but distinct disease context from aging/MASLD.",
+      "red_flags": [],
+      "review_id": "RL-8ecdf7b6ae8e85092555",
+      "studied_genes": [
+        "Fdft1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 904,
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes."
+      },
+      "function_supported_genes": [],
+      "rationale": "Conditional SCAP deficiency causally reduced hepatic cholesterol synthesis and biosynthetic-enzyme expression. The mouse-liver setting is relevant, but the tested conditions were cholesterol deprivation and fasting-refeeding rather than aging/MASLD.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9b1d86c1ff0c8dc62e7d",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 731,
+        "source_type": "abstract",
+        "start": 560,
+        "text": "with spatial transcriptomics and single-cell RNA sequencing revealing inhibition of acetate metabolism via ACSS2 and cholesterol synthesis as key drivers of the phenotype."
+      },
+      "function_supported_genes": [
+        "Acss2"
+      ],
+      "rationale": "The study links ACSS2-dependent acetate metabolism with cholesterol synthesis in MASH, but the dual ACLY/ACSS2 inhibitor prevents isolated attribution to ACSS2. Its principal cellular context is hepatic stellate cells rather than hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9ed874a050c13e1ce2d6",
+      "studied_genes": [
+        "Acss2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 7903,
+        "source_type": "full_text",
+        "start": 7753,
+        "text": "DHCR7 is an enzyme that acts in the final step of the cholesterol biosynthesis pathway and converts 7-DHC possessing conjugated diene to cholesterol9."
+      },
+      "function_supported_genes": [
+        "Dhcr7"
+      ],
+      "rationale": "The paper identifies DHCR7 as the terminal cholesterol-pathway enzyme and experimentally perturbs it in hepatic cells and mouse liver. The cellular and tissue setting transfers well, but the studied injury and ferroptosis conditions differ from aging/MASLD.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-9efeb609b3c949a89c57",
+      "studied_genes": [
+        "Dhcr7"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 167424,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 201011,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 5204,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 109.849
+  }
+}

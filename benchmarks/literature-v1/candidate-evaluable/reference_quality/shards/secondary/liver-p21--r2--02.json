@@ -1,0 +1,50 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-f68464687b9efe0c3810"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4869,
+        "source_type": "full_text",
+        "start": 4728,
+        "text": "Moreover, we found that ERG28 KO cells showed impaired SREBP-2 processing, resulting in a downregulation of many cholesterol synthesis genes."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 knockout causally impaired SREBP-2 processing and lowered cholesterol-synthesis gene expression; the paper also experimentally tested ERG28 interactions with NSDHL and SC4MOL (MSMO1). The experiments used human cell lines, including Huh7 liver-derived cells, so the context is transferable but not the target mouse aging/MASLD liver setting.",
+      "red_flags": [],
+      "review_id": "RL-f68464687b9efe0c3810",
+      "studied_genes": [
+        "Erg28",
+        "Nsdhl",
+        "Msmo1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 45568,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 72279,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 3908,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 75.862
+  }
+}

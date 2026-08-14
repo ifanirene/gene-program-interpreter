@@ -1,0 +1,25 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "Agent SDK Literature Protocol Map": {
+      "versions": [
+        {
+          "path": "Agent SDK Literature Protocol Map.html",
+          "createdAt": "2026-07-16T09:56:58.806Z",
+          "status": "approved",
+          "subtitle": "Current protocol, parameters, observed behavior, and high-yield literature-quality changes"
+        },
+        {
+          "path": "Agent SDK Literature Protocol Map — Simple.html",
+          "createdAt": "2026-07-16T10:10:10.779Z",
+          "status": "needs-review",
+          "subtitle": "Simplified flat document design with the full protocol review and parameter registry"
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-07-16T09:56:58.806Z",
+  "updatedAt": "2026-07-16T10:10:10.779Z"
+}

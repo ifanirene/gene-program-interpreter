@@ -1,0 +1,16 @@
+{
+  "content_hash": "b445bb5b69488f4528dbea75b1307b123462b951a45b12e210dbb1ba4439d1bb",
+  "doi": "10.1074/jbc.m111.331306",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "e647a650f4985d68e0f6",
+  "pmcid": "PMC3366839",
+  "pmid": "22474282",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Pregnenolone (PREG) can be converted to PREG esters (PE) by the plasma enzyme lecithin: cholesterol acyltransferase (LCAT), and by other enzyme(s) with unknown identity. Acyl-CoA:cholesterol acyltransferase 1 and 2 (ACAT1 and ACAT2) convert various sterols to steryl esters; their activities are activated by cholesterol. PREG is a sterol-like molecule, with 3-\u03b2-hydroxy moiety at steroid ring A, but with much shorter side chain at steroid ring D. Here we show that without cholesterol, PREG is a poor ACAT substrate; with cholesterol, the V(max) for PREG esterification increases by 100-fold. The binding affinity of ACAT1 for PREG is 30-50-fold stronger than that for cholesterol; however, PREG is only a substrate but not an activator, while cholesterol is both a substrate and an activator. These results indicate that the sterol substrate site in ACAT1 does not involve significant sterol-phospholipid interaction, while the sterol activator site does. Studies utilizing small molecule ACAT inhibitors show that ACAT plays a key role in PREG esterification in various cell types examined. Mice lacking ACAT1 or ACAT2 do not have decreased PREG ester contents in adrenals, nor do they have altered levels of the three major secreted adrenal steroids in serum. Mice lacking LCAT have decreased levels of PREG esters in the adrenals. These results suggest LCAT along with ACAT1/ACAT2 contribute to control pregnenolone ester content in different cell types and tissues.",
+  "text_type": "abstract",
+  "title": "Cellular pregnenolone esterification by acyl-CoA:cholesterol acyltransferase."
+}

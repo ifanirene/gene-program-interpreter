@@ -36,11 +36,53 @@ from __future__ import annotations
 
 from typing import List, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 # Active type aliases (used by the live pipeline).
 ContextMatch = Literal["direct", "partial", "indirect"]
 MechanismStatus = Literal["supported", "partial", "unsupported"]
+LedgerState = Literal["evidence_found", "searched_no_evidence", "unresolved_identifier"]
+EvidenceRole = Literal["anchor", "context", "corroboration", "review", "conflict"]
+TextType = Literal["abstract", "full_text", "unavailable"]
+IdentifierStatus = Literal["matching", "conflict", "unverified"]
+
+
+class GeneResearchLedgerEntry(BaseModel):
+    gene: str
+    state: LedgerState
+    search_attempted: bool = False
+    note: str = ""
+
+
+class RegulatorResearchLedgerEntry(BaseModel):
+    gene: str
+    search_attempted: bool = False
+    evidence_found: bool = False
+    note: str = ""
+
+
+class EvidenceLink(BaseModel):
+    """Mechanism-local interpretation of one globally deduplicated paper."""
+
+    evidence_id: str
+    role: EvidenceRole
+    selection_reason: str
+    studied_genes: List[str] = Field(default_factory=list)
+    function_supported_genes: List[str] = Field(default_factory=list)
+    finding: str = ""
+    direction: str = ""
+    context: str = ""
+    limitation: str = ""
+    evidence_span: str = ""
+
+    @model_validator(mode="after")
+    def _validate_link(self):
+        if not self.selection_reason.strip():
+            raise ValueError("selection_reason must not be empty")
+        studied = {gene.casefold() for gene in self.studied_genes}
+        if any(gene.casefold() not in studied for gene in self.function_supported_genes):
+            raise ValueError("function_supported_genes must be a subset of studied_genes")
+        return self
 
 
 # =====================================================================================
@@ -71,6 +113,8 @@ class Evidence(BaseModel):
         "(carried from the agent's paper).",
     )
     relevance_note: Optional[str] = None
+    text_type: TextType = "unavailable"
+    identifier_status: IdentifierStatus = "unverified"
 
     # ---- verifier-added (annotated in place; agents leave unset) ----
     resolved: Optional[bool] = Field(
@@ -103,6 +147,7 @@ class CandidateMechanism(BaseModel):
     supporting_genes: List[str] = Field(default_factory=list)
     supporting_regulators: List[str] = Field(default_factory=list)
     evidence_ids: List[str] = Field(default_factory=list)
+    evidence_links: List[EvidenceLink] = Field(default_factory=list)
     status: MechanismStatus = Field(
         default="partial",
         description="Per-mechanism support, derived from evidence resolvability by the verifier. "
@@ -126,6 +171,8 @@ class ResearchResult(BaseModel):
     evidence: List[Evidence] = Field(
         default_factory=list, description="Deduplicated evidence pool (by pmid|doi)."
     )
+    supplied_gene_ledger: List[GeneResearchLedgerEntry] = Field(default_factory=list)
+    regulator_ledger: List[RegulatorResearchLedgerEntry] = Field(default_factory=list)
     contradictions: List[str] = Field(default_factory=list)
     evidence_gaps: List[str] = Field(default_factory=list)
     agent_summary: str = ""
@@ -168,6 +215,25 @@ class AgentPaper(BaseModel):
         default="indirect", description="How directly this paper fits the cell-type context."
     )
     note: Optional[str] = Field(default=None, description="Why this paper supports the mechanism.")
+    role: EvidenceRole = "corroboration"
+    selection_reason: str = "legacy evidence link"
+    studied_genes: List[str] = Field(default_factory=list)
+    function_supported_genes: List[str] = Field(default_factory=list)
+    finding: str = ""
+    direction: str = ""
+    context: str = ""
+    limitation: str = ""
+    evidence_span: str = ""
+    text_type: TextType = "unavailable"
+
+    @model_validator(mode="after")
+    def _validate_supported_genes(self):
+        studied = {gene.casefold() for gene in self.studied_genes}
+        if any(gene.casefold() not in studied for gene in self.function_supported_genes):
+            raise ValueError("function_supported_genes must be a subset of studied_genes")
+        if not self.selection_reason.strip():
+            raise ValueError("selection_reason must not be empty")
+        return self
 
 
 class AgentMechanism(BaseModel):
@@ -194,6 +260,8 @@ class AgentResearchResult(BaseModel):
     candidate_mechanisms: List[AgentMechanism] = Field(
         default_factory=list, description="1-3 mechanisms (hard max 3, enforced in normalization)."
     )
+    supplied_gene_ledger: List[GeneResearchLedgerEntry] = Field(default_factory=list)
+    regulator_ledger: List[RegulatorResearchLedgerEntry] = Field(default_factory=list)
     contradictions: List[str] = Field(default_factory=list)
     evidence_gaps: List[str] = Field(default_factory=list)
     agent_summary: str = ""
@@ -261,6 +329,9 @@ class Claim(BaseModel):
 __all__ = [
     # active — canonical
     "Evidence",
+    "EvidenceLink",
+    "GeneResearchLedgerEntry",
+    "RegulatorResearchLedgerEntry",
     "CandidateMechanism",
     "ResearchResult",
     # active — agent-facing
@@ -271,6 +342,10 @@ __all__ = [
     # active — aliases
     "ContextMatch",
     "MechanismStatus",
+    "LedgerState",
+    "EvidenceRole",
+    "TextType",
+    "IdentifierStatus",
     # reserved (future claim-vs-paper entailment verification; not wired in)
     "Citation",
     "AgentClaim",

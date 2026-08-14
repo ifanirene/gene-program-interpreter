@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "brain-p11--r1--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.98
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.36
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.65
+      }
+    ],
+    "moduleSemanticSimilarity": 0.663333,
+    "overall_rationale": "The strongest correspondences are the nearly identical tip-cell sprouting modules and the shared Kcnj2-centered mechanosensing modules, while the remaining similarities reflect narrower overlap in endothelial identity or TGF-β-dependent brain vascular biology.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules describe the same Angpt2/Cxcr4/Cdc42ep3-positive tip-cell sprouting program, with matching Nrp1 promotion and Tek opposition in postnatal brain endothelium.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.98
+      },
+      {
+        "left_module": 1,
+        "rationale": "They share brain vascular patterning genes and angiogenic-versus-arterial identity features, but one centers on active tip-cell sprouting whereas the other centers on arteriovenous specification.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.43
+      },
+      {
+        "left_module": 1,
+        "rationale": "The modules share only the broad setting of specialized brain endothelium, with distinct angiogenic and BBB transport-mechanosensing outputs.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.13
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both concern brain endothelial tip-cell angiogenesis, but the left module specifically requires TGF-β/ALK5 signaling for diving-tip identity while the right centers on Nrp1–CDC42 and Angpt2–Tek sprouting control.",
+        "relationship": "meaningful_refinement",
+        "right_module": 1,
+        "similarity": 0.68
+      },
+      {
+        "left_module": 2,
+        "rationale": "Angpt2-linked nonarterial identity and postnatal brain vascular development overlap, but TGF-β-dependent diving-tip formation and arteriovenous specification are different central mechanisms and outputs.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.36
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both assign a positive role to Tgfbr1/Tgfbr2 signaling in brain endothelial development, but one predicts diving-tip and deep-plexus defects while the other emphasizes BBB integrity alongside transport and mechanosensing.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.46
+      },
+      {
+        "left_module": 3,
+        "rationale": "Aside from their shared brain endothelial context, membrane ion-channel mechanosensing and angiogenic tip-cell sprouting have different mechanisms and validation phenotypes.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 3,
+        "rationale": "Rgs6 and neurovascular specialization provide peripheral overlap, but membrane calcium and flow sensing are mechanistically distinct from arteriovenous identity specification.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both center partly on endothelial Kcnj2-mediated flow sensing, but the left extends this to calcium-channel microdomains whereas the right combines mechanosensing with BBB glutamate transport and TGF-β-dependent barrier integrity.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.65
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16373,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 1339,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 28.751
+  }
+}

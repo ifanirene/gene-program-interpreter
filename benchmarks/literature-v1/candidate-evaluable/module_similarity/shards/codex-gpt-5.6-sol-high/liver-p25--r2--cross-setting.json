@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "liver-p25--r2--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.9
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.93
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.96
+      }
+    ],
+    "moduleSemanticSimilarity": 0.93,
+    "overall_rationale": "The two sets contain three strongly corresponding biological programs—bile acid/steroid conjugation, peroxisomal lipid metabolism, and sulfur/nitrogen metabolism—with only modest differences in scope and mechanistic emphasis.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the same hepatic SULT2A/GSTA3-centered bile acid, hydroxysteroid, and xenobiotic conjugation program, although the right module narrows the broader Nrf2/CAR-regulated Phase I/II scope.",
+        "relationship": "meaningful_refinement",
+        "right_module": 1,
+        "similarity": 0.9
+      },
+      {
+        "left_module": 1,
+        "rationale": "The modules share hepatic detoxification, aldehyde handling, Cyb5b, and lipid-related context, but the right module centers on fatty acid oxidation and lipid storage rather than xenobiotic and steroid conjugation.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.32
+      },
+      {
+        "left_module": 1,
+        "rationale": "Bile acid regulation and general hepatic metabolic homeostasis provide limited context overlap, but sulfur and nitrogen catabolism is mechanistically distinct from Phase I/II detoxification.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.18
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both include hepatic aldehyde or lipid-associated metabolism, but sulfation and xenobiotic conjugation differ fundamentally from peroxisomal fatty acid oxidation and lipid-droplet partitioning.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.22
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both define essentially the same Hao2/Aldh3a2/Fitm1-centered program coupling peroxisomal fatty acid catabolism and fatty-aldehyde clearance to lipid-droplet homeostasis.",
+        "relationship": "same_core",
+        "right_module": 2,
+        "similarity": 0.93
+      },
+      {
+        "left_module": 2,
+        "rationale": "The modules share only broad hepatocyte metabolic and stress-homeostasis context, with little overlap between lipid oxidation and sulfur, nitrogen, or carbohydrate catabolism.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.14
+      },
+      {
+        "left_module": 3,
+        "rationale": "Their connection is largely through hepatic bile acid and sterol homeostasis, while cysteine and nitrogen catabolism differs from direct bile acid and steroid sulfation.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.22
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both concern hepatocyte metabolic homeostasis, but sulfur and nitrogen handling has little mechanistic overlap with peroxisomal fatty acid oxidation and lipid storage.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.13
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both describe the same Cdo1-centered hepatic sulfur and nitrogen metabolic program linked to taurine production, urea-cycle support, glucose regulation, and an aging hepatocyte signature.",
+        "relationship": "same_core",
+        "right_module": 3,
+        "similarity": 0.96
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16853,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 944,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 19.66
+  }
+}

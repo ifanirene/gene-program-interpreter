@@ -1,0 +1,14 @@
+{
+  "content_hash": "2b7d312f95c1e90bf116e723aa79d5726405c140a8dd1d267bad0317ded38f8b",
+  "doi": "10.1006/taap.2002.9450",
+  "errors": [],
+  "paper_key": "002e81bfe8b5958c9452",
+  "pmcid": null,
+  "pmid": "12140174",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Glutathione S-transferases (GST) are multifunctional proteins. alpha class GSTs are known to catalyze glutathione peroxidase reactions, in addition to their major activity, i.e., conjugation of electrophiles to glutathione. In the present work, the contribution of rat and mouse alpha class GSTs to glutathione-dependent reduction of phospholipid hydroperoxides has been studied., Results of these studies indicate that the alpha class GST fraction, which consists of three isoforms, has glutathione peroxidase activity toward phospholipid hydroperoxides residing in biological membranes, without the need of prior phospholipase C action. Immunotitration studies using antibodies specific to the alpha class GSTs, GSTA1-1, GSTA2-2, and GSTA3-3, indicate that these GST isozymes account for approximately half of the glutathione peroxidase activity toward phospholipid hydroperoxides present in the 28,000g supernatant fractions of rat and mouse liver extracts. GSTs contribute proportionally lesser fraction of this activity in other tissues in which alpha class GSTs are less prevalent. In mice, the contribution of alpha class GSTs to the overall glutathione peroxidase activity is indistinguishable in wild-type mice and knockout mice lacking the major selenoenzyme, glutathione peroxidase 1, an enzyme that does not act on intact phospholipid hydroperoxides. These results are consistent with our previous studies on human alpha class GSTs (Yang, et al. J. Biol. Chem. 276, 19220-19230, 2001) and demonstrate that alpha class GSTs are of physiological importance, not only in the conjugative detoxification of electrophiles, but are also an essential component of cellular antioxidant defense mechanisms.",
+  "text_type": "abstract",
+  "title": "Role of alpha class glutathione S-transferases as antioxidant enzymes in rodent tissues."
+}

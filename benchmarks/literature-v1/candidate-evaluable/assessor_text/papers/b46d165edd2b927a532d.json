@@ -1,0 +1,14 @@
+{
+  "content_hash": "91b8e497075b3cb0df68e4edbda68b42a8687e82a6bc8f68d9e942294c5dcb80",
+  "doi": "10.1038/s41436-021-01106-z",
+  "errors": [],
+  "paper_key": "b46d165edd2b927a532d",
+  "pmcid": null,
+  "pmid": "33531668",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "PURPOSE: Ciliopathies are a group of disorders caused by defects of the cilia. Joubert syndrome (JBTS) is a recessive and pleiotropic ciliopathy that causes cerebellar vermis hypoplasia and psychomotor delay. Although the intraflagellar transport (IFT) complex serves as a key module to maintain the ciliary structure and regulate ciliary signaling, the function of IFT in JBTS remains largely unknown. We aimed to explore the impact of IFT dysfunction in JBTS.\n\nMETHODS: Exome sequencing was performed to screen for pathogenic variants in IFT genes in a JBTS cohort. Animal model and patient-derived fibroblasts were used to evaluate the pathogenic effects of the variants.\n\nRESULTS: We identified IFT74 as a JBTS-associated gene in three unrelated families. All the affected individuals carried truncated variants and shared one missense variant (p.Q179E) found only in East Asians. The expression of the human p.Q179E-IFT74 variant displayed compromised rescue effects in zebrafish ift74 morphants. Attenuated ciliogenesis; altered distribution of IFT proteins and ciliary membrane proteins, including ARL13B, INPP5E, and GPR161; and disrupted hedgehog signaling were observed in patient fibroblasts with IFT74 variants.\n\nCONCLUSION: IFT74 is identified as a JBTS-related gene. Cellular and biochemical mechanisms are also provided.",
+  "text_type": "abstract",
+  "title": "Disrupted intraflagellar transport due to IFT74 variants causes Joubert syndrome."
+}

@@ -1,0 +1,65 @@
+schema_version: 1
+benchmark_id: literature-v1
+
+sentinel_case_ids: []
+
+budget:
+  sessions: 1
+  max_attempts: 1
+  max_budget_usd_per_attempt: 2.5
+  max_api_equivalent_usd: 2.5
+
+execution:
+  auth: subscription
+  model: claude-sonnet-4-6
+  concurrency: 8
+  max_turns: 120
+  max_budget_usd: 2.5
+  per_program_timeout_seconds: 1800
+  max_attempts: 1
+  cost_basis: api-equivalent
+
+cases:
+  - case_id: brain-p10
+    experiment: brain-endothelial
+    program_id: P10
+    profile_path: profiles/brain.yaml
+    inputs:
+      gene_loading: inputs/brain/FB_moi15_seq2_loading_gene_k100_top300.csv
+      regulators: inputs/brain/Discovery_FP_moi15_seq2_thresh10_k100_default.csv
+      celltype_enrichment: inputs/brain/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv
+      ncbi_context: inputs/brain/ncbi_context.json
+    expected:
+      program_genes:
+        - Map2k6
+        - X1110051M20Rik
+        - Bbs9
+        - Cfap36
+        - D130040H23Rik
+        - Stxbp4
+        - Wdpcp
+        - Metap1d
+        - Prkdc
+        - Nme7
+        - Bckdhb
+        - Camkmt
+        - Cc2d2a
+        - Tbc1d32
+        - Eml6
+      distinctive_genes:
+        - Clybl
+        - Tet1
+        - Chchd6
+        - Ift74
+        - Elp4
+        - Cep164
+        - Tex9
+        - Sdccag8
+    repeat_count: 1
+    hashes:
+      profiles/brain.yaml: e423deb8632e4b74c454e449f209204929b407a4a1dcd2a94d968c34bf7f2741
+      inputs/brain/FB_moi15_seq2_loading_gene_k100_top300.csv: 87fb0df0c4beeed7e2c39daac918a3547d4d378af6917a500b90b1ff5149dcf7
+      inputs/brain/Discovery_FP_moi15_seq2_thresh10_k100_default.csv: 2a617c7ca3124b7591432738890b20267b3223230a43511706f937da4401340b
+      inputs/brain/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv: 1e32661dda6e6ce5af16b745d5f0a4e8eafa759b2f582250851ef97f55ae78d8
+      inputs/brain/ncbi_context.json: 46147d0c8b0e01b81021ce09b61179a9854fbe18412150161700bb770a525482
+

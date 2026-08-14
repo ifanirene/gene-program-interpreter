@@ -1,0 +1,94 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-cc6e56034be9f7e2fa89",
+    "RL-d542d0316e6592db0cac",
+    "RL-e0cde018c4ab700810f1"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 8193,
+        "source_type": "full_text",
+        "start": 8033,
+        "text": "Analysis of mouse embryonic fibroblasts (MEFs) derived from WdpcpCys40 mutant embryos, referred to as WdpcpCys40 mutant MEFs, confirmed a defect in ciliogenesis"
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "Wdpcp knockout/mutant MEFs causally show a ciliogenesis defect, with Wdpcp localizing to and recruiting transition-zone proteins, directly supporting the selection-reason claim; the untested IFT-A sub-clause does not lower this below supports. Mouse embryo/MEF context is indirect to postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-cc6e56034be9f7e2fa89",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3117,
+        "source_type": "full_text",
+        "start": 3025,
+        "text": "We show that NME7 and its kinase activity are required for efficient microtubule nucleation."
+      },
+      "function_supported_genes": [
+        "Nme7"
+      ],
+      "rationale": "RNAi and biochemical experiments causally establish NME7 as a γTuRC component required for microtubule nucleation, but the assigned primary-cilium-assembly role appears only as cited background, making this a narrower molecular form of the claim. Human centrosomal/mitotic system is indirect to brain endothelial cilia.",
+      "red_flags": [],
+      "review_id": "RL-d542d0316e6592db0cac",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 8300,
+        "source_type": "full_text",
+        "start": 8243,
+        "text": "BBS1, BBS2, BBS7, and BBS9 constitute the core subcomplex"
+      },
+      "function_supported_genes": [
+        "Bbs9"
+      ],
+      "rationale": "BBS9 is investigated gene-specifically only as a core-subcomplex interactor and localization marker, while the causal SMO/GPR161 trafficking experiments perturb BBS1, so Bbs9's trafficking role is corroborated associatively rather than directly. Human RPE1 system is indirect to brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-e0cde018c4ab700810f1",
+      "studied_genes": [
+        "Bbs9"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.640701,
+    "duration_api_ms": 136976,
+    "duration_ms": 135152,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 136.438
+  }
+}

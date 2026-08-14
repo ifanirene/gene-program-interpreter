@@ -1,0 +1,150 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-cb8ac4e04cfd8021e22e",
+    "RL-d162c70104d6ae924862",
+    "RL-de90fb0fa8e1c18beac0",
+    "RL-ecd7fb527c49603945e4"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 10679,
+        "source_type": "full_text",
+        "start": 10490,
+        "text": "Conversely, the direct product of CYP51 demethylation, follicular fluid meiosis-activating sterol (FF-MAS), was decreased 2.6- and 2.1-fold in 6-week HCyp51−/− mice and runts, respectively."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "The hepatocyte-specific knockout causally changes sterol substrate and product levels, supporting Cyp51's cholesterol-biosynthetic role. The study concerns developing mouse liver rather than aging or MASLD, so the declared direct context is overclaimed; model-assessed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-cb8ac4e04cfd8021e22e",
+      "studied_genes": [
+        "Cyp51"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 6832,
+        "source_type": "full_text",
+        "start": 6610,
+        "text": "Taken together, many genes play a central role in cholesterol synthesis, including HMGCR, SQLE, HMGCS1, FDFT1, LSS, MVK, PMK, MVD, FDPS, CYP51, TM7SF2, LBR, MSMO1, NSDHL, HSD17B7, DHCR24, EBP, SC5D, DHCR7, IDI1/2 (Fig. 1)."
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Fdft1",
+        "Lss",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Sc5d",
+        "Dhcr7",
+        "Idi1"
+      ],
+      "rationale": "This review explicitly catalogs the listed genes as central cholesterol-synthesis components and provides gene-specific reaction assignments for most. It is secondary evidence in a general human/liver context, matching the declared indirect label; model-assessed.",
+      "red_flags": [],
+      "review_id": "RL-d162c70104d6ae924862",
+      "studied_genes": [
+        "Hmgcs1",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Fdft1",
+        "Lss",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Msmo1",
+        "Nsdhl",
+        "Hsd17b7",
+        "Sc5d",
+        "Dhcr7",
+        "Idi1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4727,
+        "source_type": "full_text",
+        "start": 4500,
+        "text": "In addition, we generated ERG28 KO human liver cell lines and showed they have reduced production and, under sterol-depleted conditions, when cells depend on de novo cholesterol synthesis, reduced overall levels of cholesterol."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 knockout in human liver cells lowers de novo cholesterol production, while interaction assays substantively test ERG28, NSDHL, and SC4MOL/MSMO1. Only ERG28 receives functional credit because the catalytic pathway functions assigned to NSDHL and MSMO1 were not tested; model-assessed.",
+      "red_flags": [],
+      "review_id": "RL-de90fb0fa8e1c18beac0",
+      "studied_genes": [
+        "Erg28",
+        "Nsdhl",
+        "Msmo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 394,
+        "source_type": "abstract",
+        "start": 255,
+        "text": "MVK mutations have been reported as associated with impairment of mevalonate pathway with consequent decrease of protein prenylation levels"
+      },
+      "function_supported_genes": [],
+      "rationale": "The abstract only cites prior MVK-mutation associations with pathway impairment; the experiment perturbs the pathway with lovastatin in glioblastoma cells. Support is therefore narrower and background-only, so MVK is not credited as studied; model-assessed.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-ecd7fb527c49603945e4",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 354816,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 393389,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 10874,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 227.305
+  }
+}

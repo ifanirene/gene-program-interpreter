@@ -1,0 +1,14 @@
+{
+  "content_hash": "4ae5d20fd484dcd0c406006fec765e413306ac9dea577d812f171310696b26b7",
+  "doi": "10.1016/j.cmet.2022.05.004",
+  "errors": [],
+  "paper_key": "48eba777728ded4b5ff3",
+  "pmcid": null,
+  "pmid": "35675800",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Elevated liver de novo lipogenesis contributes to non-alcoholic steatohepatitis (NASH) and can be inhibited by targeting acetyl-CoA carboxylase (ACC). However, hypertriglyceridemia limits the use of pharmacological ACC inhibitors as a monotherapy. ATP-citrate lyase (ACLY) generates acetyl-CoA and oxaloacetate from citrate, but whether inhibition is effective for treating NASH is unknown. Here, we characterize a new mouse model that replicates many of the pathological and molecular drivers of NASH and find that genetically inhibiting ACLY in hepatocytes reduces liver malonyl-CoA, oxaloacetate, steatosis, and ballooning as well as blood glucose, triglycerides, and cholesterol. Pharmacological inhibition of ACLY mirrors genetic inhibition but has additional positive effects on hepatic stellate cells, liver inflammation, and fibrosis. Mendelian randomization of human variants that mimic reductions in ACLY also associate with lower circulating triglycerides and biomarkers of NASH. These data indicate that inhibiting liver ACLY may be an effective approach for treatment of NASH and dyslipidemia.",
+  "text_type": "abstract",
+  "title": "Inhibition of ATP-citrate lyase improves NASH, liver fibrosis, and dyslipidemia."
+}

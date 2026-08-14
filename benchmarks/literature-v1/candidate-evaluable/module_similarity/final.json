@@ -1,0 +1,688 @@
+{
+  "assessment_type": "two_model_mean_with_deterministic_assignment",
+  "method": {
+    "anchors": {
+      "0.00": "unrelated or opposed",
+      "0.25": "contextual or peripheral overlap only",
+      "0.50": "same broad process but different central mechanism or output",
+      "0.75": "same core with meaningful refinement",
+      "1.00": "same mechanism, output, and direction"
+    },
+    "description": "Two independent assessors score all nine module pairs on a 0–1 semantic scale; cell scores are averaged and the best one-to-one assignment is selected from the six possible permutations."
+  },
+  "reviewers": {
+    "primary": {
+      "configured_concurrency": 6,
+      "cost_telemetry_shards": 16,
+      "known_cost_usd_equivalent": 1.751597,
+      "known_duration_seconds": 743.4,
+      "model": "sonnet",
+      "provider": "claude",
+      "reasoning_effort": "high",
+      "shards": 16,
+      "unknown_cost_shards": 0
+    },
+    "secondary": {
+      "configured_concurrency": 6,
+      "cost_telemetry_shards": 0,
+      "known_cost_usd_equivalent": null,
+      "known_duration_seconds": 400.568,
+      "model": "gpt-5.6-sol",
+      "provider": "codex",
+      "reasoning_effort": "high",
+      "shards": 16,
+      "unknown_cost_shards": 16
+    }
+  },
+  "rows": [
+    {
+      "case": "brain-p10",
+      "comparisonId": "brain-p10--baseline-replicate",
+      "comparisonType": "baseline_replicate",
+      "leftLabel": "baseline r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Primary cilia biogenesis and ciliary trafficking via BBSome, IFT, and transition zone machinery",
+          "rightModule": 1,
+          "rightName": "Primary cilia biogenesis: basal body docking, transition zone integrity, intraflagellar transport, and BBSome assembly",
+          "similarity": 0.995
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Endothelial primary cilia as mechanosensors for blood flow in brain vasculature",
+          "rightModule": 2,
+          "rightName": "Primary cilia mechanosensing and blood-brain barrier maturation in brain endothelial cells",
+          "similarity": 0.955
+        },
+        {
+          "leftModule": 3,
+          "leftName": "CNS angiogenesis and blood-brain barrier maintenance via Norrin/Wnt-Fzd4 signaling, GATA2, and Endoglin",
+          "rightModule": 3,
+          "rightName": "Wnt/Norrin-FZD4 signaling and endothelial identity regulators governing BBB and CNS vascular barrier formation",
+          "similarity": 0.965
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.971667,
+      "primaryRationale": "This is a near-identical baseline replicate: the cilia biogenesis module (L1/R1), endothelial cilia mechanosensing module (L2/R2), and Wnt/Fzd4-Gata2-Eng regulator module (L3/R3) each match one-to-one with near-perfect similarity, while cross-pairs share genes/tissue context but diverge in core mechanism (structural biogenesis vs. mechanosensory function vs. transcriptional regulation), warranting low partial-overlap or context-only scores.",
+      "primaryScore": 0.983333,
+      "program": "P10",
+      "reviewerDifference": 0.023333,
+      "reviewerMax": 0.983333,
+      "reviewerMin": 0.96,
+      "rightLabel": "baseline r2",
+      "secondaryRationale": "The replicates contain three strongly corresponding programs: core ciliogenesis, endothelial ciliary mechanosensing, and FZD4/GATA2/ENG-mediated CNS vascular-barrier regulation, with weaker cross-pair overlap driven mainly by ciliary dependence or shared brain-endothelial context.",
+      "secondaryScore": 0.96
+    },
+    {
+      "case": "brain-p10",
+      "comparisonId": "brain-p10--candidate-replicate",
+      "comparisonType": "candidate_replicate",
+      "leftLabel": "candidate r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Primary cilia assembly: IFT machinery, distal appendages, CPLANE module, and transition zone organization",
+          "rightModule": 1,
+          "rightName": "Primary cilia biogenesis, transition zone organization, and intraflagellar transport",
+          "similarity": 0.925
+        },
+        {
+          "leftModule": 2,
+          "leftName": "BBSome-mediated ciliary GPCR trafficking and Hedgehog pathway regulation",
+          "rightModule": 3,
+          "rightName": "(no module reported)",
+          "similarity": 0.0
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Mitochondrial inner membrane organization and protein biogenesis",
+          "rightModule": 2,
+          "rightName": "Mitochondrial metabolic function: BCAA catabolism, cristae integrity, and co-factor metabolism",
+          "similarity": 0.755
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.56,
+      "primaryRationale": "The two replicates largely converge: a near-identical ciliary structural assembly module (L1≈R1), a mitochondrial proteostasis/cristae module that R2 refines with added metabolic genes (L3≈R2), while L2's Hedgehog/GPCR-signaling-output module is only partially captured inside R1's broader assembly framing and the right set is missing a third distinct module.",
+      "primaryScore": 0.55,
+      "program": "P10",
+      "reviewerDifference": 0.02,
+      "reviewerMax": 0.57,
+      "reviewerMin": 0.55,
+      "rightLabel": "candidate r2",
+      "secondaryRationale": "Both sets reproduce the primary-cilium assembly and mitochondrial programs, while the replicate folds ciliary signaling into its broader ciliogenesis module and reports no third module.",
+      "secondaryScore": 0.57
+    },
+    {
+      "case": "brain-p10",
+      "comparisonId": "brain-p10--r1--cross-setting",
+      "comparisonType": "cross_setting",
+      "leftLabel": "baseline r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Primary cilia biogenesis and ciliary trafficking via BBSome, IFT, and transition zone machinery",
+          "rightModule": 1,
+          "rightName": "Primary cilia assembly: IFT machinery, distal appendages, CPLANE module, and transition zone organization",
+          "similarity": 0.895
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Endothelial primary cilia as mechanosensors for blood flow in brain vasculature",
+          "rightModule": 2,
+          "rightName": "BBSome-mediated ciliary GPCR trafficking and Hedgehog pathway regulation",
+          "similarity": 0.395
+        },
+        {
+          "leftModule": 3,
+          "leftName": "CNS angiogenesis and blood-brain barrier maintenance via Norrin/Wnt-Fzd4 signaling, GATA2, and Endoglin",
+          "rightModule": 3,
+          "rightName": "Mitochondrial inner membrane organization and protein biogenesis",
+          "similarity": 0.165
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.485,
+      "primaryRationale": "Both settings decompose the cilia biology into a broad structural-assembly module (L1≈R1, strong same_core match) and a narrower functional/signaling module, but the right setting's second cilia module (R2) centers on BBSome-Hedgehog GPCR trafficking whereas the left's second module (L2) centers on endothelial mechanosensation of blood flow, giving only partial overlap across that pairing in both directions; the left's third module is a Wnt/Fzd4-Gata2-Eng BBB angiogenesis program while the right's third module is an unrelated mitochondrial proteostasis cluster, so these have essentially no correspondence except a shared Fzd4 regulator touching R1 and weak tissue-context ties to R3.",
+      "primaryScore": 0.466667,
+      "program": "P10",
+      "reviewerDifference": 0.036666,
+      "reviewerMax": 0.503333,
+      "reviewerMin": 0.466667,
+      "rightLabel": "candidate r1",
+      "secondaryRationale": "The strongest correspondence is the shared primary-cilium assembly machinery, while ciliary mechanosensing, Hedgehog trafficking, BBB regulation, and mitochondrial organization represent distinct outputs or mechanisms despite some endothelial context overlap.",
+      "secondaryScore": 0.503333
+    },
+    {
+      "case": "brain-p10",
+      "comparisonId": "brain-p10--r2--cross-setting",
+      "comparisonType": "cross_setting",
+      "leftLabel": "baseline r2",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Primary cilia biogenesis: basal body docking, transition zone integrity, intraflagellar transport, and BBSome assembly",
+          "rightModule": 1,
+          "rightName": "Primary cilia biogenesis, transition zone organization, and intraflagellar transport",
+          "similarity": 0.945
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Primary cilia mechanosensing and blood-brain barrier maturation in brain endothelial cells",
+          "rightModule": 2,
+          "rightName": "Mitochondrial metabolic function: BCAA catabolism, cristae integrity, and co-factor metabolism",
+          "similarity": 0.215
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Wnt/Norrin-FZD4 signaling and endothelial identity regulators governing BBB and CNS vascular barrier formation",
+          "rightModule": 3,
+          "rightName": "(no module reported)",
+          "similarity": 0.0
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.386667,
+      "primaryRationale": "Both sets share a near-identical core ciliary biogenesis module (L1/R1), but the right set's second module pivots to mitochondrial metabolism while the left set's second and third modules focus on endothelial mechanosensing and Wnt/transcriptional regulators, and the right set has no third module at all, so only one strong cross-module match exists.",
+      "primaryScore": 0.39,
+      "program": "P10",
+      "reviewerDifference": 0.006667,
+      "reviewerMax": 0.39,
+      "reviewerMin": 0.383333,
+      "rightLabel": "candidate r2",
+      "secondaryRationale": "The sets strongly agree on primary-cilium construction, while the candidate replaces the baseline's endothelial mechanosensing and vascular signaling modules with mitochondrial metabolism and one missing module.",
+      "secondaryScore": 0.383333
+    },
+    {
+      "case": "brain-p11",
+      "comparisonId": "brain-p11--baseline-replicate",
+      "comparisonType": "baseline_replicate",
+      "leftLabel": "baseline r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Sprouting angiogenesis and tip cell identity in postnatal CNS vasculature",
+          "rightModule": 1,
+          "rightName": "Angiogenic tip cell identity and filopodial guidance in postnatal brain vessels",
+          "similarity": 0.9
+        },
+        {
+          "leftModule": 2,
+          "leftName": "TGF-β/Tgfbr1 signaling specifying CNS endothelial tip cell identity and vascular maturation",
+          "rightModule": 3,
+          "rightName": "TGF-β/Angiopoietin-2 signaling axis for postnatal brain vascular integrity and remodeling",
+          "similarity": 0.785
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Endothelial ion channel mechanosensing and membrane calcium signaling",
+          "rightModule": 2,
+          "rightName": "Dll4-Notch-CXCR4 axis coupling sprouting to arteriovenous specification",
+          "similarity": 0.045
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.576667,
+      "primaryRationale": "Left and right sets both decompose into a tip-cell/sprouting-angiogenesis module, a TGF-β-linked module, and (only on the left) an unrelated ion-channel/calcium module; the best cross-set matches are L1–R1 and L2–R3, with L2–R2 flagged as directionally opposed and L3 having no counterpart in the right set.",
+      "primaryScore": 0.523333,
+      "program": "P11",
+      "reviewerDifference": 0.106667,
+      "reviewerMax": 0.63,
+      "reviewerMin": 0.523333,
+      "rightLabel": "baseline r2",
+      "secondaryRationale": "The replicate sets strongly reproduce the canonical tip-cell module and the TGF-β-dependent CNS vascular module, while the left mechanosensory ion-channel module has no corresponding right-side program.",
+      "secondaryScore": 0.63
+    },
+    {
+      "case": "brain-p11",
+      "comparisonId": "brain-p11--candidate-replicate",
+      "comparisonType": "candidate_replicate",
+      "leftLabel": "candidate r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Angiogenic tip cell sprouting and vascular network formation in brain endothelium",
+          "rightModule": 1,
+          "rightName": "Sprouting angiogenesis and tip cell specification in brain vasculature",
+          "similarity": 0.91
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Arteriovenous identity specification in brain endothelium",
+          "rightModule": 3,
+          "rightName": "Endothelial survival signaling and metabolic support of vascular remodeling",
+          "similarity": 0.125
+        },
+        {
+          "leftModule": 3,
+          "leftName": "BBB transport homeostasis and endothelial mechanosensing via ion channels",
+          "rightModule": 2,
+          "rightName": "Endothelial mechanosensitive flow sensing via inward-rectifier potassium channels",
+          "similarity": 0.725
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.586667,
+      "primaryRationale": "The two replicates converge strongly on a shared angiogenic tip-cell sprouting module (L1↔R1) and a partial refinement relationship for the ion-channel/BBB module (L3↔R2 capturing just the mechanosensing half of L3), while the arteriovenous-identity module (L2) and survival/metabolic module (R3) each have only moderate-to-weak cross-matches, reflecting genuine differences in how the replicates partitioned overlapping gene sets into distinct mechanistic narratives.",
+      "primaryScore": 0.533333,
+      "program": "P11",
+      "reviewerDifference": 0.106667,
+      "reviewerMax": 0.64,
+      "reviewerMin": 0.533333,
+      "rightLabel": "candidate r2",
+      "secondaryRationale": "The strongest correspondences are the shared tip-cell sprouting program and the narrower Kcnj2 mechanosensing module, while other pairs share only vascular context or secondary angiogenic outputs.",
+      "secondaryScore": 0.64
+    },
+    {
+      "case": "brain-p11",
+      "comparisonId": "brain-p11--r1--cross-setting",
+      "comparisonType": "cross_setting",
+      "leftLabel": "baseline r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Sprouting angiogenesis and tip cell identity in postnatal CNS vasculature",
+          "rightModule": 1,
+          "rightName": "Angiogenic tip cell sprouting and vascular network formation in brain endothelium",
+          "similarity": 0.95
+        },
+        {
+          "leftModule": 2,
+          "leftName": "TGF-β/Tgfbr1 signaling specifying CNS endothelial tip cell identity and vascular maturation",
+          "rightModule": 2,
+          "rightName": "Arteriovenous identity specification in brain endothelium",
+          "similarity": 0.405
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Endothelial ion channel mechanosensing and membrane calcium signaling",
+          "rightModule": 3,
+          "rightName": "BBB transport homeostasis and endothelial mechanosensing via ion channels",
+          "similarity": 0.685
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.68,
+      "primaryRationale": "Left P11 splits angiogenic tip-cell sprouting (L1) and TGF-β-driven CNS tip-cell specification (L2) as two related but mechanistically distinct facets, plus a separate ion-channel mechanosensing module (L3); Right P11 similarly separates tip-cell sprouting (R1), arteriovenous identity (R2), and BBB transport/mechanosensing (R3), giving strong same-core correspondence for the sprouting modules (L1-R1) and moderate-to-partial overlaps elsewhere driven by shared genes/regulators reassigned to different mechanistic roles, with L3-R3 as the next strongest match via shared Kcnj2 mechanosensing.",
+      "primaryScore": 0.696667,
+      "program": "P11",
+      "reviewerDifference": 0.033334,
+      "reviewerMax": 0.696667,
+      "reviewerMin": 0.663333,
+      "rightLabel": "candidate r1",
+      "secondaryRationale": "The strongest correspondences are the nearly identical tip-cell sprouting modules and the shared Kcnj2-centered mechanosensing modules, while the remaining similarities reflect narrower overlap in endothelial identity or TGF-β-dependent brain vascular biology.",
+      "secondaryScore": 0.663333
+    },
+    {
+      "case": "brain-p11",
+      "comparisonId": "brain-p11--r2--cross-setting",
+      "comparisonType": "cross_setting",
+      "leftLabel": "baseline r2",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Angiogenic tip cell identity and filopodial guidance in postnatal brain vessels",
+          "rightModule": 1,
+          "rightName": "Sprouting angiogenesis and tip cell specification in brain vasculature",
+          "similarity": 0.88
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Dll4-Notch-CXCR4 axis coupling sprouting to arteriovenous specification",
+          "rightModule": 2,
+          "rightName": "Endothelial mechanosensitive flow sensing via inward-rectifier potassium channels",
+          "similarity": 0.07
+        },
+        {
+          "leftModule": 3,
+          "leftName": "TGF-β/Angiopoietin-2 signaling axis for postnatal brain vascular integrity and remodeling",
+          "rightModule": 3,
+          "rightName": "Endothelial survival signaling and metabolic support of vascular remodeling",
+          "similarity": 0.5
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.483333,
+      "primaryRationale": "The strongest correspondence is L1↔R1 (shared Nrp1-CDC42 tip-cell filopodia mechanism), with moderate partial overlaps for the Notch/arterial-specification (L2↔R1) and TGF-β vascular-integrity (L3↔R3, L3↔R1) themes; R2's flow-sensing Kcnj2 module has no counterpart in the left set and scores near zero against all three left modules.",
+      "primaryScore": 0.416667,
+      "program": "P11",
+      "reviewerDifference": 0.133333,
+      "reviewerMax": 0.55,
+      "reviewerMin": 0.416667,
+      "rightLabel": "candidate r2",
+      "secondaryRationale": "The strongest concordance is the shared NRP1–CDC42/CXCR4/ANGPT2 tip-cell program, while TGF-β modules overlap mainly in vascular remodeling and the flow-sensing module is largely setting-level context.",
+      "secondaryScore": 0.55
+    },
+    {
+      "case": "liver-p21",
+      "comparisonId": "liver-p21--baseline-replicate",
+      "comparisonType": "baseline_replicate",
+      "leftLabel": "baseline r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Mevalonate pathway and post-squalene cholesterol biosynthesis",
+          "rightModule": 1,
+          "rightName": "De novo cholesterol/sterol biosynthesis via the mevalonate pathway",
+          "similarity": 0.995
+        },
+        {
+          "leftModule": 2,
+          "leftName": "SCAP/INSIG1-SREBP2 sterol-sensing feedback control of the cholesterol synthesis gene program",
+          "rightModule": 2,
+          "rightName": "SREBP2–Scap–Insig1 transcriptional control of the mevalonate pathway",
+          "similarity": 0.35
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Coordinate hepatic lipid output: VLDL-triglyceride assembly coupled to de novo sterol synthesis",
+          "rightModule": 3,
+          "rightName": "Dysregulation of hepatic cholesterol synthesis in MASLD and liver aging",
+          "similarity": 0.275
+        }
+      ],
+      "matchingAgreement": false,
+      "moduleSemanticSimilarity": 0.54,
+      "primaryRationale": "Module 1 pairs are a near-verbatim match of the mevalonate/cholesterol biosynthesis enzyme cascade; module 2 pairs share the identical Scap/Insig1/Ldlr regulatory trio but assert directly conflicting functional directions for the same fold-change signs; module 3 pairs share the same Dgat2/Mttp VLDL-export coupling mechanism but likewise conflict on whether their knockdown activates or attenuates the program, while cross-module pairs show only weak gene/context overlap.",
+      "primaryScore": 0.566667,
+      "program": "P21",
+      "reviewerDifference": 0.023333,
+      "reviewerMax": 0.59,
+      "reviewerMin": 0.566667,
+      "rightLabel": "baseline r2",
+      "secondaryRationale": "The replicates strongly agree on the enzymatic cholesterol-biosynthesis module, but their matched regulatory and VLDL-coupling narratives contain explicit reversals in predicted knockout effects despite sharing the same molecular components.",
+      "secondaryScore": 0.59
+    },
+    {
+      "case": "liver-p21",
+      "comparisonId": "liver-p21--candidate-replicate",
+      "comparisonType": "candidate_replicate",
+      "leftLabel": "candidate r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "De novo mevalonate/cholesterol biosynthesis pathway enzymes in hepatocytes",
+          "rightModule": 1,
+          "rightName": "De novo hepatic cholesterol biosynthesis via the mevalonate and post-squalene sterol pathway",
+          "similarity": 0.945
+        },
+        {
+          "leftModule": 2,
+          "leftName": "SREBP2-mediated transcriptional co-regulation of hepatic cholesterol homeostasis",
+          "rightModule": 2,
+          "rightName": "SREBP-2/SCAP/INSIG1 transcriptional control of the hepatic cholesterol synthesis program",
+          "similarity": 0.94
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Hepatic acetyl-CoA provision and lipid-cholesterol coupling in MASLD context",
+          "rightModule": 3,
+          "rightName": "Hepatic lipid homeostasis and MASLD context: cholesterol esterification, steatosis regulation, and lipid export",
+          "similarity": 0.655
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.846667,
+      "primaryRationale": "The two candidate sets describe essentially the same three biological modules for program P21 (core mevalonate/cholesterol enzymatic pathway, SREBP2/SCAP/INSIG1 transcriptional regulation, and MASLD-context lipid/cholesterol coupling), with modules 1-1, 2-2, and 3-3 as clear high-similarity matches and cross-pairs showing only weak contextual overlap from shared genes/regulators without shared core mechanism.",
+      "primaryScore": 0.826667,
+      "program": "P21",
+      "reviewerDifference": 0.04,
+      "reviewerMax": 0.866667,
+      "reviewerMin": 0.826667,
+      "rightLabel": "candidate r2",
+      "secondaryRationale": "The sets strongly reproduce the cholesterol-biosynthetic enzyme and SREBP2 regulatory programs, while their third modules overlap more broadly in hepatic lipid handling and MASLD but emphasize different metabolic mechanisms.",
+      "secondaryScore": 0.866667
+    },
+    {
+      "case": "liver-p21",
+      "comparisonId": "liver-p21--r1--cross-setting",
+      "comparisonType": "cross_setting",
+      "leftLabel": "baseline r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Mevalonate pathway and post-squalene cholesterol biosynthesis",
+          "rightModule": 1,
+          "rightName": "De novo mevalonate/cholesterol biosynthesis pathway enzymes in hepatocytes",
+          "similarity": 0.975
+        },
+        {
+          "leftModule": 2,
+          "leftName": "SCAP/INSIG1-SREBP2 sterol-sensing feedback control of the cholesterol synthesis gene program",
+          "rightModule": 2,
+          "rightName": "SREBP2-mediated transcriptional co-regulation of hepatic cholesterol homeostasis",
+          "similarity": 0.91
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Coordinate hepatic lipid output: VLDL-triglyceride assembly coupled to de novo sterol synthesis",
+          "rightModule": 3,
+          "rightName": "Hepatic acetyl-CoA provision and lipid-cholesterol coupling in MASLD context",
+          "similarity": 0.855
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.913333,
+      "primaryRationale": "The two module sets are near-mirror decompositions of the same P21 program (biosynthetic enzymes, SREBP2 sterol-sensing feedback, and VLDL/acetyl-CoA lipid coupling), so the strongest signal lies on the diagonal (1-1, 2-2, 3-3) with off-diagonal pairs showing only partial or contextual overlap due to shared broad hepatic cholesterol/lipid domain rather than shared core mechanism.",
+      "primaryScore": 0.873333,
+      "program": "P21",
+      "reviewerDifference": 0.08,
+      "reviewerMax": 0.953333,
+      "reviewerMin": 0.873333,
+      "rightLabel": "candidate r1",
+      "secondaryRationale": "The sets closely correspond at all three biological levels: pathway execution, sterol-sensing transcriptional control, and coupling of cholesterol synthesis to hepatic lipid supply and export.",
+      "secondaryScore": 0.953333
+    },
+    {
+      "case": "liver-p21",
+      "comparisonId": "liver-p21--r2--cross-setting",
+      "comparisonType": "cross_setting",
+      "leftLabel": "baseline r2",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "De novo cholesterol/sterol biosynthesis via the mevalonate pathway",
+          "rightModule": 1,
+          "rightName": "De novo hepatic cholesterol biosynthesis via the mevalonate and post-squalene sterol pathway",
+          "similarity": 0.99
+        },
+        {
+          "leftModule": 2,
+          "leftName": "SREBP2–Scap–Insig1 transcriptional control of the mevalonate pathway",
+          "rightModule": 2,
+          "rightName": "SREBP-2/SCAP/INSIG1 transcriptional control of the hepatic cholesterol synthesis program",
+          "similarity": 0.855
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Dysregulation of hepatic cholesterol synthesis in MASLD and liver aging",
+          "rightModule": 3,
+          "rightName": "Hepatic lipid homeostasis and MASLD context: cholesterol esterification, steatosis regulation, and lipid export",
+          "similarity": 0.695
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.846667,
+      "primaryRationale": "The two sets share a clear structural correspondence: module 1 in each set is the core mevalonate/cholesterol biosynthetic enzyme cascade (near-identical), module 2 in each set is the SCAP-INSIG1-SREBP2 transcriptional control axis (same core with differing refinements), and module 3 in each set extends into MASLD-linked lipid dysregulation sharing Dgat2/Mttp regulators (same core with differing submechanisms — aging/senescence vs. esterification/Ddr2); off-diagonal pairs show only weak contextual overlap via shared regulators or a single gene without shared central mechanism.",
+      "primaryScore": 0.833333,
+      "program": "P21",
+      "reviewerDifference": 0.026667,
+      "reviewerMax": 0.86,
+      "reviewerMin": 0.833333,
+      "rightLabel": "candidate r2",
+      "secondaryRationale": "The sets strongly agree on the enzymatic cholesterol-biosynthesis and SCAP–SREBP2–INSIG1 control modules, while their MASLD modules overlap in lipid-homeostasis context but emphasize different mechanisms and outcomes.",
+      "secondaryScore": 0.86
+    },
+    {
+      "case": "liver-p25",
+      "comparisonId": "liver-p25--baseline-replicate",
+      "comparisonType": "baseline_replicate",
+      "leftLabel": "baseline r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Hepatic Phase I/II xenobiotic detoxification and steroid/bile acid conjugation",
+          "rightModule": 1,
+          "rightName": "Phase I/II xenobiotic, steroid, and bile acid detoxification (Nrf2/CAR-regulated hepatocyte program)",
+          "similarity": 0.99
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Lipid droplet biogenesis and peroxisomal/ER fatty acid catabolism",
+          "rightModule": 2,
+          "rightName": "Peroxisomal and microsomal fatty acid catabolism and lipid aldehyde detoxification",
+          "similarity": 0.96
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Sulfur amino acid catabolism and nitrogen/ammonia detoxification (urea cycle support)",
+          "rightModule": 3,
+          "rightName": "Hepatic cysteine catabolism, taurine biosynthesis, and sulfur amino acid homeostasis",
+          "similarity": 0.88
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.943333,
+      "primaryRationale": "This is a strong baseline replicate: modules 1 and 2 are near-identical restatements of the same detoxification and lipid-catabolism gene programs, module 3 shares the same Cdo1-centered sulfur/nitrogen disposal core with added refinements in the right replicate, and cross-pairs show only weak, mechanistically unrelated gene/regulator overlaps.",
+      "primaryScore": 0.933333,
+      "program": "P25",
+      "reviewerDifference": 0.02,
+      "reviewerMax": 0.953333,
+      "reviewerMin": 0.933333,
+      "rightLabel": "baseline r2",
+      "secondaryRationale": "The replicates contain three strongly conserved programs—xenobiotic conjugation, peroxisomal lipid oxidation, and sulfur/nitrogen metabolism—with only modest differences in scope and emphasis.",
+      "secondaryScore": 0.953333
+    },
+    {
+      "case": "liver-p25",
+      "comparisonId": "liver-p25--candidate-replicate",
+      "comparisonType": "candidate_replicate",
+      "leftLabel": "candidate r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Hepatic Phase I and Phase II xenobiotic and endobiotic detoxification",
+          "rightModule": 1,
+          "rightName": "Bile acid and hydroxysteroid Phase II sulfation and xenobiotic conjugation",
+          "similarity": 0.56
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Bile acid biotransformation: hepatic sulfonation and cysteine-taurine conjugation axis",
+          "rightModule": 3,
+          "rightName": "Hepatic sulfur/nitrogen catabolism, urea cycle support, and metabolic aging signature",
+          "similarity": 0.44
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Hepatic lipid droplet biogenesis, peroxisomal fatty acid oxidation, and polyol-fructose metabolism",
+          "rightModule": 2,
+          "rightName": "Peroxisomal fatty acid oxidation and lipid droplet homeostasis",
+          "similarity": 0.865
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.621667,
+      "primaryRationale": "Strong correspondence is limited to L3↔R2 (peroxisomal fatty acid oxidation/lipid droplet biogenesis, high gene and regulator overlap); the remaining pairs show only partial gene/mechanism overlap (detox battery vs. bile-acid sulfation, taurine conjugation vs. sulfation or sulfur/nitrogen catabolism) or no relation at all (lipid metabolism vs. detox/bile-acid modules).",
+      "primaryScore": 0.583333,
+      "program": "P25",
+      "reviewerDifference": 0.076667,
+      "reviewerMax": 0.66,
+      "reviewerMin": 0.583333,
+      "rightLabel": "candidate r2",
+      "secondaryRationale": "The sets reproduce the bile-acid sulfation and lipid-droplet/peroxisomal programs strongly, while the remaining annotations redistribute detoxification, taurine synthesis, and polyol metabolism across broader mixed modules.",
+      "secondaryScore": 0.66
+    },
+    {
+      "case": "liver-p25",
+      "comparisonId": "liver-p25--r1--cross-setting",
+      "comparisonType": "cross_setting",
+      "leftLabel": "baseline r1",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Hepatic Phase I/II xenobiotic detoxification and steroid/bile acid conjugation",
+          "rightModule": 1,
+          "rightName": "Hepatic Phase I and Phase II xenobiotic and endobiotic detoxification",
+          "similarity": 0.805
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Lipid droplet biogenesis and peroxisomal/ER fatty acid catabolism",
+          "rightModule": 3,
+          "rightName": "Hepatic lipid droplet biogenesis, peroxisomal fatty acid oxidation, and polyol-fructose metabolism",
+          "similarity": 0.875
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Sulfur amino acid catabolism and nitrogen/ammonia detoxification (urea cycle support)",
+          "rightModule": 2,
+          "rightName": "Bile acid biotransformation: hepatic sulfonation and cysteine-taurine conjugation axis",
+          "similarity": 0.49
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.723333,
+      "primaryRationale": "The two annotation sets largely re-partition the same underlying gene program: right splits left's combined detox+sulfation module into a narrower pure-detox module (R1) and a distinct bile-acid sulfonation/taurine module (R2, which also absorbs Cdo1 from left's nitrogen module), while the lipid droplet/peroxisomal module (L2/R3) remains essentially intact across settings; left's urea-cycle/nitrogen theme (L3) has no direct right-side counterpart beyond the shared Cdo1 gene.",
+      "primaryScore": 0.7,
+      "program": "P25",
+      "reviewerDifference": 0.046667,
+      "reviewerMax": 0.746667,
+      "reviewerMin": 0.7,
+      "rightLabel": "candidate r1",
+      "secondaryRationale": "The sets strongly preserve the detoxification and lipid-homeostasis programs, while the candidate redistributes bile-acid sulfation and Cdo1-mediated sulfur metabolism into a combined bile-acid module and leaves nitrogen disposal without a close counterpart.",
+      "secondaryScore": 0.746667
+    },
+    {
+      "case": "liver-p25",
+      "comparisonId": "liver-p25--r2--cross-setting",
+      "comparisonType": "cross_setting",
+      "leftLabel": "baseline r2",
+      "matching": [
+        {
+          "leftModule": 1,
+          "leftName": "Phase I/II xenobiotic, steroid, and bile acid detoxification (Nrf2/CAR-regulated hepatocyte program)",
+          "rightModule": 1,
+          "rightName": "Bile acid and hydroxysteroid Phase II sulfation and xenobiotic conjugation",
+          "similarity": 0.9
+        },
+        {
+          "leftModule": 2,
+          "leftName": "Peroxisomal and microsomal fatty acid catabolism and lipid aldehyde detoxification",
+          "rightModule": 2,
+          "rightName": "Peroxisomal fatty acid oxidation and lipid droplet homeostasis",
+          "similarity": 0.89
+        },
+        {
+          "leftModule": 3,
+          "leftName": "Hepatic cysteine catabolism, taurine biosynthesis, and sulfur amino acid homeostasis",
+          "rightModule": 3,
+          "rightName": "Hepatic sulfur/nitrogen catabolism, urea cycle support, and metabolic aging signature",
+          "similarity": 0.93
+        }
+      ],
+      "matchingAgreement": true,
+      "moduleSemanticSimilarity": 0.906667,
+      "primaryRationale": "The two module sets are strongly congruent one-to-one: L1↔R1 (Phase II bile acid/steroid sulfation/conjugation), L2↔R2 (peroxisomal fatty acid oxidation and lipid droplet homeostasis), and L3↔R3 (cysteine/taurine/sulfur-nitrogen catabolism with hepatocyte aging signature) each share core mechanism, dominant genes, and key regulators, while all cross-pairs are biologically distinct processes linked only by incidental shared regulators or a single overlapping gene with divergent roles.",
+      "primaryScore": 0.883333,
+      "program": "P25",
+      "reviewerDifference": 0.046667,
+      "reviewerMax": 0.93,
+      "reviewerMin": 0.883333,
+      "rightLabel": "candidate r2",
+      "secondaryRationale": "The two sets contain three strongly corresponding biological programs—bile acid/steroid conjugation, peroxisomal lipid metabolism, and sulfur/nitrogen metabolism—with only modest differences in scope and mechanistic emphasis.",
+      "secondaryScore": 0.93
+    }
+  ],
+  "schema_version": 1,
+  "summary": {
+    "baselineReplicateMean": 0.757917,
+    "candidateReplicateMean": 0.65375,
+    "comparisonCount": 16,
+    "crossSettingMean": 0.678125,
+    "matchingAgreementCount": 15,
+    "meanReviewerDifference": 0.051667
+  }
+}

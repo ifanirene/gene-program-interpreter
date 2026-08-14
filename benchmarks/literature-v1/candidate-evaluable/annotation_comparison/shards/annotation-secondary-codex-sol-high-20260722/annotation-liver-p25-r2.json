@@ -1,0 +1,48 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-liver-p25-r2",
+    "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+    "candidate_additions": [
+      "Assigns Sult2a8 specifically to 7α-hydroxyl bile acid sulfation.",
+      "Adds Psmd1-mediated lipid-droplet regulation to the lipid-storage theme.",
+      "Adds Car5a-supported ureagenesis and Alad-mediated heme biosynthesis to sulfur/nitrogen metabolism.",
+      "Frames the program as periportal/metabolically active."
+    ],
+    "candidate_removed_or_weakened": [
+      "Drops the explicit Nrf2/CAR co-regulatory interpretation and associated cholestasis-protective mechanism.",
+      "Omits Cyp2c50-driven Phase I oxidation from the detoxification module.",
+      "Omits Eci2 unsaturated-fatty-acid oxidation and Lonp2 peroxisomal quality control.",
+      "Weakens the direct Cdo1–cysteine–gluconeogenesis connection and omits Agmat.",
+      "Changes the spatial context from baseline pericentral hepatocytes to candidate periportal hepatocytes."
+    ],
+    "core_interpretation_changed": false,
+    "decision_relevant_differences": [
+      "The detoxification program is narrowed from coordinated Phase I/II Nrf2/CAR activity to predominantly Phase II sulfation and conjugation.",
+      "The lipid axis shifts emphasis from fatty-acid oxidation and peroxisomal maintenance toward lipid-droplet control.",
+      "The opposing pericentral versus periportal assignments could affect conclusions about hepatocyte zonation."
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations retain the same three central biological themes: bile acid/xenobiotic detoxification, peroxisomal-lipid metabolism, and sulfur metabolism with an aging signature. The candidate adds useful gene-level functions for Sult2a8, Psmd1, Car5a, and Alad, but removes major regulatory and enzymatic details and introduces a conflicting zonation qualifier. These are meaningful refinements and weakenings, not a replacement of the core program interpretation.",
+    "semantic_relation": "same_core_with_meaningful_refinement",
+    "shared_core_conclusions": [
+      "SULT2A enzymes, Gsta3, Akr1c6, and Aldh1a1 define hepatic bile acid/steroid and xenobiotic detoxification.",
+      "Hao2, Aldh3a2, and Fitm1 support a peroxisomal/microsomal fatty-acid and lipid-homeostasis axis.",
+      "Cdo1 links hepatic cysteine catabolism to taurine, glutathione, and bile-acid metabolism.",
+      "Rgn/SMP30 provides an aging-related hepatocyte signature.",
+      "The program is connected to hepatic lipid dysregulation in MASLD."
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 17445,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 915,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 20.185
+  }
+}

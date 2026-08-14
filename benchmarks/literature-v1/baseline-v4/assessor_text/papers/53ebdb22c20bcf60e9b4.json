@@ -1,0 +1,14 @@
+{
+  "content_hash": "e9f159063703d542a51fdff68293e2054ca871e7529d95492f6128719dd1a5d0",
+  "doi": "10.1016/j.biocel.2004.08.004",
+  "errors": [],
+  "paper_key": "53ebdb22c20bcf60e9b4",
+  "pmcid": null,
+  "pmid": "15618015",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "In rat, serine dehydratase (SDH) is abundant in the liver and known to be a gluconeogenic enzyme, while there is little information about the biochemical property of human liver serine dehydratase because of its low content and difficulty in obtaining fresh materials. To circumvent these problems, we purified recombinant enzyme from Escherichia coli, and compared some properties between human and rat liver serine dehydratases. Edman degradation showed that the N-terminal sequence of about 75% of human serine dehydratase starts from MetSTART-Met2-Ser3- and the rest from Ser3-, whereas the N-terminus of rat enzyme begins from the second codon of MetSTART-Ala2-. The heterogeneity of the purified preparation was totally confirmed by mass spectrometry. Accordingly, this observation in part fails to follow the general rule that the first Met is not removed when the side chain of the penultimate amino acid is bulky such as Met, Arg, Lys, etc. There existed the obvious differences in the local structures between the two enzymes as revealed by limited-proteolysis experiments using trypsin and Staphylococcus aureus V8 protease. The most prominent difference was found histochemically: expression of rat liver serine dehydratase is confined to the periportal region in which many enzymes involved in gluconeogenesis and urea cycle are known to coexist, whereas human liver serine dehydratase resides predominantly in the perivenous region. These findings provide an additional support to the previous notion suggested by physiological experiments that contribution of serine dehydratase to gluconeogenesis is negligible or little in human liver.",
+  "text_type": "abstract",
+  "title": "Some biochemical and histochemical properties of human liver serine dehydratase."
+}

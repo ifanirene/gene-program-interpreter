@@ -1,0 +1,143 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-081933ad9516de845c00",
+    "RL-0a849c76f65251620997",
+    "RL-0fdbb950b388fd1607bc",
+    "RL-1151ece55cc67a4a83be"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 19415,
+        "source_type": "full_text",
+        "start": 18954,
+        "text": "Genes that code for enzymes in the cholesterol synthesis pathway (Idi1, Fdps, Sqle, Cyp51, Tm7sf2, Nsdhl, Hsd7b17, and Dhcr7) were upregulated in the TXNIP C247S mouse livers compared with WT controls (Fig. 5B, the upregulated genes are highlighted in yellow boxes). We also validated the increased expressions of these cholesterol genes according to the RNA-Seq data in the TXNIP C247S group in a different cohort of mouse livers by quantitative PCR (Fig. 5C)."
+      },
+      "function_supported_genes": [
+        "Idi1",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Nsdhl",
+        "Hsd17b7",
+        "Dhcr7"
+      ],
+      "rationale": "Model-assessed: RNA-seq and qPCR associate seven supplied genes with hepatic cholesterol synthesis, but do not test their catalytic steps. HFD mouse liver is close to, but not identical with, aging or MASLD liver.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-081933ad9516de845c00",
+      "studied_genes": [
+        "Idi1",
+        "Fdps",
+        "Cyp51",
+        "Tm7sf2",
+        "Nsdhl",
+        "Hsd17b7",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 17216,
+        "source_type": "full_text",
+        "start": 17058,
+        "text": "Cyp51+/− males had significantly increased plasma total cholesterol, HDL and LDL cholesterol (20–35% higher than controls) and present hepatomegaly (Table 1)."
+      },
+      "function_supported_genes": [
+        "Cyp51"
+      ],
+      "rationale": "Model-assessed: Cyp51 haploinsufficiency causally altered cholesterol and liver phenotypes, supporting an in-vivo hepatic cholesterol role. The mouse-liver setting is relevant, but the mixed diets and whole-body genotype are not direct aging or MASLD evidence.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0a849c76f65251620997",
+      "studied_genes": [
+        "Cyp51",
+        "Nsdhl",
+        "Tm7sf2",
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 30311,
+        "source_type": "full_text",
+        "start": 29977,
+        "text": "A measurement of total cholesterol levels at 8 dpf indicated a strong reduction in both mutants. Compared to wild-type siblings, total cholesterol levels of lssnu60 homozygous mutants were 43% (s.d. 9.14, P=0.0011) of wild-type levels, whereas those of msmo1nu81 homozygous mutants were 22% (s.d. 10.59, P=0.0006) of wild-type levels."
+      },
+      "function_supported_genes": [
+        "Lss",
+        "Msmo1"
+      ],
+      "rationale": "Model-assessed: Loss of either Lss or Msmo1 markedly reduced cholesterol, causally supporting both genes' biosynthetic roles. Zebrafish larval skeletal-dysplasia experiments are indirect to aging or MASLD mouse hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0fdbb950b388fd1607bc",
+      "studied_genes": [
+        "Lss",
+        "Msmo1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 2544,
+        "source_type": "full_text",
+        "start": 2273,
+        "text": "The third key enzyme of the mevalonate pathway is the one responsible for converting mevalonic acid into mevalonate-5-phosphate, a key pathway intermediate. Mevalonate kinase (EC 2.7.1.36) (MVK) catalyses this conversion, using ATP as a phosphate donor and energy source."
+      },
+      "function_supported_genes": [
+        "Mvk"
+      ],
+      "rationale": "Model-assessed: This review explicitly assigns MVK the mevalonate-to-mevalonate-5-phosphate reaction in the cholesterol-producing pathway. It provides secondary, context-general evidence rather than liver-specific experiments.",
+      "red_flags": [],
+      "review_id": "RL-1151ece55cc67a4a83be",
+      "studied_genes": [
+        "Mvk"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 296960,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 335664,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 13200,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 254.077
+  }
+}

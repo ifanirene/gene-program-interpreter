@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "brain-p10--candidate-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.95
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 3,
+        "similarity": 0.0
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 2,
+        "similarity": 0.76
+      }
+    ],
+    "moduleSemanticSimilarity": 0.57,
+    "overall_rationale": "Both sets reproduce the primary-cilium assembly and mitochondrial programs, while the replicate folds ciliary signaling into its broader ciliogenesis module and reports no third module.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules center on primary-cilium assembly through distal appendages, transition-zone proteins, and intraflagellar transport, with only minor differences in component scope.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.95
+      },
+      {
+        "left_module": 1,
+        "rationale": "The modules share brain-endothelial context and one listed gene, but cilium biogenesis and mitochondrial metabolism are mechanistically distinct.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 1,
+        "rationale": "The right-hand slot contains no reported module.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both concern ciliary trafficking and Hedgehog competence, but the left module emphasizes BBSome-dependent GPCR signaling whereas the right emphasizes structural ciliogenesis broadly.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.58
+      },
+      {
+        "left_module": 2,
+        "rationale": "Ciliary GPCR–Hedgehog signaling and mitochondrial metabolic homeostasis share only the endothelial developmental context.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.03
+      },
+      {
+        "left_module": 2,
+        "rationale": "The right-hand slot contains no reported module.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 3,
+        "rationale": "Mitochondrial membrane organization and ciliary assembly are distinct mechanisms despite their shared brain-endothelial context.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.03
+      },
+      {
+        "left_module": 3,
+        "rationale": "The right module retains the same CHCHD6 cristae and METAP1D protein-maturation mechanisms while broadening the program to additional mitochondrial metabolic pathways.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.76
+      },
+      {
+        "left_module": 3,
+        "rationale": "The right-hand slot contains no reported module.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16147,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 966,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 21.339
+  }
+}

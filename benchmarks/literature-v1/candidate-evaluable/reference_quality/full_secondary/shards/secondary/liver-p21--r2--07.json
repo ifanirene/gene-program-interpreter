@@ -1,0 +1,48 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-e87be25ad05faf6b4ce2"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 24191,
+        "source_type": "full_text",
+        "start": 24077,
+        "text": "DGAT2 inhibition increased the ER content of PE, which blocked SREBP-1 movement from the ER to Golgi for cleavage."
+      },
+      "function_supported_genes": [],
+      "rationale": "Pharmacologic inhibition, knockout, and overexpression experiments causally establish Dgat2 as a regulator of SREBP-1 cleavage and hepatic steatosis. Acss2, Hmgcs1, and Fdft1 had gene-specific expression measurements, but the cited finding supports the perturbation regulator rather than their assigned program functions.",
+      "red_flags": [],
+      "review_id": "RL-e87be25ad05faf6b4ce2",
+      "studied_genes": [
+        "Acss2",
+        "Fdft1",
+        "Hmgcs1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 56576,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 69700,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 2121,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 43.528
+  }
+}

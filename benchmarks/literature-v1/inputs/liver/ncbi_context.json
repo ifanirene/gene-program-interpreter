@@ -1,0 +1,4119 @@
+{
+  "20": {
+    "meta": {
+      "query": "(Slc25a31 OR Cep152 OR Slc7a8 OR Med18 OR Cyp2d40 OR Med12 OR Urm1 OR Slc27a2 OR Retsat OR Ptk6 OR Impact OR Hspb2 OR Dusp11 OR Srgap1 OR Por OR Cox6a1 OR Cyp4a12b OR Scara5 OR Chd2 OR Rnpc3 OR Zfpm1 OR Pilrb2 OR Cyp4a12a) AND (hepatocyte OR liver OR aging OR MASLD OR \"metabolic zonation\" OR \"xenobiotic and drug metabolism\" OR \"bile acid metabolism\" OR \"gluconeogenesis and glycogen storage\" OR \"nitrogen and urea metabolism\" OR \"oxidative and mitochondrial metabolism\" OR \"membrane transport and solute carriers\" OR \"lipid metabolism\")",
+      "total_hits": 25
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Slc25a31": "The protein encoded by this gene is a member of the ADP/ATP carrier family of proteins that exchange cytosolic ADP for matrix ATP in the mitochondria. Cells over-expressing this gene have been shown to display an anti-apoptotic phenotype. This protein is also thought to play a role in spermatogenesis, where it is believed to associate with a part of the flagellar cytoskeleton and with glycolytic enzymes. Male mice with mutations in the mouse ortholog of this gene are sterile and spermatocytes display an early meiotic arrest phenotype. Alternative splicing results in multiple transcript variants encoding different isoforms.",
+      "Cep152": "This gene encodes a protein that is thought to be involved with centrosome function. Mutations in this gene have been associated with primary microcephaly (MCPH4). Alternative splicing results in multiple transcript variants.",
+      "Slc7a8": "Enables several functions, including neutral L-amino acid transmembrane transporter activity; protein heterodimerization activity; and secondary active transmembrane transporter activity. Involved in L-alanine import across plasma membrane; L-leucine import across plasma membrane; and thyroid hormone transport. Located in basolateral plasma membrane and microvillus membrane.",
+      "Med18": "MED18 is a component of the Mediator complex, which is a coactivator for DNA-binding factors that activate transcription via RNA polymerase II (Sato et al., 2003 [PubMed 12584197]).[supplied by OMIM, Oct 2008]",
+      "Med12": "The initiation of transcription is controlled in part by a large protein assembly known as the preinitiation complex. A component of this preinitiation complex is a 1.2 MDa protein aggregate called Mediator. This Mediator component binds with a CDK8 subcomplex which contains the protein encoded by this gene, mediator complex subunit 12 (MED12), along with MED13, CDK8 kinase, and cyclin C. The CDK8 subcomplex modulates Mediator-polymerase II interactions and thereby regulates transcription initiation and reinitation rates. The MED12 protein is essential for activating CDK8 kinase. Defects in this gene cause X-linked Opitz-Kaveggia syndrome, also known as FG syndrome, and Lujan-Fryns syndrome.",
+      "Urm1": "Enables sulfur carrier activity. Involved in tRNA thio-modification and tRNA wobble uridine modification. Predicted to be located in cytosol. Predicted to be active in nucleus.",
+      "Slc27a2": "The protein encoded by this gene is an isozyme of long-chain fatty-acid-coenzyme A ligase family. Although differing in substrate specificity, subcellular localization, and tissue distribution, all isozymes of this family convert free long-chain fatty acids into fatty acyl-CoA esters, and thereby play a key role in lipid biosynthesis and fatty acid degradation. This isozyme activates long-chain, branched-chain and very-long-chain fatty acids containing 22 or more carbons to their CoA derivatives. It is expressed primarily in liver and kidney, and is present in both endoplasmic reticulum and peroxisomes, but not in mitochondria. Its decreased peroxisomal enzyme activity is in part responsible for the biochemical pathology in X-linked adrenoleukodystrophy. Alternatively spliced transcript variants encoding different isoforms have been found for this gene.",
+      "Retsat": "Predicted to enable all-trans-retinol 13,14-reductase activity. Predicted to be involved in retinol metabolic process. Located in membrane.",
+      "Ptk6": "The protein encoded by this gene is a cytoplasmic nonreceptor protein kinase which may function as an intracellular signal transducer in epithelial tissues. Overexpression of this gene in mammary epithelial cells leads to sensitization of the cells to epidermal growth factor and results in a partially transformed phenotype. Expression of this gene has been detected at low levels in some breast tumors but not in normal breast tissue. The encoded protein has been shown to undergo autophosphorylation. Alternative splicing results in multiple transcript variants.",
+      "Impact": "Predicted to enable protein sequestering activity. Predicted to be involved in several processes, including GCN2-mediated signaling; cellular response to amino acid starvation; and regulation of gene expression. Predicted to act upstream of or within negative regulation of protein phosphorylation. Predicted to be active in cytoplasm.",
+      "Hspb2": "The protein encoded by this gene belongs to the superfamily of small heat-shock proteins containing a conservative alpha-crystallin domain at the C-terminal part of the molecule. The protein is expressed preferentially in the heart and skeletal muscle. This protein regulates Myotonic Dystrophy Protein Kinase, which plays an important role in maintenance of muscle structure and function.",
+      "Dusp11": "The protein encoded by this gene is a member of the dual specificity protein phosphatase subfamily. These phosphatases inactivate their target kinases by dephosphorylating both the phosphoserine/threonine and phosphotyrosine residues. They negatively regulate members of the mitogen-activated protein (MAP) kinase superfamily (MAPK/ERK, SAPK/JNK, p38), which is associated with cellular proliferation and differentiation. Different members of the family of dual specificity phosphatases show distinct substrate specificities for various MAP kinases, different tissue distribution and subcellular localization, and different modes of inducibility of their expression by extracellular stimuli. This gene product is localized to the nucleus and binds directly to RNA and splicing factors, and thus it is suggested to participate in nuclear mRNA metabolism.",
+      "Srgap1": "The protein encoded by this gene is a GTPase activator, working with the GTPase CDC42 to negatively regulate neuronal migration. The encoded protein interacts with the transmembrane receptor ROBO1 to inactivate CDC42.",
+      "Por": "This gene encodes an endoplasmic reticulum membrane oxidoreductase that is essential for multiple metabolic processes, including reactions catalyzed by cytochrome P450 proteins for metabolism of steroid hormones, drugs and xenobiotics. The encoded protein has a flavin adenine dinucleotide (FAD)-binding domain and a flavodoxin-like domain which bind two cofactors, FAD and FMN, that allow it to donate electrons directly from NADPH to all microsomal P450 enzymes. Mutations in this gene cause a complex set of disorders, including apparent combined P450C17 and P450C21 deficiency, amenorrhea and disordered steroidogenesis, congenital adrenal hyperplasia and Antley-Bixler syndrome, that resemble those caused by defects in steroid metabolizing enzymes such as aromatase, 21-hydroxylase, and 17 alpha-hydroxylase.",
+      "Cox6a1": "Cytochrome c oxidase (COX), the terminal enzyme of the mitochondrial respiratory chain, catalyzes the electron transfer from reduced cytochrome c to oxygen. It is a heteromeric complex consisting of 3 catalytic subunits encoded by mitochondrial genes and multiple structural subunits encoded by nuclear genes. The mitochondrially-encoded subunits function in the electron transfer and the nuclear-encoded subunits may function in the regulation and assembly of the complex. This nuclear gene encodes polypeptide 1 (liver isoform) of subunit VIa, and polypeptide 1 is found in all non-muscle tissues. Polypeptide 2 (heart/muscle isoform) of subunit VIa is encoded by a different gene, and is present only in striated muscles. These two polypeptides share 66% amino acid sequence identity. It has been reported that there may be several pseudogenes on chromosomes 1, 6, 7q21, 7q31-32 and 12. However, only one pseudogene (COX6A1P) on chromosome 1p31.1 has been documented.",
+      "Scara5": "Predicted to enable ferritin receptor activity. Predicted to be involved in several processes, including intracellular iron ion homeostasis; iron ion transmembrane transport; and protein homotrimerization. Predicted to act upstream of or within cellular response to heat. Predicted to be located in plasma membrane.",
+      "Chd2": "The CHD family of proteins is characterized by the presence of chromo (chromatin organization modifier) domains and SNF2-related helicase/ATPase domains. CHD genes alter gene expression possibly by modification of chromatin structure thus altering access of the transcriptional apparatus to its chromosomal DNA template. Alternatively spliced transcript variants encoding distinct isoforms have been found for this gene.",
+      "Rnpc3": "Two types of spliceosomes catalyze splicing of pre-mRNAs. The major U2-type spliceosome is found in all eukaryotes and removes U2-type introns, which represent more than 99% of pre-mRNA introns. The minor U12-type spliceosome is found in some eukaryotes and removes U12-type introns, which are rare and have distinct splice consensus signals. The U12-type spliceosome consists of several small nuclear RNAs and associated proteins. This gene encodes a 65K protein that is a component of the U12-type spliceosome. This protein contains two RNA recognition motifs (RRMs), suggesting that it may contact one of the small nuclear RNAs of the minor spliceosome.",
+      "Zfpm1": "Enables RNA polymerase II-specific DNA-binding transcription factor binding activity and transcription corepressor activity. Involved in platelet formation; regulation of definitive erythrocyte differentiation; and regulation of gene expression. Part of transcription repressor complex."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Ptk6": [],
+      "Impact": [
+        "\"Herein, we review the role of lipid metabolism in MASLD/MASH and discuss the impact of weight loss (diet, bariatric surgery, GLP-1RAs) or other pharmacological treatments (PPAR or THRbeta agonists) on hepatic lipid metabolism, lipidomics, and the resolution of MASH.\" (PMID:39583092)"
+      ],
+      "Pilrb2": [],
+      "Zfpm1": [],
+      "Slc25a31": [],
+      "Srgap1": [],
+      "Cyp4a12a": [],
+      "Retsat": [],
+      "Cox6a1": [
+        "\"SUMOylation-driven nuclear translocation of HSF2BP alleviates MASLD via COX6A1-dependent mitochondrial reprogramming..\" (PMID:42259788)",
+        "\"Mechanistically, we show that HSF2BP undergoes SUMOylation through interaction with UBC9, promoting its nuclear translocation and triggering an upregulation of COX6A1, a core subunit of mitochondrial complex IV.\" (PMID:42259788)"
+      ],
+      "Por": [],
+      "Cyp2d40": [],
+      "Urm1": [],
+      "Med12": [],
+      "Med18": [],
+      "Dusp11": [],
+      "Rnpc3": [],
+      "Chd2": [],
+      "Cyp4a12b": [],
+      "Slc27a2": [],
+      "Cep152": [],
+      "Slc7a8": [],
+      "Scara5": [],
+      "Hspb2": []
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [
+          {
+            "regulator": "Insig1",
+            "log2fc": -1.0036790756151732,
+            "adj_pvalue": 4.7253800274112365e-09,
+            "pvalue": 2.895911394439117e-11,
+            "n_program_targets": 8,
+            "string_interactions": [
+              {
+                "target": "Dhcr24",
+                "score": 826
+              },
+              {
+                "target": "Abca1",
+                "score": 696
+              },
+              {
+                "target": "Fads2",
+                "score": 499
+              },
+              {
+                "target": "Cpt1a",
+                "score": 495
+              },
+              {
+                "target": "Mlxipl",
+                "score": 468
+              },
+              {
+                "target": "Acsl1",
+                "score": 453
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 424
+              },
+              {
+                "target": "Gpat4",
+                "score": 403
+              }
+            ]
+          },
+          {
+            "regulator": "Mlxipl",
+            "log2fc": -0.8753947227348642,
+            "adj_pvalue": 1.0620015432745909e-07,
+            "pvalue": 8.044079511789954e-10,
+            "n_program_targets": 10,
+            "string_interactions": [
+              {
+                "target": "Ogt",
+                "score": 934
+              },
+              {
+                "target": "Ptpa",
+                "score": 900
+              },
+              {
+                "target": "G6pc",
+                "score": 682
+              },
+              {
+                "target": "Cpt1a",
+                "score": 622
+              },
+              {
+                "target": "Slc2a2",
+                "score": 534
+              },
+              {
+                "target": "Slc27a2",
+                "score": 472
+              },
+              {
+                "target": "Apoa5",
+                "score": 457
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 448
+              },
+              {
+                "target": "Slc27a5",
+                "score": 433
+              },
+              {
+                "target": "Creb3l3",
+                "score": 414
+              }
+            ]
+          },
+          {
+            "regulator": "Tmprss6",
+            "log2fc": -0.6110246291017287,
+            "adj_pvalue": 1.6737629632733271e-06,
+            "pvalue": 1.6020175727748662e-08,
+            "n_program_targets": 9,
+            "string_interactions": [
+              {
+                "target": "Hjv",
+                "score": 988
+              },
+              {
+                "target": "Tfr2",
+                "score": 918
+              },
+              {
+                "target": "Creb3l3",
+                "score": 556
+              },
+              {
+                "target": "Furin",
+                "score": 529
+              },
+              {
+                "target": "Proc",
+                "score": 522
+              },
+              {
+                "target": "Hpn",
+                "score": 480
+              },
+              {
+                "target": "Slc39a14",
+                "score": 425
+              },
+              {
+                "target": "Apoa5",
+                "score": 414
+              },
+              {
+                "target": "Serpinf2",
+                "score": 409
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Scap",
+            "log2fc": 0.8434569409178058,
+            "adj_pvalue": 3.501619021321395e-09,
+            "pvalue": 2.0494925321993125e-11,
+            "n_program_targets": 4,
+            "string_interactions": [
+              {
+                "target": "Abca1",
+                "score": 575
+              },
+              {
+                "target": "Dhcr24",
+                "score": 460
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 456
+              },
+              {
+                "target": "Cyp27a1",
+                "score": 413
+              }
+            ]
+          },
+          {
+            "regulator": "Dgat2",
+            "log2fc": 1.1196303469613988,
+            "adj_pvalue": 1.9255241566247193e-08,
+            "pvalue": 1.312631094019137e-10,
+            "n_program_targets": 19,
+            "string_interactions": [
+              {
+                "target": "Lpin2",
+                "score": 956
+              },
+              {
+                "target": "Plpp3",
+                "score": 941
+              },
+              {
+                "target": "Acsl1",
+                "score": 803
+              },
+              {
+                "target": "Gpat4",
+                "score": 756
+              },
+              {
+                "target": "Cpt1a",
+                "score": 662
+              },
+              {
+                "target": "Mlxipl",
+                "score": 655
+              },
+              {
+                "target": "Slc27a2",
+                "score": 583
+              },
+              {
+                "target": "Soat2",
+                "score": 557
+              },
+              {
+                "target": "Ces1d",
+                "score": 555
+              },
+              {
+                "target": "Slc27a5",
+                "score": 534
+              },
+              {
+                "target": "G6pc",
+                "score": 525
+              },
+              {
+                "target": "Fads2",
+                "score": 490
+              },
+              {
+                "target": "Elovl3",
+                "score": 473
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 447
+              },
+              {
+                "target": "G0s2",
+                "score": 430
+              },
+              {
+                "target": "Abca1",
+                "score": 416
+              },
+              {
+                "target": "Pcyt2",
+                "score": 405
+              },
+              {
+                "target": "Nat8",
+                "score": 405
+              },
+              {
+                "target": "Apoa2",
+                "score": 403
+              }
+            ]
+          },
+          {
+            "regulator": "Leng1",
+            "log2fc": 0.846954231881365,
+            "adj_pvalue": 0.0032929066207376,
+            "pvalue": 6.348863185369388e-05,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Grn",
+                "score": 416
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Insig1",
+            "log2fc": -0.4941881066170079,
+            "adj_pvalue": 1.6488633048388117e-21,
+            "pvalue": 7.817910544584899e-24,
+            "n_program_targets": 8,
+            "string_interactions": [
+              {
+                "target": "Dhcr24",
+                "score": 826
+              },
+              {
+                "target": "Abca1",
+                "score": 696
+              },
+              {
+                "target": "Fads2",
+                "score": 499
+              },
+              {
+                "target": "Cpt1a",
+                "score": 495
+              },
+              {
+                "target": "Mlxipl",
+                "score": 468
+              },
+              {
+                "target": "Acsl1",
+                "score": 453
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 424
+              },
+              {
+                "target": "Gpat4",
+                "score": 403
+              }
+            ]
+          },
+          {
+            "regulator": "Flcn",
+            "log2fc": -0.4451085679456397,
+            "adj_pvalue": 9.737878362153998e-20,
+            "pvalue": 5.232726687131446e-22,
+            "n_program_targets": 0,
+            "string_interactions": []
+          },
+          {
+            "regulator": "Ldlr",
+            "log2fc": -0.288560903698557,
+            "adj_pvalue": 9.87395282434094e-07,
+            "pvalue": 1.7556112673715945e-08,
+            "n_program_targets": 6,
+            "string_interactions": [
+              {
+                "target": "Apoe",
+                "score": 627
+              },
+              {
+                "target": "Egfr",
+                "score": 580
+              },
+              {
+                "target": "Pltp",
+                "score": 569
+              },
+              {
+                "target": "Apoa5",
+                "score": 561
+              },
+              {
+                "target": "Apoa2",
+                "score": 547
+              },
+              {
+                "target": "Hpn",
+                "score": 405
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Dgat2",
+            "log2fc": 0.3458753572834029,
+            "adj_pvalue": 1.9822642194729624e-11,
+            "pvalue": 2.005055068498645e-13,
+            "n_program_targets": 19,
+            "string_interactions": [
+              {
+                "target": "Lpin2",
+                "score": 956
+              },
+              {
+                "target": "Plpp3",
+                "score": 941
+              },
+              {
+                "target": "Acsl1",
+                "score": 803
+              },
+              {
+                "target": "Gpat4",
+                "score": 756
+              },
+              {
+                "target": "Cpt1a",
+                "score": 662
+              },
+              {
+                "target": "Mlxipl",
+                "score": 655
+              },
+              {
+                "target": "Slc27a2",
+                "score": 583
+              },
+              {
+                "target": "Soat2",
+                "score": 557
+              },
+              {
+                "target": "Ces1d",
+                "score": 555
+              },
+              {
+                "target": "Slc27a5",
+                "score": 534
+              },
+              {
+                "target": "G6pc",
+                "score": 525
+              },
+              {
+                "target": "Fads2",
+                "score": 490
+              },
+              {
+                "target": "Elovl3",
+                "score": 473
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 447
+              },
+              {
+                "target": "G0s2",
+                "score": 430
+              },
+              {
+                "target": "Abca1",
+                "score": 416
+              },
+              {
+                "target": "Pcyt2",
+                "score": 405
+              },
+              {
+                "target": "Nat8",
+                "score": 405
+              },
+              {
+                "target": "Apoa2",
+                "score": 403
+              }
+            ]
+          },
+          {
+            "regulator": "Leng1",
+            "log2fc": 0.2153813750221402,
+            "adj_pvalue": 8.775207863578427e-06,
+            "pvalue": 1.8514989386560321e-07,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Grn",
+                "score": 416
+              }
+            ]
+          },
+          {
+            "regulator": "Mttp",
+            "log2fc": 0.2466161714925332,
+            "adj_pvalue": 2.3307360866850683e-05,
+            "pvalue": 5.359704952499197e-07,
+            "n_program_targets": 20,
+            "string_interactions": [
+              {
+                "target": "Apoa2",
+                "score": 741
+              },
+              {
+                "target": "Apoe",
+                "score": 722
+              },
+              {
+                "target": "Lpgat1",
+                "score": 708
+              },
+              {
+                "target": "Soat2",
+                "score": 647
+              },
+              {
+                "target": "Cpt1a",
+                "score": 596
+              },
+              {
+                "target": "Slc2a2",
+                "score": 578
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 569
+              },
+              {
+                "target": "Abca1",
+                "score": 560
+              },
+              {
+                "target": "Slc27a5",
+                "score": 559
+              },
+              {
+                "target": "Sar1b",
+                "score": 550
+              },
+              {
+                "target": "Creb3l3",
+                "score": 549
+              },
+              {
+                "target": "G6pc",
+                "score": 539
+              },
+              {
+                "target": "Mlxipl",
+                "score": 532
+              },
+              {
+                "target": "Slc27a2",
+                "score": 494
+              },
+              {
+                "target": "Apoa5",
+                "score": 483
+              },
+              {
+                "target": "Pltp",
+                "score": 460
+              },
+              {
+                "target": "Abcc2",
+                "score": 427
+              },
+              {
+                "target": "Cyp8b1",
+                "score": 421
+              },
+              {
+                "target": "Lrp1",
+                "score": 418
+              },
+              {
+                "target": "Ces1d",
+                "score": 408
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "21": {
+    "meta": {
+      "query": "(Cyp51 OR Hmgcs1 OR Fdps OR Msmo1 OR Nsdhl OR Idi1 OR Acss2 OR Fdft1 OR Tm7sf2 OR Tas2r138 OR Sc5d OR Hsd17b7 OR Dhcr7 OR Lss OR Erg28 OR Mvk OR Rdh11 OR Ddr2 OR Pmvk OR Cetn2 OR Zfp839 OR Mvd OR Acat2) AND (hepatocyte OR liver OR aging OR MASLD OR \"metabolic zonation\" OR \"xenobiotic and drug metabolism\" OR \"bile acid metabolism\" OR \"gluconeogenesis and glycogen storage\" OR \"nitrogen and urea metabolism\" OR \"oxidative and mitochondrial metabolism\" OR \"membrane transport and solute carriers\" OR \"lipid metabolism\")",
+      "total_hits": 25
+    },
+    "top_papers": [
+      {
+        "pmid": 41390243,
+        "title": "Revealing differentially expressed genes between hypertrophic scars and normal skin tissues by bioinformatic analysis.",
+        "score": 9,
+        "genes": [
+          "Acat2",
+          "Aacs",
+          "Msmo1",
+          "Dhcr7",
+          "Hmgcr",
+          "Hmgcs1",
+          "Mvd",
+          "Fasn",
+          "Dhcr24"
+        ]
+      },
+      {
+        "pmid": 40867648,
+        "title": "Integrated Multi-Omics Investigation of Gypenosides' Mechanisms in Lowering Hepatic Cholesterol.",
+        "score": 6,
+        "genes": [
+          "Pmvk",
+          "Fdft1",
+          "Fdps",
+          "Hmgcs1",
+          "Mvd",
+          "Tm7sf2"
+        ]
+      },
+      {
+        "pmid": 40994015,
+        "title": "The Mechanism by Which Melatonin Improves the Dysregulation of Glucose and Lipid Metabolism in Castrated Female Mice.",
+        "score": 6,
+        "genes": [
+          "Lss",
+          "Idi1",
+          "Hmgcr",
+          "Fdps",
+          "Mvk",
+          "Fasn"
+        ]
+      },
+      {
+        "pmid": 40250732,
+        "title": "The DHCR7 is the key target of lipotoxic liver injury caused by matrine through abnormal activation of the cholesterol synthesis pathway.",
+        "score": 5,
+        "genes": [
+          "Lss",
+          "Cyp51",
+          "Sc5d",
+          "Msmo1",
+          "Dhcr7"
+        ]
+      },
+      {
+        "pmid": 39359475,
+        "title": "Identification of novel targets associated with cholesterol metabolism in nonalcoholic fatty liver disease: a comprehensive study using Mendelian randomization combined with transcriptome analysis.",
+        "score": 4,
+        "genes": [
+          "Fdps",
+          "Tm7sf2",
+          "Hmgcs1",
+          "Mvk"
+        ]
+      }
+    ],
+    "gene_summaries": {
+      "Cyp51": "This gene encodes a member of the cytochrome P450 superfamily of enzymes. The cytochrome P450 proteins are monooxygenases which catalyze many reactions involved in drug metabolism and synthesis of cholesterol, steroids and other lipids. This endoplasmic reticulum protein participates in the synthesis of cholesterol by catalyzing the removal of the 14alpha-methyl group from lanosterol. Homologous genes are found in all three eukaryotic phyla, fungi, plants, and animals, suggesting that this is one of the oldest cytochrome P450 genes. Two transcript variants encoding different isoforms have been found for this gene.",
+      "Hmgcs1": "Enables protein homodimerization activity. Predicted to be involved in acetyl-CoA metabolic process and farnesyl diphosphate biosynthetic process, mevalonate pathway. Predicted to be located in cytosol.",
+      "Fdps": "This gene encodes an enzyme that catalyzes the production of geranyl pyrophosphate and farnesyl pyrophosphate from isopentenyl pyrophosphate and dimethylallyl pyrophosphate. The resulting product, farnesyl pyrophosphate, is a key intermediate in cholesterol and sterol biosynthesis, a substrate for protein farnesylation and geranylgeranylation, and a ligand or agonist for certain hormone receptors and growth receptors. Drugs that inhibit this enzyme prevent the post-translational modifications of small GTPases and have been used to treat diseases related to bone resorption. Multiple pseudogenes have been found on chromosomes 1, 7, 14, 15, 21 and X. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Msmo1": "Sterol-C4-mehtyl oxidase-like protein was isolated based on its similarity to the yeast ERG25 protein. It contains a set of putative metal binding motifs with similarity to that seen in a family of membrane desaturases-hydroxylases. The protein is localized to the endoplasmic reticulum membrane and is believed to function in cholesterol biosynthesis. Alternatively spliced transcript variants encoding distinct isoforms have been found for this gene.",
+      "Nsdhl": "The protein encoded by this gene is localized in the endoplasmic reticulum and is involved in cholesterol biosynthesis. Mutations in this gene are associated with CHILD syndrome, which is a X-linked dominant disorder of lipid metabolism with disturbed cholesterol biosynthesis, and typically lethal in males. Alternatively spliced transcript variants with differing 5' UTR have been found for this gene.",
+      "Idi1": "IDI1 encodes a peroxisomally-localized enzyme that catalyzes the interconversion of isopentenyl diphosphate (IPP) to its highly electrophilic isomer, dimethylallyl diphosphate (DMAPP), which are the substrates for the successive reaction that results in the synthesis of farnesyl diphosphate and, ultimately, cholesterol. It has been shown in peroxisomal deficiency diseases such as Zellweger syndrome and neonatal adrenoleukodystrophy that there is reduction in IPP isomerase activity.",
+      "Acss2": "This gene encodes a cytosolic enzyme that catalyzes the activation of acetate for use in lipid synthesis and energy generation. The protein acts as a monomer and produces acetyl-CoA from acetate in a reaction that requires ATP. Expression of this gene is regulated by sterol regulatory element-binding proteins, transcription factors that activate genes required for the synthesis of cholesterol and unsaturated fatty acids. Alternative splicing results in multiple transcript variants.",
+      "Fdft1": "This gene encodes a membrane-associated enzyme located at a branch point in the mevalonate pathway. The encoded protein is the first specific enzyme in cholesterol biosynthesis, catalyzing the dimerization of two molecules of farnesyl diphosphate in a two-step reaction to form squalene.",
+      "Tm7sf2": "Enables delta14-sterol reductase activity. Involved in cholesterol biosynthetic process. Located in endoplasmic reticulum. Part of receptor complex.",
+      "Sc5d": "This gene encodes an enzyme of cholesterol biosynthesis. The encoded protein catalyzes the conversion of lathosterol into 7-dehydrocholesterol. Mutations in this gene have been associated with lathosterolosis. Alternatively spliced transcript variants encoding the same protein have been described.",
+      "Hsd17b7": "HSD17B7 encodes an enzyme that functions both as a 17-beta-hydroxysteroid dehydrogenase (EC 1.1.1.62) in the biosynthesis of sex steroids and as a 3-ketosteroid reductase (EC 1.1.1.270) in the biosynthesis of cholesterol (Marijanovic et al., 2003 [PubMed 12829805]).[supplied by OMIM, May 2010]",
+      "Dhcr7": "This gene encodes an enzyme that removes the C(7-8) double bond in the B ring of sterols and catalyzes the conversion of 7-dehydrocholesterol to cholesterol. This gene is ubiquitously expressed and its transmembrane protein localizes to the endoplasmic reticulum membrane and nuclear outer membrane. Mutations in this gene cause Smith-Lemli-Opitz syndrome (SLOS); a syndrome that is metabolically characterized by reduced serum cholesterol levels and elevated serum 7-dehydrocholesterol levels and phenotypically characterized by cognitive disability, facial dysmorphism, syndactyly of second and third toes, and holoprosencephaly in severe cases to minimal physical abnormalities and near-normal intelligence in mild cases. Alternative splicing results in multiple transcript variants that encode the same protein.",
+      "Lss": "The protein encoded by this gene catalyzes the conversion of (S)-2,3 oxidosqualene to lanosterol. The encoded protein is a member of the terpene cyclase/mutase family and catalyzes the first step in the biosynthesis of cholesterol, steroid hormones, and vitamin D. Alternative splicing results in multiple transcript variants encoding different isoforms.",
+      "Erg28": "Enables identical protein binding activity. Predicted to be involved in sterol biosynthetic process. Located in transport vesicle.",
+      "Mvk": "This gene encodes the peroxisomal enzyme mevalonate kinase. Mevalonate is a key intermediate, and mevalonate kinase a key early enzyme, in isoprenoid and sterol synthesis. Mevalonate kinase deficiency caused by mutation of this gene results in mevalonic aciduria, a disease characterized psychomotor retardation, failure to thrive, hepatosplenomegaly, anemia and recurrent febrile crises. Defects in this gene also cause hyperimmunoglobulinaemia D and periodic fever syndrome, a disorder characterized by recurrent episodes of fever associated with lymphadenopathy, arthralgia, gastrointestinal dismay and skin rash. Alternative splicing results in multiple transcript variants.",
+      "Rdh11": "Enables all-trans-retinol dehydrogenase (NADP+) activity. Involved in cellular detoxification of aldehyde and retinoid metabolic process. Acts upstream of or within retinal metabolic process. Located in endoplasmic reticulum membrane.",
+      "Ddr2": "This gene encodes a member of the discoidin domain receptor subclass of the receptor tyrosine kinase (RTKs) protein family. RTKs play a key role in the communication of cells with their microenvironment. The encoded protein is a collagen-induced receptor that activates signal transduction pathways involved in cell adhesion, proliferation, and extracellular matrix remodeling. This protein is expressed in numerous cell types and may alos be involved in wound repair and regulate tumor growth and invasiveness. Mutations in this gene are the cause of short limb-hand type spondylometaepiphyseal dysplasia.",
+      "Pmvk": "This gene encodes a peroxisomal enzyme that is a member of the galactokinase, homoserine kinase, mevalonate kinase, and phosphomevalonate kinase (GHMP) family of ATP-dependent enzymes. The encoded protein catalyzes the conversion of mevalonate 5-phosphate to mevalonate 5-diphosphate, which is the fifth step in the mevalonate pathway of isoprenoid biosynthesis. Mutations in this gene are linked to certain types of porokeratosis including disseminated superficial porokeratosis. Alternative splicing results in multiple transcript variants.",
+      "Cetn2": "Caltractin belongs to a family of calcium-binding proteins and is a structural component of the centrosome. The high level of conservation from algae to humans and its association with the centrosome suggested that caltractin plays a fundamental role in the structure and function of the microtubule-organizing center, possibly required for the proper duplication and segregation of the centrosome.",
+      "Mvd": "The enzyme mevalonate pyrophosphate decarboxylase catalyzes the conversion of mevalonate pyrophosphate into isopentenyl pyrophosphate in one of the early steps in cholesterol biosynthesis. It decarboxylates and dehydrates its substrate while hydrolyzing ATP.",
+      "Acat2": "The product of this gene is an enzyme involved in lipid metabolism, and it encodes cytosolic acetoacetyl-CoA thiolase. This gene shows complementary overlapping with the 3-prime region of the TCP1 gene in both mouse and human. These genes are encoded on opposite strands of DNA, as well as in opposite transcriptional orientation. Alternatively spliced transcript variants encoding different isoforms have been found for this gene."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Fdft1": [
+        "\"It inhibits endogenous cholesterol synthesis by downregulating key enzymes (Hmgcs1, Fdft1, Pmvk, Mvd, Fdps, Tm7sf2), promotes cholesterol efflux and transport (upregulating Abca1, ApoB), and accelerates steroid hormone metabolism (upregulating Cyp3a11, Cyp3a25).\" (PMID:40867648)",
+        "\"Multi-omics integration identified seven critical genes/proteins-Cyp3a25, Fdft1, Tm7sf2, Hmgcs1, Fdps, Mvd, and Pmvk-that were consistently and significantly regulated by GP at both transcriptional and translational levels.\" (PMID:40867648)"
+      ],
+      "Dhcr7": [
+        "\"mRNA levels of 10 core genes (MVD, ACAT2, HMGCS1, HMGCR, FASN, MSMO1, DHCR7, DHCR24, and AACS) in HS and normal skin tissues were different (P < 0.05), with MVK showing non-significant differences (P > 0.05).\" (PMID:41390243)",
+        "\"Among which, the steroid biosynthesis was the most key signaling pathway, evidenced by the enhanced expression of eight genes, including DHCR7, SQLE, CYP51, CYP24A1, SC5D, LSS, MSMO1 and SOAT1.\" (PMID:40250732)",
+        "\"The DHCR7 is the key target of lipotoxic liver injury caused by matrine through abnormal activation of the cholesterol synthesis pathway..\" (PMID:40250732)"
+      ],
+      "Hsd17b7": [],
+      "Mvd": [
+        "\"It inhibits endogenous cholesterol synthesis by downregulating key enzymes (Hmgcs1, Fdft1, Pmvk, Mvd, Fdps, Tm7sf2), promotes cholesterol efflux and transport (upregulating Abca1, ApoB), and accelerates steroid hormone metabolism (upregulating Cyp3a11, Cyp3a25).\" (PMID:40867648)",
+        "\"Multi-omics integration identified seven critical genes/proteins-Cyp3a25, Fdft1, Tm7sf2, Hmgcs1, Fdps, Mvd, and Pmvk-that were consistently and significantly regulated by GP at both transcriptional and translational levels.\" (PMID:40867648)",
+        "\"mRNA levels of 10 core genes (MVD, ACAT2, HMGCS1, HMGCR, FASN, MSMO1, DHCR7, DHCR24, and AACS) in HS and normal skin tissues were different (P < 0.05), with MVK showing non-significant differences (P > 0.05).\" (PMID:41390243)"
+      ],
+      "Nsdhl": [],
+      "Rdh11": [],
+      "Fdps": [
+        "\"It inhibits endogenous cholesterol synthesis by downregulating key enzymes (Hmgcs1, Fdft1, Pmvk, Mvd, Fdps, Tm7sf2), promotes cholesterol efflux and transport (upregulating Abca1, ApoB), and accelerates steroid hormone metabolism (upregulating Cyp3a11, Cyp3a25).\" (PMID:40867648)",
+        "\"Multi-omics integration identified seven critical genes/proteins-Cyp3a25, Fdft1, Tm7sf2, Hmgcs1, Fdps, Mvd, and Pmvk-that were consistently and significantly regulated by GP at both transcriptional and translational levels.\" (PMID:40867648)",
+        "\"Conclusion: Our study has linked cholesterol metabolism genes (MVK, HMGCS1, TM7SF2, and FDPS) to NAFLD, providing a promising diagnostic framework, identifying treatment targets, and offering novel perspectives into its mechanisms.\" (PMID:39359475)",
+        "\"Results: We identified four hub genes (MVK, HMGCS1, TM7SF2, and FDPS) linked to NAFLD risk.\" (PMID:39359475)",
+        "\"Melatonin significantly reduced the high concentrations of TC and LDL-C in the serum and lipid accumulation in the livers of the ovariectomized mice, and downregulated the protein expression associated with cholesterol and fatty acid biosynthesis, including HMGCR, FDPS, IDI1, MVK, LSS, FASN, and ACC.\" (PMID:40994015)"
+      ],
+      "Erg28": [],
+      "Cyp51": [
+        "\"Among which, the steroid biosynthesis was the most key signaling pathway, evidenced by the enhanced expression of eight genes, including DHCR7, SQLE, CYP51, CYP24A1, SC5D, LSS, MSMO1 and SOAT1.\" (PMID:40250732)"
+      ],
+      "Msmo1": [
+        "\"mRNA levels of 10 core genes (MVD, ACAT2, HMGCS1, HMGCR, FASN, MSMO1, DHCR7, DHCR24, and AACS) in HS and normal skin tissues were different (P < 0.05), with MVK showing non-significant differences (P > 0.05).\" (PMID:41390243)",
+        "\"Among which, the steroid biosynthesis was the most key signaling pathway, evidenced by the enhanced expression of eight genes, including DHCR7, SQLE, CYP51, CYP24A1, SC5D, LSS, MSMO1 and SOAT1.\" (PMID:40250732)"
+      ],
+      "Ddr2": [],
+      "Acat2": [
+        "\"mRNA levels of 10 core genes (MVD, ACAT2, HMGCS1, HMGCR, FASN, MSMO1, DHCR7, DHCR24, and AACS) in HS and normal skin tissues were different (P < 0.05), with MVK showing non-significant differences (P > 0.05).\" (PMID:41390243)"
+      ],
+      "Lss": [
+        "\"Among which, the steroid biosynthesis was the most key signaling pathway, evidenced by the enhanced expression of eight genes, including DHCR7, SQLE, CYP51, CYP24A1, SC5D, LSS, MSMO1 and SOAT1.\" (PMID:40250732)",
+        "\"Melatonin significantly reduced the high concentrations of TC and LDL-C in the serum and lipid accumulation in the livers of the ovariectomized mice, and downregulated the protein expression associated with cholesterol and fatty acid biosynthesis, including HMGCR, FDPS, IDI1, MVK, LSS, FASN, and ACC.\" (PMID:40994015)"
+      ],
+      "Idi1": [
+        "\"Melatonin significantly reduced the high concentrations of TC and LDL-C in the serum and lipid accumulation in the livers of the ovariectomized mice, and downregulated the protein expression associated with cholesterol and fatty acid biosynthesis, including HMGCR, FDPS, IDI1, MVK, LSS, FASN, and ACC.\" (PMID:40994015)"
+      ],
+      "Cetn2": [],
+      "Pmvk": [
+        "\"It inhibits endogenous cholesterol synthesis by downregulating key enzymes (Hmgcs1, Fdft1, Pmvk, Mvd, Fdps, Tm7sf2), promotes cholesterol efflux and transport (upregulating Abca1, ApoB), and accelerates steroid hormone metabolism (upregulating Cyp3a11, Cyp3a25).\" (PMID:40867648)",
+        "\"Multi-omics integration identified seven critical genes/proteins-Cyp3a25, Fdft1, Tm7sf2, Hmgcs1, Fdps, Mvd, and Pmvk-that were consistently and significantly regulated by GP at both transcriptional and translational levels.\" (PMID:40867648)"
+      ],
+      "Sc5d": [
+        "\"Among which, the steroid biosynthesis was the most key signaling pathway, evidenced by the enhanced expression of eight genes, including DHCR7, SQLE, CYP51, CYP24A1, SC5D, LSS, MSMO1 and SOAT1.\" (PMID:40250732)"
+      ],
+      "Zfp839": [],
+      "Hmgcs1": [
+        "\"It inhibits endogenous cholesterol synthesis by downregulating key enzymes (Hmgcs1, Fdft1, Pmvk, Mvd, Fdps, Tm7sf2), promotes cholesterol efflux and transport (upregulating Abca1, ApoB), and accelerates steroid hormone metabolism (upregulating Cyp3a11, Cyp3a25).\" (PMID:40867648)",
+        "\"Multi-omics integration identified seven critical genes/proteins-Cyp3a25, Fdft1, Tm7sf2, Hmgcs1, Fdps, Mvd, and Pmvk-that were consistently and significantly regulated by GP at both transcriptional and translational levels.\" (PMID:40867648)",
+        "\"Conclusion: Our study has linked cholesterol metabolism genes (MVK, HMGCS1, TM7SF2, and FDPS) to NAFLD, providing a promising diagnostic framework, identifying treatment targets, and offering novel perspectives into its mechanisms.\" (PMID:39359475)",
+        "\"Results: We identified four hub genes (MVK, HMGCS1, TM7SF2, and FDPS) linked to NAFLD risk.\" (PMID:39359475)",
+        "\"mRNA levels of 10 core genes (MVD, ACAT2, HMGCS1, HMGCR, FASN, MSMO1, DHCR7, DHCR24, and AACS) in HS and normal skin tissues were different (P < 0.05), with MVK showing non-significant differences (P > 0.05).\" (PMID:41390243)"
+      ],
+      "Tas2r138": [],
+      "Mvk": [
+        "\"Conclusion: Our study has linked cholesterol metabolism genes (MVK, HMGCS1, TM7SF2, and FDPS) to NAFLD, providing a promising diagnostic framework, identifying treatment targets, and offering novel perspectives into its mechanisms.\" (PMID:39359475)",
+        "\"Results: We identified four hub genes (MVK, HMGCS1, TM7SF2, and FDPS) linked to NAFLD risk.\" (PMID:39359475)",
+        "\"mRNA levels of 10 core genes (MVD, ACAT2, HMGCS1, HMGCR, FASN, MSMO1, DHCR7, DHCR24, and AACS) in HS and normal skin tissues were different (P < 0.05), with MVK showing non-significant differences (P > 0.05).\" (PMID:41390243)",
+        "\"Melatonin significantly reduced the high concentrations of TC and LDL-C in the serum and lipid accumulation in the livers of the ovariectomized mice, and downregulated the protein expression associated with cholesterol and fatty acid biosynthesis, including HMGCR, FDPS, IDI1, MVK, LSS, FASN, and ACC.\" (PMID:40994015)"
+      ],
+      "Tm7sf2": [
+        "\"It inhibits endogenous cholesterol synthesis by downregulating key enzymes (Hmgcs1, Fdft1, Pmvk, Mvd, Fdps, Tm7sf2), promotes cholesterol efflux and transport (upregulating Abca1, ApoB), and accelerates steroid hormone metabolism (upregulating Cyp3a11, Cyp3a25).\" (PMID:40867648)",
+        "\"Multi-omics integration identified seven critical genes/proteins-Cyp3a25, Fdft1, Tm7sf2, Hmgcs1, Fdps, Mvd, and Pmvk-that were consistently and significantly regulated by GP at both transcriptional and translational levels.\" (PMID:40867648)",
+        "\"Conclusion: Our study has linked cholesterol metabolism genes (MVK, HMGCS1, TM7SF2, and FDPS) to NAFLD, providing a promising diagnostic framework, identifying treatment targets, and offering novel perspectives into its mechanisms.\" (PMID:39359475)",
+        "\"Results: We identified four hub genes (MVK, HMGCS1, TM7SF2, and FDPS) linked to NAFLD risk.\" (PMID:39359475)"
+      ],
+      "Acss2": []
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [
+          {
+            "regulator": "Scap",
+            "log2fc": -3.2100084062064576,
+            "adj_pvalue": 1.5987287670309324e-223,
+            "pvalue": 1.1008630912094106e-227,
+            "n_program_targets": 21,
+            "string_interactions": [
+              {
+                "target": "Srebf2",
+                "score": 999
+              },
+              {
+                "target": "Pgrmc1",
+                "score": 695
+              },
+              {
+                "target": "Hmgcr",
+                "score": 653
+              },
+              {
+                "target": "Fasn",
+                "score": 641
+              },
+              {
+                "target": "Scd1",
+                "score": 638
+              },
+              {
+                "target": "Sqle",
+                "score": 582
+              },
+              {
+                "target": "Fdft1",
+                "score": 555
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 526
+              },
+              {
+                "target": "Acaca",
+                "score": 523
+              },
+              {
+                "target": "Cyp51",
+                "score": 513
+              },
+              {
+                "target": "Acly",
+                "score": 502
+              },
+              {
+                "target": "Abcg5",
+                "score": 496
+              },
+              {
+                "target": "Fdps",
+                "score": 492
+              },
+              {
+                "target": "Msmo1",
+                "score": 490
+              },
+              {
+                "target": "Dhcr7",
+                "score": 483
+              },
+              {
+                "target": "Pcsk9",
+                "score": 474
+              },
+              {
+                "target": "Mvk",
+                "score": 474
+              },
+              {
+                "target": "Dhcr24",
+                "score": 460
+              },
+              {
+                "target": "Abcg8",
+                "score": 438
+              },
+              {
+                "target": "Lss",
+                "score": 434
+              },
+              {
+                "target": "Cyp27a1",
+                "score": 413
+              }
+            ]
+          },
+          {
+            "regulator": "Dgat2",
+            "log2fc": -3.871282810638495,
+            "adj_pvalue": 9.94839631632048e-214,
+            "pvalue": 1.3700663361052764e-217,
+            "n_program_targets": 30,
+            "string_interactions": [
+              {
+                "target": "Lpin1",
+                "score": 970
+              },
+              {
+                "target": "Lpin2",
+                "score": 956
+              },
+              {
+                "target": "Scd1",
+                "score": 928
+              },
+              {
+                "target": "Fasn",
+                "score": 776
+              },
+              {
+                "target": "Acaca",
+                "score": 759
+              },
+              {
+                "target": "Gpam",
+                "score": 741
+              },
+              {
+                "target": "Acsl5",
+                "score": 729
+              },
+              {
+                "target": "Acacb",
+                "score": 688
+              },
+              {
+                "target": "Elovl6",
+                "score": 636
+              },
+              {
+                "target": "Hmgcr",
+                "score": 596
+              },
+              {
+                "target": "Acly",
+                "score": 590
+              },
+              {
+                "target": "Srebf2",
+                "score": 581
+              },
+              {
+                "target": "Acsl3",
+                "score": 575
+              },
+              {
+                "target": "Slc27a5",
+                "score": 534
+              },
+              {
+                "target": "Apoc3",
+                "score": 534
+              },
+              {
+                "target": "Elovl2",
+                "score": 501
+              },
+              {
+                "target": "Fads2",
+                "score": 490
+              },
+              {
+                "target": "Abcg8",
+                "score": 480
+              },
+              {
+                "target": "Elovl5",
+                "score": 478
+              },
+              {
+                "target": "Abcg5",
+                "score": 469
+              },
+              {
+                "target": "Cideb",
+                "score": 465
+              },
+              {
+                "target": "Elovl1",
+                "score": 440
+              },
+              {
+                "target": "Acss2",
+                "score": 432
+              },
+              {
+                "target": "Thrsp",
+                "score": 430
+              },
+              {
+                "target": "Fdft1",
+                "score": 426
+              },
+              {
+                "target": "Cyp2e1",
+                "score": 424
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 412
+              },
+              {
+                "target": "Alb",
+                "score": 404
+              },
+              {
+                "target": "Fads1",
+                "score": 403
+              },
+              {
+                "target": "Apoa2",
+                "score": 403
+              }
+            ]
+          },
+          {
+            "regulator": "Mttp",
+            "log2fc": -2.7951572856903217,
+            "adj_pvalue": 3.4210215869186514e-56,
+            "pvalue": 7.067008132211565e-60,
+            "n_program_targets": 22,
+            "string_interactions": [
+              {
+                "target": "P4hb",
+                "score": 983
+              },
+              {
+                "target": "Apoc3",
+                "score": 782
+              },
+              {
+                "target": "Apoa2",
+                "score": 741
+              },
+              {
+                "target": "Hmgcr",
+                "score": 724
+              },
+              {
+                "target": "Apoe",
+                "score": 722
+              },
+              {
+                "target": "Abcg5",
+                "score": 709
+              },
+              {
+                "target": "Fasn",
+                "score": 694
+              },
+              {
+                "target": "Scd1",
+                "score": 693
+              },
+              {
+                "target": "Srebf2",
+                "score": 676
+              },
+              {
+                "target": "Pcsk9",
+                "score": 625
+              },
+              {
+                "target": "Cideb",
+                "score": 623
+              },
+              {
+                "target": "Abcg8",
+                "score": 613
+              },
+              {
+                "target": "Alb",
+                "score": 561
+              },
+              {
+                "target": "Slc27a5",
+                "score": 559
+              },
+              {
+                "target": "Sar1b",
+                "score": 550
+              },
+              {
+                "target": "Acaca",
+                "score": 527
+              },
+              {
+                "target": "Gpam",
+                "score": 523
+              },
+              {
+                "target": "Pltp",
+                "score": 460
+              },
+              {
+                "target": "Cyp8b1",
+                "score": 421
+              },
+              {
+                "target": "Acly",
+                "score": 407
+              },
+              {
+                "target": "Elovl6",
+                "score": 402
+              },
+              {
+                "target": "Abcb11",
+                "score": 401
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insig1",
+            "log2fc": 1.5315189104385678,
+            "adj_pvalue": 5.3685326445153435e-39,
+            "pvalue": 2.957359404134846e-42,
+            "n_program_targets": 39,
+            "string_interactions": [
+              {
+                "target": "Scap",
+                "score": 999
+              },
+              {
+                "target": "Hmgcr",
+                "score": 992
+              },
+              {
+                "target": "Srebf2",
+                "score": 977
+              },
+              {
+                "target": "Idi1",
+                "score": 889
+              },
+              {
+                "target": "Cyp51",
+                "score": 881
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 878
+              },
+              {
+                "target": "Lss",
+                "score": 841
+              },
+              {
+                "target": "Pgrmc1",
+                "score": 831
+              },
+              {
+                "target": "Dhcr24",
+                "score": 826
+              },
+              {
+                "target": "Nsdhl",
+                "score": 824
+              },
+              {
+                "target": "Sqle",
+                "score": 819
+              },
+              {
+                "target": "Fdft1",
+                "score": 816
+              },
+              {
+                "target": "Fdps",
+                "score": 788
+              },
+              {
+                "target": "Hsd17b7",
+                "score": 784
+              },
+              {
+                "target": "Msmo1",
+                "score": 768
+              },
+              {
+                "target": "Pmvk",
+                "score": 737
+              },
+              {
+                "target": "Scd1",
+                "score": 720
+              },
+              {
+                "target": "Fasn",
+                "score": 720
+              },
+              {
+                "target": "Dhcr7",
+                "score": 716
+              },
+              {
+                "target": "Sc5d",
+                "score": 707
+              },
+              {
+                "target": "Mvk",
+                "score": 671
+              },
+              {
+                "target": "Stard4",
+                "score": 624
+              },
+              {
+                "target": "Acaca",
+                "score": 592
+              },
+              {
+                "target": "Elovl6",
+                "score": 576
+              },
+              {
+                "target": "Acss2",
+                "score": 569
+              },
+              {
+                "target": "Mvd",
+                "score": 556
+              },
+              {
+                "target": "Acly",
+                "score": 542
+              },
+              {
+                "target": "Gpam",
+                "score": 520
+              },
+              {
+                "target": "Lpin1",
+                "score": 506
+              },
+              {
+                "target": "Fads2",
+                "score": 499
+              },
+              {
+                "target": "Lbr",
+                "score": 480
+              },
+              {
+                "target": "Aacs",
+                "score": 476
+              },
+              {
+                "target": "Pcsk9",
+                "score": 474
+              },
+              {
+                "target": "Acsl3",
+                "score": 468
+              },
+              {
+                "target": "Tm7sf2",
+                "score": 465
+              },
+              {
+                "target": "Fads1",
+                "score": 421
+              },
+              {
+                "target": "Thrsp",
+                "score": 421
+              },
+              {
+                "target": "Elovl5",
+                "score": 410
+              },
+              {
+                "target": "Acat2",
+                "score": 409
+              }
+            ]
+          },
+          {
+            "regulator": "Ldlr",
+            "log2fc": 1.1898716923787434,
+            "adj_pvalue": 6.322522122608452e-33,
+            "pvalue": 5.6596846251656545e-36,
+            "n_program_targets": 21,
+            "string_interactions": [
+              {
+                "target": "Pcsk9",
+                "score": 954
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 651
+              },
+              {
+                "target": "Apoe",
+                "score": 627
+              },
+              {
+                "target": "Sqle",
+                "score": 578
+              },
+              {
+                "target": "Pltp",
+                "score": 569
+              },
+              {
+                "target": "Fdps",
+                "score": 563
+              },
+              {
+                "target": "Cyp51",
+                "score": 559
+              },
+              {
+                "target": "Pon1",
+                "score": 547
+              },
+              {
+                "target": "Apoa2",
+                "score": 547
+              },
+              {
+                "target": "Pcyox1",
+                "score": 545
+              },
+              {
+                "target": "Gpld1",
+                "score": 542
+              },
+              {
+                "target": "Apom",
+                "score": 542
+              },
+              {
+                "target": "Apof",
+                "score": 540
+              },
+              {
+                "target": "Apoc3",
+                "score": 540
+              },
+              {
+                "target": "Igf2r",
+                "score": 521
+              },
+              {
+                "target": "Agrn",
+                "score": 516
+              },
+              {
+                "target": "M6pr",
+                "score": 505
+              },
+              {
+                "target": "Lss",
+                "score": 474
+              },
+              {
+                "target": "Nsdhl",
+                "score": 426
+              },
+              {
+                "target": "Idi1",
+                "score": 406
+              },
+              {
+                "target": "Mvd",
+                "score": 404
+              }
+            ]
+          },
+          {
+            "regulator": "Fgfr4",
+            "log2fc": 0.7798724477832316,
+            "adj_pvalue": 2.5926206693556708e-11,
+            "pvalue": 1.0889986360334849e-13,
+            "n_program_targets": 5,
+            "string_interactions": [
+              {
+                "target": "Cyp8b1",
+                "score": 712
+              },
+              {
+                "target": "Abcb11",
+                "score": 686
+              },
+              {
+                "target": "Cyp27a1",
+                "score": 588
+              },
+              {
+                "target": "Cdh2",
+                "score": 570
+              },
+              {
+                "target": "Abcg5",
+                "score": 439
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Scap",
+            "log2fc": -1.8439810988684624,
+            "adj_pvalue": 1.2654506306528943e-246,
+            "pvalue": 1e-250,
+            "n_program_targets": 21,
+            "string_interactions": [
+              {
+                "target": "Srebf2",
+                "score": 999
+              },
+              {
+                "target": "Pgrmc1",
+                "score": 695
+              },
+              {
+                "target": "Hmgcr",
+                "score": 653
+              },
+              {
+                "target": "Fasn",
+                "score": 641
+              },
+              {
+                "target": "Scd1",
+                "score": 638
+              },
+              {
+                "target": "Sqle",
+                "score": 582
+              },
+              {
+                "target": "Fdft1",
+                "score": 555
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 526
+              },
+              {
+                "target": "Acaca",
+                "score": 523
+              },
+              {
+                "target": "Cyp51",
+                "score": 513
+              },
+              {
+                "target": "Acly",
+                "score": 502
+              },
+              {
+                "target": "Abcg5",
+                "score": 496
+              },
+              {
+                "target": "Fdps",
+                "score": 492
+              },
+              {
+                "target": "Msmo1",
+                "score": 490
+              },
+              {
+                "target": "Dhcr7",
+                "score": 483
+              },
+              {
+                "target": "Pcsk9",
+                "score": 474
+              },
+              {
+                "target": "Mvk",
+                "score": 474
+              },
+              {
+                "target": "Dhcr24",
+                "score": 460
+              },
+              {
+                "target": "Abcg8",
+                "score": 438
+              },
+              {
+                "target": "Lss",
+                "score": 434
+              },
+              {
+                "target": "Cyp27a1",
+                "score": 413
+              }
+            ]
+          },
+          {
+            "regulator": "Dgat2",
+            "log2fc": -2.439251444436167,
+            "adj_pvalue": 9.954903875492734e-221,
+            "pvalue": 1.573337376323661e-224,
+            "n_program_targets": 30,
+            "string_interactions": [
+              {
+                "target": "Lpin1",
+                "score": 970
+              },
+              {
+                "target": "Lpin2",
+                "score": 956
+              },
+              {
+                "target": "Scd1",
+                "score": 928
+              },
+              {
+                "target": "Fasn",
+                "score": 776
+              },
+              {
+                "target": "Acaca",
+                "score": 759
+              },
+              {
+                "target": "Gpam",
+                "score": 741
+              },
+              {
+                "target": "Acsl5",
+                "score": 729
+              },
+              {
+                "target": "Acacb",
+                "score": 688
+              },
+              {
+                "target": "Elovl6",
+                "score": 636
+              },
+              {
+                "target": "Hmgcr",
+                "score": 596
+              },
+              {
+                "target": "Acly",
+                "score": 590
+              },
+              {
+                "target": "Srebf2",
+                "score": 581
+              },
+              {
+                "target": "Acsl3",
+                "score": 575
+              },
+              {
+                "target": "Slc27a5",
+                "score": 534
+              },
+              {
+                "target": "Apoc3",
+                "score": 534
+              },
+              {
+                "target": "Elovl2",
+                "score": 501
+              },
+              {
+                "target": "Fads2",
+                "score": 490
+              },
+              {
+                "target": "Abcg8",
+                "score": 480
+              },
+              {
+                "target": "Elovl5",
+                "score": 478
+              },
+              {
+                "target": "Abcg5",
+                "score": 469
+              },
+              {
+                "target": "Cideb",
+                "score": 465
+              },
+              {
+                "target": "Elovl1",
+                "score": 440
+              },
+              {
+                "target": "Acss2",
+                "score": 432
+              },
+              {
+                "target": "Thrsp",
+                "score": 430
+              },
+              {
+                "target": "Fdft1",
+                "score": 426
+              },
+              {
+                "target": "Cyp2e1",
+                "score": 424
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 412
+              },
+              {
+                "target": "Alb",
+                "score": 404
+              },
+              {
+                "target": "Fads1",
+                "score": 403
+              },
+              {
+                "target": "Apoa2",
+                "score": 403
+              }
+            ]
+          },
+          {
+            "regulator": "Mttp",
+            "log2fc": -2.130473920966752,
+            "adj_pvalue": 6.35026314665936e-128,
+            "pvalue": 2.0072732962748668e-131,
+            "n_program_targets": 22,
+            "string_interactions": [
+              {
+                "target": "P4hb",
+                "score": 983
+              },
+              {
+                "target": "Apoc3",
+                "score": 782
+              },
+              {
+                "target": "Apoa2",
+                "score": 741
+              },
+              {
+                "target": "Hmgcr",
+                "score": 724
+              },
+              {
+                "target": "Apoe",
+                "score": 722
+              },
+              {
+                "target": "Abcg5",
+                "score": 709
+              },
+              {
+                "target": "Fasn",
+                "score": 694
+              },
+              {
+                "target": "Scd1",
+                "score": 693
+              },
+              {
+                "target": "Srebf2",
+                "score": 676
+              },
+              {
+                "target": "Pcsk9",
+                "score": 625
+              },
+              {
+                "target": "Cideb",
+                "score": 623
+              },
+              {
+                "target": "Abcg8",
+                "score": 613
+              },
+              {
+                "target": "Alb",
+                "score": 561
+              },
+              {
+                "target": "Slc27a5",
+                "score": 559
+              },
+              {
+                "target": "Sar1b",
+                "score": 550
+              },
+              {
+                "target": "Acaca",
+                "score": 527
+              },
+              {
+                "target": "Gpam",
+                "score": 523
+              },
+              {
+                "target": "Pltp",
+                "score": 460
+              },
+              {
+                "target": "Cyp8b1",
+                "score": 421
+              },
+              {
+                "target": "Acly",
+                "score": 407
+              },
+              {
+                "target": "Elovl6",
+                "score": 402
+              },
+              {
+                "target": "Abcb11",
+                "score": 401
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insig1",
+            "log2fc": 1.7012506691226006,
+            "adj_pvalue": 1.1538987370821936e-210,
+            "pvalue": 2.735544261778557e-214,
+            "n_program_targets": 38,
+            "string_interactions": [
+              {
+                "target": "Scap",
+                "score": 999
+              },
+              {
+                "target": "Hmgcr",
+                "score": 992
+              },
+              {
+                "target": "Srebf2",
+                "score": 977
+              },
+              {
+                "target": "Idi1",
+                "score": 889
+              },
+              {
+                "target": "Cyp51",
+                "score": 881
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 878
+              },
+              {
+                "target": "Lss",
+                "score": 841
+              },
+              {
+                "target": "Pgrmc1",
+                "score": 831
+              },
+              {
+                "target": "Dhcr24",
+                "score": 826
+              },
+              {
+                "target": "Nsdhl",
+                "score": 824
+              },
+              {
+                "target": "Sqle",
+                "score": 819
+              },
+              {
+                "target": "Fdft1",
+                "score": 816
+              },
+              {
+                "target": "Fdps",
+                "score": 788
+              },
+              {
+                "target": "Hsd17b7",
+                "score": 784
+              },
+              {
+                "target": "Msmo1",
+                "score": 768
+              },
+              {
+                "target": "Pmvk",
+                "score": 737
+              },
+              {
+                "target": "Scd1",
+                "score": 720
+              },
+              {
+                "target": "Fasn",
+                "score": 720
+              },
+              {
+                "target": "Dhcr7",
+                "score": 716
+              },
+              {
+                "target": "Sc5d",
+                "score": 707
+              },
+              {
+                "target": "Mvk",
+                "score": 671
+              },
+              {
+                "target": "Stard4",
+                "score": 624
+              },
+              {
+                "target": "Acaca",
+                "score": 592
+              },
+              {
+                "target": "Elovl6",
+                "score": 576
+              },
+              {
+                "target": "Acss2",
+                "score": 569
+              },
+              {
+                "target": "Mvd",
+                "score": 556
+              },
+              {
+                "target": "Acly",
+                "score": 542
+              },
+              {
+                "target": "Gpam",
+                "score": 520
+              },
+              {
+                "target": "Lpin1",
+                "score": 506
+              },
+              {
+                "target": "Lbr",
+                "score": 480
+              },
+              {
+                "target": "Aacs",
+                "score": 476
+              },
+              {
+                "target": "Pcsk9",
+                "score": 474
+              },
+              {
+                "target": "Acsl3",
+                "score": 468
+              },
+              {
+                "target": "Tm7sf2",
+                "score": 465
+              },
+              {
+                "target": "Fads1",
+                "score": 421
+              },
+              {
+                "target": "Thrsp",
+                "score": 421
+              },
+              {
+                "target": "Elovl5",
+                "score": 410
+              },
+              {
+                "target": "Acat2",
+                "score": 409
+              }
+            ]
+          },
+          {
+            "regulator": "Ldlr",
+            "log2fc": 1.0472362318640769,
+            "adj_pvalue": 1.5874423676091071e-78,
+            "pvalue": 1.129003452399464e-81,
+            "n_program_targets": 21,
+            "string_interactions": [
+              {
+                "target": "Pcsk9",
+                "score": 954
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 651
+              },
+              {
+                "target": "Apoe",
+                "score": 627
+              },
+              {
+                "target": "Sqle",
+                "score": 578
+              },
+              {
+                "target": "Pltp",
+                "score": 569
+              },
+              {
+                "target": "Fdps",
+                "score": 563
+              },
+              {
+                "target": "Cyp51",
+                "score": 559
+              },
+              {
+                "target": "Pon1",
+                "score": 547
+              },
+              {
+                "target": "Apoa2",
+                "score": 547
+              },
+              {
+                "target": "Pcyox1",
+                "score": 545
+              },
+              {
+                "target": "Gpld1",
+                "score": 542
+              },
+              {
+                "target": "Apom",
+                "score": 542
+              },
+              {
+                "target": "Apof",
+                "score": 540
+              },
+              {
+                "target": "Apoc3",
+                "score": 540
+              },
+              {
+                "target": "Igf2r",
+                "score": 521
+              },
+              {
+                "target": "Agrn",
+                "score": 516
+              },
+              {
+                "target": "M6pr",
+                "score": 505
+              },
+              {
+                "target": "Lss",
+                "score": 474
+              },
+              {
+                "target": "Nsdhl",
+                "score": 426
+              },
+              {
+                "target": "Idi1",
+                "score": 406
+              },
+              {
+                "target": "Mvd",
+                "score": 404
+              }
+            ]
+          },
+          {
+            "regulator": "Fads2",
+            "log2fc": 0.2494654725122062,
+            "adj_pvalue": 1.3306883069340564e-14,
+            "pvalue": 1.1041305669584903e-16,
+            "n_program_targets": 28,
+            "string_interactions": [
+              {
+                "target": "Scd1",
+                "score": 774
+              },
+              {
+                "target": "Elovl5",
+                "score": 768
+              },
+              {
+                "target": "Elovl2",
+                "score": 763
+              },
+              {
+                "target": "Fasn",
+                "score": 730
+              },
+              {
+                "target": "Elovl6",
+                "score": 724
+              },
+              {
+                "target": "Dhcr24",
+                "score": 710
+              },
+              {
+                "target": "Elovl1",
+                "score": 650
+              },
+              {
+                "target": "Fdps",
+                "score": 642
+              },
+              {
+                "target": "Fdft1",
+                "score": 642
+              },
+              {
+                "target": "Sqle",
+                "score": 637
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 629
+              },
+              {
+                "target": "Cyp51",
+                "score": 623
+              },
+              {
+                "target": "Srebf2",
+                "score": 601
+              },
+              {
+                "target": "Hsd17b7",
+                "score": 535
+              },
+              {
+                "target": "Acaca",
+                "score": 521
+              },
+              {
+                "target": "Nsdhl",
+                "score": 516
+              },
+              {
+                "target": "Sc5d",
+                "score": 514
+              },
+              {
+                "target": "Acly",
+                "score": 504
+              },
+              {
+                "target": "Insig1",
+                "score": 499
+              },
+              {
+                "target": "Hmgcr",
+                "score": 490
+              },
+              {
+                "target": "Msmo1",
+                "score": 467
+              },
+              {
+                "target": "Dhcr7",
+                "score": 462
+              },
+              {
+                "target": "Lss",
+                "score": 439
+              },
+              {
+                "target": "Lpcat3",
+                "score": 435
+              },
+              {
+                "target": "Acsl3",
+                "score": 426
+              },
+              {
+                "target": "Gpam",
+                "score": 424
+              },
+              {
+                "target": "Fabp5",
+                "score": 421
+              },
+              {
+                "target": "Fads1",
+                "score": 408
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "22": {
+    "meta": {
+      "query": "(Intu OR Twist1 OR Me1 OR Pklr OR Lias OR Gstm7 OR Aldh2 OR Mt2 OR Cyb5r3 OR Acly OR Ugdh OR Gstp1 OR Mt1 OR Zfp729b OR Khk OR Stap1 OR Zfp709 OR Ampd2 OR Sema3e OR Utp3 OR Gstp3 OR Nob1 OR Lama1) AND (hepatocyte OR liver OR aging OR MASLD OR \"metabolic zonation\" OR \"xenobiotic and drug metabolism\" OR \"bile acid metabolism\" OR \"gluconeogenesis and glycogen storage\" OR \"nitrogen and urea metabolism\" OR \"oxidative and mitochondrial metabolism\" OR \"membrane transport and solute carriers\" OR \"lipid metabolism\")",
+      "total_hits": 25
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Intu": "Predicted to enable phosphatidylinositol binding activity. Involved in embryonic digit morphogenesis; roof of mouth development; and tongue morphogenesis. Located in ciliary basal body and motile cilium. Implicated in asphyxiating thoracic dystrophy and orofaciodigital syndrome XVII.",
+      "Twist1": "This gene encodes a basic helix-loop-helix (bHLH) transcription factor that plays an important role in embryonic development. The encoded protein forms both homodimers and heterodimers that bind to DNA E box sequences and regulate the transcription of genes involved in cranial suture closure during skull development. This protein may also regulate neural tube closure, limb development and brown fat metabolism. This gene is hypermethylated and overexpressed in multiple human cancers, and the encoded protein promotes tumor cell invasion and metastasis, as well as metastatic recurrence. Mutations in this gene cause Saethre-Chotzen syndrome in human patients, which is characterized by craniosynostosis, ptosis and hypertelorism.",
+      "Me1": "This gene encodes a cytosolic, NADP-dependent enzyme that generates NADPH for fatty acid biosynthesis. The activity of this enzyme, the reversible oxidative decarboxylation of malate, links the glycolytic and citric acid cycles. The regulation of expression for this gene is complex. Increased expression can result from elevated levels of thyroid hormones or by higher proportions of carbohydrates in the diet.",
+      "Pklr": "The protein encoded by this gene is a pyruvate kinase that catalyzes the transphosphorylation of phohsphoenolpyruvate into pyruvate and ATP, which is the rate-limiting step of glycolysis. Defects in this enzyme, due to gene mutations or genetic variations, are the common cause of chronic hereditary nonspherocytic hemolytic anemia (CNSHA or HNSHA). Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Lias": "The protein encoded by this gene belongs to the biotin and lipoic acid synthetases family. Localized in the mitochondrion, this iron-sulfur enzyme catalyzes the final step in the de novo pathway for the biosynthesis of lipoic acid, a potent antioxidant. The deficient expression of this enzyme has been linked to conditions such as diabetes, atherosclerosis and neonatal-onset epilepsy. Alternative splicing occurs at this locus, and several transcript variants encoding distinct isoforms have been identified.",
+      "Aldh2": "This protein belongs to the aldehyde dehydrogenase family of proteins. Aldehyde dehydrogenase is the second enzyme of the major oxidative pathway of alcohol metabolism. Two major liver isoforms of aldehyde dehydrogenase, cytosolic and mitochondrial, can be distinguished by their electrophoretic mobilities, kinetic properties, and subcellular localizations. Most Caucasians have two major isozymes, while approximately 50% of East Asians have the cytosolic isozyme but not the mitochondrial isozyme. A remarkably higher frequency of acute alcohol intoxication among East Asians than among Caucasians could be related to the absence of a catalytically active form of the mitochondrial isozyme. The increased exposure to acetaldehyde in individuals with the catalytically inactive form may also confer greater susceptibility to many types of cancer. This gene encodes a mitochondrial isoform, which has a low Km for acetaldehydes, and is localized in mitochondrial matrix. Alternative splicing results in multiple transcript variants encoding distinct isoforms.",
+      "Mt2": "This gene is a member of the metallothionein family of genes. Proteins encoded by this gene family are low in molecular weight, are cysteine-rich, lack aromatic residues, and bind divalent heavy metal ions, altering the intracellular concentration of heavy metals in the cell. These proteins act as anti-oxidants, protect against hydroxyl free radicals, are important in homeostatic control of metal in the cell, and play a role in detoxification of heavy metals. The encoded protein interacts with the protein encoded by the homeobox containing 1 gene in some cell types, controlling intracellular zinc levels, affecting apoptotic and autophagy pathways. Some polymorphisms in this gene are associated with an increased risk of cancer.",
+      "Cyb5r3": "This gene encodes cytochrome b5 reductase, which includes a membrane-bound form in somatic cells (anchored in the endoplasmic reticulum, mitochondrial and other membranes) and a soluble form in erythrocytes. The membrane-bound form exists mainly on the cytoplasmic side of the endoplasmic reticulum and functions in desaturation and elongation of fatty acids, in cholesterol biosynthesis, and in drug metabolism. The erythrocyte form is located in a soluble fraction of circulating erythrocytes and is involved in methemoglobin reduction. The membrane-bound form has both membrane-binding and catalytic domains, while the soluble form has only the catalytic domain. Alternate splicing results in multiple transcript variants. Mutations in this gene cause methemoglobinemias.",
+      "Acly": "ATP citrate lyase is the primary enzyme responsible for the synthesis of cytosolic acetyl-CoA in many tissues. The enzyme is a tetramer (relative molecular weight approximately 440,000) of apparently identical subunits. It catalyzes the formation of acetyl-CoA and oxaloacetate from citrate and CoA with a concomitant hydrolysis of ATP to ADP and phosphate. The product, acetyl-CoA, serves several important biosynthetic pathways, including lipogenesis and cholesterogenesis. In nervous tissue, ATP citrate-lyase may be involved in the biosynthesis of acetylcholine. Multiple transcript variants encoding distinct isoforms have been identified for this gene.",
+      "Ugdh": "The protein encoded by this gene converts UDP-glucose to UDP-glucuronate and thereby participates in the biosynthesis of glycosaminoglycans such as hyaluronan, chondroitin sulfate, and heparan sulfate. These glycosylated compounds are common components of the extracellular matrix and likely play roles in signal transduction, cell migration, and cancer growth and metastasis. The expression of this gene is up-regulated by transforming growth factor beta and down-regulated by hypoxia. Alternative splicing results in multiple transcript variants.",
+      "Gstp1": "Glutathione S-transferases (GSTs) are a family of enzymes that play an important role in detoxification by catalyzing the conjugation of many hydrophobic and electrophilic compounds with reduced glutathione. Based on their biochemical, immunologic, and structural properties, the soluble GSTs are categorized into 4 main classes: alpha, mu, pi, and theta. This GST family member is a polymorphic gene encoding active, functionally different GSTP1 variant proteins that are thought to function in xenobiotic metabolism and play a role in susceptibility to cancer, and other diseases.",
+      "Mt1": "Predicted to enable zinc ion binding activity. Involved in cellular response to cadmium ion and cellular response to zinc ion. Located in cytoplasm and nucleus.",
+      "Khk": "This gene encodes ketohexokinase that catalyzes conversion of fructose to fructose-1-phosphate. The product of this gene is the first enzyme with a specialized pathway that catabolizes dietary fructose. Alternatively spliced transcript variants encoding different isoforms have been identified.",
+      "Stap1": "The protein encoded by this gene contains a proline-rich region, a pleckstrin homology (PH) domain, and a region in the carboxy terminal half with similarity to the Src Homology 2 (SH2) domain. This protein is a substrate of tyrosine-protein kinase Tec, and its interaction with tyrosine-protein kinase Tec is phosphorylation-dependent. This protein is thought to participate in a positive feedback loop by upregulating the activity of tyrosine-protein kinase Tec. Variants of this gene have been associated with autosomal-dominant hypercholesterolemia (ADH), which is characterized by elevated low-density lipoprotein cholesterol levels and in increased risk of coronary vascular disease. Alternative splicing results in multiple transcript variants.",
+      "Ampd2": "The protein encoded by this gene is important in purine metabolism by converting AMP to IMP. The encoded protein, which acts as a homotetramer, is one of three AMP deaminases found in mammals. Several transcript variants encoding different isoforms have been found for this gene.",
+      "Sema3e": "Semaphorins are a large family of conserved secreted and membrane associated proteins which possess a semaphorin (Sema) domain and a PSI domain (found in plexins, semaphorins and integrins) in the N-terminal extracellular portion. Based on sequence and structural similarities, semaphorins are put into eight classes: invertebrates contain classes 1 and 2, viruses have class V, and vertebrates contain classes 3-7. Semaphorins serve as axon guidance ligands via multimeric receptor complexes, some (if not all) containing plexin proteins. This gene encodes a class 4 semaphorin. This gene encodes a class 3 semaphorin. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Utp3": "Enables RNA binding activity. Involved in ribosomal small subunit biogenesis. Located in nucleolus. Part of small-subunit processome.",
+      "Nob1": "In yeast, over 200 protein and RNA cofactors are required for ribosome assembly, and these are generally conserved in eukaryotes. These factors orchestrate modification and cleavage of the initial 35S precursor rRNA transcript into the mature 18S, 5.8S, and 25S rRNAs, folding of the rRNA, and binding of ribosomal proteins and 5S RNA. Nob1 is involved in pre-rRNA processing. In a late cytoplasmic processing step, Nob1 cleaves a 20S rRNA intermediate at cleavage site D to produce the mature 18S rRNA (Lamanna and Karbstein, 2009 [PubMed 19706509]).[supplied by OMIM, Nov 2010]",
+      "Lama1": "This gene encodes one of the alpha 1 subunits of laminin. The laminins are a family of extracellular matrix glycoproteins that have a heterotrimeric structure consisting of an alpha, beta and gamma chain. These proteins make up a major component of the basement membrane and have been implicated in a wide variety of biological processes including cell adhesion, differentiation, migration, signaling, neurite outgrowth and metastasis. Mutations in this gene may be associated with Poretti-Boltshauser syndrome."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Lias": [],
+      "Acly": [],
+      "Zfp729b": [],
+      "Intu": [],
+      "Gstm7": [],
+      "Me1": [
+        "\"However, the role and mechanisms of ME1 in regulating hepatic lipid metabolism remain largely unclear.\" (PMID:40930346)",
+        "\"CONCLUSIONS: Our study provides the first demonstration that ME1 regulates ACOX1-mediated peroxisomal beta-oxidation and subsequent lipophagy/lipolysis, revealing its pivotal lipid-regulatory role in MASLD.\" (PMID:40930346)"
+      ],
+      "Khk": [
+        "\"Ketohexokinase (KHK), the primary enzyme for fructose metabolism, is increasingly recognized for non-metabolic roles2,3, but its function in regulating ER proteostasis under nutrient stress remains unclear.\" (PMID:41138206)",
+        "\"We show that steatogenic conditions synergistically induce lipid accumulation and robust KHK expression accompanied by activation of the IRE1alpha-XBP1 branch of the unfolded protein response (UPR).\" (PMID:41138206)"
+      ],
+      "Stap1": [],
+      "Pklr": [
+        "\"Pyruvate kinase is a key regulator in hepatic glucose metabolism, encoded by the gene pyruvate kinase liver/red blood cells (PKLR).\" (PMID:40221236)",
+        "\"Systems biology-based approaches, including metabolic and gene co-expression networks analyses, as well as genome-wide association studies (GWAS), have led to the identification of PKLR as a pivotal gene influencing liver metabolism in patients with metabolic dysfunction-associated steatotic liver disease (MASLD) and hepatocellular carcinoma (HCC).\" (PMID:40221236)"
+      ],
+      "Gstp1": [],
+      "Cyb5r3": [],
+      "Sema3e": [],
+      "Ampd2": [
+        "\"AMPD2 plays important roles in regulating hepatic glucose and lipid metabolism..\" (PMID:37567359)",
+        "\"However, the mechanistic link between AMPD2 and hepatic glucose and lipid metabolism remains elusive.\" (PMID:37567359)"
+      ],
+      "Gstp3": [],
+      "Zfp709": [],
+      "Ugdh": [
+        "\"Gut-Derived Hippuric Acid Alleviates Hepatic Lipid Metabolism via UGDH/FOXK1/CD36 Axis in Obese Mice..\" (PMID:41800297)",
+        "\"Mechanistically, we found that HA directly binds to UDP-glucose dehydrogenase (UGDH), enhancing its interaction with forkhead box protein K1 (FOXK1) in the cytoplasm, thereby preventing FOXK1 nuclear translocation.\" (PMID:41800297)"
+      ],
+      "Aldh2": [
+        "\"ALDH2 deficiency exacerbates MCD-diet induced MASLD by modulating bile acid metabolism..\" (PMID:38104741)",
+        "\"Furthermore, ALDH2 deficiency exacerbated hepatic steatosis, inflammation, and fibrosis in the MCD-diet induced mice.\" (PMID:38104741)"
+      ],
+      "Mt1": [],
+      "Nob1": [],
+      "Mt2": [],
+      "Twist1": [],
+      "Lama1": [],
+      "Utp3": []
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [
+          {
+            "regulator": "Mlxipl",
+            "log2fc": -1.6971389948474118,
+            "adj_pvalue": 2.1587472715402166e-29,
+            "pvalue": 2.2297264334285254e-32,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Fasn",
+                "score": 750
+              },
+              {
+                "target": "Acly",
+                "score": 656
+              },
+              {
+                "target": "Pklr",
+                "score": 588
+              },
+              {
+                "target": "Khk",
+                "score": 579
+              },
+              {
+                "target": "Gpam",
+                "score": 541
+              },
+              {
+                "target": "Acadl",
+                "score": 409
+              },
+              {
+                "target": "Fabp1",
+                "score": 405
+              }
+            ]
+          },
+          {
+            "regulator": "Dgat2",
+            "log2fc": -1.582934824071674,
+            "adj_pvalue": 4.250031066112609e-27,
+            "pvalue": 5.1672017678602095e-30,
+            "n_program_targets": 13,
+            "string_interactions": [
+              {
+                "target": "Fasn",
+                "score": 776
+              },
+              {
+                "target": "Gpam",
+                "score": 741
+              },
+              {
+                "target": "Plin2",
+                "score": 685
+              },
+              {
+                "target": "Plin3",
+                "score": 615
+              },
+              {
+                "target": "Acly",
+                "score": 590
+              },
+              {
+                "target": "Cpt2",
+                "score": 532
+              },
+              {
+                "target": "Fabp1",
+                "score": 528
+              },
+              {
+                "target": "Acadl",
+                "score": 503
+              },
+              {
+                "target": "Ehhadh",
+                "score": 494
+              },
+              {
+                "target": "Acadm",
+                "score": 438
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 409
+              },
+              {
+                "target": "Pklr",
+                "score": 405
+              },
+              {
+                "target": "Vcp",
+                "score": 402
+              }
+            ]
+          },
+          {
+            "regulator": "Scap",
+            "log2fc": -0.9942887357545636,
+            "adj_pvalue": 6.163601870725971e-14,
+            "pvalue": 1.9947614102588427e-16,
+            "n_program_targets": 3,
+            "string_interactions": [
+              {
+                "target": "Fasn",
+                "score": 641
+              },
+              {
+                "target": "Acly",
+                "score": 502
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 412
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insig1",
+            "log2fc": 2.0488217509497852,
+            "adj_pvalue": 4.0050465549456626e-21,
+            "pvalue": 7.44611697678947e-24,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Vcp",
+                "score": 721
+              },
+              {
+                "target": "Fasn",
+                "score": 720
+              },
+              {
+                "target": "Stard4",
+                "score": 624
+              },
+              {
+                "target": "Acly",
+                "score": 542
+              },
+              {
+                "target": "Gpam",
+                "score": 520
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 513
+              },
+              {
+                "target": "Acat2",
+                "score": 409
+              }
+            ]
+          },
+          {
+            "regulator": "Flcn",
+            "log2fc": 1.6364534256012442,
+            "adj_pvalue": 2.210489159422003e-18,
+            "pvalue": 5.175184390029176e-21,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Sdhd",
+                "score": 469
+              },
+              {
+                "target": "Sdhc",
+                "score": 416
+              }
+            ]
+          },
+          {
+            "regulator": "Gckr",
+            "log2fc": 0.7722955728440067,
+            "adj_pvalue": 0.0003313137582106,
+            "pvalue": 4.722460543521586e-06,
+            "n_program_targets": 5,
+            "string_interactions": [
+              {
+                "target": "Khk",
+                "score": 633
+              },
+              {
+                "target": "Atp5d",
+                "score": 461
+              },
+              {
+                "target": "Pygl",
+                "score": 431
+              },
+              {
+                "target": "Pklr",
+                "score": 423
+              },
+              {
+                "target": "Uox",
+                "score": 421
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Mlxipl",
+            "log2fc": -1.6040931048809606,
+            "adj_pvalue": 3.4954037348821216e-103,
+            "pvalue": 1.6573086220259938e-106,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Fasn",
+                "score": 750
+              },
+              {
+                "target": "Acly",
+                "score": 656
+              },
+              {
+                "target": "Pklr",
+                "score": 588
+              },
+              {
+                "target": "Khk",
+                "score": 579
+              },
+              {
+                "target": "Gpam",
+                "score": 541
+              },
+              {
+                "target": "Acadl",
+                "score": 409
+              },
+              {
+                "target": "Fabp1",
+                "score": 405
+              }
+            ]
+          },
+          {
+            "regulator": "Dgat2",
+            "log2fc": -1.141382783220739,
+            "adj_pvalue": 4.7719827443283046e-46,
+            "pvalue": 4.902267553832688e-49,
+            "n_program_targets": 13,
+            "string_interactions": [
+              {
+                "target": "Fasn",
+                "score": 776
+              },
+              {
+                "target": "Gpam",
+                "score": 741
+              },
+              {
+                "target": "Plin2",
+                "score": 685
+              },
+              {
+                "target": "Plin3",
+                "score": 615
+              },
+              {
+                "target": "Acly",
+                "score": 590
+              },
+              {
+                "target": "Cpt2",
+                "score": 532
+              },
+              {
+                "target": "Fabp1",
+                "score": 528
+              },
+              {
+                "target": "Acadl",
+                "score": 503
+              },
+              {
+                "target": "Ehhadh",
+                "score": 494
+              },
+              {
+                "target": "Acadm",
+                "score": 438
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 409
+              },
+              {
+                "target": "Pklr",
+                "score": 405
+              },
+              {
+                "target": "Vcp",
+                "score": 402
+              }
+            ]
+          },
+          {
+            "regulator": "Insr",
+            "log2fc": -0.5434578159366292,
+            "adj_pvalue": 1.083099953881504e-17,
+            "pvalue": 6.676024678984903e-20,
+            "n_program_targets": 4,
+            "string_interactions": [
+              {
+                "target": "Pten",
+                "score": 641
+              },
+              {
+                "target": "Sqstm1",
+                "score": 528
+              },
+              {
+                "target": "Cdc42",
+                "score": 490
+              },
+              {
+                "target": "Fasn",
+                "score": 427
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insig1",
+            "log2fc": 1.2513934509090845,
+            "adj_pvalue": 1.2424947651316812e-41,
+            "pvalue": 1.4727892993628256e-44,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Vcp",
+                "score": 721
+              },
+              {
+                "target": "Fasn",
+                "score": 720
+              },
+              {
+                "target": "Stard4",
+                "score": 624
+              },
+              {
+                "target": "Acly",
+                "score": 542
+              },
+              {
+                "target": "Gpam",
+                "score": 520
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 513
+              },
+              {
+                "target": "Acat2",
+                "score": 409
+              }
+            ]
+          },
+          {
+            "regulator": "Flcn",
+            "log2fc": 0.787446534083642,
+            "adj_pvalue": 2.5738699743011555e-24,
+            "pvalue": 9.559589751023339e-27,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Sdhd",
+                "score": 469
+              },
+              {
+                "target": "Sdhc",
+                "score": 416
+              }
+            ]
+          },
+          {
+            "regulator": "G6pc",
+            "log2fc": 0.8230311442085209,
+            "adj_pvalue": 2.714645338041781e-23,
+            "pvalue": 1.1369562702101079e-25,
+            "n_program_targets": 14,
+            "string_interactions": [
+              {
+                "target": "Aldob",
+                "score": 939
+              },
+              {
+                "target": "Tkt",
+                "score": 842
+              },
+              {
+                "target": "Taldo1",
+                "score": 824
+              },
+              {
+                "target": "Pcx",
+                "score": 755
+              },
+              {
+                "target": "Pygl",
+                "score": 751
+              },
+              {
+                "target": "Pklr",
+                "score": 689
+              },
+              {
+                "target": "Cyp3a11",
+                "score": 681
+              },
+              {
+                "target": "Fasn",
+                "score": 678
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 499
+              },
+              {
+                "target": "Khk",
+                "score": 489
+              },
+              {
+                "target": "Acly",
+                "score": 489
+              },
+              {
+                "target": "Fabp1",
+                "score": 469
+              },
+              {
+                "target": "Gpam",
+                "score": 459
+              },
+              {
+                "target": "Aldh8a1",
+                "score": 410
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "23": {
+    "meta": {
+      "query": "(Mup17 OR Mup10 OR Casc3 OR Adam32 OR Emc10 OR Mgst1 OR Cd207 OR Hipk1 OR Fitm1 OR Ubxn11 OR Acox1 OR Pon1 OR Ces1d OR Clstn3 OR Cyp2e1 OR Mesp2 OR Fcor OR Ripply1 OR Ttll3 OR Phactr4 OR Vnn1 OR Chpt1 OR Cyp4b1) AND (hepatocyte OR liver OR aging OR MASLD OR \"metabolic zonation\" OR \"xenobiotic and drug metabolism\" OR \"bile acid metabolism\" OR \"gluconeogenesis and glycogen storage\" OR \"nitrogen and urea metabolism\" OR \"oxidative and mitochondrial metabolism\" OR \"membrane transport and solute carriers\" OR \"lipid metabolism\")",
+      "total_hits": 25
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Casc3": "The product of this gene is a core component of the exon junction complex (EJC), a protein complex that is deposited on spliced mRNAs at exon-exon junctions and functions in nonsense-mediated mRNA decay (NMD). The encoded protein binds RNA and interacts with two other EJC core components. It is predominantly located in the cytoplasm, but shuttles into the nucleus where it localizes to nuclear speckles.",
+      "Adam32": "This gene encodes a member of the disintegrin family of membrane-anchored proteins that play a role in diverse biological processes such as brain development, fertilization, tumor development and inflammation. This gene is predominantly expressed in the testis. The encoded protein undergoes proteolytic processing to generate a mature polypeptide comprised of an metalloprotease, disintegrin and epidermal growth factor-like domains. This gene is located in a cluster of other disintegrin and metallopeptidase family genes on chromosome 8. Alternative splicing results in multiple transcript variants encoding different isoforms.",
+      "Emc10": "Contributes to membrane insertase activity. Involved in positive regulation of angiogenesis; positive regulation of endothelial cell proliferation; and protein insertion into ER membrane. Located in endoplasmic reticulum membrane and extracellular region. Part of EMC complex.",
+      "Mgst1": "The MAPEG (Membrane Associated Proteins in Eicosanoid and Glutathione metabolism) family consists of six human proteins, two of which are involved in the production of leukotrienes and prostaglandin E, important mediators of inflammation. Other family members, demonstrating glutathione S-transferase and peroxidase activities, are involved in cellular defense against toxic, carcinogenic, and pharmacologically active electrophilic compounds. This gene encodes a protein that catalyzes the conjugation of glutathione to electrophiles and the reduction of lipid hydroperoxides. This protein is localized to the endoplasmic reticulum and outer mitochondrial membrane where it is thought to protect these membranes from oxidative stress. Several transcript variants, some non-protein coding and some protein coding, have been found for this gene.",
+      "Cd207": "The protein encoded by this gene is expressed only in Langerhans cells which are immature dendritic cells of the epidermis and mucosa. It is localized in the Birbeck granules, organelles present in the cytoplasm of Langerhans cells and consisting of superimposed and zippered membranes. It is a C-type lectin with mannose binding specificity, and it has been proposed that mannose binding by this protein leads to internalization of antigen into Birbeck granules and providing access to a nonclassical antigen-processing pathway. Mutations in this gene result in Birbeck granules deficiency or loss of sugar binding activity.",
+      "Hipk1": "The protein encoded by this gene belongs to the Ser/Thr family of protein kinases and HIPK subfamily. It phosphorylates homeodomain transcription factors and may also function as a co-repressor for homeodomain transcription factors. Alternative splicing results in four transcript variants encoding four distinct isoforms.",
+      "Fitm1": "Predicted to enable diacylglycerol binding activity and triglyceride binding activity. Predicted to be involved in lipid droplet formation; phospholipid biosynthetic process; and positive regulation of sequestering of triglyceride. Predicted to be located in endoplasmic reticulum and membrane. Predicted to be active in endoplasmic reticulum membrane.",
+      "Ubxn11": "This gene encodes a protein with a divergent C-terminal UBX domain. The homologous protein in the rat interacts with members of the Rnd subfamily of Rho GTPases at the cell periphery through its C-terminal region. It also interacts with several heterotrimeric G proteins through their G-alpha subunits and promotes Rho GTPase activation. It is proposed to serve a bidirectional role in the promotion and inhibition of Rho activity through upstream signaling pathways. The 3' coding sequence of this gene contains a polymoprhic region of 24 nt tandem repeats. Several transcripts containing between 1.5 and five repeat units have been reported. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Acox1": "The protein encoded by this gene is the first enzyme of the fatty acid beta-oxidation pathway, which catalyzes the desaturation of acyl-CoAs to 2-trans-enoyl-CoAs. It donates electrons directly to molecular oxygen, thereby producing hydrogen peroxide. Defects in this gene result in pseudoneonatal adrenoleukodystrophy, a disease that is characterized by accumulation of very long chain fatty acids. Alternatively spliced transcript variants encoding different isoforms have been identified.",
+      "Pon1": "This gene encodes a member of the paraoxonase family of enzymes and exhibits lactonase and ester hydrolase activity. Following synthesis in the kidney and liver, the enzyme is secreted into the circulation, where it binds to high density lipoprotein (HDL) particles and hydrolyzes thiolactones and xenobiotics, including paraoxon, a metabolite of the insecticide parathion. Polymorphisms in this gene may be associated with coronary artery disease and diabetic retinopathy. The gene is found in a cluster of three related paraoxonase genes on chromosome 7.",
+      "Clstn3": "Enables cell-cell adhesion mediator activity and neurexin family protein binding activity. Involved in L-ascorbic acid metabolic process and regulation of synapse assembly. Predicted to be located in several cellular components, including Golgi membrane; dendrite; and postsynaptic density. Predicted to be part of protein-containing complex. Predicted to be active in several cellular components, including GABA-ergic synapse; lipid droplet; and postsynaptic density membrane.",
+      "Cyp2e1": "This gene encodes a member of the cytochrome P450 superfamily of enzymes. The cytochrome P450 proteins are monooxygenases which catalyze many reactions involved in drug metabolism and synthesis of cholesterol, steroids and other lipids. This protein localizes to the endoplasmic reticulum and is induced by ethanol, the diabetic state, and starvation. The enzyme metabolizes both endogenous substrates, such as ethanol, acetone, and acetal, as well as exogenous substrates including benzene, carbon tetrachloride, ethylene glycol, and nitrosamines which are premutagens found in cigarette smoke. Due to its many substrates, this enzyme may be involved in such varied processes as gluconeogenesis, hepatic cirrhosis, diabetes, and cancer.",
+      "Mesp2": "This gene encodes a member of the bHLH family of transcription factors and plays a key role in defining the rostrocaudal patterning of somites via interactions with multiple Notch signaling pathways. This gene is expressed in the anterior presomitic mesoderm and is downregulated immediately after the formation of segmented somites. This gene also plays a role in the formation of epithelial somitic mesoderm and cardiac mesoderm. Mutations in the MESP2 gene cause autosomal recessive spondylocostal dystosis 2 (SCD02).",
+      "Ripply1": "This gene encodes a protein similar to a zebrafish protein which acts as a transcriptional repressor in and is required for somite segmentation in zebrafish embryos (PMID: 16326386). Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Ttll3": "Enables protein-glycine ligase activity. Predicted to be involved in several processes, including axoneme assembly; flagellated sperm motility; and protein polyglycylation. Predicted to be located in cilium. Predicted to be active in axoneme; microtubule cytoskeleton; and sperm flagellum.",
+      "Phactr4": "This gene encodes a member of the phosphatase and actin regulator (PHACTR) family. Other PHACTR family members have been shown to inhibit protein phosphatase 1 (PP1) activity, and the homolog of this gene in the mouse has been shown to interact with actin and PP1. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Vnn1": "This gene encodes a member of the vanin family of proteins, which share extensive sequence similarity with each other, and also with biotinidase. The family includes secreted and membrane-associated proteins, a few of which have been reported to participate in hematopoietic cell trafficking. No biotinidase activity has been demonstrated for any of the vanin proteins, however, they possess pantetheinase activity, which may play a role in oxidative-stress response. This protein, like its mouse homolog, is likely a GPI-anchored cell surface molecule. The mouse protein is expressed by the perivascular thymic stromal cells and regulates migration of T-cell progenitors to the thymus. This gene lies in close proximity to, and in the same transcriptional orientation as, two other vanin genes on chromosome 6q23-q24.",
+      "Chpt1": "Enables diacylglycerol cholinephosphotransferase activity. Involved in phosphatidylcholine biosynthetic process and platelet activating factor biosynthetic process. Is active in Golgi membrane.",
+      "Cyp4b1": "This gene encodes a member of the cytochrome P450 superfamily of enzymes. The cytochrome P450 proteins are monooxygenases which catalyze many reactions involved in drug metabolism and synthesis of cholesterol, steroids and other lipids. This protein localizes to the endoplasmic reticulum. In rodents, the homologous protein has been shown to metabolize certain carcinogens; however, the specific function of the human protein has not been determined. Multiple transcript variants have been found for this gene."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Ttll3": [],
+      "Ripply1": [],
+      "Hipk1": [],
+      "Ubxn11": [],
+      "Chpt1": [],
+      "Casc3": [],
+      "Ces1d": [],
+      "Mgst1": [],
+      "Cd207": [],
+      "Fitm1": [],
+      "Pon1": [
+        "\"The paraoxonase (PON) gene family (including PON1, PON2, and PON3), is known for its anti-oxidative and anti-inflammatory properties, protecting against metabolic diseases such as obesity and metabolic dysfunction-associated steatotic liver disease (MASLD).\" (PMID:39334710)",
+        "\"Polymorphisms rs705379 and rs854552 in the PON1 gene displayed significant association with MASLD stage and fibrosis, respectively.\" (PMID:39334710)"
+      ],
+      "Phactr4": [],
+      "Emc10": [
+        "\"EMC10 modulates hepatic ER stress and steatosis in an isoform specific manner..\" (PMID:38599383)",
+        "\"BACKGROUND & AIMS: Endoplasmic reticulum (ER) membrane protein complex subunit 10 (EMC10) has been implicated in obesity.\" (PMID:38599383)"
+      ],
+      "Mup17": [],
+      "Clstn3": [],
+      "Adam32": [],
+      "Cyp4b1": [],
+      "Cyp2e1": [],
+      "Mesp2": [],
+      "Fcor": [],
+      "Mup10": [],
+      "Vnn1": [],
+      "Acox1": [
+        "\"In addition, melatonin reduced lipid accumulation and ameliorated MASLD through its regulatory effect on key proteins involved in fatty acid metabolism, including acyl coenzyme A oxidase 1 (ACOX1), cluster of differentiation 36 (CD36), and fatty acid synthase (FASN).\" (PMID:42118212)",
+        "\"CONCLUSIONS: Our study provides the first demonstration that ME1 regulates ACOX1-mediated peroxisomal beta-oxidation and subsequent lipophagy/lipolysis, revealing its pivotal lipid-regulatory role in MASLD.\" (PMID:40930346)",
+        "\"Transcriptome analyses uncovered that in response to HFD, acyl-CoA oxidase 1 (Acox1)-mediated peroxisomal fatty acid beta-oxidation was remarkably suppressed in Me1-deficient livers, thereby disrupting the downstream production of acetyl-CoA and H2O2.\" (PMID:40930346)"
+      ]
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [
+          {
+            "regulator": "Dgat2",
+            "log2fc": -1.2341432530088543,
+            "adj_pvalue": 1.0105811428860878e-10,
+            "pvalue": 4.731933412321685e-13,
+            "n_program_targets": 28,
+            "string_interactions": [
+              {
+                "target": "Lpin2",
+                "score": 956
+              },
+              {
+                "target": "Plpp3",
+                "score": 941
+              },
+              {
+                "target": "Lipc",
+                "score": 939
+              },
+              {
+                "target": "Scd1",
+                "score": 928
+              },
+              {
+                "target": "Mogat1",
+                "score": 910
+              },
+              {
+                "target": "Acsl1",
+                "score": 803
+              },
+              {
+                "target": "Agpat2",
+                "score": 779
+              },
+              {
+                "target": "Gpat4",
+                "score": 756
+              },
+              {
+                "target": "Acsl5",
+                "score": 729
+              },
+              {
+                "target": "Ppara",
+                "score": 726
+              },
+              {
+                "target": "Pparg",
+                "score": 682
+              },
+              {
+                "target": "Acox1",
+                "score": 676
+              },
+              {
+                "target": "Lcat",
+                "score": 663
+              },
+              {
+                "target": "Cpt1a",
+                "score": 662
+              },
+              {
+                "target": "Slc27a2",
+                "score": 583
+              },
+              {
+                "target": "Fitm2",
+                "score": 580
+              },
+              {
+                "target": "Ces1d",
+                "score": 555
+              },
+              {
+                "target": "Pemt",
+                "score": 552
+              },
+              {
+                "target": "Slc27a5",
+                "score": 534
+              },
+              {
+                "target": "Fads2",
+                "score": 490
+              },
+              {
+                "target": "Elovl5",
+                "score": 478
+              },
+              {
+                "target": "Elovl3",
+                "score": 473
+              },
+              {
+                "target": "Cideb",
+                "score": 465
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 447
+              },
+              {
+                "target": "G0s2",
+                "score": 430
+              },
+              {
+                "target": "Cyp2e1",
+                "score": 424
+              },
+              {
+                "target": "Aadac",
+                "score": 411
+              },
+              {
+                "target": "Apoa2",
+                "score": 403
+              }
+            ]
+          },
+          {
+            "regulator": "Pparg",
+            "log2fc": -0.6604645771608267,
+            "adj_pvalue": 1.47845683860334e-05,
+            "pvalue": 1.628872738519329e-07,
+            "n_program_targets": 39,
+            "string_interactions": [
+              {
+                "target": "Smarcd1",
+                "score": 917
+              },
+              {
+                "target": "Retn",
+                "score": 833
+              },
+              {
+                "target": "Cpt1a",
+                "score": 811
+              },
+              {
+                "target": "Scd1",
+                "score": 803
+              },
+              {
+                "target": "Acsl1",
+                "score": 763
+              },
+              {
+                "target": "Acox1",
+                "score": 745
+              },
+              {
+                "target": "Apoe",
+                "score": 716
+              },
+              {
+                "target": "Ppara",
+                "score": 698
+              },
+              {
+                "target": "Adipor2",
+                "score": 680
+              },
+              {
+                "target": "Ucp3",
+                "score": 657
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 641
+              },
+              {
+                "target": "Mgst1",
+                "score": 628
+              },
+              {
+                "target": "Elovl3",
+                "score": 605
+              },
+              {
+                "target": "Agpat2",
+                "score": 605
+              },
+              {
+                "target": "Serpina6",
+                "score": 605
+              },
+              {
+                "target": "Acaa1b",
+                "score": 577
+              },
+              {
+                "target": "Bdnf",
+                "score": 563
+              },
+              {
+                "target": "Nt5e",
+                "score": 527
+              },
+              {
+                "target": "Cyp2e1",
+                "score": 520
+              },
+              {
+                "target": "Faah",
+                "score": 518
+              },
+              {
+                "target": "Cyp4a10",
+                "score": 516
+              },
+              {
+                "target": "Mogat1",
+                "score": 491
+              },
+              {
+                "target": "Gpt",
+                "score": 478
+              },
+              {
+                "target": "Rbp4",
+                "score": 471
+              },
+              {
+                "target": "Slc27a2",
+                "score": 466
+              },
+              {
+                "target": "Acsl5",
+                "score": 462
+              },
+              {
+                "target": "Fads2",
+                "score": 459
+              },
+              {
+                "target": "Lipc",
+                "score": 451
+              },
+              {
+                "target": "G0s2",
+                "score": 449
+              },
+              {
+                "target": "Cyp27a1",
+                "score": 444
+              },
+              {
+                "target": "Pon1",
+                "score": 442
+              },
+              {
+                "target": "Amy1",
+                "score": 437
+              },
+              {
+                "target": "Lcat",
+                "score": 435
+              },
+              {
+                "target": "Aldh1a1",
+                "score": 430
+              },
+              {
+                "target": "Cyp4a14",
+                "score": 420
+              },
+              {
+                "target": "Plg",
+                "score": 410
+              },
+              {
+                "target": "Serpinb1a",
+                "score": 406
+              },
+              {
+                "target": "Paqr9",
+                "score": 405
+              },
+              {
+                "target": "Serpinb1c",
+                "score": 401
+              }
+            ]
+          },
+          {
+            "regulator": "Scap",
+            "log2fc": -0.5448734604941496,
+            "adj_pvalue": 0.0004367281220291,
+            "pvalue": 6.525734698461309e-06,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Pgrmc1",
+                "score": 695
+              },
+              {
+                "target": "Scd1",
+                "score": 638
+              },
+              {
+                "target": "Dhcr24",
+                "score": 460
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 456
+              },
+              {
+                "target": "Ppara",
+                "score": 427
+              },
+              {
+                "target": "Cyp27a1",
+                "score": 413
+              },
+              {
+                "target": "Pparg",
+                "score": 410
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Flcn",
+            "log2fc": 0.7611083597579593,
+            "adj_pvalue": 9.32267502690317e-08,
+            "pvalue": 6.868831220347303e-10,
+            "n_program_targets": 0,
+            "string_interactions": []
+          },
+          {
+            "regulator": "Trib1",
+            "log2fc": 0.8554577375701118,
+            "adj_pvalue": 3.072838992819049e-07,
+            "pvalue": 2.560257795844959e-09,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Acsl1",
+                "score": 578
+              },
+              {
+                "target": "Galnt2",
+                "score": 526
+              }
+            ]
+          },
+          {
+            "regulator": "Leng1",
+            "log2fc": 0.8713909899395296,
+            "adj_pvalue": 3.0307778837263708e-06,
+            "pvalue": 3.0052120617707924e-08,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Slc16a13",
+                "score": 416
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Sqle",
+            "log2fc": -0.539615124779308,
+            "adj_pvalue": 2.5659131546027898e-11,
+            "pvalue": 2.656244464310242e-13,
+            "n_program_targets": 18,
+            "string_interactions": [
+              {
+                "target": "Sigmar1",
+                "score": 977
+              },
+              {
+                "target": "Dhcr24",
+                "score": 870
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 718
+              },
+              {
+                "target": "Hsd3b7",
+                "score": 709
+              },
+              {
+                "target": "Cyp7b1",
+                "score": 697
+              },
+              {
+                "target": "Hsd3b3",
+                "score": 689
+              },
+              {
+                "target": "Cyp8b1",
+                "score": 679
+              },
+              {
+                "target": "Fads2",
+                "score": 637
+              },
+              {
+                "target": "Scd1",
+                "score": 597
+              },
+              {
+                "target": "Cpox",
+                "score": 567
+              },
+              {
+                "target": "Cyp4a14",
+                "score": 546
+              },
+              {
+                "target": "Cyp4a10",
+                "score": 511
+              },
+              {
+                "target": "Cyp27a1",
+                "score": 510
+              },
+              {
+                "target": "Ebpl",
+                "score": 503
+              },
+              {
+                "target": "Por",
+                "score": 464
+              },
+              {
+                "target": "Cyp4b1",
+                "score": 421
+              },
+              {
+                "target": "Cyp4a32",
+                "score": 421
+              },
+              {
+                "target": "Elovl5",
+                "score": 408
+              }
+            ]
+          },
+          {
+            "regulator": "Ap2a2",
+            "log2fc": -0.5429901320134117,
+            "adj_pvalue": 9.19573101963306e-09,
+            "pvalue": 1.242616634949999e-10,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Prkcg",
+                "score": 434
+              }
+            ]
+          },
+          {
+            "regulator": "Srebf1",
+            "log2fc": -0.5659321424548418,
+            "adj_pvalue": 4.100790644888595e-06,
+            "pvalue": 8.16625490935791e-08,
+            "n_program_targets": 34,
+            "string_interactions": [
+              {
+                "target": "Scd1",
+                "score": 907
+              },
+              {
+                "target": "Ppara",
+                "score": 886
+              },
+              {
+                "target": "Pparg",
+                "score": 878
+              },
+              {
+                "target": "Cpt1a",
+                "score": 822
+              },
+              {
+                "target": "Acox1",
+                "score": 769
+              },
+              {
+                "target": "Cyp7a1",
+                "score": 738
+              },
+              {
+                "target": "Apoe",
+                "score": 673
+              },
+              {
+                "target": "Elovl5",
+                "score": 669
+              },
+              {
+                "target": "Fads2",
+                "score": 660
+              },
+              {
+                "target": "Acsl1",
+                "score": 613
+              },
+              {
+                "target": "Adipor2",
+                "score": 612
+              },
+              {
+                "target": "Cyp2e1",
+                "score": 612
+              },
+              {
+                "target": "Retn",
+                "score": 583
+              },
+              {
+                "target": "Cyp27a1",
+                "score": 541
+              },
+              {
+                "target": "Gpt",
+                "score": 539
+              },
+              {
+                "target": "Lipc",
+                "score": 536
+              },
+              {
+                "target": "Slc27a2",
+                "score": 536
+              },
+              {
+                "target": "Slc27a5",
+                "score": 534
+              },
+              {
+                "target": "Cyp8b1",
+                "score": 532
+              },
+              {
+                "target": "Cyp4a10",
+                "score": 509
+              },
+              {
+                "target": "Dhcr24",
+                "score": 507
+              },
+              {
+                "target": "Gpat4",
+                "score": 505
+              },
+              {
+                "target": "Agpat2",
+                "score": 486
+              },
+              {
+                "target": "Pltp",
+                "score": 482
+              },
+              {
+                "target": "Acsl5",
+                "score": 481
+              },
+              {
+                "target": "Elovl3",
+                "score": 476
+              },
+              {
+                "target": "Lpin2",
+                "score": 475
+              },
+              {
+                "target": "Ucp3",
+                "score": 474
+              },
+              {
+                "target": "Mogat1",
+                "score": 471
+              },
+              {
+                "target": "Cyp7b1",
+                "score": 430
+              },
+              {
+                "target": "Nr1i3",
+                "score": 424
+              },
+              {
+                "target": "Cyp4a14",
+                "score": 421
+              },
+              {
+                "target": "Ces1d",
+                "score": 419
+              },
+              {
+                "target": "Lcat",
+                "score": 411
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Trib1",
+            "log2fc": 0.4699950752260648,
+            "adj_pvalue": 5.0840997429345927e-14,
+            "pvalue": 4.459558182641847e-16,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Acsl1",
+                "score": 578
+              },
+              {
+                "target": "Galnt2",
+                "score": 526
+              }
+            ]
+          },
+          {
+            "regulator": "Insr",
+            "log2fc": 0.2229197636899036,
+            "adj_pvalue": 4.869880164201586e-05,
+            "pvalue": 1.1929843917526829e-06,
+            "n_program_targets": 7,
+            "string_interactions": [
+              {
+                "target": "Bdnf",
+                "score": 739
+              },
+              {
+                "target": "Retn",
+                "score": 589
+              },
+              {
+                "target": "Pparg",
+                "score": 553
+              },
+              {
+                "target": "Ppara",
+                "score": 537
+              },
+              {
+                "target": "Pex11g",
+                "score": 496
+              },
+              {
+                "target": "Adipor2",
+                "score": 422
+              },
+              {
+                "target": "Suox",
+                "score": 404
+              }
+            ]
+          },
+          {
+            "regulator": "Flcn",
+            "log2fc": 0.1715708286341168,
+            "adj_pvalue": 0.000102508202284,
+            "pvalue": 2.681275281241173e-06,
+            "n_program_targets": 0,
+            "string_interactions": []
+          }
+        ]
+      }
+    }
+  },
+  "24": {
+    "meta": {
+      "query": "(Pck1 OR Cps1 OR Rida OR Uroc1 OR Sfxn1 OR Sds OR Uox OR Gls2 OR Hal OR Hsd17b6 OR Car9 OR Igfbp2 OR Ifitm2 OR Sult2a2 OR Pigr OR Cmtm4 OR Mapre2 OR Frat2 OR Sdr9c7 OR Rab3gap2 OR Cfap46 OR Zfp385a OR Gas2) AND (hepatocyte OR liver OR aging OR MASLD OR \"metabolic zonation\" OR \"xenobiotic and drug metabolism\" OR \"bile acid metabolism\" OR \"gluconeogenesis and glycogen storage\" OR \"nitrogen and urea metabolism\" OR \"oxidative and mitochondrial metabolism\" OR \"membrane transport and solute carriers\" OR \"lipid metabolism\")",
+      "total_hits": 25
+    },
+    "top_papers": [],
+    "gene_summaries": {
+      "Pck1": "This gene is a main control point for the regulation of gluconeogenesis. The cytosolic enzyme encoded by this gene, along with GTP, catalyzes the formation of phosphoenolpyruvate from oxaloacetate, with the release of carbon dioxide and GDP. The expression of this gene can be regulated by insulin, glucocorticoids, glucagon, cAMP, and diet. Defects in this gene are a cause of cytosolic phosphoenolpyruvate carboxykinase deficiency. A mitochondrial isozyme of the encoded protein also has been characterized.",
+      "Cps1": "The mitochondrial enzyme encoded by this gene catalyzes synthesis of carbamoyl phosphate from ammonia and bicarbonate. This reaction is the first committed step of the urea cycle, which is important in the removal of excess urea from cells. The encoded protein may also represent a core mitochondrial nucleoid protein. Three transcript variants encoding different isoforms have been found for this gene. The shortest isoform may not be localized to the mitochondrion. Mutations in this gene have been associated with carbamoyl phosphate synthetase deficiency, susceptibility to persistent pulmonary hypertension, and susceptibility to venoocclusive disease after bone marrow transplantation.",
+      "Rida": "Enables mRNA binding activity. Involved in mRNA catabolic process and mRNA destabilization. Located in cytoplasm and nucleus.",
+      "Uroc1": "This gene encodes an enzyme involved in the second step of histidine catabolism, metabolizing urocanic acid to formiminoglutamic acid. Deficiency of this enzyme results in urocanic aciduria, and is an apparent cause of mental retardation. Multiple transcript variants encoding different isoforms have been found for this gene.",
+      "Sfxn1": "Enables L-alanine transmembrane transporter activity and L-serine transmembrane transporter activity. Involved in L-alanine transport; L-serine transport; and serine import into mitochondrion. Located in mitochondrial inner membrane.",
+      "Sds": "This gene encodes one of three enzymes that are involved in metabolizing serine and glycine. L-serine dehydratase converts L-serine to pyruvate and ammonia and requires pyridoxal phosphate as a cofactor. The encoded protein can also metabolize threonine to NH4+ and 2-ketobutyrate. The encoded protein is found predominantly in the liver.",
+      "Uox": "Urate oxidase is an enzyme that catalyzes the oxidation of uric acid to allantoin. This gene has been inactivated by mutation and is nonfunctional in humans and some other primates.",
+      "Gls2": "The protein encoded by this gene is a mitochondrial phosphate-activated glutaminase that catalyzes the hydrolysis of glutamine to stoichiometric amounts of glutamate and ammonia. Originally thought to be liver-specific, this protein has been found in other tissues as well. Alternative splicing results in multiple transcript variants that encode different isoforms.",
+      "Hal": "Histidine ammonia-lyase is a cytosolic enzyme catalyzing the first reaction in histidine catabolism, the nonoxidative deamination of L-histidine to trans-urocanic acid. Histidine ammonia-lyase defects cause histidinemia which is characterized by increased histidine and histamine and decreased urocanic acid in body fluids. Several transcript variants encoding different isoforms have been found for this gene.",
+      "Hsd17b6": "The protein encoded by this gene has both oxidoreductase and epimerase activities and is involved in androgen catabolism. The oxidoreductase activity can convert 3 alpha-adiol to dihydrotestosterone, while the epimerase activity can convert androsterone to epi-androsterone. Both reactions use NAD+ as the preferred cofactor. This gene is a member of the retinol dehydrogenase family.",
+      "Igfbp2": "The protein encoded by this gene is one of six similar proteins that bind insulin-like growth factors I and II (IGF-I and IGF-II). The encoded protein can be secreted into the bloodstream, where it binds IGF-I and IGF-II with high affinity, or it can remain intracellular, interacting with many different ligands. High expression levels of this protein promote the growth of several types of tumors and may be predictive of the chances of recovery of the patient. Several transcript variants, one encoding a secreted isoform and the others encoding nonsecreted isoforms, have been found for this gene.",
+      "Ifitm2": "Interferon-induced transmembrane (IFITM) proteins are a family of interferon induced antiviral proteins. The family contains five members, including IFITM1, IFITM2 and IFITM3 and belong to the CD225 superfamily. The protein encoded by this gene restricts cellular entry by diverse viral pathogens, such as influenza A virus, Ebola virus and Sars-CoV-2.",
+      "Pigr": "This gene is a member of the immunoglobulin superfamily. The encoded poly-Ig receptor binds polymeric immunoglobulin molecules at the basolateral surface of epithelial cells; the complex is then transported across the cell to be secreted at the apical surface. A significant association was found between immunoglobulin A nephropathy and several SNPs in this gene.",
+      "Cmtm4": "This gene belongs to the chemokine-like factor gene superfamily, a novel family that is similar to the chemokine and the transmembrane 4 superfamilies of signaling molecules. This gene is one of several chemokine-like factor genes located in a cluster on chromosome 16. Alternatively spliced transcript variants encoding different isoforms have been identified.",
+      "Mapre2": "The protein encoded by this gene shares significant homology to the adenomatous polyposis coli (APC) protein-binding EB1 gene family. This protein is a microtubule-associated protein that is necessary for spindle symmetry during mitosis. It is thought to play a role in the tumorigenesis of colorectal cancers and the proliferative control of normal cells. Alternative splicing of this gene results in multiple transcript variants.",
+      "Frat2": "The protein encoded by this intronless gene belongs to the GSK-3-binding protein family. Studies show that this protein plays a role as a positive regulator of the WNT signaling pathway. It may be upregulated in tumor progression.",
+      "Sdr9c7": "This gene encodes a protein with similarity to the short-chain dehydrogenase/reductase (SDR) family but has not been shown to have retinoid or dehydrogenase activities.",
+      "Rab3gap2": "The protein encoded by this gene belongs to the RAB3 protein family, members of which are involved in regulated exocytosis of neurotransmitters and hormones. This protein forms the Rab3 GTPase-activating complex with RAB3GAP1, where it constitutes the regulatory subunit, whereas the latter functions as the catalytic subunit. This gene has the highest level of expression in the brain, consistent with it having a key role in neurodevelopment. Mutations in this gene are associated with Martsolf syndrome.",
+      "Cfap46": "Predicted to be involved in axoneme assembly. Predicted to be located in axoneme.",
+      "Gas2": "The protein encoded by this gene is a caspase-3 substrate that plays a role in regulating microfilament and cell shape changes during apoptosis. It can also modulate cell susceptibility to p53-dependent apoptosis by inhibiting calpain activity. Alternative splicing results in multiple transcript variants."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Ifitm2": [],
+      "Igfbp2": [],
+      "Frat2": [],
+      "Sds": [],
+      "Uox": [],
+      "Hal": [
+        "\"Haloacetaldehyde-associated disinfection byproducts (HAL-DBPs) at various multiples of concentrations found in finished drinking water together with high-fat (HF) were examined to gauge their mixed effects on hepatic lipid metabolism.\" (PMID:38953388)",
+        "\"Using new alternative methods (NAMs), studying effects in human cells in vitro for risk assessment, we investigated the combined effects of HF and HAL-DBPs on hepatic lipid metabolism and lipotoxicity in immortalized LO-2 human hepatocytes.\" (PMID:38953388)"
+      ],
+      "Sdr9c7": [],
+      "Rida": [],
+      "Gas2": [],
+      "Sult2a2": [],
+      "Zfp385a": [],
+      "Pigr": [],
+      "Car9": [],
+      "Hsd17b6": [],
+      "Pck1": [],
+      "Cps1": [],
+      "Mapre2": [],
+      "Cfap46": [],
+      "Gls2": [],
+      "Sfxn1": [],
+      "Cmtm4": [],
+      "Rab3gap2": [],
+      "Uroc1": []
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [],
+        "negative_regulators": [
+          {
+            "regulator": "Insig1",
+            "log2fc": 0.5845383564531794,
+            "adj_pvalue": 4.031207639419743e-06,
+            "pvalue": 4.0804778510841285e-08,
+            "n_program_targets": 0,
+            "string_interactions": []
+          },
+          {
+            "regulator": "Flcn",
+            "log2fc": 0.2009815144146719,
+            "adj_pvalue": 0.0003644108661241,
+            "pvalue": 5.262531956802275e-06,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Deptor",
+                "score": 412
+              }
+            ]
+          },
+          {
+            "regulator": "Dgat2",
+            "log2fc": 0.2893042195488678,
+            "adj_pvalue": 0.0030712140649224,
+            "pvalue": 5.794542767014583e-05,
+            "n_program_targets": 3,
+            "string_interactions": [
+              {
+                "target": "Pck1",
+                "score": 601
+              },
+              {
+                "target": "Acadl",
+                "score": 503
+              },
+              {
+                "target": "Acadm",
+                "score": 438
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Tmprss6",
+            "log2fc": -0.4061573809912666,
+            "adj_pvalue": 8.610334568835405e-05,
+            "pvalue": 2.2113535424354935e-06,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Hao1",
+                "score": 437
+              },
+              {
+                "target": "Ambp",
+                "score": 406
+              }
+            ]
+          },
+          {
+            "regulator": "Rfxank",
+            "log2fc": -0.4236814757948674,
+            "adj_pvalue": 0.0148200103697857,
+            "pvalue": 0.000782311588237,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Nfyc",
+                "score": 627
+              }
+            ]
+          },
+          {
+            "regulator": "Slco1b2",
+            "log2fc": -0.3973249803346067,
+            "adj_pvalue": 0.018298945543904,
+            "pvalue": 0.0010136753276307,
+            "n_program_targets": 17,
+            "string_interactions": [
+              {
+                "target": "Abcb11",
+                "score": 914
+              },
+              {
+                "target": "Slc51b",
+                "score": 706
+              },
+              {
+                "target": "Cyp2c70",
+                "score": 682
+              },
+              {
+                "target": "Ambp",
+                "score": 674
+              },
+              {
+                "target": "Agxt",
+                "score": 662
+              },
+              {
+                "target": "Cfhr2",
+                "score": 662
+              },
+              {
+                "target": "Uox",
+                "score": 660
+              },
+              {
+                "target": "Mug2",
+                "score": 623
+              },
+              {
+                "target": "Sult2a1",
+                "score": 589
+              },
+              {
+                "target": "Fgb",
+                "score": 567
+              },
+              {
+                "target": "Hao1",
+                "score": 537
+              },
+              {
+                "target": "Hnf4a",
+                "score": 483
+              },
+              {
+                "target": "Cps1",
+                "score": 473
+              },
+              {
+                "target": "Ugt1a9",
+                "score": 470
+              },
+              {
+                "target": "Otc",
+                "score": 415
+              },
+              {
+                "target": "C9",
+                "score": 402
+              },
+              {
+                "target": "Mat1a",
+                "score": 400
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Insr",
+            "log2fc": 0.6443051244614347,
+            "adj_pvalue": 1.7683704647735913e-22,
+            "pvalue": 7.8255716681913075e-25,
+            "n_program_targets": 6,
+            "string_interactions": [
+              {
+                "target": "Ptpn11",
+                "score": 960
+              },
+              {
+                "target": "Plcb3",
+                "score": 659
+              },
+              {
+                "target": "Ppp2r5a",
+                "score": 502
+              },
+              {
+                "target": "Pck1",
+                "score": 487
+              },
+              {
+                "target": "Igfbp2",
+                "score": 448
+              },
+              {
+                "target": "Foxo4",
+                "score": 436
+              }
+            ]
+          },
+          {
+            "regulator": "Irs1",
+            "log2fc": 0.3457669763431827,
+            "adj_pvalue": 6.556745715236915e-08,
+            "pvalue": 9.84456963960947e-10,
+            "n_program_targets": 10,
+            "string_interactions": [
+              {
+                "target": "Ptpn11",
+                "score": 998
+              },
+              {
+                "target": "Fgfr2",
+                "score": 819
+              },
+              {
+                "target": "Pck1",
+                "score": 648
+              },
+              {
+                "target": "Agt",
+                "score": 551
+              },
+              {
+                "target": "Deptor",
+                "score": 508
+              },
+              {
+                "target": "Gpx1",
+                "score": 506
+              },
+              {
+                "target": "Foxo4",
+                "score": 492
+              },
+              {
+                "target": "Nox4",
+                "score": 420
+              },
+              {
+                "target": "Igfbp2",
+                "score": 415
+              },
+              {
+                "target": "Hsd11b1",
+                "score": 401
+              }
+            ]
+          },
+          {
+            "regulator": "Flcn",
+            "log2fc": 0.191674721311652,
+            "adj_pvalue": 8.526100460823467e-07,
+            "pvalue": 1.4890096509492596e-08,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Deptor",
+                "score": 412
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "25": {
+    "meta": {
+      "query": "(Akr1c6 OR Rgn OR Aldh1a1 OR Sult2a7 OR Aldh3a2 OR Alad OR Sord OR Fitm1 OR Cyb5b OR Cdo1 OR Hao2 OR Gsta3 OR Sult2a5 OR Rnase4 OR Cyp2c50 OR Spag17 OR Agmat OR Sult2a8 OR Car5a OR Lonp2 OR Psmd1 OR Htatip2 OR Eci2) AND (hepatocyte OR liver OR aging OR MASLD OR \"metabolic zonation\" OR \"xenobiotic and drug metabolism\" OR \"bile acid metabolism\" OR \"gluconeogenesis and glycogen storage\" OR \"nitrogen and urea metabolism\" OR \"oxidative and mitochondrial metabolism\" OR \"membrane transport and solute carriers\" OR \"lipid metabolism\")",
+      "total_hits": 25
+    },
+    "top_papers": [
+      {
+        "pmid": 41240298,
+        "title": "Lead-induced Hepatotoxicity in Rat Hepatocytes: a Transcriptomic Network Analysis Reveals Key Molecular Insights.",
+        "score": 3,
+        "genes": [
+          "Sord",
+          "Aldh1a1",
+          "Cyp2e1"
+        ]
+      }
+    ],
+    "gene_summaries": {
+      "Rgn": "The protein encoded by this gene is a highly conserved, calcium-binding protein, that is preferentially expressed in the liver and kidney. It may have an important role in calcium homeostasis. Studies in rat indicate that this protein may also play a role in aging, as it shows age-associated down-regulation. This gene is part of a gene cluster on chromosome Xp11.3-Xp11.23. Alternative splicing results in multiple transcript variants.",
+      "Aldh1a1": "The protein encoded by this gene belongs to the aldehyde dehydrogenase family. Aldehyde dehydrogenase is the next enzyme after alcohol dehydrogenase in the major pathway of alcohol metabolism. There are two major aldehyde dehydrogenase isozymes in the liver, cytosolic and mitochondrial, which are encoded by distinct genes, and can be distinguished by their electrophoretic mobility, kinetic properties, and subcellular localization. This gene encodes the cytosolic isozyme. Studies in mice show that through its role in retinol metabolism, this gene may also be involved in the regulation of the metabolic responses to high-fat diet.",
+      "Aldh3a2": "Aldehyde dehydrogenase isozymes are thought to play a major role in the detoxification of aldehydes generated by alcohol metabolism and lipid peroxidation. This gene product catalyzes the oxidation of long-chain aliphatic aldehydes to fatty acid. Mutations in the gene cause Sjogren-Larsson syndrome. Alternatively spliced transcript variants encoding different isoforms have been found for this gene.",
+      "Alad": "The ALAD enzyme is composed of 8 identical subunits and catalyzes the condensation of 2 molecules of delta-aminolevulinate to form porphobilinogen (a precursor of heme, cytochromes and other hemoproteins). ALAD catalyzes the second step in the porphyrin and heme biosynthetic pathway; zinc is essential for enzymatic activity. ALAD enzymatic activity is inhibited by lead and a defect in the ALAD structural gene can cause increased sensitivity to lead poisoning and acute hepatic porphyria. Alternative splicing of this gene results in multiple transcript variants encoding different isoforms.",
+      "Sord": "Sorbitol dehydrogenase (SORD; EC 1.1.1.14) catalyzes the interconversion of polyols and their corresponding ketoses, and together with aldose reductase (ALDR1; MIM 103880), makes up the sorbitol pathway that is believed to play an important role in the development of diabetic complications (summarized by Carr and Markham, 1995 [PubMed 8535074]). The first reaction of the pathway (also called the polyol pathway) is the reduction of glucose to sorbitol by ALDR1 with NADPH as the cofactor. SORD then oxidizes the sorbitol to fructose using NAD(+) cofactor.[supplied by OMIM, Jul 2010]",
+      "Fitm1": "Predicted to enable diacylglycerol binding activity and triglyceride binding activity. Predicted to be involved in lipid droplet formation; phospholipid biosynthetic process; and positive regulation of sequestering of triglyceride. Predicted to be located in endoplasmic reticulum and membrane. Predicted to be active in endoplasmic reticulum membrane.",
+      "Cyb5b": "Enables heme binding activity. Contributes to nitrite reductase (NO-forming) activity. Involved in nitric oxide biosynthetic process. Located in membrane. Part of nitric-oxide synthase complex.",
+      "Cdo1": "Enables cysteine dioxygenase activity; ferrous iron binding activity; and zinc ion binding activity. Predicted to be involved in L-cysteine catabolic process. Predicted to be located in cytosol.",
+      "Hao2": "This gene is one of three related genes that have 2-hydroxyacid oxidase activity. The encoded protein localizes to the peroxisome has the highest activity toward the substrate 2-hydroxypalmitate. Alternative splicing results in multiple transcript variants.",
+      "Gsta3": "Cytosolic and membrane-bound forms of glutathione S-transferase are encoded by two distinct supergene families. These enzymes are involved in cellular defense against toxic, carcinogenic, and pharmacologically active electrophilic compounds. At present, eight distinct classes of the soluble cytoplasmic mammalian glutathione S-transferases have been identified: alpha, kappa, mu, omega, pi, sigma, theta and zeta. This gene encodes a glutathione S-tranferase belonging to the alpha class genes that are located in a cluster mapped to chromosome 6. Genes of the alpha class are highly related and encode enzymes with glutathione peroxidase activity. However, during evolution, this alpha class gene diverged accumulating mutations in the active site that resulted in differences in substrate specificity and catalytic activity. The enzyme encoded by this gene catalyzes the double bond isomerization of precursors for progesterone and testosterone during the biosynthesis of steroid hormones. An additional transcript variant has been identified, but its full length sequence has not been determined.",
+      "Rnase4": "The protein encoded by this gene belongs to the pancreatic ribonuclease family. It plays an important role in mRNA cleavage and has marked specificity towards the 3' side of uridine nucleotides. Alternative splicing results in four transcript variants encoding the same protein. This gene and the gene that encodes angiogenin share promoters and 5' exons. Each gene splices to a unique downstream exon that contains its complete coding region.",
+      "Spag17": "This gene encodes a central pair protein present in the axonemes of cells with a `9 + 2` organization of microtubules. The encoded protein is required for the proper function of the axoneme. Mutations in the orthologous gene in mice lead to primary ciliary dyskinesia characterized by immotile nasal and tracheal cilia, reduced clearance of nasal mucus, profound respiratory distress, hydrocephalus, and neonatal lethality within twelve hours of birth due to impaired airway mucociliary clearance. Single-nucleotide polymorphisms in this gene are associated with human height and targeted mutations lead to skeletal malformations affecting the limbs in mice, suggesting a role for this gene in skeletal development.",
+      "Agmat": "Enables arginase activity; guanidinobutyrase activity; and guanidinopropionase activity. Predicted to be involved in putrescine biosynthetic process from arginine, using agmatinase. Located in mitochondrion.",
+      "Lonp2": "In human, peroxisomes function primarily to catalyze fatty acid beta-oxidation and, as a by-product, produce hydrogen peroxide and superoxide. The protein encoded by this gene is an ATP-dependent protease that likely plays a role in maintaining overall peroxisome homeostasis as well as proteolytically degrading peroxisomal proteins damaged by oxidation. The protein has an N-terminal Lon N substrate recognition domain, an ATPase domain, a proteolytic domain, and, in some isoforms, a C-terminal peroxisome targeting sequence. Alternative splicing results in multiple transcript variants encoding distinct isoforms.",
+      "Psmd1": "The 26S proteasome is a multicatalytic proteinase complex with a highly ordered structure composed of 2 complexes, a 20S core and a 19S regulator. The 20S core is composed of 4 rings of 28 non-identical subunits; 2 rings are composed of 7 alpha subunits and 2 rings are composed of 7 beta subunits. The 19S regulator is composed of a base, which contains 6 ATPase subunits and 2 non-ATPase subunits, and a lid, which contains up to 10 non-ATPase subunits. Proteasomes are distributed throughout eukaryotic cells at a high concentration and cleave peptides in an ATP/ubiquitin-dependent process in a non-lysosomal pathway. An essential function of a modified proteasome, the immunoproteasome, is the processing of class I MHC peptides. This gene encodes the largest non-ATPase subunit of the 19S regulator lid, which is responsible for substrate recognition and binding. There is evidence that this proteasome and its subunits interact with viral proteins, including those of coronaviruses. Alternatively spliced transcript variants have been found for this gene.",
+      "Htatip2": "Enables protein serine/threonine kinase activity. Involved in import into nucleus and regulation of angiogenesis. Acts upstream of or within positive regulation of programmed cell death; positive regulation of transcription by RNA polymerase II; and protein autophosphorylation. Located in cytosol and nuclear envelope.",
+      "Eci2": "This gene encodes a member of the hydratase/isomerase superfamily. The protein encoded is a key mitochondrial enzyme involved in beta-oxidation of unsaturated fatty acids. It catalyzes the transformation of 3-cis and 3-trans-enoyl-CoA esters arising during the stepwise degradation of cis-, mono-, and polyunsaturated fatty acids to the 2-trans-enoyl-CoA intermediates. Alternatively spliced transcript variants have been described."
+    },
+    "gene_summaries_source": "harmonizome",
+    "evidence_snippets": {
+      "Sult2a7": [],
+      "Gsta3": [],
+      "Sult2a5": [],
+      "Cyp2c50": [
+        "\"RNA-seq analysis identified the CYP450 epoxygenase (CYP2C50) pathway of arachidonic acid metabolism as a novel target of ChREBP .\" (PMID:38740087)",
+        "\"Suppression of hepatic ChREBP -CYP2C50 axis-driven fatty acid oxidation sensitizes mice to diet-induced MASLD/MASH..\" (PMID:38740087)"
+      ],
+      "Cdo1": [],
+      "Spag17": [
+        "\"Regulation of Female Reproductive Aging by the Spag17 Gene..\" (PMID:40093080)",
+        "\"To investigate mechanisms underlying reproductive aging, we explored the contribution of Spag17 , a cilia-related gene associated with tissue homeostasis and fibrosis.\" (PMID:40093080)"
+      ],
+      "Fitm1": [],
+      "Akr1c6": [],
+      "Agmat": [],
+      "Lonp2": [],
+      "Sult2a8": [],
+      "Rgn": [
+        "\"Other Ca2+-binding proteins, such as calmodulin (CaM), calcineurin (CaN), regucalcin (RgN), calreticulin (CrT), and calnexin (CnX), further modulate Ca2+ homeostasis and impact lipid metabolism by influencing lipolysis, lipogenesis, and lipid droplet dynamics.\" (PMID:41553666)"
+      ],
+      "Psmd1": [],
+      "Aldh3a2": [],
+      "Aldh1a1": [
+        "\"Through protein-protein interaction network analysis, we systematically identified 22 molecular hubs (11 upregulated: FASN, CYP2E1, ALDH1A1, CYP3A2, HMGCR, UGT2B1, CYP2B3, UGT2A1, SORD, SQLE, and CYP3A62; 11 downregulated: CCNA2, CDK1, CCNB1, PLK1, AURKA, TOP2A, KIF11, BUB1B, NUF2, AURKB, and EXO1) that functionally coalesce in five critical pathways: (i) core metabolic processes; (ii) bile secretion; (iii) chemical carcinogenesis; (iv) steroid hormone biosynthesis; and (v) cytochrome P450-mediated xenobiotic metabolism.\" (PMID:41240298)"
+      ],
+      "Cyb5b": [],
+      "Htatip2": [],
+      "Sord": [
+        "\"Through protein-protein interaction network analysis, we systematically identified 22 molecular hubs (11 upregulated: FASN, CYP2E1, ALDH1A1, CYP3A2, HMGCR, UGT2B1, CYP2B3, UGT2A1, SORD, SQLE, and CYP3A62; 11 downregulated: CCNA2, CDK1, CCNB1, PLK1, AURKA, TOP2A, KIF11, BUB1B, NUF2, AURKB, and EXO1) that functionally coalesce in five critical pathways: (i) core metabolic processes; (ii) bile secretion; (iii) chemical carcinogenesis; (iv) steroid hormone biosynthesis; and (v) cytochrome P450-mediated xenobiotic metabolism.\" (PMID:41240298)"
+      ],
+      "Hao2": [],
+      "Rnase4": [],
+      "Eci2": [],
+      "Alad": [],
+      "Car5a": []
+    },
+    "regulator_validation_by_condition": {
+      "young": {
+        "positive_regulators": [
+          {
+            "regulator": "Flcn",
+            "log2fc": -0.4499421719454954,
+            "adj_pvalue": 2.831777486551927e-12,
+            "pvalue": 1.091957343722066e-14,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Atp6v0d2",
+                "score": 816
+              },
+              {
+                "target": "Hsp90aa1",
+                "score": 540
+              }
+            ]
+          },
+          {
+            "regulator": "Nfib",
+            "log2fc": -0.2112103308202683,
+            "adj_pvalue": 0.000439271274825,
+            "pvalue": 6.593982949037376e-06,
+            "n_program_targets": 0,
+            "string_interactions": []
+          },
+          {
+            "regulator": "Mau2",
+            "log2fc": -0.2361197593528692,
+            "adj_pvalue": 0.0079261144600914,
+            "pvalue": 0.0001735585372922,
+            "n_program_targets": 0,
+            "string_interactions": []
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Dgat2",
+            "log2fc": 1.232030640019394,
+            "adj_pvalue": 2.438745404467729e-09,
+            "pvalue": 1.393808401900114e-11,
+            "n_program_targets": 12,
+            "string_interactions": [
+              {
+                "target": "Ppara",
+                "score": 726
+              },
+              {
+                "target": "Acox1",
+                "score": 676
+              },
+              {
+                "target": "Cpt2",
+                "score": 532
+              },
+              {
+                "target": "Fabp1",
+                "score": 528
+              },
+              {
+                "target": "Acadl",
+                "score": 503
+              },
+              {
+                "target": "Ehhadh",
+                "score": 494
+              },
+              {
+                "target": "Fabp2",
+                "score": 472
+              },
+              {
+                "target": "Acadm",
+                "score": 438
+              },
+              {
+                "target": "Cyp2e1",
+                "score": 424
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 412
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 409
+              },
+              {
+                "target": "Vcp",
+                "score": 402
+              }
+            ]
+          },
+          {
+            "regulator": "Leng1",
+            "log2fc": 1.1750297231811162,
+            "adj_pvalue": 5.0729976813920686e-05,
+            "pvalue": 6.078164278057094e-07,
+            "n_program_targets": 1,
+            "string_interactions": [
+              {
+                "target": "Sod2",
+                "score": 542
+              }
+            ]
+          },
+          {
+            "regulator": "Abcg5",
+            "log2fc": 0.9745268696599207,
+            "adj_pvalue": 0.0008615085469859,
+            "pvalue": 1.411871166915376e-05,
+            "n_program_targets": 12,
+            "string_interactions": [
+              {
+                "target": "Slco1b2",
+                "score": 705
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 668
+              },
+              {
+                "target": "Ppara",
+                "score": 653
+              },
+              {
+                "target": "Cyp3a11",
+                "score": 578
+              },
+              {
+                "target": "Hmgcs1",
+                "score": 562
+              },
+              {
+                "target": "Fabp2",
+                "score": 554
+              },
+              {
+                "target": "Fabp1",
+                "score": 532
+              },
+              {
+                "target": "Sult2a1",
+                "score": 483
+              },
+              {
+                "target": "Apoc4",
+                "score": 471
+              },
+              {
+                "target": "Pon1",
+                "score": 423
+              },
+              {
+                "target": "Scp2",
+                "score": 414
+              },
+              {
+                "target": "Apoc1",
+                "score": 401
+              }
+            ]
+          }
+        ]
+      },
+      "aged": {
+        "positive_regulators": [
+          {
+            "regulator": "Flcn",
+            "log2fc": -0.4676353832797906,
+            "adj_pvalue": 1.0856704110955922e-15,
+            "pvalue": 8.150352653494517e-18,
+            "n_program_targets": 2,
+            "string_interactions": [
+              {
+                "target": "Atp6v0d2",
+                "score": 816
+              },
+              {
+                "target": "Hsp90aa1",
+                "score": 540
+              }
+            ]
+          },
+          {
+            "regulator": "Insr",
+            "log2fc": -0.1964688118798621,
+            "adj_pvalue": 0.0005249531288989,
+            "pvalue": 1.617856242759616e-05,
+            "n_program_targets": 5,
+            "string_interactions": [
+              {
+                "target": "Ppara",
+                "score": 537
+              },
+              {
+                "target": "Ghr",
+                "score": 510
+              },
+              {
+                "target": "Atp6v0d2",
+                "score": 508
+              },
+              {
+                "target": "Ppp2r5a",
+                "score": 502
+              },
+              {
+                "target": "Suox",
+                "score": 404
+              }
+            ]
+          },
+          {
+            "regulator": "G6pc",
+            "log2fc": -0.1714145773776456,
+            "adj_pvalue": 0.009684745678538,
+            "pvalue": 0.000466079827641,
+            "n_program_targets": 16,
+            "string_interactions": [
+              {
+                "target": "Cyp4a10",
+                "score": 762
+              },
+              {
+                "target": "Pcx",
+                "score": 755
+              },
+              {
+                "target": "Ppara",
+                "score": 737
+              },
+              {
+                "target": "Cyp3a11",
+                "score": 681
+              },
+              {
+                "target": "Acox1",
+                "score": 607
+              },
+              {
+                "target": "Agxt2",
+                "score": 593
+              },
+              {
+                "target": "Hpd",
+                "score": 555
+              },
+              {
+                "target": "Hgd",
+                "score": 527
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 499
+              },
+              {
+                "target": "Pah",
+                "score": 486
+              },
+              {
+                "target": "Fabp1",
+                "score": 469
+              },
+              {
+                "target": "Cyp2e1",
+                "score": 453
+              },
+              {
+                "target": "Gk",
+                "score": 452
+              },
+              {
+                "target": "Gpx1",
+                "score": 450
+              },
+              {
+                "target": "Cyp1a2",
+                "score": 419
+              },
+              {
+                "target": "Aldh8a1",
+                "score": 410
+              }
+            ]
+          }
+        ],
+        "negative_regulators": [
+          {
+            "regulator": "Sqle",
+            "log2fc": 0.9217745594027896,
+            "adj_pvalue": 7.89724527251897e-24,
+            "pvalue": 2.9955160944155923e-26,
+            "n_program_targets": 9,
+            "string_interactions": [
+              {
+                "target": "Hmgcs1",
+                "score": 985
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 904
+              },
+              {
+                "target": "Hsd3b3",
+                "score": 689
+              },
+              {
+                "target": "Cyb5b",
+                "score": 578
+              },
+              {
+                "target": "Cpox",
+                "score": 567
+              },
+              {
+                "target": "Acat1",
+                "score": 544
+              },
+              {
+                "target": "Cyp4a10",
+                "score": 511
+              },
+              {
+                "target": "Cyb5a",
+                "score": 511
+              },
+              {
+                "target": "Hgd",
+                "score": 495
+              }
+            ]
+          },
+          {
+            "regulator": "Tpst1",
+            "log2fc": 0.5034524549492203,
+            "adj_pvalue": 1.8819600648649817e-05,
+            "pvalue": 4.268222920222341e-07,
+            "n_program_targets": 0,
+            "string_interactions": []
+          },
+          {
+            "regulator": "Insig1",
+            "log2fc": 0.4226518273308957,
+            "adj_pvalue": 0.0014127080816874,
+            "pvalue": 4.8115443499613617e-05,
+            "n_program_targets": 4,
+            "string_interactions": [
+              {
+                "target": "Hmgcs1",
+                "score": 878
+              },
+              {
+                "target": "Vcp",
+                "score": 721
+              },
+              {
+                "target": "Hmgcs2",
+                "score": 513
+              },
+              {
+                "target": "Ppara",
+                "score": 491
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

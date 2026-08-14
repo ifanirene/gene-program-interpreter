@@ -1,0 +1,99 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-86a86fe4051c778eaf13",
+    "RL-a56a1e2fbb57a3ab037e",
+    "RL-c6efbbad84bf5495bff1"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1764,
+        "source_type": "abstract",
+        "start": 1510,
+        "text": "Ectopic expression of FALDH significantly decreased reactive oxygen species production in cells treated by 4-hydroxynonenal, the major lipid peroxidation product, suggesting that FALDH protects against oxidative stress associated with lipid peroxidation."
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "FALDH/Aldh3a2 overexpression directly reduced oxidative stress caused by a lipid-peroxidation aldehyde. Hepatocyte and liver data are relevant, but the mixed rat adipocyte and insulin-resistance setting only partially matches aging/MASLD mouse liver.",
+      "red_flags": [],
+      "review_id": "RL-86a86fe4051c778eaf13",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1832,
+        "source_type": "abstract",
+        "start": 1628,
+        "text": "Taken together, this work establishes a role for retinoid metabolism in glucose homeostasis in vivo and for Aldh1a1 as a novel determinant of gluconeogenesis and lipid metabolism independent of adiposity."
+      },
+      "function_supported_genes": [],
+      "rationale": "Aldh1a1 was directly tested in mouse liver and primary hepatocytes, establishing hepatic glucose and lipid regulation but not lipid-peroxidation aldehyde detoxification. The chow-fed metabolic setting only partially matches aging/MASLD.",
+      "red_flags": [
+        "wrong_function",
+        "context_overclaim"
+      ],
+      "review_id": "RL-a56a1e2fbb57a3ab037e",
+      "studied_genes": [
+        "Aldh1a1"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 722,
+        "source_type": "abstract",
+        "start": 562,
+        "text": "CDO(-/-) mice had extremely low taurine levels and somewhat elevated cysteine levels, consistent with the lack of flux through CDO-dependent catabolic pathways."
+      },
+      "function_supported_genes": [
+        "Cdo1"
+      ],
+      "rationale": "Cdo1 knockout causally supports its role in cysteine-dependent taurine synthesis. The abstract does not localize this result to hepatocytes or connect it to bile-acid conjugation, making the context indirect rather than direct.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-c6efbbad84bf5495bff1",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 36352,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 58370,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4379,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 89.213
+  }
+}

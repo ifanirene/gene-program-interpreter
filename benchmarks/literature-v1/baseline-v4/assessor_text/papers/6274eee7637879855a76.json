@@ -1,0 +1,14 @@
+{
+  "content_hash": "48b06d6bd01516632b8aa35c94877f2a6d406707c70672a3944944864d877c20",
+  "doi": "10.1146/annurev-nutr-071715-051145",
+  "errors": [],
+  "paper_key": "6274eee7637879855a76",
+  "pmcid": null,
+  "pmid": "27146014",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Liver glucose metabolism is dependent on glucokinase activity. Glucokinase expression is transcriptionally regulated by hormones and metabolites of glucose, and glucokinase activity is dependent on reversible binding of glucokinase to a specific inhibitor protein, glucokinase regulatory protein (GKRP), and to other binding proteins such as 6-phosphofructo-2-kinase/fructose 2,6-bisphosphatase (PFK2/FBP2), which functions as an activator. Glucokinase is inhibited in the postabsorptive state by sequestration in the nucleus bound to GKRP, and it is activated postprandially by portal hyperglycemia and fructose through dissociation from GKRP, translocation to the cytoplasm, and binding to PFK2/FBP2. Glucagon dissociates this interaction, promoting translocation back to the nucleus. In humans, changes in glucokinase expression and activity are associated with poorly controlled type 2 diabetes and with nonalcoholic fatty liver disease, and a common variant of GKRP with altered binding affinity for glucokinase is associated with increased blood and liver lipids and other metabolic traits that implicate a role for GKRP in maintaining intrahepatic metabolite homeostasis.",
+  "text_type": "abstract",
+  "title": "Hormonal and Metabolite Regulation of Hepatic Glucokinase."
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "pairs": [
+    {
+      "assessment_id": "annotation-brain-p10-r1",
+      "session_id": "brain-p10--r1",
+      "case_id": "brain-p10",
+      "program_id": "P10",
+      "baseline_result": "benchmarks/literature-v1/baseline-v4/sessions/brain-p10--r1/research_results/P10.json",
+      "candidate_result": "benchmarks/literature-v1/candidate-evaluable/sessions/brain-p10--r1/research_results/P10.json",
+      "baseline_audits": ["benchmarks/literature-v1/baseline-v4/sessions/brain-p10--r1/research_audit/P10.audit.json"],
+      "candidate_audits": ["benchmarks/literature-v1/candidate-evaluable/sessions/brain-p10--r1/research_audit/P10.audit.json"]
+    },
+    {
+      "assessment_id": "annotation-brain-p10-r2",
+      "session_id": "brain-p10--r2",
+      "case_id": "brain-p10",
+      "program_id": "P10",
+      "baseline_result": "benchmarks/literature-v1/baseline-v4/sessions/brain-p10--r2/research_results/P10.json",
+      "candidate_result": "benchmarks/literature-v1/candidate-evaluable/sessions/brain-p10--r2/research_results/P10.json",
+      "baseline_audits": ["benchmarks/literature-v1/baseline-v4/sessions/brain-p10--r2/research_audit/P10.audit.json"],
+      "candidate_audits": ["benchmarks/literature-v1/candidate-evaluable/sessions/brain-p10--r2/research_audit/P10.audit.json"]
+    },
+    {
+      "assessment_id": "annotation-brain-p11-r1",
+      "session_id": "brain-p11--r1",
+      "case_id": "brain-p11",
+      "program_id": "P11",
+      "baseline_result": "benchmarks/literature-v1/baseline-v4/sessions/brain-p11--r1/research_results/P11.json",
+      "candidate_result": "benchmarks/literature-v1/candidate-evaluable/sessions/brain-p11--r1/research_results/P11.json",
+      "baseline_audits": ["benchmarks/literature-v1/baseline-v4/sessions/brain-p11--r1/research_audit/P11.audit.json"],
+      "candidate_audits": ["benchmarks/literature-v1/candidate-evaluable/sessions/brain-p11--r1/research_audit/P11.audit.json"]
+    },
+    {
+      "assessment_id": "annotation-brain-p11-r2",
+      "session_id": "brain-p11--r2",
+      "case_id": "brain-p11",
+      "program_id": "P11",
+      "baseline_result": "benchmarks/literature-v1/baseline-v4/sessions/brain-p11--r2/research_results/P11.json",
+      "candidate_result": "benchmarks/literature-v1/candidate-evaluable/sessions/brain-p11--r2/research_results/P11.json",
+      "baseline_audits": ["benchmarks/literature-v1/baseline-v4/sessions/brain-p11--r2/research_audit/P11.audit.json"],
+      "candidate_audits": ["benchmarks/literature-v1/candidate-evaluable/sessions/brain-p11--r2/research_audit/P11.audit.json"]
+    },
+    {
+      "assessment_id": "annotation-liver-p21-r1",
+      "session_id": "liver-p21--r1",
+      "case_id": "liver-p21",
+      "program_id": "P21",
+      "baseline_result": "benchmarks/literature-v1/baseline-v4/sessions/liver-p21--r1/research_results/P21.json",
+      "candidate_result": "benchmarks/literature-v1/candidate-evaluable/sessions/liver-p21--r1-recovery/research_results/P21.json",
+      "baseline_audits": ["benchmarks/literature-v1/baseline-v4/sessions/liver-p21--r1/research_audit/P21.audit.json"],
+      "candidate_audits": [
+        "benchmarks/literature-v1/candidate-evaluable/sessions/liver-p21--r1/research_audit/P21.audit.json",
+        "benchmarks/literature-v1/candidate-evaluable/sessions/liver-p21--r1-recovery/research_audit/P21.audit.json"
+      ]
+    },
+    {
+      "assessment_id": "annotation-liver-p21-r2",
+      "session_id": "liver-p21--r2",
+      "case_id": "liver-p21",
+      "program_id": "P21",
+      "baseline_result": "benchmarks/literature-v1/baseline-v4/sessions/liver-p21--r2/research_results/P21.json",
+      "candidate_result": "benchmarks/literature-v1/candidate-evaluable/sessions/liver-p21--r2/research_results/P21.json",
+      "baseline_audits": ["benchmarks/literature-v1/baseline-v4/sessions/liver-p21--r2/research_audit/P21.audit.json"],
+      "candidate_audits": ["benchmarks/literature-v1/candidate-evaluable/sessions/liver-p21--r2/research_audit/P21.audit.json"]
+    },
+    {
+      "assessment_id": "annotation-liver-p25-r1",
+      "session_id": "liver-p25--r1",
+      "case_id": "liver-p25",
+      "program_id": "P25",
+      "baseline_result": "benchmarks/literature-v1/baseline-v4/sessions/liver-p25--r1/research_results/P25.json",
+      "candidate_result": "benchmarks/literature-v1/candidate-evaluable/sessions/liver-p25--r1/research_results/P25.json",
+      "baseline_audits": ["benchmarks/literature-v1/baseline-v4/sessions/liver-p25--r1/research_audit/P25.audit.json"],
+      "candidate_audits": ["benchmarks/literature-v1/candidate-evaluable/sessions/liver-p25--r1/research_audit/P25.audit.json"]
+    },
+    {
+      "assessment_id": "annotation-liver-p25-r2",
+      "session_id": "liver-p25--r2",
+      "case_id": "liver-p25",
+      "program_id": "P25",
+      "baseline_result": "benchmarks/literature-v1/baseline-v4/sessions/liver-p25--r2/research_results/P25.json",
+      "candidate_result": "benchmarks/literature-v1/candidate-evaluable/sessions/liver-p25--r2/research_results/P25.json",
+      "baseline_audits": ["benchmarks/literature-v1/baseline-v4/sessions/liver-p25--r2/research_audit/P25.audit.json"],
+      "candidate_audits": ["benchmarks/literature-v1/candidate-evaluable/sessions/liver-p25--r2/research_audit/P25.audit.json"]
+    }
+  ]
+}

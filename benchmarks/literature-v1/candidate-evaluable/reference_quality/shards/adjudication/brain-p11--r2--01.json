@@ -1,0 +1,117 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0a7beb25f6d4662bc1f7",
+    "RL-54d161cbee9c42984f91",
+    "RL-a3e7477dd40323d6a6a8",
+    "RL-fe80504bafd42b5f9584"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 967,
+        "text": "activates the mitochondrial respiratory chain and fuels vascular endothelial cell migration in tumor angiogenesis"
+      },
+      "function_supported_genes": [
+        "Slc1a1"
+      ],
+      "rationale": "The paper causally shows SLC1A1 mediates endothelial R-2-HG influx that activates mitochondrial respiration and fuels EC migration/angiogenesis, with mouse knockout confirming the direction of the cited claim. Tumor vascular endothelium in mouse is the same cell type in another tissue, so declared partial is accurate rather than overclaimed.",
+      "red_flags": [],
+      "review_id": "RL-0a7beb25f6d4662bc1f7",
+      "studied_genes": [
+        "Slc1a1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 3229,
+        "source_type": "full_text",
+        "start": 3066,
+        "text": "Cxcr4a and Cxcl12b are important for inducing the phase transition to the directional phase, thereby promoting directional migration toward the anastomotic target."
+      },
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "rationale": "cxcr4a mutant live-imaging shows Cxcr4a is required for the tip-cell transition to directional migration during cerebral capillary network formation, matching the tip-cell guidance claim. Brain/endothelial/sprouting context all match with only a species difference and accepted ortholog, so partial is a closely transferable and accurate label.",
+      "red_flags": [],
+      "review_id": "RL-54d161cbee9c42984f91",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 735,
+        "source_type": "abstract",
+        "start": 457,
+        "text": "Organoid morphogenesis models revealed abnormal cessation of proliferation, abnormalities in expression of tip and stalk genes, and a failure to properly form elongating tubes. These defects were influenced by both hyperactive PI-3' kinase signaling and altered TGF-β signaling."
+      },
+      "function_supported_genes": [],
+      "rationale": "No supplied gene (Tnfrsf11b/Slc1a1) is studied, but the reported link between altered TGF-β signaling and brain endothelial tip/stalk programs partially supports the TGF-β regulator context, though direction is unresolved. The pathological HRAS malformation model is a related condition, not normal postnatal development, so declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a3e7477dd40323d6a6a8",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "reversed",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1754,
+        "source_type": "abstract",
+        "start": 1694,
+        "text": "we uncover a reinforcing role for angiopoietin 2 at the BBB."
+      },
+      "function_supported_genes": [],
+      "rationale": "Reverse genetics reveals a vessel-reinforcing (stabilizing) role for ANGPT2, explicitly paradoxical to its TEK-antagonist role, which reverses the mechanism's assigned destabilizing/pro-sprouting Angpt2 function. Context is adult pathological pericyte-deficiency rather than normal postnatal development, so declared direct is overclaimed.",
+      "red_flags": [
+        "reversed_direction",
+        "context_overclaim"
+      ],
+      "review_id": "RL-fe80504bafd42b5f9584",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "contradicts"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.4903775,
+    "duration_api_ms": 154113,
+    "duration_ms": 152731,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 153.821
+  }
+}

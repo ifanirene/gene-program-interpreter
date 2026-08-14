@@ -1,0 +1,280 @@
+{
+  "reviews": [
+    {
+      "review_id": "RL-10c90de4214dc35aeb36",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "partial",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "The bulk of FALDH-activity produced from the ALDH3A2 gene, however, is located in the endoplasmic reticulum (ER).",
+        "start": 34160,
+        "end": 34273,
+        "source_type": "full_text"
+      },
+      "rationale": "The review directly supports ALDH3A2 ER localization and broader peroxisome–ER lipid interplay, but not Hao2/Eci2 or mouse hepatocyte MASLD. The function is non-directional and the context is indirect.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-1b94bd4f696f98c72ae7",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "not_assessable",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "unclear",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "",
+        "start": null,
+        "end": null,
+        "source_type": ""
+      },
+      "rationale": "The abstract supports a hepatic PPARα fasting network but does not mention or verify the claimed Hao2 and Eci2 targets.",
+      "red_flags": [
+        "insufficient_text",
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-2031655117f8baca41ce",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "partial",
+      "studied_genes": [
+        "Itga4"
+      ],
+      "function_supported_genes": [
+        "Itga4"
+      ],
+      "directness": "causal",
+      "direction": "unclear",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Our data shows that Fn1 and Vcam1 binding to and activation of ItgA4/Β1 induces defects in directed migration of EC upon TDP-43 loss.",
+        "start": 40821,
+        "end": 40954,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper directly studies Itga4 in endothelial migration and sprouting, but shows that excess pathway activation disrupts directed migration rather than establishing a simple requirement for Itga4.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-26961567be69d2771a0f",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "partial",
+      "studied_genes": [
+        "Sord"
+      ],
+      "function_supported_genes": [
+        "Sord"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Interestingly, WT but not Nrf2−/− liver slices treated with arsenic resulted in increased mRNA levels of the key fructose metabolism pathway enzymes ketohexokinase (Khk), sorbitol dehydrogenase (Sord), and triokinase/FMN cyclase (Tkfc) as well as a key mediator of liver gluconeogenesis hepatocyte nuclear factor 4 (Hnf4A) (Figure 4B).",
+        "start": 12511,
+        "end": 12846,
+        "source_type": "full_text"
+      },
+      "rationale": "Mouse liver experiments establish NRF2-dependent Sord induction under toxic metabolic stress; flux attribution remains partial.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-48422b8ea27c2539bf2b",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "no",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "background",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "",
+        "start": null,
+        "end": null,
+        "source_type": ""
+      },
+      "rationale": "The experiment characterizes AKR1C20 and explicitly distinguishes it from AKR1C6; AKR1C6 is only a comparator, so this paper does not cover supplied Akr1c6.",
+      "red_flags": [
+        "wrong_gene",
+        "paralog_only",
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-54dff275faab78dc35a5",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "supports",
+      "studied_genes": [
+        "Gabarapl1"
+      ],
+      "function_supported_genes": [
+        "Gabarapl1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Simply put, miR-195 regulates proliferation, migration, angiogenesis and autophagy of hEPCs by targeting GABARAPL1.",
+        "start": 25083,
+        "end": 25198,
+        "source_type": "full_text"
+      },
+      "rationale": "Targeting, knockdown, and rescue experiments support a causal GABARAPL1 role in endothelial-progenitor autophagy and angiogenic behaviors. Human EPCs under hypoxia are a closely transferable endothelial context rather than postnatal mouse brain endothelium.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-5551cbd4f12617c28768",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "partial",
+      "studied_genes": [
+        "Hopx"
+      ],
+      "function_supported_genes": [],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Another gene that we found to be highly expressed in the intracranial arterial ECs compared to the extracranial arterial ECs is the transcription factor HOPX.",
+        "start": 42529,
+        "end": 42687,
+        "source_type": "full_text"
+      },
+      "rationale": "The human artery comparison and protein validation substantively study HOPX and support intracranial endothelial enrichment. They do not test an arterial-identity function, which remains a suggestion. Human adult intracranial artery ECs are closely relevant but not the target mouse postnatal brain setting.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-560b17922f0923a44c21",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "partial",
+      "studied_genes": [
+        "Lonp2"
+      ],
+      "function_supported_genes": [
+        "Lonp2"
+      ],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "During peroxisomal degradation, 70–80% of excess peroxisomes are degraded through autophagy, whereas the remaining 20–30% of peroxisomes are degraded by other processes mediated by peroxisomal LonP2 and 15-lipoxygenase-154,55.",
+        "start": 15567,
+        "end": 15793,
+        "source_type": "full_text"
+      },
+      "rationale": "The review supports Lonp2 in peroxisome quality control, but not specifically fatty-acid oxidation, and its disease focus is neurodegeneration rather than liver.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-7b48bebde36f0916fddc",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "no",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "unclear",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "",
+        "start": null,
+        "end": null,
+        "source_type": ""
+      },
+      "rationale": "The exact brain-endothelial review states that empirical support for ciliary mechanosensing is absent and favors nanotubules in BBB genesis. It therefore does not support the claimed ciliary function; the direction cannot be established.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-8e8098d397b5ef463914",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Our results identify a significant overactivation of the Smad2/3 pathway in Nrp1-deficient cells as the key determinant of loss of tip cell capacity and sprouting. They are consistent with a model in which Notch activation in stalk cells decreases Nrp1 levels, which induces stalk cell behaviour by suppressing Smad2/3 activation downstream of Alk1 and Alk5.",
+        "start": 16936,
+        "end": 17294,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper causally supports the Notch-NRP1-ALK1/ALK5 tip-stalk mechanism, but it never studies CXCR4 or an arteriovenous boundary. Thus the added CXCR4-NRP1 linkage is unsupported and no supplied P11 gene receives coverage from this citation.",
+      "red_flags": [
+        "wrong_gene",
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-bfd8007f2b08a42926ff",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "partial",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Herein, we establish that the TGFβ/ALK5 pathway robustly represses ANGPT2 (angiopoietin-2) in pericytes via epigenetic remodeling. TGFβ-driven SMAD (suppressor of mothers against decapentaplegic) 3/4 associates with TGIF1 (TGFβ-induced factor homeobox 1) and HDAC (histone deacetylase) 5 to form a corepressor complex at the Angpt2 promoter, resulting in promoter deacetylation and gene repression.",
+        "start": 966,
+        "end": 1364,
+        "source_type": "abstract"
+      },
+      "rationale": "Genetic and pharmacological experiments causally support ALK5-SMAD repression of Angpt2 and its role in germinal-matrix hemorrhage. However, the paper identifies pericytes, not endothelial cells, as the excessive ANGPT2 source. This is a relevant brain vascular cross-talk context, but the direct endothelial label is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-e259e3212002092d0f1d",
+      "assessor_id": "codex-adjudicator-mixed",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "not_applicable",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "While DGAT1 activation drives FA incorporation into lipoprotein particles (VLDL) for circulation, DGAT2 activation leads to storage in hepatic lipid droplets.",
+        "start": 42831,
+        "end": 42989,
+        "source_type": "full_text"
+      },
+      "rationale": "The MASLD review directly supports dysregulated fatty-acid oxidation and DGAT2-driven lipid-droplet storage, but it does not study Fitm1, Hao2, or Eci2. This is useful pathway context, not supplied-gene evidence.",
+      "red_flags": [
+        "wrong_gene"
+      ]
+    }
+  ]
+}

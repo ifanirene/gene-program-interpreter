@@ -1,0 +1,14 @@
+{
+  "content_hash": "9a9a910f47ab73590b8b363bc4254edf433deeaa9b588cd5f3509b9d53427803",
+  "doi": "10.1007/s00380-020-01625-w",
+  "errors": [],
+  "paper_key": "07ff280768b736a3717f",
+  "pmcid": null,
+  "pmid": "32449050",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Although endothelial progenitor cells (EPCs) are considered to be an essential source of vascular endothelial repair, their bidirectional differentiation determines that they play a double-edged role in the restoration of endothelial injury. In this research, we investigated the effect of Kir2.1 ion channel on the transdifferentiation of endothelial progenitor cells (EPCs) under the oscillating shear stress (OSS) and the molecular mechanisms underlying the pathological vascular remodeling. EPCs were treated with OSS (\u00b1 3.5 dynes/cm2, 1 Hz) simulated with the parallel flow chamber system. The results have shown that OSS promoted the expression of \u03b1-SMA and SM22, markers of mesenchymal cells on EPCs. Moreover, OSS also increased expression of Kir2.1 in EPCs. The down-regulation of Kir2.1 reduced OSS-induced EPC mesenchymal transdifferentiation. The overexpression of Kir2.1 suppressed the angiogenic abilities of EPCs in vitro. In parallel, the overexpression of Kir2.1 on EPCs thickened the carotid tunica intima in rat carotid artery balloon injured model in vivo. Taken together, those data indicated that the OSS could facilitate the transdifferentiation of EPCs by increasing Kir2.1 expression. This study provides a novel insight into the pathogenesis of cardiovascular diseases and gives evidence for Kir2.1 as a potential therapeutic target.",
+  "text_type": "abstract",
+  "title": "Oscillating shear stress mediates mesenchymal transdifferentiation of EPCs by the Kir2.1 channel."
+}

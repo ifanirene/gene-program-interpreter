@@ -1,0 +1,16 @@
+{
+  "content_hash": "df64381f7305e29af809f3980fd590cbc5bf1d5a682015f75629d675e35cf0b3",
+  "doi": "10.1080/15384101.2016.1195939",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "f780353d9092b0ba2a82",
+  "pmcid": "PMC4993425",
+  "pmid": "27341299",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The liver is the most important organ in cholesterol metabolism, which is instrumental in regulating cell proliferation and differentiation. The gene Tm7sf2 codifies for 3 \u03b2-hydroxysterol-\u039414-reductase (C14-SR), an endoplasmic reticulum resident protein catalyzing the reduction of C14-unsaturated sterols during cholesterol biosynthesis from lanosterol. In this study we analyzed the role of C14-SR in vivo during cell proliferation by evaluating liver regeneration in Tm7sf2 knockout (KO) and wild-type (WT) mice. Tm7sf2 KO mice showed no alteration in cholesterol content. However, accumulation and delayed catabolism of hepatic triglycerides was observed, resulting in persistent steatosis at all times post hepatectomy. Moreover, delayed cell cycle progression to the G1/S phase was observed in Tm7sf2 KO mice, resulting in reduced cell division at the time points examined. This was associated to abnormal ER stress response, leading to alteration in p53 content and, consequently, induction of p21 expression in Tm7sf2 KO mice. In conclusion, our results indicate that Tm7sf2 deficiency during liver regeneration alters lipid metabolism and generates a stress condition, which, in turn, transiently unbalances hepatocytes cell cycle progression.",
+  "text_type": "abstract",
+  "title": "Impaired cell proliferation in regenerating liver of 3 \u03b2-hydroxysterol \u039414-reductase (TM7SF2) knock-out mice."
+}

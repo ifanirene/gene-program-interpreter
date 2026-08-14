@@ -28,7 +28,7 @@ import os
 import time
 import requests
 import logging
-from typing import List, Dict, Any, Optional, Union
+from typing import List, Dict, Any, Optional
 
 # URL Constants
 PUBTATOR_API_BASE = "https://www.ncbi.nlm.nih.gov/research/pubtator3-api"
@@ -181,7 +181,80 @@ class NcbiClient:
     # E-Utilities
     # -------------------------------------------------------------------------
 
-    def normalize_genes(self, symbols: List[str], organism: str = "mouse") -> Dict[str, str]:
+    def resolve_gene_metadata(
+        self, symbols: List[str], *, species_taxid: int = 10090
+    ) -> Dict[str, Dict[str, Any]]:
+        """Resolve symbols against NCBI Gene for one explicit taxonomy id.
+
+        Every requested input symbol is returned. Unresolved symbols are represented
+        explicitly instead of being silently omitted or mapped to another species. The
+        caller's symbol remains the dictionary key; NCBI's official symbol is metadata.
+        """
+        ordered = list(dict.fromkeys(str(symbol).strip() for symbol in symbols if str(symbol).strip()))
+        resolved: Dict[str, Dict[str, Any]] = {}
+        for symbol in ordered:
+            term = f"{symbol}[Sym] AND txid{int(species_taxid)}[Organism:exp]"
+            response = self._get(
+                f"{EUTILS_BASE}/esearch.fcgi",
+                {"db": "gene", "term": term, "retmode": "json", "retmax": 1},
+            )
+            gene_id: Optional[str] = None
+            if response:
+                try:
+                    ids = response.json().get("esearchresult", {}).get("idlist", [])
+                    gene_id = str(ids[0]) if ids else None
+                except (AttributeError, IndexError, TypeError, ValueError):
+                    gene_id = None
+
+            if not gene_id:
+                resolved[symbol] = {
+                    "canonical_symbol": None,
+                    "entrez_id": None,
+                    "description": None,
+                    "aliases": [],
+                    "source": "NCBI Gene",
+                    "status": "unresolved",
+                }
+                continue
+
+            summary_response = self._get(
+                f"{EUTILS_BASE}/esummary.fcgi",
+                {"db": "gene", "id": gene_id, "retmode": "json"},
+            )
+            item: Dict[str, Any] = {}
+            if summary_response:
+                try:
+                    item = summary_response.json().get("result", {}).get(gene_id, {})
+                except (AttributeError, TypeError, ValueError):
+                    item = {}
+
+            canonical = str(item.get("name") or symbol).strip()
+            raw_aliases = str(item.get("otheraliases") or "")
+            aliases = sorted(
+                {
+                    alias.strip()
+                    for alias in raw_aliases.split(",")
+                    if alias.strip() and alias.strip().casefold() != canonical.casefold()
+                },
+                key=lambda value: (value.casefold(), value),
+            )
+            resolved[symbol] = {
+                "canonical_symbol": canonical,
+                "entrez_id": gene_id,
+                "description": str(item.get("description") or "").strip() or None,
+                "aliases": aliases,
+                "source": "NCBI Gene",
+                "status": "resolved",
+            }
+        return resolved
+
+    def normalize_genes(
+        self,
+        symbols: List[str],
+        organism: str = "mouse",
+        *,
+        species_taxid: Optional[int] = None,
+    ) -> Dict[str, str]:
         """
         Map Gene Symbols to Entrez IDs using ESearch.
         Returns: {Symbol: EntrezID}
@@ -230,19 +303,12 @@ class NcbiClient:
         # Let's implement single lookup loop for now (safest).
         # Optimization: Only look up the *Driver* genes (Top 5-10/program).
         
-        for sym in symbols:
-            term = f"{sym}[Sym] AND {organism}[Orgn]"
-            url = f"{EUTILS_BASE}/esearch.fcgi"
-            params = {"db": "gene", "term": term, "retmode": "json", "retmax": 1}
-            r = self._get(url, params)
-            if r:
-                try:
-                    d = r.json()
-                    ids = d.get("esearchresult", {}).get("idlist", [])
-                    if ids:
-                        mapping[sym] = ids[0]
-                except:
-                    pass
+        if species_taxid is None:
+            species_taxid = {"human": 9606, "mouse": 10090}.get(organism.casefold(), 10090)
+        metadata = self.resolve_gene_metadata(symbols, species_taxid=species_taxid)
+        for sym, record in metadata.items():
+            if record["status"] == "resolved" and record["entrez_id"]:
+                mapping[sym] = str(record["entrez_id"])
         return mapping
 
     def get_gene_summaries(self, gene_ids: List[str]) -> Dict[str, str]:
@@ -285,4 +351,3 @@ class NcbiClient:
                 logger.error(f"Error parsing ESummary JSON: {e}")
                 
         return results
-

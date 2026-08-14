@@ -1,0 +1,16 @@
+{
+  "content_hash": "dcb94d748f86977dde18a2e3cc5ece70a6a26103044c5a021f37ec0dcaaecedd",
+  "doi": "10.1093/toxsci/kfy106",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "4704ceb2153c95c92fc6",
+  "pmcid": "PMC6659028",
+  "pmid": "29718361",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Alcohol metabolism is a well-characterized biological process that is dominated by the alcohol dehydrogenase (ADH) and aldehyde dehydrogenase (ALDH) families. Nonalcoholic steatohepatitis (NASH) is the advanced inflammatory stage of nonalcoholic fatty liver disease (NAFLD) and is known to alter the metabolism and disposition of numerous drugs. The purpose of this study was to investigate the alterations in alcohol metabolism processes in response to human NASH progression. Expression and function of ADHs, ALDHs, and catalase were examined in normal, steatosis, NASH (fatty) and NASH (not fatty) human liver samples. ALDH4A1 mRNA was significantly decreased in both NASH groups, while no significant changes were observed in the mRNA levels of other alcohol-related enzymes. The protein levels of ADH1A, ADH1B, and ADH4 were each decreased in the NASH groups, which was consistent with a decreased overall ADH activity. The protein level of ALDH2 was significantly increased in both NASH groups, while ALDH1A1 and ALDH1B1 were only decreased in NASH (fatty) samples. ALDH activity represented by oxidation of acetaldehyde was decreased in the NASH (fatty) group. The protein level of catalase was decreased in both NASH groups, though activity was unchanged. Furthermore, the significant accumulation of 4-hydroxynonenal protein adduct in NASH indicated significant oxidative stress and a potential reduction in ALDH activity. Collectively, ADH and ALDH expression and function are profoundly altered in the progression of NASH, which may have a notable impact on ADH- and ALDH-associated cellular metabolism processes and lead to significant alterations in drug metabolism mediated by these enzymes.",
+  "text_type": "abstract",
+  "title": "Alcohol Metabolism in the Progression of Human Nonalcoholic Steatohepatitis."
+}

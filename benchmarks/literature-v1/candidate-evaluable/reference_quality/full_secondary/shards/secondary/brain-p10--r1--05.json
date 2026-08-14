@@ -1,0 +1,48 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-ed761449626e1d4df505"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 28243,
+        "source_type": "full_text",
+        "start": 28116,
+        "text": "a deletion of the helical bundle from full-length FLAG-tagged CEP164 largely abolished its ability to pull down HA-tagged TTBK2"
+      },
+      "function_supported_genes": [
+        "Cep164"
+      ],
+      "rationale": "Gene-specific deletion and pull-down data directly support the CEP164–TTBK2 interaction underlying ciliogenesis. The human protein and tissue-culture context is indirect to postnatal mouse brain endothelial cells, matching the declared context.",
+      "red_flags": [],
+      "review_id": "RL-ed761449626e1d4df505",
+      "studied_genes": [
+        "Cep164"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 69888,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 96384,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 2440,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 51.882
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "liver-p21--candidate-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.96
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.98
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.66
+      }
+    ],
+    "moduleSemanticSimilarity": 0.866667,
+    "overall_rationale": "The sets strongly reproduce the cholesterol-biosynthetic enzyme and SREBP2 regulatory programs, while their third modules overlap more broadly in hepatic lipid handling and MASLD but emphasize different metabolic mechanisms.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules describe the same sequential hepatic mevalonate and post-squalene cholesterol-biosynthesis pathway, with the right module adding acetyl-CoA supply and upstream sterol sensing.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.96
+      },
+      {
+        "left_module": 1,
+        "rationale": "They concern the same cholesterol-synthesis program, but the left centers on catalytic pathway enzymes whereas the right centers on SREBP2-dependent transcriptional control.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.48
+      },
+      {
+        "left_module": 1,
+        "rationale": "The modules intersect at hepatocyte cholesterol esterification through ACAT2, but the right primarily concerns downstream lipid storage, steatosis, and export rather than sterol synthesis.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.29
+      },
+      {
+        "left_module": 2,
+        "rationale": "The left module's SCAP-INSIG1-SREBP2 mechanism is included in the right module, but the right is primarily organized around the enzymatic biosynthesis pathway it regulates.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both modules assert essentially the same SCAP-INSIG1-dependent SREBP2 transcriptional control of hepatic cholesterol genes, including ERG28 and RDH11.",
+        "relationship": "same_core",
+        "right_module": 2,
+        "similarity": 0.98
+      },
+      {
+        "left_module": 2,
+        "rationale": "They share a hepatic cholesterol-homeostasis and MASLD setting, but transcriptional sterol sensing and downstream lipid esterification, storage, and export are distinct mechanisms.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 3,
+        "rationale": "ACSS2-mediated acetyl-CoA provision directly feeds the biosynthetic pathway described on the right, but triglyceride synthesis and lipoprotein export are not its central mechanism.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.44
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both relate to hepatic cholesterol homeostasis, but acetyl-CoA supply and lipid export have little mechanistic overlap with SCAP-INSIG1-SREBP2 transcriptional regulation.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.19
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both describe MASLD-associated hepatic lipid–cholesterol coupling through DGAT2 and MTTP, although the left emphasizes ACSS2 substrate provision while the right emphasizes ACAT2 esterification and steatosis control.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.66
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 13056,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16630,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 1084,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 25.599
+  }
+}

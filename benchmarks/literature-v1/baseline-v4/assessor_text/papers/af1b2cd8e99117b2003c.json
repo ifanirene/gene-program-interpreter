@@ -1,0 +1,14 @@
+{
+  "content_hash": "8ea73444ca70dff6e5ce4f86a3cd19679d66d951ba06301680095f42cf6cebb5",
+  "doi": "10.1194/jlr.m600224-jlr200",
+  "errors": [],
+  "paper_key": "af1b2cd8e99117b2003c",
+  "pmcid": null,
+  "pmid": "16741291",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Squalene synthase (SS) is the first committed enzyme for cholesterol biosynthesis, located at a branch point in the mevalonate pathway. To examine the role of SS in the overall cholesterol metabolism, we transiently overexpressed mouse SS in the livers of mice using adenovirus-mediated gene transfer. Overexpression of SS increased de novo cholesterol biosynthesis with increased 3-hydroxy-3-methyglutaryl-CoA (HMG-CoA) reductase activity, in spite of the downregulation of its own mRNA expression. Furthermore, overexpression of SS increased plasma concentrations of LDL, irrespective of the presence of functional LDL receptor (LDLR). Thus, the hypercholesterolemia is primarily caused by increased hepatic production of cholesterol-rich VLDL, as demonstrated by the increases in plasma cholesterol levels after intravenous injection of Triton WR1339. mRNA expression of LDLR was decreased, suggesting that defective LDL clearance contributed to the development of hypercholesterolemia. Curiously, the liver was enlarged, with a larger number of Ki-67-positive cells. These results demonstrate that transient upregulation of SS stimulates cholesterol biosynthesis as well as lipoprotein production, providing the first in vivo evidence that SS plays a regulatory role in cholesterol metabolism through modulation of HMG-CoA reductase activity and cholesterol biosynthesis.",
+  "text_type": "abstract",
+  "title": "Increased cholesterol biosynthesis and hypercholesterolemia in mice overexpressing squalene synthase in the liver."
+}

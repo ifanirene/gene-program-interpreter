@@ -1,0 +1,1079 @@
+{
+  "schema_version": 1,
+  "assessor_type": "model",
+  "assessor_id": "primary-p11-p9",
+  "reviews": [
+    {
+      "review_id": "RL-03f46f5ba8db2f5db0de",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We propose that Notch-mediated differential expression of Nrp1 critically regulates tip/stalk specification and thus vascular branching by modulating the activity of Tgf-β/Alk5 and Bmp9/Alk1 signalling between neighbouring endothelial cells.",
+        "start": 4744,
+        "end": 4985,
+        "source_type": "full_text"
+      },
+      "rationale": "The Notch–Nrp1–ALK mechanism is supported, but no supplied P9 gene is studied.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-1142818060e99f4556c2",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Adamtsl2",
+        "Htra3"
+      ],
+      "function_supported_genes": [
+        "Adamtsl2",
+        "Htra3"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Twelve of these genes were transmembrane transporters or coreceptors and 8 (Adamtsl2 [ADAMTS-like protein 2], Apod [apolipoprotein D], Ctsw [Cathepsin W], Htra3 [serine protease HTRA3], Pglyrp1 [peptidoglycan recognition protein 1], Spock2 [Testican-2], Ttyh2 [protein tweety homolog 2], and Wfdc1 [WAP four-disulfide core domain protein 1]) belong to the family of bona fide ECM proteins expressed on average 20-fold higher in brain ECs compared with ECs from other tissues (Figure 7B).",
+        "start": 50232,
+        "end": 50719,
+        "source_type": "full_text"
+      },
+      "rationale": "Forebrain profiling supports Adamtsl2 and Htra3 as brain-enriched ECM genes during embryonic BBB maturation.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-1a7af052863c552bc619",
+      "assessor_id": "primary-p11-p9",
+      "support": "contradicts",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "reversed",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Here, we show that the simultaneous activation of cAMP and Wnt/β-catenin signaling while inhibiting the TGF-β pathway synergistically increases BBB tightness in ECs.",
+        "start": 3900,
+        "end": 4065,
+        "source_type": "full_text"
+      },
+      "rationale": "TGF-β inhibition improves BBB tightness, opposite to the claimed positive driver direction.",
+      "red_flags": [
+        "reversed_direction"
+      ]
+    },
+    {
+      "review_id": "RL-1dbada6da7fd86f2374d",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Htra3"
+      ],
+      "function_supported_genes": [
+        "Htra3"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Similar to HtrA1, HtrA3 bound to various TGF-beta proteins and inhibited the signaling of BMP-4, -2 and TGF-beta 1.",
+        "start": 672,
+        "end": 787,
+        "source_type": "abstract"
+      },
+      "rationale": "Htra3 directly inhibits extracellular TGF-β/BMP signaling outside brain endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-2a369f44fb857d361ecf",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Using the tamoxifen inducible Cre approach, we now demonstrate that vascular haemorrhage also occurs in retinal and brain tissues when Tgfbr2 is depleted postnatally in ECs, supporting a continued role for Tgfbr2 in neural ECs following birth.",
+        "start": 3502,
+        "end": 3745,
+        "source_type": "full_text"
+      },
+      "rationale": "Postnatal endothelial Tgfbr2 deletion directly demonstrates CNS vascular integrity dependence.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-2a79d807d08d2b082c85",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "reversed",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Here, we show that the simultaneous activation of cAMP and Wnt/β-catenin signaling while inhibiting the TGF-β pathway synergistically increases BBB tightness in ECs.",
+        "start": 3900,
+        "end": 4065,
+        "source_type": "full_text"
+      },
+      "rationale": "TGF-β inhibition improves barrier tightness, opposite to a simple positive TGF-β maturation claim.",
+      "red_flags": [
+        "reversed_direction"
+      ]
+    },
+    {
+      "review_id": "RL-2e6ddf9c9bbd8ed18d0c",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Secreted molecules endothelial-specific molecule 1, angiopoietin 2, and apelin bind to cognate receptors on endothelial stalk cells.",
+        "start": 853,
+        "end": 985,
+        "source_type": "abstract"
+      },
+      "rationale": "Retinal transcriptomics identifies Angpt2 as a tip-cell secreted molecule in a related CNS vascular bed.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-319507c3926e5a3cec76",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Whereas WT ECs formed distinct tubes within 4–6 h in Matrigel, Vezf1−/− ECs showed significant defects in tube formation as indicated by the shorter tube length (Fig.",
+        "start": 14043,
+        "end": 14209,
+        "source_type": "full_text"
+      },
+      "rationale": "Vezf1 loss impairs generic endothelial tube formation through Cited2 regulation.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-324ec6f55da876ef1562",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "It inhibited the expression of genes enriched in tip cells, such as angiopoietin-2, ESM1, and Apelin, and impaired tip cell formation.",
+        "start": 1182,
+        "end": 1316,
+        "source_type": "abstract"
+      },
+      "rationale": "Enhanced endothelial Notch signaling suppresses Angpt2 and tip formation.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-3a0fc12b219432055d1d",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "In both retina and brain, vascular endothelial cells activate a previously dormant tip cell gene expression program, which likely underlies the adaptive neoangiogenic response to chronic hypoxia.",
+        "start": 1124,
+        "end": 1319,
+        "source_type": "abstract"
+      },
+      "rationale": "Brain endothelial cells activate a tip program under chronic hypoxia rather than normal postnatal development.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-4cd1d112d7de253b861e",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Unexpectedly, NRP1 enabled CDC42-dependent actin remodeling and filopodia formation in endothelial tip cells independently of VEGF-A stimulation, and loss of CDC42 activation did not phenocopy the vascular defects of mice with impaired VEGF-A signaling through NRP1.",
+        "start": 3756,
+        "end": 4022,
+        "source_type": "full_text"
+      },
+      "rationale": "Nrp1–CDC42 is supported, but supplied Cdc42ep3 is not studied.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-4d644c1023997551c725",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The functional downregulation of endothelial Kir2.1 using dominant-negative Kir2.1 construct resulted in substantial reductions in the response to flow in mesenteric arteries of lean mice, whereas no effect was observed in arteries of obese mice.",
+        "start": 349,
+        "end": 595,
+        "source_type": "abstract"
+      },
+      "rationale": "Kir2.1 perturbation causally supports endothelial flow sensing in a nonbrain vascular bed.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-54dff275faab78dc35a5",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [
+        "Gabarapl1"
+      ],
+      "function_supported_genes": [
+        "Gabarapl1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "the transfection of si-GABARAPL1 plus miR-195 inhibitor could obviously suppress the proliferation of hEPCs",
+        "start": 19589,
+        "end": 19696,
+        "source_type": "full_text"
+      },
+      "rationale": "GABARAPL1 perturbation affects progenitor proliferation, but other angiogenic results are less clear and the cells are not brain endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-5551cbd4f12617c28768",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [
+        "Hopx"
+      ],
+      "function_supported_genes": [
+        "Hopx"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Interestingly, HOPX is higher expressed in intracranial ECs compared to extracranial ECs.",
+        "start": 43021,
+        "end": 43110,
+        "source_type": "full_text"
+      },
+      "rationale": "HOPX is an adult intracranial endothelial marker, not a causally established arterial-identity factor.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-59c4ebeceaa5b2c94c74",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "D-tip cell specification depends on TGF-β signaling, and endothelial-specific loss of TGF-β receptor I (ALK5) in the post-natal retina reverts D-tip cells to an S-like phenotype, inhibiting neuroretina vascularization.",
+        "start": 3684,
+        "end": 3902,
+        "source_type": "full_text"
+      },
+      "rationale": "ALK5 deletion blocks postnatal retinal diving-tip identity; Angpt2 is profiled but is ancillary to this link.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-5d4f1894d36c56f451a8",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Cxcr4",
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Cxcr4",
+        "Angpt2"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Five genes that were previously validated as tip cell markers in the retina — Plaur, Angpt2, Lcp2, Cxcr4, Apln, and Kcne3 — are enriched in the scRNAseq tip cell cluster (del Toro et al., 2010; Strasser et al., 2010; Rattner et al., 2013).",
+        "start": 87709,
+        "end": 87948,
+        "source_type": "full_text"
+      },
+      "rationale": "Postnatal mouse brain single-cell data directly show Cxcr4 and Angpt2 enrichment in tip cells.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-676792adf2331006725b",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "We identify endothelial expression of VEGF-A and of the chemokine receptor CXCR4 as key processes controlling Notch-dependent vessel growth.",
+        "start": 508,
+        "end": 648,
+        "source_type": "abstract"
+      },
+      "rationale": "Genetic experiments support CXCR4 in Notch-dependent postnatal vessel growth, mainly in retina.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-6a209becf4a00b1778e2",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Treatment with both BMP9 and BMP10 blocking antibodies, but not with individual antibodies, in neonates resulted in AVM formation in the developing retina [19–23].",
+        "start": 3038,
+        "end": 3201,
+        "source_type": "full_text"
+      },
+      "rationale": "BMP9/10 perturbation supports neonatal arteriovenous patterning, not a brain-specific TGF-β/Angpt2 mechanism.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-6b215c83b58f1077a80d",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Here, fluorescent imaging based on total internal reflection fluorescence (TIRF) microscopy and whole-cell patch clamp recordings reveal that JP2 functions as a critical structural component enabling efficient localized translation of Ca2+ sparks to STOCs, thus effectively regulating resting tone in VSMCs.",
+        "start": 3629,
+        "end": 3936,
+        "source_type": "full_text"
+      },
+      "rationale": "The study supports JPH2 calcium microdomains in smooth muscle, not supplied Jph1.",
+      "red_flags": [
+        "paralog_only"
+      ]
+    },
+    {
+      "review_id": "RL-6f074d7bbf6217b33d2a",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "reversed",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Exogenous TGF-β1 induced a dose-dependent decrease in endothelial cord formation on Matrigel, with significant reductions in cord length, cord branching, loop formation and tip cell generation detectable with doses of TGF-β1 ≥ 1.0 ng/ml (Fig. 1).",
+        "start": 8405,
+        "end": 8651,
+        "source_type": "full_text"
+      },
+      "rationale": "Peripheral endothelial culture supports ALK5 regulation of tip behavior but in the reverse direction from CNS D-tip identity.",
+      "red_flags": [
+        "reversed_direction"
+      ]
+    },
+    {
+      "review_id": "RL-71abd330642adb2d2009",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "RESULTS: Herein, we establish that the TGFβ/ALK5 pathway robustly represses ANGPT2 (angiopoietin-2) in pericytes via epigenetic remodeling.",
+        "start": 957,
+        "end": 1096,
+        "source_type": "abstract"
+      },
+      "rationale": "ALK5 causally represses Angpt2 in brain pericytes, not endothelial tip cells.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-73071a0ded46f509bf95",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "The BBB-reinforcing role of ANGPT2 (angiopoietin 2) is paradoxical given its wider role as TIE2 (TEK receptor tyrosine kinase) receptor antagonist and may suggest a unique and context-dependent function of ANGPT2 in the brain.",
+        "start": 2036,
+        "end": 2262,
+        "source_type": "abstract"
+      },
+      "rationale": "Adult pathological brain profiling supports a context-dependent ANGPT2 endothelial function.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-77989471926390ff134f",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "We were able to pinpoint and validate hsa-miR-24-3p (indicated for brevity as miR-24) as a main regulator of Neuropilin-1 transcription.",
+        "start": 1479,
+        "end": 1615,
+        "source_type": "full_text"
+      },
+      "rationale": "NRP1 regulation is validated in brain endothelial cells, but BBB or tip/stalk function is not tested.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-7b7e4737988b94697081",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Neutralizing antibodies against SDF-1 or an antagonist of CXCR4, AMD3100, reduced the radius of the vascularized area in retinal vascular development.",
+        "start": 568,
+        "end": 718,
+        "source_type": "abstract"
+      },
+      "rationale": "CXCR4 inhibition causally impairs retinal vascular expansion and tip behavior.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-873e9a2975e4ca81645b",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The expression of KIR in capillaries in electrically active tissues may allow KIR to sense extracellular K+ , contributing to functional hyperemia.",
+        "start": 1044,
+        "end": 1191,
+        "source_type": "abstract"
+      },
+      "rationale": "A focused review supports Kir2.1 functional hyperemia, but it is secondary and not postnatal-brain-specific.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-87d7176d50316fb87645",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "underclaimed",
+      "evidence_span": {
+        "text": "Finally, the formation of arteriovenous connections during CNS development is partially mediated by the receptor–ligand pair Cxcr4–Cxcl12b in the CNS but not in the trunk of zebrafish embryos, suggesting it has a CNS-specific nature152.",
+        "start": 38202,
+        "end": 38438,
+        "source_type": "full_text"
+      },
+      "rationale": "The review substantively connects Cxcr4 to CNS vascular development but is secondary evidence.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-8e8098d397b5ef463914",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We propose that Notch-mediated differential expression of Nrp1 critically regulates tip/stalk specification and thus vascular branching by modulating the activity of Tgf-β/Alk5 and Bmp9/Alk1 signalling between neighbouring endothelial cells.",
+        "start": 4744,
+        "end": 4985,
+        "source_type": "full_text"
+      },
+      "rationale": "The Nrp1–Notch–ALK switch is supported, but no supplied P11 gene is studied.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-94012f0cc7cf58b8df27",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "During head-fold and somite stages, expression was restricted to vascular endothelial cells that arise during both vasculogenesis and angiogenesis.",
+        "start": 922,
+        "end": 1069,
+        "source_type": "abstract"
+      },
+      "rationale": "Vezf1 marks embryonic endothelium, but brain endothelial identity and function are not tested.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-9bf7e16cfe67e3eb3744",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Cxcr4a and Cxcl12b are important for inducing the phase transition to the directional phase, thereby promoting directional migration toward the anastomotic target.",
+        "start": 3066,
+        "end": 3229,
+        "source_type": "full_text"
+      },
+      "rationale": "Genetics and live imaging establish Cxcr4-dependent directional migration in zebrafish cerebral vessels.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-a21636836fe7611234ae",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Skil"
+      ],
+      "function_supported_genes": [
+        "Skil"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Thus, the activity of ALK5 signaling is increased whereas that of the ALK1 branch is decreased in SnoNm/m MEECs.",
+        "start": 25050,
+        "end": 25162,
+        "source_type": "full_text"
+      },
+      "rationale": "SnoN/Skil mutation shifts endothelial ALK5 versus ALK1 signaling and causes angiogenic phenotypes.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-a278001bc49e2e9e1781",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Cxcr4",
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Cxcr4",
+        "Angpt2"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Genes enriched in tip cells include ESM-1, angiopoietin-2, and SLP-76. CXCR4, a receptor for the chemokine stromal-cell derived factor-1, was also identified as a tip cell-enriched gene, and we provide evidence for a novel role for this receptor in mediating tip cell morphology and vascular patterning in the neonatal retina.",
+        "start": 768,
+        "end": 1094,
+        "source_type": "abstract"
+      },
+      "rationale": "Neonatal retinal profiling supports Angpt2 enrichment and Cxcr4 enrichment/function.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-a33a0629c0f3c280a517",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "These defects were influenced by both hyperactive PI-3' kinase signaling and altered TGF-β signaling.",
+        "start": 634,
+        "end": 735,
+        "source_type": "abstract"
+      },
+      "rationale": "A brain-malformation model links altered TGF-β to tip/stalk defects without isolating the claimed axis.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-a53d95ec02804a8b2407",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [
+        "Adamtsl2",
+        "Htra3",
+        "Lrp8"
+      ],
+      "function_supported_genes": [
+        "Adamtsl2",
+        "Htra3"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Specifically, Adamtsl2, Htra3, LDL receptor-related protein 8 (Lrp8), and AU021092 were downregulated in endothelial cells from hemorrhagic brains at all ages while Timp3 and coiled-coil domain containing 28B (Ccdc28b) were upregulated in endothelial cells from all KO samples.",
+        "start": 16365,
+        "end": 16642,
+        "source_type": "full_text"
+      },
+      "rationale": "Neonatal brain data associate three supplied genes with hemorrhage; ECM/TGF function for Adamtsl2 and Htra3 remains predictive.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-ab19f586a6ed146cee0d",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Moreover, the CXCL12/CXCR4/CXCR7 system appears to be directly involved in microvessel growth, its members being differentially expressed in angiogenically activated microvessels and vascular sprouts.",
+        "start": 1239,
+        "end": 1439,
+        "source_type": "abstract"
+      },
+      "rationale": "Human fetal brain localization supports association with sprouts, not a causal postnatal mouse function.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-af69170bda59a3750f67",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Here we show that endothelial-specific disruption of the Ccm1 gene in mice induces EndMT, which contributes to the development of vascular malformations.",
+        "start": 990,
+        "end": 1143,
+        "source_type": "abstract"
+      },
+      "rationale": "The paper supports CCM/TGF-driven EndMT but perturbs Ccm1 rather than claimed Ccm2.",
+      "red_flags": [
+        "wrong_gene"
+      ]
+    },
+    {
+      "review_id": "RL-b9f6789f11d353be3566",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Tram2"
+      ],
+      "function_supported_genes": [
+        "Tram2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Deletion of the C-terminal part of TRAM2 inhibits type I collagen synthesis during activation of HSCs.",
+        "start": 1149,
+        "end": 1251,
+        "source_type": "abstract"
+      },
+      "rationale": "TRAM2 causally supports collagen synthesis in hepatic stellate cells, not brain endothelium.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-bfd8007f2b08a42926ff",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "RESULTS: Herein, we establish that the TGFβ/ALK5 pathway robustly represses ANGPT2 (angiopoietin-2) in pericytes via epigenetic remodeling.",
+        "start": 957,
+        "end": 1096,
+        "source_type": "abstract"
+      },
+      "rationale": "The TGF-β/ALK5–Angpt2 link is causal but occurs in brain pericytes.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-c4f2318eb5bdbfde3efe",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We propose that Notch-mediated differential expression of Nrp1 critically regulates tip/stalk specification and thus vascular branching by modulating the activity of Tgf-β/Alk5 and Bmp9/Alk1 signalling between neighbouring endothelial cells.",
+        "start": 4744,
+        "end": 4985,
+        "source_type": "full_text"
+      },
+      "rationale": "The Notch–Nrp1–ALK switch is supported, but no supplied P11 gene is studied.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-cfe94a500b24f2c43d20",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Cells treated with 50 mM ethanol for 24 h exhibited a 30% increase in VEZF1 protein fluorescence intensity, whereas treatment with 100 mM ethanol did not significantly alter VEZF1 intensity compared with controls (Figure 3l–o).",
+        "start": 30192,
+        "end": 30419,
+        "source_type": "full_text"
+      },
+      "rationale": "VEZF1 is measured in brain endothelial cells, but no perturbation establishes GLUT1 or CLDN5 regulation.",
+      "red_flags": [
+        "wrong_function",
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-dadc6ba8f18c5aeaa69e",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Unexpectedly, NRP1 enabled CDC42-dependent actin remodeling and filopodia formation in endothelial tip cells independently of VEGF-A stimulation, and loss of CDC42 activation did not phenocopy the vascular defects of mice with impaired VEGF-A signaling through NRP1.",
+        "start": 3756,
+        "end": 4022,
+        "source_type": "full_text"
+      },
+      "rationale": "The Nrp1–CDC42 pathway is supported, but supplied Cdc42ep3 is not studied.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-e235b25ccaa3823c1c62",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [
+        "Hopx"
+      ],
+      "function_supported_genes": [
+        "Hopx"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Interestingly, HOPX is higher expressed in intracranial ECs compared to extracranial ECs.",
+        "start": 43021,
+        "end": 43110,
+        "source_type": "full_text"
+      },
+      "rationale": "HOPX is an intracranial endothelial marker, but an identity function is not causally established.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-e2994b00a0b44903011c",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "RESULTS: We profiled single-cell transcriptomes of 13 human cerebrovascular malformation samples (10 cerebral cavernous malformations and 3 brain arteriovenous malformations) and 13 control brain samples, identifying a crucial pathological tip cell population in lesions.",
+        "start": 883,
+        "end": 1154,
+        "source_type": "abstract"
+      },
+      "rationale": "The study identifies and manipulates pathological cerebrovascular tip cells rather than normal developmental cells.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-e49bdaf598df22bfdbaf",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "underclaimed",
+      "evidence_span": {
+        "text": "Our data demonstrate that OPCs are an important source of TGF-β1 that supports BBB integrity during development. OPC-derived TGF-β1 activates the MEK/ERK pathway in cerebral endothelium via TGF-β receptor, and the signaling cascade eventually increases the expression levels of tight-junction proteins to promote the BBB integrity.",
+        "start": 19327,
+        "end": 19658,
+        "source_type": "full_text"
+      },
+      "rationale": "Neonatal genetics and cerebral endothelial inhibition directly support developmental BBB integrity.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-f016cce59f0ccfca2dfc",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Specifically, we show that blocking Kir2.1 with ML133 or functionally downregulating Kir2.1 with endothelial-specific adenoviral vector containing dominant-negative Kir2.1 (dnKir2.1) result in a significant reduction in FIV in normotensive subjects but with a smaller effect in hypertensive adults.",
+        "start": 1162,
+        "end": 1460,
+        "source_type": "abstract"
+      },
+      "rationale": "Kir2.1 perturbation causally reduces endothelial flow-induced vasodilation in peripheral vessels.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-f1d1d90955ef6253220c",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "These observations suggest that Nrp-1 plays an important role in allowing the endothelial tip cell filopodia to switch substrate and protrude in a new direction at a specific location in the developing brain.",
+        "start": 1574,
+        "end": 1782,
+        "source_type": "abstract"
+      },
+      "rationale": "Mouse hindbrain experiments support Nrp1 tip guidance at an embryonic rather than postnatal stage.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-f8b225a8cb863ed98012",
+      "assessor_id": "primary-p11-p9",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Our findings suggest that activation of Notch-1 signalling is a phenotypic feature of brain arteriovenous malformations, and that activation of Notch-1 in normal vasculature induces a pro-angiogenic state, which may contribute to the development of vascular malformations.",
+        "start": 992,
+        "end": 1264,
+        "source_type": "abstract"
+      },
+      "rationale": "Human AVM observations plus rat activation support pathology, not normal postnatal specification.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-fcd26d3dfa906a900002",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Initially, Notch signalling induces cxcr4a expression, allowing proper tip cell migration towards the arterial circulation, thereby establishing optimal blood flow.",
+        "start": 2557,
+        "end": 2721,
+        "source_type": "full_text"
+      },
+      "rationale": "Live imaging and genetics support Notch induction of Cxcr4 during arterial tip migration.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-ff25a8b2a5f5c0c87200",
+      "assessor_id": "primary-p11-p9",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "NRP1 therefore promotes brain angiogenesis cell autonomously in endothelium, independently of heterotypic interactions with nonendothelial cells.",
+        "start": 932,
+        "end": 1077,
+        "source_type": "abstract"
+      },
+      "rationale": "Developing-brain mosaics establish a cell-autonomous Nrp1 tip role; Nrp1 is a regulator.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    }
+  ]
+}

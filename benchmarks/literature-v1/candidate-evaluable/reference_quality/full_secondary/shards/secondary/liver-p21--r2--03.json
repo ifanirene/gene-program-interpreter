@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-5cd2513174caf50a54cb",
+    "RL-6477323ccc29012a84a7",
+    "RL-74bfd22b55ef7de1a593",
+    "RL-8655cf3bfaadd6f3db6a"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1514,
+        "source_type": "abstract",
+        "start": 1306,
+        "text": "the high intracellular expression ratio of SREBP cleavage-activating protein (Scap) to insulin-induced gene (Insig) disrupted the SREBP2-mediated feedback regulation of cholesterol homeostasis in these cells."
+      },
+      "function_supported_genes": [],
+      "rationale": "The study mechanistically links the SCAP:INSIG balance to SREBP2 cholesterol feedback, but only in hepatic stellate cells and without testing the supplied program genes. The direct context label is therefore overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5cd2513174caf50a54cb",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "background",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper experimentally studies Mvd in a skin-disease knock-in model, but its cholesterol-biosynthesis role appears only as introductory background and is not tested. Mvd is studied gene-specifically, but the assigned pathway function is unsupported by the reported experiments.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-6477323ccc29012a84a7",
+      "studied_genes": [
+        "Mvd"
+      ],
+      "support": "no"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1080,
+        "source_type": "abstract",
+        "start": 904,
+        "text": "SCAP-deficient mice showed an 80% reduction in basal rates of cholesterol and fatty acid synthesis in liver, owing to decreases in mRNAs encoding multiple biosynthetic enzymes."
+      },
+      "function_supported_genes": [],
+      "rationale": "Liver-specific SCAP deficiency causally reduces hepatic cholesterol synthesis and biosynthetic-enzyme mRNAs, supporting SCAP/SREBP control of the program. The study does not examine aging or MASLD, so its context is partial rather than direct.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-74bfd22b55ef7de1a593",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1656,
+        "source_type": "abstract",
+        "start": 1550,
+        "text": "HSD17B7, along with MPD and SQE, is involved in the decreased cholesterol synthesis in the liver of SHRSP."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "Gene-specific liver expression and activity differences associate HSD17B7 with reduced hepatic cholesterol synthesis, supporting its assigned function observationally. The rat strain model differs in species and condition from mouse aging/MASLD, so direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-8655cf3bfaadd6f3db6a",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 40448,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 65405,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 6544,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 126.001
+  }
+}

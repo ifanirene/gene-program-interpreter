@@ -1,0 +1,118 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-689f197748219170cfe5",
+    "RL-83a46fb3311eafce74e1",
+    "RL-9934cbd6af57ae3c29e8",
+    "RL-b385d1999f04916474a8"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 875,
+        "source_type": "abstract",
+        "start": 725,
+        "text": "gain or loss of Norrin/Fz4 signaling results in a cell-autonomous gain or loss, respectively, of blood retina barrier and blood brain barrier function"
+      },
+      "function_supported_genes": [],
+      "rationale": "Genetic gain/loss experiments support Fzd4-dependent CNS endothelial barrier function, but do not test cilia assembly or any supplied gene. The adult retina/cerebellum setting only partially matches postnatal brain endothelial development.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-689f197748219170cfe5",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 5047,
+        "source_type": "full_text",
+        "start": 4891,
+        "text": "Micro-CT scan performed at postnatal day 1 (P1) revealed random left/right symmetry dysregulation with situs inversus totalis present in most SDNme7−/− rats"
+      },
+      "function_supported_genes": [],
+      "rationale": "Rat Nme7 knockout causally supports a ciliopathy phenotype. It does not test Smoothened localization, Hedgehog signaling, or BBSome-mediated GPCR trafficking, so support for the assigned mechanism is only partial.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-83a46fb3311eafce74e1",
+      "studied_genes": [
+        "Nme7"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 21171,
+        "source_type": "full_text",
+        "start": 20940,
+        "text": "The CPLANE proteins Intu, Fuz, and Wdpcp/Fritz are deeply conserved in animal evolution (Fig. 1a) and were first identified as PCP proteins in Drosophila33-37,40. In vertebrates, mutation of these genes elicits ciliogenesis defects"
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "Gene-specific mutation evidence supports Wdpcp as a CPLANE component required for vertebrate ciliogenesis, consistent with the cilia-assembly mechanism. The experimental systems are indirect to postnatal mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-9934cbd6af57ae3c29e8",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 26950,
+        "source_type": "full_text",
+        "start": 26770,
+        "text": "Upon detachment of the cleaved polypeptide from the N-terminal methionine, the produced L-methionine is bound to two metals (E•P), as clearly observed in the Co-Met-bound structure"
+      },
+      "function_supported_genes": [
+        "Metap1d"
+      ],
+      "rationale": "MetAP1D ligand-bound structures and substrate modeling directly support cleavage of initiator methionine during mitochondrial protein maturation. The human recombinant structural system is indirect to mouse brain endothelial development.",
+      "red_flags": [],
+      "review_id": "RL-b385d1999f04916474a8",
+      "studied_genes": [
+        "Metap1d"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 225536,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 255996,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 8217,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 162.569
+  }
+}

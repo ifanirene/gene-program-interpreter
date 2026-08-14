@@ -1,0 +1,79 @@
+{
+  "assessment_type": "model",
+  "assessor_index_path": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v4/assessor_text/index.json",
+  "packet_path": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v4/review/review_packet.json",
+  "schema_version": 1,
+  "sessions": [
+    {
+      "review_links": 24,
+      "session_id": "brain-p10--r1",
+      "task_path": "brain-p10--r1.json"
+    },
+    {
+      "review_links": 25,
+      "session_id": "brain-p10--r2",
+      "task_path": "brain-p10--r2.json"
+    },
+    {
+      "review_links": 18,
+      "session_id": "brain-p11--r1",
+      "task_path": "brain-p11--r1.json"
+    },
+    {
+      "review_links": 16,
+      "session_id": "brain-p11--r2",
+      "task_path": "brain-p11--r2.json"
+    },
+    {
+      "review_links": 22,
+      "session_id": "brain-p8--r1",
+      "task_path": "brain-p8--r1.json"
+    },
+    {
+      "review_links": 14,
+      "session_id": "brain-p9--r1",
+      "task_path": "brain-p9--r1.json"
+    },
+    {
+      "review_links": 18,
+      "session_id": "liver-p20--r1",
+      "task_path": "liver-p20--r1.json"
+    },
+    {
+      "review_links": 16,
+      "session_id": "liver-p21--r1",
+      "task_path": "liver-p21--r1.json"
+    },
+    {
+      "review_links": 16,
+      "session_id": "liver-p21--r2",
+      "task_path": "liver-p21--r2.json"
+    },
+    {
+      "review_links": 22,
+      "session_id": "liver-p22--r1",
+      "task_path": "liver-p22--r1.json"
+    },
+    {
+      "review_links": 18,
+      "session_id": "liver-p23--r1",
+      "task_path": "liver-p23--r1.json"
+    },
+    {
+      "review_links": 17,
+      "session_id": "liver-p24--r1",
+      "task_path": "liver-p24--r1.json"
+    },
+    {
+      "review_links": 20,
+      "session_id": "liver-p25--r1",
+      "task_path": "liver-p25--r1.json"
+    },
+    {
+      "review_links": 15,
+      "session_id": "liver-p25--r2",
+      "task_path": "liver-p25--r2.json"
+    }
+  ],
+  "total_review_links": 261
+}

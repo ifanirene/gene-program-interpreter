@@ -1,0 +1,48 @@
+{
+  "approval": {
+    "max_api_equivalent_usd": 2.5,
+    "record_approval_before_launch": true,
+    "status": "required"
+  },
+  "benchmark_id": "literature-v1",
+  "execution": {
+    "auth": "subscription",
+    "concurrency": 8,
+    "cost_basis": "api-equivalent",
+    "max_attempts": 1,
+    "max_budget_usd": 2.5,
+    "max_turns": 120,
+    "model": "claude-sonnet-4-6",
+    "per_program_timeout_seconds": 1800
+  },
+  "manifest_sha256": "10a81cebef82d6192f166f63f0a49ecf54cff202d990468256bbce56c3b574e2",
+  "notes": [
+    "Launch each session in its own directory; repeated sentinels must never overwrite.",
+    "With subscription auth, withhold ANTHROPIC_API_KEY from the Agent-SDK process.",
+    "Run the first session as a serial canary before concurrent fan-out.",
+    "Persist immutable per-attempt artifacts and cumulative telemetry for every retry."
+  ],
+  "schema_version": 1,
+  "sessions": [
+    {
+      "audit_dir": "sessions/brain-p10--r1/research_audit",
+      "bundle": "sessions/brain-p10--r1/program_bundles/P10.json",
+      "case_id": "brain-p10",
+      "context": {
+        "cell_type": "brain endothelial cell",
+        "conditions": [
+          "postnatal development"
+        ],
+        "organism": "mouse",
+        "species_taxid": 10090,
+        "tissue": "brain"
+      },
+      "experiment": "brain-endothelial",
+      "program_id": "P10",
+      "repeat": 1,
+      "result_dir": "sessions/brain-p10--r1/research_results",
+      "sentinel": false,
+      "session_id": "brain-p10--r1"
+    }
+  ]
+}

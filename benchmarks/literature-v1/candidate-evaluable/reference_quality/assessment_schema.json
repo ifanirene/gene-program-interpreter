@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["assessor_id", "reviews"],
+  "properties": {
+    "assessor_id": {"type": "string", "minLength": 1},
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "review_id",
+          "assessor_id",
+          "support",
+          "studied_genes",
+          "function_supported_genes",
+          "directness",
+          "direction",
+          "assessed_context",
+          "context_label_accuracy",
+          "evidence_span",
+          "rationale",
+          "red_flags"
+        ],
+        "properties": {
+          "review_id": {"type": "string", "minLength": 1},
+          "assessor_id": {"type": "string", "minLength": 1},
+          "support": {
+            "enum": ["supports", "partial", "no", "contradicts", "not_assessable"]
+          },
+          "studied_genes": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true
+          },
+          "function_supported_genes": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true
+          },
+          "directness": {
+            "enum": ["causal", "observational", "secondary", "background", "unclear"]
+          },
+          "direction": {
+            "enum": ["matches", "unclear", "reversed", "not_applicable"]
+          },
+          "assessed_context": {
+            "enum": ["direct", "partial", "indirect", "not_assessable"]
+          },
+          "context_label_accuracy": {
+            "enum": ["accurate", "overclaimed", "underclaimed", "not_assessable"]
+          },
+          "evidence_span": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text", "start", "end", "source_type"],
+            "properties": {
+              "text": {"type": "string"},
+              "start": {"type": ["integer", "null"]},
+              "end": {"type": ["integer", "null"]},
+              "source_type": {"type": "string"}
+            }
+          },
+          "rationale": {"type": "string", "minLength": 1},
+          "red_flags": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "wrong_gene",
+                "paralog_only",
+                "background_only",
+                "wrong_function",
+                "reversed_direction",
+                "context_overclaim",
+                "secondary_as_direct",
+                "insufficient_text"
+              ]
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "02d2444fb4dced44d1d89c536507628e0d95b6702ff0e36d173377743af7d7dd",
+  "doi": "10.1172/jci.insight.93626",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "e4870feac0446252aeb6",
+  "pmcid": "PMC5926941",
+  "pmid": "29563328",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Nonalcoholic fatty liver disease (NAFLD), a metabolic predisposition for development of hepatocellular carcinoma (HCC), represents a disease spectrum ranging from steatosis to steatohepatitis to cirrhosis. Acox1, a rate-limiting enzyme in peroxisomal fatty acid \u03b2-oxidation, regulates metabolism, spontaneous hepatic steatosis, and hepatocellular damage over time. However, it is unknown whether Acox1 modulates inflammation relevant to NAFLD pathogenesis or if Acox1-associated metabolic and inflammatory derangements uncover and accelerate potential for NAFLD progression. Here, we show that mice with a point mutation in Acox1 (Acox1Lampe1) exhibited altered cellular metabolism, modified T cell polarization, and exacerbated immune cell inflammatory potential. Further, in context of a brief obesogenic diet stress, NAFLD progression associated with Acox1 mutation resulted in significantly accelerated and exacerbated hepatocellular damage via induction of profound histological changes in hepatocytes, hepatic inflammation, and robust upregulation of gene expression associated with HCC development. Collectively, these data demonstrate that \u03b2-oxidation links metabolism and immune responsiveness and that a better understanding of peroxisomal \u03b2-oxidation may allow for discovery of mechanisms central for NAFLD progression.",
+  "text_type": "abstract",
+  "title": "Peroxisomal \u03b2-oxidation regulates whole body metabolism, inflammatory vigor, and pathogenesis of nonalcoholic fatty liver disease."
+}

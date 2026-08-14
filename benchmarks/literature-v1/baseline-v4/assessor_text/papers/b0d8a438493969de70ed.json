@@ -1,0 +1,14 @@
+{
+  "content_hash": "a8b17f172fc3d807a32faa07b2445e2b23e0e8c7ef38afa17ba75477c1b4f04f",
+  "doi": "10.1182/blood-2009-07-230284",
+  "errors": [],
+  "paper_key": "b0d8a438493969de70ed",
+  "pmcid": null,
+  "pmid": "20154215",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The development of the vertebrate vascular system is mediated by both genetic patterning of vessels and by angiogenic sprouting in response to hypoxia. Both of these processes depend on the detection of environmental guidance cues by endothelial cells. A specialized subtype of endothelial cell known as the tip cell is thought to be involved in the detection and response to these cues, but the molecular signaling pathways used by tip cells to mediate tissue vascularization remain largely uncharacterized. To identify genes critical to tip cell function, we have developed a method to isolate them using laser capture microdissection, permitting comparison of RNA extracted from endothelial tip cells with that of endothelial stalk cells using microarray analysis. Genes enriched in tip cells include ESM-1, angiopoietin-2, and SLP-76. CXCR4, a receptor for the chemokine stromal-cell derived factor-1, was also identified as a tip cell-enriched gene, and we provide evidence for a novel role for this receptor in mediating tip cell morphology and vascular patterning in the neonatal retina.",
+  "text_type": "abstract",
+  "title": "Microarray analysis of retinal endothelial tip cells identifies CXCR4 as a mediator of tip cell morphology and branching."
+}

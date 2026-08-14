@@ -1,0 +1,131 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0177374bf6967e556349",
+    "RL-05c0907255a005142391",
+    "RL-15e8809241c8acf542c8",
+    "RL-16f57f20ddb8f8436776"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1184,
+        "source_type": "abstract",
+        "start": 1080,
+        "text": "The results of our study provide unequivocal evidence for a role of HSD17B7 in cholesterol biosynthesis."
+      },
+      "function_supported_genes": [
+        "Hsd17b7"
+      ],
+      "rationale": "The abstract shows HSD17B7's zymosterone-to-zymosterol conversion in postsqualene cholesterol biosynthesis proven in vitro, directly supporting the enzymatic function. The unspecified in vitro/promoter system is indirect to mouse hepatocyte aging/MASLD, so the declared partial context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-0177374bf6967e556349",
+      "studied_genes": [
+        "Hsd17b7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4869,
+        "source_type": "full_text",
+        "start": 4728,
+        "text": "Moreover, we found that ERG28 KO cells showed impaired SREBP-2 processing, resulting in a downregulation of many cholesterol synthesis genes."
+      },
+      "function_supported_genes": [
+        "Erg28"
+      ],
+      "rationale": "ERG28 KO in Huh7 liver cells is an SREBP-2 target whose loss impairs SREBP-2 processing, directly supporting the mechanism-2 claim. NSDHL/MSMO1 appear only as ERG28 binding partners and HSD17B7 only as a homolog/inhibitor tool, so only Erg28 is substantively investigated; the human liver-derived cell line matches the declared partial context.",
+      "red_flags": [],
+      "review_id": "RL-05c0907255a005142391",
+      "studied_genes": [
+        "Erg28"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10370,
+        "source_type": "full_text",
+        "start": 10201,
+        "text": "mice fed a western diet (high fat, high cholesterol; WD) exhibited a significant reduction in hepatic Rdh11 mRNA expression compared to mice fed a chow diet for 16 weeks"
+      },
+      "function_supported_genes": [
+        "Rdh11"
+      ],
+      "rationale": "Hepatic Rdh11 is reduced by a high-fat/high-cholesterol diet, induced by statins, and co-regulated like LDLR/HMGCR, directly matching the SREBP2-coregulation claim; the other genes are only co-correlation reference nodes. Evidence is expression response rather than direct SREBP2 perturbation (observational), and aging/established MASLD are not modeled, so the declared direct context is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-15e8809241c8acf542c8",
+      "studied_genes": [
+        "Rdh11"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 10399,
+        "source_type": "full_text",
+        "start": 10274,
+        "text": "The qPCR results for Hmgcs1, Hmgcr, Mvd, Idi1, Sqle and Dhcr7 confirmed the genomic analyses, whereas those for Fdft1 did not"
+      },
+      "function_supported_genes": [
+        "Hmgcs1",
+        "Idi1",
+        "Mvd",
+        "Dhcr7"
+      ],
+      "rationale": "Glucose-induced coordinated mRNA upregulation confirms Hmgcs1, Idi1, Mvd, and Dhcr7 as cholesterol-biosynthesis genes (Fdft1 not confirmed; Mvk/Pmvk measured but not reported as changed), an associative/expression-only form of the enzymatic-cascade claim. The rat-islet, non-hepatocyte, expression-only evidence is indirect, matching the declared context.",
+      "red_flags": [],
+      "review_id": "RL-16f57f20ddb8f8436776",
+      "studied_genes": [
+        "Hmgcs1",
+        "Mvk",
+        "Pmvk",
+        "Mvd",
+        "Idi1",
+        "Fdft1",
+        "Dhcr7"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.8425625,
+    "duration_api_ms": 218879,
+    "duration_ms": 217072,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 218.141
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-14933a5aa9ab3b84f6a1",
+    "RL-192282ce3b107122e137",
+    "RL-4dd99213a043f827b379",
+    "RL-524c0930970ba7d5a340"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "not_assessable",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "not_assessable",
+      "direction": "matches",
+      "directness": "background",
+      "evidence_span": {
+        "end": 670,
+        "source_type": "abstract",
+        "start": 580,
+        "text": "These include four previously isolated mouse HSD genes (Akr1c18, Akr1c6, Akr1c12, Akr1c13)"
+      },
+      "function_supported_genes": [],
+      "rationale": "Akr1c6 is named only among 'previously isolated' HSD genes, and prereceptor steroid modulation is attributed to the AKR/HSD family as a whole with no Akr1c6-specific functional data or liver context. This yields weak family-level associative support but does not substantively investigate Akr1c6.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-14933a5aa9ab3b84f6a1",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 12746,
+        "source_type": "full_text",
+        "start": 12616,
+        "text": "the key fructose metabolism pathway enzymes ketohexokinase (Khk), sorbitol dehydrogenase (Sord), and triokinase/FMN cyclase (Tkfc)"
+      },
+      "function_supported_genes": [
+        "Sord"
+      ],
+      "rationale": "Sord mRNA is induced by arsenic in WT but not Nrf2-/- mouse liver with ChIP-confirmed NRF2-ARE binding at its promoter, causally supporting NRF2 regulation of this polyol/fructose enzyme. The arsenic-diabetes setting is the same tissue but a related condition rather than the target aging/MASLD, so the 'direct' label is overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-192282ce3b107122e137",
+      "studied_genes": [
+        "Sord"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 13414,
+        "source_type": "full_text",
+        "start": 13337,
+        "text": "GSTA3, the primary enzyme responsible for phase II metabolism of AFB1 in mice"
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "The paper measures GSTA3 protein and transcript in mouse liver and repeatedly frames it as the primary Phase II enzyme detoxifying the AFB1 epoxide, giving gene-specific support in the target organism/tissue for the general hepatic detox clause. Directness is observational because the detox function is asserted/cited rather than re-tested biochemically here.",
+      "red_flags": [],
+      "review_id": "RL-4dd99213a043f827b379",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 784,
+        "source_type": "abstract",
+        "start": 614,
+        "text": "aldehyde dehydrogenase 1A1 (ALDH1A1, alternatively known as retinaldehyde dehydrogenase 1 or RALDH1), have also been identified as being associated with metabolic disease"
+      },
+      "function_supported_genes": [],
+      "rationale": "This is a review that only names ALDH1A1/RALDH1 as associated with metabolic disease including NAFLD/NASH, providing secondary associative support. A review does not generate gene-specific data, so Aldh1a1 is not credited as studied or function-supported.",
+      "red_flags": [
+        "secondary_as_direct"
+      ],
+      "review_id": "RL-524c0930970ba7d5a340",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7339555000000001,
+    "duration_api_ms": 226774,
+    "duration_ms": 223100,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 224.041
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "7d422f391f6862967a8a0ab98f4551c41ddad595f750a380b3e0c22e517da3c3",
+  "doi": "10.1172/jci34275",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "bc0f43ef3a91df2cc93d",
+  "pmcid": "PMC2254980",
+  "pmid": "18317565",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Nonalcoholic fatty liver disease (NAFLD) is associated with obesity, insulin resistance, and type 2 diabetes. NAFLD represents a large spectrum of diseases ranging from (i) fatty liver (hepatic steatosis); (ii) steatosis with inflammation and necrosis; and (iii) cirrhosis. Although the molecular mechanism leading to the development of hepatic steatosis in the pathogenesis of NAFLD is complex, recent animal models have shown that modulating important enzymes in fatty acid synthesis in liver may be key for the treatment of NAFLD. This review discusses recent advances in the field.",
+  "text_type": "abstract",
+  "title": "Contribution of de novo fatty acid synthesis to hepatic steatosis and insulin resistance: lessons from genetically engineered mice."
+}

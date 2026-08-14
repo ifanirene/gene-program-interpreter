@@ -1,0 +1,1720 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Current-state review and improvement map for the Gene Program Interpreter Claude Agent SDK literature-research protocol.">
+  <title>GPI — Agent SDK Literature Protocol Map</title>
+  <style>
+    :root {
+      --paper: #f4f6f5;
+      --paper-line: rgba(20, 32, 29, .035);
+      --surface: #ffffff;
+      --surface-2: #eef2f1;
+      --surface-3: #e7ecea;
+      --ink: #14201d;
+      --ink-2: #3f4e49;
+      --muted: #6e7b76;
+      --line: #dce3e0;
+      --line-strong: #bdc9c4;
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-soft: #dff4f0;
+      --blue: #3d7d9e;
+      --blue-soft: #e3edf2;
+      --amber: #b45f16;
+      --amber-soft: #f8eadc;
+      --red: #b64c4c;
+      --red-soft: #f7e5e3;
+      --green: #287a4b;
+      --green-soft: #e3f2e9;
+      --slate: #63706c;
+      --slate-soft: #e9eeec;
+      --shadow: 0 1px 2px rgba(20, 32, 29, .05), 0 18px 48px -34px rgba(20, 32, 29, .45);
+      --shadow-lift: 0 4px 16px rgba(20, 32, 29, .08), 0 28px 64px -38px rgba(20, 32, 29, .5);
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      --sans: "Avenir Next", Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --max: 1240px;
+      --radius: 16px;
+    }
+
+    :root[data-theme="dark"] {
+      --paper: #0d1210;
+      --paper-line: rgba(255, 255, 255, .025);
+      --surface: #151b18;
+      --surface-2: #1b2420;
+      --surface-3: #232d29;
+      --ink: #edf2f0;
+      --ink-2: #bdc8c3;
+      --muted: #8f9d97;
+      --line: #293530;
+      --line-strong: #3b4a44;
+      --teal: #23b7a8;
+      --teal-dark: #5eead4;
+      --teal-soft: #12332f;
+      --blue: #83b9d2;
+      --blue-soft: #152a34;
+      --amber: #f0a15c;
+      --amber-soft: #382619;
+      --red: #ed8580;
+      --red-soft: #381d1c;
+      --green: #66c88c;
+      --green-soft: #163223;
+      --slate: #a7b2ad;
+      --slate-soft: #252d2a;
+      --shadow: 0 2px 16px rgba(0, 0, 0, .28);
+      --shadow-lift: 0 16px 48px rgba(0, 0, 0, .38);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--paper-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+      background-size: 32px 32px;
+      font-family: var(--sans);
+      line-height: 1.58;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    button, input { font: inherit; }
+    button { color: inherit; }
+    a { color: var(--teal-dark); text-underline-offset: 3px; }
+    code, .mono { font-family: var(--mono); font-size: .9em; }
+    .skip {
+      position: fixed;
+      top: -80px;
+      left: 16px;
+      z-index: 1000;
+      padding: 10px 14px;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 8px;
+    }
+    .skip:focus { top: 16px; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    .masthead {
+      padding: 68px 0 34px;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper) 91%, transparent);
+    }
+    .kicker {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--teal-dark);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .kicker::after { content: ""; height: 1px; width: min(220px, 30vw); background: var(--line-strong); }
+    h1 {
+      margin: 18px 0 0;
+      max-width: 980px;
+      font-family: var(--serif);
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: .98;
+      letter-spacing: -.035em;
+      font-weight: 500;
+    }
+    .lede {
+      max-width: 850px;
+      margin: 24px 0 0;
+      color: var(--ink-2);
+      font-family: var(--serif);
+      font-size: clamp(19px, 2.3vw, 25px);
+      line-height: 1.45;
+      text-wrap: pretty;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      align-items: center;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .verdict-chip {
+      display: inline-flex;
+      gap: 9px;
+      align-items: center;
+      padding: 7px 12px;
+      border: 1px solid color-mix(in srgb, var(--amber) 35%, var(--line));
+      border-radius: 999px;
+      background: var(--amber-soft);
+      color: var(--amber);
+      font-weight: 700;
+    }
+    .verdict-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--paper) 88%, transparent);
+      backdrop-filter: blur(13px) saturate(140%);
+    }
+    .topbar-inner {
+      min-height: 58px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .toc {
+      display: flex;
+      gap: 2px;
+      overflow-x: auto;
+      flex: 1;
+      scrollbar-width: thin;
+    }
+    .toc a {
+      flex: none;
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--ink-2);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .toc a:hover, .toc a:focus-visible { background: var(--surface-2); color: var(--ink); }
+    .icon-btn {
+      flex: none;
+      min-width: 42px;
+      min-height: 38px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      background: var(--surface);
+      cursor: pointer;
+    }
+    .icon-btn:hover { border-color: var(--teal); }
+
+    main { padding-bottom: 54px; }
+    .section {
+      padding: 52px 0 8px;
+      scroll-margin-top: 70px;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 24px;
+    }
+    .section-no {
+      margin-top: 4px;
+      color: var(--teal-dark);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(29px, 4vw, 43px);
+      line-height: 1.06;
+      font-weight: 550;
+      letter-spacing: -.02em;
+    }
+    .section-sub {
+      max-width: 850px;
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      text-wrap: pretty;
+    }
+
+    .verdict {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .verdict-copy { padding: clamp(24px, 4vw, 42px); }
+    .verdict-copy .label {
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .verdict-copy h3 {
+      margin: 11px 0 12px;
+      max-width: 720px;
+      font-family: var(--serif);
+      font-size: clamp(27px, 3.4vw, 40px);
+      line-height: 1.13;
+      font-weight: 550;
+    }
+    .verdict-copy p { max-width: 760px; margin: 0; color: var(--ink-2); }
+    .verdict-side {
+      display: grid;
+      align-content: center;
+      gap: 1px;
+      padding: 16px;
+      background: var(--surface-2);
+      border-left: 1px solid var(--line);
+    }
+    .verdict-line {
+      padding: 14px 15px;
+      background: var(--surface);
+      border-radius: 8px;
+    }
+    .verdict-line b { display: block; font-size: 13px; }
+    .verdict-line span { color: var(--muted); font-size: 12px; }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .metric {
+      min-height: 122px;
+      padding: 17px 15px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .metric .n {
+      font-family: var(--mono);
+      font-size: clamp(23px, 3vw, 33px);
+      line-height: 1;
+      letter-spacing: -.05em;
+      font-weight: 700;
+    }
+    .metric .l { margin-top: 9px; color: var(--muted); font-size: 11.5px; line-height: 1.35; }
+    .metric.attn .n { color: var(--amber); }
+    .metric.good .n { color: var(--green); }
+
+    .map-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .segmented {
+      display: inline-flex;
+      gap: 3px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface-2);
+    }
+    .segmented button {
+      min-height: 36px;
+      padding: 7px 13px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+    .segmented button.active {
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 0 1px 4px rgba(20, 32, 29, .12);
+    }
+    .map-hint { color: var(--muted); font-size: 12px; }
+
+    .protocol-map {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .flow-nav {
+      display: grid;
+      grid-template-columns: repeat(9, minmax(118px, 1fr));
+      gap: 0;
+      overflow-x: auto;
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-2);
+      scrollbar-width: thin;
+    }
+    .flow-step {
+      position: relative;
+      min-width: 118px;
+      padding: 0 9px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 43px;
+      right: -8px;
+      height: 2px;
+      background: var(--line-strong);
+    }
+    .flow-step:last-child::after { display: none; }
+    .flow-dot {
+      position: relative;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--line-strong);
+      border-radius: 50%;
+      background: var(--surface);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      transition: .16s ease;
+    }
+    .flow-name {
+      display: block;
+      margin-top: 10px;
+      color: var(--ink-2);
+      font-size: 11px;
+      line-height: 1.28;
+      font-weight: 700;
+    }
+    .flow-actor {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 9.5px;
+    }
+    .flow-step:hover .flow-dot { transform: translateY(-2px); border-color: var(--teal); }
+    .flow-step.active .flow-dot {
+      border-color: var(--teal-dark);
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 0 0 5px var(--teal-soft);
+    }
+    .flow-step.active .flow-name { color: var(--teal-dark); }
+    .flow-step[data-kind="verify"] .flow-dot { border-color: var(--blue); }
+    .flow-step[data-kind="change"] .flow-dot { border-color: var(--amber); }
+
+    .stage-panel {
+      display: grid;
+      grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr);
+      min-height: 500px;
+    }
+    .stage-summary {
+      padding: clamp(25px, 4vw, 42px);
+      border-right: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .stage-id {
+      color: var(--teal-dark);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .stage-summary h3 {
+      margin: 13px 0 10px;
+      font-family: var(--serif);
+      font-size: clamp(27px, 3vw, 39px);
+      line-height: 1.08;
+      font-weight: 550;
+    }
+    .stage-summary p { color: var(--ink-2); font-size: 14px; }
+    .actor-chip {
+      display: inline-flex;
+      margin-top: 13px;
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface-2);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+    }
+    .source-list { display: grid; gap: 7px; margin-top: 24px; }
+    .source-list code {
+      display: block;
+      padding: 7px 8px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface-2);
+      color: var(--ink-2);
+      font-size: 10px;
+      overflow-wrap: anywhere;
+    }
+    .stage-detail {
+      padding: clamp(25px, 4vw, 42px);
+      background: color-mix(in srgb, var(--surface) 92%, var(--surface-2));
+    }
+    .detail-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .detail-label::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+    .param-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-bottom: 26px;
+    }
+    .param-tile {
+      min-height: 78px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--surface);
+    }
+    .param-tile .pk { color: var(--muted); font-family: var(--mono); font-size: 10px; }
+    .param-tile .pv { margin-top: 4px; color: var(--ink); font-size: 12.5px; font-weight: 650; overflow-wrap: anywhere; }
+    .risk-list, .patch-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .risk-list li, .patch-list li {
+      display: grid;
+      grid-template-columns: 9px 1fr;
+      gap: 10px;
+      color: var(--ink-2);
+      font-size: 13px;
+    }
+    .risk-list li::before, .patch-list li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: var(--red);
+    }
+    .patch-list li::before { background: var(--amber); }
+    .recommended-box {
+      margin-top: 25px;
+      padding: 18px;
+      border: 1px solid color-mix(in srgb, var(--amber) 34%, var(--line));
+      border-radius: 12px;
+      background: var(--amber-soft);
+    }
+    .recommended-box[hidden] { display: none; }
+    .recommended-box .detail-label { color: var(--amber); }
+    .recommended-box .detail-label::after { background: color-mix(in srgb, var(--amber) 25%, transparent); }
+
+    .branch-strip {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 9px;
+      align-items: stretch;
+      margin-top: 14px;
+    }
+    .branch-box {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+      font-size: 12px;
+    }
+    .branch-box b { display: block; margin-bottom: 3px; }
+    .branch-box.fail { border-color: color-mix(in srgb, var(--red) 28%, var(--line)); background: var(--red-soft); }
+    .branch-arrow { align-self: center; color: var(--line-strong); font-weight: 800; }
+
+    .registry-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .search {
+      min-width: min(360px, 100%);
+      flex: 1;
+      min-height: 42px;
+      padding: 9px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 9px;
+      outline: none;
+      background: var(--surface);
+      color: var(--ink);
+    }
+    .search:focus { border-color: var(--teal); box-shadow: 0 0 0 3px var(--teal-soft); }
+    .filter-row { display: flex; gap: 5px; flex-wrap: wrap; }
+    .filter-row button {
+      min-height: 37px;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 11.5px;
+      font-weight: 700;
+    }
+    .filter-row button.active { border-color: var(--teal); background: var(--teal-soft); color: var(--teal-dark); }
+    .table-shell {
+      overflow: auto;
+      max-height: 740px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 900px; font-size: 12px; }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--line-strong);
+      background: var(--surface-2);
+      color: var(--ink);
+      text-align: left;
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    td {
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--line);
+      color: var(--ink-2);
+      vertical-align: top;
+    }
+    tbody tr:hover { background: color-mix(in srgb, var(--teal-soft) 38%, transparent); }
+    td:nth-child(2) { color: var(--ink); font-family: var(--mono); font-size: 10.8px; font-weight: 700; }
+    .state {
+      display: inline-flex;
+      padding: 2px 6px;
+      border-radius: 5px;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .state.keep { color: var(--green); background: var(--green-soft); }
+    .state.change { color: var(--amber); background: var(--amber-soft); }
+    .state.dead { color: var(--red); background: var(--red-soft); }
+    .state.hidden { color: var(--slate); background: var(--slate-soft); }
+    .registry-count { color: var(--muted); font-family: var(--mono); font-size: 11px; }
+
+    .priority-list { display: grid; gap: 12px; }
+    .priority {
+      display: grid;
+      grid-template-columns: 64px minmax(200px, .85fr) minmax(280px, 1.15fr);
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .priority:hover { box-shadow: var(--shadow-lift); }
+    .priority-rank {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--amber-soft);
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .priority h3 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 24px;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+    .priority .why { margin: 8px 0 0; color: var(--muted); font-size: 12.5px; }
+    .priority .action { color: var(--ink-2); font-size: 13px; }
+    .priority .action b { color: var(--ink); }
+    .impact {
+      display: inline-flex;
+      margin-top: 11px;
+      padding: 3px 7px;
+      border-radius: 5px;
+      background: var(--surface-2);
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+
+    .patch {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .patch-copy { padding: 28px; }
+    .patch-copy h3 { margin: 0; font-family: var(--serif); font-size: 28px; }
+    .patch-copy p { color: var(--muted); font-size: 13px; }
+    .patch-code {
+      margin: 0;
+      padding: 24px;
+      overflow: auto;
+      border-left: 1px solid var(--line);
+      background: #101714;
+      color: #dce8e3;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      line-height: 1.7;
+      white-space: pre;
+    }
+    .patch-code .c { color: #7f918a; }
+    .patch-code .k { color: #5eead4; }
+    .patch-code .v { color: #f2b36f; }
+
+    .run-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+      gap: 14px;
+    }
+    .run-panel {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .run-panel h3 { margin: 0; font-family: var(--serif); font-size: 26px; }
+    .run-panel > p { color: var(--muted); font-size: 13px; }
+    .bar-list { display: grid; gap: 14px; margin-top: 21px; }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 42px 1fr 52px;
+      gap: 12px;
+      align-items: center;
+      font-size: 11px;
+    }
+    .bar-track {
+      position: relative;
+      height: 12px;
+      border-radius: 2px;
+      background: var(--surface-2);
+      overflow: hidden;
+    }
+    .bar-fill { height: 100%; background: var(--teal); }
+    .bar-fill.weak { background: var(--amber); }
+    .bar-value { text-align: right; color: var(--muted); font-family: var(--mono); }
+    .stacked {
+      display: flex;
+      height: 18px;
+      margin: 19px 0 8px;
+      overflow: hidden;
+      border-radius: 4px;
+      background: var(--surface-2);
+    }
+    .stacked span { display: block; height: 100%; }
+    .stacked .direct { width: 40%; background: var(--green); }
+    .stacked .partial { width: 38.67%; background: var(--amber); }
+    .stacked .indirect { width: 21.33%; background: var(--slate); }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px 16px; color: var(--muted); font-size: 11px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 9px; height: 9px; border-radius: 2px; background: var(--slate); }
+    .legend .d i { background: var(--green); }
+    .legend .p i { background: var(--amber); }
+
+    .learning-list { display: grid; gap: 1px; margin-top: 18px; }
+    .learning {
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+    }
+    .learning b { display: block; font-size: 13px; }
+    .learning span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+
+    .truth-table {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .truth {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+    .truth .t { color: var(--muted); font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
+    .truth h3 { margin: 8px 0 7px; font-family: var(--serif); font-size: 22px; }
+    .truth p { margin: 0; color: var(--ink-2); font-size: 12.5px; }
+    .truth.yes { border-color: color-mix(in srgb, var(--green) 30%, var(--line)); }
+    .truth.no { border-color: color-mix(in srgb, var(--red) 30%, var(--line)); }
+    .truth.future { border-color: color-mix(in srgb, var(--amber) 30%, var(--line)); }
+
+    .mismatch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .mismatch {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+    .mismatch code { color: var(--red); }
+    .mismatch b { display: block; margin-bottom: 4px; font-size: 12.5px; }
+    .mismatch span { color: var(--muted); font-size: 11.5px; }
+
+    .sources {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .source-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface);
+    }
+    .source-card b { display: block; margin-bottom: 7px; font-size: 12px; }
+    .source-card code { color: var(--muted); font-size: 10px; overflow-wrap: anywhere; }
+
+    footer {
+      margin-top: 52px;
+      padding: 28px 0 44px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+    }
+    footer .wrap { display: flex; gap: 16px; justify-content: space-between; flex-wrap: wrap; }
+
+    @media (max-width: 1040px) {
+      .metrics { grid-template-columns: repeat(3, 1fr); }
+      .priority { grid-template-columns: 54px 1fr; }
+      .priority .action { grid-column: 2; }
+      .run-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 820px) {
+      .verdict { grid-template-columns: 1fr; }
+      .verdict-side { border-left: 0; border-top: 1px solid var(--line); }
+      .stage-panel { grid-template-columns: 1fr; }
+      .stage-summary { border-right: 0; border-bottom: 1px solid var(--line); }
+      .patch { grid-template-columns: 1fr; }
+      .patch-code { border-left: 0; border-top: 1px solid var(--line); }
+      .truth-table, .sources { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .wrap { width: min(100% - 24px, var(--max)); }
+      .masthead { padding-top: 46px; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .metric { min-height: 108px; }
+      .param-grid, .mismatch-grid { grid-template-columns: 1fr; }
+      .branch-strip { grid-template-columns: 1fr; }
+      .branch-arrow { transform: rotate(90deg); justify-self: center; }
+      .priority { grid-template-columns: 1fr; }
+      .priority .action { grid-column: 1; }
+      .bar-row { grid-template-columns: 38px 1fr 46px; }
+      h1 { font-size: 47px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+    @media print {
+      .topbar, .map-toolbar, .flow-nav { display: none !important; }
+      body { background: #fff; color: #111; }
+      .section { break-inside: avoid; }
+      .table-shell { max-height: none; overflow: visible; }
+      .stage-panel { grid-template-columns: 1fr 1.4fr; }
+      .recommended-box[hidden] { display: block; }
+      .wrap { width: 96%; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to review</a>
+
+  <header class="masthead">
+    <div class="wrap">
+      <p class="kicker">Gene Program Interpreter · current working tree</p>
+      <h1>Agent SDK literature protocol map</h1>
+      <p class="lede">The runtime is well isolated and unusually auditable. The main scientific weakness is semantic: it proves that a citation exists, but not that the citation supports the mechanism it is attached to.</p>
+      <div class="hero-meta">
+        <span class="verdict-chip"><span class="dot"></span>Strong retrieval plumbing · incomplete evidence semantics</span>
+        <span>Reviewed 16 July 2026</span>
+        <span class="mono">claude-agent-sdk 0.2.118</span>
+        <span class="mono">protocol.md · 717 words</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <nav class="toc" aria-label="Page sections">
+        <a href="#verdict">Verdict</a>
+        <a href="#map">Protocol map</a>
+        <a href="#parameters">Parameters</a>
+        <a href="#changes">High-yield changes</a>
+        <a href="#observed">Observed run</a>
+        <a href="#truth">What “verified” means</a>
+        <a href="#sources">Sources</a>
+      </nav>
+      <button class="icon-btn" id="themeButton" type="button" aria-label="Switch color theme" title="Switch color theme">◐</button>
+    </div>
+  </div>
+
+  <main id="main">
+    <section class="section" id="verdict" data-screen-label="Verdict">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">01</span>
+          <div>
+            <h2>What the review found</h2>
+            <p class="section-sub">The result is not “make the prompt shorter.” That change is already present. The next quality gains come from better inputs, stricter evidence semantics, and a retrieval stop rule.</p>
+          </div>
+        </div>
+
+        <div class="verdict">
+          <div class="verdict-copy">
+            <span class="label">Bottom line</span>
+            <h3>Keep the architecture. Change what counts as support.</h3>
+            <p>One isolated session per program, in-process read-only literature tools, raw payload capture, deterministic identifier resolution, and graceful fallback are all sound. But a mechanism becomes <code>supported</code> when any linked PMID or DOI resolves. There is no check that the abstract entails the mechanism, that PMID and DOI refer to the same paper, or that the mechanism is driven by several program genes rather than by perturbation regulators.</p>
+          </div>
+          <div class="verdict-side">
+            <div class="verdict-line"><b>Keep</b><span>Isolation, PubMed fetch-before-cite, raw payloads, tri-state network verification.</span></div>
+            <div class="verdict-line"><b>Fix first</b><span>Entailment, gene-defined themes, schema constraints, dead input knobs.</span></div>
+            <div class="verdict-line"><b>Do not cut blindly</b><span>The observed sessions needed 34–49 reported turns; a 12–15 turn cap is not evidence-based yet.</span></div>
+          </div>
+        </div>
+
+        <div class="metrics" aria-label="Latest run metrics">
+          <div class="metric"><div class="n">4</div><div class="l">program-specific agents<br><span class="mono">P8–P11</span></div></div>
+          <div class="metric attn"><div class="n">174</div><div class="l">SDK-reported turns<br>34–49 per agent</div></div>
+          <div class="metric attn"><div class="n">116</div><div class="l">search calls<br>107 PubMed + 9 OpenAlex</div></div>
+          <div class="metric good"><div class="n">75/75</div><div class="l">identifiers resolved<br>zero refuted</div></div>
+          <div class="metric attn"><div class="n">30/75</div><div class="l">agent-rated direct context<br>40% of papers</div></div>
+          <div class="metric attn"><div class="n">12/12</div><div class="l">mechanisms called supported<br>existence rule only</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="map" data-screen-label="Protocol map">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">02</span>
+          <div>
+            <h2>The live protocol, end to end</h2>
+            <p class="section-sub">Choose a stage to inspect its effective behavior, failure path, hidden constants, and recommended patch. “Recommended” changes the detail overlay; it does not pretend the code has already changed.</p>
+          </div>
+        </div>
+
+        <div class="map-toolbar">
+          <div class="segmented" role="group" aria-label="Map view">
+            <button type="button" class="active" data-view="current" aria-pressed="true">Current runtime</button>
+            <button type="button" data-view="recommended" aria-pressed="false">Recommended overlay</button>
+          </div>
+          <span class="map-hint">Click a numbered stage · arrow keys also work</span>
+        </div>
+
+        <div class="protocol-map">
+          <div class="flow-nav" id="flowNav" role="tablist" aria-label="Protocol stages"></div>
+          <div class="stage-panel">
+            <div class="stage-summary" id="stageSummary"></div>
+            <div class="stage-detail" id="stageDetail"></div>
+          </div>
+        </div>
+
+        <div class="branch-strip" aria-label="Failure and retry branch">
+          <div class="branch-box"><b>Valid payload</b>Normalize → write result → verify identifiers.</div>
+          <div class="branch-arrow">→</div>
+          <div class="branch-box fail"><b>No submit / schema failure / SDK error</b>Start a new paid session with the same prompt. <code>max_attempts=2</code> means one retry.</div>
+          <div class="branch-arrow">→</div>
+          <div class="branch-box"><b>Still failing</b>Write a schema-valid <code>incomplete</code> fallback; downstream continues without invented literature.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="parameters" data-screen-label="Parameter registry">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">03</span>
+          <div>
+            <h2>Parameter registry</h2>
+            <p class="section-sub">This combines user-facing configuration, fixed constants, tool bounds, schema defaults, SDK options, and downstream rules. “Dead” means a value is present or advertised but does not affect this research path.</p>
+          </div>
+        </div>
+
+        <div class="registry-tools">
+          <input class="search" id="parameterSearch" type="search" placeholder="Search parameter, value, source, or recommendation…" aria-label="Search parameter registry">
+          <div class="filter-row" id="filterRow" aria-label="Filter registry by layer"></div>
+          <span class="registry-count" id="registryCount"></span>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Parameter</th>
+                <th>Current / default</th>
+                <th>Effective behavior or range</th>
+                <th>Recommendation</th>
+                <th>State</th>
+              </tr>
+            </thead>
+            <tbody id="parameterBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="changes" data-screen-label="High-yield changes">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">04</span>
+          <div>
+            <h2>High-yield adjustments</h2>
+            <p class="section-sub">Ordered by expected scientific gain, not by how easy the code change is. The first three change interpretation quality directly; the later items make the system cheaper and more reliable.</p>
+          </div>
+        </div>
+
+        <div class="priority-list">
+          <article class="priority">
+            <div class="priority-rank">01</div>
+            <div>
+              <h3>Make “supported” mean supported</h3>
+              <p class="why">Today it means only “one identifier exists and is not retracted.”</p>
+              <span class="impact">impact: very high · effort: medium</span>
+            </div>
+            <div class="action"><b>Split three axes:</b> citation resolution, paper→claim entailment, and cell/tissue context fit. Store the canonical abstract plus a claim-specific supporting excerpt; verify that the excerpt exists; then run a small adjudicator that returns entail / neutral / contradict. Until that exists, rename the visible badge to <code>citation resolved</code>.</div>
+          </article>
+
+          <article class="priority">
+            <div class="priority-rank">02</div>
+            <div>
+              <h3>Define themes from program genes first</h3>
+              <p class="why">Regulators currently seed themes “the same way” as program genes.</p>
+              <span class="impact">impact: very high · effort: small</span>
+            </div>
+            <div class="action"><b>Use two passes:</b> cluster <code>program_genes + distinctive_genes</code>; only then ask whether regulators reinforce, oppose, or fail to connect to those themes. Require at least two program genes for a module unless the agent explicitly marks a single-gene exception. Regulators should never satisfy the multi-gene rule.</div>
+          </article>
+
+          <article class="priority">
+            <div class="priority-rank">03</div>
+            <div>
+              <h3>Feed the agent signal already computed upstream</h3>
+              <p class="why">The bundle discards ranks, tissue, NCBI summaries, and strong enrichment hints.</p>
+              <span class="impact">impact: high · effort: small–medium</span>
+            </div>
+            <div class="action"><b>Repair the bundle:</b> include loading rank, true unique genes outside the top-loading set, tissue, canonical gene summaries/aliases, and the top three non-redundant enrichment terms with FDR and gene overlap. Treat enrichment as a hypothesis seed, never as literature evidence. This would have revealed P10’s cilium program before dozens of single-gene searches.</div>
+          </article>
+
+          <article class="priority">
+            <div class="priority-rank">04</div>
+            <div>
+              <h3>Use an evidence budget, not a blunt turn range</h3>
+              <p class="why">Latest agents made 20–34 searches each and still logged only 53% of them in <code>queries[]</code>.</p>
+              <span class="impact">impact: high · effort: medium</span>
+            </div>
+            <div class="action"><b>Stage retrieval:</b> theme discovery → anchor evidence → exact-context check → one gap pass. Start with a soft ceiling of 12–18 searches, 4–6 fetch batches, 2–4 papers per mechanism, and 8–12 unique papers total. Keep <code>max_turns=30</code> and <code>timeout=600</code> until new stop-reason/token telemetry shows where they truly bind.</div>
+          </article>
+
+          <article class="priority">
+            <div class="priority-rank">05</div>
+            <div>
+              <h3>Constrain availability, not only permission</h3>
+              <p class="why"><code>allowed_tools</code> auto-approves tools; it does not remove the default Claude Code toolset.</p>
+              <span class="impact">impact: medium · effort: small</span>
+            </div>
+            <div class="action"><b>Set the SDK <code>tools</code> option.</b> Either inject the small bundle directly and use <code>tools=[]</code>, or expose only <code>Read</code>. Keep the MCP allowlist. The latest audit contains <code>ToolSearch</code> and <code>Glob</code> despite the claimed literature-only surface; explicit availability removes ambiguity and wasted turns.</div>
+          </article>
+
+          <article class="priority">
+            <div class="priority-rank">06</div>
+            <div>
+              <h3>Add a strict pre-verification quality gate</h3>
+              <p class="why">Only <code>program_id</code> and mechanism <code>name</code> are required by the generated schema.</p>
+              <span class="impact">impact: medium–high · effort: medium</span>
+            </div>
+            <div class="action"><b>Forbid extras and validate invariants:</b> 1–3 non-empty mechanisms, at least one identifier per paper, no silent 4th-mechanism truncation, program-gene membership, non-redundancy, PMID↔DOI↔title concordance, and context claims backed by context-specific evidence. Derive <code>queries</code> from the tool trace instead of trusting a partial agent log.</div>
+          </article>
+        </div>
+
+        <div class="patch">
+          <div class="patch-copy">
+            <h3>Recommended next-run profile</h3>
+            <p>This intentionally sits outside the earlier “12–15 turns / 300 seconds” proposal. The observed four-program run makes that range too aggressive. First improve tool efficiency and collect the new stop-reason/token fields; then reduce caps from evidence.</p>
+          </div>
+          <pre class="patch-code"><span class="k">research</span>:
+  model: <span class="v">claude-sonnet-4-6</span>        <span class="c"># keep until blind benchmark</span>
+  concurrency: <span class="v">3–4</span>
+  max_turns: <span class="v">30</span>                    <span class="c"># not 12–15 yet</span>
+  max_budget_usd: <span class="v">1.0</span>              <span class="c"># add a total retry budget</span>
+  per_program_timeout: <span class="v">600</span>         <span class="c"># 300 s would have cut observed runs</span>
+  max_search_calls: <span class="v">16</span>             <span class="c"># new deterministic soft gate</span>
+  max_fetch_batches: <span class="v">6</span>             <span class="c"># fetch several PMIDs per call</span>
+  max_unique_papers: <span class="v">12</span>
+
+<span class="k">bundle</span>:
+  top_loading: <span class="v">15</span>
+  top_unique: <span class="v">8</span>                   <span class="c"># outside top-loading set</span>
+  top_enrichment: <span class="v">3</span>               <span class="c"># non-redundant hypothesis hints</span>
+  include_gene_summaries: <span class="v">true</span>
+  regulator_role: <span class="v">corroboration_only</span>
+
+<span class="k">quality_gate</span>:
+  mechanisms: <span class="v">1–3, non-redundant</span>
+  papers_per_mechanism: <span class="v">2–4</span>
+  min_program_genes: <span class="v">2</span>             <span class="c"># explicit exception allowed</span>
+  require_identifier_concordance: <span class="v">true</span>
+  require_entailment_check: <span class="v">true</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="observed" data-screen-label="Observed run">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">05</span>
+          <div>
+            <h2>What the latest run teaches us</h2>
+            <p class="section-sub">This is the strongest evidence for tuning. It is one four-program brain-endothelial run, not a universal benchmark, so the map separates observation from inference.</p>
+          </div>
+        </div>
+
+        <div class="run-grid">
+          <div class="run-panel">
+            <h3>Search effort by program</h3>
+            <p>Search calls are PubMed + OpenAlex. Bars show how much of the 34-call maximum each program used.</p>
+            <div class="bar-list">
+              <div class="bar-row"><b>P8</b><div class="bar-track"><div class="bar-fill" style="width:58.8%"></div></div><span class="bar-value">20</span></div>
+              <div class="bar-row"><b>P9</b><div class="bar-track"><div class="bar-fill weak" style="width:94.1%"></div></div><span class="bar-value">32</span></div>
+              <div class="bar-row"><b>P10</b><div class="bar-track"><div class="bar-fill weak" style="width:88.2%"></div></div><span class="bar-value">30</span></div>
+              <div class="bar-row"><b>P11</b><div class="bar-track"><div class="bar-fill weak" style="width:100%"></div></div><span class="bar-value">34</span></div>
+            </div>
+            <div class="stacked" aria-label="Evidence context distribution: 30 direct, 29 partial, 16 indirect">
+              <span class="direct"></span><span class="partial"></span><span class="indirect"></span>
+            </div>
+            <div class="legend">
+              <span class="d"><i></i>direct 30</span>
+              <span class="p"><i></i>partial 29</span>
+              <span><i></i>indirect 16</span>
+            </div>
+          </div>
+
+          <div class="run-panel">
+            <h3>Technical and biological learning</h3>
+            <div class="learning-list">
+              <div class="learning"><b>P10 is a real cilia program.</b><span>Six top genes converge on ciliogenesis; upstream STRING already reports “cilium organization” at FDR 1.57×10⁻¹⁸. The agent correctly found it, but split one dominant biology into three nested mechanisms.</span></div>
+              <div class="learning"><b>Context and mechanism strength are different axes.</b><span>P10 has only 1/17 “direct” brain-endothelial papers, yet its core ciliogenesis mechanism is biologically coherent. A universal molecular mechanism can be strong while its tissue-context evidence is weak.</span></div>
+              <div class="learning"><b>Regulator leakage changes the question.</b><span>Several modules are narrated mainly through Fzd4, Eng, Notch1, Nrp1, or TGFBR1/2 while carrying only one or two program genes. That is regulator mechanism research, not purely shared program function.</span></div>
+              <div class="learning"><b>Three is behaving like a target, not a maximum.</b><span>All four agents returned exactly three mechanisms. P10’s ciliogenesis, ciliary Hedgehog, and endothelial cilia are nested; an adaptive stop rule should allow one dominant mechanism.</span></div>
+              <div class="learning"><b>The self-reported query log is incomplete.</b><span><code>queries[]</code> contains 62 entries while the audit records 116 searches. Provenance should be derived from tool calls.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="truth" data-screen-label="Verification semantics">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">06</span>
+          <div>
+            <h2>What “verified” does—and does not—mean</h2>
+            <p class="section-sub">The current implementation is honest in its internal documentation, but the word “supported” can still overstate the result when it reaches a reader.</p>
+          </div>
+        </div>
+
+        <div class="truth-table">
+          <div class="truth yes">
+            <span class="t">Implemented</span>
+            <h3>Identifier existence</h3>
+            <p>PMID resolves in PubMed or DOI resolves through Crossref / doi.org; retractions are flagged; network failure remains tri-state <code>None</code>.</p>
+          </div>
+          <div class="truth no">
+            <span class="t">Not implemented</span>
+            <h3>Scientific entailment</h3>
+            <p>No step checks whether the abstract supports the mechanism summary, the named genes, or the claimed causal relationship.</p>
+          </div>
+          <div class="truth future">
+            <span class="t">Designed, not wired</span>
+            <h3>Claim adjudication</h3>
+            <p>The repository already sketches a post-verification claim⇄paper adjudicator in <code>docs/FUTURE_claim_verification.md</code>.</p>
+          </div>
+        </div>
+
+        <div class="mismatch-grid">
+          <div class="mismatch"><b>Protocol vs schema</b><span>The protocol requires a real PMID for every paper; <code>AgentPaper</code> allows PMID, DOI, both, or neither. Identifier-less papers are only dropped later.</span></div>
+          <div class="mismatch"><b>Advertised 1–3 vs enforced shape</b><span>The schema has no <code>minItems</code> or <code>maxItems</code>. A fourth mechanism is silently dropped; zero mechanisms is valid.</span></div>
+          <div class="mismatch"><b>Allowlist vs availability</b><span>The code calls <code>allowed_tools</code> a read-only tool surface, but the SDK treats it as a permission allowlist. <code>tools</code> is unset.</span></div>
+          <div class="mismatch"><b>Configured unique genes vs bundle</b><span><code>top_unique=8</code> is not used by <code>bundle.py</code>; it emits 10 distinctive genes chosen only from the top-loading pool.</span></div>
+          <div class="mismatch"><b>Enrichment parameter vs bundle</b><span><code>top_enrichment=7</code> is passed into bundle assembly and deliberately ignored.</span></div>
+          <div class="mismatch"><b>Profile framing vs agent input</b><span><code>tissue</code> and <code>keyword_query</code> are resolved and printed, but neither is put in the research bundle.</span></div>
+          <div class="mismatch"><b>Result fields vs downstream use</b><span><code>supporting_regulators</code>, <code>contradictions</code>, <code>evidence_gaps</code>, paper titles, notes, and context ratings are not passed into the annotation module context.</span></div>
+          <div class="mismatch"><b>Earlier review vs live code</b><span><code>docs/pipeline_overview.html</code> describes the retired four-question protocol, plugin literature tools, and old claims schema. It is no longer a current map.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sources" data-screen-label="Sources and scope">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="section-no">07</span>
+          <div>
+            <h2>Sources and scope</h2>
+            <p class="section-sub">The review follows the current working tree, including the uncommitted addition of token and stop-reason audit fields. No production code was changed.</p>
+          </div>
+        </div>
+
+        <div class="sources">
+          <div class="source-card"><b>Protocol and output contract</b><code>research/protocol.md<br>research/schema.py<br>research/verify.py</code></div>
+          <div class="source-card"><b>Runtime and SDK options</b><code>research/research_parallel.py<br>research/literature.py<br>gpi/run_pipeline.py</code></div>
+          <div class="source-card"><b>Inputs and downstream use</b><code>research/bundle.py<br>gpi/context_profile.py<br>gpi/research_evidence_adapter.py</code></div>
+          <div class="source-card"><b>Observed run</b><code>runs/brain_ec_p8_11/research_audit/*<br>runs/brain_ec_p8_11/research_results/*<br>runs/brain_ec_p8_11/program_bundles/*</code></div>
+          <div class="source-card"><b>Scientific follow-on already designed</b><code>docs/FUTURE_claim_verification.md</code></div>
+          <div class="source-card"><b>SDK semantics cross-check</b><code>Installed claude-agent-sdk 0.2.118<br>Official Anthropic Python SDK README / changelog</code></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Gene Program Interpreter · Agent SDK literature protocol review</span>
+      <span class="mono">self-contained HTML · no external runtime dependencies</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var stages = [
+        {
+          id: "context",
+          number: "00",
+          title: "Context and upstream evidence",
+          short: "Context + upstream",
+          actor: "deterministic · executor ④",
+          kind: "change",
+          summary: "The pipeline resolves biological framing, selects genes, fetches NCBI summaries, and computes STRING enrichment before the Agent SDK session exists.",
+          params: [
+            ["ContextProfile", "organism, taxid, tissue, cell type, conditions, context terms"],
+            ["settings", "n_top_genes=300 · top_loading=15 · top_unique=8"],
+            ["enrichment controls", "top_enrichment=7 · genes_per_term=10"],
+            ["query warnings", ">10 context terms or >3 words per concept"]
+          ],
+          risks: [
+            "The profile prints keyword_query as research framing, but the query is not handed to the research agent.",
+            "NCBI gene summaries and enrichment exist upstream, yet bundle assembly discards them.",
+            "The assay is intentionally recorded but hidden from the research agent."
+          ],
+          patch: [
+            "Include tissue, canonical gene descriptions/aliases, and a compact query scaffold.",
+            "Add the top three non-redundant enrichment terms as hypothesis hints with FDR and overlap.",
+            "Keep assay hidden unless assay biology is itself relevant to interpretation."
+          ],
+          sources: ["gpi/context_profile.py:96", "gpi/run_pipeline.py:180", "gpi/run_pipeline.py:472"]
+        },
+        {
+          id: "bundle",
+          number: "01",
+          title: "Per-program bundle assembly",
+          short: "Bundle",
+          actor: "deterministic · executor ④",
+          kind: "change",
+          summary: "One JSON bundle becomes the complete biological input for one agent. The live bundle is intentionally lean: names, context terms, regulators, and a short brief.",
+          params: [
+            ["program genes", "top 15 in pipeline · top 20 standalone default"],
+            ["distinctive genes", "fixed 10, re-ranked only within top-loading genes"],
+            ["regulators", "top 6 per condition by |log2FC| · 2 decimals"],
+            ["fields", "organism, cell_type, conditions, functions_to_consider, research_brief"]
+          ],
+          risks: [
+            "top_unique=8 does not control the bundle; distinctive genes add no genes outside the top-loading pool.",
+            "Scores and ranks are hidden, so the agent cannot distinguish defining from marginal genes.",
+            "The brief tells the agent to research regulators the same way as program genes.",
+            "Tissue is omitted even when it differs from the cell-type string."
+          ],
+          patch: [
+            "Emit top-loading and true unique genes as separate ranked sets, with loading and uniqueness rank.",
+            "Treat regulators as a second-pass corroboration block.",
+            "Include concise NCBI summaries and three enrichment hypotheses."
+          ],
+          sources: ["research/bundle.py:53", "research/bundle.py:90", "research/bundle.py:153"]
+        },
+        {
+          id: "launch",
+          number: "02",
+          title: "Fan-out and SDK launch",
+          short: "SDK launch",
+          actor: "Python + Claude Agent SDK",
+          kind: "change",
+          summary: "Bundles are sorted, queued under an asyncio semaphore, copied into isolated workspaces, and launched as one fresh Claude session per program.",
+          params: [
+            ["concurrency", "default 4 · validated range 1–16"],
+            ["model", "claude-sonnet-4-6"],
+            ["caps", "max_turns=30 · budget=$1/attempt · timeout=600 s"],
+            ["retries", "max_attempts=2 total · one retry"],
+            ["auth", "subscription by default · api override"]
+          ],
+          risks: [
+            "There is no local validation for zero/negative turn, budget, or timeout values.",
+            "A retry receives the same prompt and can spend a second per-attempt budget.",
+            "Latest ResultMessage counts were 34–49 despite a current/default cap of 30; old audits lack stop_reason, so the cause is unresolved.",
+            "The model and caps are not linked to an evaluation benchmark."
+          ],
+          patch: [
+            "Add config validation and a total budget across attempts.",
+            "Use a cheap payload-repair path instead of rerunning literature research after schema-only failure.",
+            "Keep 30 turns / 600 seconds until stop-reason and token telemetry is collected across a benchmark."
+          ],
+          sources: ["research/research_parallel.py:528", "research/research_parallel.py:768", "gpi/run_pipeline.py:542"]
+        },
+        {
+          id: "sandbox",
+          number: "03",
+          title: "Session sandbox and tool surface",
+          short: "Sandbox",
+          actor: "ClaudeAgentOptions",
+          kind: "change",
+          summary: "The session uses a protocol-only system prompt, an isolated cwd, two in-process MCP servers, empty setting sources, strict MCP configuration, and a permission callback.",
+          params: [
+            ["system prompt", "research/protocol.md · 717 words"],
+            ["MCP servers", "literature + gpi submit_result"],
+            ["allowed_tools", "literature wildcard + Read + submit_result"],
+            ["disallowed_tools", "Bash, Write, Edit, WebSearch, Agent, Skill, etc."],
+            ["isolation", "setting_sources=[] · strict_mcp_config=true"]
+          ],
+          risks: [
+            "SDK allowed_tools is a permission allowlist, not an availability list.",
+            "ClaudeAgentOptions.tools is unset, so the default built-in toolset still exists.",
+            "The latest audit records ToolSearch and one Glob call outside the claimed minimal surface.",
+            "can_use_tool is not a universal deny hook; it is consulted on ask decisions."
+          ],
+          patch: [
+            "Set tools=[] and inject the compact bundle, or set tools=[Read] explicitly.",
+            "Retain the MCP permission allowlist and side-effect denylist as defense in depth.",
+            "Use deterministic hooks or tool budgets for search-count enforcement."
+          ],
+          sources: ["research/research_parallel.py:88", "research/research_parallel.py:197", "research/research_parallel.py:227"]
+        },
+        {
+          id: "protocol",
+          number: "04",
+          title: "Lean biological protocol",
+          short: "Protocol",
+          actor: "research agent",
+          kind: "change",
+          summary: "The agent asks one question: what shared function do the genes perform? It groups candidate themes, retrieves evidence, returns one to three mechanisms, and flags incidental contradictions.",
+          params: [
+            ["question", "one shared-function question"],
+            ["mechanisms", "stated 1–3 · hard normalization cap 3"],
+            ["evidence context", "direct | partial | indirect"],
+            ["contradictions", "flag-only · do not actively search"],
+            ["summary", "agent_summary requested as 2–4 sentences"]
+          ],
+          risks: [
+            "Theme formation begins from model knowledge before retrieval; obscure genes are prone to alias or function errors.",
+            "No explicit non-redundancy rule makes three nested mechanisms acceptable.",
+            "No minimum program-gene coverage is enforced.",
+            "Regulators are promoted to equal search targets, contradicting the genes-first objective."
+          ],
+          patch: [
+            "Form themes only from ranked program/distinctive genes, then validate with retrieval.",
+            "Return fewer than three when additional themes are nested or weak.",
+            "Require a coverage ledger: defining genes, unexplained genes, and regulator corroboration kept separate."
+          ],
+          sources: ["research/protocol.md:1", "research/protocol.md:46", "research/protocol.md:59"]
+        },
+        {
+          id: "retrieve",
+          number: "05",
+          title: "Literature retrieval loop",
+          short: "Retrieve",
+          actor: "in-process MCP · executor ②",
+          kind: "change",
+          summary: "The agent controls every query. PubMed is primary, OpenAlex broadens discovery, Crossref resolves bibliographic strings, and PubMed fetch supplies canonical metadata and abstracts.",
+          params: [
+            ["query length", "1–512 characters"],
+            ["search results", "1–15 · MCP fallback cap 10"],
+            ["PubMed fetch", "up to 20 PMIDs · abstract clipped to 1,500 chars"],
+            ["HTTP", "30 s timeout · one transient retry"],
+            ["rate limits", "NCBI 3/s or 9/s with key · OpenAlex/Crossref 5/s"]
+          ],
+          risks: [
+            "There is no search-call budget, evidence target, or stopping rule.",
+            "PubMed sorts only by relevance; no deliberate review/primary/context balance is enforced.",
+            "OpenAlex records have no abstract in this tool, so they are weak for entailment.",
+            "Crossref bibliographic resolution takes only the first match.",
+            "Latest agents made 116 searches and 39 fetch batches for 75 unique papers."
+          ],
+          patch: [
+            "Use four phases with an adaptive stop rule: discover, anchor, context-check, gap pass.",
+            "Target 2–4 papers per non-redundant mechanism and 8–12 unique papers per program.",
+            "Add PMC/Europe PMC full-text or abstract retrieval for the later entailment stage.",
+            "Batch fetch PMIDs and derive the query log from the trace."
+          ],
+          sources: ["research/literature.py:49", "research/literature.py:120", "research/literature.py:385"]
+        },
+        {
+          id: "submit",
+          number: "06",
+          title: "Synthesis and submit_result",
+          short: "Submit",
+          actor: "research agent + gpi MCP",
+          kind: "change",
+          summary: "The agent attaches papers directly to each mechanism and calls submit_result. The runner captures the raw ToolUseBlock before validation so paid work survives downstream failure.",
+          params: [
+            ["required root fields", "program_id only"],
+            ["required mechanism fields", "name only"],
+            ["paper identifiers", "pmid and doi both optional in schema"],
+            ["submit calls", "requested exactly once · last payload wins"],
+            ["extra fields", "ignored by Pydantic default"]
+          ],
+          risks: [
+            "The generated JSON schema does not enforce the advertised 1–3 mechanisms.",
+            "Empty evidence, empty summaries, blank names, and identifier-less papers can validate.",
+            "The protocol says PMID is required; the schema allows DOI-only or no identifier.",
+            "Silent extra-field acceptance can hide legacy payloads."
+          ],
+          patch: [
+            "Use strict models with extra=forbid and explicit list/string constraints.",
+            "Validate identifier presence and program-gene membership before accepting.",
+            "Reject rather than silently truncate a fourth mechanism.",
+            "Consider SDK structured output for schema-constrained final emission while retaining raw capture."
+          ],
+          sources: ["research/schema.py:157", "research/schema.py:186", "research/research_parallel.py:157"]
+        },
+        {
+          id: "normalize",
+          number: "07",
+          title: "Normalize, retry, or fall back",
+          short: "Normalize",
+          actor: "deterministic · executor ④",
+          kind: "change",
+          summary: "The first three mechanisms are kept, papers are deduplicated into EV identifiers, identifier-less records are dropped, program ID drift is corrected, and failures enter retry/fallback logic.",
+          params: [
+            ["MAX_MECHANISMS", "3 · first three win"],
+            ["dedup keys", "normalized DOI and stripped PMID"],
+            ["metadata merge", "first seen wins"],
+            ["retryable", "no submit, validation, timeout, SDK/transport"],
+            ["not retried", "normalization infrastructure errors"]
+          ],
+          risks: [
+            "A paper carrying a mismatched valid PMID and DOI can merge unrelated evidence records.",
+            "First-seen title/year/context metadata is trusted until missing, not compared with canonical metadata.",
+            "Schema failures rerun retrieval instead of repairing the preserved payload.",
+            "Fallback is safe but can conceal systematic quality-gate failure unless surfaced prominently."
+          ],
+          patch: [
+            "Require PMID↔DOI↔title concordance before merging.",
+            "Overwrite agent bibliography with canonical registry metadata; keep agent values only as audit input.",
+            "Repair structurally invalid payloads offline, with no second literature session.",
+            "Write explicit quality-gate reasons into result meta."
+          ],
+          sources: ["research/verify.py:165", "research/verify.py:187", "research/research_parallel.py:585"]
+        },
+        {
+          id: "verify",
+          number: "08",
+          title: "Identifier verification and downstream handoff",
+          short: "Verify + handoff",
+          actor: "deterministic · executors ④/③",
+          kind: "verify",
+          summary: "PMIDs and DOIs resolve, retractions are marked, records deduplicate across programs, mechanism status is recomputed, and compact modules are passed into annotation.",
+          params: [
+            ["supported", "≥1 resolved, non-retracted linked paper"],
+            ["partial", "some linked evidence could not be checked"],
+            ["unsupported", "no evidence or all false/retracted"],
+            ["annotation citation", "PMID preferred · DOI fallback"],
+            ["downstream module", "name, program genes, ids, summary, status"]
+          ],
+          risks: [
+            "Resolution is not entailment; one real but irrelevant paper makes a mechanism supported.",
+            "The status does not measure gene coverage, study quality, context fit, or agreement across papers.",
+            "Supporting regulators, contradictions, evidence gaps, paper notes, and context ratings are dropped from annotation context.",
+            "The annotation LLM is told modules carry status, but the formatter does not print the status value."
+          ],
+          patch: [
+            "Rename current status to citation_status and add entailment_status plus context_fit.",
+            "Pass compact evidence grades, contradictions, and explicit gaps downstream.",
+            "Require the final annotation to distinguish established molecular function from exact tissue-context evidence.",
+            "Benchmark module coherence, gene coverage, redundancy, entailment, context, cost, and latency."
+          ],
+          sources: ["research/verify.py:332", "research/verify.py:522", "gpi/research_evidence_adapter.py:197"]
+        }
+      ];
+
+      var parameters = [
+        ["Context", "context.organism", "mouse", "Free text; taxid checked only for known mouse/human aliases.", "Keep; add canonical species name to the bundle.", "keep"],
+        ["Context", "context.species_taxid", "10090", "Integer; warns on known organism mismatch, does not block.", "Make mismatch blocking before network work.", "change"],
+        ["Context", "context.tissue", "blank by default", "Resolved and printed; omitted from research bundle.", "Include in bundle.", "dead"],
+        ["Context", "context.cell_type", "blank by default", "Becomes agent role and bundle field.", "Require cell type or tissue for research.", "change"],
+        ["Context", "context.conditions", "[]", "Included in bundle and research brief.", "Keep as optional lens, never forced conclusion.", "keep"],
+        ["Context", "context.context_terms", "[]", "Warnings at >10 terms or >3-word concepts; included as functions_to_consider.", "Keep a curated 5–10 concept list.", "keep"],
+        ["Context", "context.assay", "Perturb-seq", "Recorded/report-only; intentionally hidden from research agent.", "Keep hidden unless assay alters biological interpretation.", "keep"],
+        ["Context", "context.annotation_role", "derived", "Neutral cell/tissue biologist persona.", "Keep neutral.", "keep"],
+        ["Context", "context.annotation_context", "derived", "Used downstream; not included verbatim in research bundle.", "No change required if bundle fields are fixed.", "keep"],
+        ["Context", "context.keyword_query", "derived", "Printed and used in gene_summaries, not given to research agents.", "Either remove research claim or include as a query scaffold.", "dead"],
+        ["Context", "context.condition_context", "derived", "Used downstream, not by Agent SDK research.", "Document as downstream-only.", "hidden"],
+        ["Context", "context.functional_context", "blank", "Downstream prompt field only.", "Document as downstream-only.", "hidden"],
+        ["Context", "context.report_dataset_crumb", "derived", "Report presentation only.", "No research effect.", "hidden"],
+        ["Context", "context.evidence_context_types", "direct, partial, indirect, mixed", "Research schema accepts only direct/partial/indirect; mixed is downstream vocabulary.", "Use separate entailment and context axes.", "change"],
+
+        ["Bundle", "settings.n_top_genes", "300", "Controls STRING input; not bundle gene count.", "Keep; clearly label as enrichment scope.", "keep"],
+        ["Bundle", "settings.top_loading", "15", "Pipeline bundle uses 15; standalone bundle CLI defaults to 20.", "Keep 15 initially; unify defaults.", "change"],
+        ["Bundle", "settings.top_unique", "8", "Used upstream/downstream, not bundle.py.", "Wire it; choose unique genes outside top-loading.", "dead"],
+        ["Bundle", "settings.top_enrichment", "7", "Passed to bundle.py and ignored.", "Wire top 3 non-redundant hints, not 7 redundant terms.", "dead"],
+        ["Bundle", "settings.genes_per_term", "10", "Used downstream annotation enrichment, not Agent SDK bundle.", "Document as downstream-only.", "hidden"],
+        ["Bundle", "TOP_REGULATORS_PER_CONDITION", "6", "Fixed; strongest |log2FC|, positive and negative pooled.", "Keep 3–6 but use only after gene-defined themes.", "change"],
+        ["Bundle", "distinctive_genes count", "10", "Fixed and selected from top-loading pool only.", "Use configured top_unique=8 outside top-loading.", "change"],
+        ["Bundle", "regulator log2fc precision", "2 decimals", "Magnitude and sign included, biological direction not researched.", "Keep for corroboration; label sign semantics explicitly.", "keep"],
+        ["Bundle", "gene loading / uniqueness values", "omitted", "Agent sees names only.", "Include rank and normalized score.", "change"],
+        ["Bundle", "NCBI gene summaries", "discarded", "Already fetched upstream, absent from bundle.", "Include concise canonical summaries/aliases.", "dead"],
+        ["Bundle", "STRING enrichment", "discarded", "Already computed upstream; top_enrichment ignored.", "Include 3 hypothesis hints with FDR and overlap.", "dead"],
+
+        ["Runner", "research.enabled", "true", "False or --no-research gates the whole step.", "Keep.", "keep"],
+        ["Runner", "research.auth", "subscription", "Any value other than api withholds ANTHROPIC_API_KEY.", "Validate enum: subscription | api.", "change"],
+        ["Runner", "research.concurrency", "4", "Validated integer 1–16; configs usually 2–5; shared source rate limiters.", "Use min(programs, 3–4); quality-neutral.", "keep"],
+        ["Runner", "research.model", "claude-sonnet-4-6", "Free model string; no benchmark gate.", "Keep until a blind quality/cost comparison.", "keep"],
+        ["Runner", "research.max_turns", "30", "No local positive-range validation; SDK cap per attempt.", "Keep 30 now; add stop telemetry and search budget.", "change"],
+        ["Runner", "research.max_budget_usd", "1.0", "Per session attempt, not total run or total across retry.", "Add per-program total budget across attempts.", "change"],
+        ["Runner", "research.per_program_timeout", "600 s", "asyncio wall-clock timeout per attempt; non-positive fails immediately.", "Keep 600; 300 s is too low for observed runs.", "keep"],
+        ["Runner", "max_attempts", "2", "Hidden function default: two total attempts, therefore one retry.", "Expose; use one literature attempt plus offline repair.", "change"],
+        ["Runner", "out_dir", "research_results", "Configurable path.", "Keep.", "keep"],
+        ["Runner", "audit_dir", "research_audit", "Configurable path; raw, audit, pre-verify, summary.", "Keep.", "keep"],
+        ["Runner", "workspace root", "out_dir.parent/workspaces", "One bundle copied into one program cwd; existing workspace deleted.", "Keep isolation.", "keep"],
+        ["Runner", "program ordering", "sorted paths", "Deterministic queue order.", "Keep.", "keep"],
+
+        ["SDK", "system_prompt", "research/protocol.md", "Replaces default prompt; 717 words.", "Keep lean; revise workflow semantics, not length alone.", "change"],
+        ["SDK", "cwd", "isolated workspace", "Only one bundle is copied there.", "Keep, or inject bundle and remove Read.", "keep"],
+        ["SDK", "mcp_servers", "literature + gpi", "Strict in-process server set.", "Keep.", "keep"],
+        ["SDK", "tools", "unset", "Default Claude Code built-ins remain available.", "Set [] with injected bundle, or [Read].", "change"],
+        ["SDK", "allowed_tools", "literature wildcard + Read + submit", "Permission auto-allowlist, not availability filter.", "Keep as permissions after setting tools.", "change"],
+        ["SDK", "disallowed_tools", "12 named tools", "Explicit side-effect/off-task denylist; does not list Glob/ToolSearch.", "Keep defense-in-depth; availability is primary.", "change"],
+        ["SDK", "can_use_tool", "custom deny callback", "Only used when SDK permission evaluation asks.", "Do not describe as a complete availability boundary.", "change"],
+        ["SDK", "permission_mode", "default", "Unlisted ask decisions reach callback; no blanket bypass.", "Keep.", "keep"],
+        ["SDK", "setting_sources", "[]", "No user/project/local settings.", "Keep.", "keep"],
+        ["SDK", "strict_mcp_config", "true", "Ignores settings-file MCP servers.", "Keep.", "keep"],
+        ["SDK", "fallback_model", "unset", "SDK feature not used.", "Optional reliability knob; benchmark before enabling.", "hidden"],
+        ["SDK", "effort / thinking / task_budget", "unset", "Current SDK exposes these; local protocol does not tune them.", "Prefer explicit search/tool budgets first.", "hidden"],
+        ["SDK", "output_format", "unset", "Custom submit_result tool provides structure.", "Consider JSON-schema structured output after quality schema is fixed.", "hidden"],
+
+        ["Retrieval", "MAX_SEARCH_RESULTS", "15", "Client clamps requested result count to 1–15.", "Keep; quality comes from query design, not larger pages.", "keep"],
+        ["Retrieval", "server max_results_per_search", "10", "Only fallback default; agent-supplied max_results can reach 15.", "Rename to default_results or enforce a true cap.", "change"],
+        ["Retrieval", "MAX_FETCH_IDS", "20", "Extra PMIDs silently truncated.", "Keep; return truncation metadata.", "change"],
+        ["Retrieval", "query length", "512 chars", "Whitespace normalized; empty errors; extra text truncated.", "Keep.", "keep"],
+        ["Retrieval", "PubMed ordering", "relevance", "No explicit date/publication-type filters.", "Add planned review/primary/context query roles.", "change"],
+        ["Retrieval", "PubMed abstract", "1,500 chars", "Canonical fetch clips longer abstracts.", "Store full abstract for entailment or document clipping.", "change"],
+        ["Retrieval", "OpenAlex API key", "required by local client", "Clean tool error when absent; PubMed/Crossref remain.", "Preflight once and expose capability state to agent.", "change"],
+        ["Retrieval", "Crossref bibliographic rows", "1", "First match returned; no confidence threshold.", "Use exact DOI when possible; validate title concordance.", "change"],
+        ["Retrieval", "HTTP timeout", "30 s", "Per retrieval request.", "Keep.", "keep"],
+        ["Retrieval", "transient_retries", "1", "Constructor clamps 0–2; backoff 0.25 s.", "Keep one; surface retry counts in audit.", "keep"],
+        ["Retrieval", "NCBI rate", "3/s or 9/s", "Global shared limiter; API key selects 9/s.", "Keep shared limiter.", "keep"],
+        ["Retrieval", "OpenAlex / Crossref rate", "5/s", "Global shared limiters.", "Keep.", "keep"],
+        ["Retrieval", "search-call budget", "none", "Agent can search until SDK/timeout/budget cap.", "Add adaptive 12–18 search soft ceiling.", "change"],
+        ["Retrieval", "evidence target", "none", "Latest outputs contain 17–22 papers per program.", "Target 8–12 unique papers, 2–4 per mechanism.", "change"],
+
+        ["Protocol", "candidate mechanisms", "1–3 stated", "Schema has no min/max; normalization keeps first 3.", "Enforce 1–3 non-redundant mechanisms.", "change"],
+        ["Protocol", "minimum supporting genes", "several stated", "Not validated; observed modules can have one program gene.", "Require 2 program genes or an explicit exception.", "change"],
+        ["Protocol", "regulator role", "equal research target", "Regulators may drive a mechanism and are stored separately.", "Make corroboration-only second pass.", "change"],
+        ["Protocol", "contradictions", "flag-only", "Agent-authored list; not passed to annotation module context.", "Keep flag-only, but pass real flags downstream.", "change"],
+        ["Protocol", "evidence_gaps", "required conceptually", "Unbounded list; not passed to annotation module context.", "Use a structured gene coverage ledger downstream.", "change"],
+        ["Protocol", "queries[]", "agent-authored", "Latest 62 entries vs 116 audited searches.", "Derive deterministically from tool trace.", "dead"],
+        ["Protocol", "agent_summary", "2–4 sentences requested", "No length or content validation.", "Keep lightweight; validate non-empty.", "change"],
+
+        ["Schema", "AgentResearchResult required", "program_id", "All arrays optional/default empty.", "Require 1–3 mechanisms and non-empty summary.", "change"],
+        ["Schema", "AgentMechanism required", "name", "Summary, genes, regulators, papers may be empty.", "Validate quality invariants outside raw schema where exceptions matter.", "change"],
+        ["Schema", "AgentPaper identifier", "optional PMID and DOI", "Identifier-less paper validates then is dropped.", "Require at least one; align protocol with DOI-only support.", "change"],
+        ["Schema", "context_match", "indirect default", "Enum direct | partial | indirect; agent self-rates.", "Split context_fit from entailment_strength.", "change"],
+        ["Schema", "extra fields", "ignored", "Pydantic default accepts unknown legacy fields.", "Use extra=forbid.", "change"],
+        ["Schema", "submit calls", "exactly once requested", "Multiple accepted; last payload kept with warning.", "Reject later calls or keep first complete valid payload.", "change"],
+
+        ["Verify", "MAX_MECHANISMS", "3", "Silent first-three truncation.", "Reject or quality-rank; never silently drop.", "change"],
+        ["Verify", "paper dedup", "PMID and/or normalized DOI", "A combined record can union previously separate ids.", "Require cross-identifier concordance before union.", "change"],
+        ["Verify", "metadata precedence", "first seen wins", "Canonical title/year only fill missing values.", "Canonical registry data should be authoritative.", "change"],
+        ["Verify", "supported", "≥1 resolved non-retracted paper", "Does not check relevance or entailment.", "Rename citation_resolved; add entailment status.", "change"],
+        ["Verify", "partial", "some unresolved=None", "Network uncertainty, not partial scientific support.", "Rename citation_unverified.", "change"],
+        ["Verify", "unsupported", "no resolvable paper", "No distinction between absent evidence and refuted mechanism.", "Separate no citation, invalid citation, and contradicted claim.", "change"],
+        ["Verify", "DOI GET / HEAD timeout", "15 s / 10 s", "One 2 s retry on 429; tri-state result.", "Keep tri-state behavior.", "keep"],
+        ["Verify", "PMID verify timeout", "60 s", "One batched ESummary request per program.", "Keep; add title/DOI concordance.", "change"],
+        ["Verify", "cross-program dedup", "union by shared DOI/PMID", "Verification fields propagated; local EV ids preserved.", "Keep after concordance check.", "change"],
+
+        ["Downstream", "citation emission", "PMID first, DOI fallback", "resolved=False dropped; resolved=None retained.", "Keep, but display unverified distinctly.", "keep"],
+        ["Downstream", "mechanism status in prompt", "not printed", "Formatter says status exists but does not emit each value.", "Emit graded evidence without anchoring the final label.", "change"],
+        ["Downstream", "supporting_regulators", "discarded", "Not mapped into annotation modules.", "Pass as corroboration or remove from agent output.", "dead"],
+        ["Downstream", "paper title/note/context", "discarded", "Annotation sees ids and mechanism summary only.", "Pass compact adjudicated evidence notes.", "dead"],
+        ["Downstream", "contradictions / gaps", "discarded", "Not part of module context.", "Pass structured caveats.", "dead"]
+      ];
+
+      var activeStage = 0;
+      var view = "current";
+      var activeLayer = "All";
+
+      function escapeHtml(value) {
+        return String(value == null ? "" : value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function renderFlow() {
+        var host = document.getElementById("flowNav");
+        host.innerHTML = stages.map(function (stage, index) {
+          return '<button class="flow-step' + (index === activeStage ? ' active' : '') + '" type="button" role="tab" aria-selected="' + (index === activeStage) + '" data-index="' + index + '" data-kind="' + stage.kind + '">' +
+            '<span class="flow-dot">' + stage.number + '</span>' +
+            '<span class="flow-name">' + escapeHtml(stage.short) + '</span>' +
+            '<span class="flow-actor">' + escapeHtml(stage.actor.split("·")[0].trim()) + '</span>' +
+          '</button>';
+        }).join("");
+        host.querySelectorAll(".flow-step").forEach(function (button) {
+          button.addEventListener("click", function () {
+            activeStage = Number(button.getAttribute("data-index"));
+            renderFlow();
+            renderStage();
+          });
+        });
+      }
+
+      function renderStage() {
+        var stage = stages[activeStage];
+        document.getElementById("stageSummary").innerHTML =
+          '<div class="stage-id">Stage ' + stage.number + ' · ' + escapeHtml(stage.actor) + '</div>' +
+          '<h3>' + escapeHtml(stage.title) + '</h3>' +
+          '<p>' + escapeHtml(stage.summary) + '</p>' +
+          '<span class="actor-chip">' + escapeHtml(stage.id) + '</span>' +
+          '<div class="source-list">' + stage.sources.map(function (source) {
+            return '<code>' + escapeHtml(source) + '</code>';
+          }).join("") + '</div>';
+
+        var tiles = stage.params.map(function (pair) {
+          return '<div class="param-tile"><div class="pk">' + escapeHtml(pair[0]) + '</div><div class="pv">' + escapeHtml(pair[1]) + '</div></div>';
+        }).join("");
+        var risks = stage.risks.map(function (item) { return '<li><span>' + escapeHtml(item) + '</span></li>'; }).join("");
+        var patches = stage.patch.map(function (item) { return '<li><span>' + escapeHtml(item) + '</span></li>'; }).join("");
+
+        document.getElementById("stageDetail").innerHTML =
+          '<div class="detail-label">Effective parameters</div>' +
+          '<div class="param-grid">' + tiles + '</div>' +
+          '<div class="detail-label">Quality or correctness risk</div>' +
+          '<ul class="risk-list">' + risks + '</ul>' +
+          '<div class="recommended-box"' + (view === "recommended" ? "" : " hidden") + '>' +
+            '<div class="detail-label">Recommended patch</div>' +
+            '<ul class="patch-list">' + patches + '</ul>' +
+          '</div>';
+      }
+
+      function setupViewButtons() {
+        document.querySelectorAll("[data-view]").forEach(function (button) {
+          button.addEventListener("click", function () {
+            view = button.getAttribute("data-view");
+            document.querySelectorAll("[data-view]").forEach(function (item) {
+              item.classList.toggle("active", item === button);
+              item.setAttribute("aria-pressed", String(item === button));
+            });
+            renderStage();
+          });
+        });
+      }
+
+      function renderFilters() {
+        var layers = ["All"];
+        parameters.forEach(function (row) {
+          if (layers.indexOf(row[0]) === -1) layers.push(row[0]);
+        });
+        var host = document.getElementById("filterRow");
+        host.innerHTML = layers.map(function (layer) {
+          return '<button type="button" class="' + (layer === activeLayer ? "active" : "") + '" data-layer="' + escapeHtml(layer) + '" aria-pressed="' + (layer === activeLayer) + '">' + escapeHtml(layer) + '</button>';
+        }).join("");
+        host.querySelectorAll("button").forEach(function (button) {
+          button.addEventListener("click", function () {
+            activeLayer = button.getAttribute("data-layer");
+            renderFilters();
+            renderParameters();
+          });
+        });
+      }
+
+      function renderParameters() {
+        var query = document.getElementById("parameterSearch").value.trim().toLowerCase();
+        var filtered = parameters.filter(function (row) {
+          var inLayer = activeLayer === "All" || row[0] === activeLayer;
+          var inQuery = !query || row.join(" ").toLowerCase().indexOf(query) !== -1;
+          return inLayer && inQuery;
+        });
+        document.getElementById("parameterBody").innerHTML = filtered.map(function (row) {
+          return "<tr>" +
+            "<td>" + escapeHtml(row[0]) + "</td>" +
+            "<td>" + escapeHtml(row[1]) + "</td>" +
+            "<td>" + escapeHtml(row[2]) + "</td>" +
+            "<td>" + escapeHtml(row[3]) + "</td>" +
+            "<td>" + escapeHtml(row[4]) + "</td>" +
+            '<td><span class="state ' + escapeHtml(row[5]) + '">' + escapeHtml(row[5]) + "</span></td>" +
+          "</tr>";
+        }).join("");
+        document.getElementById("registryCount").textContent = filtered.length + " / " + parameters.length;
+      }
+
+      function setupTheme() {
+        var button = document.getElementById("themeButton");
+        var stored = null;
+        try { stored = localStorage.getItem("gpi-protocol-theme"); } catch (error) {}
+        if (stored === "dark") document.documentElement.setAttribute("data-theme", "dark");
+        button.setAttribute("aria-pressed", String(stored === "dark"));
+        button.addEventListener("click", function () {
+          var dark = document.documentElement.getAttribute("data-theme") === "dark";
+          if (dark) document.documentElement.removeAttribute("data-theme");
+          else document.documentElement.setAttribute("data-theme", "dark");
+          button.setAttribute("aria-pressed", String(!dark));
+          try { localStorage.setItem("gpi-protocol-theme", dark ? "light" : "dark"); } catch (error) {}
+        });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.target && /input|textarea/i.test(event.target.tagName)) return;
+        if (event.key === "ArrowRight") {
+          activeStage = Math.min(stages.length - 1, activeStage + 1);
+          renderFlow();
+          renderStage();
+        }
+        if (event.key === "ArrowLeft") {
+          activeStage = Math.max(0, activeStage - 1);
+          renderFlow();
+          renderStage();
+        }
+      });
+
+      document.getElementById("parameterSearch").addEventListener("input", renderParameters);
+      setupTheme();
+      setupViewButtons();
+      renderFlow();
+      renderStage();
+      renderFilters();
+      renderParameters();
+    })();
+  </script>
+</body>
+</html>

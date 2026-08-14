@@ -1,0 +1,45 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-brain-p11-r1",
+    "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+    "candidate_additions": [
+      "A distinct arteriovenous identity module involving Hopx, Angpt2, Cxcr4, Rgs6, and Tek.",
+      "BBB glutamate transport through Slc1a1/EAAT-3.",
+      "Angiogenic roles for Tnfrsf11b/OPG."
+    ],
+    "candidate_removed_or_weakened": [
+      "The CNS-specific TGF-β/ALK5 requirement for diving-tip-cell identity and deep plexus formation is replaced by a broader BBB morphogenesis and integrity interpretation.",
+      "The membrane–ER calcium-signaling module involving Cacna1c, Jph1, Syt12, and Rgs6 is largely removed.",
+      "The proposed neurovascular-coupling interpretation of the ion-channel module is weakened to general flow mechanosensing."
+    ],
+    "core_interpretation_changed": true,
+    "decision_relevant_differences": [
+      "Both annotations identify angiogenic tip-cell sprouting as a central program.",
+      "The baseline interprets Tgfbr1/Tgfbr2 as specifying CNS diving-tip cells, whereas the candidate interprets them mainly as supporting BBB formation and barrier integrity.",
+      "The candidate elevates arteriovenous specification and BBB transport to major themes while de-emphasizing calcium microdomains and neurovascular coupling."
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "The shared tip-cell mechanism remains, including Angpt2, Cxcr4, Cdc42ep3, Nrp1, and opposing Tek activity. However, two other central modules are substantially recast: CNS-specific TGF-β-dependent diving-tip identity becomes BBB maintenance, and the calcium-signaling/neurovascular module becomes arteriovenous specification plus BBB transport. These shifts could lead a reader to prioritize different biological functions and experiments, so this is more than added evidence coverage.",
+    "semantic_relation": "materially_changed",
+    "shared_core_conclusions": [
+      "P11 represents active angiogenic sprouting and tip-cell behavior in postnatal brain endothelium.",
+      "Angpt2, Cxcr4, and Cdc42ep3 support the tip-cell interpretation.",
+      "Nrp1 promotes the program, whereas Tek/Tie2 opposes it.",
+      "Kcnj2 supports endothelial mechanosensing.",
+      "Tgfbr1 and Tgfbr2 signaling positively supports P11."
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 13056,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16856,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 722,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 16.939
+  }
+}

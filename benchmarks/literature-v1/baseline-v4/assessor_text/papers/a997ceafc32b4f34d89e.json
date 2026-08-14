@@ -1,0 +1,16 @@
+{
+  "content_hash": "c95901217ecebe8d528f7cbe005c40f7ad5e0d7789bcb4a9e0b5ab9ea0319758",
+  "doi": "10.1073/pnas.1821122116",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "a997ceafc32b4f34d89e",
+  "pmcid": "PMC6500147",
+  "pmid": "30988181",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The mammalian CNS is capable of tolerating chronic hypoxia, but cell type-specific responses to this stress have not been systematically characterized. In the Norrin KO (NdpKO ) mouse, a model of familial exudative vitreoretinopathy (FEVR), developmental hypovascularization of the retina produces chronic hypoxia of inner nuclear-layer (INL) neurons and Muller glia. We used single-cell RNA sequencing, untargeted metabolomics, and metabolite labeling from 13C-glucose to compare WT and NdpKO retinas. In NdpKO retinas, we observe gene expression responses consistent with hypoxia in Muller glia and retinal neurons, and we find a metabolic shift that combines reduced flux through the TCA cycle with increased synthesis of serine, glycine, and glutathione. We also used single-cell RNA sequencing to compare the responses of individual cell types in NdpKO retinas with those in the hypoxic cerebral cortex of mice that were housed for 1 week in a reduced oxygen environment (7.5% oxygen). In the hypoxic cerebral cortex, glial transcriptome responses most closely resemble the response of Muller glia in the NdpKO retina. In both retina and brain, vascular endothelial cells activate a previously dormant tip cell gene expression program, which likely underlies the adaptive neoangiogenic response to chronic hypoxia. These analyses of retina and brain transcriptomes at single-cell resolution reveal both shared and cell type-specific changes in gene expression in response to chronic hypoxia, implying both shared and distinct cell type-specific physiologic responses.",
+  "text_type": "abstract",
+  "title": "Hypoxia tolerance in the Norrin-deficient retina and the chronically hypoxic brain studied at single-cell resolution."
+}

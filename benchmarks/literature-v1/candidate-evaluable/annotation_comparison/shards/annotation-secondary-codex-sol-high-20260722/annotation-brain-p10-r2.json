@@ -1,0 +1,41 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-brain-p10-r2",
+    "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+    "candidate_additions": [
+      "Adds a secondary mitochondrial-maintenance theme involving Bckdhb, Clybl, Chchd6, Metap1d, and Wdpcp.",
+      "Adds ciliopathy/CNS-malformation and cilia-dependent Hedgehog signaling context."
+    ],
+    "candidate_removed_or_weakened": [
+      "Weakens the explicit endothelial cilia mechanosensing, shear-response, and postnatal BBB-maturation interpretation.",
+      "Reduces Fzd4, Gata2, and Eng from a developed BBB/angiogenic regulatory mechanism to brief endothelial-context framing.",
+      "Omits Nme7 and Cfap36 from the primary cilia gene set."
+    ],
+    "core_interpretation_changed": false,
+    "decision_relevant_differences": [
+      "The candidate supports considering mitochondrial homeostasis as a secondary program component.",
+      "The baseline more strongly supports a flow-sensing and BBB-maturation interpretation of the ciliary program."
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations identify primary cilia biogenesis, transition-zone organization, and intraflagellar/BBSome trafficking as the dominant program and place it in developing brain endothelium using Fzd4, Gata2, and Eng. The candidate meaningfully adds a mitochondrial subprogram and ciliopathy/Hedgehog context, while weakening the baseline's explicit mechanosensing and BBB-maturation mechanism. These refinements could affect secondary follow-up choices but do not replace the central ciliary interpretation.",
+    "semantic_relation": "same_core_with_meaningful_refinement",
+    "shared_core_conclusions": [
+      "P10 is dominated by genes supporting primary cilia assembly and function.",
+      "Bbs9, Cc2d2a, Tbc1d32, Wdpcp, Ift74, Cep164, and Sdccag8 support ciliary trafficking, gating, and ciliogenesis.",
+      "Fzd4, Gata2, and Eng place the program in a developing brain-endothelial vascular context."
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16723,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 655,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 15.766
+  }
+}

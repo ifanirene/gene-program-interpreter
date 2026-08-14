@@ -57,6 +57,8 @@ logger = logging.getLogger(__name__)
 
 # How many perturbation regulators to surface per condition (treated as search targets).
 TOP_REGULATORS_PER_CONDITION = 6
+MAX_ALIASES_PER_GENE = 6
+MAX_GENE_DESCRIPTION_CHARS = 280
 
 
 # --------------------------------------------------------------------------- helpers
@@ -82,7 +84,10 @@ def _resolve_program_context(
     """Return the per-program ncbi_context entry (accepts full keyed dict or unwrapped)."""
     if not ncbi_context or not isinstance(ncbi_context, dict):
         return None
-    if "regulator_validation" in ncbi_context or "regulator_validation_by_condition" in ncbi_context:
+    if any(
+        key in ncbi_context
+        for key in ("regulator_validation", "regulator_validation_by_condition", "gene_metadata")
+    ):
         return ncbi_context
     for candidate in (str(int_key), int_key):
         if candidate in ncbi_context:
@@ -148,6 +153,66 @@ def _top_condition_regulators(ctx: Optional[Dict[str, Any]]) -> Dict[str, List[D
         picked = _pick(flat)
         return {"all": picked} if picked else {}
     return {}
+
+
+def _bundle_gene_metadata(
+    ctx: Optional[Dict[str, Any]], genes: List[str]
+) -> Dict[str, Dict[str, Any]]:
+    """Select compact metadata without ever rewriting supplied gene symbols."""
+    raw = (ctx or {}).get("gene_metadata") or {}
+    compact: Dict[str, Dict[str, Any]] = {}
+    for gene in genes:
+        record = raw.get(gene)
+        if not isinstance(record, dict):
+            continue
+        description = str(record.get("description") or "").strip()
+        if len(description) > MAX_GENE_DESCRIPTION_CHARS:
+            description = description[: MAX_GENE_DESCRIPTION_CHARS - 1].rstrip() + "…"
+        aliases = sorted(
+            {
+                str(alias).strip()
+                for alias in (record.get("aliases") or [])
+                if str(alias).strip() and str(alias).strip().casefold() != gene.casefold()
+            },
+            key=lambda value: (value.casefold(), value),
+        )[:MAX_ALIASES_PER_GENE]
+        compact[gene] = {
+            "canonical_symbol": record.get("canonical_symbol"),
+            "entrez_id": str(record["entrez_id"]) if record.get("entrez_id") else None,
+            "description": description or None,
+            "aliases": aliases,
+            "source": record.get("source") or "NCBI Gene",
+            "status": record.get("status")
+            or ("resolved" if record.get("entrez_id") else "unresolved"),
+        }
+    return compact
+
+
+def _build_query_guidance(profile: ContextProfile) -> Dict[str, Any]:
+    """Build optional components; conditions remain lenses rather than mandatory clauses."""
+    rp = profile.resolved()
+
+    def _unique(values: List[str]) -> List[str]:
+        seen: set[str] = set()
+        out: List[str] = []
+        for value in values:
+            clean = str(value or "").strip()
+            if clean and clean.casefold() not in seen:
+                seen.add(clean.casefold())
+                out.append(clean)
+        return out
+
+    identity = _unique([rp.cell_type, rp.tissue])
+    patterns = ["(GENE OR ALIAS)"]
+    if identity:
+        patterns.insert(0, "(GENE OR ALIAS) AND (CELL_TYPE OR TISSUE)")
+    return {
+        "organism": rp.organism,
+        "identity_terms": identity,
+        "condition_terms": _unique(list(rp.conditions)),
+        "function_terms": _unique(list(rp.context_terms)),
+        "patterns": patterns,
+    }
 
 
 # ---------------------------------------------------------------------- research_brief
@@ -220,12 +285,14 @@ def build_bundle(
     if not program_genes:
         raise ValueError(f"No genes found for program {label} in gene_df — check id and CSV.")
 
-    regulators = _top_condition_regulators(_resolve_program_context(ncbi_context, int_key))
+    program_context = _resolve_program_context(ncbi_context, int_key)
+    regulators = _top_condition_regulators(program_context)
 
     rp = profile.resolved()
     bundle: Dict[str, Any] = {
         "program_id": label,
         "organism": rp.organism,
+        "tissue": rp.tissue,
         "cell_type": rp.cell_type,
         "conditions": rp.conditions,
         "functions_to_consider": rp.context_terms,
@@ -234,6 +301,18 @@ def build_bundle(
     }
     if regulators:
         bundle["perturbation_regulators"] = regulators
+    regulator_genes = [
+        str(record["gene"])
+        for records in regulators.values()
+        for record in records
+    ]
+    metadata = _bundle_gene_metadata(
+        program_context,
+        list(dict.fromkeys(program_genes + distinctive_genes + regulator_genes)),
+    )
+    if metadata:
+        bundle["gene_metadata"] = metadata
+    bundle["query_guidance"] = _build_query_guidance(profile)
     bundle["research_brief"] = _build_research_brief(label, profile, bool(regulators))
     return bundle
 

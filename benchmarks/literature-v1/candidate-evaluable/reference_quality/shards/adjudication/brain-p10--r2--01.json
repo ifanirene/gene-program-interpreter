@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-5c1ad05f4b58cd61e436",
+    "RL-a9e2ecbeee798dc7b6b0",
+    "RL-bf6376e48bfe2af991ef",
+    "RL-c30b0610814d501b2881"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 15977,
+        "source_type": "full_text",
+        "start": 15885,
+        "text": "WDPCP silencing or inhibition of the MAPK/ERK pathway could reduce mitochondrial biogenesis."
+      },
+      "function_supported_genes": [
+        "Wdpcp"
+      ],
+      "rationale": "siRNA knockdown causally shows WDPCP loss reduces mitochondrial biogenesis, mtDNA, membrane potential and ATP, but WDPCP is a ciliary PCP effector regulating mitochondria via MAPK/ERK rather than an intrinsic mitochondrial metabolic enzyme, so this is a narrower/partial match to Mechanism 2. Human nasal epithelium is indirect relative to mouse brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-5c1ad05f4b58cd61e436",
+      "studied_genes": [
+        "Wdpcp"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "secondary",
+      "evidence_span": {
+        "end": 812,
+        "source_type": "abstract",
+        "start": 683,
+        "text": "TBC1D32 is involved in the development and function of cilia and is expressed in the developing hypothalamus and pituitary gland."
+      },
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "rationale": "This case series/review reports new TBC1D32 probands and states a ciliary developmental role, providing genetic-association and synthesis-level rather than gene-specific mechanistic evidence, so it partially supports the ciliopathy claim. Developing human hypothalamus/pituitary is indirect, not the closely transferable 'partial' context declared.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a9e2ecbeee798dc7b6b0",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 532,
+        "source_type": "abstract",
+        "start": 217,
+        "text": "We have cloned, expressed in Escherichia coli, and purified the recombinant human mitochondrial MetAP isoform (MetAP1D). The full-length enzyme and a truncated form lacking the mitochondrial targeting sequence (residues 1-55) have been characterized as metal-requiring proteases, with Co2+ being the best activator."
+      },
+      "function_supported_genes": [
+        "Metap1d"
+      ],
+      "rationale": "Direct biochemical characterization establishes MetAP1D as the mitochondrial methionine aminopeptidase, a metal-dependent protease, matching the cited enzymatic function. The recombinant in-vitro system is indirect to mouse brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-bf6376e48bfe2af991ef",
+      "studied_genes": [
+        "Metap1d"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1768,
+        "source_type": "abstract",
+        "start": 1627,
+        "text": "Thus, SDCCAG8 mutations are sufficient to cause BBS in 1-2% of our combined cohorts, and define this gene as the sixteenth BBS locus (BBS16)."
+      },
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "rationale": "Human genetic and phenotypic analysis establishes SDCCAG8 as a bona fide BBS/nephronophthisis ciliopathy gene, directly matching the selection rationale, though it is patient-mutation association rather than a direct transition-zone functional assay. Human patient cohorts are indirect relative to mouse brain endothelium, as declared.",
+      "red_flags": [],
+      "review_id": "RL-c30b0610814d501b2881",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r2",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.469126,
+    "duration_api_ms": 79522,
+    "duration_ms": 77463,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 3,
+    "wall_seconds": 78.651
+  }
+}

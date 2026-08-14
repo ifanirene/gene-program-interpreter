@@ -1,0 +1,16 @@
+{
+  "content_hash": "50747c7b50b2ee7d905dd5bf679f4f893f7ad793f5083ad879670f5b6f3ed021",
+  "doi": "10.1016/j.devcel.2014.08.018",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "119fa727e13d894984f5",
+  "pmcid": "PMC4223636",
+  "pmid": "25373781",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Canonical Wnt signaling in endothelial cells (ECs) is required for vascularization of the central nervous system (CNS) and for formation and maintenance of barrier properties unique to CNS vasculature. Gpr124 is an orphan member of the adhesion G protein-coupled receptor family that is expressed in ECs and is essential for CNS angiogenesis and barrier formation via an unknown mechanism. Using canonical Wnt signaling assays in cell culture and genetic loss- and gain-of-function experiments in mice, we show that Gpr124 functions as a coactivator of Wnt7a- and Wnt7b-stimulated canonical Wnt signaling via a Frizzled receptor and Lrp coreceptor and that Gpr124-stimulated signaling functions in concert with Norrin/Frizzled4 signaling to control CNS vascular development. These experiments identify Gpr124 as a ligand-specific coactivator of canonical Wnt signaling.",
+  "text_type": "abstract",
+  "title": "Gpr124 controls CNS angiogenesis and blood-brain barrier integrity by promoting ligand-specific canonical wnt signaling."
+}

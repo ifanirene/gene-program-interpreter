@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "liver-p21--r1--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.97
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.85
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.8
+      }
+    ],
+    "moduleSemanticSimilarity": 0.873333,
+    "overall_rationale": "The two module sets are near-mirror decompositions of the same P21 program (biosynthetic enzymes, SREBP2 sterol-sensing feedback, and VLDL/acetyl-CoA lipid coupling), so the strongest signal lies on the diagonal (1-1, 2-2, 3-3) with off-diagonal pairs showing only partial or contextual overlap due to shared broad hepatic cholesterol/lipid domain rather than shared core mechanism.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the identical complete mevalonate-to-cholesterol enzymatic cascade in hepatocytes with near-total gene overlap and the same mechanistic ordering.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.97
+      },
+      {
+        "left_module": 1,
+        "rationale": "Both concern cholesterol biosynthesis, but L1 is the enzymatic pathway itself while R2 is the SCAP/INSIG1/SREBP2 transcriptional control layer over that pathway, a different central mechanism.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.45
+      },
+      {
+        "left_module": 1,
+        "rationale": "Only the shared mention of Acss2 supplying acetyl-CoA links the pure biosynthetic enzyme cascade to R3's acetyl-CoA/VLDL coupling narrative, which is peripheral to L1's core.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's SCAP/INSIG1/SREBP2 regulatory feedback controls the same broad cholesterol biosynthesis process as R1, but R1's content is the enzymatic pathway itself, not the sensing/transcriptional mechanism.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.4
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both center on the same SCAP-INSIG1-SREBP2-Ldlr sterol-sensing feedback mechanism with identical regulators; R2 adds a refinement identifying Erg28 and Rdh11 as direct SREBP2 targets.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.85
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's sterol-sensing transcriptional feedback and R3's acetyl-CoA/VLDL export coupling involve distinct regulators and mechanisms, sharing only the general hepatic lipid/cholesterol domain.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's VLDL-TG assembly/export regulators (Dgat2, Mttp) have no mechanistic role in R1's pure cholesterol biosynthesis enzyme cascade beyond general pathway coupling.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "L3's VLDL export regulators (Dgat2, Mttp) are mechanistically distinct from R2's SREBP2 sterol-sensing transcriptional control, sharing only broad hepatic cholesterol context.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.2
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both modules center on the same Dgat2/Mttp/Acss2 regulator set coupling VLDL-lipid export to cholesterol synthesis; R3 refines this with MASLD/HCC disease context and ACLY-independent acetyl-CoA detail.",
+        "relationship": "meaningful_refinement",
+        "right_module": 3,
+        "similarity": 0.8
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.08321399999999998,
+    "duration_api_ms": 35753,
+    "duration_ms": 34159,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 35.38
+  }
+}

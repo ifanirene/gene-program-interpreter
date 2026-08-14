@@ -1,0 +1,16 @@
+{
+  "content_hash": "8060e6e1e1f0d4e108d5c0ce68fb44fec97907dac227e9169cc6ea8f2c70538f",
+  "doi": "10.1152/ajpgi.00353.2024",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "959999536e1fd1f28c83",
+  "pmcid": "PMC12161287",
+  "pmid": "39819116",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Bile acid sequestrants such as cholestyramine (ChTM) are gut-restricted bile acid-binding resins that block intestine bile acid absorption and attenuate hepatic bile acid signaling. Bile acid sequestrants induce hepatic bile acid synthesis to promote cholesterol catabolism and are cholesterol-lowering drugs. Bile acid sequestrants also reduce blood glucose in clinical trials and are approved drugs for treating hyperglycemia in type-2 diabetes. However, the mechanisms mediating the glucose-lowering effect of bile acid sequestrants are still incompletely understood. Here we showed that ChTM treatment decreased hepatic glucose production in Western diet-fed mice with paradoxically induced hepatic gluconeogenic genes. Cysteine dioxygenase type 1 (CDO1) mediates cysteine conversion to taurine and its expression is repressed by bile acids. We show that ChTM induced hepatic CDO1 and selectively reduced hepatic cysteine availability. Knockdown of liver CDO1 increased liver cysteine and glucose production in mice, whereas hepatocytes cultured in cystine-deficient medium showed reduced glucose production. By using dietary protein-restricted and cystine-modified Western diets that selectively alter hepatic cysteine availability, we found that reduced hepatic cysteine availability strongly inhibited glucose production in mice. Interestingly, chronic dietary protein restriction also prevented Western diet-induced obesity, which was fully reversed by restoring dietary cystine intake alone. Consistently, reduced cysteine availability dose-dependently inhibited adipogenesis in vitro. In conclusion, we report that the glucose-lowering effect of bile acid sequestrants is mediated by a CDO1-induced hepatic cysteine restriction mimetic effect. Furthermore, the anti-obesity effect of dietary protein restriction is largely mediated by reduced dietary cysteine intake.NEW & NOTEWORTHY Hepatic cysteine availability is a key driver of hepatic gluconeogenesis. Bile acid sequestrant inhibits gluconeogenesis by inducing CDO1-mediated cysteine catabolism to reduce cysteine availability. Dietary protein restriction causes hepatic cysteine deficiency without overall amino acid deficiency. The glucose-lowering effect of dietary protein restriction is largely mediated by lower dietary cysteine intake. The anti-obesity effect of chronic dietary protein restriction is largely mediated by lower dietary cysteine intake.",
+  "text_type": "abstract",
+  "title": "Bile acid sequestrant inhibits gluconeogenesis via inducing hepatic cysteine dioxygenase type 1 to reduce cysteine availability."
+}

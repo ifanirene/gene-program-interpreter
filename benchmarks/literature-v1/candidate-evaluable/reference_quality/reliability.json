@@ -1,0 +1,2102 @@
+{
+  "adjudicated_count": 21,
+  "assessment_type": "model",
+  "disagreement_count": 21,
+  "double_scored_count": 33,
+  "double_scored_fraction": 0.2,
+  "exact_agreement_count": 12,
+  "exact_agreement_rate": 0.363636,
+  "expanded_full_review": {
+    "adjudicated_count": 102,
+    "disagreement_count": 102,
+    "double_scored_count": 165,
+    "double_scored_fraction": 1.0,
+    "exact_agreement_count": 63,
+    "exact_agreement_rate": 0.381818,
+    "field_agreement_rates": {
+      "assessed_context": 0.666667,
+      "context_label_accuracy": 0.684848,
+      "direction": 0.927273,
+      "directness": 0.860606,
+      "function_supported_genes": 0.872727,
+      "red_flags": 0.618182,
+      "studied_genes": 0.860606,
+      "support": 0.721212
+    },
+    "links": [
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-0177374bf6967e556349",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-0364eeef4f0d91a67655",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-051ed77bab8c2398ab6a",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-052bab66f63d10e2ab61",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-05c0907255a005142391",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-0601d5e7467599f25f9b",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "function_supported_genes",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-081933ad9516de845c00",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-082dea94c06908c689e1",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-083bfff9d0a161756d80",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-0a7beb25f6d4662bc1f7",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-0a849c76f65251620997",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-0c73ccc4d28e3a565c0b",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "function_supported_genes",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-0e92bfb5cf811a272d0a",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-0fdbb950b388fd1607bc",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-10594afcdb966e3bbc7a",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-1151ece55cc67a4a83be",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "function_supported_genes",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-13dc533bca062d93b4eb",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-13ddf8b81d82d21d35cf",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-148096a874ea409f1b55",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "studied_genes",
+          "directness",
+          "direction",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-14933a5aa9ab3b84f6a1",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-14984c0203ecc7d322b5",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-15171d9c5f375baf481b",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "studied_genes",
+          "directness",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-15e8809241c8acf542c8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "studied_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-16f57f20ddb8f8436776",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-177f26e45743a987f8be",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-1822007a0d9e45b76e8d",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-183470d687b7b5380f8a",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-192282ce3b107122e137",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-23792fc596b05a7bd26c",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-23fb1a616a643411783f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-24d856c907e05d8e3a6f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-2d56b92bac216e075b2d",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness",
+          "assessed_context"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-3094cd650bd5570968ca",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "function_supported_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-30c576a064cee4c29b51",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-338245f2c6d2246dfb13",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-343e0ebf9b978e4e82e4",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "direction",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-3a33580a6464c5931f9d",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "studied_genes",
+          "function_supported_genes",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-40d78e992150c1f1e610",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-42714aba16b5a9c52a0b",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-46fdbfa13566802963a6",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-48196647472e2225acb4",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-493a12558580ff39f9c5",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-49812ab40048330b300c",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-4a4bf79af316fed564bf",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-4a8f23e3d003c28cf3b6",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-4cd21b97b77a31ff5a05",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "studied_genes",
+          "function_supported_genes",
+          "directness",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-4dd99213a043f827b379",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "studied_genes",
+          "function_supported_genes",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-502a14189be4e1c2dff2",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-51fded379c64326f0e27",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "function_supported_genes",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-524c0930970ba7d5a340",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-52c1f64bf508b8222052",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-53157633a89ca27ca997",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-54bc20dde80494cdd555",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-54d161cbee9c42984f91",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-550926b5b162413b40aa",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-55bbb18c908c78ced746",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-5c1ad05f4b58cd61e436",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "directness"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-5cd2513174caf50a54cb",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-5dd4b5247c95cbc27365",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-5f3a18841e1138ffe838",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-6477323ccc29012a84a7",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-64dff063a63f09f71102",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "function_supported_genes",
+          "directness",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-66edfccab184902f9a84",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-67217474f94081d5e6a6",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-689f197748219170cfe5",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-6926b3be8d716db7aacc",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "function_supported_genes",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-6a44877265e2c5747629",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-6fe32566ea1756b7aab7",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "directness",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-706e258c97dffbb8395e",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-7139315235492569ad76",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-715e37db25a0faa6c296",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-74bfd22b55ef7de1a593",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-767f3edaaf0c7a14d825",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-790a9c8ed4212eb9a4d8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-7b3938f58c0d76d9fef5",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "function_supported_genes",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-7fa2530b6e396a5d70e6",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-7fd4234b22fb8bfc045b",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-803bb5541c150e4bba5f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-80883b9e36c6c06f1ca8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-80f9c513752ed89483c1",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "function_supported_genes",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-83a46fb3311eafce74e1",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-8655cf3bfaadd6f3db6a",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-86a86fe4051c778eaf13",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-8917eaf883f998bbc932",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-8bcd69ca787b12545d4a",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-8ecdf7b6ae8e85092555",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "function_supported_genes",
+          "direction",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-920e5a6b1b1a04c491c2",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-94f6465ea7414b57d28c",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-95e57925e0ba07dc2306",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "function_supported_genes",
+          "directness",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-96caf1f9350d2ce119e3",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-98c69c822d79aec67b0f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9921c28d1a87e9f2d38f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9934cbd6af57ae3c29e8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9b1d86c1ff0c8dc62e7d",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9bb58929218910003e0f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "function_supported_genes",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9c41babf6664c0afdd85",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9d6bcac1a4302a5bcb96",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "directness",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9ed874a050c13e1ce2d6",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "function_supported_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9efeb609b3c949a89c57",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9f72d03c8a188627beb0",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-9fde2b6915b63651244f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-a00515549f5be58f8057",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-a067f883b7440ceeb232",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness",
+          "direction",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-a3e7477dd40323d6a6a8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness",
+          "direction",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-a56a1e2fbb57a3ab037e",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-a825f41108a26d4ab883",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-a9e2ecbeee798dc7b6b0",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-aa13c1e7f8facc8720c7",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-aa3efd2b8625d1de4c6a",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-aa43395cb1c6b9bfed78",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "function_supported_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-aa469413a31b091378a5",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-abadb2ff1633b9762c56",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness",
+          "direction",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-ad3d7fb8300108d2a609",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-aeede7f1fab29205b9cc",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-affec80b10774f33e847",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "directness",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b017318c593b56289789",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "directness",
+          "assessed_context"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b0bf65debdf8394a131f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b17aae18064317b9f2c8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "direction",
+          "assessed_context"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b1d09a63dcdf6abee6e1",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b385d1999f04916474a8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b42268c163f806da2d2f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes",
+          "function_supported_genes",
+          "directness",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b786af039e250eba6e79",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b7b08380dfd123b1605c",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b86ef285975d5bb08e0f",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-b880133a833ce5a6f7da",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "direction",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-bb4358ce7362aadea933",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-bca2b920f9dab51d685c",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-bcb8d8bbafcc60bae100",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-bf6376e48bfe2af991ef",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-c30b0610814d501b2881",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-c487a62e550988549c0e",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-c52c12c9cf73b0c9ef7d",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-c6dc85e122c5ecb839a6",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-c6efbbad84bf5495bff1",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "studied_genes",
+          "function_supported_genes",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-c70b6666365c8ced88d9",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-c7cfd3867b60bd50ce88",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-cb8ac4e04cfd8021e22e",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-cc6e56034be9f7e2fa89",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-ccaa69a0b61a920d774b",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "studied_genes",
+          "function_supported_genes",
+          "direction",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-d162c70104d6ae924862",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-d29d1d9fc24dd68d66b4",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-d42354d63977c0f3f9f8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-d441a59c5a1311c12a1e",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-d542d0316e6592db0cac",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-d788e150ed0b8eeaf9d6",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "directness",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-d80a25883afb7304cfa8",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "function_supported_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-d9c0f210c10e0a1940fb",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "direction"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-dc23d8b920afec94f0a5",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-ddf8878d8e24dac2310a",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-ddff9eef767f83d3ff5d",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-de264669813fae7e23fd",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-de90fb0fa8e1c18beac0",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-def9b33e9590b1c3d439",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "assessed_context",
+          "context_label_accuracy"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-e083affdd600ee732138",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "directness"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-e0cde018c4ab700810f1",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-e852c42233ff0b961e61",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "studied_genes"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-e87be25ad05faf6b4ce2",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-eb6e41646ef46fd76567",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "direction"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-ecd7fb527c49603945e4",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-ed761449626e1d4df505",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-eedf1854869a82bd0119",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-ef80cb26184e135aa53b",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-f2154dc6b97c36f40430",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": null,
+        "disagreement_fields": [],
+        "exact_agreement": true,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-f68464687b9efe0c3810",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      },
+      {
+        "adjudicator": "candidate-adjudicator-opus-high-20260722",
+        "disagreement_fields": [
+          "support",
+          "directness",
+          "direction",
+          "assessed_context",
+          "context_label_accuracy",
+          "red_flags"
+        ],
+        "exact_agreement": false,
+        "primary_assessor": "candidate-primary-sonnet-20260722",
+        "review_id": "RL-fe80504bafd42b5f9584",
+        "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+      }
+    ]
+  },
+  "field_agreement_rates": {
+    "assessed_context": 0.69697,
+    "context_label_accuracy": 0.727273,
+    "direction": 0.939394,
+    "directness": 0.848485,
+    "function_supported_genes": 0.878788,
+    "red_flags": 0.575758,
+    "studied_genes": 0.848485,
+    "support": 0.757576
+  },
+  "links": [
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-0a7beb25f6d4662bc1f7",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-14984c0203ecc7d322b5",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "support",
+        "studied_genes"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-16f57f20ddb8f8436776",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "studied_genes"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-177f26e45743a987f8be",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "support",
+        "directness",
+        "assessed_context"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-3094cd650bd5570968ca",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "support"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-338245f2c6d2246dfb13",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-42714aba16b5a9c52a0b",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-46fdbfa13566802963a6",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-51fded379c64326f0e27",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "directness",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-706e258c97dffbb8395e",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "support",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-790a9c8ed4212eb9a4d8",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-7b3938f58c0d76d9fef5",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "studied_genes",
+        "function_supported_genes",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-7fa2530b6e396a5d70e6",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-80883b9e36c6c06f1ca8",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "studied_genes",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-80f9c513752ed89483c1",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-86a86fe4051c778eaf13",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "support",
+        "directness"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-8bcd69ca787b12545d4a",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "function_supported_genes",
+        "directness",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-96caf1f9350d2ce119e3",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-9921c28d1a87e9f2d38f",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "function_supported_genes",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-9c41babf6664c0afdd85",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-9f72d03c8a188627beb0",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "support",
+        "directness",
+        "direction",
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-a56a1e2fbb57a3ab037e",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-aa3efd2b8625d1de4c6a",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-b17aae18064317b9f2c8",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-b86ef285975d5bb08e0f",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-c52c12c9cf73b0c9ef7d",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "assessed_context",
+        "context_label_accuracy"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-c6efbbad84bf5495bff1",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "support",
+        "studied_genes",
+        "function_supported_genes",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-c70b6666365c8ced88d9",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "assessed_context",
+        "context_label_accuracy",
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-d42354d63977c0f3f9f8",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "red_flags"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-d441a59c5a1311c12a1e",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-d788e150ed0b8eeaf9d6",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": "candidate-adjudicator-opus-high-20260722",
+      "disagreement_fields": [
+        "support",
+        "direction"
+      ],
+      "exact_agreement": false,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-dc23d8b920afec94f0a5",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    },
+    {
+      "adjudicator": null,
+      "disagreement_fields": [],
+      "exact_agreement": true,
+      "primary_assessor": "candidate-primary-sonnet-20260722",
+      "review_id": "RL-f68464687b9efe0c3810",
+      "secondary_assessor": "candidate-secondary-codex-sol-high-20260722"
+    }
+  ],
+  "schema_version": 1,
+  "secondary_scope": "all"
+}

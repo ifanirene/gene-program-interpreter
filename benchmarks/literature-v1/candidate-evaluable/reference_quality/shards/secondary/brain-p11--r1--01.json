@@ -1,0 +1,120 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-14984c0203ecc7d322b5",
+    "RL-46fdbfa13566802963a6",
+    "RL-51fded379c64326f0e27",
+    "RL-dc23d8b920afec94f0a5"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4084,
+        "source_type": "full_text",
+        "start": 4009,
+        "text": "the expression of Angpt2 is upregulated in EC-specific Prdm16 knockout mice"
+      },
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "rationale": "EC-specific Prdm16 loss increased Angpt2, supporting its association with loss of arterial endothelial identity. The study includes postnatal mouse brain endothelial data, matching the target context.",
+      "red_flags": [],
+      "review_id": "RL-14984c0203ecc7d322b5",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 536,
+        "source_type": "abstract",
+        "start": 349,
+        "text": "The functional downregulation of endothelial Kir2.1 using dominant-negative Kir2.1 construct resulted in substantial reductions in the response to flow in mesenteric arteries of lean mice"
+      },
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "rationale": "Gene-specific perturbation establishes endothelial Kir2.1 as necessary for flow responses. Mesenteric endothelium is transferable but differs from postnatal brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-46fdbfa13566802963a6",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 774,
+        "source_type": "abstract",
+        "start": 574,
+        "text": "Inhibition of Tie2, using a kinase-deficient Tie2 construct, decreases growth of malignant human astrocytoma subcutaneous and intracranial xenografts. Tie2 inactivation disrupted the tumor vascularity"
+      },
+      "function_supported_genes": [],
+      "rationale": "Tie2 perturbation supports a causal regulator role in brain-tumor angiogenesis and vascular remodeling. Angpt2 antagonism is only introductory, so no supplied gene receives credit.",
+      "red_flags": [
+        "background_only"
+      ],
+      "review_id": "RL-51fded379c64326f0e27",
+      "studied_genes": [],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "unclear",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 35843,
+        "source_type": "full_text",
+        "start": 35614,
+        "text": "With our in vitro data we could demonstrate that SCN3B, DSP and HOPX are responsive to shear stress and/or hypoxia in intracranial ECs, besides being differently regulated in the intracranial ECs compared to the extracranial ECs."
+      },
+      "function_supported_genes": [
+        "Hopx"
+      ],
+      "rationale": "HOPX was measured gene-specifically and differed between intracranial and extracranial arterial ECs, but the available text does not state the direction of that difference. Adult human arteries only partially match postnatal mouse brain endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-dc23d8b920afec94f0a5",
+      "studied_genes": [
+        "Hopx"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 160512,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 199798,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 7851,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 150.882
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-primary-sonnet-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-aa3efd2b8625d1de4c6a",
+    "RL-bf6376e48bfe2af991ef",
+    "RL-c30b0610814d501b2881",
+    "RL-c52c12c9cf73b0c9ef7d",
+    "RL-c6dc85e122c5ecb839a6",
+    "RL-ccaa69a0b61a920d774b",
+    "RL-ddf8878d8e24dac2310a",
+    "RL-ddff9eef767f83d3ff5d"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1100,
+        "source_type": "abstract",
+        "start": 978,
+        "text": "We performed the first characterization of a Bckdhb-/- mouse model, which recapitulates the severe human phenotype of MSUD"
+      },
+      "function_supported_genes": [
+        "Bckdhb"
+      ],
+      "rationale": "A Bckdhb knockout mouse recapitulates severe BCAA-accumulation disease (MSUD), directly demonstrating Bckdhb's causal role in mitochondrial BCAA catabolism. Context is a whole-body/liver-relevant MSUD model, not brain endothelium, consistent with the declared indirect context.",
+      "red_flags": [],
+      "review_id": "RL-aa3efd2b8625d1de4c6a",
+      "studied_genes": [
+        "Bckdhb"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 337,
+        "source_type": "abstract",
+        "start": 217,
+        "text": "We have cloned, expressed in Escherichia coli, and purified the recombinant human mitochondrial MetAP isoform (MetAP1D)."
+      },
+      "function_supported_genes": [
+        "Metap1d"
+      ],
+      "rationale": "The paper biochemically characterizes recombinant human MetAP1D as a metal-dependent aminopeptidase, supporting its identity/enzymatic function but not directly testing mitochondrial nascent-protein processing in vivo. Context is an in vitro recombinant-enzyme system, matching the declared indirect label.",
+      "red_flags": [],
+      "review_id": "RL-bf6376e48bfe2af991ef",
+      "studied_genes": [
+        "Metap1d"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1768,
+        "source_type": "abstract",
+        "start": 1627,
+        "text": "Thus, SDCCAG8 mutations are sufficient to cause BBS in 1-2% of our combined cohorts, and define this gene as the sixteenth BBS locus (BBS16)."
+      },
+      "function_supported_genes": [
+        "Sdccag8"
+      ],
+      "rationale": "Human genetic/phenotypic analysis establishes SDCCAG8 as a bona fide ciliopathy (BBS/NPHP) gene, matching the cited selection rationale, though the paper is patient genetics rather than a direct transition-zone functional assay. Context is human patient cohorts, appropriately labeled indirect relative to mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-c30b0610814d501b2881",
+      "studied_genes": [
+        "Sdccag8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1018,
+        "source_type": "abstract",
+        "start": 907,
+        "text": "the affected genes (SCLT1 and TBC1D32/C6orf170) have established roles in centrosomal biology and ciliogenesis."
+      },
+      "function_supported_genes": [
+        "Tbc1d32"
+      ],
+      "rationale": "Exome sequencing identifies a novel truncating TBC1D32 mutation in ciliopathy (OFD IX) patients, genetically implicating the gene in disease, but the ciliogenesis role cited is attributed to prior literature rather than new functional data in this paper. Context is human patient genetics, matching the declared indirect label.",
+      "red_flags": [],
+      "review_id": "RL-c52c12c9cf73b0c9ef7d",
+      "studied_genes": [
+        "Tbc1d32"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 530,
+        "source_type": "full_text",
+        "start": 334,
+        "text": "GRSF1 maintains branched-chain amino acid homeostasis and mitochondrial function by stabilizing BCKDHB (branched-chain keto acid dehydrogenase E1 subunit β) mRNA at the post-transcriptional level."
+      },
+      "function_supported_genes": [
+        "Bckdhb"
+      ],
+      "rationale": "Using cardiomyocyte-specific BCKDHB knockout mice and mRNA-stability experiments, the paper directly demonstrates BCKDHB's essential role in BCAA catabolism and mitochondrial homeostasis. Context is mouse/human cardiomyocytes, correctly labeled indirect relative to brain endothelial cells.",
+      "red_flags": [],
+      "review_id": "RL-c6dc85e122c5ecb839a6",
+      "studied_genes": [
+        "Bckdhb"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 48157,
+        "source_type": "full_text",
+        "start": 47934,
+        "text": "Our findings indicate a role for Cc2d2a in vesicle trafficking of transmembrane outer segment components such as opsins, based on the striking accumulation of vesicles and mislocalization of opsins in mutant photoreceptors."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "A zebrafish cc2d2a mutant directly demonstrates a functional requirement for Cc2d2a at the ciliary transition zone/connecting cilium in Rab8-dependent trafficking, matching its assigned role in the transition-zone/gate cluster. Context is zebrafish photoreceptor cilia, appropriately labeled indirect relative to mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-ccaa69a0b61a920d774b",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1467,
+        "source_type": "abstract",
+        "start": 1258,
+        "text": "Knockdown of cep290 function in sentinel fish results in a synergistic pronephric cyst phenotype, revealing a genetic interaction between CC2D2A and CEP290 and implicating CC2D2A in cilium/basal body function."
+      },
+      "function_supported_genes": [
+        "Cc2d2a"
+      ],
+      "rationale": "Human mutation discovery plus zebrafish functional/genetic-interaction data directly implicate CC2D2A in ciliary basal body function, supporting its ciliopathy gene role. The evidence combines human patient genetics and zebrafish kidney cilia, which is not closely transferable to mouse brain endothelial cilia, so the declared 'partial' context is overclaimed relative to the actual indirect context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-ddf8878d8e24dac2310a",
+      "studied_genes": [
+        "Cc2d2a"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-primary-sonnet-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 475,
+        "source_type": "abstract",
+        "start": 415,
+        "text": "CLYBL operates as a citramalyl-CoA lyase in mammalian cells."
+      },
+      "function_supported_genes": [
+        "Clybl"
+      ],
+      "rationale": "Enzymology and metabolomics in CLYBL-deficient human cells directly establish CLYBL as a mitochondrial citramalyl-CoA lyase linking itaconate and B12 metabolism, matching the assigned mechanism. Context is human cell-line biochemistry, appropriately labeled indirect relative to mouse brain endothelium.",
+      "red_flags": [],
+      "review_id": "RL-ddff9eef767f83d3ff5d",
+      "studied_genes": [
+        "Clybl"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p10--r2",
+  "slot": "primary",
+  "telemetry": {
+    "cost_usd_equivalent": 0.7885044999999999,
+    "duration_api_ms": 307876,
+    "duration_ms": 305566,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 306.519
+  }
+}

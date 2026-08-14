@@ -1,0 +1,103 @@
+{
+  "assessment": {
+    "assessor_id": "codex-gpt-5.6-sol-high",
+    "comparison_id": "liver-p25--baseline-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.98
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.97
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.91
+      }
+    ],
+    "moduleSemanticSimilarity": 0.953333,
+    "overall_rationale": "The replicates contain three strongly conserved programs—xenobiotic conjugation, peroxisomal lipid oxidation, and sulfur/nitrogen metabolism—with only modest differences in scope and emphasis.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules describe the same Phase I/II hepatic oxidation and conjugation program for xenobiotics, steroids, and bile acids with concordant enzyme roles and excretory output.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.98
+      },
+      {
+        "left_module": 1,
+        "rationale": "The modules intersect through hepatic oxidative metabolism and aldehyde detoxification, but fatty-acid catabolism and lipid-droplet handling are peripheral to the left module's conjugative xenobiotic program.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.22
+      },
+      {
+        "left_module": 1,
+        "rationale": "Bile-acid coupling and general hepatic metabolic homeostasis provide context, but cysteine and nitrogen disposal use distinct central mechanisms from xenobiotic oxidation and conjugation.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.14
+      },
+      {
+        "left_module": 2,
+        "rationale": "ER lipid processing, Cyb5b, and sterol export connect the modules, but lipid storage and fatty-acid oxidation differ centrally from xenobiotic and steroid conjugation.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.23
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both modules encode essentially the same coordinated lipid-droplet, peroxisomal fatty-acid oxidation, lipid-aldehyde clearance, and peroxisomal quality-control mechanism.",
+        "relationship": "same_core",
+        "right_module": 2,
+        "similarity": 0.97
+      },
+      {
+        "left_module": 2,
+        "rationale": "They share only broad hepatic metabolic-stress context and a peripheral Sord association, while their substrates, machinery, and physiological outputs differ.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 3,
+        "rationale": "Taurine-dependent bile-acid conjugation links sulfur metabolism indirectly to bile-acid detoxification, but the asserted enzymatic mechanisms and disposal products are different.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both concern hepatic catabolic homeostasis and oxidative by-product management, but amino-acid nitrogen disposal is mechanistically distinct from peroxisomal fatty-acid oxidation.",
+        "relationship": "context_only",
+        "right_module": 2,
+        "similarity": 0.11
+      },
+      {
+        "left_module": 3,
+        "rationale": "Both center on Cdo1-driven cysteine catabolism and taurine production while incorporating Agmat, Car5a, G6pc, and Insr connections to nitrogen disposal and metabolic control, with the right module placing greater emphasis on sulfur homeostasis.",
+        "relationship": "meaningful_refinement",
+        "right_module": 3,
+        "similarity": 0.91
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 16947,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 1037,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 25.321
+  }
+}

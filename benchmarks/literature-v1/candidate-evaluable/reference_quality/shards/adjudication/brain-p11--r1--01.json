@@ -1,0 +1,115 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-13dc533bca062d93b4eb",
+    "RL-13ddf8b81d82d21d35cf",
+    "RL-4cd21b97b77a31ff5a05",
+    "RL-51fded379c64326f0e27"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 4084,
+        "source_type": "full_text",
+        "start": 4009,
+        "text": "the expression of Angpt2 is upregulated in EC-specific Prdm16 knockout mice"
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper substantively measures Angpt2 (RNA-seq/qPCR/western) in postnatal mouse brain ECs and shows it is upregulated when the arterial-identity factor Prdm16 is lost, an associative readout on the correct fate axis. It does not demonstrate the assigned tip-cell/sprouting-driver or Tek-antagonism function, which is only background citation, so Angpt2 is not function-supported here.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-13dc533bca062d93b4eb",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 854,
+        "source_type": "abstract",
+        "start": 708,
+        "text": "Moreover, OSS also increased expression of Kir2.1 in EPCs. The down-regulation of Kir2.1 reduced OSS-induced EPC mesenchymal transdifferentiation."
+      },
+      "function_supported_genes": [
+        "Kcnj2"
+      ],
+      "rationale": "Kir2.1/Kcnj2 is shown to be shear-stress-responsive and causally required for the shear-induced cellular response via knockdown and overexpression, directly supporting the smallest selected claim of a shear-sensitive mechanosensing channel. The endothelial-progenitor/carotid-injury system is indirect to postnatal brain endothelium, matching the declared context.",
+      "red_flags": [],
+      "review_id": "RL-13ddf8b81d82d21d35cf",
+      "studied_genes": [
+        "Kcnj2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1116,
+        "source_type": "abstract",
+        "start": 1019,
+        "text": "Overall, our findings reveal a key role for PC ALK5 in regulating brain endothelial morphogenesis"
+      },
+      "function_supported_genes": [],
+      "rationale": "Pericyte-specific Alk5/Tgfbr1 deletion causally establishes the regulator's role in brain endothelial morphogenesis via pericyte-EC (TIMP3) crosstalk, matching the selection reason; Tgfbr1 is a perturbation regulator so supplied-gene arrays stay empty. The embryonic, pericyte-localized setting is transferable but not the postnatal EC-autonomous context, so the declared 'direct' overclaims.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-4cd21b97b77a31ff5a05",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 774,
+        "source_type": "abstract",
+        "start": 574,
+        "text": "Inhibition of Tie2, using a kinase-deficient Tie2 construct, decreases growth of malignant human astrocytoma subcutaneous and intracranial xenografts. Tie2 inactivation disrupted the tumor vascularity"
+      },
+      "function_supported_genes": [],
+      "rationale": "Tek/Tie2 is causally perturbed and supports its angiogenic role, but Tek is a perturbation regulator and the supplied gene Angpt2 appears only as a background modulator statement, so no supplied gene is credited. The adult human astrocytoma tumor-angiogenesis xenograft system is a different disease setting rather than postnatal developmental brain endothelium, so the declared 'partial' overclaims.",
+      "red_flags": [
+        "background_only",
+        "context_overclaim"
+      ],
+      "review_id": "RL-51fded379c64326f0e27",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.523936,
+    "duration_api_ms": 142825,
+    "duration_ms": 140367,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 141.631
+  }
+}

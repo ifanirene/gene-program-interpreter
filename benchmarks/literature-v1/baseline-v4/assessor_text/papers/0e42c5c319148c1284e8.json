@@ -1,0 +1,14 @@
+{
+  "content_hash": "c80b4f9314bc19ec72d51a775046f70c6ae8b5bde243641c79a277f6cbc9c748",
+  "doi": "10.1016/j.bbalip.2010.01.012",
+  "errors": [],
+  "paper_key": "0e42c5c319148c1284e8",
+  "pmcid": null,
+  "pmid": "20123130",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cideb, a member of CIDE family proteins, has emerged as an important regulator in the development of obesity and diabetes by controlling fatty acid synthesis and VLDL secretion in hepatocytes. Here, we investigated the role of Cideb in cholesterol biosynthesis, uptake and storage in the liver by using Cideb-null mice as a model system. Cideb-null mice and wild-type mice were treated with normal diet (ND) or high cholesterol diet (HCD) for one month. The metabolic parameters of cholesterol metabolism and expression profiles of genes in cholesterol biosynthesis and storage were measured. Cideb-null mice had lower levels of plasma cholesterol and LDL when fed with both ND and HCD and increased rate of cholesterol absorption. Furthermore, the liver of Cideb-null mice has lower rates of cholesterol biosynthesis and reduced expression levels of sterol response element-binding protein (SREBP) cleavage-activation protein (SCAP), and lower levels of nuclear form of SREBP2 and its downstream target genes in cholesterol biosynthesis pathway under a normal diet treatment. On the contrary, hepatic cholesterol biosynthesis rate between wild-type and Cideb-null mice was similar after high cholesterol diet treatment. Interestingly, hepatic cholesterol storage in the liver of Cideb-null mice was significantly increased due to its increased LDL receptor (LDLR) and acyl-CoA cholesterol acyltransferase (ACAT) expression. Finally, we observed drastically reduced cholesterol levels in the heart of Cideb-null mice fed with a high cholesterol diet. Overall, our data suggest that Cideb is a novel regulator in controlling cholesterol homeostasis in the liver. Therefore, Cideb could serve as an important therapeutical target for the treatment of atherosclerosis and cardiovascular diseases.",
+  "text_type": "abstract",
+  "title": "Control of cholesterol biosynthesis, uptake and storage in hepatocytes by Cideb."
+}

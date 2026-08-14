@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "brain-p10--r1--cross-setting",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.85
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 2,
+        "similarity": 0.4
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 3,
+        "similarity": 0.15
+      }
+    ],
+    "moduleSemanticSimilarity": 0.466667,
+    "overall_rationale": "Both settings decompose the cilia biology into a broad structural-assembly module (L1≈R1, strong same_core match) and a narrower functional/signaling module, but the right setting's second cilia module (R2) centers on BBSome-Hedgehog GPCR trafficking whereas the left's second module (L2) centers on endothelial mechanosensation of blood flow, giving only partial overlap across that pairing in both directions; the left's third module is a Wnt/Fzd4-Gata2-Eng BBB angiogenesis program while the right's third module is an unrelated mitochondrial proteostasis cluster, so these have essentially no correspondence except a shared Fzd4 regulator touching R1 and weak tissue-context ties to R3.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the same core cilia biogenesis mechanism (IFT-B, transition zone, distal appendage machinery) using almost identical gene sets, differing only in which BBSome/CPLANE gene is emphasized.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.85
+      },
+      {
+        "left_module": 1,
+        "rationale": "Shares Bbs9/Nme7/Tbc1d32 and the cilia domain, but R2's core mechanism is Hedgehog-GPCR signaling output while L1's is structural ciliary assembly/trafficking.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.55
+      },
+      {
+        "left_module": 1,
+        "rationale": "Cilia biogenesis machinery has no mechanistic or gene overlap with mitochondrial inner membrane/protein maturation biology.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 2,
+        "rationale": "Same cilia gene set and tissue context, but L2's central claim is endothelial shear-stress mechanotransduction whereas R1's core mechanism is structural ciliogenesis assembly.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.5
+      },
+      {
+        "left_module": 2,
+        "rationale": "Both concern functional/signaling output of cilia rather than pure assembly, but L2's mechanism is flow-induced mechanosensation (KLF2/MAPK) versus R2's Hedgehog-GPCR trafficking output.",
+        "relationship": "partial_overlap",
+        "right_module": 2,
+        "similarity": 0.4
+      },
+      {
+        "left_module": 2,
+        "rationale": "Only a peripheral tissue link (brain barrier-forming endothelium metabolic demand) connects endothelial cilia mechanosensing to mitochondrial proteostasis; mechanisms are unrelated.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.15
+      },
+      {
+        "left_module": 3,
+        "rationale": "Shares the Fzd4 regulator, but L3's core mechanism is Norrin/Wnt-BBB signaling while R1's core mechanism is ciliary structural assembly, so overlap is regulator-only, not mechanistic.",
+        "relationship": "context_only",
+        "right_module": 1,
+        "similarity": 0.25
+      },
+      {
+        "left_module": 3,
+        "rationale": "Wnt-Fzd4/Gata2/Eng-driven BBB angiogenic identity shares no genes, regulators, or mechanism with BBSome-Hedgehog ciliary GPCR trafficking.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 3,
+        "rationale": "Only a loose contextual link exists (mitochondrial support for barrier-forming endothelium) between BBB angiogenic signaling and mitochondrial cristae/protein biogenesis, with no shared genes or mechanism.",
+        "relationship": "context_only",
+        "right_module": 3,
+        "similarity": 0.15
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.09689900000000001,
+    "duration_api_ms": 48981,
+    "duration_ms": 43449,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 44.602
+  }
+}

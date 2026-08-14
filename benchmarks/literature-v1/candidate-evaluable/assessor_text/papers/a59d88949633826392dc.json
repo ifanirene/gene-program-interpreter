@@ -1,0 +1,16 @@
+{
+  "content_hash": "7dbd0db3390948d256278c67f9c00cf17dff0b332667017b89e9fa7f93bebeac",
+  "doi": "10.1091/mbc.e04-01-0059",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "a59d88949633826392dc",
+  "pmcid": "PMC420106",
+  "pmid": "15064358",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Endothelial cell survival and antiapoptotic pathways, including those stimulated by extracellular matrix, are critical regulators of vasculogenesis, angiogenesis, endothelial repair, and shear-stress-induced endothelial activation. One of these pathways is mediated by alpha(v)beta(3) integrin ligation, downstream activation of nuclear factor-kappaB, and subsequent up-regulation of osteoprotegerin (OPG). In this study, the mechanism by which OPG protects endothelial cells from death was examined. Serum-starved human microvascular endothelial cells (HMECs) plated on the alpha(v)beta(3) ligand osteopontin were protected from cell death. Immunoprecipitation experiments indicated that OPG formed a complex with tumor necrosis factor-related apoptosis-inducing ligand (TRAIL) in HMECs under these conditions. Furthermore, inhibitors of TRAIL, including recombinant soluble TRAIL receptors and a neutralizing antibody against TRAIL, blocked apoptosis of serum-starved HMECs plated on the nonintegrin attachment factor poly-d-lysine. Whereas TRAIL was unable to induce apoptosis in HMECs plated on osteopontin, the addition of recombinant TRAIL did increase the percentage of apoptotic HMECs plated on poly-d-lysine. This evidence indicates that OPG blocks endothelial cell apoptosis through binding TRAIL and preventing its interaction with death-inducing TRAIL-receptors",
+  "text_type": "abstract",
+  "title": "The role of osteoprotegerin and tumor necrosis factor-related apoptosis-inducing ligand in human microvascular endothelial cell survival."
+}

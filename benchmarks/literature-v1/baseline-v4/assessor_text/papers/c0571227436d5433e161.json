@@ -1,0 +1,16 @@
+{
+  "content_hash": "dd7e55710165cb5d0b5d5a863544cda11c23c62ea09845e2eb0b3f92d764e21a",
+  "doi": "10.1189/jlb.0308161",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "c0571227436d5433e161",
+  "pmcid": "PMC2626770",
+  "pmid": "18845616",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Alpha-lipoic acid (1, 2-dithiolane-3-pentanoic acid; LA), synthesized in mitochondria by LA synthase (Lias), is a potent antioxidant and a cofactor for metabolic enzyme complexes. In this study, we examined the effect of genetic reduction of LA synthesis on its antioxidant and anti-inflammatory properties using a model of LPS-induced inflammation in Lias+/- mice. The increase of plasma proinflammatory cytokine, TNF-alpha, and NF-kappaB at an early phase following LPS injection was greater in Lias+/- mice compared with Lias+/+ mice. The circulating blood white blood cell (WBC) and platelet counts dropped continuously during the initial 4 h. The counts subsequently recovered partially in Lias+/+ mice, but the recovery was impaired totally in Lias+/- mice. Administration of exogenous LA normalized the recovery of WBC counts in Lias+/- mice but not platelets. Enhanced neutrophil sequestration in the livers of Lias+/- mice was associated with increased hepatocyte injury and increased gene expression of growth-related oncogene, E-selectin, and VCAM-1 in the liver and/or lung. Lias gene expression in tissues was 50% of normal expression in Lias+/- mice and reduced further by LPS treatment. Decreased Lias expression was associated with diminished hepatic LA and tissue oxidative stress. Finally, Lias+/- mice displayed enhanced mortality when exposed to LPS-induced sepsis. These data demonstrate the importance of endogenously produced LA for preventing leukocyte accumulation and tissue injury that result from LPS-induced inflammation.",
+  "text_type": "abstract",
+  "title": "Mice with heterozygous deficiency of lipoic acid synthase have an increased sensitivity to lipopolysaccharide-induced tissue injury."
+}

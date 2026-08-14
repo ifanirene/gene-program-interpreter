@@ -1,0 +1,14 @@
+{
+  "content_hash": "9e7a77c6ba5e116daaa9407ae3e1eb7e7ae9c359419110c7eb34582e00d04ad6",
+  "doi": "10.1016/j.phrs.2022.106585",
+  "errors": [],
+  "paper_key": "d65267ec8ba5bc7e58ba",
+  "pmcid": null,
+  "pmid": "36455814",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Disturbed endoplasmic reticulum (ER) stress response driven by the excessive lipid accumulation in the liver is a characteristic feature in the pathogenesis of non-alcoholic fatty liver disease (NAFLD). Restoring metabolic homeostasis by targeting ER stress is a potentially therapeutic strategy for NAFLD. Here we aim to identify novel proteins or pathways involved in regulating ER stress response and therapeutic targets for alleviating NAFLD. Proteomic and transcriptomic analysis demonstrated that major urinary proteins (MUPs) were significantly reduced in the livers from NAFLD mouse models. Then we confirmed that MUP1, the major secreted form of MUPs, was reduced at mRNA and protein expression levels in hepatocytes both in vivo and in vitro under ER stress. We further illustrated that MUP1 protein levels in the urine were reduced in mice with NAFLD, which was reversed by GLP-1 receptor agonist treatment. To study the relationship between ER stress and MUP1 biology, our analysis demonstrated that MUP1 was misfolded and trapped in the ER under ER stress in vivo. Interestingly, we discovered that recombinant MUP1 treatment in hepatocytes increased calcium efflux from the ER, which resulted in transient ER stress response, including reduced protein synthesis. These responses facilitated the alleviation of chemical induced ER stress in hepatocytes, which was suggested as \"pre-adaptive ER stress\". Besides, recombinant MUP1 pretreatment also improved ER stress-induced insulin resistance in hepatocytes. Our findings revealed a novel and critical role of MUP1, and recombinant MUP1 or its potential derivates may serve as a promising therapeutic target for alleviating NAFLD.",
+  "text_type": "abstract",
+  "title": "Secreted MUP1 that reduced under ER stress attenuates ER stress induced insulin resistance through suppressing protein synthesis in hepatocytes."
+}

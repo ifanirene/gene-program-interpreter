@@ -1,0 +1,16 @@
+{
+  "content_hash": "f8a7ea766e5a9c527bb0c70251c836dcb7882848309cfbefbba369eee9ea1804",
+  "doi": "10.1073/pnas.1110817108",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "0df33ab3b855f49918f9",
+  "pmcid": "PMC3241795",
+  "pmid": "22106267",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The process of lipid droplet (LD) formation is an evolutionarily conserved process among all eukaryotes and plays an important role in both cellular physiology and disease. Recently, fat storage-inducing transmembrane proteins 1 and 2 (FIT1/FITM1 and FIT2/FITM2) were discovered as an evolutionarily conserved family of proteins involved in fat storage. In mammals, FIT1 is expressed primarily in skeletal muscle and FIT2 is expressed primarily in adipose, raising the possibility that FIT1 and FIT2 have unique functions. These proteins are exclusively localized to the endoplasmic reticulum (ER) and mediate triglyceride-rich LD accumulation when overexpressed in cells, mouse liver, or muscle. Unlike the ER-resident diacylglycerol O-acyltransferase family of triglyceride-synthesizing enzymes, FITs do not synthesize triglyceride, but rather partition triglyceride into LDs. The mechanism by which FIT proteins mediate this process has not been determined. A simple hypothesis was tested that FIT proteins bind to triglyceride to mediate LD formation. Here, it is shown that FIT proteins purified in detergent micelles directly bind triolein with specificity and saturation-binding kinetics. A FIT2 gain-of-function mutant that formed larger LDs, FLL(157-9)AAA, showed increased binding to triolein relative to wild-type FIT2, whereas FIT1 and a FIT2 partial loss-of-function mutant, N80A, had significantly lower triolein binding and produced smaller LDs. In summary, FIT proteins are transmembrane domain-containing proteins shown to bind triglyceride. These findings indicate that FITs have a unique biochemical mechanism in mediating LD formation and implicates triglyceride binding as important for FIT-mediated LD formation.",
+  "text_type": "abstract",
+  "title": "Direct binding of triglyceride to fat storage-inducing transmembrane proteins 1 and 2 is important for lipid droplet formation."
+}

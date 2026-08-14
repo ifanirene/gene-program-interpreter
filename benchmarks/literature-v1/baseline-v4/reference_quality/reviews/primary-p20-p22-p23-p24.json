@@ -1,0 +1,1665 @@
+{
+  "reviews": [
+    {
+      "review_id": "RL-00e0625aee93e7de0be8",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Although the molecular mechanism leading to the development of hepatic steatosis in the pathogenesis of NAFLD is complex, recent animal models have shown that modulating important enzymes in fatty acid synthesis in liver may be key for the treatment of NAFLD.",
+        "start": 274,
+        "end": 533,
+        "source_type": "abstract"
+      },
+      "rationale": "The review is directly about mouse NAFLD genetics, but the cached abstract does not establish the specific SREBP/ChREBP/DGAT2 chain.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-0ad17194d72d31b83ade",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Slc27a2"
+      ],
+      "function_supported_genes": [
+        "Slc27a2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Compared with their littermate control counterparts, VPA-exposed Slc27a2LKO mice showed significantly lower liver coefficients (Figure 5B), as well as ALT, AST, ALP, TG and NEFA levels in serum and liver tissue (Figure 5C-L).",
+        "start": 17389,
+        "end": 17614,
+        "source_type": "full_text"
+      },
+      "rationale": "Liver-specific Slc27a2 loss reduces hepatic lipid injury in mice, directly supporting FATP2-dependent uptake and steatosis.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-158649afadeb5a4e1241",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Here, we induced NAFLD-like disease in mice by feeding a diet rich in fructose, saturated fat, and cholesterol and found that hepatocyte-specific Dgat2 deficiency reduced expression of de novo lipogenesis genes and lowered liver TGs by ~70%.",
+        "start": 887,
+        "end": 1128,
+        "source_type": "abstract"
+      },
+      "rationale": "Hepatocyte-specific Dgat2 deletion causally supports the regulator-level triglyceride-synthesis claim, but Dgat2 is not a supplied P20 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-19406902b1e880661d3d",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Hepatic lipid accumulation results from high-fat diet, increased lipolysis caused by adipose tissue insulin resistance, high de novo lipogenesis and alterations in VLDL secretion.",
+        "start": 11,
+        "end": 190,
+        "source_type": "full_text"
+      },
+      "rationale": "The MASLD review supports the stated hepatic lipid-input and export pathways, without studying a supplied P20 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-532836422817961e23c0",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "ChREBP is highly enriched in the liver and has been studied as a master regulator of lipid metabolism (Iizuka et al., 2004; Osorio et al., 2016).",
+        "start": 2533,
+        "end": 2678,
+        "source_type": "full_text"
+      },
+      "rationale": "The review supports hepatic ChREBP as a lipogenic regulator; it is secondary evidence and Mlxipl is not a supplied P20 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-56cc186fe8ac3da87b59",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Whereas cholesterol feeding reduced nuclear SREBPs and lipogenic mRNAs in wild-type mice, this feedback response was severely blunted in the double-knockout mice, and synthesis of cholesterol and fatty acids was not repressed.",
+        "start": 745,
+        "end": 971,
+        "source_type": "abstract"
+      },
+      "rationale": "Liver Insig double knockout causally supports sterol feedback through SREBP, but no supplied P20 gene is investigated.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-5bf55508600eb63e5e4a",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Cytochrome P450s comprise the major Phase I family of enzymes capable of catalyzing the oxidative biotransformation of a vast majority of lipophilic xenobiotics and are the focus of research in areas such as clinical pharmacology and toxicology [5,18,25,31,32,33].",
+        "start": 6107,
+        "end": 6371,
+        "source_type": "full_text"
+      },
+      "rationale": "This establishes a general CYP-family function, not the supplied Cyp2d40 ortholog in mouse hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-73bd979945a0f618fc9b",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Cox6a1"
+      ],
+      "function_supported_genes": [
+        "Cox6a1"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The liver isoform of subunit VIa was indirectly concluded to modulate proton pumping efficiency of COX (i.e., the proton to electron stoichiometry).",
+        "start": 44627,
+        "end": 44775,
+        "source_type": "full_text"
+      },
+      "rationale": "The review links the liver COX6A isoform to proton-pumping efficiency, but only indirectly supports broader adaptation of hepatic OXPHOS state.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-7af043d6d104398fd92c",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Slc25a31"
+      ],
+      "function_supported_genes": [
+        "Slc25a31"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Humans possess four distinct ANT isoforms encoded by four genes (gene names in brackets): ANT1 (SLC25A4), ANT2 (SLC25A5), ANT3 (SLC25A6), and ANT4 (SLC25A31) [55], whose transcription depends on the cell type, developmental stage, cell proliferation, and hormone status.",
+        "start": 43205,
+        "end": 43475,
+        "source_type": "full_text"
+      },
+      "rationale": "The review identifies SLC25A31 as ANT4 within the ADP/ATP-carrier family, but the evidence is human and not hepatic.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-7e843711392f423a40b9",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp4a12a",
+        "Cyp4a12b"
+      ],
+      "function_supported_genes": [
+        "Cyp4a12a",
+        "Cyp4a12b"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Microsomal oxidation of fatty acids, catalyzed by cytochrome CYP2E1, CYP4A10, CYP4A12, and CYP4A14, which are induced in mouse models of steatosis and steatohepatitis, is a potent source of ROS through uncoupling of their catalytic cycles.",
+        "start": 39664,
+        "end": 39903,
+        "source_type": "full_text"
+      },
+      "rationale": "The review explicitly connects mouse CYP4A12 fatty-acid oxidation to steatotic liver and ROS; CYP4A12 covers the supplied a/b isoforms.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-8acb2e62192c629d43e1",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Changes in CYP450 activity are closely linked to the pathogenesis of NAFLD.73 Several CYP450 isoforms mediate insulin action (eg CYP2J2 and CYP2E1), affect lipid synthesis and accumulation in the liver, and enhance liver susceptibility.43",
+        "start": 12251,
+        "end": 12489,
+        "source_type": "full_text"
+      },
+      "rationale": "The review supports a liver-disease role for CYP activity, but it does not study Cyp2d40 or Cyp4a12 specifically.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-926d17936824b07a3419",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We conclude that MTP is essential for transferring the bulk of triglycerides into the lumen of the ER for VLDL assembly and is required for the secretion of apo B-100 from the liver.",
+        "start": 1546,
+        "end": 1728,
+        "source_type": "abstract"
+      },
+      "rationale": "The liver-specific knockout study directly supports MTTP-dependent VLDL export; Mttp is a regulator rather than a supplied P20 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-a4f6eee4f8d12eecaa54",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Por"
+      ],
+      "function_supported_genes": [
+        "Por"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "POR transfers electrons to the heme iron of CYPs and other redox partners selectively activating them4–10.",
+        "start": 224,
+        "end": 330,
+        "source_type": "full_text"
+      },
+      "rationale": "Biochemical and structural evidence directly supports POR electron donation to CYPs, in a non-hepatocyte-specific system.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-ab00406111610e9a5e02",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Por"
+      ],
+      "function_supported_genes": [
+        "Por"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "All microsomal cytochrome P450 get electrons from nicotinamide adenine dinucleotide phosphate (NADPH) through POR (Zanger and Schwab, 2013) (Figure 2).",
+        "start": 164,
+        "end": 315,
+        "source_type": "full_text"
+      },
+      "rationale": "The review directly describes POR electron transfer to microsomal CYPs, with only partial match to the target liver condition.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-bfbeda07da0a47f00076",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Cyp4a12a",
+        "Cyp4a12b"
+      ],
+      "function_supported_genes": [
+        "Cyp4a12a",
+        "Cyp4a12b"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Human CYP4A11 and CYP4A22, and mouse CYP4A10, CYP4A12 and CYP4A14 are responsible for the ω-hydroxylation of fatty acids (8).",
+        "start": 1341,
+        "end": 1466,
+        "source_type": "full_text"
+      },
+      "rationale": "Human CYP4A11 experiments support a conserved CYP4A fatty-acid function for mouse Cyp4a12 co-orthologs, but not a direct mouse-context causal claim.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-d90a271a3191f2a32992",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Treating MCD diet-fed mice with DGAT2 ASO for 4 and 8 weeks decreased hepatic steatosis, but increased hepatic free fatty acids, cytochrome P4502E1, markers of lipid peroxidation/oxidant stress, lobular necroinflammation, and fibrosis.",
+        "start": 1113,
+        "end": 1348,
+        "source_type": "abstract"
+      },
+      "rationale": "DGAT2 knockdown causally reduces steatosis in a mouse NASH model, while worsening injury; DGAT2 is not a supplied P20 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-f6fdca0129b7d91573da",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "SREBP cleavage activating protein (SCAP), an ER sensing protein, plays an inevitable role in the regulation of SREBP activity by transporting SREBP from the ER to the Golgi apparatus",
+        "start": 1452,
+        "end": 1634,
+        "source_type": "full_text"
+      },
+      "rationale": "The MASLD review supports the SCAP-SREBP activation step; it does not cover a supplied P20 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-fc596e6d20e00f89ceaf",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Evidence for an intracellular protein in the lumen of mammalian liver microsomes that transfers neutral lipids, triglycerides and cholesterol esters between phospholipid vesicles was first provided by Wetterau and Zilversmit [1,2].",
+        "start": 0,
+        "end": 231,
+        "source_type": "full_text"
+      },
+      "rationale": "The review supports MTTP-mediated apoB lipoprotein assembly and export; it is secondary and regulator-only evidence.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-06f87770cc31693e05db",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Acly"
+      ],
+      "function_supported_genes": [
+        "Acly"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Here, we characterize a new mouse model that replicates many of the pathological and molecular drivers of NASH and find that genetically inhibiting ACLY in hepatocytes reduces liver malonyl-CoA, oxaloacetate, steatosis, and ballooning as well as blood glucose, triglycerides, and cholesterol.",
+        "start": 391,
+        "end": 683,
+        "source_type": "abstract"
+      },
+      "rationale": "Genetic and pharmacologic ACLY inhibition directly supports its causal role in mouse hepatic lipid disease.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-084e2ad6c284dbe10455",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Mechanistically, NFE2L1 interacts with insulin-induced gene 1 (INSIG1) and promotes its degradation in hepatocytes.",
+        "start": 449,
+        "end": 564,
+        "source_type": "abstract"
+      },
+      "rationale": "The commentary is directly about hepatocyte sterol reprogramming in MASH, but provides only secondary, regulator-level support.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-2290538b00b40d359d6b",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "These livers also overexpress machinery for biosynthesis of glutathione and conversion of glycogen into UDP-glucuronate; they stockpile glutathione-S-transferases and UDP-glucuronyl-transferases; and they overexpress xenobiotic exporters.",
+        "start": 350,
+        "end": 588,
+        "source_type": "abstract"
+      },
+      "rationale": "The knockout study supports coordinated GST and UDP-glucuronate detoxification, but the cached evidence does not identify the supplied GST or Ugdh genes.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-25a637605dda357f56fd",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Liver-specific NFE2L1 deletion elevated INSIG1 abundance, suppressed SREBP1 activation, and impaired VLDL secretion, leading to hepatic cholesterol accumulation and liver injury.",
+        "start": 698,
+        "end": 876,
+        "source_type": "abstract"
+      },
+      "rationale": "Hepatocyte INSIG1 perturbation causally supports sterol sensing and lipid-pathway control, without a supplied P22 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-29d8740b66c047b39e71",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We found that DGAT2 deletion in hepatocytes or pharmacologic DGAT2 inhibition increased the phosphatidylethanolamine (PE) content of the ER, and this prevented SREBP-1 cleavage, which reduced hepatic de novo lipogenesis and reduced TG accumulation and secretion from liver.",
+        "start": 3663,
+        "end": 3936,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper causally links DGAT2 to SREBP cleavage, DNL, and hepatic TG, but DGAT2 is not supplied in P22.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-2fdedf3d9ad47904a976",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Me1",
+        "Acly"
+      ],
+      "function_supported_genes": [
+        "Me1",
+        "Acly"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "underclaimed",
+      "evidence_span": {
+        "text": "Acc, Me1, Fasn, and Acly play a role in the de novo synthesis of fatty acids in the liver;",
+        "start": 29836,
+        "end": 29926,
+        "source_type": "full_text"
+      },
+      "rationale": "Mouse liver proteomics directly measures Me1 and Acly in a lipogenic program, though the cited relationship is observational.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-3da1513b4c7d2580274c",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Mt2"
+      ],
+      "function_supported_genes": [
+        "Mt2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "MT2 knockdown in NAFLD mice blocked the effects of 2 weeks of KD feeding on HFD-induced steatosis.",
+        "start": 1302,
+        "end": 1400,
+        "source_type": "abstract"
+      },
+      "rationale": "Mt2 knockdown attenuates ketogenic-diet protection in NAFLD mice, supporting a causal antioxidant role.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-3e450158b939eb7c647e",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Acly"
+      ],
+      "function_supported_genes": [
+        "Acly"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Mimicking ACLY-3K acetylation by replacing the three lysines with three glutamines (ACLY-3KQ variant) promoted lipid accumulation both in high glucose-treated AML12 cells and in the livers of high-fat/high-sucrose (HF/HS) diet-fed mice.",
+        "start": 1020,
+        "end": 1256,
+        "source_type": "abstract"
+      },
+      "rationale": "Manipulating ACLY acetylation in mouse liver causally alters steatosis, supporting ACLY in the P22 lipogenic axis.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-508dcce725e005b5de67",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "ChREBP is a master regulator of lipid metabolism present across various organs and majorly regulates hepatic DNL.",
+        "start": 844,
+        "end": 957,
+        "source_type": "full_text"
+      },
+      "rationale": "In vivo and hepatocyte perturbations support ChREBP-dependent lipid accumulation, but no supplied P22 gene is named.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-52393e8cde2d26f27c1a",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Khk",
+        "Pklr"
+      ],
+      "function_supported_genes": [
+        "Khk",
+        "Pklr"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "HFrD induced hepatic ChREBP-β expression in WT, but this was significantly attenuated in FGF21 KO mice (Figure 2A) as was the induction of key ChREBP transcriptional targets including ketohexokinase (Khk), a key fructolytic enzyme, and pyruvate kinase (Pklr), a key glycolytic enzyme (Figure 2A).",
+        "start": 12153,
+        "end": 12449,
+        "source_type": "full_text"
+      },
+      "rationale": "The mouse fructose intervention directly places Khk and Pklr in a ChREBP-responsive hepatic carbohydrate-to-lipid program.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-5d3a23454b4f5bde891e",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Cyb5r3"
+      ],
+      "function_supported_genes": [
+        "Cyb5r3"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The data obtained argue against VDAC1 and in favor of Cyb5R3 involvement in the activation of redox cyclers in the outer mitochondrial membrane.",
+        "start": 1602,
+        "end": 1746,
+        "source_type": "abstract"
+      },
+      "rationale": "Membrane and inhibitor experiments support Cyb5r3-mediated xenobiotic redox cycling, but outside hepatocytes.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-6dda4ff1cad86bd77841",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Aldh2"
+      ],
+      "function_supported_genes": [
+        "Aldh2"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "A family of detoxifying enzymes called aldehyde dehydrogenases (ALDHs) has been a subject of recent interest, as its role in detoxifying aldehydes that accumulate through metabolism and to which we are exposed from the environment has been elucidated.",
+        "start": 0,
+        "end": 251,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports ALDH2 detoxification and age-related disease relevance, but only partially matches mouse MASLD hepatocytes.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-7065d3a44ddaf8636dec",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Pklr"
+      ],
+      "function_supported_genes": [
+        "Pklr"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In a HepG2 DNL steatosis model, all compounds reduced intracellular triacylglycerol (TAG) and inhibited key DNL proteins (PKL, FASN, ACACA, SCD1, SREBP1-c, ChREBP).",
+        "start": 872,
+        "end": 1036,
+        "source_type": "abstract"
+      },
+      "rationale": "Expression and inhibition experiments directly support PKLR as a causal contributor to hepatocyte lipid accumulation.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-7731b7630ff539d049a3",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Lias"
+      ],
+      "function_supported_genes": [
+        "Lias"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Alpha-lipoic acid (1, 2-dithiolane-3-pentanoic acid; LA), synthesized in mitochondria by LA synthase (Lias), is a potent antioxidant and a cofactor for metabolic enzyme complexes.",
+        "start": 0,
+        "end": 179,
+        "source_type": "abstract"
+      },
+      "rationale": "Lias deficiency causally worsens oxidative liver injury in mice, supporting antioxidant-cofactor function in a different liver condition.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-7c31c34fca9ea8ddd530",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Mt1",
+        "Mt2"
+      ],
+      "function_supported_genes": [
+        "Mt1",
+        "Mt2"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "As a response to the double insult of diet and ethanol the rat liver showed: (1) a larger increase in fat accumulation within ADRP-positive LDs; (2) stimulation of lipid oxidation in the attempt to limit excess fat accumulation; (3) induction of antioxidant proteins (MT2, in particular) to protect the liver from the ethanol-induced overproduction of oxygen radicals.",
+        "start": 933,
+        "end": 1301,
+        "source_type": "abstract"
+      },
+      "rationale": "Rat fatty-liver expression supports MT1/MT2 as an antioxidant response, but it is observational and not an exact mouse-context match.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-84d032526b679b32d83b",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Acly"
+      ],
+      "function_supported_genes": [
+        "Acly"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "underclaimed",
+      "evidence_span": {
+        "text": "Because acetyl-CoA is an essential building block for cholesterol and triglycerides, Acly has been considered a therapeutic target for hyperlipidemias and obesity.",
+        "start": 98,
+        "end": 261,
+        "source_type": "abstract"
+      },
+      "rationale": "The study supports hepatic Acly expression and enzyme biology, but heterozygotes did not establish the claimed central lipid phenotype.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-95251ed1341e52c5d0b0",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Glucokinase is inhibited in the postabsorptive state by sequestration in the nucleus bound to GKRP, and it is activated postprandially by portal hyperglycemia and fructose through dissociation from GKRP, translocation to the cytoplasm, and binding to PFK2/FBP2.",
+        "start": 441,
+        "end": 702,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports Gckr regulation of hepatic glucose flux and liver lipids, without studying a supplied P22 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-a3b42302caf791379a3e",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Aldh2"
+      ],
+      "function_supported_genes": [
+        "Aldh2"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "ALDH2 is also responsible for the detoxification of other toxic short-term aldehydes, including some aromatic and polycyclic types[1,3].",
+        "start": 1203,
+        "end": 1339,
+        "source_type": "full_text"
+      },
+      "rationale": "The review supports ALDH2-mediated aldehyde detoxification and oxidative-stress protection, with only partial disease-context match.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-c3c276f20a73fcf9bf95",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Hepatic metabolism of carbohydrates into lipids is largely dependent on the carbohydrate-responsive element binding protein (ChREBP), a transcription factor that senses intracellular carbohydrates and activates many different target genes, through the activation of de novo lipogenesis (DNL).",
+        "start": 213,
+        "end": 505,
+        "source_type": "abstract"
+      },
+      "rationale": "The review supports ChREBP as a hepatic DNL regulator, but does not substantively study a supplied P22 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-db7b4b7c65103de11745",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Pklr"
+      ],
+      "function_supported_genes": [
+        "Pklr"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We assessed the molecular function of PKLR on global metabolites by integrating untargeted and targeted metabolomic and transcriptomic data in human hepatoma cells over- or underexpressing PKLR.",
+        "start": 3713,
+        "end": 3907,
+        "source_type": "full_text"
+      },
+      "rationale": "PKLR perturbation is direct, but human hepatoma metabolomics only partially supports the specific normal-hepatocyte DNL pathway claim.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-dd235c9f40e4f7f843fc",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Khk"
+      ],
+      "function_supported_genes": [
+        "Khk"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "We show that steatogenic conditions synergistically induce lipid accumulation and robust KHK expression, accompanied by activation of the IRE1α-XBP1 branch of the unfolded protein response.",
+        "start": 935,
+        "end": 1124,
+        "source_type": "abstract"
+      },
+      "rationale": "Hepatocyte and mouse MASH experiments directly support KHK induction and its role in nutrient stress.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-fe6491cf994ad6dff4ce",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "contradicts",
+      "studied_genes": [
+        "Acly"
+      ],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "reversed",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "These data indicate that, in contrast with existing models of fructose metabolism, the use of fructose carbons for hepatic DNL does not require ACLY.",
+        "start": 2321,
+        "end": 2470,
+        "source_type": "full_text"
+      },
+      "rationale": "The cited in vivo isotope study explicitly shows fructose-derived hepatic DNL does not require ACLY, opposite the selection reason.",
+      "red_flags": [
+        "reversed_direction",
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-036293eb15ab608d30f6",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Mgst1"
+      ],
+      "function_supported_genes": [],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The superfamily of glutathione transferases (GSTs) is composed of multifunctional proteins widely distributed in nature, in both eukaryotes and prokaryotes1–5.",
+        "start": 0,
+        "end": 159,
+        "source_type": "full_text"
+      },
+      "rationale": "The review establishes a GST-family detoxification function and discusses MGST1, but does not directly show that supplied Mgst1 performs the selected conjugation in hepatocytes.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-2a128254c8a7c31ab646",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "not_assessable",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "unclear",
+      "direction": "unclear",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "",
+        "start": null,
+        "end": null,
+        "source_type": ""
+      },
+      "rationale": "The cached abstract discusses β-catenin zonation but contains no Cyp2e1-specific evidence for the selected claim.",
+      "red_flags": [
+        "insufficient_text"
+      ]
+    },
+    {
+      "review_id": "RL-3e28bb2cfa093f501915",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In Oil Red O staining, knocking down SQLE led to a reduction in hepatic fat deposition, while its overexpression promoted its deposition, providing compelling evidence for the promoting effect of SQLE on MASLD (Figure 6g and Supplementary Fig S29).",
+        "start": 24459,
+        "end": 24707,
+        "source_type": "full_text"
+      },
+      "rationale": "SQLE gain- and loss-of-function supports lipid deposition in MASLD models, but SQLE is not a supplied P23 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-406303f15dfc433daa67",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "hepatocyte-specific Dgat2 deficiency reduced expression of de novo lipogenesis genes and lowered liver TGs by ~70%.",
+        "start": 1013,
+        "end": 1128,
+        "source_type": "abstract"
+      },
+      "rationale": "Hepatocyte Dgat2 deletion directly reduces liver TG and DNL expression, but Dgat2 is a regulator rather than a supplied P23 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-53aee5c7d77412cae242",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Mgst1"
+      ],
+      "function_supported_genes": [
+        "Mgst1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "These results indicate that activation of microsomal glutathione S-transferase 1 by peroxynitrite is mediated by nitration of tyrosine residue 92 and represents one of the few examples in which a gain in function has been associated with nitration of a specific tyrosine residue.",
+        "start": 1423,
+        "end": 1702,
+        "source_type": "abstract"
+      },
+      "rationale": "Biochemical/cell experiments support oxidative activation of MGST1, but the systems are rat enzyme and kidney-derived cells, not hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-5647b6ba86f448cabe99",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp2e1"
+      ],
+      "function_supported_genes": [
+        "Cyp2e1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Considering the function of CYGB as O2 carrier, these results strongly support the hypothesis that HSCs are involved in the CYP2E1-mediated xenobiotic activation by augmenting O2 supply to hepatocytes.",
+        "start": 1466,
+        "end": 1667,
+        "source_type": "abstract"
+      },
+      "rationale": "Hepatocyte experiments support CYP2E1-dependent APAP bioactivation and xenobiotic metabolism in the target cell type.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-5acd7a093f1b793fc40c",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Like in intact liver, protein levels of both the precursor and mature forms of SREBP1 protein as well as that of SREBP1 downstream targets e.g. SCD1 and G6PD were increased, which was also the case for the two bona fide MARCHF6 targets SQLE and PLIN2 (Figure 6A and Supplementary Fig. 6B).",
+        "start": 51224,
+        "end": 51513,
+        "source_type": "full_text"
+      },
+      "rationale": "The experiment shows SQLE accumulation and SREBP1 activation in parallel after MARCHF6 loss, not that SQLE stabilization activates SREBP1.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-5ca95ef495132b7abde9",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "contradicts",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "not_applicable",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Furthermore, the expression of SREBP‐1c, a master regulator of these genes except for Dgat1/2, was significantly decreased at mRNA (Figure 1P) and protein levels (Figure 1N,O) in the liver.",
+        "start": 7676,
+        "end": 7865,
+        "source_type": "full_text"
+      },
+      "rationale": "The paper explicitly exempts Dgat1/2 from the SREBP-1c-regulated genes, contradicting the claimed downstream relationship.",
+      "red_flags": [
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-717a37875b0988889cfa",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Acox1"
+      ],
+      "function_supported_genes": [
+        "Acox1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Acox1, a rate-limiting enzyme in peroxisomal fatty acid β-oxidation, regulates metabolism, spontaneous hepatic steatosis, and hepatocellular damage over time.",
+        "start": 206,
+        "end": 364,
+        "source_type": "abstract"
+      },
+      "rationale": "Acox1 mutation causally disrupts peroxisomal oxidation and increases mouse hepatic lipid accumulation.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-7dc25d951d78cd49c241",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp2e1"
+      ],
+      "function_supported_genes": [
+        "Cyp2e1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "As a result, FTY720 treatment led to a significant decrease in Cyp1a1, Cyp1a2, Cyp2e1, and Cyp2a5 enzyme mRNA level in primary hepatocytes isolated from WT mice",
+        "start": 16782,
+        "end": 16942,
+        "source_type": "full_text"
+      },
+      "rationale": "Primary mouse-hepatocyte perturbation directly shows Cyp2e1 regulation within the drug-metabolism program.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-858a49e910d77d5dc46f",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Acox1"
+      ],
+      "function_supported_genes": [
+        "Acox1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Mechanistically, Pdcd4 negatively regulated the expression Pparα and Acox1-3.",
+        "start": 1332,
+        "end": 1409,
+        "source_type": "abstract"
+      },
+      "rationale": "Rat primary-hepatocyte experiments causally support PPARα regulation of the Acox1 ortholog, with a partial species match.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-8b5f0c2dd98577fc419a",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "contradicts",
+      "studied_genes": [
+        "Acox1"
+      ],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "reversed",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The in vivo and in vitro assays further verified that ACOX1-mediated oxidative stress contributed to mitochondrial compromise and lipid accumulation in PFOA/PFOS-exposed mouse hepatocytes, which could be mitigated by co-treatment with ACOX1 inhibitor and mitochondria ROS scavenger.",
+        "start": 1508,
+        "end": 1790,
+        "source_type": "abstract"
+      },
+      "rationale": "Rather than showing that reduced ACOX1 drives lipid accumulation, the study finds induced ACOX1 activity promotes oxidative damage and lipid accumulation.",
+      "red_flags": [
+        "reversed_direction",
+        "wrong_function"
+      ]
+    },
+    {
+      "review_id": "RL-8ce6c625d9f5783df517",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Fitm1"
+      ],
+      "function_supported_genes": [
+        "Fitm1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "underclaimed",
+      "evidence_span": {
+        "text": "FIT1 and FIT2 are endoplasmic reticulum resident membrane proteins that induce lipid droplet accumulation in cell culture and when expressed in mouse liver.",
+        "start": 444,
+        "end": 600,
+        "source_type": "abstract"
+      },
+      "rationale": "FIT1/Fitm1 overexpression causally promotes lipid-droplet accumulation including in mouse liver.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-b85c5e41325f9c78141e",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Then we confirmed that MUP1, the major secreted form of MUPs, was reduced at mRNA and protein expression levels in hepatocytes both in vivo and in vitro under ER stress.",
+        "start": 599,
+        "end": 768,
+        "source_type": "abstract"
+      },
+      "rationale": "The paper supports MUP1 as a metabolic hepatokine, but MUP1 is a paralog rather than supplied Mup10 or Mup17.",
+      "red_flags": [
+        "paralog_only"
+      ]
+    },
+    {
+      "review_id": "RL-bc72715db2eef51808cf",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Pon1"
+      ],
+      "function_supported_genes": [],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "H4LivKO serum was enriched in the smaller, denser HDL particles, devoid of APOA2 and APOM apolipoproteins, exhibiting decreased activity of paraoxonase-1 but retaining macrophage cholesterol efflux capacity and phospho-AKT activation in endothelial cells.",
+        "start": 1217,
+        "end": 1472,
+        "source_type": "abstract"
+      },
+      "rationale": "The study measures reduced Pon1 activity with mouse steatosis, but does not establish Pon1 synthesis or its proposed peroxisome/lipid-droplet mechanism.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-c1d775ff96c8794167cb",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Ces1d"
+      ],
+      "function_supported_genes": [
+        "Ces1d"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Consequently, disrupting CMA-mediated SORT1 degradation significantly affects CES1-dependent TG hydrolysis, thereby affecting hepatic lipid homeostasis.",
+        "start": 1608,
+        "end": 1760,
+        "source_type": "abstract"
+      },
+      "rationale": "Ces1d ablation causally raises hepatic triglyceride, supporting its hepatocyte TG-hydrolase role.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-c8d93f2c3e298de005bb",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Cyp2e1"
+      ],
+      "function_supported_genes": [
+        "Cyp2e1"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "the RFP+ distribution pattern coincided with the expression of the typical zone 3 hepatocyte marker CYP2E1 (86.7 ± 2.69% of CYP2E1+ hepatocytes).",
+        "start": 7336,
+        "end": 7481,
+        "source_type": "full_text"
+      },
+      "rationale": "Mouse liver lineage mapping directly validates CYP2E1 as a zone-3 hepatocyte marker.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-d76fa2f8ef89c1f51301",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "MUP1 inhibited the expression of both gluconeogenic genes and lipogenic genes in the liver.",
+        "start": 854,
+        "end": 945,
+        "source_type": "abstract"
+      },
+      "rationale": "MUP1 manipulation supports a family-level metabolic effect, but cannot be assigned to supplied Mup10 or Mup17.",
+      "red_flags": [
+        "paralog_only"
+      ]
+    },
+    {
+      "review_id": "RL-2092063923545a5f6747",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Sds"
+      ],
+      "function_supported_genes": [
+        "Sds"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "The most prominent difference was found histochemically: expression of rat liver serine dehydratase is confined to the periportal region in which many enzymes involved in gluconeogenesis and urea cycle are known to coexist, whereas human liver serine dehydratase resides predominantly in the perivenous region.",
+        "start": 1136,
+        "end": 1446,
+        "source_type": "abstract"
+      },
+      "rationale": "Rat histochemistry and enzyme work supports periportal Sds ortholog localization, but the species is not the target mouse.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-39e9d33cc9ff7fc99851",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Hsd17b6"
+      ],
+      "function_supported_genes": [
+        "Hsd17b6"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Interestingly, Hsd17b6 appears to be exclusively expressed in hepatocytes—the parenchymal cells of the liver",
+        "start": 6719,
+        "end": 6827,
+        "source_type": "full_text"
+      },
+      "rationale": "The knockout paper supports hepatocyte-enriched Hsd17b6 and steroid-enzyme biology, but finds it dispensable for diet-induced fatty liver.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-43697367f664f9f0214d",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Pck1"
+      ],
+      "function_supported_genes": [
+        "Pck1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Phosphorylated PCK1 translocates to the endoplasmic reticulum, where it uses GTP as a phosphate donor to phosphorylate INSIG1 at Ser207 and INSIG2 at Ser151.",
+        "start": 893,
+        "end": 1050,
+        "source_type": "abstract"
+      },
+      "rationale": "The paper directly establishes PCK1 kinase control of INSIG-SREBP lipogenesis, but in liver-cancer rather than normal metabolic hepatocytes.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-4e4362b5deb6789c2fd5",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Sds"
+      ],
+      "function_supported_genes": [
+        "Sds"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Stable-isotope tracing revealed that the liver converts glycine to serine, which is then converted by serine dehydratase into pyruvate and burned in the tricarboxylic acid cycle.",
+        "start": 506,
+        "end": 684,
+        "source_type": "abstract"
+      },
+      "rationale": "Stable-isotope and rodent liver experiments directly support Sds conversion of serine to pyruvate for gluconeogenesis.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-4f0cac24ae9b04389c18",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [],
+      "function_supported_genes": [],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "These KO mice exhibited systemic insulin resistance, with increased gluconeogenesis and suppressed glycogen accumulation in the liver.",
+        "start": 386,
+        "end": 520,
+        "source_type": "abstract"
+      },
+      "rationale": "Wdfy2 knockout causally increases gluconeogenesis and suppresses hepatic glycogen; the same study places INSR–IRS1/2 upstream of Akt2, though neither regulator is a supplied P24 gene.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-58b8d41f467859dc8898",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Gls2"
+      ],
+      "function_supported_genes": [
+        "Gls2"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "There it is hydrolyzed by glutaminase 2 (Gls2) into glutamate and ammonia, the latter further directed to the urea cycle and detoxified through conversion into urea [9].",
+        "start": 2658,
+        "end": 2827,
+        "source_type": "full_text"
+      },
+      "rationale": "In situ mouse-liver evidence directly supports periportal Gls2 zonation.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-5b74cf0cd807173cc470",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Pck1"
+      ],
+      "function_supported_genes": [
+        "Pck1"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "PCK1 is the rate-limiting enzyme in both gluconeogenesis and glyceroneogenesis that catalyzes OAA into PEP, which is then converted into glycerol 3-phosphate in both the adipose tissue and liver.",
+        "start": 9899,
+        "end": 10094,
+        "source_type": "full_text"
+      },
+      "rationale": "The liver-focused review supports PCK1 gluconeogenic function, though it is secondary evidence.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-64f7fe2d61682a861b00",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Sult2a2"
+      ],
+      "function_supported_genes": [
+        "Sult2a2"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "Human hydroxysteroid sulfotransferase or (HUMAN)SULT2A1 catalyzes the sulfonation of procarcinogen xenobiotics, hydroxysteroids, and bile acids and plays a dynamic role in hepatic cholesterol homeostasis.",
+        "start": 0,
+        "end": 204,
+        "source_type": "abstract"
+      },
+      "rationale": "Primary human-hepatocyte work supports the orthologous SULT2A sulfation function, with a species rather than tissue mismatch.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-71660da32cfe719ce00c",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Gls2"
+      ],
+      "function_supported_genes": [
+        "Gls2"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "The periportal glutaminase [7], located in the mitochondria, is stimulated by ammonia and influenced by pH and hormones [8,9].",
+        "start": 1171,
+        "end": 1297,
+        "source_type": "full_text"
+      },
+      "rationale": "Perfused rat liver supports periportal glutamine uptake through liver glutaminase activity, but does not directly perturb mouse Gls2.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-719e6b59ed923a170805",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Hal"
+      ],
+      "function_supported_genes": [
+        "Hal"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "It catalyzes the first reaction in the catabolism of histidine, which involves the irreversible non-oxidative deamination of L-histidine to trans-urocanic acid and ammonia [14–17].",
+        "start": 1984,
+        "end": 2164,
+        "source_type": "full_text"
+      },
+      "rationale": "Human liver/tumor data directly supports HAL catalytic function and liver expression, with only partial match to mouse metabolic hepatocytes.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-839bcbe749d3b74293ee",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Uox"
+      ],
+      "function_supported_genes": [
+        "Uox"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "In vivo, the Uox-KO mice spontaneously developed hyperuricemia and aberrant lipid-metabolism, concomitant with abnormal hepatic fat accumulation.",
+        "start": 570,
+        "end": 715,
+        "source_type": "abstract"
+      },
+      "rationale": "Uox knockout causally produces oxidative stress and steatosis in mice, supporting purine-catabolic involvement in MASLD.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-acc233b445a97625403c",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Pck1"
+      ],
+      "function_supported_genes": [
+        "Pck1"
+      ],
+      "directness": "secondary",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Various signaling pathways governed by insulin converge at the level of transcriptional regulation of the key hepatic gluconeogenic genes PCK1 and G6PC, highlighting this as one of the focal mechanisms through which gluconeogenesis is modulated.",
+        "start": 804,
+        "end": 1049,
+        "source_type": "abstract"
+      },
+      "rationale": "The review directly supports insulin-dependent transcriptional suppression of hepatic PCK1.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-cd8993876d4ffeff2b37",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Cps1"
+      ],
+      "function_supported_genes": [
+        "Cps1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "direct",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "The results showed that the level of CPS1 O-GlcNAcylation was much higher in old mice than in young mice, but the protein levels were not changed significantly (Figure 2B).",
+        "start": 8731,
+        "end": 8903,
+        "source_type": "full_text"
+      },
+      "rationale": "Aged-mouse liver experiments directly connect CPS1 modification and inhibited activity to the target aging context.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-cfee15616e85ac8cc960",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Sfxn1"
+      ],
+      "function_supported_genes": [
+        "Sfxn1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "indirect",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Thus, SFXN1 functions as a mitochondrial serine transporter in one-carbon metabolism.",
+        "start": 812,
+        "end": 897,
+        "source_type": "abstract"
+      },
+      "rationale": "Transport and knockout experiments support SFXN1 mitochondrial serine import, but in non-hepatic human cell systems.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-ec94849f3fdc879eaa3f",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Cps1"
+      ],
+      "function_supported_genes": [
+        "Cps1"
+      ],
+      "directness": "observational",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "In NASH animals, gene and protein expression of OTC and CPS1, and the activity of OTC, were reversibly reduced.",
+        "start": 1005,
+        "end": 1116,
+        "source_type": "abstract"
+      },
+      "rationale": "Human and rat steatotic-liver evidence supports reduced CPS1 and urea-cycle dysfunction in NAFLD, with a partial species match.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    },
+    {
+      "review_id": "RL-f4f1adcb00fa3816fccf",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "supports",
+      "studied_genes": [
+        "Hal"
+      ],
+      "function_supported_genes": [
+        "Hal"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "accurate",
+      "evidence_span": {
+        "text": "Furthermore, we found that activated Wnt/β-catenin signaling suppressed not only HAL but also ARG1, a gene encoding arginase 1, through the reduced CEBPA and FOXA1 expression.",
+        "start": 3441,
+        "end": 3616,
+        "source_type": "full_text"
+      },
+      "rationale": "Perturbation in liver cancer cells causally supports Wnt-mediated HAL suppression, but the transformed context is only partially transferable.",
+      "red_flags": []
+    },
+    {
+      "review_id": "RL-f61da05e22029f356be0",
+      "assessor_id": "codex-primary-p20-p22-p23-p24",
+      "support": "partial",
+      "studied_genes": [
+        "Pck1"
+      ],
+      "function_supported_genes": [
+        "Pck1"
+      ],
+      "directness": "causal",
+      "direction": "matches",
+      "assessed_context": "partial",
+      "context_label_accuracy": "overclaimed",
+      "evidence_span": {
+        "text": "However, blocking gluconeogenesis with PCK1 inhibitor aggravated hepatic I/R injury by decreasing glucose level and deepening lactate accumulation, while overexpressing PCK1 did the opposite.",
+        "start": 1156,
+        "end": 1347,
+        "source_type": "abstract"
+      },
+      "rationale": "Mouse and human hepatocyte stress experiments support PCK1 function, but ischemia/reperfusion is not the aging/MASLD gluconeogenic context.",
+      "red_flags": [
+        "context_overclaim"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "76b25bfce9b1c2cfde28c5d294673ce936b1b45fa0beb6232a5de52a27cbb08d",
+  "doi": "10.1074/jbc.m310512200",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "ac13172464fa2aca706b",
+  "pmcid": "PMC2888281",
+  "pmid": "14662765",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "ATP-citrate lyase (Acly) is one of two cytosolic enzymes that synthesize acetyl-coenzyme A (CoA). Because acetyl-CoA is an essential building block for cholesterol and triglycerides, Acly has been considered a therapeutic target for hyperlipidemias and obesity. To define the phenotype of Acly-deficient mice, we created Acly knockout mice in which a beta-galactosidase marker is expressed from Acly regulatory sequences. We also sought to define the cell type-specific expression patterns of Acly to further elucidate the in vivo roles of the enzyme. Homozygous Acly knockout mice died early in development. Heterozygous mice were healthy, fertile, and normolipidemic on both chow and high fat diets, despite expressing half-normal amounts of Acly mRNA and protein. Fibroblasts and hepatocytes from heterozygous Acly mice contained half-normal amounts of Acly mRNA and protein, but this did not perturb triglyceride and cholesterol synthesis or the expression of lipid biosynthetic genes regulated by sterol regulatory element-binding proteins. The expression of acetyl-CoA synthetase 1, another cytosolic enzyme for producing acetyl-CoA, was not up-regulated. As judged by beta-galactosidase staining, Acly was expressed ubiquitously but was expressed particularly highly in tissues with high levels of lipogenesis, such as in the livers of mice fed a high-carbohydrate diet. beta-Galactosidase staining was intense in the developing brain, in keeping with the high levels of de novo lipogenesis of the tissue. In the adult brain, beta-galactosidase staining was in general much lower, consistent with reduced levels of lipogenesis; however, beta-galactosidase expression remained very high in cholinergic neurons, likely reflecting the importance of Acly in generating acetyl-CoA for acetylcholine synthesis. The Acly knockout allele is useful for identifying cell types with a high demand for acetyl-CoA synthesis.",
+  "text_type": "abstract",
+  "title": "ATP-citrate lyase deficiency in the mouse."
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "89955ad4728090cffeaae0f2fd4c75c3062b139097979cfa4fd88cbef7c67011",
+  "doi": "10.1681/asn.2013050565",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "eb0a813782536416f4be",
+  "pmcid": "PMC4214515",
+  "pmid": "24722439",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Nephronophthisis-related ciliopathies (NPHP-RCs) are developmental and degenerative kidney diseases that are frequently associated with extrarenal pathologies such as retinal degeneration, obesity, and intellectual disability. We recently identified mutations in a gene encoding the centrosomal protein SDCCAG8 as causing NPHP type 10 in humans. To study the role of Sdccag8 in disease pathogenesis, we generated a Sdccag8 gene-trap mouse line. Homozygous Sdccag8(gt/gt) mice lacked the wild-type Sdccag8 transcript and protein, and recapitulated the human phenotypes of NPHP and retinal degeneration. These mice exhibited early onset retinal degeneration that was associated with rhodopsin mislocalization in the photoreceptors and reduced cone cell numbers, and led to progressive loss of vision. By contrast, renal histologic changes occurred later, and no global ciliary defects were observed in the kidneys. Instead, renal pathology was associated with elevated levels of DNA damage response signaling activity. Cell culture studies confirmed the aberrant activation of DNA damage response in Sdccag8(gt/gt)-derived cells, characterized by elevated levels of \u03b3H2AX and phosphorylated ATM and cell cycle profile abnormalities. Our analysis of Sdccag8(gt/gt) mice indicates that the pleiotropic phenotypes in these mice may arise through multiple tissue-specific disease mechanisms.",
+  "text_type": "abstract",
+  "title": "Renal-retinal ciliopathy gene Sdccag8 regulates DNA damage response signaling."
+}

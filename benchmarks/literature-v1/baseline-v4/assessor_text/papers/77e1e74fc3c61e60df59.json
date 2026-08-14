@@ -1,0 +1,16 @@
+{
+  "content_hash": "7bb6c6aadb50fcf125e03965d314c37090a503f782988bfbfb1653010a352480",
+  "doi": "10.1161/circresaha.110.230888",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "77e1e74fc3c61e60df59",
+  "pmcid": "PMC3709466",
+  "pmid": "21474816",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "RATIONALE: Fetuses that develop in diabetic mothers have a higher incidence of birth defects that include cardiovascular defects, but the signaling pathways that mediate these developmental effects are poorly understood. It is reasonable to hypothesize that diabetic maternal effects are mediated by 1 or more pathways activated downstream of aberrant glucose metabolism, because poorly controlled maternal glucose levels correlate with the frequency and severity of the defects.\n\nOBJECTIVE: We investigated whether RasGRP3 (Ras guanyl-releasing protein 3), a Ras activator expressed in developing blood vessels, mediates diabetes-induced vascular developmental defects. RasGRP3 is activated by diacylglycerol, and diacylglycerol is overproduced by aberrant glucose metabolism in diabetic individuals. We also investigated the effects of overactivation and loss of function for RasGRP3 in primary endothelial cells and developing vessels.\n\nMETHODS AND RESULTS: Analysis of mouse embryos from diabetic mothers showed that diabetes-induced developmental defects were dramatically attenuated in embryos that lacked Rasgrp3 function. Endothelial cells that expressed activated RasGRP3 had elevated Ras-ERK signaling and perturbed migration, whereas endothelial cells that lacked Rasgrp3 function had attenuated Ras-ERK signaling and did not migrate in response to endothelin-1. Developing blood vessels exhibited endothelin-stimulated vessel dysmorphogenesis that required Rasgrp3 function.\n\nCONCLUSIONS: These findings provide the first evidence that RasGRP3 contributes to developmental defects found in embryos that develop in a diabetic environment. The results also elucidate RasGRP3-mediated signaling in endothelial cells and identify endothelin-1 as an upstream input and Ras/MEK/ERK as a downstream effector pathway. RasGRP3 may be a novel therapeutic target for the fetal complications of diabetes.",
+  "text_type": "abstract",
+  "title": "The Ras activator RasGRP3 mediates diabetes-induced embryonic defects and affects endothelial cell migration."
+}

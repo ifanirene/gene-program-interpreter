@@ -1,0 +1,16 @@
+{
+  "content_hash": "a8a799bb0ab2f720494c769c875e28446071c0b8e32f4aa9d3be326baecd19b7",
+  "doi": "10.1074/jbc.m111.277103",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "725569f5756b83942d65",
+  "pmcid": "PMC3293568",
+  "pmid": "22228767",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The structural integrity of mitochondrial cristae is crucial for mitochondrial functions; however, the molecular events controlling the structural integrity and biogenesis of mitochondrial cristae remain to be fully elucidated. Here, we report the functional characterization of a novel mitochondrial protein named CHCM1 (coiled coil helix cristae morphology 1)/CHCHD6. CHCM1/CHCHD6 harbors a coiled coil helix-coiled coil helix domain at its C-terminal end and predominantly localizes to mitochondrial inner membrane. CHCM1/CHCHD6 knockdown causes severe defects in mitochondrial cristae morphology. The mitochondrial cristae in CHCM1/CHCHD6-deficient cells become hollow with loss of structural definitions and reduction in electron-dense matrix. CHCM1/CHCHD6 depletion also leads to reductions in cell growth, ATP production, and oxygen consumption. CHCM1/CHCHD6 through its C-terminal end strongly and directly interacts with the mitochondrial inner membrane protein mitofilin, which is known to also control mitochondrial cristae morphology. CHCM1/CHCHD6 also interacts with other mitofilin-associated proteins, including DISC1 and CHCHD3. Knockdown of CHCM1/CHCHD6 reduces mitofilin protein levels; conversely, mitofilin knockdown leads to reduction in CHCM1 levels, suggesting coordinate regulation between these proteins. Our results further indicate that genotoxic anticancer drugs that induce DNA damage down-regulate CHCM1/CHCHD6 expression in multiple human cancer cells, whereas mitochondrial respiratory chain inhibitors do not affect CHCM1/CHCHD6 levels. CHCM1/CHCHD6 knockdown in human cancer cells enhances chemosensitivity to genotoxic anticancer drugs, whereas its overexpression increases resistance. Collectively, our results indicate that CHCM1/CHCHD6 is linked to regulation of mitochondrial cristae morphology, cell growth, ATP production, and oxygen consumption and highlight its potential as a possible target for cancer therapeutics.",
+  "text_type": "abstract",
+  "title": "CHCM1/CHCHD6, novel mitochondrial protein linked to regulation of mitofilin and mitochondrial cristae morphology."
+}

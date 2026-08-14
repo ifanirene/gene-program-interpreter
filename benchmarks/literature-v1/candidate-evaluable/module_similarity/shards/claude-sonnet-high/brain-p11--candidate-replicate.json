@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "brain-p11--candidate-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.85
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 3,
+        "similarity": 0.05
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 2,
+        "similarity": 0.7
+      }
+    ],
+    "moduleSemanticSimilarity": 0.533333,
+    "overall_rationale": "The two replicates converge strongly on a shared angiogenic tip-cell sprouting module (L1↔R1) and a partial refinement relationship for the ion-channel/BBB module (L3↔R2 capturing just the mechanosensing half of L3), while the arteriovenous-identity module (L2) and survival/metabolic module (R3) each have only moderate-to-weak cross-matches, reflecting genuine differences in how the replicates partitioned overlapping gene sets into distinct mechanistic narratives.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both modules describe the same angiopoietin-CXCR4-NRP1/CDC42 tip-cell sprouting program with TEK suppression driving destabilization, differing only in a minor extra gene (Cdc42ep3/Tnfrsf11b vs Rgs6).",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.85
+      },
+      {
+        "left_module": 1,
+        "rationale": "L1's angiogenic sprouting mechanism shares no genes or mechanistic logic with R2's flow-sensitive Kir2.1 mechanotransduction beyond generic brain-endothelium context.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 1,
+        "rationale": "Tnfrsf11b's endothelial survival/angiogenic-support role is shared, but L1's core is tip-cell sprouting whereas R3's core is anti-apoptotic survival and metabolic fueling via Slc1a1, a different central mechanism.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.3
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2 and R1 share nearly identical genes/regulators (Angpt2, Cxcr4, Rgs6, Tek, Nrp1) and both invoke arterial-specification signaling, but L2's central output is arteriovenous identity/boundary patterning while R1's is active sprouting/tip-cell behavior.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.5
+      },
+      {
+        "left_module": 2,
+        "rationale": "Arteriovenous identity specification and Kir2.1 flow-sensing mechanotransduction share no genes or mechanistic logic.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's arterial-venous identity program and R3's survival/metabolic support module share no genes and describe unrelated mechanisms.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 3,
+        "rationale": "BBB glutamate transport and flow mechanosensing have no mechanistic or gene overlap with the sprouting/tip-cell angiogenesis program.",
+        "relationship": "different",
+        "right_module": 1,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 3,
+        "rationale": "R2 is a narrower, single-gene refinement of L3 that isolates the Kcnj2 flow-sensitive mechanotransduction component while dropping the Slc1a1 BBB-transport component.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.7
+      },
+      {
+        "left_module": 3,
+        "rationale": "Slc1a1 and the Tgfbr1/Tgfbr2 regulators are shared, but L3 frames Slc1a1 as glutamate efflux for BBB homeostasis while R3 frames it as a metabolite importer fueling mitochondrial respiration and migration, a different asserted role.",
+        "relationship": "partial_overlap",
+        "right_module": 3,
+        "similarity": 0.45
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.1336266,
+    "duration_api_ms": 49097,
+    "duration_ms": 47505,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 3,
+    "wall_seconds": 49.081
+  }
+}

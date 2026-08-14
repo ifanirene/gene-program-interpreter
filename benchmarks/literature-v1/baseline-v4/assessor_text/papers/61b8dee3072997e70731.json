@@ -1,0 +1,14 @@
+{
+  "content_hash": "597a1f536ee2446ee3050d71350ce2b1601cf29c705addb5c7110e030eced4b1",
+  "doi": "10.1016/j.mce.2022.111562",
+  "errors": [],
+  "paper_key": "61b8dee3072997e70731",
+  "pmcid": null,
+  "pmid": "35051553",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Nonalcoholic fatty liver disease (NAFLD) is characterized by excessive lipid accumulation in hepatocytes. The involvement of programmed cell death 4 (Pdcd4) in inflammation and metabolic diseases has been widely reported. However, the precise regulatory role of Pdcd4 in hepatocytic lipid metabolism and NAFLD is not well known.\n\nRESEARCH DESIGN AND METHODS: We established a high-fat diet-induced NAFLD (HFD-NAFLD) rat model and a free fatty acids (FFAs)-treated cell model, and analyzed the expression and distribution of PDCD4. The lentivirus for Pdcd4 knockout and the vector for Pdcd4 overexpression were used to alter Pdcd4 expression in BRL 3A cells. Thereafter, lipid accumulation, FA metabolic gene expression, and peroxisome proliferator-activated receptor alpha (Ppar\u03b1)-dependent peroxisomal \u03b2-oxidation-related gene expression, especially that of the critical transcription factors and enzymes acyl-CoA oxidases 1-3 (Acox1-3), were detected both at the mRNA and protein levels.\n\nRESULTS: PDCD4 expression increased and it was mainly distributed in hepatocyte nuclei of the HFD-NAFLD rats. as well as the FFAs-treated CBRH-7919 and BRL 3A cell lines. Pdcd4 knockout significantly suppressed FFAs-induced lipid accumulation, and Pdcd4 overexpression accelerated FFAs-induced lipid accumulation in hepatocytes. Mechanistically, Pdcd4 negatively regulated the expression Ppar\u03b1 and Acox1-3. In addition, rescue experiments confirmed that Ppar\u03b1 knockdown could attenuate the expression of Acox1-3 in Pdcd4 knockout cells, which ultimately restored lipid deposition to normal levels. PPAR\u03b1 expression decreased in the liver of the HFD-NAFLD rats. The enrichment of PDCD4 in hepatocyte nuclei correlated with lower PPAR\u03b1 expression after FFAs treatment in vitro.\n\nCONCLUSION: Our results indicate that the abundance of PDCD4 under high-fat conditions facilitates hepatocellular lipid accumulation by decreasing PPAR\u03b1-dependent FA peroxisomal \u03b2-oxidation.",
+  "text_type": "abstract",
+  "title": "Pdcd4 promotes lipid deposition by attenuating PPAR\u03b1-mediated fatty acid oxidation in hepatocytes."
+}

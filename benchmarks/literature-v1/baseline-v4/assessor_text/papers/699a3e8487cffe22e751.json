@@ -1,0 +1,16 @@
+{
+  "content_hash": "92272ebd5a3d961e78436bdbfa318c2f99271d1a672c496a988ad3e24cfdcfe3",
+  "doi": "10.1161/circresaha.120.317473",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "699a3e8487cffe22e751",
+  "pmcid": "PMC10858745",
+  "pmid": "33375813",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "RATIONALE: Pericytes are capillary mural cells playing a role in stabilizing newly formed blood vessels during development and tissue repair. Loss of pericytes has been described in several brain disorders, and genetically induced pericyte deficiency in the brain leads to increased macromolecular leakage across the blood-brain barrier (BBB). However, the molecular details of the endothelial response to pericyte deficiency remain elusive.\n\nOBJECTIVE: To map the transcriptional changes in brain endothelial cells resulting from lack of pericyte contact at single-cell level and to correlate them with regional heterogeneities in BBB function and vascular phenotype.\n\nMETHODS AND RESULTS: We reveal transcriptional, morphological, and functional consequences of pericyte absence for brain endothelial cells using a combination of methodologies, including single-cell RNA sequencing, tracer analyses, and immunofluorescent detection of protein expression in pericyte-deficient adult Pdgfbret/ret mice. We find that endothelial cells without pericyte contact retain a general BBB-specific gene expression profile, however, they acquire a venous-shifted molecular pattern and become transformed regarding the expression of numerous growth factors and regulatory proteins. Adult Pdgfbret/ret brains display ongoing angiogenic sprouting without concomitant cell proliferation providing unique insights into the endothelial tip cell transcriptome. We also reveal heterogeneous modes of pericyte-deficient BBB impairment, where hotspot leakage sites display arteriolar-shifted identity and pinpoint putative BBB regulators. By testing the causal involvement of some of these using reverse genetics, we uncover a reinforcing role for angiopoietin 2 at the BBB.\n\nCONCLUSIONS: By elucidating the complexity of endothelial response to pericyte deficiency at cellular resolution, our study provides insight into the importance of brain pericytes for endothelial arterio-venous zonation, angiogenic quiescence, and a limited set of BBB functions. The BBB-reinforcing role of ANGPT2 (angiopoietin 2) is paradoxical given its wider role as TIE2 (TEK receptor tyrosine kinase) receptor antagonist and may suggest a unique and context-dependent function of ANGPT2 in the brain.",
+  "text_type": "abstract",
+  "title": "Single-Cell Analysis of Blood-Brain Barrier Response to Pericyte Loss."
+}

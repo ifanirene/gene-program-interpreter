@@ -1,0 +1,134 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-6926b3be8d716db7aacc",
+    "RL-6a44877265e2c5747629",
+    "RL-767f3edaaf0c7a14d825",
+    "RL-8917eaf883f998bbc932"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 364,
+        "source_type": "abstract",
+        "start": 158,
+        "text": "This resistance is because of a detoxifying enzyme, mouse glutathione S-transferase A3, which binds to and inactivates aflatoxin B1 epoxide, preventing the epoxide from binding to DNA and causing mutations."
+      },
+      "function_supported_genes": [
+        "Gsta3"
+      ],
+      "rationale": "The knockout study and explicit enzyme description support Gsta3-mediated aflatoxin detoxification. The toxic-exposure and cancer setting differs from aging/MASLD.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-6926b3be8d716db7aacc",
+      "studied_genes": [
+        "Gsta3"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 10039,
+        "source_type": "full_text",
+        "start": 9771,
+        "text": "The mRNA of Cyp2c50 and Cyp2c54 in Nrf2-null mice was 45 and 65% lower than in wild-type mice, respectively, but in Keap1-KD and Keap1-HKO mice the mRNA of Cyp2c50 and Cyp2c54 tended to be higher than in wild-type mice, although this was not statistically significant."
+      },
+      "function_supported_genes": [
+        "Cyp2c50",
+        "Aldh1a1",
+        "Gsta3"
+      ],
+      "rationale": "Genetic Nrf2 dosage in mouse liver supports regulation of Cyp2c50, Aldh1a1, and Gsta3. Akr1c6 and Aldh3a2 were measured but were not Nrf2-responsive.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-6a44877265e2c5747629",
+      "studied_genes": [
+        "Cyp2c50",
+        "Aldh1a1",
+        "Aldh3a2",
+        "Gsta3",
+        "Akr1c6"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 600,
+        "source_type": "abstract",
+        "start": 444,
+        "text": "FIT1 and FIT2 are endoplasmic reticulum resident membrane proteins that induce lipid droplet accumulation in cell culture and when expressed in mouse liver."
+      },
+      "function_supported_genes": [
+        "Fitm1"
+      ],
+      "rationale": "FIT1 overexpression directly supports a role for Fitm1 in lipid-droplet accumulation in mouse liver. The aging/MASLD condition and hepatocyte specificity are not established.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-767f3edaaf0c7a14d825",
+      "studied_genes": [
+        "Fitm1"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 951,
+        "source_type": "abstract",
+        "start": 748,
+        "text": "Fatty aldehyde dehydrogenase had high activity towards saturated and unsaturated aliphatic aldehydes ranging from 6 to 24 carbons in length, as well as dihydrophytal, a 20-carbon branched chain aldehyde."
+      },
+      "function_supported_genes": [
+        "Aldh3a2"
+      ],
+      "rationale": "The biochemical assays support ALDH3A2 fatty-aldehyde metabolism but do not specifically establish detoxification of lipid-peroxidation aldehydes. The evidence is from human rather than mouse liver.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-8917eaf883f998bbc932",
+      "studied_genes": [
+        "Aldh3a2"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 144896,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 163552,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 7816,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 152.729
+  }
+}

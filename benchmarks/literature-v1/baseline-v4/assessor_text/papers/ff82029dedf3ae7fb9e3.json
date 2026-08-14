@@ -1,0 +1,16 @@
+{
+  "content_hash": "795ab9fbaa51a139efeb94e446ca517fc8000c238e6bbde7fc77708c8c6451e8",
+  "doi": "10.4161/21541248.2014.975002",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "ff82029dedf3ae7fb9e3",
+  "pmcid": "PMC4601187",
+  "pmid": "25425145",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The formation of the vascular network requires a tightly controlled balance of pro-angiogenic and stabilizing signals. Perturbation of this balance can result in dysregulated blood vessel morphogenesis and drive pathologies including cancer. Here, we have identified a novel gene, ARHGAP18, as an endogenous negative regulator of angiogenesis, limiting pro-angiogenic signaling and promoting vascular stability. Loss of ARHGAP18 promotes EC hypersprouting during zebrafish and murine retinal vessel development and enhances tumor vascularization and growth. Endogenous ARHGAP18 acts specifically on RhoC and relocalizes to the angiogenic and destabilized EC junctions in a ROCK dependent manner, where it is important in reaffirming stable EC junctions and suppressing tip cell behavior, at least partially through regulation of tip cell genes, Dll4, Flk-1 and Flt-4. These findings highlight ARHGAP18 as a specific RhoGAP to fine tune vascular morphogenesis, limiting tip cell formation and promoting junctional integrity to stabilize the angiogenic architecture.",
+  "text_type": "abstract",
+  "title": "ARHGAP18: an endogenous inhibitor of angiogenesis, limiting tip formation and stabilizing junctions."
+}

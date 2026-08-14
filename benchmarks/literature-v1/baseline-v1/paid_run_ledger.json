@@ -1,0 +1,134 @@
+{
+  "approval_file_sha256": "27bdfc1ad42a6156954c6e524d6136637a1306635032f918304f8e3988cfdac0",
+  "approved_ceiling_usd": 28.0,
+  "benchmark_id": "literature-v1",
+  "schema_version": 1,
+  "sessions": {
+    "brain-p10--r1": {
+      "attempts": 2,
+      "audit_sha256": "6f2ac344fdb34ea1fce64b716ff3172c5d5e7c01ef320790ba7a726ab9dccfd8",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P10",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "brain-p10--r2": {
+      "attempts": 2,
+      "audit_sha256": "6f2ac344fdb34ea1fce64b716ff3172c5d5e7c01ef320790ba7a726ab9dccfd8",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P10",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "brain-p11--r1": {
+      "attempts": 2,
+      "audit_sha256": "e0ca3ec1721849a8e526a7ebeac018789ea0f7c37c6f405be2abf7c5e5f1ce89",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P11",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "brain-p11--r2": {
+      "attempts": 2,
+      "audit_sha256": "e0ca3ec1721849a8e526a7ebeac018789ea0f7c37c6f405be2abf7c5e5f1ce89",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P11",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "brain-p8--r1": {
+      "attempts": 2,
+      "audit_sha256": "d45ec3c5896344aeb520b8d51c4479c506fd1895db056cbc328ebe6c3314c85d",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P8",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "brain-p9--r1": {
+      "attempts": 2,
+      "audit_sha256": "08d904674226e72b63cfcf393541a9077d627cb24fce81601838c124c451ed25",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P9",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "liver-p20--r1": {
+      "attempts": 2,
+      "audit_sha256": "4e133245fc737e43c97eb5e49cf4e39339dcdcd738726ea08e4ee3ebc2077dc8",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P20",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "liver-p21--r1": {
+      "attempts": 2,
+      "audit_sha256": "5a7836a138d7d8950784284243dc79ea89f53fe440e4e9a7476f56d8179736bd",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P21",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "liver-p21--r2": {
+      "attempts": 2,
+      "audit_sha256": "5a7836a138d7d8950784284243dc79ea89f53fe440e4e9a7476f56d8179736bd",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P21",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "liver-p22--r1": {
+      "attempts": 2,
+      "audit_sha256": "7435bd4353f96bbca5dc58b42da4d07bf4ece870624e0f02a4af6d62b502e326",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P22",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "liver-p23--r1": {
+      "attempts": 2,
+      "audit_sha256": "a71907a841f890f2b9449830cc31d84ff09cdcf581aedc6e51b299fbb0c5343c",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P23",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "liver-p24--r1": {
+      "attempts": 2,
+      "audit_sha256": "d28818b0a6e5a0b93c066cce3ba91b83e565cd0b9add4e2b022b50b851c2ff78",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P24",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "liver-p25--r1": {
+      "attempts": 2,
+      "audit_sha256": "bf394b222aa4d4cfd9c139ecd5cc46e5112fcc63ed7478598fe98333dc40d372",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P25",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    },
+    "liver-p25--r2": {
+      "attempts": 2,
+      "audit_sha256": "bf394b222aa4d4cfd9c139ecd5cc46e5112fcc63ed7478598fe98333dc40d372",
+      "audit_status": "incomplete",
+      "max_api_equivalent_allocation_usd": 2.0,
+      "program_id": "P25",
+      "recorded_cost_usd": null,
+      "status": "research_complete"
+    }
+  }
+}

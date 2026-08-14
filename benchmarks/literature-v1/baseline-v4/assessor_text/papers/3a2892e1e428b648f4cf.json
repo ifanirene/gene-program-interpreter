@@ -1,0 +1,16 @@
+{
+  "content_hash": "d4d713a4ebd5f5e1948882b97e5c23edd5f91c57d9132f7fa63c25cb1eaf7400",
+  "doi": "10.1111/micc.12319",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "3a2892e1e428b648f4cf",
+  "pmcid": "PMC5360557",
+  "pmid": "27652592",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Endothelial cells express a diverse array of ion channels including members of the strong inward rectifier family composed of KIR 2 subunits. These two-membrane spanning domain channels are modulated by their lipid environment, and exist in macromolecular signaling complexes with receptors, protein kinases and other ion channels. Inward rectifier K+ channel (KIR ) currents display a region of negative slope conductance at membrane potentials positive to the K+ equilibrium potential that allows outward current through the channels to be activated by membrane hyperpolarization, permitting KIR to amplify hyperpolarization induced by other K+ channels and ion transporters. Increases in extracellular K+ concentration activate KIR allowing them to sense extracellular K+ concentration and transduce this change into membrane hyperpolarization. These properties position KIR to participate in the mechanism of action of hyperpolarizing vasodilators and contribute to cell-cell conduction of hyperpolarization along the wall of microvessels. The expression of KIR in capillaries in electrically active tissues may allow KIR to sense extracellular K+ , contributing to functional hyperemia. Understanding the regulation of expression and function of microvascular endothelial KIR will improve our understanding of the control of blood flow in the microcirculation in health and disease and may provide new targets for the development of therapeutics in the future.",
+  "text_type": "abstract",
+  "title": "Boosting the signal: Endothelial inward rectifier K+ channels."
+}

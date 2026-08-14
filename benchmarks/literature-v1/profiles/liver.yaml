@@ -1,0 +1,29 @@
+context:
+  organism: mouse
+  species_taxid: 10090
+  tissue: liver
+  cell_type: hepatocyte
+  conditions:
+    - aging
+    - MASLD
+  context_terms:
+    - metabolic zonation
+    - xenobiotic and drug metabolism
+    - bile acid metabolism
+    - gluconeogenesis and glycogen storage
+    - nitrogen and urea metabolism
+    - oxidative and mitochondrial metabolism
+    - membrane transport and solute carriers
+    - lipid metabolism
+  assay: in vivo Perturb-seq
+  annotation_role: hepatocyte biologist
+  annotation_context: a consensus gene expression program in mouse hepatocytes, in the context of aging and MASLD
+  keyword_query: '(hepatocyte OR liver OR aging OR MASLD OR "metabolic zonation" OR "xenobiotic and drug metabolism" OR "bile acid metabolism" OR "gluconeogenesis and glycogen storage" OR "nitrogen and urea metabolism" OR "oxidative and mitochondrial metabolism" OR "membrane transport and solute carriers" OR "lipid metabolism")'
+  condition_context: 'Context: liver tissue; hepatocyte biology spanning metabolic zonation, xenobiotic and drug metabolism, bile acid metabolism, gluconeogenesis and glycogen storage, nitrogen and urea metabolism, oxidative and mitochondrial metabolism, membrane transport and solute carriers, lipid metabolism; with attention to aging and MASLD.'
+  functional_context: ''
+  report_dataset_crumb: mouse liver in vivo Perturb-seq
+  evidence_context_types:
+    - direct
+    - partial
+    - indirect
+    - mixed

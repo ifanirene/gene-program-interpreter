@@ -1,0 +1,114 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-94f6465ea7414b57d28c",
+    "RL-a067f883b7440ceeb232",
+    "RL-affec80b10774f33e847",
+    "RL-b1d09a63dcdf6abee6e1"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1466,
+        "source_type": "abstract",
+        "start": 1354,
+        "text": "Taken together, these findings demonstrate that NRP1 promotes endothelial tip cell function during angiogenesis."
+      },
+      "function_supported_genes": [],
+      "rationale": "Endothelial Nrp1 perturbation and mosaic analysis directly support its regulator role in tip-cell function and sprouting in the developing brain. Nrp1 is a regulator, so it does not enter supplied-gene coverage.",
+      "red_flags": [],
+      "review_id": "RL-94f6465ea7414b57d28c",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 997,
+        "source_type": "abstract",
+        "start": 866,
+        "text": "TGFβ treatment aggravated hypoxia-induced BBB permeability but ALK5 or Furin blockade reversed injury-induced permeability changes."
+      },
+      "function_supported_genes": [],
+      "rationale": "ALK5 blockade causally implicates Tgfbr1 signaling in brain endothelial BBB permeability. The hypoxic in vitro injury setting is transferable but not the target postnatal-development context, and Tgfbr1 is a regulator rather than a supplied gene.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a067f883b7440ceeb232",
+      "studied_genes": [],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1546,
+        "source_type": "abstract",
+        "start": 1333,
+        "text": "Expression of EAAT-1 (Slc1a3), -2 (Slc1a2), and -3 (Slc1a1) mRNA in the endothelial cells was confirmed by conventional PCR and localization of EAAT-1 and -3 in endothelial cells was shown with immunofluorescence."
+      },
+      "function_supported_genes": [
+        "Slc1a1"
+      ],
+      "rationale": "The paper provides Slc1a1-specific expression and localization plus family-level EAAT inhibition during polarized glutamate transport, supporting an associative but not Slc1a1-specific causal transport role. The bovine endothelial/rat astrocyte coculture is an indirect model of mouse postnatal brain endothelium.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-affec80b10774f33e847",
+      "studied_genes": [
+        "Slc1a1"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 817,
+        "source_type": "abstract",
+        "start": 631,
+        "text": "Tgfβ-Smad2/3 signaling was attenuated, whereas phosphorylation of Smad1/5 and p38 were enhanced. Tgfβ pathway components, including Tgfβ2, Tgfβr2, Alk5, and integrins αVβ8, were reduced."
+      },
+      "function_supported_genes": [],
+      "rationale": "Foxf2 perturbation associates reduced pericyte Tgfbr2/Alk5 pathway components with BBB defects, giving pathway-level support but not receptor-specific perturbation or brain-endothelial action. The brain context is relevant, but the receptor measurements are in pericytes rather than the target endothelial cell type.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-b1d09a63dcdf6abee6e1",
+      "studied_genes": [],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 18176,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 40506,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4446,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 84.383
+  }
+}

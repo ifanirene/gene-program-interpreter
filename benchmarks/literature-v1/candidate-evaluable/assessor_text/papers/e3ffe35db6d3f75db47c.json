@@ -1,0 +1,16 @@
+{
+  "content_hash": "5c33fcaf8c40a36dfe3729fb158ea9af9116c918ba47205a7226bb5ea6617cfd",
+  "doi": "10.1194/jlr.m074302",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "e3ffe35db6d3f75db47c",
+  "pmcid": "PMC5454508",
+  "pmid": "28442498",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "PPAR\u03b1 has been known to play a pivotal role in orchestrating lipid, glucose, and amino acid metabolism via transcriptional regulation of its target gene expression during energy deprivation. Recent evidence has also suggested that PPAR\u03b1 is involved in bile acid metabolism, but how PPAR\u03b1 modulates the homeostasis of bile acids during fasting is still not clear. In a mechanistic study aiming to dissect the spectrum of PPAR\u03b1 target genes involved in metabolic response to fasting, we identified a novel mouse gene (herein named mL-STL for mouse liver-sulfotransferase-like) that shared extensive homology with the Sult2a subfamily of a superfamily of cytosolic sulfotransferases, implying its potential function in sulfonation. The mL-STL gene expressed predominantly in liver in fed state, but PPAR\u03b1 was required to sustain its expression during fasting, suggesting a critical role of PPAR\u03b1 in regulating the mL-STL-mediated sulfonation during fasting. Functional studies using recombinant His-tagged mL-STL protein revealed its narrow sulfonating activities toward 7\u03b1-hydroxyl primary bile acids, including cholic acid, chenodeoxycholic acid, and \u03b1-muricholic acid, and thus suggesting that mL-STL may be the major hepatic bile acid sulfonating enzyme in mice. Together, these studies identified a novel PPAR\u03b1-dependent gene and uncovered a new role of PPAR\u03b1 as being an essential regulator in bile acid biotransformation via sulfonation during fasting.",
+  "text_type": "abstract",
+  "title": "Identification and characterization of a novel PPAR\u03b1-regulated and 7\u03b1-hydroxyl bile acid-preferring cytosolic sulfotransferase mL-STL (Sult2a8)."
+}

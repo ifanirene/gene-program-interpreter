@@ -1,0 +1,46 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-brain-p11-r2",
+    "assessor_id": "annotation-primary-sonnet-high-20260722",
+    "candidate_additions": [
+      "New mechanosensitive flow-sensing theme built around Kcnj2 (Kir2.1) shear-stress response, absent from baseline",
+      "New endothelial survival/anti-apoptotic theme via Tnfrsf11b (OPG)-TRAIL blockade and tube formation, absent from baseline",
+      "New metabolic-support theme via Slc1a1-mediated metabolite influx fueling mitochondrial respiration, absent from baseline",
+      "Rgs6 added as a tip-cell/Notch-arterial gene not mentioned in baseline",
+      "Explicit 'evidence gap' designation for many program/distinctive genes (Hopx, Prdm1, Ctdspl, Cacna1c, Chst9, Syt12, Jph1, Rhod, Bag2, Epb41l4b, Gabarapl1)"
+    ],
+    "candidate_removed_or_weakened": [
+      "Dll4-Notch-CXCR4 arteriovenous specification axis dropped as a standalone mechanism",
+      "Hopx as a marker confirming intracranial arterial EC identity is reversed: candidate flags it as lacking direct published evidence in brain endothelial contexts",
+      "Prdm1's supporting role in the Notch-arterial axis dropped, now listed as an evidence gap",
+      "Cdc42ep3 dropped as supporting evidence for Nrp1-CDC42-filopodia link",
+      "Specific TGF-β-mediated repression of Angpt2 and vascular-integrity mechanism (Tgfbr1/2 KO hemorrhage, Alk1/Alk5-Smad2/3 pathway) replaced by a generic, unmechanistic statement that TGF-β 'supports brain vascular development and angiogenic capacity'"
+    ],
+    "core_interpretation_changed": true,
+    "decision_relevant_differences": [
+      "Baseline treats arterial specification (Dll4-Notch-CXCR4-Hopx) as one of three co-equal core mechanisms; candidate removes this axis and explicitly denies evidentiary support for its key marker (Hopx), so a reader would no longer conclude P11 marks arterial EC identity",
+      "Baseline attributes program regulation to a specific TGF-β→Angpt2 repression homeostatic mechanism; candidate discards this specific regulatory logic and instead attributes the Tgfbr1/2 regulator effect to a generic supportive role bundled with unrelated survival/metabolism genes (Tnfrsf11b, Slc1a1)",
+      "Candidate introduces mechanosensitive hemodynamic flow-sensing (Kcnj2) as a full third mechanism, a functional category entirely absent from baseline, which would lead a reader to a different functional hypothesis about what drives program activity"
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Only one of three central mechanisms (tip-cell/sprouting angiogenesis via Angpt2, Cxcr4, Nrp1) is substantively shared, and even that mechanism drops a supporting gene (Cdc42ep3) and adds another (Rgs6). The other two baseline mechanisms — Dll4-Notch-CXCR4 arterial specification anchored by Hopx, and TGF-β-mediated Angpt2 repression for vascular integrity — are dropped or reduced to vague, non-mechanistic statements; Hopx's role is explicitly reversed from 'confirmed arterial marker' to 'evidence gap.' In their place, candidate introduces two entirely new mechanisms (Kcnj2 flow-sensing; Tnfrsf11b/Slc1a1 survival-metabolism) built on genes never discussed in baseline. This is not additional detail on the same story but a different set of central mechanisms, satisfying materially_changed.",
+    "semantic_relation": "materially_changed",
+    "shared_core_conclusions": [
+      "P11 reflects postnatal brain endothelial tip-cell identity / sprouting angiogenesis",
+      "Angpt2 and Cxcr4 are core tip-cell marker genes",
+      "Nrp1 acts as a regulator promoting tip-cell filopodia formation via CDC42",
+      "Tek is retained as a supporting regulator of the angiogenic axis"
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.10235190000000001,
+    "duration_api_ms": 55568,
+    "duration_ms": 52735,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 54.18
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "content_hash": "a50e747ba3414a196f404ba1e6307259572dfddc4531ad5d202f258356825635",
+  "doi": "10.1074/jbc.m509480200",
+  "errors": [],
+  "paper_key": "e5cc9253862bf4bbe770",
+  "pmcid": null,
+  "pmid": "16314419",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "There is increasing evidence that protein function can be modified by nitration of tyrosine residue(s), a reaction catalyzed by proteins with peroxidase activity, or that occurs by interaction with peroxynitrite, a highly reactive oxidant formed by the reaction of nitric oxide with superoxide. Although there are numerous reports describing loss of function after treatment of proteins with peroxynitrite, we recently demonstrated that the microsomal glutathione S-transferase 1 is activated rather than inactivated by peroxynitrite and suggested that this could be attributed to nitration of tyrosine residues rather than to other effects of peroxynitrite. In this report, the nitrated tyrosine residues of peroxynitrite-treated microsomal glutathione S-transferase 1 were characterized by mass spectrometry and their functional significance determined. Of the seven tyrosine residues present in the protein, only those at positions 92 and 153 were nitrated after treatment with peroxynitrite. Three mutants (Y92F, Y153F, and Y92F, Y153F) were created using site-directed mutagenesis and expressed in LLC-PK1 cells. Treatment of the microsomal fractions of these cells with peroxynitrite resulted in an approximately 2-fold increase in enzyme activity in cells expressing the wild type microsomal glutathione S-transferase 1 or the Y153F mutant, whereas the enzyme activity of Y92F and double site mutant was unaffected. These results indicate that activation of microsomal glutathione S-transferase 1 by peroxynitrite is mediated by nitration of tyrosine residue 92 and represents one of the few examples in which a gain in function has been associated with nitration of a specific tyrosine residue.",
+  "text_type": "abstract",
+  "title": "Nitration of tyrosine 92 mediates the activation of rat microsomal glutathione s-transferase by peroxynitrite."
+}

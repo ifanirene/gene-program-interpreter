@@ -1,0 +1,128 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-adjudicator-opus-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-96caf1f9350d2ce119e3",
+    "RL-a00515549f5be58f8057",
+    "RL-aa469413a31b091378a5",
+    "RL-b86ef285975d5bb08e0f"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 1381,
+        "source_type": "abstract",
+        "start": 1238,
+        "text": "In the liver, the proportion of NSDHL negative cells dropped from approximately 50% at postnatal day 6 to approximately 20% at one year of age."
+      },
+      "function_supported_genes": [
+        "Nsdhl"
+      ],
+      "rationale": "The paper gene-specifically tracks NSDHL-deficient liver cells and shows their progressive negative selection over life, which functionally supports an essential cholesterol-biosynthesis requirement even though the exact C4-demethylation reaction is not assayed. Mouse liver examined across the lifespan is the target context, so 'direct' is accurate; B's background_only/overclaim downgrade is not warranted because the depletion is a functional finding, not mere background.",
+      "red_flags": [],
+      "review_id": "RL-96caf1f9350d2ce119e3",
+      "studied_genes": [
+        "Nsdhl"
+      ],
+      "support": "partial"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1176,
+        "source_type": "abstract",
+        "start": 1076,
+        "text": "Tm7sf2 deficiency during liver regeneration alters lipid metabolism and generates a stress condition"
+      },
+      "function_supported_genes": [
+        "Tm7sf2"
+      ],
+      "rationale": "The Tm7sf2 knockout causally establishes the enzyme's C14-reductase identity and hepatic role, directly matching the mechanism's claim that its deficiency causes lipid accumulation and ER stress in liver. Unchanged cholesterol content is a nuance but not a contradiction; however the regenerating-liver setting is a different condition than aging/MASLD, so the declared 'direct' context is overclaimed relative to same-tissue/different-condition partial.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-a00515549f5be58f8057",
+      "studied_genes": [
+        "Tm7sf2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 841,
+        "source_type": "abstract",
+        "start": 663,
+        "text": "We found that the pathway components, including MSMO1, CYP51A1, EBP and SC5D, function as potential suppressors of ferroptosis, whereas DHCR7 functions as a pro-ferroptotic gene."
+      },
+      "function_supported_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Sc5d",
+        "Dhcr7"
+      ],
+      "rationale": "The genome-wide CRISPR screen substantively and causally implicates all four genes as functional distal cholesterol-biosynthesis enzymes (SC5D/DHCR7 with explicit catalytic steps; MSMO1/CYP51A1 as confirmed pathway hits), which is exactly the 'distal cholesterol biosynthesis enzyme' claim behind the citation. This resolves toward B: the CRISPR functional evidence exceeds mere listing, so all four are function-supported; the cancer/kidney systems are indirect to mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-aa469413a31b091378a5",
+      "studied_genes": [
+        "Cyp51",
+        "Msmo1",
+        "Sc5d",
+        "Dhcr7"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-adjudicator-opus-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "observational",
+      "evidence_span": {
+        "end": 993,
+        "source_type": "abstract",
+        "start": 925,
+        "text": "Three patients had MVD mutations, and 2 patients had PMVK mutations."
+      },
+      "function_supported_genes": [
+        "Mvd",
+        "Pmvk"
+      ],
+      "rationale": "Patient genotyping identifies gene-specific MVD and PMVK loss-of-function mutations whose cholesterol-replenishment response supports their mevalonate-pathway role, but only associatively and without demonstrating the precise enzymatic reactions, so partial is correct. The abstract does report the finding sufficiently for a partial judgment, so B's insufficient_text flag is not warranted; human skin disease is indirect to mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-b86ef285975d5bb08e0f",
+      "studied_genes": [
+        "Mvd",
+        "Pmvk"
+      ],
+      "support": "partial"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p21--r1",
+  "slot": "adjudication",
+  "telemetry": {
+    "cost_usd_equivalent": 0.38977849999999997,
+    "duration_api_ms": 141042,
+    "duration_ms": 139634,
+    "model": "opus",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 140.685
+  }
+}

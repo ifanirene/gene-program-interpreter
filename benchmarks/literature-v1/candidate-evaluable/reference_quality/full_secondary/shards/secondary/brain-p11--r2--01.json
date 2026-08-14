@@ -1,0 +1,126 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-0c73ccc4d28e3a565c0b",
+    "RL-24d856c907e05d8e3a6f",
+    "RL-493a12558580ff39f9c5",
+    "RL-52c1f64bf508b8222052"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 682,
+        "source_type": "abstract",
+        "start": 491,
+        "text": "In the present study we demonstrate the ability of OPG to support endothelial cell survival, as well as the formation of cord-like structures in vitro using a matrigel tubule formation assay."
+      },
+      "function_supported_genes": [
+        "Tnfrsf11b"
+      ],
+      "rationale": "Model-assessed: the in vitro human endothelial assays directly support OPG-dependent survival and angiogenic cord formation, but not the mouse postnatal brain context.",
+      "red_flags": [],
+      "review_id": "RL-0c73ccc4d28e3a565c0b",
+      "studied_genes": [
+        "Tnfrsf11b"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1431,
+        "source_type": "abstract",
+        "start": 1317,
+        "text": "Pharmacological blockade of ANG2 improved brain vascular pathologies in all HHT models, albeit to varying degrees."
+      },
+      "function_supported_genes": [
+        "Angpt2"
+      ],
+      "rationale": "Model-assessed: ANG2 blockade causally improves proangiogenic cerebrovascular defects in mouse HHT models. The brain endothelial setting matches, but the disease context is not postnatal development.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-24d856c907e05d8e3a6f",
+      "studied_genes": [
+        "Angpt2"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 711,
+        "source_type": "abstract",
+        "start": 494,
+        "text": "Zebrafish mutants for the chemokine receptor cxcr4a or its ligand cxcl12b establish a decreased number of arterial-venous connections, leading to the formation of an unperfused and interconnected blood vessel network."
+      },
+      "function_supported_genes": [
+        "Cxcr4"
+      ],
+      "rationale": "Model-assessed: cxcr4a mutant data causally support CXCR4 control of brain arterial-venous network formation. The zebrafish system makes the context indirect for a mouse program.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-493a12558580ff39f9c5",
+      "studied_genes": [
+        "Cxcr4"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "indirect",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1373,
+        "source_type": "abstract",
+        "start": 1218,
+        "text": "This evidence indicates that OPG blocks endothelial cell apoptosis through binding TRAIL and preventing its interaction with death-inducing TRAIL-receptors"
+      },
+      "function_supported_genes": [
+        "Tnfrsf11b"
+      ],
+      "rationale": "Model-assessed: biochemical and apoptosis experiments directly support OPG-mediated endothelial survival through TRAIL binding. Human microvascular endothelial cells without a brain developmental setting provide indirect context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-52c1f64bf508b8222052",
+      "studied_genes": [
+        "Tnfrsf11b"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "brain-p11--r2",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 69632,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 80748,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 4206,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 85.114
+  }
+}

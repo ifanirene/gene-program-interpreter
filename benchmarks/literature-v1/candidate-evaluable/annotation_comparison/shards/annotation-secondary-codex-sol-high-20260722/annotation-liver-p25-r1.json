@@ -1,0 +1,46 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-liver-p25-r1",
+    "assessor_id": "annotation-secondary-codex-sol-high-20260722",
+    "candidate_additions": [
+      "Assigns Cyp2c50 specifically to arachidonic acid/EET epoxygenase activity.",
+      "Defines a Sult2a8–Cdo1 bile acid axis linking sulfation and taurine conjugation to cholesterol handling.",
+      "Adds Htatip2-mediated lipid storage/oxidation and Sord-linked polyol–fructose metabolism.",
+      "Adds CAR/PXR/Nrf2 and PPARalpha regulatory context."
+    ],
+    "candidate_removed_or_weakened": [
+      "Drops the Car5a-supported urea-cycle/ammonia-detoxification conclusion.",
+      "Drops Agmat-mediated arginine/polyamine nitrogen disposal.",
+      "Weakens the broader sulfur amino acid and nitrogen-disposal theme by reassigning Cdo1 mainly to bile acid conjugation.",
+      "Omits Lonp2-mediated peroxisomal protein quality control."
+    ],
+    "core_interpretation_changed": false,
+    "decision_relevant_differences": [
+      "The candidate no longer supports nitrogen/ammonia disposal as a distinct third program mechanism.",
+      "Cdo1 is reframed from general sulfur catabolism toward taurine-dependent bile acid biotransformation.",
+      "The lipid theme expands to polyol–fructose metabolism and Htatip2 regulation."
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations retain the same dominant interpretation: a hepatocyte program coupling xenobiotic/endobiotic detoxification, bile acid handling, and lipid metabolism in an aging/MASLD context. The candidate adds specific enzyme and regulatory assignments, but meaningfully removes the baseline Car5a/Agmat nitrogen-disposal mechanism and reframes Cdo1. This is a meaningful refinement, not a change to the central program identity.",
+    "semantic_relation": "same_core_with_meaningful_refinement",
+    "shared_core_conclusions": [
+      "Coordinated Phase I/II hepatic detoxification involving CYP, ALDH, GST, AKR, and SULT enzymes.",
+      "Bile acid/steroid processing and elimination are major program functions.",
+      "FITM1, ECI2, HAO2, CYB5B, and related genes support hepatic lipid storage and fatty-acid metabolism.",
+      "The program is interpreted in a hepatocyte aging/MASLD context."
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cached_input_tokens": 0,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 17102,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 631,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 16.19
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "content_hash": "1666f644230b12a02c82ab08a1f58c5c4d1dccfe39439624903031c24268a32e",
+  "doi": "10.3389/fphar.2026.1823203",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "d3322014b8198893075c",
+  "pmcid": "PMC13369619",
+  "pmid": "42460009",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Pyruvate kinase liver and red blood cells (PKLR) is linked to metabolic dysfunction-associated steatotic liver disease (MASLD). Previous study, we identified JNK-IN-5A, a c-Jun N-terminal kinase (JNK) inhibitor that suppresses PKL expression in HepG2 cells using computational drug repurposing and screened out four hit JNK-IN-5A derivatives (SET-151, SET-152, SET-162, SET-130).\n\nMATERIALS AND METHODS: We validated therapeutic efficacy of JNK-IN-5A and four derivative (SET-151, SET-152, SET-162, SET-130). HepG2 de novo lipogenesis (DNL) steatosis model was used in vitro validation. RNA sequencing data were analysed using systems biology approaches, including transcriptomic profiling and COMPASS analysis. GLP-like toxicity assessment in rat model shows in vivo safety and MASLD rat model revealed in vivo therapeutic effect to MASLD and MASH.\n\nRESULTS: In a HepG2 DNL steatosis model, all compounds reduced intracellular triacylglycerol (TAG) and inhibited key DNL proteins (PKL, FASN, ACACA, SCD1, SREBP1-c, ChREBP). Transcriptomic profiling revealed stronger anti-steatotic effects with SET-151, SET-152, and SET-162, which uniquely downregulated genes in pyruvate metabolism, bile acid synthesis, fatty acid metabolism, and glycolysis. Compass analysis showed these derivatives significantly altered lipid-related metabolic reactions, unlike JNK-IN-5A. In a high-sucrose, high-fat diet-induced MASLD rat model, JNK-IN-5A and SET-152 reduced hepatic lipid accumulation, liver stiffness, and MASLD biomarkers.\n\nCONCLUSION: Our findings identify PKLR as a promising therapeutic target for MASLD and MASH. SET-152 suppressing PKLR through JNK inhibition highlights its potential as a new drug for MASLD and MASH therapy.",
+  "text_type": "abstract",
+  "title": "Targeting PKLR and lipogenic enzymes through JNK inhibition to develop a therapeutic strategy for MASLD and MASH."
+}

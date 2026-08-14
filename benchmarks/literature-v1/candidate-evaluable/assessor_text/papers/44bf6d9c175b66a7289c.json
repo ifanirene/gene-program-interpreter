@@ -1,0 +1,14 @@
+{
+  "content_hash": "29f64a99a0d196f872c08436e8f5b5007155779d9634cc4237adc094b383ffb3",
+  "doi": "10.1177/1010428318777344",
+  "errors": [],
+  "paper_key": "44bf6d9c175b66a7289c",
+  "pmcid": null,
+  "pmid": "29804515",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Aflatoxin B1, arguably the most potent human carcinogen, induces liver cancer in humans, rats, trout, ducks, and so on, but adult mice are totally resistant. This resistance is because of a detoxifying enzyme, mouse glutathione S-transferase A3, which binds to and inactivates aflatoxin B1 epoxide, preventing the epoxide from binding to DNA and causing mutations. Glutathione S-transferase A3 or its analog has not been detected in any of the sensitive species, including humans. The generation of a glutathione S-transferase A3 knockout (represented as KO or -/-) mice has allowed us to study the induction of liver cancer in mice by aflatoxin B1. In contrast to the induction of hepatocellular carcinomas in other species, aflatoxin B1 induces cholangiocarcinomas in GSTA3-/- mice. In other species and in knockout mice, the induction of liver cancer is preceded by extensive proliferation of small oval cells, providing additional evidence that oval cells are bipolar stem cells and may give rise to either hepatocellular carcinoma or cholangiocarcinoma depending on the nature of the hepatocarcinogen and the species of animal. The recent development of mouse oval cell lines in our laboratory from aflatoxin B1-treated GSTA3-/- mice should provide a new venue for study of the properties and potential of putative mouse liver stem cells.",
+  "text_type": "abstract",
+  "title": "Participation of liver stem cells in cholangiocarcinogenesis after aflatoxin B1 exposure of glutathione S-transferase A3 knockout mice."
+}

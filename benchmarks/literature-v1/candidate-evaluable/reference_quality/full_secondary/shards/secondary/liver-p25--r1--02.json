@@ -1,0 +1,124 @@
+{
+  "assessment_type": "model",
+  "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+  "attempt": 1,
+  "review_ids": [
+    "RL-3a33580a6464c5931f9d",
+    "RL-550926b5b162413b40aa",
+    "RL-5dd4b5247c95cbc27365",
+    "RL-5f3a18841e1138ffe838"
+  ],
+  "reviews": [
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "not_applicable",
+      "directness": "causal",
+      "evidence_span": {
+        "end": null,
+        "source_type": "",
+        "start": null,
+        "text": ""
+      },
+      "function_supported_genes": [],
+      "rationale": "The paper substantively perturbs hepatic Cdo1 and establishes an AMPK/FAO role in mouse NAFLD, but it does not support the assigned taurine–bile acid conjugation function; hepatic cysteine and taurine were unchanged after liver-specific knockout.",
+      "red_flags": [
+        "wrong_function"
+      ],
+      "review_id": "RL-3a33580a6464c5931f9d",
+      "studied_genes": [
+        "Cdo1"
+      ],
+      "support": "no"
+    },
+    {
+      "assessed_context": "direct",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "accurate",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 4839,
+        "source_type": "full_text",
+        "start": 4598,
+        "text": "via the CYP450 epoxygenase CYP2C50, one of the key players in arachidonic acid metabolism. Restoring hepatic CYP2C50 expression in the background of Chrebp⍺ deficiency is sufficient to reduce liver steatosis, fibrosis, and hepatocyte injury."
+      },
+      "function_supported_genes": [
+        "Cyp2c50"
+      ],
+      "rationale": "The paper identifies CYP2C50 as an arachidonic-acid epoxygenase and shows that restoring it causally protects against diet-induced liver disease. This directly supports the citation-specific endobiotic Phase I function in mouse hepatocytes.",
+      "red_flags": [],
+      "review_id": "RL-550926b5b162413b40aa",
+      "studied_genes": [
+        "Cyp2c50"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 671,
+        "source_type": "abstract",
+        "start": 517,
+        "text": "Disruption of one allele of the Sult2a8 gene in male HT mice resulted in losing ~ 50% of the 7α-OH sulfonating activity compared to wild-type (WT) control"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "Sult2a8 haplodeficiency causally reduced hepatic 7α-hydroxyl bile-acid sulfonation and affected bile-acid and cholesterol metabolism. The mouse-liver context is relevant, but fasting rather than aging or MASLD makes the declared direct context overclaimed.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5dd4b5247c95cbc27365",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    },
+    {
+      "assessed_context": "partial",
+      "assessor_id": "candidate-secondary-codex-sol-high-20260722",
+      "context_label_accuracy": "overclaimed",
+      "direction": "matches",
+      "directness": "causal",
+      "evidence_span": {
+        "end": 1098,
+        "source_type": "abstract",
+        "start": 955,
+        "text": "Functional studies using recombinant His-tagged mL-STL protein revealed its narrow sulfonating activities toward 7α-hydroxyl primary bile acids"
+      },
+      "function_supported_genes": [
+        "Sult2a8"
+      ],
+      "rationale": "Recombinant-protein assays directly establish Sult2a8 activity toward 7α-hydroxyl primary bile acids, while the study also reports liver-predominant, PPARα-dependent expression. The fasting and recombinant-assay setting is relevant but not the target aging/MASLD context.",
+      "red_flags": [
+        "context_overclaim"
+      ],
+      "review_id": "RL-5f3a18841e1138ffe838",
+      "studied_genes": [
+        "Sult2a8"
+      ],
+      "support": "supports"
+    }
+  ],
+  "schema_version": 1,
+  "session_id": "liver-p25--r1",
+  "slot": "secondary",
+  "telemetry": {
+    "cached_input_tokens": 123648,
+    "cost_usd_equivalent": null,
+    "executable": "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "input_tokens": 155665,
+    "model": "gpt-5.6-sol",
+    "output_tokens": 7379,
+    "provider": "codex",
+    "reasoning_effort": "high",
+    "turns": 1,
+    "wall_seconds": 146.872
+  }
+}

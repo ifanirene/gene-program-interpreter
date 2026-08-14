@@ -1,0 +1,28 @@
+context:
+  organism: mouse
+  species_taxid: 10090
+  tissue: brain
+  cell_type: brain endothelial cell
+  conditions:
+    - postnatal development
+  context_terms:
+    - blood-brain barrier
+    - arteriovenous zonation
+    - tight junctions
+    - angiogenesis
+    - tip cells
+    - Notch signaling
+    - VEGF signaling
+    - mechanotransduction
+  assay: Perturb-seq
+  annotation_role: brain endothelial cell biologist
+  annotation_context: a consensus gene expression program in mouse brain endothelial cells, in the context of postnatal development
+  keyword_query: '("brain endothelial cell" OR brain OR "postnatal development" OR "blood-brain barrier" OR "arteriovenous zonation" OR "tight junctions" OR angiogenesis OR "tip cells" OR "Notch signaling" OR "VEGF signaling" OR mechanotransduction)'
+  condition_context: 'Context: brain tissue; brain endothelial cell biology spanning blood-brain barrier, arteriovenous zonation, tight junctions, angiogenesis, tip cells, Notch signaling, VEGF signaling, mechanotransduction; with attention to postnatal development.'
+  functional_context: ''
+  report_dataset_crumb: Mouse brain endothelial Perturb-seq
+  evidence_context_types:
+    - direct
+    - partial
+    - indirect
+    - mixed

@@ -1,0 +1,43 @@
+{
+  "assessment": {
+    "assessment_id": "annotation-brain-p10-r1",
+    "assessor_id": "annotation-primary-sonnet-high-20260722",
+    "candidate_additions": [
+      "A new mitochondrial mechanism (Chchd6 MICOS/cristae organization, Metap1d N-terminal methionine processing) with no counterpart in the baseline",
+      "Explicit Hedgehog pathway signaling mechanism: ciliary GPCR trafficking of Smo/GPR161 as the functional output of Bbs9, Nme7, Tbc1d32",
+      "Finer-grained assignment of individual cilia genes to specific subcomplexes (CPLANE, γ-TuRC, IFT-A/B, distal appendages)"
+    ],
+    "candidate_removed_or_weakened": [
+      "Endothelial primary cilia as mechanosensors for blood flow shear stress (KLF2 induction, hemodynamic sensing) — entirely absent from candidate",
+      "Gata2 as master endothelial transcription factor / HIF-glycolytic regulator — dropped",
+      "Eng/Endoglin as TGF-β co-receptor implicated in HHT and brain AVM risk — dropped",
+      "Tet1-mediated epigenetic control of angiogenic gene expression — dropped",
+      "CNS vascular identity/BBB maintenance reduced from a full regulatory mechanism (Fzd4+Gata2+Eng+Tet1) to a one-line mention of Fzd4 providing 'cell-type identity context'"
+    ],
+    "core_interpretation_changed": true,
+    "decision_relevant_differences": [
+      "Baseline attributes the cilia module's functional purpose to hemodynamic mechanotransduction (shear-stress sensing), while candidate attributes it to Hedgehog morphogen signaling (Smo/GPR161 export) — these imply different experiments/phenotypes to expect upon perturbation (flow-response assays vs. Shh pathway readouts) and are not presented as complementary",
+      "Candidate adds an unrelated mitochondrial cristae/proteostasis mechanism (Chchd6, Metap1d) that changes the perceived functional scope of the program beyond cilia biology",
+      "Candidate substantially narrows the regulatory/identity story by dropping Gata2, Eng, and Tet1, leaving only Fzd4 as identity context — a reader would come away with a much thinner view of how this program relates to BBB maintenance and CNS vascular identity"
+    ],
+    "evidence_depth_change": "mixed",
+    "rationale": "Both annotations agree the dominant signal is a coherent primary-cilia biogenesis/trafficking module built on the same gene set, situated in postnatal brain endothelium. Beyond that shared core, the two diverge substantively: the candidate replaces the baseline's mechanosensory/shear-stress interpretation of ciliary function with a Hedgehog-signaling (Smo/GPR161 trafficking) interpretation, introduces an unrelated mitochondrial mechanism absent from the baseline, and drops the baseline's regulatory narrative built on Gata2, Eng, and Tet1 (BBB maintenance, TGF-β vascular remodeling, epigenetic angiogenic control), retaining only Fzd4. These are not just added detail or citations — they change what the program is claimed to functionally do (mechanotransduction vs. Hedgehog signaling) and what regulatory genes are implicated in its identity/BBB role, which could lead a reader to prioritize different validation experiments or follow-up hypotheses. This crosses from refinement into material reinterpretation.",
+    "semantic_relation": "materially_changed",
+    "shared_core_conclusions": [
+      "Primary cilia biogenesis/trafficking machinery (BBSome, IFT-B, transition zone, distal appendages) is the dominant program theme, built from the same core genes: Bbs9, Cc2d2a, Wdpcp, Ift74, Sdccag8, Tbc1d32, Cep164, Nme7",
+      "The program is interpreted in the context of mouse brain endothelial cells during postnatal CNS vascular development",
+      "Fzd4/Norrin-Wnt signaling is retained as a regulator providing CNS endothelial identity context"
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.10338789999999999,
+    "duration_api_ms": 53249,
+    "duration_ms": 50992,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 52.496
+  }
+}

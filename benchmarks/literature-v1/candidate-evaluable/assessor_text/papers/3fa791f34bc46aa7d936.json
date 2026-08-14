@@ -1,0 +1,14 @@
+{
+  "content_hash": "e993d3bdb50ee9d6a3ea86fa9d607aacd00555be837a1c42dc767de6ab1bd545",
+  "doi": "10.1161/01.cir.0000143163.76212.0b",
+  "errors": [],
+  "paper_key": "3fa791f34bc46aa7d936",
+  "pmcid": null,
+  "pmid": "15451793",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Two acyl-coenzyme A:cholesterol acyltransferase (ACAT) genes, ACAT1 and ACAT2, have been identified that encode 2 proteins responsible for intracellular cholesterol esterification.\n\nMETHODS AND RESULTS: In this study, immunohistology was used to establish their cellular localization in human liver biopsies. ACAT2 protein expression was confined to hepatocytes, whereas ACAT1 protein was found in Kupffer cells only. Studies with a highly specific ACAT2 inhibitor, pyripyropene A, in microsomal activity assays demonstrated that ACAT2 activity was highly variable among individual human liver samples, whereas ACAT1 activity was more similar in all specimens. ACAT2 provided the major cholesterol-esterifying activity in 3 of 4 human liver samples examined.\n\nCONCLUSIONS: The data suggest that in diseases in which dysregulation of cholesterol metabolism occurs, such as hypercholesterolemia and atherosclerosis, ACAT2 should be considered a target for prevention and treatment.",
+  "text_type": "abstract",
+  "title": "ACAT2 is localized to hepatocytes and is the major cholesterol-esterifying enzyme in human liver."
+}

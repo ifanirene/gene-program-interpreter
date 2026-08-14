@@ -1,0 +1,16 @@
+{
+  "content_hash": "9427140532ddc4f448ceadcc00d1a9797b778711693e082c821e0bb6dc3ecc76",
+  "doi": "10.1080/15548627.2024.2435234",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "7c5ef04669f0dd0a1c0c",
+  "pmcid": "PMC11925108",
+  "pmid": "39611307",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "SORT1 (sortilin 1), a member of the the Vps10 (vacuolar protein sorting 10) family, is involved in hepatic lipid metabolism by regulating very low-density lipoprotein (VLDL) secretion and facilitating the lysosomal degradation of CES1 (carboxylesterase 1), crucial for triglyceride (TG) breakdown in the liver. This study explores whether SORT1 is targeted for degradation by chaperone-mediated autophagy (CMA), a selective protein degradation pathway that directs proteins containing KFERQ-like motifs to lysosomes via LAMP2A (lysosomal-associated membrane protein 2A). Silencing LAMP2A or HSPA8/Hsc70 with siRNA increased cytosolic SORT1 protein levels. Leupeptin treatment induced lysosomal accumulation of SORT1, unaffected by siLAMP2A co-treatment, indicating CMA-dependent degradation. Human SORT1 contains five KFERQ-like motifs (658VVTKQ662, 730VREVK734, 733VKDLK737, 734KDLKK738, and 735DLKKK739), crucial for HSPA8 recognition; mutating any single amino acid within these motifs decreased HSPA8 binding. Furthermore, compromised CMA activity resulted in elevated SORT1-mediated degradation of CES1, contributing to increased lipid accumulation in hepatocytes. Consistent with in vitro findings, LAMP2A knockdown in mice exacerbated high-fructose diet-induced fatty liver, marked by increased SORT1 and decreased CES1 levels. Conversely, LAMP2A overexpression promoted SORT1 degradation and CES1D accumulation, counteracting fasting-induced CES1D suppression through CMA activation. Our findings reveal that SORT1 is a substrate of CMA, highlighting its crucial role in directing CES1 to lysosomes. Consequently, disrupting CMA-mediated SORT1 degradation significantly affects CES1-dependent TG hydrolysis, thereby affecting hepatic lipid homeostasis.Abbreviations: APOB: apolipoprotein B; CES1: carboxylesterase 1; CMA: chaperone-mediated autophagy; HSPA8/Hsc70: heat shock protein family A (Hsp70) member 8; LAMP2A: lysosomal associated membrane protein 2A; LDL-C: low-density lipoprotein-cholesterol; PLIN: perilipin; SORT1: sortilin 1; TG: triglyceride; VLDL: very low-density lipoprotein; Vps10: vacuolar protein sorting 10.",
+  "text_type": "abstract",
+  "title": "Impaired chaperone-mediated autophagy leads to abnormal SORT1 (sortilin 1) turnover and CES1-dependent triglyceride hydrolysis."
+}

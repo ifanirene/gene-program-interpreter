@@ -1,0 +1,16 @@
+{
+  "content_hash": "85cdec643c4731fa789ce8de57c12b4ffdfb11e0b93c46c7416bbdd6aaa58d5a",
+  "doi": "10.1111/nyas.13435",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "a3e13a022e34bc066dd1",
+  "pmcid": "PMC5927596",
+  "pmid": "28868790",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "The coordinated regulation between cellular glucose uptake and endogenous glucose production is indispensable for the maintenance of constant blood glucose concentrations. The liver contributes significantly to this process by altering the levels of hepatic glucose release, through controlling the processes of de novo glucose production (gluconeogenesis) and glycogen breakdown (glycogenolysis). Various nutritional and hormonal stimuli signal to alter hepatic gluconeogenic flux, and suppression of this metabolic pathway during the postprandial state can, to a significant extent, be attributed to insulin. Here, we review some of the molecular mechanisms through which insulin modulates hepatic gluconeogenesis, thus controlling glucose production by the liver to ultimately maintain normoglycemia. Various signaling pathways governed by insulin converge at the level of transcriptional regulation of the key hepatic gluconeogenic genes PCK1 and G6PC, highlighting this as one of the focal mechanisms through which gluconeogenesis is modulated. In individuals with compromised insulin signaling, such as insulin resistance in type 2 diabetes, insulin fails to suppress hepatic gluconeogenesis, even in the fed state; hence, an insight into these insulin-moderated pathways is critical for therapeutic purposes.",
+  "text_type": "abstract",
+  "title": "Insulin regulation of gluconeogenesis."
+}

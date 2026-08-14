@@ -1,0 +1,16 @@
+{
+  "content_hash": "98224a46a604b79b3f1b9e3d9241e280b154b0796b9bd989bf2bcab2a9375ddb",
+  "doi": "10.1016/j.ajhg.2014.01.006",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "131224a809e55d8be356",
+  "pmcid": "PMC3951944",
+  "pmid": "24530203",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Four children in three unrelated families (one consanguineous) presented with lethargy, hyperlactatemia, and hyperammonemia of unexplained origin during the neonatal period and early childhood. We identified and validated three different CA5A alterations, including a homozygous missense mutation (c.697T>C) in two siblings, a homozygous splice site mutation (c.555G>A) leading to skipping of exon 4, and a homozygous 4 kb deletion of exon 6. The deleterious nature of the homozygous mutation c.697T>C (p.Ser233Pro) was demonstrated by reduced enzymatic activity and increased temperature sensitivity. Carbonic anhydrase VA (CA-VA) was absent in liver in the child with the homozygous exon 6 deletion. The metabolite profiles in the affected individuals fit CA-VA deficiency, showing evidence of impaired provision of bicarbonate to the four enzymes that participate in key pathways in intermediary metabolism: carbamoylphosphate synthetase 1 (urea cycle), pyruvate carboxylase (anaplerosis, gluconeogenesis), propionyl-CoA carboxylase, and 3-methylcrotonyl-CoA carboxylase (branched chain amino acids catabolism). In the three children who were administered carglumic acid, hyperammonemia resolved. CA-VA deficiency should therefore be added to urea cycle defects, organic acidurias, and pyruvate carboxylase deficiency as a treatable condition in the differential diagnosis of hyperammonemia in the neonate and young child.",
+  "text_type": "abstract",
+  "title": "Mitochondrial carbonic anhydrase VA deficiency resulting from CA5A alterations presents with hyperammonemia in early childhood."
+}

@@ -1,0 +1,101 @@
+{
+  "assessment": {
+    "assessor_id": "claude-sonnet-high",
+    "comparison_id": "brain-p10--candidate-replicate",
+    "matching": [
+      {
+        "leftModule": 1,
+        "rightModule": 1,
+        "similarity": 0.9
+      },
+      {
+        "leftModule": 2,
+        "rightModule": 3,
+        "similarity": 0.0
+      },
+      {
+        "leftModule": 3,
+        "rightModule": 2,
+        "similarity": 0.75
+      }
+    ],
+    "moduleSemanticSimilarity": 0.55,
+    "overall_rationale": "The two replicates largely converge: a near-identical ciliary structural assembly module (L1≈R1), a mitochondrial proteostasis/cristae module that R2 refines with added metabolic genes (L3≈R2), while L2's Hedgehog/GPCR-signaling-output module is only partially captured inside R1's broader assembly framing and the right set is missing a third distinct module.",
+    "pair_scores": [
+      {
+        "left_module": 1,
+        "rationale": "Both describe the same primary cilia structural assembly network (IFT, transition zone, distal appendages, CPLANE) with near-identical supporting gene sets.",
+        "relationship": "same_core",
+        "right_module": 1,
+        "similarity": 0.9
+      },
+      {
+        "left_module": 1,
+        "rationale": "Cilia biogenesis machinery has no mechanistic overlap with mitochondrial BCAA/cristae metabolism aside from a stray shared gene (Wdpcp).",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.1
+      },
+      {
+        "left_module": 1,
+        "rationale": "Right slot is a genuinely missing module.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 2,
+        "rationale": "L2's BBSome/Hedgehog GPCR-trafficking mechanism (Bbs9, Tbc1d32) is present as a subset of R1's broader ciliopathy assembly module but is not R1's central framing.",
+        "relationship": "partial_overlap",
+        "right_module": 1,
+        "similarity": 0.45
+      },
+      {
+        "left_module": 2,
+        "rationale": "Ciliary Hedgehog/GPCR signaling output shares no mechanism with mitochondrial metabolic pathways.",
+        "relationship": "different",
+        "right_module": 2,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 2,
+        "rationale": "Right slot is a genuinely missing module.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      },
+      {
+        "left_module": 3,
+        "rationale": "Mitochondrial inner-membrane biogenesis is unrelated to ciliary structural assembly.",
+        "relationship": "different",
+        "right_module": 1,
+        "similarity": 0.05
+      },
+      {
+        "left_module": 3,
+        "rationale": "Same core mitochondrial proteostasis/cristae mechanism (identical Chchd6/Metap1d genes) with R2 adding a BCAA/co-factor metabolism submechanism.",
+        "relationship": "meaningful_refinement",
+        "right_module": 2,
+        "similarity": 0.75
+      },
+      {
+        "left_module": 3,
+        "rationale": "Right slot is a genuinely missing module.",
+        "relationship": "different",
+        "right_module": 3,
+        "similarity": 0.0
+      }
+    ]
+  },
+  "schema_version": 1,
+  "telemetry": {
+    "cost_usd_equivalent": 0.107481,
+    "duration_api_ms": 31947,
+    "duration_ms": 29378,
+    "model": "sonnet",
+    "stop_reason": "tool_use",
+    "terminal_reason": "completed",
+    "turns": 2,
+    "wall_seconds": 30.399
+  }
+}

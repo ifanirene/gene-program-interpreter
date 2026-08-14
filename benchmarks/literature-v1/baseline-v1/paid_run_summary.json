@@ -1,0 +1,182 @@
+{
+  "api_equivalent_cost_usd_recorded": null,
+  "approval": {
+    "approval_file_sha256": "27bdfc1ad42a6156954c6e524d6136637a1306635032f918304f8e3988cfdac0",
+    "approved": true,
+    "approved_at": "2026-07-21T07:16:35Z",
+    "approved_by": "workspace user",
+    "benchmark_id": "literature-v1",
+    "max_api_equivalent_usd": 28.0,
+    "run_dir": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/baseline-v1"
+  },
+  "benchmark_id": "literature-v1",
+  "blocking_reason": "one or more sessions failed or retried without cumulative attempt telemetry",
+  "execution": {
+    "auth": "subscription",
+    "concurrency": 3,
+    "cost_basis": "api-equivalent",
+    "max_attempts": 2,
+    "max_budget_usd": 1.0,
+    "max_turns": 30,
+    "model": "claude-sonnet-4-6",
+    "per_program_timeout_seconds": 600
+  },
+  "freezable": false,
+  "schema_version": 1,
+  "sessions": [
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P8",
+      "session_id": "brain-p8--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P9",
+      "session_id": "brain-p9--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P10",
+      "session_id": "brain-p10--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P10",
+      "session_id": "brain-p10--r2",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P11",
+      "session_id": "brain-p11--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P11",
+      "session_id": "brain-p11--r2",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P20",
+      "session_id": "liver-p20--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P21",
+      "session_id": "liver-p21--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P21",
+      "session_id": "liver-p21--r2",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P22",
+      "session_id": "liver-p22--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P23",
+      "session_id": "liver-p23--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P24",
+      "session_id": "liver-p24--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P25",
+      "session_id": "liver-p25--r1",
+      "status": "incomplete",
+      "telemetry_complete": false
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": null,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P25",
+      "session_id": "liver-p25--r2",
+      "status": "incomplete",
+      "telemetry_complete": false
+    }
+  ]
+}

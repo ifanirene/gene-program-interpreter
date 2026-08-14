@@ -1,0 +1,16 @@
+{
+  "content_hash": "b991b29b2f3b1815e7d44daef05dff69cb83ec43a3c667e2aff13523b2cb73ff",
+  "doi": "10.1016/j.pharmthera.2019.01.006",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "2f7004460d3801c93774",
+  "pmcid": "PMC6520171",
+  "pmid": "30703416",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Much evidence has accumulated in the literature over the last fifteen years that indicates vitamin A has a role in metabolic disease prevention and causation. This literature proposes that vitamin A can affect obesity development and the development of obesity-related diseases including insulin resistance, type 2 diabetes, hepatic steatosis and steatohepatitis, and cardiovascular disease. Retinoic acid, the transcriptionally active form of vitamin A, accounts for many of the reported associations. However, a number of proteins involved in vitamin A metabolism, including retinol-binding protein 4 (RBP4) and aldehyde dehydrogenase 1A1 (ALDH1A1, alternatively known as retinaldehyde dehydrogenase 1 or RALDH1), have also been identified as being associated with metabolic disease. Some of the reported effects of these vitamin A-related proteins are proposed to be independent of their roles in assuring normal retinoic acid homeostasis. This review will consider both human observational data as well as published data from molecular studies undertaken in rodent models and in cells in culture. The primary focus of the review will be on the effects that vitamin A per se and proteins involved in vitamin A metabolism have on adipocytes, adipose tissue biology, and adipose-related disease, as well as on early stage liver disease, including non-alcoholic fatty liver disease (NAFLD) and non-alcoholic steatohepatitis (NASH).",
+  "text_type": "abstract",
+  "title": "Vitamin A signaling and homeostasis in obesity, diabetes, and metabolic disorders."
+}

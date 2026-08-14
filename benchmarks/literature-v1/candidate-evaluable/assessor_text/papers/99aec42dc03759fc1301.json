@@ -1,0 +1,14 @@
+{
+  "content_hash": "4d4c3982ebc412bda632a1d992648b8f8699eaa145373fb7db968d0e49ed9976",
+  "doi": "10.1016/j.jbspin.2022.105490",
+  "errors": [],
+  "paper_key": "99aec42dc03759fc1301",
+  "pmcid": null,
+  "pmid": "36410683",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: Mevalonate kinase (MVK) plays a role in cholesterol and non-sterol isoprenoid biosynthesis and its deficiency-related diseases are caused by bi-allelic pathogenic mutations in the MVK gene, (MVK), which leads to rare hereditary autoinflammatory diseases. The disease may manifest different clinical phenotypes depending on the degree of the deficiency in the enzyme activity. The complete deficiency of the enzyme activity results in the severe metabolic disease called mevalonic aciduria, while a partial deficiency results in a broad spectrum of clinical presentations called hyper-immunoglobulin D syndrome (HIDS). Serum immunoglobulin (Ig) D and urine mevalonic acid levels may be increased during inflammatory attacks of HIDS.\n\nCASE PRESENTATION: Herein, for the first time in the literature, we present a 6-year-old male patient who suffered from recurrent episodes of fever, polyarthritis, skin rash, diarrhea, abdominal pain, and inflammatory bowel disease-like manifestations with elevated levels of serum IgD, and urine mevalonic acid. Eventually we detected compound heterozygous mutations in the phosphomevalonate kinase (PMVK) gene coding the second enzyme after mevalonate kinase in the mevalonate pathway.\n\nCONCLUSION: For patients presenting with HIDS-like findings, disease exacerbations and persistent chronic inflammation, and having high urinary mevalonic acid and serum IgD levels, raising suspicion in terms of MVK deficiency (MVKD), it is recommended to study all mevalonate pathway enzymes, even if there is no mutation in the MVK gene. It should be kept in mind that novel mutations might be seen such as PMVK gene.",
+  "text_type": "abstract",
+  "title": "A possibly new autoinflammatory disease due to compound heterozygous phosphomevalonate kinase gene mutation."
+}

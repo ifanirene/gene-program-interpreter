@@ -1,0 +1,14 @@
+{
+  "content_hash": "1bc9cd2e85ff06500137e6a923f58ada7f9f5ef229a1311ccbccba2210046f11",
+  "doi": "10.1016/j.peptides.2010.07.020",
+  "errors": [],
+  "paper_key": "418bfcbee4da8276e88b",
+  "pmcid": null,
+  "pmid": "20817058",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Insulin-induced genes (Insigs) including Insig-1 and Insig-2, are proteins that mediate sterol regulation of sterol regulatory element-binding protein (SREBP) cleavage-activating protein (SCAP) and 3-hydroxy-3-methylglutaryl-coenzyme A reductase (HMG-CoA reductase). Insigs perform distinct tasks in the regulation of these effectors: they promote the endoplasmic reticulum (ER) retention of SCAP, but ubiquitin-mediated degradation of HMG-CoA reductase. Through these activities, Insig-1 and Insig-2 influence cholesterol metabolism, lipogenesis, and glucose homeostasis in diverse tissues such as adipose tissue and liver. In this article, we focus on the functions, expression and regulation, gene polymorphisms of Insigs, and their deficiency with diseases.",
+  "text_type": "abstract",
+  "title": "Insulin-induced gene: a new regulator in lipid metabolism."
+}

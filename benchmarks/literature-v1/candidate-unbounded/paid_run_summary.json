@@ -1,0 +1,122 @@
+{
+  "api_equivalent_cost_usd_recorded": null,
+  "approval": {
+    "approval_file_sha256": "402e73a0dd22e26b4c97974d90e948265903bd2fd340fb2a7127e6dd28e27efa",
+    "approved": true,
+    "approved_at": "2026-07-22T15:32:00-07:00",
+    "approved_by": "workspace user (standing subscription research authorization; unbounded turns authorized)",
+    "auth_preflight": {
+      "api_provider": "firstParty",
+      "auth_method": "claude.ai",
+      "command_exit_code": 0,
+      "logged_in": true
+    },
+    "benchmark_id": "literature-v1",
+    "max_api_equivalent_usd": 160.0,
+    "run_dir": "/Volumes/IF_PHAGE/gene-program-interpreter/benchmarks/literature-v1/candidate-unbounded"
+  },
+  "benchmark_id": "literature-v1",
+  "blocking_reason": "one or more sessions failed or retried without cumulative attempt telemetry",
+  "execution": {
+    "auth": "subscription",
+    "concurrency": 4,
+    "cost_basis": "api-equivalent",
+    "max_attempts": 2,
+    "max_budget_usd": 10.0,
+    "max_turns": null,
+    "model": "claude-sonnet-4-6",
+    "per_program_timeout_seconds": 3600
+  },
+  "freezable": false,
+  "schema_version": 1,
+  "sessions": [
+    {
+      "attempts": 1,
+      "cost_usd": 1.7145622999999999,
+      "duration_ms": 983251,
+      "ledger_status": "verified",
+      "num_turns": 80,
+      "program_id": "P10",
+      "session_id": "brain-p10--r1",
+      "status": "ok",
+      "telemetry_complete": true
+    },
+    {
+      "attempts": 1,
+      "cost_usd": 1.221671,
+      "duration_ms": 685996,
+      "ledger_status": "verified",
+      "num_turns": 69,
+      "program_id": "P10",
+      "session_id": "brain-p10--r2",
+      "status": "ok",
+      "telemetry_complete": true
+    },
+    {
+      "attempts": 2,
+      "cost_usd": 3.0946941,
+      "duration_ms": 1636078,
+      "ledger_status": "verified",
+      "num_turns": 175,
+      "program_id": "P11",
+      "session_id": "brain-p11--r1",
+      "status": "ok",
+      "telemetry_complete": true
+    },
+    {
+      "attempts": 1,
+      "cost_usd": 1.6431769999999999,
+      "duration_ms": 868738,
+      "ledger_status": "verified",
+      "num_turns": 107,
+      "program_id": "P11",
+      "session_id": "brain-p11--r2",
+      "status": "ok",
+      "telemetry_complete": true
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": 2094453,
+      "ledger_status": "research_complete",
+      "num_turns": null,
+      "program_id": "P21",
+      "session_id": "liver-p21--r1",
+      "status": "incomplete",
+      "telemetry_complete": true
+    },
+    {
+      "attempts": 2,
+      "cost_usd": null,
+      "duration_ms": 2550825,
+      "ledger_status": "verified",
+      "num_turns": null,
+      "program_id": "P21",
+      "session_id": "liver-p21--r2",
+      "status": "ok",
+      "telemetry_complete": true
+    },
+    {
+      "attempts": 1,
+      "cost_usd": 2.7570213999999997,
+      "duration_ms": 2716765,
+      "ledger_status": "verified",
+      "num_turns": 93,
+      "program_id": "P25",
+      "session_id": "liver-p25--r1",
+      "status": "ok",
+      "telemetry_complete": true
+    },
+    {
+      "attempts": 1,
+      "cost_usd": 2.3428676000000004,
+      "duration_ms": 1803969,
+      "ledger_status": "verified",
+      "num_turns": 96,
+      "program_id": "P25",
+      "session_id": "liver-p25--r2",
+      "status": "ok",
+      "telemetry_complete": true
+    }
+  ]
+}

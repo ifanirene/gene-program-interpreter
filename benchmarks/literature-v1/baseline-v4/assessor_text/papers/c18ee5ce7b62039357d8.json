@@ -1,0 +1,16 @@
+{
+  "content_hash": "dba03f99e9459cff1b11e1bf8c5bf39cc17368df8a36cc9373b6aeef62f24403",
+  "doi": "10.3727/105221618x15277685544442",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "c18ee5ce7b62039357d8",
+  "pmcid": "PMC6190117",
+  "pmid": "29871716",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Cysteine dioxygenase 1 (CDO1) converts cysteine to cysteine sulfinic acid, which can be further converted by cysteine sulfinic acid decarboxylase (CSAD) to hypotaurine for taurine production. This cysteine catabolic pathway plays a major role in regulating hepatic cysteine homeostasis. Furthermore, taurine is used for bile acid conjugation, which enhances bile acid solubility and physiological function in the gut. Recent studies show that this cysteine catabolic pathway is repressed by bile acid signaling, but the molecular mechanisms have not been fully elucidated. The mechanisms of bile acid and farnesoid X receptor (FXR) regulation of hepatic CSAD expression were studied in mice and hepatocytes. We showed that hepatocyte nuclear factor 4\u03b1 (HNF4\u03b1) bound the mouse CSAD proximal promoter and induced CSAD transcription. FXR-induced small heterodimer partner (SHP) repressed mouse CSAD gene transcription via interacting with HNF4\u03b1 as a repressor. Consistent with this model, cholic acid feeding, obeticholic acid administration, and liver HNF4\u03b1 knockdown reduced hepatic CSAD expression, while liver SHP knockout and apical sodium-dependent bile acid transporter (ASBT) inhibitor treatment induced hepatic CSAD expression in mice. Furthermore, TNF-\u03b1 also inhibited CSAD expression, which may be partially mediated by reduced HNF4\u03b1 in mouse hepatocytes. In contrast, bile acids and GW4064 did not inhibit CSAD expression in human hepatocytes. This study identified mouse CSAD as a novel transcriptional target of HNF4\u03b1. Bile acids and cytokines repress hepatic CSAD, which closely couples taurine production to bile acid synthesis in mice. The species-specific regulation of CSAD reflects the differential preference of bile acid conjugation to glycine and taurine in humans and mice, respectively.",
+  "text_type": "abstract",
+  "title": "HNF4\u03b1 Regulates CSAD to Couple Hepatic Taurine Production to Bile Acid Synthesis in Mice."
+}

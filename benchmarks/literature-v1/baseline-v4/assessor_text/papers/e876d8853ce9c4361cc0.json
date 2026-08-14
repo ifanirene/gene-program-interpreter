@@ -1,0 +1,14 @@
+{
+  "content_hash": "6ae7a36de1016fc5f4924137b372aeac86f6aae7a3ffa4145e9dcac64b158a4c",
+  "doi": "10.1016/j.plipres.2024.101303",
+  "errors": [],
+  "paper_key": "e876d8853ce9c4361cc0",
+  "pmcid": null,
+  "pmid": "39521352",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "Peroxisome proliferator-activated receptors (PPARs) constitute a small family of three nuclear receptors that act as lipid sensors, and thereby regulate the transcription of genes having key roles in hepatic and whole-body energy homeostasis, and in other processes (e.g., inflammation), which have far-reaching health consequences. Peroxisome proliferator-activated receptor isotype \u03b1 (PPAR\u03b1) is expressed in oxidative tissues, particularly in the liver, carrying out critical functions during the adaptive fasting response. Advanced omics technologies have provided insight into the vast complexity of the regulation of PPAR expression and activity, as well as their downstream effects on the physiology of the liver and its associated metabolic organs. Here, we provide an overview of the gene regulatory networks controlled by PPAR\u03b1 in the liver in response to fasting. We discuss impacts on liver metabolism, the systemic repercussions and benefits of PPAR\u03b1-regulated ketogenesis and production of fibroblast growth factor 21 (FGF21), a fasting- and stress-inducible metabolic hormone. We also highlight current challenges in using novel methods to further improve our knowledge of PPAR\u03b1 in health and disease.",
+  "text_type": "abstract",
+  "title": "Lipid sensing by PPAR\u03b1: Role in controlling hepatocyte gene regulatory networks and the metabolic response to fasting."
+}

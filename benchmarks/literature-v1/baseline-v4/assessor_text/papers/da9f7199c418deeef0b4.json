@@ -1,0 +1,16 @@
+{
+  "content_hash": "6c602f00f04db7849b97463942a7786d2c1005782f465cbfecc178ffcb8f39ea",
+  "doi": "10.1172/jci25614",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "da9f7199c418deeef0b4",
+  "pmcid": "PMC1184040",
+  "pmid": "16100574",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "End-product feedback inhibition of cholesterol synthesis was first demonstrated in living animals by Schoenheimer 72 years ago. Current studies define Insig proteins as essential elements of this feedback system in mouse liver. In cultured cells, Insig proteins are required for sterol-mediated inhibition of the processing of sterol regulatory element-binding proteins (SREBPs) to their nuclear forms. We produced mice with germline disruption of the Insig2 gene and Cre-mediated disruption of the Insig1 gene in liver. On a chow diet, these double-knockout mice overaccumulated cholesterol and triglycerides in liver. Despite this accumulation, levels of nuclear SREBPs and mRNAs for SREBP target genes in lipogenic pathways were not reduced. Whereas cholesterol feeding reduced nuclear SREBPs and lipogenic mRNAs in wild-type mice, this feedback response was severely blunted in the double-knockout mice, and synthesis of cholesterol and fatty acids was not repressed. The amount of HMG-CoA reductase protein was elevated out of proportion to the mRNA in the double-knockout mice, apparently owing to the failure of cholesterol to accelerate degradation of the enzyme. These studies indicate that the essential elements of the regulatory pathway for lipid synthesis function in liver as they do in cultured cells.",
+  "text_type": "abstract",
+  "title": "Schoenheimer effect explained--feedback regulation of cholesterol synthesis in mice mediated by Insig proteins."
+}

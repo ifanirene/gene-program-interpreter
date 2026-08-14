@@ -1,0 +1,16 @@
+{
+  "content_hash": "feb4f6139bb4f54750a8b4022a6e955c21258baf5fb932ae5d6d63def00e0db0",
+  "doi": "10.1161/strokeaha.123.045248",
+  "errors": [
+    "PMC retrieval failed: HTTPError"
+  ],
+  "paper_key": "aa7e383ad2b6e85ea2cc",
+  "pmcid": "PMC11347087",
+  "pmid": "39129597",
+  "retrieval_status": "retrieved",
+  "schema_version": 1,
+  "source": "pubmed",
+  "text": "BACKGROUND: TGF (transforming growth factor)-\u03b2 pathway is central to blood-brain barrier development as it regulates cross talk between pericytes and endothelial cells. Murine embryos lacking TGF\u03b2 receptor Alk5 (activin receptor-like kinase 5) in brain pericytes (mutants) display endothelial cell hyperproliferation, abnormal vessel morphology, and gross germinal matrix hemorrhage-intraventricular hemorrhage (GMH-IVH), leading to perinatal lethality. Mechanisms underlying how ALK5 signaling in pericytes noncell autonomously regulates endothelial cell behavior remain elusive.\n\nMETHODS: Transcriptomic analysis of human brain pericytes with ALK5 silencing identified differential gene expression. Brain vascular cells isolated from mutant embryonic mice with GMH-IVH and preterm human IVH brain samples were utilized for target validation. Finally, pharmacological and genetic inhibition was used to study the therapeutic effects on GMH-IVH pathology.\n\nRESULTS: Herein, we establish that the TGF\u03b2/ALK5 pathway robustly represses ANGPT2 (angiopoietin-2) in pericytes via epigenetic remodeling. TGF\u03b2-driven SMAD (suppressor of mothers against decapentaplegic) 3/4 associates with TGIF1 (TGF\u03b2-induced factor homeobox 1) and HDAC (histone deacetylase) 5 to form a corepressor complex at the Angpt2 promoter, resulting in promoter deacetylation and gene repression. Moreover, murine and human germinal matrix vessels display increased ANGPT2 expression during GMH-IVH. Isolation of vascular cells from murine germinal matrix identifies pericytes as a cellular source of excessive ANGPT2. In addition, mutant endothelial cells exhibit higher phosphorylated TIE2 (tyrosine protein kinase receptor). Pharmacological or genetic inhibition of ANGPT2 in mutants improves germinal matrix vessel morphology and attenuates GMH pathogenesis. Importantly, genetic ablation of Angpt2 in mutant pericytes prevents perinatal lethality, prolonging survival.\n\nCONCLUSIONS: This study demonstrates that TGF\u03b2-mediated ANGPT2 repression in pericytes is critical for maintaining blood-brain barrier integrity and identifies pericyte-derived ANGPT2 as an important pathological target for GMH-IVH.",
+  "text_type": "abstract",
+  "title": "Loss of TGF\u03b2-Mediated Repression of Angiopoietin-2 in Pericytes Underlies Germinal Matrix Hemorrhage Pathogenesis."
+}
