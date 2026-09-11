@@ -256,6 +256,8 @@ gpi --config configs/example_generic.yaml                  # full pipeline (paid
 
 - `inputs.gene_loading` — required weighted gene-program CSV;
 - `inputs.regulators` or `inputs.regulators_by_condition` — optional Perturb-seq effects;
+- `mask_regulators` — optional pipeline-wide gene list excluded before regulator ranking,
+  STRING validation, research bundling, and annotation; next-best regulators fill the top-N;
 - `context` — organism, tissue, cell type, conditions, and normal cell functions;
 - `output_dir`, and an optional `programs` subset.
 

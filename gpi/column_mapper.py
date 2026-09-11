@@ -19,7 +19,7 @@ Key features:
 import logging
 import numbers
 import re
-from typing import Dict, List, Optional, Set
+from typing import Dict, Iterable, List, Optional, Set
 import pandas as pd
 
 
@@ -360,6 +360,35 @@ def strip_guide_suffix(value: object) -> str:
     text = re.sub(r"_[0-9]+$", "", text)
     text = re.sub(r"-P[0-9]+$", "", text, flags=re.IGNORECASE)
     return text
+
+
+def filter_masked_regulators(
+    df: pd.DataFrame,
+    masked_regulators: Optional[Iterable[str]] = None,
+) -> pd.DataFrame:
+    """Drop masked regulator genes before ranking or downstream evidence work.
+
+    Matching is case-insensitive and gene-level: guide suffixes such as ``_1``
+    and ``-P2`` are removed when a standardized ``target_gene`` column is not
+    available. The input is never mutated.
+    """
+    mask = {
+        str(gene).strip().casefold()
+        for gene in (masked_regulators or [])
+        if str(gene).strip()
+    }
+    if not mask or df.empty:
+        return df.copy()
+
+    if "target_gene" in df.columns:
+        genes = df["target_gene"].astype(str).str.strip()
+    elif "grna_target" in df.columns:
+        genes = df["grna_target"].map(strip_guide_suffix)
+    else:
+        raise ValueError(
+            "Cannot mask regulators without a target_gene or grna_target column."
+        )
+    return df.loc[~genes.str.casefold().isin(mask)].copy()
 
 
 def _coerce_boolean_series(series: pd.Series) -> pd.Series:

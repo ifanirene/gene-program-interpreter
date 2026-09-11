@@ -1,6 +1,7 @@
-# Gene Program Interpreter — installed-plugin E2E run (brain-EC demo, 3 programs).
-# Identical to example_generic.yaml but writes to a fresh output_dir so the run is
-# real (not a resume) and does not clobber the existing brain_endothelial_example.
+# Gene Program Interpreter — full brain-EC Perturb-seq annotation.
+# Derived from configs/brain_ec_e2e.yaml; runs all 100 cNMF programs and
+# excludes the specified TGF-beta/BMP-pathway regulators pipeline-wide before
+# regulator ranking, STRING validation, literature research, and annotation.
 
 context:
   organism: mouse
@@ -25,9 +26,18 @@ inputs:
   regulators: examples/brain_endothelial_demo/Discovery_FP_moi15_seq2_thresh10_k100_default.csv
   celltype_enrichment: examples/brain_endothelial_demo/FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv
 
-output_dir: runs/brain_ec_e2e
+output_dir: runs/brain_ec_all_programs_mask_tgfbr1_eng_tgfbr2_smad4
 
-programs: [9, 48, 70]
+# null selects every program in the loading table (100 programs here).
+programs: null
+
+# Exclude these regulators before every top-N selection so next-best unmasked
+# perturbations are used consistently throughout the report.
+mask_regulators:
+  - Tgfbr1
+  - Eng
+  - Tgfbr2
+  - Smad4
 
 settings:
   n_top_genes: 300
@@ -38,7 +48,8 @@ settings:
 
 research:
   enabled: true
-  concurrency: 3
+  auth: subscription
+  concurrency: 8
   model: claude-sonnet-4-6
   max_turns: 30
   max_budget_usd: 1.0
@@ -48,6 +59,7 @@ annotation:
   model: claude-sonnet-4-6
   max_tokens: 8192
   batch: true
+  batch_size: 25
 
 theme:
   enabled: true

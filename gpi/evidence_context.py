@@ -45,6 +45,7 @@ import pandas as pd
 from .column_mapper import (
     apply_program_id_offset,
     collapse_regulator_guides,
+    filter_masked_regulators,
     sort_regulator_rows_by_significance,
     standardize_condition_regulator_results,
     standardize_regulator_results,
@@ -732,6 +733,7 @@ def format_ncbi_context(
 def load_regulator_data(
     csv_path: Optional[Path],
     significance_threshold: float = 0.05,
+    masked_regulators: Optional[Iterable[str]] = None,
 ) -> Dict[int, pd.DataFrame]:
     """Load significant regulators from SCEPTRE results CSV.
 
@@ -747,6 +749,7 @@ def load_regulator_data(
         df = standardize_regulator_results(
             df, significance_threshold=significance_threshold
         )
+        df = filter_masked_regulators(df, masked_regulators)
         df = df[df["significant"] == True].copy()
 
         result = {}
@@ -795,6 +798,7 @@ def load_condition_regulator_data(
     regulator_qc_files: Optional[Dict[str, Path]] = None,
     significance_threshold: float = 0.05,
     program_id_offset: int = 0,
+    masked_regulators: Optional[Iterable[str]] = None,
 ) -> Dict[str, Dict[int, pd.DataFrame]]:
     """Load condition-specific program regulator matrices.
 
@@ -816,6 +820,7 @@ def load_condition_regulator_data(
                 significance_threshold=significance_threshold,
                 program_id_offset=0,
             )
+            df = filter_masked_regulators(df, masked_regulators)
             qc_path = regulator_qc_files.get(condition)
             if qc_path and qc_path.exists():
                 qc = pd.read_csv(qc_path)
@@ -928,6 +933,15 @@ def format_regulator_analysis_context(
     condition-keyed mapping. ``masked_regulators`` (case-insensitive gene symbols) are
     excluded from selection so promiscuous regulators never fill a top-N slot.
     """
+    if not regulator_data:
+        return (
+            "#### Regulator perturbation evidence\n"
+            "No regulator perturbation input was supplied for this run. Do not interpret "
+            "this as an absence of significant regulators. Any regulator candidates must "
+            "be labeled explicitly as inference from program genes or literature, with "
+            "log2FC=N/A."
+        )
+
     mask = {str(m).strip().lower() for m in (masked_regulators or []) if str(m).strip()}
     if regulator_data and all(
         isinstance(value, dict) for value in regulator_data.values()
@@ -1447,7 +1461,13 @@ Then provide the following sections:
    - If evidence is limited or mixed, say so explicitly.
 
 4. **Regulator analysis**
-   List 1-3 most prominent regulators from Perturb-seq, for each regulator use this exact format:
+   - Use supplied Perturb-seq regulator evidence when it exists.
+   - If no regulator perturbation input was supplied, state that clearly. Do not claim that
+     no significant regulators were identified, and do not infer biological meaning from
+     absent hits. You may nominate up to 3 plausible regulators from program genes or
+     literature only when useful, but label each one explicitly as inference and use
+     `log2FC=N/A`.
+   For each reported regulator use this exact format:
    ```
    regulator_name (role, log2FC=X): [Confidence: High/Medium/Low]
    Propose a mechanistic hypothesis: How might this regulator control the program's genes/pathways? Cite program genes and evidence.
@@ -1524,11 +1544,13 @@ def cmd_prepare(args: argparse.Namespace) -> int:
             condition_files,
             regulator_qc_files=condition_qc_files,
             significance_threshold=args.regulator_significance_threshold,
+            masked_regulators=args.mask_regulator,
         )
     else:
         regulator_data = load_regulator_data(
             Path(args.regulator_file) if args.regulator_file else None,
             significance_threshold=args.regulator_significance_threshold,
+            masked_regulators=args.mask_regulator,
         )
 
     batch_requests = build_annotation_requests(
@@ -1659,8 +1681,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--top-negative-regulators", type=int, default=3)
     p.add_argument(
         "--mask-regulator", action="append", metavar="GENE",
-        help="Regulator gene to mask from the annotation's regulator evidence (promiscuous, "
-             "non-program-specific); repeatable. Masked before top-N selection, both conditions.",
+        help="Regulator gene already excluded from upstream evidence selection; repeatable. "
+             "Applied again defensively before annotation top-N selection.",
     )
     p.add_argument("--regulator-significance-threshold", type=float, default=0.05)
     p.set_defaults(func=cmd_prepare)

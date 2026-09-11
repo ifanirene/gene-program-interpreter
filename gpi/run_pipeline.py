@@ -286,6 +286,33 @@ class PipelineConfig:
             return None
         return ",".join(str(p) for p in self.programs)
 
+    @property
+    def masked_regulators(self) -> List[str]:
+        """Pipeline-wide regulator exclusions, with legacy config compatibility.
+
+        ``mask_regulators`` is now a top-level pipeline option. Values under the
+        former ``annotation.mask_regulators`` location are still honored so old
+        configs gain the upstream behavior without migration.
+        """
+        values: List[Any] = []
+        for configured in (
+            self.raw.get("mask_regulators"),
+            self.annotation.get("mask_regulators"),
+        ):
+            if configured is None:
+                continue
+            values.extend(configured if isinstance(configured, list) else [configured])
+
+        result: List[str] = []
+        seen: set[str] = set()
+        for value in values:
+            gene = str(value).strip()
+            key = gene.casefold()
+            if gene and key not in seen:
+                seen.add(key)
+                result.append(gene)
+        return result
+
     def config_hash(self) -> str:
         return ps.compute_config_hash(self.raw)
 
@@ -506,6 +533,10 @@ def run_gene_summaries(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[
     # perturbation_regulators). One repeatable --regulator-condition-file cond=path.
     for cond, path in cfg.regulators_by_condition.items():
         argv += ["--regulator-condition-file", f"{cond}={path}"]
+    # Apply pipeline-wide exclusions before STRING validation. The resulting
+    # ncbi_context feeds program bundles, so research receives next-best hits.
+    for gene in cfg.masked_regulators:
+        argv += ["--mask-regulator", gene]
     # PubTator stays OFF by default (no --use-pubtator).
     _run_subprocess(argv, flags.dry_run)
     return {"ncbi_context": str(paths.ncbi_context)}
@@ -714,22 +745,34 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
     # evidence" section (evidence_context supports --regulator-condition-file cond=path).
     for cond, path in cfg.regulators_by_condition.items():
         prepare += ["--regulator-condition-file", f"{cond}={path}"]
-    # Mask promiscuous, non-program-specific regulators from the annotation regulator
-    # evidence (annotation.mask_regulators in the config), both conditions.
-    for gene in cfg.annotation.get("mask_regulators", []) or []:
+    # Defensive repeat: inputs are reloaded for prompt assembly, so apply the same
+    # pipeline-wide mask before annotation selection too.
+    for gene in cfg.masked_regulators:
         prepare += ["--mask-regulator", str(gene)]
     emit_step_progress(None, None, "assembling requests")
     _run_subprocess(prepare, flags.dry_run)
 
-    # (b) submit the batch and wait for results (Anthropic Batch API — spends money)
-    # anthropic_batch emits its own sub-phases here: submitted → processing k/n → fetching.
-    submit = _pymod(
-        "gpi.anthropic_batch", "submit", paths.batch_request,
-        "--model", cfg.annotation.get("model", "claude-sonnet-4-6"),
-        "--max-tokens", cfg.annotation.get("max_tokens", 8192),
-        "--wait",
-    )
-    _run_subprocess(submit, flags.dry_run)
+    # (b) synthesize annotations. Batch mode is cheaper but asynchronous; live mode
+    # uses direct Messages API calls with bounded concurrency and writes the same JSONL.
+    if bool(cfg.annotation.get("batch", True)):
+        # anthropic_batch emits: submitted → processing k/n → fetching.
+        synthesize = _pymod(
+            "gpi.anthropic_batch", "submit", paths.batch_request,
+            "--model", cfg.annotation.get("model", "claude-sonnet-4-6"),
+            "--max-tokens", cfg.annotation.get("max_tokens", 8192),
+            "--wait",
+        )
+        if cfg.annotation.get("batch_size") is not None:
+            synthesize += ["--batch-size", str(cfg.annotation["batch_size"])]
+    else:
+        synthesize = _pymod(
+            "gpi.anthropic_live", paths.batch_request,
+            "--output", paths.batch_results,
+            "--model", cfg.annotation.get("model", "claude-sonnet-4-6"),
+            "--max-tokens", cfg.annotation.get("max_tokens", 8192),
+            "--concurrency", cfg.annotation.get("concurrency", 4),
+        )
+    _run_subprocess(synthesize, flags.dry_run)
 
     # (c) parse results -> per-topic markdown + summary CSV (uses parse_final_results)
     parse = _pymod(

@@ -55,13 +55,14 @@ research:                      # executor 2 — parallel literature agents (subs
   max_budget_usd: 1.0          # per-program cost cap (SDK-native)
   per_program_timeout: 600
 
+# Pipeline-wide exclusions: removed before regulator validation/ranking, so
+# research and annotation receive the next-best program-specific regulators.
+mask_regulators: [Dgat2, Flcn, Insig1, Insr, Scap, Mlxipl]
+
 annotation:                    # executor 3 — Anthropic Batch synthesis + labels (API credit)
   model: claude-sonnet-4-6
   max_tokens: 8192
   batch: true
-  # Promiscuous, non-program-specific regulators masked from the annotation
-  # regulator evidence (both conditions), so program-specific regulators surface.
-  mask_regulators: [Dgat2, Flcn, Insig1, Insr, Scap, Mlxipl]
 
 theme:                         # executor 3 — generic-theme down-weighting (M6)
   enabled: true

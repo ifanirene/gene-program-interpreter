@@ -60,6 +60,7 @@ from claude_agent_sdk import (
 )
 from pydantic import ValidationError
 
+from gpi.log_redaction import install_log_redaction
 from research.literature import (
     LITERATURE_SERVER_NAME,
     LiteratureClient,
@@ -75,6 +76,7 @@ from research.schema import AgentResearchResult, ResearchResult, submit_result_t
 from research.verify import normalize_agent_result
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+install_log_redaction()
 logger = logging.getLogger(__name__)
 
 

@@ -218,6 +218,60 @@ def _resolve_batch_id(args: argparse.Namespace) -> Optional[str]:
     return batch_id
 
 
+def _chunk_requests(requests: list[dict], batch_size: Optional[int]) -> list[list[dict]]:
+    """Split requests into deterministic API batches, preserving input order."""
+    if batch_size is None:
+        return [requests]
+    if batch_size < 1:
+        raise ValueError(f"batch_size must be >= 1, got {batch_size}")
+    return [requests[index:index + batch_size] for index in range(0, len(requests), batch_size)]
+
+
+def _save_batch_ids(batch_path: Path, batch_ids: list[str], chunk_sizes: list[int]) -> Path:
+    """Persist every submitted batch id so chunked jobs remain auditable/recoverable."""
+    output = batch_path.with_suffix(".batch_ids.json")
+    output.write_text(
+        json.dumps(
+            {
+                "source": str(batch_path),
+                "batch_ids": batch_ids,
+                "chunk_sizes": chunk_sizes,
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+    logger.info("Saved %d batch ID(s) to %s", len(batch_ids), output)
+    return output
+
+
+def _combined_counts(statuses: list[dict]) -> dict[str, int]:
+    keys = ("succeeded", "errored", "processing", "canceled")
+    return {
+        key: sum(int(status["counts"].get(key, 0)) for status in statuses)
+        for key in keys
+    }
+
+
+def _fetch_chunked_results(batch_path: Path, batch_ids: list[str]) -> Path:
+    """Fetch each chunk and concatenate JSONL into the pipeline's canonical result path."""
+    output = batch_path.with_name(f"{batch_path.stem}_results.jsonl")
+    part_paths: list[Path] = []
+    for index, batch_id in enumerate(batch_ids, start=1):
+        part_path = batch_path.with_name(
+            f"{batch_path.stem}_part{index:02d}_results.jsonl"
+        )
+        part_paths.append(fetch_results(batch_id, part_path))
+
+    with output.open("w", encoding="utf-8") as combined:
+        for part_path in part_paths:
+            with part_path.open("r", encoding="utf-8") as part:
+                for line in part:
+                    combined.write(line)
+    logger.info("Merged %d batch result file(s) into %s", len(part_paths), output)
+    return output
+
+
 def cmd_submit(args: argparse.Namespace) -> int:
     """Submit a prepared batch JSON file to the Anthropic Batch API."""
     if not args.batch_file:
@@ -247,48 +301,65 @@ def cmd_submit(args: argparse.Namespace) -> int:
         params.setdefault("max_tokens", args.max_tokens)
 
     try:
-        batch_id = submit_batch(
-            requests_list, thinking=args.thinking, effort=args.effort
-        )
+        request_chunks = _chunk_requests(requests_list, args.batch_size)
+        batch_ids = [
+            submit_batch(chunk, thinking=args.thinking, effort=args.effort)
+            for chunk in request_chunks
+        ]
     except (RuntimeError, ValueError) as exc:
         logger.error(str(exc))
         return 1
 
-    print("\nBatch created!")
-    print(f"  Batch ID: {batch_id}")
+    print(f"\nCreated {len(batch_ids)} batch job(s)!")
+    for index, (batch_id, chunk) in enumerate(
+        zip(batch_ids, request_chunks), start=1
+    ):
+        print(f"  Part {index}: {batch_id} ({len(chunk)} requests)")
 
-    # Save batch ID for later retrieval.
-    batch_id_file = batch_path.with_suffix(".batch_id")
-    batch_id_file.write_text(batch_id, encoding="utf-8")
-    logger.info(f"Saved batch ID to {batch_id_file}")
+    # Keep the legacy single-id sidecar for unchunked runs and a complete JSON
+    # sidecar for both single and chunked runs.
+    if len(batch_ids) == 1:
+        batch_id_file = batch_path.with_suffix(".batch_id")
+        batch_id_file.write_text(batch_ids[0], encoding="utf-8")
+        logger.info("Saved batch ID to %s", batch_id_file)
+    batch_ids_file = _save_batch_ids(
+        batch_path, batch_ids, [len(chunk) for chunk in request_chunks]
+    )
 
     if args.wait:
         emit_step_progress(0, len(requests_list), "submitted")
-        print(f"\nWaiting for batch completion (checking every {POLL_INTERVAL_SECONDS}s)...")
-        status = check_batch(batch_id)
-        while status["processing_status"] == "in_progress":
+        print(
+            f"\nWaiting for {len(batch_ids)} batch job(s) "
+            f"(checking every {POLL_INTERVAL_SECONDS}s)..."
+        )
+        statuses = [check_batch(batch_id) for batch_id in batch_ids]
+        while any(status["processing_status"] == "in_progress" for status in statuses):
             time.sleep(POLL_INTERVAL_SECONDS)
-            status = check_batch(batch_id)
-            c = status["counts"]
-            done = c["succeeded"]
-            total = c["processing"] + c["succeeded"]
-            print(f"  Status: {status['processing_status']} | Completed: {done}/{total}")
-            emit_step_progress(done, total, "processing")
+            statuses = [check_batch(batch_id) for batch_id in batch_ids]
+            counts = _combined_counts(statuses)
+            done = counts["succeeded"] + counts["errored"] + counts["canceled"]
+            print(
+                f"  Jobs ended: "
+                f"{sum(s['processing_status'] == 'ended' for s in statuses)}/{len(statuses)} "
+                f"| Requests completed: {done}/{len(requests_list)}"
+            )
+            emit_step_progress(done, len(requests_list), "processing")
 
-        print(f"\nFinal status: {status['processing_status']}")
-        if status["processing_status"] == "ended":
+        final_states = [status["processing_status"] for status in statuses]
+        print(f"\nFinal job states: {final_states}")
+        if all(state == "ended" for state in final_states):
             emit_step_progress(len(requests_list), len(requests_list), "fetching results")
-            output_file = batch_path.with_name(f"{batch_path.stem}_results.jsonl")
-            fetch_results(batch_id, output_file)
+            output_file = _fetch_chunked_results(batch_path, batch_ids)
+            counts = _combined_counts(statuses)
             print(f"SUCCESS! Results saved to: {output_file}")
-            print(f"  Succeeded: {status['counts']['succeeded']}")
-            print(f"  Errored: {status['counts']['errored']}")
+            print(f"  Succeeded: {counts['succeeded']}")
+            print(f"  Errored: {counts['errored']}")
         else:
-            print("Batch did not complete successfully.")
+            print(f"One or more batch jobs did not complete; IDs: {batch_ids_file}")
             return 3
     else:
-        print(f"\nCheck status with: python -m gpi.anthropic_batch check --batch-id {batch_id}")
-        print(f"Or retrieve results with: python -m gpi.anthropic_batch results --batch-id {batch_id}")
+        print(f"\nBatch IDs saved to: {batch_ids_file}")
+        print("Use the check/results subcommands with each saved batch ID.")
 
     return 0
 
@@ -371,6 +442,10 @@ def build_parser() -> argparse.ArgumentParser:
     p_submit.add_argument(
         "--wait", action="store_true",
         help="Wait for job completion and download results",
+    )
+    p_submit.add_argument(
+        "--batch-size", type=int,
+        help="Maximum requests per Anthropic batch job (default: submit one job)",
     )
     p_submit.set_defaults(func=cmd_submit)
 

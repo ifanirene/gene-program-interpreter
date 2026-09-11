@@ -343,9 +343,11 @@ def split_final_modules(annotation_md: str) -> tuple[str, list[dict[str, object]
 
 
 # Regulator head: tolerant of role clauses such as "(repressor, ...)",
-# "(activator in both aged and young conditions, ...)", "(activators, ...)".
+# "(activator in both aged and young conditions, ...)", "(activators, ...)", and
+# literature-only descriptors such as "(nuclear receptor, ..., log2FC=N/A)".
 _REG_HEAD_RE = re.compile(
-    r"^\s*(?P<gene>[A-Za-z0-9/().+\-]+?)\s*\(\s*(?P<role>repressor|activator)s?\b",
+    r"^\s*(?P<gene>[A-Za-z0-9/().+\-]+?)\s*\(\s*"
+    r"(?:(?P<role>repressor|activator)s?\b|(?P<descriptor>[^,)\n]+))",
     re.I,
 )
 _REG_FC_RE = re.compile(r"log[\u2082\u2083]?2?FC\s*=\s*(?P<fc>[^)\]\n]*)", re.I)
@@ -373,6 +375,8 @@ def _parse_regulator_block(block: str) -> dict[str, str] | None:
         return None
     fc_match = _REG_FC_RE.search(lines[0])
     fc = re.sub(r"\s+", " ", fc_match.group("fc").strip()).rstrip(":").strip() if fc_match else ""
+    if fc.upper() in {"N/A", "NA", "-", "\u2014"}:
+        fc = ""
     conf_match = _REG_CONF_RE.search(lines[0])
     confidence = conf_match.group("conf").strip() if conf_match else ""
 
@@ -393,7 +397,7 @@ def _parse_regulator_block(block: str) -> dict[str, str] | None:
 
     return {
         "gene": head.group("gene").strip(),
-        "role": head.group("role").lower(),
+        "role": head.group("role").lower() if head.group("role") else "inferred",
         "fc": fc,
         "confidence": confidence or "—",
         "mechanism": mechanism,
@@ -403,7 +407,7 @@ def _parse_regulator_block(block: str) -> dict[str, str] | None:
 def parse_regulators_detailed(annotation_md: str) -> list[dict[str, str]]:
     """Parse the Regulator-analysis section into structured cards.
 
-    Each card carries gene, role (repressor/activator), the raw fold-change
+    Each card carries gene, role (repressor/activator/inferred), the raw fold-change
     string (e.g. "+1.831 young / +0.359 aged"), a confidence label, and the
     mechanistic hypothesis prose. The role clause and mechanism label vary between
     annotations, so matching is intentionally permissive.
@@ -1314,9 +1318,11 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         .reg .rgene { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 15px; font-weight: 700; }
         .reg .rgene.rep { color: var(--up); }
         .reg .rgene.act { color: var(--down); }
+        .reg .rgene.inf { color: var(--accent-text); }
         .reg .role { font-size: 11.5px; font-weight: 600; }
         .reg .role.rep { color: var(--up); }
         .reg .role.act { color: var(--down); }
+        .reg .role.inf { color: var(--accent-text); }
         .conf { font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--muted); }
         .conf.high { border-color: var(--accent); color: var(--accent-text); }
         .reg .fc { margin-left: auto; font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -1390,7 +1396,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
     <script>
     const esc = s => String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
     const mdItalic = s => esc(s).replace(/\*(.+?)\*/g, "<i>$1</i>");
-    const roleCls = r => r === "activator" ? "act" : "rep";
+    const roleCls = r => r === "activator" ? "act" : (r === "repressor" ? "rep" : "inf");
     const negLog = fdr => { const v = -Math.log10(parseFloat(fdr)); return isFinite(v) ? v : 0; };
     const cid = c => String(c).replace(/[^a-z0-9]/gi, "_");
     // Unify the two ways perturbation data reaches a program: condition-keyed runs populate
@@ -1518,6 +1524,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         const uniq = asArray(p.unique).slice(0,8);
         const modules = p.modules || [];
         const regs = p.regulators || [];
+        const hasMeasuredRegs = regs.some(r => r.fc && (r.role === "activator" || r.role === "repressor"));
         const pathways = p.pathways || [];
         const sortedPw = [...pathways].sort((a,b) => parseFloat(a.fdr) - parseFloat(b.fdr));
         const topPw = sortedPw[0];
@@ -1525,14 +1532,12 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         const conds = Object.keys(condVolcanoOf(p)).sort();
 
         const regGlance = regs.length
-            ? regs.map(r => `<span class="rg" style="color:var(--${r.role==="activator"?"down":"up"})">${esc(r.gene)}</span>`).join("")
+            ? regs.map(r => `<span class="rg" style="color:var(--${r.role==="activator"?"down":(r.role==="repressor"?"up":"accent-text")})">${esc(r.gene)}</span>`).join("")
             : `<span class="rg" style="color:var(--muted)">\u2014</span>`;
         const modGlance = pres.moduleShort.map((m,i) => `<span><b>${i+1}</b>${esc(m)}</span>`).join("");
         const crumbHtml = DATASET_CRUMB ? `<span class="crumb">${esc(DATASET_CRUMB)}</span>` : "";
 
-        const volCards = conds.length
-            ? conds.map(c => `<div class="volcard"><div class="vtitle">${esc(c)}<span class="dotc" id="vc-${cid(c)}"></span></div><div id="vol-${cid(c)}" class="volplot"></div></div>`).join("")
-            : `<p class="note">No perturbation data available.</p>`;
+        const volCards = conds.map(c => `<div class="volcard"><div class="vtitle">${esc(c)}<span class="dotc" id="vc-${cid(c)}"></span></div><div id="vol-${cid(c)}" class="volplot"></div></div>`).join("");
 
         document.getElementById("main").innerHTML = `
         <header class="hero">
@@ -1544,9 +1549,9 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
 
         <section class="glance" aria-label="At a glance">
             <div class="cell">
-                <div class="k">Top regulators</div>
+                <div class="k">${hasMeasuredRegs ? "Top regulators" : "Regulator candidates"}</div>
                 <div class="v"><div class="reglist">${regGlance}</div>
-                    <small><span class="kkey rep">repressor</span> &middot; <span class="kkey act">activator</span></small></div>
+                    <small>${hasMeasuredRegs ? `<span class="kkey rep">repressor</span> &middot; <span class="kkey act">activator</span>` : "gene-content + literature inference"}</small></div>
             </div>
             <div class="cell">
                 <div class="k">Functional modules</div>
@@ -1611,8 +1616,8 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
 
         <section class="section open" id="sec-regs">
             <button class="head" onclick="toggleSection('sec-regs')">
-                <span class="htitle">Top regulators</span>
-                <span class="hmeta">top perturbations that move this program &middot; <span class="kkey rep">repressor</span> / <span class="kkey act">activator</span></span>
+                <span class="htitle">${hasMeasuredRegs ? "Top regulators" : "Inferred regulator candidates"}</span>
+                <span class="hmeta">${hasMeasuredRegs ? `top perturbations that move this program &middot; <span class="kkey rep">repressor</span> / <span class="kkey act">activator</span>` : "no perturbation file &middot; hypotheses only"}</span>
                 <span class="chev">\u203a</span></button>
             <div class="body">${regs.length ? regs.map(r => `
                 <div class="reg">
@@ -1623,7 +1628,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                         ${r.fc ? `<span class="fc">log\u2082FC <b>${esc(r.fc)}</b></span>` : ""}
                     </div>
                     ${r.mechanism ? `<div class="rbody"><details><summary>Mechanistic hypothesis</summary><p>${esc(r.mechanism)}</p></details></div>` : ""}
-                </div>`).join("") : `<p class="note">No regulator hits reported for this program.</p>`}</div>
+                </div>`).join("") : `<p class="note">No measured regulator data or inferred candidates are available.</p>`}</div>
         </section>
 
         <section class="section collapsed" id="sec-pw">
@@ -1646,7 +1651,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             </div>
         </section>
 
-        <section class="section collapsed" id="sec-volcano">
+        ${conds.length ? `<section class="section collapsed" id="sec-volcano">
             <button class="head" onclick="toggleSection('sec-volcano')">
                 <span class="htitle">Perturbation effects</span>
                 <span class="hmeta">regulator screen &middot; log\u2082FC vs significance</span>
@@ -1655,10 +1660,11 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 <div class="volgrid">${volCards}</div>
                 <p class="note">Red = positive log\u2082FC (program up on knockdown), blue = negative. Top hits and known regulators are labelled.</p>
             </div>
-        </section>`;
+        </section>` : ""}`;
 
         document.querySelector(".rail a.active") && document.querySelector(".rail a.active").scrollIntoView({block:"nearest"});
-        if(document.getElementById("sec-volcano").classList.contains("open")) drawVolcanoes(p);
+        const volSection = document.getElementById("sec-volcano");
+        if(volSection && volSection.classList.contains("open")) drawVolcanoes(p);
     }
 
     function cssv(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }

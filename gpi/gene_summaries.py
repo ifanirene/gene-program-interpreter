@@ -54,6 +54,7 @@ from .string_api import (
 from .column_mapper import (
     apply_program_id_offset,
     collapse_regulator_guides,
+    filter_masked_regulators,
     sort_regulator_rows_by_significance,
     standardize_condition_regulator_results,
     standardize_regulator_results,
@@ -695,6 +696,7 @@ PUBTATOR_RATE_LIMIT = 0.1  # 10 requests per second
 def load_regulator_data(
     csv_path: Path,
     significance_threshold: float = 0.05,
+    masked_regulators: Optional[List[str]] = None,
 ) -> Dict[int, pd.DataFrame]:
     """Load significant regulators from SCEPTRE results CSV.
     
@@ -709,6 +711,13 @@ def load_regulator_data(
     df = standardize_regulator_results(
         df, significance_threshold=significance_threshold
     )
+    before_mask = len(df)
+    df = filter_masked_regulators(df, masked_regulators)
+    if before_mask != len(df):
+        logger.info(
+            "Masked %d regulator rows before significance filtering and ranking",
+            before_mask - len(df),
+        )
     df = df[df["significant"] == True].copy()  # type: ignore
     
     result = {}
@@ -753,6 +762,7 @@ def load_condition_regulator_data(
     regulator_qc_files: Optional[Dict[str, Path]] = None,
     significance_threshold: float = 0.05,
     program_id_offset: int = 0,
+    masked_regulators: Optional[List[str]] = None,
 ) -> Dict[str, Dict[int, pd.DataFrame]]:
     regulator_qc_files = regulator_qc_files or {}
     by_condition: Dict[str, Dict[int, pd.DataFrame]] = {}
@@ -768,6 +778,14 @@ def load_condition_regulator_data(
             # program_name; program_id_offset is only for loading RowID.
             program_id_offset=0,
         )
+        before_mask = len(df)
+        df = filter_masked_regulators(df, masked_regulators)
+        if before_mask != len(df):
+            logger.info(
+                "[%s] Masked %d regulator rows before QC, significance filtering, and ranking",
+                condition,
+                before_mask - len(df),
+            )
         qc_path = regulator_qc_files.get(condition)
         if qc_path and qc_path.exists():
             qc = pd.read_csv(qc_path)
@@ -816,6 +834,7 @@ def select_top_condition_regulators(
     program_id: int,
     top_n_positive: int = 3,
     top_n_negative: int = 3,
+    masked_regulators: Optional[List[str]] = None,
 ) -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
     selected: Dict[str, Dict[str, List[Dict[str, Any]]]] = {}
     for condition, by_program in regulator_data.items():
@@ -823,7 +842,10 @@ def select_top_condition_regulators(
         if reg_df is None or reg_df.empty:
             selected[condition] = {"positive": [], "negative": []}
             continue
-        collapsed = collapse_regulator_guides(reg_df, significant_only=True)
+        collapsed = collapse_regulator_guides(
+            filter_masked_regulators(reg_df, masked_regulators),
+            significant_only=True,
+        )
         positive = sort_regulator_rows_by_significance(
             collapsed[collapsed["log_2_fold_change"] < 0]
         ).head(top_n_positive)
@@ -856,7 +878,8 @@ def get_top_regulators(
     top_n_positive: Optional[int] = None,
     top_n_negative: Optional[int] = None,
     use_all_significant: bool = False,
-    max_regulators: int = 20
+    max_regulators: int = 20,
+    masked_regulators: Optional[List[str]] = None,
 ) -> Dict[str, List[Dict[str, Any]]]:
     """Get top positive and negative regulators for a program.
     
@@ -880,7 +903,8 @@ def get_top_regulators(
     
     top_n_positive = top_n if top_n_positive is None else top_n_positive
     top_n_negative = top_n if top_n_negative is None else top_n_negative
-    sig_df = reg_df[reg_df['significant'] == True].copy()
+    sig_df = filter_masked_regulators(reg_df, masked_regulators)
+    sig_df = sig_df[sig_df['significant'] == True].copy()
     
     # Negative log2FC = positive regulators (activators)
     if use_all_significant:
@@ -1285,6 +1309,7 @@ def validate_program_regulators(
     use_batch: bool = True,
     min_score: int = 400,
     species: int = 10090,
+    masked_regulators: Optional[List[str]] = None,
 ) -> Dict[str, Any]:
     """Validate all top regulators for a program.
     
@@ -1309,7 +1334,8 @@ def validate_program_regulators(
         top_n_positive=top_n_positive_regulators,
         top_n_negative=top_n_negative_regulators,
         use_all_significant=use_all_significant,
-        max_regulators=max_regulators
+        max_regulators=max_regulators,
+        masked_regulators=masked_regulators,
     )
     
     result = {
@@ -1408,6 +1434,7 @@ def validate_condition_program_regulators(
     top_n_negative_regulators: int = 3,
     species: int = 10090,
     min_score: int = 400,
+    masked_regulators: Optional[List[str]] = None,
 ) -> Dict[str, Dict[str, Any]]:
     """Validate top young/aged regulators against program genes with STRING."""
     selected = select_top_condition_regulators(
@@ -1415,6 +1442,7 @@ def validate_condition_program_regulators(
         program_id=program_id,
         top_n_positive=top_n_positive_regulators,
         top_n_negative=top_n_negative_regulators,
+        masked_regulators=masked_regulators,
     )
     results: Dict[str, Dict[str, Any]] = {}
     for condition, groups in selected.items():
@@ -1508,6 +1536,15 @@ def main():
     parser.add_argument("--regulator-file", type=str, help="CSV with regulator perturbation results")
     parser.add_argument("--regulator-condition-file", action="append", help="Condition-specific regulator matrix as condition=path; repeatable")
     parser.add_argument("--regulator-qc-file", action="append", help="Condition-specific regulator QC table as condition=path; repeatable")
+    parser.add_argument(
+        "--mask-regulator",
+        action="append",
+        metavar="GENE",
+        help=(
+            "Regulator gene to exclude before validation and top-N selection; "
+            "repeatable. The next-best unmasked regulators fill the available slots."
+        ),
+    )
     parser.add_argument("--top-regulators", type=int, default=3, help="Backward-compatible default for positive/negative regulator counts")
     parser.add_argument("--top-positive-regulators", type=int, help="Number of top positive regulators to validate")
     parser.add_argument("--top-negative-regulators", type=int, help="Number of top negative regulators to validate")
@@ -1723,6 +1760,7 @@ def main():
             condition_files,
             regulator_qc_files=condition_qc_files,
             significance_threshold=args.regulator_significance_threshold,
+            masked_regulators=args.mask_regulator,
         )
         for pid in program_ids:
             program_genes = programs[pid].get("all_genes", programs[pid]["drivers"])
@@ -1742,6 +1780,7 @@ def main():
                 top_n_positive_regulators=top_pos,
                 top_n_negative_regulators=top_neg,
                 species=args.species,
+                masked_regulators=args.mask_regulator,
             )
             final_context[pid]["regulator_validation_by_condition"] = validation_result
     elif args.regulator_file:
@@ -1753,6 +1792,7 @@ def main():
         regulator_data = load_regulator_data(
             Path(args.regulator_file),
             significance_threshold=args.regulator_significance_threshold,
+            masked_regulators=args.mask_regulator,
         )
         
         for pid in program_ids:
@@ -1782,6 +1822,7 @@ def main():
                 use_all_significant=args.all_significant,
                 max_regulators=args.max_regulators,
                 species=args.species,
+                masked_regulators=args.mask_regulator,
             )
 
             # Add to final context
