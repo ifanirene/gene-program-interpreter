@@ -521,7 +521,7 @@ def run_gene_summaries(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[
         "--input", cfg.gene_loading,
         "--json-out", paths.ncbi_context,
         "--csv-out", paths.ncbi_summary,
-        "--keyword", cfg.profile.resolved_keyword_query(),
+        "--keyword", cfg.profile.for_interpretation().resolved_keyword_query(),
         "--species", cfg.species_taxid,
         "--top-loading", cfg.setting("top_loading", 15),
         "--top-unique", cfg.setting("top_unique", 8),
@@ -547,7 +547,8 @@ def run_bundle(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
     ncbi_json = paths.ncbi_context if paths.ncbi_context.exists() else None
     _log_call(
         "research.bundle.build_all_bundles("
-        f"gene_loading_csv={cfg.gene_loading}, profile=<{cfg.profile.resolved_annotation_role()}>, "
+        f"gene_loading_csv={cfg.gene_loading}, "
+        f"profile=<{cfg.profile.for_interpretation().resolved_annotation_role()}>, "
         f"enrichment_csv={enrichment_csv}, ncbi_context_json={ncbi_json}, "
         f"out_dir={paths.bundles_dir}, program_ids={cfg.programs}, "
         f"top_loading={cfg.setting('top_loading', 15)}, "
@@ -982,8 +983,9 @@ def _slice_steps(start_from: Optional[str], stop_after: Optional[str]) -> List[s
 
 
 def _print_framing(cfg: PipelineConfig) -> None:
-    p = cfg.profile
+    p = cfg.profile.for_interpretation()
     print("Resolved ContextProfile framing:")
+    print(f"  interpretation_mode: {cfg.profile.interpretation_mode}")
     print(f"  organism / taxid : {p.organism} / {p.species_taxid}")
     print(f"  tissue           : {p.tissue or '(none)'}")
     print(f"  cell_type        : {p.cell_type or '(none)'}")
@@ -992,7 +994,7 @@ def _print_framing(cfg: PipelineConfig) -> None:
     print(f"  annotation_ctx   : {p.resolved_annotation_context()}")
     print(f"  keyword_query    : {p.resolved_keyword_query()}")
     print(f"  condition_context: {p.resolved_condition_context()}")
-    print(f"  report_crumb     : {p.resolved_report_dataset_crumb()}")
+    print(f"  report_crumb     : {cfg.profile.resolved_report_dataset_crumb()}")
     # The keyword_query above is sent to PubMed literally, so a badly-shaped context_term
     # becomes a slot that matches nothing. Surface that here — this is the last free moment
     # before the user approves a paid run.
@@ -1349,6 +1351,7 @@ def cmd_emit_config(args: argparse.Namespace) -> int:
 
     config = {
         "context": {
+            "interpretation_mode": profile.interpretation_mode,
             "organism": profile.organism,
             "species_taxid": profile.species_taxid,
             "tissue": profile.tissue,
@@ -1370,9 +1373,11 @@ def cmd_emit_config(args: argparse.Namespace) -> int:
         print(rendered)
 
     print("Resolved framing (auto-derived from the context — this is what the pipeline uses):")
-    print(f"  annotation_role  : {profile.resolved_annotation_role()}")
-    print(f"  keyword_query    : {profile.resolved_keyword_query()}")
-    print(f"  condition_context: {profile.resolved_condition_context()}")
+    effective = profile.for_interpretation()
+    print(f"  interpretation_mode: {profile.interpretation_mode}")
+    print(f"  annotation_role  : {effective.resolved_annotation_role()}")
+    print(f"  keyword_query    : {effective.resolved_keyword_query()}")
+    print(f"  condition_context: {effective.resolved_condition_context()}")
     print(f"  report crumb     : {profile.resolved_report_dataset_crumb()}")
     return 0
 

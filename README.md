@@ -276,6 +276,38 @@ Outputs land in the config's `output_dir`. Interrupted runs resume from
 `pipeline_state.json`; `--start-from`, `--stop-after`, and `--force-restart` control where a
 rerun picks up. Run `gpi --help` for the full flag list.
 
+### Gene-first interpretation
+
+Set `context.interpretation_mode: gene_first` to discover program functions from genes and
+biological identity without configured disease/process framing. Configs that omit the mode
+retain the existing `context_guided` behavior; `configs/example_generic.yaml` opts in.
+
+```yaml
+context:
+  interpretation_mode: gene_first
+  organism: mouse
+  species_taxid: 10090
+  tissue: brain
+  cell_type: brain endothelial cell
+output_dir: runs/brain_gene_first_fresh
+```
+
+Merge this illustrative fragment into your dataset's config, retaining its actual inputs
+and settings. Gene-first requires a nonempty tissue or cell type. It excludes **all free-text
+profile conditions**, `context_terms`, and the explicit `annotation_role`,
+`annotation_context`, `keyword_query`, `condition_context`, and `functional_context`
+overrides from research and core annotation. Organism, taxid, tissue, cell type, gene sets,
+and supplied measured evidence remain available. Condition-specific regulator labels and
+values are experimental data and remain intact. Diseases/processes supported by gene
+summaries, papers, enrichment, or measurements may still appear in the interpretation.
+The original configuration and report/assay metadata remain recorded for provenance.
+
+Use a **new output directory** for the first gene-first run. Completed stages can be reused
+on resume; a code update or `--start-from` alone does not invalidate them. Check your actual
+config with `gpi --config YOUR_CONFIG.yaml --dry-run` before running. No model stages or
+per-program limits are added, although different searches within existing caps can change
+total spend. Offline input isolation does not establish improved biological accuracy.
+
 ## How it works
 
 | Layer | Role |

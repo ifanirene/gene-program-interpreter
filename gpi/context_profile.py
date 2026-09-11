@@ -20,7 +20,8 @@ research agents need are **derived** from those fields when left blank, so:
   * a liver profile reproduces the original liver text (see `ContextProfile.liver_demo()`), and
   * any other tissue/condition works with no code change — you only change the profile.
 
-Every derived string can also be set explicitly; an explicit value always wins.
+In the default context_guided mode, explicit framing overrides win. Interpretation
+boundaries use `for_interpretation()` to exclude configured interests in gene_first mode.
 """
 
 from __future__ import annotations
@@ -126,6 +127,33 @@ class ContextProfile:
     evidence_context_types: List[str] = field(
         default_factory=lambda: list(DEFAULT_EVIDENCE_CONTEXT_TYPES)
     )
+
+    interpretation_mode: str = "context_guided"
+
+    def __post_init__(self) -> None:
+        if self.interpretation_mode not in ("context_guided", "gene_first"):
+            raise ValueError("interpretation_mode must be 'context_guided' or 'gene_first'")
+        if self.interpretation_mode == "gene_first" and not (
+            self.tissue.strip() or self.cell_type.strip()
+        ):
+            raise ValueError("gene_first requires a nonempty tissue or cell_type")
+
+    def for_interpretation(self) -> "ContextProfile":
+        """Return independent framing for discovery, leaving provenance on this profile.
+
+        Rebuild gene-first framing from identity even after `.resolved()` has pinned
+        explicit strings. The effective copy uses the default mode so projecting it
+        again is harmless and the existing derivation methods remain unchanged.
+        """
+        if self.interpretation_mode == "context_guided":
+            return ContextProfile(**asdict(self))
+        return ContextProfile(
+            organism=self.organism,
+            species_taxid=self.species_taxid,
+            tissue=self.tissue,
+            cell_type=self.cell_type,
+            evidence_context_types=list(self.evidence_context_types),
+        )
 
     # ------------------------------------------------------------------ derivations
     def _subject(self) -> str:

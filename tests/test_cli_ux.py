@@ -84,3 +84,37 @@ def test_plugin_manifest_and_runner_are_present():
     assert (root / "skills" / "interpret" / "SKILL.md").is_file()
     runner = root / "bin" / "gpi"
     assert runner.is_file() and runner.stat().st_mode & 0o111
+
+
+def test_gene_first_emit_config_and_dry_run_use_effective_framing(
+    tmp_path, gene_loading_csv, capsys,
+):
+    context = tmp_path / "context.yaml"
+    context.write_text(yaml.safe_dump({"context": {
+        "interpretation_mode": "gene_first", "organism": "mouse", "species_taxid": 10090,
+        "tissue": "brain", "cell_type": "endothelial cell",
+        "conditions": ["SENTINEL_INTEREST"], "context_terms": ["SENTINEL_FUNCTION"],
+    }}))
+    output = tmp_path / "run.yaml"
+    assert run_pipeline.main([
+        "--emit-config", "--context-file", str(context), "--gene-loading", str(gene_loading_csv),
+        "--output-dir", str(tmp_path / "fresh"), "--output", str(output),
+    ]) == 0
+    emitted = yaml.safe_load(output.read_text())
+    assert emitted["context"]["interpretation_mode"] == "gene_first"
+    assert emitted["context"]["conditions"] == ["SENTINEL_INTEREST"]
+    framing = capsys.readouterr().out
+    assert "gene_first" in framing
+    assert '("endothelial cell" OR brain)' in framing
+    assert "SENTINEL" not in framing
+    gene_first = run_pipeline.PipelineConfig.from_yaml(output)
+    assert run_pipeline.main(["--config", str(output), "--dry-run"]) == 0
+    dry_run = capsys.readouterr().out
+    assert "gene_first" in dry_run
+    assert '("endothelial cell" OR brain)' in dry_run
+    assert "endothelial cell biologist" in dry_run
+    assert "SENTINEL" not in dry_run
+    assert not (tmp_path / "fresh").exists()
+    emitted["context"]["interpretation_mode"] = "context_guided"
+    output.write_text(yaml.safe_dump(emitted))
+    assert run_pipeline.PipelineConfig.from_yaml(output).config_hash() != gene_first.config_hash()

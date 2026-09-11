@@ -175,13 +175,17 @@ def _build_research_brief(
         if has_regulators
         else ""
     )
+    function_clause = (
+        ", within the cell-type functions listed in `functions_to_consider`"
+        if rp.context_terms else ""
+    )
     lines = [
         f"# Program {label} — {rp.organism} {subject} gene program",
         "",
         f"You are a {role}. Determine the shared biological function of this program's genes.",
         "",
-        f"Research the genes in `program_genes` and `distinctive_genes`{reg_clause}, within the "
-        "cell-type functions listed in `functions_to_consider`. Land on 1-3 coherent functional "
+        f"Research the genes in `program_genes` and `distinctive_genes`{reg_clause}"
+        f"{function_clause}. Land on 1-3 coherent functional "
         "themes, each supported by several genes and specific retrieved papers.",
     ]
     if rp.conditions:
@@ -211,6 +215,7 @@ def build_bundle(
     **_ignored: Any,  # accept legacy kwargs (enrichment_df, top_enrichment) without using them
 ) -> Dict[str, Any]:
     """Assemble the lean, immutable program-bundle dict for one program. Offline; no network."""
+    profile = profile.for_interpretation()
     _validate_gene_df(gene_df)
     int_key, label = _program_key(program_id)
 
@@ -226,6 +231,7 @@ def build_bundle(
     bundle: Dict[str, Any] = {
         "program_id": label,
         "organism": rp.organism,
+        "tissue": rp.tissue,
         "cell_type": rp.cell_type,
         "conditions": rp.conditions,
         "functions_to_consider": rp.context_terms,

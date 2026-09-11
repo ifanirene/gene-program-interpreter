@@ -73,3 +73,64 @@ def test_prompt_fields_keys():
         "condition_context",
         "functional_context",
     }
+
+
+def test_gene_first_projection_is_neutral_independent_and_survives_materialization(tmp_path):
+    import yaml
+
+    original = ContextProfile(
+        interpretation_mode="gene_first", organism="human", species_taxid=9606,
+        tissue="brain", cell_type="endothelial cell", conditions=["stroke"],
+        context_terms=["angiogenesis"], annotation_role="stroke expert",
+        annotation_context="stroke", keyword_query="stroke", condition_context="stroke",
+        functional_context="angiogenesis", assay="custom assay", report_dataset_crumb="stroke study",
+        evidence_context_types=["direct", "indirect"],
+    )
+    before = original.to_dict()
+    path = tmp_path / "profile.yaml"
+    path.write_text(yaml.safe_dump({"context": original.resolved().to_dict()}))
+    for profile in (original, original.resolved(), ContextProfile.from_yaml(path)):
+        effective = profile.for_interpretation()
+        assert effective.prompt_fields() == {
+            "annotation_role": "endothelial cell biologist",
+            "annotation_context": "a consensus gene expression program in human endothelial cells",
+            "search_keyword": '("endothelial cell" OR brain)',
+            "condition_context": "Context: brain tissue; endothelial cell cellular function.",
+            "functional_context": "",
+        }
+        assert effective.species_taxid == 9606
+        assert effective.evidence_context_types == ["direct", "indirect"]
+        assert effective.conditions == effective.context_terms == []
+        assert effective.for_interpretation() == effective
+        effective.evidence_context_types.append("mixed")
+    assert original.to_dict() == before
+
+
+def test_context_guided_projection_preserves_overrides_without_sharing_lists():
+    original = ContextProfile.liver_demo().resolved()
+    effective = original.for_interpretation()
+    assert effective == original
+    effective.conditions.append("new condition")
+    assert "new condition" not in original.conditions
+
+
+def test_interpretation_mode_validation_at_construction_and_loading(tmp_path):
+    import pytest
+    import yaml
+
+    invalid = [
+        ({"interpretation_mode": "gene_frist", "tissue": "brain"}, "interpretation_mode"),
+        ({"interpretation_mode": "gene_first", "cell_type": "  "}, "tissue or cell_type"),
+    ]
+    for data, message in invalid:
+        with pytest.raises(ValueError, match=message):
+            ContextProfile(**data)
+        with pytest.raises(ValueError, match=message):
+            ContextProfile.from_dict(data)
+        path = tmp_path / "bad.yaml"
+        path.write_text(yaml.safe_dump({"context": data}))
+        with pytest.raises(ValueError, match=message):
+            ContextProfile.from_yaml(path)
+    for identity in ({"tissue": "brain"}, {"cell_type": "neuron"}):
+        assert ContextProfile(interpretation_mode="gene_first", **identity).for_interpretation()
+    assert ContextProfile().interpretation_mode == "context_guided"

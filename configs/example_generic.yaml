@@ -9,14 +9,16 @@
 # `inputs` and rewrite `context`.
 
 context:                       # -> ContextProfile.from_dict
+  interpretation_mode: gene_first
   organism: mouse
   species_taxid: 10090
   tissue: brain
   cell_type: brain endothelial cell
   conditions: [postnatal development]
 
-  # The single highest-leverage control in this file. These terms are OR'd into a
-  # literal PubMed query, so shape them for a search engine, not for a reader:
+  # Retained as provenance; conditions and context_terms are ignored by gene_first.
+  # In context_guided mode these terms are OR'd into a literal PubMed query,
+  # so shape them for a search engine, not for a reader:
   #
   #   * 1-3 words. A long term is phrase-quoted whole and matches almost nothing.
   #   * No conjunctions. "tip and stalk cell specification" splits into a bare

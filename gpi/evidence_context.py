@@ -1245,6 +1245,7 @@ def generate_prompt(
     Framing strings (role/context/keyword/condition/functional) are taken from
     `profile.prompt_fields()` so no tissue is hard-coded.
     """
+    profile = profile.for_interpretation()
     top_loading_genes, unique_genes = select_program_genes(
         gene_df=gene_df,
         program_id=program_id,
