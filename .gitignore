@@ -14,6 +14,14 @@ venv/
 # OS
 .DS_Store
 
+# Project-memory documents use a separate local Git history (no remote).
+# Keep them out of the GitHub repository's index.
+/.local-project-memory.git/
+/AGENTS.md
+/ANALYSIS_INDEX.md
+/docs/NOTES.md
+/docs/LESSONS.md
+
 # Caches
 .pytest_cache/
 .ruff_cache/
