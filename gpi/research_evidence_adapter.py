@@ -232,6 +232,30 @@ def _map_research_result(
     )
     context = {
         "modules": modules,
+        # Annotation-only detail. Keep the established module/report shape small;
+        # the original ResearchResult remains the complete evidence archive.
+        "annotation_evidence": {
+            "papers": [
+                {
+                    "evidence_id": ev.evidence_id,
+                    "citations": _evidence_id_strings([ev.evidence_id], evidence_by_id),
+                    "candidate_modules": [
+                        m.name for m in result.candidate_mechanisms
+                        if ev.evidence_id in m.evidence_ids
+                    ],
+                    "title": ev.title,
+                    "study_type": ev.study_type,
+                    "context_match": ev.context_match,
+                    "relevance_note": ev.relevance_note,
+                    "resolved": ev.resolved,
+                    "retracted": ev.retracted,
+                }
+                for ev in result.evidence
+                if _evidence_id_strings([ev.evidence_id], evidence_by_id)
+            ],
+            "contradictions": list(result.contradictions),
+            "evidence_gaps": list(result.evidence_gaps),
+        },
         "genes_with_limited_literature": genes_with_limited_literature,
         "source_summary": {
             "source_files": [source_file.name],

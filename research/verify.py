@@ -162,9 +162,6 @@ def _norm_doi(doi: Optional[str]) -> Optional[str]:
     return d.strip().lower() or None
 
 
-MAX_MECHANISMS = 3  # hard cap enforced during normalization (schema documents 1-3)
-
-
 def _derive_mechanism_status(mech: CandidateMechanism, ev_by_id: dict[str, Evidence]) -> str:
     """Per-mechanism support, from its linked evidence's resolvability. Used for BOTH the
     provisional status in ``normalize_agent_result`` (evidence unresolved -> 'partial') and the
@@ -186,8 +183,8 @@ def _derive_mechanism_status(mech: CandidateMechanism, ev_by_id: dict[str, Evide
 
 def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
     """Turn a flat ``AgentResearchResult`` (papers attached per mechanism) into a canonical
-    ``ResearchResult``: keep only the first ``MAX_MECHANISMS`` mechanisms, dedup their papers
-    into one ``Evidence`` pool (by DOI/PMID), assign ``EV-NNN`` ids, and reference those ids
+    ``ResearchResult``: preserve every research candidate, dedup their papers into one
+    ``Evidence`` pool (by DOI/PMID), assign ``EV-NNN`` ids, and reference those ids
     from each mechanism. Papers without any identifier are dropped (they cannot be verified). A
     provisional per-mechanism ``status`` is set here and finalized by the resolution pass.
     """
@@ -281,9 +278,7 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
                 seen.append(eid)
         return seen
 
-    # Hard 3-cap: truncate FIRST, then build the pool only from the kept mechanisms
-    # (so no orphan evidence from dropped 4th+ mechanisms enters the pool).
-    kept = agent.candidate_mechanisms[:MAX_MECHANISMS]
+    # Research candidates are evidence inputs, not final report categories.
     mechanisms = [
         CandidateMechanism(
             name=m.name,
@@ -292,7 +287,7 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
             supporting_regulators=m.supporting_regulators,
             evidence_ids=_ids(m.papers),
         )
-        for m in kept
+        for m in agent.candidate_mechanisms
     ]
 
     # Collapse any records unified mid-build: drop the aliased pool entries and remap every
@@ -312,10 +307,9 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
         mech.status = _derive_mechanism_status(mech, ev_by_id)  # provisional (pre-resolution)
 
     meta: dict = {"normalized_from_agent": True}
-    if len(agent.candidate_mechanisms) > MAX_MECHANISMS:
-        meta["mechanisms_truncated"] = len(agent.candidate_mechanisms) - MAX_MECHANISMS
     return ResearchResult(
         program_id=agent.program_id,
+        regulator_coverage=agent.regulator_coverage,
         queries=agent.queries,
         candidate_mechanisms=mechanisms,
         evidence=pool,

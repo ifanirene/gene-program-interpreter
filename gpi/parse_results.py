@@ -204,6 +204,13 @@ def parse_final_results(result_file: str, output_dir: str) -> List[int]:
                             continue
 
                     if text_content:
+                        if (re.sub(r'^```(?:json)?\s*\n', '', text_content.strip()).startswith('{')
+                                or re.search(r'```json\s*\n\s*\{', text_content)):
+                            from .annotation_contract import parse_annotation, render_annotation
+                            annotation = parse_annotation(text_content, topic_number)
+                            Path(output_dir, f'topic_{topic_number}_annotation.json').write_text(
+                                annotation.model_dump_json(indent=2))
+                            text_content = render_annotation(annotation)
                         output_filename = os.path.join(output_dir, f"topic_{topic_number}_annotation.md")
                         with open(output_filename, "w", encoding="utf-8") as out_f:
                             out_f.write(text_content)
@@ -295,7 +302,7 @@ def generate_unique_topic_names(
             base_name = f"Topic {topic_number}"
             keywords_list: List[str] = []
             if keywords_str:
-                keywords_list = [kw.strip().title() for kw in keywords_str.split(",")]
+                keywords_list = [kw.strip() for kw in keywords_str.split(",")]
                 if keywords_list:
                     base_name = keywords_list[0]
                     if len(keywords_list) > 1:

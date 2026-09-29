@@ -22,6 +22,7 @@ import numpy as np
 import pandas as pd
 from markdown import markdown
 from .column_mapper import (
+    collapse_regulator_guides,
     standardize_condition_regulator_results,
     standardize_gene_loading,
     standardize_regulator_results,
@@ -346,11 +347,11 @@ def split_final_modules(annotation_md: str) -> tuple[str, list[dict[str, object]
 # "(activator in both aged and young conditions, ...)", "(activators, ...)", and
 # literature-only descriptors such as "(nuclear receptor, ..., log2FC=N/A)".
 _REG_HEAD_RE = re.compile(
-    r"^\s*(?P<gene>[A-Za-z0-9/().+\-]+?)\s*\(\s*"
+    r"^\s*(?P<gene>[A-Za-z0-9.+\-]+)(?:\s*/\s*[^\n]*?)?\s*\(\s*"
     r"(?:(?P<role>repressor|activator)s?\b|(?P<descriptor>[^,)\n]+))",
     re.I,
 )
-_REG_FC_RE = re.compile(r"log[\u2082\u2083]?2?FC\s*=\s*(?P<fc>[^)\]\n]*)", re.I)
+_REG_FC_RE = re.compile(r"log[\u2082\u2083]?2?FC\s*=\s*(?P<fc>[^\[\]\n]*)", re.I)
 _REG_CONF_RE = re.compile(r"\[\s*Confidence\s*:\s*(?P<conf>[^\]]+)\]", re.I)
 # Both "Mechanistic hypothesis:" and "Propose a mechanistic hypothesis:" occur.
 _REG_MECH_RE = re.compile(
@@ -374,10 +375,10 @@ def _parse_regulator_block(block: str) -> dict[str, str] | None:
     if not head:
         return None
     fc_match = _REG_FC_RE.search(lines[0])
-    fc = re.sub(r"\s+", " ", fc_match.group("fc").strip()).rstrip(":").strip() if fc_match else ""
+    fc = re.sub(r"\s+", " ", fc_match.group("fc").strip()).rstrip(":").rstrip().removesuffix(")").strip() if fc_match else ""
     if fc.upper() in {"N/A", "NA", "-", "\u2014"}:
         fc = ""
-    conf_match = _REG_CONF_RE.search(lines[0])
+    conf_match = _REG_CONF_RE.search("\n".join(lines[:2]))
     confidence = conf_match.group("conf").strip() if conf_match else ""
 
     mechanism_parts: list[str] = []
@@ -395,9 +396,17 @@ def _parse_regulator_block(block: str) -> dict[str, str] | None:
     if not mechanism and len(lines) > 1:
         mechanism = " ".join(line.strip() for line in lines[1:]).strip()
 
+    role = head.group("role")
+    role_clause = re.search(r"\brole\s*[:=]\s*([^,)\n]+)", lines[0], re.I)
+    if not role and role_clause:
+        explicit_roles = set(re.findall(r"\b(activator|repressor)\b", role_clause.group(1), re.I))
+        explicit_roles = {value.lower() for value in explicit_roles}
+        if len(explicit_roles) == 1:
+            role = explicit_roles.pop()
+
     return {
         "gene": head.group("gene").strip(),
-        "role": head.group("role").lower() if head.group("role") else "inferred",
+        "role": role.lower() if role else "inferred",
         "fc": fc,
         "confidence": confidence or "—",
         "mechanism": mechanism,
@@ -423,6 +432,43 @@ def parse_regulators_detailed(annotation_md: str) -> list[dict[str, str]]:
         if section:
             blocks = _bold_header_blocks(section, _REG_HEAD_RE)
     return [card for block in blocks if (card := _parse_regulator_block(block))]
+
+
+def measured_regulator_cards(cards, condition_frames):
+    """Use full measured cohorts, independently of model prose and volcano guide choice."""
+    result = []
+    for original in cards:
+        card = dict(original)
+        effects = []
+        observations = []
+        for condition, frame in condition_frames.items():
+            matches = frame[frame.target_gene.str.casefold() == card['gene'].casefold()]
+            if matches.empty:
+                effects.append(f"{condition}: unavailable")
+                continue
+            row = matches.iloc[0]
+            sig = bool(row.significant)
+            direction = ('increased' if row.log_2_fold_change > 0 else
+                         'decreased' if row.log_2_fold_change < 0 else 'unchanged')
+            observations.append(f"{condition}: knockdown {direction} program activity" if sig else
+                                f"{condition}: no statistically supported change")
+            effects.append(f"{condition}: {row.log_2_fold_change:+.3f} ({'significant' if sig else 'not significant'})")
+        measured = [frame[frame.target_gene.str.casefold() == card['gene'].casefold()]
+                    for frame in condition_frames.values()]
+        measured = pd.concat(measured) if measured else pd.DataFrame()
+        if not measured.empty:
+            card['gene'] = str(measured.iloc[0].target_gene)
+            supported = measured[measured.significant]
+            signs = set(np.sign(supported.log_2_fold_change.dropna())) - {0}
+            card['role'] = ('activator' if signs == {-1} else 'repressor' if signs == {1}
+                            else 'mixed' if signs == {-1, 1} else 'not significant')
+            card['fc'] = '; '.join(effects)
+            card['observation'] = '; '.join(observations) + '. These are program responses, not direct molecular regulation.'
+        elif condition_frames:
+            card['role'] = 'unmeasured'
+            card['fc'] = '; '.join(effects)
+        result.append(card)
+    return result
 
 
 def parse_pathways(annotation_md: str) -> list[dict[str, object]]:
@@ -1007,6 +1053,16 @@ def generate_report(
         else {}
     )
     
+    measured_frames = {}
+    for condition, path in (volcano_condition_csvs or {}).items():
+        if Path(path).exists():
+            measured_frames[condition] = collapse_regulator_guides(
+                standardize_condition_regulator_results(
+                    pd.read_csv(path, sep=None, engine="python"), condition=condition,
+                    significance_threshold=regulator_significance_threshold,
+                ), significant_only=False,
+            )
+
     # Build per-program data
     programs_data = []
     for _, row in summary_df.iterrows():
@@ -1027,7 +1083,10 @@ def generate_report(
         # Optional evidence status / DOIs / contradictions / gaps (spec §10).
         # Absent research file => empty evidence => legacy rendering unchanged.
         research = load_research_results(research_results_dir, topic_id)
-        _merge_research_modules(final_modules, research.get("modules", []))
+        # Structured synthesis selects citations for the FINAL module boundaries.
+        # Positional unions would reattach discarded citations after a module is revised.
+        if not Path(annotations_dir, f'topic_{topic_id}_annotation.json').exists():
+            _merge_research_modules(final_modules, research.get("modules", []))
         
         # Enrichment paths
         enr_rel = os.path.relpath(enrichment_dir, os.path.dirname(output_html))
@@ -1053,10 +1112,11 @@ def generate_report(
             'celltype': stats.get('celltype') or fallback_stats.get('celltype', ''),
             'celltype_detail': celltype_by_program.get(topic_id, []),
             'modules': final_modules,
-            'contradictions': research.get('contradictions', []),
-            'evidence_gaps': research.get('evidence_gaps', []),
             'distinctive': extract_distinctive(annotation_md),
-            'regulators': parse_regulators_detailed(annotation_md),
+            'regulators': measured_regulator_cards(
+                parse_regulators_detailed(annotation_md),
+                {c: df[df.program_id == topic_id] for c, df in measured_frames.items()},
+            ),
             'pathways': pathways_by_program.get(topic_id) or parse_pathways(annotation_md),
             'annotation_text': annotation_md,  # For full-text search
             'kegg_fig': f"{enr_rel}/program_{topic_id}_kegg_enrichment.png",
@@ -1481,7 +1541,6 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             ...(p.modules||[]).flatMap(m => [m.title, m.summary, (m.key_genes||[]).join(" "), (m.pmids||[]).join(" "), (m.dois||[]).join(" "), m.status, m.evidence, m.mechanism]),
             ...(p.regulators||[]).flatMap(r => [r.gene, r.role, r.mechanism]),
             ...(p.pathways||[]).flatMap(pw => [pw.term, pw.source, (pw.genes||[]).join(" ")]),
-            (p.contradictions||[]).join(" "), (p.evidence_gaps||[]).join(" "),
             p.distinctive, p.annotation_text
         ];
         SEARCH_INDEX[id] = parts.filter(Boolean).join(" ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").toLowerCase();
@@ -1524,7 +1583,8 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         const uniq = asArray(p.unique).slice(0,8);
         const modules = p.modules || [];
         const regs = p.regulators || [];
-        const hasMeasuredRegs = regs.some(r => r.fc && (r.role === "activator" || r.role === "repressor"));
+        // Evidence availability comes from the input screen, not model-written role labels.
+        const hasMeasuredRegs = Object.values(condVolcanoOf(p)).some(points => points.length > 0);
         const pathways = p.pathways || [];
         const sortedPw = [...pathways].sort((a,b) => parseFloat(a.fdr) - parseFloat(b.fdr));
         const topPw = sortedPw[0];
@@ -1619,7 +1679,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 <span class="htitle">${hasMeasuredRegs ? "Top regulators" : "Inferred regulator candidates"}</span>
                 <span class="hmeta">${hasMeasuredRegs ? `top perturbations that move this program &middot; <span class="kkey rep">repressor</span> / <span class="kkey act">activator</span>` : "no perturbation file &middot; hypotheses only"}</span>
                 <span class="chev">\u203a</span></button>
-            <div class="body">${regs.length ? regs.map(r => `
+            <div class="body">${hasMeasuredRegs ? `<p class="note">Roles describe the knockdown response, not direct regulation. Effects include every supplied condition; significance is assessed separately in each. Cards use the guide with the strongest adjusted-p support; volcano plots use the largest absolute effect.</p>` : ""}${regs.length ? regs.map(r => `
                 <div class="reg">
                     <div class="rhead">
                         <span class="rgene ${roleCls(r.role)}">${esc(r.gene)}</span>
@@ -1627,6 +1687,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                         ${(r.confidence && r.confidence!=="\u2014") ? `<span class="conf ${String(r.confidence).toLowerCase()}">${esc(r.confidence)} confidence</span>` : ""}
                         ${r.fc ? `<span class="fc">log\u2082FC <b>${esc(r.fc)}</b></span>` : ""}
                     </div>
+                    ${r.observation ? `<div class="rbody"><p><b>Measured response:</b> ${esc(r.observation)}</p></div>` : ""}
                     ${r.mechanism ? `<div class="rbody"><details><summary>Mechanistic hypothesis</summary><p>${esc(r.mechanism)}</p></details></div>` : ""}
                 </div>`).join("") : `<p class="note">No measured regulator data or inferred candidates are available.</p>`}</div>
         </section>

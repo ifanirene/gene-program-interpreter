@@ -377,6 +377,8 @@ def filter_masked_regulators(
         for gene in (masked_regulators or [])
         if str(gene).strip()
     }
+    # Controls may yield significant screen rows, but are never biological regulators.
+    mask.update({"non-targeting", "non_targeting", "nontargeting"})
     if not mask or df.empty:
         return df.copy()
 

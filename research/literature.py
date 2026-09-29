@@ -313,7 +313,7 @@ def _parse_pubmed_xml(xml_text: str) -> List[Dict[str, Any]]:
             "year": _pubmed_year(article),
             "journal": journal,
             "study_type": _study_type(pub_types),
-            "abstract": abstract[:1500] if abstract else None,
+            "abstract": abstract,
             "is_preprint": any("preprint" in t.casefold() for t in pub_types),
             "is_retracted": retracted,
         })

@@ -19,10 +19,10 @@ from research.schema import (
 from research.verify import _apply_mechanism_status_and_meta, normalize_agent_result
 
 
-def test_flatten_normalizes_dedups_and_drops_idless():
+def test_flatten_preserves_all_candidates_dedups_and_drops_idless():
     """The flat agent output (papers attached per mechanism) normalizes to a deduplicated
     Evidence pool with assigned ids, drops id-less papers, carries context_match, sets a
-    provisional per-mechanism status, and hard-caps to 3 mechanisms."""
+    provisional per-mechanism status, and preserves candidates beyond the third."""
     agent = AgentResearchResult(
         program_id="P10",
         candidate_mechanisms=[
@@ -42,16 +42,16 @@ def test_flatten_normalizes_dedups_and_drops_idless():
                 papers=[AgentPaper(doi="10.1016/j.cell.2025.05.022")],
             ),
             AgentMechanism(name="Empty", supporting_genes=["Xyz1"], papers=[]),  # no papers
-            AgentMechanism(name="FourthDropped", papers=[AgentPaper(pmid="99999")]),  # > 3 -> cut
+            AgentMechanism(name="FourthRetained", papers=[AgentPaper(pmid="99999")]),
         ],
     )
     rr = normalize_agent_result(agent)
 
-    assert len(rr.candidate_mechanisms) == 3  # hard 3-cap; the 4th is dropped
+    assert len(rr.candidate_mechanisms) == 4
     assert not hasattr(rr, "claims") or "claims" not in rr.model_dump()  # no claims layer
-    # the 4th mechanism's paper never enters the pool (truncated before pooling)
-    assert len(rr.evidence) == 2
-    assert not any(e.pmid == "99999" for e in rr.evidence)
+    assert len(rr.evidence) == 3
+    assert any(e.pmid == "99999" for e in rr.evidence)
+    assert rr.candidate_mechanisms[3].evidence_ids == ["EV-003"]
     # dedup: mechanism 0's two identical-PMID papers collapse to one Evidence
     assert rr.candidate_mechanisms[0].evidence_ids == ["EV-001"]
     assert rr.candidate_mechanisms[1].evidence_ids == ["EV-002"]
@@ -60,7 +60,7 @@ def test_flatten_normalizes_dedups_and_drops_idless():
     ev0 = rr.evidence_by_id()["EV-001"]
     assert ev0.context_match == "direct" and ev0.relevance_note == "n1"
     # provisional status: has evidence + unresolved -> 'partial'; no evidence -> 'unsupported'
-    assert [m.status for m in rr.candidate_mechanisms] == ["partial", "partial", "unsupported"]
+    assert [m.status for m in rr.candidate_mechanisms] == ["partial", "partial", "unsupported", "partial"]
 
 
 def test_bundle_from_fixtures(gene_loading_csv, literature_context_json, tmp_path):
@@ -313,3 +313,52 @@ def test_adapter_limited_genes_excludes_gene_shared_with_supported(tmp_path):
     assert "OnlyUnsupported" in limited  # only in the unsupported mechanism
     assert "Shared" not in limited       # also in a supported mechanism -> excluded
     assert "Sole1" not in limited        # only in the supported mechanism
+
+
+def test_pubmed_preserves_complete_structured_abstract():
+    from research.literature import _parse_pubmed_xml
+
+    background = "Background detail. " * 120
+    conclusion = "The association was indirect and did not establish causality."
+    xml = f'''<PubmedArticleSet><PubmedArticle><MedlineCitation><PMID>123</PMID>
+      <Article><ArticleTitle>Fixture</ArticleTitle><Abstract>
+        <AbstractText Label="BACKGROUND">{background}</AbstractText>
+        <AbstractText Label="CONCLUSIONS">{conclusion}</AbstractText>
+      </Abstract></Article></MedlineCitation></PubmedArticle></PubmedArticleSet>'''
+    record = _parse_pubmed_xml(xml)[0]
+    assert len(record["abstract"]) > 1500
+    assert record["abstract"] == f"BACKGROUND: {background.strip()} CONCLUSIONS: {conclusion}"
+    assert _parse_pubmed_xml(xml.replace(
+        xml[xml.index("<Abstract>"):xml.index("</Abstract>") + len("</Abstract>")], ""
+    ))[0]["abstract"] is None
+
+
+def test_research_qualifications_reach_annotation_without_invalid_citations(tmp_path):
+    from gpi.evidence_context import format_research_evidence_context
+
+    rr = ResearchResult(
+        program_id="P1",
+        candidate_mechanisms=[CandidateMechanism(name="Candidate", evidence_ids=["EV-1", "EV-2"])],
+        evidence=[
+            Evidence(evidence_id="EV-1", pmid="123", context_match="indirect",
+                     relevance_note="Observed in another cell type.", resolved=True),
+            Evidence(evidence_id="EV-2", pmid="99999999", resolved=False),
+        ],
+        contradictions=["Conflicting functional assignment."],
+        evidence_gaps=["No direct evidence in hepatocytes."],
+    )
+    (tmp_path / "P1.json").write_text(rr.model_dump_json())
+    ctx = load_research_evidence_directory(tmp_path)[1]
+    prompt = format_research_evidence_context({"research_evidence_modules": ctx})
+    for text in ("PMID:123", "indirect", "Observed in another cell type.",
+                 "Conflicting functional assignment.", "No direct evidence in hepatocytes."):
+        assert text in prompt
+    assert "99999999" not in prompt
+    # Empty research can still convey the reason annotation should stay tentative.
+    rr.candidate_mechanisms = []
+    rr.evidence = []
+    (tmp_path / "P1.json").write_text(rr.model_dump_json())
+    ctx = load_research_evidence_directory(tmp_path)[1]
+    assert "No direct evidence in hepatocytes." in format_research_evidence_context(
+        {"research_evidence_modules": ctx}
+    )

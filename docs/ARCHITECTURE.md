@@ -105,7 +105,7 @@ evidence[Evidence], contradictions[], evidence_gaps[], agent_summary, meta}`.
 status ∈ {supported,partial,unsupported}}` — `status` is per-mechanism, derived by the verifier
 from evidence resolvability. The agent submits the flat `AgentResearchResult` whose
 `AgentMechanism.papers[AgentPaper{pmid,doi,title,year,study_type,context_match,note}]` are
-normalized into the deduplicated `Evidence` pool (hard-capped to 3 mechanisms). `Evidence`
+normalized into the deduplicated `Evidence` pool without truncating research candidates. `Evidence`
 carries `context_match` plus verifier-added fields (`resolved`, `registry`, `retracted`,
 `verify_error`) annotated **in place** (no second schema). The claim-level models
 (`Claim`/`AgentClaim`/`Citation`) are RESERVED for a future entailment-verification step and are
@@ -140,9 +140,47 @@ NOT wired into the active pipeline — see `docs/FUTURE_claim_verification.md`.
   literature_summary, status}`. `research_evidence_adapter.py` maps each `ResearchResult`
   `candidate_mechanism` (reading `mechanism.status` directly) + its linked `evidence` into this shape.
 
+### Evidence qualifications and report scope (2026-09-22)
+
+At the user's explicit request, PubMed retrieval retains the complete available
+abstract. Research results remain the archive for paper relevance notes, context
+ratings, contradictions and gaps. The adapter passes these in a separate
+`annotation_evidence` block to functional synthesis; regulator
+supplementation also receives its own research qualifications. These are fallible
+supporting inputs, not a claim-entailment verdict or required report content.
+
+The final HTML omits raw gaps/contradictions and paper-note audit details from its
+program payload and search index. This supersedes the earlier report-extension
+instruction above for raw contradictions/gaps. Existing concise biological caveats
+and final selected citations remain. No research strategy or extra model stage was
+added by this change.
+
+Research hypotheses and submitted candidates have no fixed count. They remain subject
+to gene-specific support and the session's time/turn/budget limits. Final synthesis
+selects or consolidates candidates into at most three report categories, enforced by
+`Annotation.modules`; three is a maximum, not a quota (user clarification, 2026-09-22).
+
+The primary functional request carries the shared `OUTPUT_CONTRACT` and an API JSON
+schema; the separate regulator request carries its own schema. The user removed
+identity-review and model-repair calls from the working runner on 2026-09-24.
+The contract requires at least two distinct supplied genes per module but has no
+gene-count ceiling; at most three final modules remain. One unambiguous JSON code
+fence can still be decoded for saved responses; multiple objects are rejected.
+All publication checks still run, and unresolved failures block report generation.
+In gene-first mode, regulator-only coverage gaps stay in the regulator supplement,
+so retaining evidence qualifications does not expose those identities to functional synthesis.
+
 ## Verification expectations (every component)
 Actually exercise it: import it, run its CLI on a fixture (`tests/fixtures/`), or unit-test it.
 Report what you ran and observed (shapes, counts, a sanity value). Fixtures available:
 `tests/fixtures/inputs/{gene_loading,regulators}.csv` (18 liver programs),
 `tests/fixtures/literature/literature_context.json` (programs 2/10/18),
 `tests/fixtures/annotations/topic_{2,10,18}_annotation.md`, and a real literature prompt.
+# Reusing gene descriptions
+
+The optional `settings.gene_summary_cache` points to a JSON file containing
+`source`, `species_taxid`, `full_summaries`, and a `gene_summaries` symbol-to-text
+mapping. The gene-summary stage checks source, species and summary mode, reuses
+nonempty exact-symbol matches, and retrieves missing descriptions. Descriptions
+are remapped to the current program genes; prior program-level literature,
+regulator selection and enrichment are not reused through this cache.

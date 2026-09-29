@@ -11,6 +11,39 @@ from gpi.context_profile import ContextProfile
 from research.bundle import build_bundle
 
 
+@pytest.mark.parametrize('mode', ['gene_first', 'context_guided'])
+def test_regulator_coverage_gaps_do_not_leak_into_functional_evidence(tmp_path, monkeypatch, mode):
+    from types import SimpleNamespace
+    from gpi.run_pipeline import Flags, Paths, run_verify
+    from gpi.research_evidence_adapter import load_research_evidence_directory
+    from gpi.evidence_context import format_research_evidence_context
+    import research.verify
+    import gpi.regulator_evidence
+
+    paths = Paths(tmp_path)
+    support = tmp_path / 'regulator_research' / 'research_results'
+    for directory in (paths.bundles_dir, paths.research_dir, paths.audit_dir, support):
+        directory.mkdir(parents=True, exist_ok=True)
+    (paths.bundles_dir / 'P1.json').write_text('{"program_id": "P1"}')
+    (paths.research_dir / 'P1.json').write_text(json.dumps({
+        'program_id': 'P1', 'evidence_gaps': ['Functional evidence remains uncertain.'],
+    }))
+    (support / 'P1.json').write_text('{"program_id": "P1"}')
+    monkeypatch.setattr(research.verify, 'verify_directory', lambda *a, **k: {'n_programs': 1})
+    monkeypatch.setattr(gpi.regulator_evidence, 'audit_research_coverage', lambda *a: [
+        {'gene': 'SENTINEL_REGULATOR', 'status': 'not_researched'}
+    ])
+    cfg = SimpleNamespace(output_dir=tmp_path, profile=ContextProfile(interpretation_mode=mode, tissue='liver'))
+    run_verify(cfg, paths, Flags())
+    context = load_research_evidence_directory(paths.research_dir)[1]
+    prompt = format_research_evidence_context({'research_evidence_modules': context})
+    assert 'Functional evidence remains uncertain.' in prompt
+    assert ('SENTINEL_REGULATOR' in prompt) == (mode == 'context_guided')
+    if mode == 'gene_first':
+        assert 'SENTINEL_REGULATOR' in (support / 'P1.json').read_text()
+    assert 'SENTINEL_REGULATOR' in (paths.audit_dir / 'regulator_coverage.json').read_text()
+
+
 @pytest.fixture
 def profiles(tmp_path):
     variants = []

@@ -167,7 +167,8 @@ def _make_submit_tool(holder: Dict[str, Any]):
 
     @tool(SUBMIT_TOOL_NAME, "Submit your findings for this program (call exactly once). Attach "
           "the papers that establish each mechanism inline in that mechanism's papers[]; do not "
-          "assign evidence ids or status, and return at most 3 mechanisms.",
+          "assign evidence ids or status. Retain distinct supported research candidates without a fixed count; "
+          "the final report is consolidated into at most 3 categories downstream.",
           submit_result_tool_schema())
     async def submit_result(args: Dict[str, Any]) -> Dict[str, Any]:
         # Backup capture; the authoritative payload is read from the ToolUseBlock stream in
@@ -523,7 +524,14 @@ async def _drive_once(
                     }
                 )
 
-    await asyncio.wait_for(_run(), timeout=per_program_timeout)
+    try:
+        await asyncio.wait_for(_run(), timeout=per_program_timeout)
+    except Exception as exc:
+        if submit_holder.get("payload") is None:
+            raise
+        # Validate below as usual, but do not discard a completed submission
+        # merely because the SDK failed while ending its session.
+        result_info.update(session_error=f"{type(exc).__name__}: {exc}", is_error=True)
     return tool_trace, result_info
 
 
@@ -661,7 +669,8 @@ async def _handle_one_program(
 
             rr.meta.update(
                 {
-                    "status": "ok",
+                    "status": "recovered_after_session_error" if result_info.get("session_error") else "ok",
+                    "session_error": result_info.get("session_error"),
                     "model": model,
                     "cost_usd": result_info.get("total_cost_usd"),
                     "num_turns": result_info.get("num_turns"),
@@ -688,7 +697,8 @@ async def _handle_one_program(
                 tool_trace=tool_trace,
                 cost_usd=result_info.get("total_cost_usd"),
                 num_turns=result_info.get("num_turns"),
-                status="ok", attempts=attempt,
+                status=rr.meta["status"], attempts=attempt,
+                error=result_info.get("session_error"),
                 subtype=result_info.get("subtype"),
                 is_error=result_info.get("is_error"),
                 stop_reason=result_info.get("stop_reason"),
@@ -703,7 +713,7 @@ async def _handle_one_program(
             if progress_cb is not None:
                 try:
                     progress_cb("agent_finished", {
-                        "program_id": program_id, "status": "ok",
+                        "program_id": program_id, "status": rr.meta["status"],
                         "num_turns": result_info.get("num_turns"),
                         "cost_usd": result_info.get("total_cost_usd"),
                         "stop_reason": result_info.get("stop_reason"),

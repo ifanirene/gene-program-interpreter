@@ -612,15 +612,16 @@ def format_research_evidence_context(ctx: Dict[str, Any]) -> str:
     if not isinstance(research, dict):
         return ""
     modules = research.get("modules", [])
-    if not isinstance(modules, list) or not modules:
+    details = research.get("annotation_evidence", {})
+    if not isinstance(modules, list) or (not modules and not any(details.values())):
         return ""
 
     lines = [
         "#### Research-evidence modules",
         "",
-        "Use these as high-priority evidence, not fixed final module boundaries. "
-        "Each module carries a verification status "
-        "(supported/partial/unsupported).",
+        "These are fallible supporting hypotheses. Program genes determine the interpretation. "
+        "Verification resolves citation identifiers; it does not establish that a paper "
+        "supports the claimed mechanism. Discard candidates without specific program-gene support.",
         "",
     ]
     for idx, module in enumerate(modules, start=1):
@@ -643,6 +644,16 @@ def format_research_evidence_context(ctx: Dict[str, Any]) -> str:
             ]
         )
 
+    if any(details.values()):
+        lines.extend([
+            "#### Research qualifications (annotation input only)",
+            "Use these fallible researcher notes where helpful to retain, qualify, or reject "
+            "a claim. Context-match ratings are researcher judgments, not verified entailment. "
+            "Unverified or retracted papers do not establish support. Do not reproduce this "
+            "audit, its ratings, or its lists of gaps/contradictions in the final annotation; "
+            "reflect material uncertainty concisely in the relevant interpretation instead.",
+            json.dumps(details, ensure_ascii=False, indent=2),
+        ])
     return "\n".join(lines).strip()
 
 
@@ -873,20 +884,15 @@ def select_top_condition_regulators(
     cut so promiscuous, non-program-specific regulators do not consume activator/repressor
     slots — the top-N is filled from the remaining program-specific regulators instead.
     """
-    mask = {str(m).strip().lower() for m in (masked_regulators or []) if str(m).strip()}
     selected: Dict[str, Dict[str, List[Dict[str, Any]]]] = {}
     for condition, by_program in regulator_data.items():
         reg_df = by_program.get(program_id)
         if reg_df is None or reg_df.empty:
             selected[condition] = {"positive": [], "negative": []}
             continue
-        collapsed = collapse_regulator_guides(reg_df, significant_only=True)
-        if mask and not collapsed.empty:
-            gene_col = "target_gene" if "target_gene" in collapsed.columns else "grna_target"
-            if gene_col in collapsed.columns:
-                collapsed = collapsed[
-                    ~collapsed[gene_col].astype(str).str.strip().str.lower().isin(mask)
-                ]
+        collapsed = collapse_regulator_guides(
+            filter_masked_regulators(reg_df, masked_regulators), significant_only=True,
+        )
         positive = sort_regulator_rows_by_significance(
             collapsed[collapsed["log_2_fold_change"] < 0]
         ).head(top_positive_regulators)
@@ -1110,7 +1116,7 @@ def format_condition_regulator_analysis_context(
     _mask = sorted({str(m).strip() for m in (masked_regulators or []) if str(m).strip()})
     if _mask:
         lines.append(
-            f"(Promiscuous, non-program-specific regulators masked from selection: {', '.join(_mask)}.)"
+            f"({len(_mask)} configured regulators excluded before ranking.)"
         )
     lines.append("")
     for condition in sorted(selected.keys()):
@@ -1140,6 +1146,40 @@ def format_condition_regulator_analysis_context(
                     f"- {gene} (log2FC={reg['log2fc']:+.3f}{suffix}){interactions}"
                 )
         lines.append("")
+    genes = sorted({str(reg['gene']) for groups in selected.values()
+                    for regs in groups.values() for reg in regs})
+    lines += [
+        "Complete condition coverage for the union of selected regulators:",
+        "Selection above is a ranking filter, not a test of absence. Use the table below "
+        "for every numerical range or condition claim. Include nonsignificant estimates "
+        "in an all-condition range; identify missing conditions explicitly. Significance "
+        "in one condition but not another does not establish an age or sex interaction.",
+        "Gene | Condition | Representative guide | log2FC | Adjusted P | Significant",
+        "--- | --- | --- | --- | --- | ---",
+    ]
+    for condition, by_program in regulator_data.items():
+        frame = collapse_regulator_guides(by_program.get(program_id, pd.DataFrame()),
+                                         significant_only=False)
+        for gene in genes:
+            matches = frame[frame.target_gene == gene] if not frame.empty else frame
+            if matches.empty:
+                lines.append(f"{gene} | {condition} | unavailable | unavailable | unavailable | unavailable")
+                continue
+            row = matches.iloc[0]
+            adj = row.get('adj_p_value')
+            adj_text = f"{adj:.3e}" if pd.notna(adj) else "unavailable"
+            lines.append(f"{gene} | {condition} | {row.get('grna_target', gene)} | "
+                         f"{row.log_2_fold_change:+.3f} | {adj_text} | {row.get('significant', 'unavailable')}")
+    programs = {pid for by_program in regulator_data.values() for pid in by_program}
+    lines += ["", "Regulator breadth across the supplied dataset (significant in any condition):"]
+    for gene in genes:
+        affected = {pid for by_program in regulator_data.values() for pid, df in by_program.items()
+                    if ((df.target_gene == gene) & df.get('significant', False)).any()}
+        lines.append(f"- {gene}: {len(affected)}/{len(programs)} programs")
+    lines.append("Broad effects are supporting context, not distinctive program identity. "
+                 "Assign the label and modules from multiple program genes first; regulator "
+                 "evidence may support or qualify them, but must not introduce a theme without "
+                 "program-gene support. STRING associations do not establish direct binding.")
     return "\n".join(lines).strip()
 
 
@@ -1278,10 +1318,10 @@ def generate_prompt(
     context_phrase = _context_phrase(profile)
     if research_evidence_context:
         evidence_guidance = (
-            "- Primary evidence: program genes and research-evidence modules\n"
+            "- Primary evidence: ranked program genes (leading genes carry most weight)\n"
             "- Supporting evidence: top KEGG/GO enrichment, regulator perturbation "
             f"evidence, gene summaries, cell-type enrichment, and {context_phrase} context.\n"
-            "- Refine final module labels, boundaries, and gene membership using "
+            "- Research modules are fallible supporting hypotheses; discard those driven by regulators. Refine final module labels, boundaries, and gene membership using "
             "all supplied evidence, with primary evidence carrying the most weight."
         )
     else:
@@ -1289,7 +1329,7 @@ def generate_prompt(
             "- Primary evidence: program genes\n"
             "- Supporting evidence: top KEGG/GO enrichment, regulator perturbation "
             f"evidence, gene summaries, cell-type enrichment, and {context_phrase} context.\n"
-            "- Refine final module labels, boundaries, and gene membership using "
+            "- Research modules are fallible supporting hypotheses; discard those driven by regulators. Refine final module labels, boundaries, and gene membership using "
             "all supplied evidence, with primary evidence carrying the most weight."
         )
     allowed_genes = (
@@ -1314,7 +1354,7 @@ def generate_prompt(
 
     framing = profile.prompt_fields()
 
-    return (
+    prompt = (
         prompt_template.replace("{program_id}", str(program_id))
         .replace("{gene_context}", gene_context)
         .replace("{research_evidence_context}", research_evidence_context)
@@ -1331,6 +1371,13 @@ def generate_prompt(
         .replace("{functional_context}", framing["functional_context"])
         .replace("{evidence_guidance}", evidence_guidance)
     )
+    # Strict identity masking at the final boundary covers enrichment partners,
+    # research summaries and STRING text too. Source measurements remain intact.
+    for gene in sorted(set(masked_regulators or []), key=len, reverse=True):
+        prompt = re.sub(r'(?<![\w])' + re.escape(gene) + r'(?![\w])',
+                        '[excluded gene]', prompt, flags=re.I)
+    return prompt
+
 
 
 def build_annotation_requests(
@@ -1365,6 +1412,8 @@ def build_annotation_requests(
     ncbi_data = ncbi_data or {}
 
     requests: List[dict] = []
+    from .annotation_contract import Annotation, output_format
+    annotation_format = output_format(Annotation)
     for program_id in program_ids:
         prompt = generate_prompt(
             program_id=program_id,
@@ -1390,11 +1439,12 @@ def build_annotation_requests(
             "model": model,
             "max_tokens": max_tokens,
             "messages": [{"role": "user", "content": prompt}],
+            "output_config": {"format": annotation_format},
         }
         if thinking:
             params["thinking"] = {"type": thinking}
         if effort:
-            params["output_config"] = {"effort": effort}
+            params["output_config"]["effort"] = effort
         requests.append({"custom_id": f"topic_{program_id}", "params": params})
     return requests
 
@@ -1410,11 +1460,11 @@ You are a {annotation_role}. Interpret Program {program_id}, {annotation_context
 
 ### Primary evidence
 {gene_context}
-{research_evidence_context}
 {condition_context}
 {functional_context}
 
 ### Supporting evidence
+{research_evidence_context}
 {ncbi_context}
 {enrichment_context}
 {celltype_context}
@@ -1424,7 +1474,8 @@ You are a {annotation_role}. Interpret Program {program_id}, {annotation_context
 - Cite genes and supplied evidence for biological claims.
 - Use the cell-type log2FC values to judge whether this is a cell-type identity program or a cross-cell-type functional program. Strong depletion in a lineage is as informative as enrichment.
 - Treat research-evidence modules as candidate modules, not fixed final boundaries.
-- Add 1-2 de novo functional theme candidates when primary gene descriptions, regulators, or enrichments support them.
+- Add de novo functional theme candidates only when supported by at least two program genes. Regulators and enrichments may qualify these themes, but cannot establish a module on their own.
+- Regulator identities are supporting context, like contextual keywords. Do not use a familiar regulator to rename the program or manufacture a pathway module. Broad regulators listed in the dataset breadth summary carry little evidence of program specificity.
 - Do not automatically select all research-evidence candidates; a de novo candidate may replace a research-evidence candidate when it is more specific or clearly supported by evidence.
 - Do not refer to upstream labels such as "research-evidence Module 1", "research module", or "candidate module" anywhere in the final output, including the evidence used field; use genes, pathways, regulator evidence, and Supporting PMIDs to trace evidence instead.
 - Include all supplied PMIDs, only if a final module strongly overlaps a research-evidence module.
@@ -1434,46 +1485,11 @@ You are a {annotation_role}. Interpret Program {program_id}, {annotation_context
 ### Generic themes to down-weight
 {theme_contrast_context}
 
-### Output requirements (GitHub-flavored Markdown)
-Start with: `## Program {program_id} annotation`
 
-CRITICALLY, include the following two lines near the top, exactly with these bold labels:
-- **Brief Summary:** <1-2 sentences>
-- **Program label:** <=6 words
-
-Then provide the following sections:
-
-1. **High-level overview (<=120 words)**
-   - Main theme(s) grounded in the primary evidence.
-   - Connect to {context_phrase} context only when supported by the supplied genes and curated literature evidence.
-
-2. **Functional modules and mechanisms**
-   Group genes into 1-3 final modules. For each module, use this exact format:
-   ```
-   Module name
-   A 2-4 sentence summary — directly reuse or refine the matching research-evidence module's literature summary, folding in notable additional evidence (regulator perturbation, gene summaries, or {context_phrase} context) only when it adds specificity. For a de novo module with no literature summary, write a concise evidence-anchored summary.
-   Key genes: list 2-10
-   Supporting PMIDs: comma-separated PMIDs directly supporting this final module, or None
-   evidence used: cite any of the supplied evidence that supports this module — program genes, regulator perturbations, enrichment terms, cell-type context, NCBI gene summaries, and/or literature — not only genes and PMIDs. Refer to evidence by its content (gene names, term/pathway names, regulator names), never by upstream labels.
-   ```
-
-3. **Distinctive features**
-   - Describe what is most distinctive about Program {program_id} in 1-2 sentences. Cite unique genes and provide reasoning.
-   - If evidence is limited or mixed, say so explicitly.
-
-4. **Regulator analysis**
-   - Use supplied Perturb-seq regulator evidence when it exists.
-   - If no regulator perturbation input was supplied, state that clearly. Do not claim that
-     no significant regulators were identified, and do not infer biological meaning from
-     absent hits. You may nominate up to 3 plausible regulators from program genes or
-     literature only when useful, but label each one explicitly as inference and use
-     `log2FC=N/A`.
-   For each reported regulator use this exact format:
-   ```
-   regulator_name (role, log2FC=X): [Confidence: High/Medium/Low]
-   Propose a mechanistic hypothesis: How might this regulator control the program's genes/pathways? Cite program genes and evidence.
-   ```
 """
+
+from .annotation_contract import OUTPUT_CONTRACT
+PROMPT_TEMPLATE += OUTPUT_CONTRACT
 
 
 # =============================================================================

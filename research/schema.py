@@ -12,7 +12,7 @@ Two shapes, one file:
 
 2. CANONICAL (normalized + verified) — written to ``research_results/{program_id}.json``.
    ``research/verify.py`` deterministically:
-     * normalizes the flat agent output into this shape — TRUNCATING to the first 3 mechanisms,
+     * normalizes the flat agent output into this shape — preserving every research candidate,
        then building the deduplicated ``Evidence`` pool (by pmid|doi) from the kept mechanisms'
        papers, assigning ``EV-NNN`` ids, attaching ``evidence_ids`` per mechanism, carrying
        ``context_match``/``note`` onto the Evidence, and setting a provisional ``status``;
@@ -36,7 +36,7 @@ from __future__ import annotations
 
 from typing import List, Literal, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 # Active type aliases (used by the live pipeline).
 ContextMatch = Literal["direct", "partial", "indirect"]
@@ -84,7 +84,7 @@ class Evidence(BaseModel):
 
 
 class CandidateMechanism(BaseModel):
-    """A proposed mechanism (1-3 per program). Maps to exactly one annotation ``module``.
+    """A research candidate supplied to annotation, which may merge or omit candidates.
 
     Papers are attached directly (no intermediate claim layer): the agent's ``AgentPaper[]`` are
     deduplicated into the program ``Evidence`` pool and referenced here by ``evidence_ids``.
@@ -110,18 +110,35 @@ class CandidateMechanism(BaseModel):
     )
 
 
+class RegulatorCoverage(BaseModel):
+    gene: str
+    status: Literal['retrieved_support', 'searched_no_support', 'not_researched']
+    queries: List[str] = Field(default_factory=list)
+    identifiers: List[str] = Field(default_factory=list)
+    note: str = ''
+
+    @model_validator(mode='after')
+    def require_search_evidence(self):
+        if self.status == 'retrieved_support' and (not self.queries or not self.identifiers):
+            raise ValueError('Retrieved regulator support requires queries and identifiers')
+        if self.status == 'searched_no_support' and not self.queries:
+            raise ValueError('A searched regulator requires at least one query')
+        return self
+
+
 class ResearchResult(BaseModel):
     """The per-program artifact written to ``research_results/{program_id}.json``.
 
-    ``candidate_mechanisms`` is 1-3 (hard-truncated to the first 3 during normalization).
+    ``candidate_mechanisms`` preserves all submitted research candidates without truncation.
     ``evidence`` is the deduplicated pool referenced by each mechanism's ``evidence_ids``.
     """
 
     program_id: str
+    regulator_coverage: List[RegulatorCoverage] = Field(default_factory=list)
     queries: List[str] = Field(default_factory=list)
     candidate_mechanisms: List[CandidateMechanism] = Field(
         default_factory=list,
-        description="1-3 mechanisms; hard-truncated to the first 3 during normalization.",
+        description="Distinct research candidates; the final report category limit is applied downstream.",
     )
     evidence: List[Evidence] = Field(
         default_factory=list, description="Deduplicated evidence pool (by pmid|doi)."
@@ -147,7 +164,7 @@ class ResearchResult(BaseModel):
 #
 # The agent attaches papers INLINE to each mechanism (`papers`); it does NOT assign evidence
 # ids, keep a separate `evidence[]` pool, or set status. `research/verify.py` deterministically
-# normalizes this into the canonical `ResearchResult` above — truncating to 3 mechanisms,
+# normalizes this into the canonical `ResearchResult` above — preserving all candidates,
 # building the deduplicated Evidence pool, assigning ids, resolving identifiers, and deriving
 # each mechanism's status. This keeps id/dedup/verification bookkeeping out of the LLM (where it
 # is error-prone) and in deterministic code (where it is reliable).
@@ -171,7 +188,7 @@ class AgentPaper(BaseModel):
 
 
 class AgentMechanism(BaseModel):
-    """A proposed functional theme (1-3 per program). Maps to one annotation module.
+    """A proposed functional theme, which annotation may consolidate with other candidates.
 
     Attach the specific papers that establish this theme in ``papers`` (each with a real
     tool-returned pmid and/or doi)."""
@@ -186,13 +203,17 @@ class AgentMechanism(BaseModel):
 class AgentResearchResult(BaseModel):
     """What the research agent submits (flat). ``verify.py`` normalizes it to ``ResearchResult``.
 
-    Return the strongest **1-3** mechanisms (a hard maximum of 3 is enforced during
-    normalization); do not assign the final program label."""
+    Retain distinct supported candidates without a fixed count; downstream annotation
+    selects or combines them into at most three final report categories. Do not assign
+    the final program label."""
 
     program_id: str
+    regulator_coverage: List[RegulatorCoverage] = Field(default_factory=list,
+        description='One record per selected regulator, including those not researched. '
+                    'Retrieved support requires actual search queries and tool-returned identifiers.')
     queries: List[str] = Field(default_factory=list)
     candidate_mechanisms: List[AgentMechanism] = Field(
-        default_factory=list, description="1-3 mechanisms (hard max 3, enforced in normalization)."
+        default_factory=list, description="Distinct supported research candidates, without a fixed count or quota."
     )
     contradictions: List[str] = Field(default_factory=list)
     evidence_gaps: List[str] = Field(default_factory=list)

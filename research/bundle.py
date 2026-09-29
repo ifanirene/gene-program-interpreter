@@ -130,7 +130,7 @@ def _top_condition_regulators(ctx: Optional[Dict[str, Any]]) -> Dict[str, List[D
             for r in block.get(side) or []:
                 name = str(r.get("regulator", "")).strip()
                 lfc = r.get("log2fc")
-                if not name or lfc is None:
+                if not name or lfc is None or name.casefold() in {'non-targeting', 'non_targeting', 'nontargeting'}:
                     continue
                 if name not in pooled or abs(lfc) > abs(pooled[name]):
                     pooled[name] = float(lfc)
@@ -170,8 +170,8 @@ def _build_research_brief(
     subject = rp.cell_type or rp.tissue or rp.organism or "cell"
 
     reg_clause = (
-        " and the genes in `perturbation_regulators` (research these the same way as the "
-        "program genes)"
+        ". Then research `perturbation_regulators` as supporting evidence separately from the "
+        "program genes"
         if has_regulators
         else ""
     )
@@ -185,14 +185,31 @@ def _build_research_brief(
         f"You are a {role}. Determine the shared biological function of this program's genes.",
         "",
         f"Research the genes in `program_genes` and `distinctive_genes`{reg_clause}"
-        f"{function_clause}. Land on 1-3 coherent functional "
-        "themes, each supported by several genes and specific retrieved papers.",
+        f"{function_clause}. Explore hypotheses without a fixed count and retain coherent functional "
+        "themes supported by several genes and specific retrieved papers. The final report's "
+        "three-category maximum does not limit research candidates; do not add weak themes to fill a quota.",
     ]
     if rp.conditions:
         lines += [
             "",
             f"Experimental context: {', '.join(rp.conditions)}. Cite the condition link when the "
             "literature supports it; do not force one.",
+        ]
+    if has_regulators:
+        lines += [
+            "",
+            "Program genes determine functional identity. Research regulators as supporting "
+            "evidence and possible explanations; do not let a regulator or a familiar pathway "
+            "name dictate a theme without support from several program genes. The regulator "
+            "lists are top-hit selections: omission from a condition does not mean absence "
+            "of an effect or lack of significance. Do not infer age/sex specificity or an "
+            "all-condition effect range from these truncated lists. Report which selected "
+            "regulators have retrieved support and which remain unresearched. Return one "
+            "regulator_coverage record for each unique selected regulator, with the actual "
+            "queries and retrieved identifiers. Use regulator_effects_all_conditions when "
+            "available for condition comparisons. Regulators flagged broad_top_hit in "
+            "regulator_recurrence must not define labels or modules without independent "
+            "support from multiple program genes.",
         ]
     lines += [
         "",
@@ -212,6 +229,8 @@ def build_bundle(
     ncbi_context: Optional[Dict[str, Any]] = None,
     top_loading: int = 15,
     top_unique: int = 8,
+    regulator_data=None,
+    regulator_recurrence=None,
     **_ignored: Any,  # accept legacy kwargs (enrichment_df, top_enrichment) without using them
 ) -> Dict[str, Any]:
     """Assemble the lean, immutable program-bundle dict for one program. Offline; no network."""
@@ -226,6 +245,16 @@ def build_bundle(
         raise ValueError(f"No genes found for program {label} in gene_df — check id and CSV.")
 
     regulators = _top_condition_regulators(_resolve_program_context(ncbi_context, int_key))
+    if regulator_data:
+        from gpi.evidence_context import select_top_condition_regulators
+        selected = select_top_condition_regulators(regulator_data, int_key)
+        regulators = {
+            c: [{'gene': r['gene'], 'log2fc': round(r['log2fc'], 3)}
+                for r in sorted(groups['positive'] + groups['negative'],
+                                key=lambda r: -abs(r['log2fc']))]
+            for c, groups in selected.items()
+            if groups['positive'] or groups['negative']
+        }
 
     rp = profile.resolved()
     bundle: Dict[str, Any] = {
@@ -240,6 +269,12 @@ def build_bundle(
     }
     if regulators:
         bundle["perturbation_regulators"] = regulators
+        if regulator_data:
+            from gpi.regulator_evidence import complete_effects
+            genes = {r['gene'] for regs in regulators.values() for r in regs}
+            bundle['regulator_effects_all_conditions'] = complete_effects(regulator_data, int_key, genes)
+            bundle['regulator_recurrence'] = {g: regulator_recurrence[g] for g in genes
+                                             if g in (regulator_recurrence or {})}
     bundle["research_brief"] = _build_research_brief(label, profile, bool(regulators))
     return bundle
 
@@ -253,6 +288,8 @@ def build_all_bundles(
     program_ids: Optional[List[Union[int, str]]] = None,
     top_loading: int = 15,
     top_unique: int = 8,
+    regulator_files=None,
+    masked_regulators=None,
     **_ignored: Any,  # accept legacy kwargs (enrichment_csv, top_enrichment) without using them
 ) -> List[Path]:
     """Build and write one ``{out_dir}/{program_id}.json`` per requested program."""
@@ -279,11 +316,18 @@ def build_all_bundles(
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
 
+    from gpi.evidence_context import load_condition_regulator_data
+    from gpi.regulator_evidence import recurrence
+    regulator_data = load_condition_regulator_data(regulator_files or {}, masked_regulators=masked_regulators)
+    breadth = recurrence(regulator_data) if regulator_data else {}
+    if breadth:
+        (out_path.parent / 'regulator_recurrence.json').write_text(json.dumps(breadth, indent=2))
     written: List[Path] = []
     for pid in program_ids:
         bundle = build_bundle(
             pid, gene_df, profile,
             ncbi_context=ncbi_context, top_loading=top_loading, top_unique=top_unique,
+            regulator_data=regulator_data, regulator_recurrence=breadth,
         )
         dest = out_path / f"{bundle['program_id']}.json"
         dest.write_text(json.dumps(bundle, indent=2), encoding="utf-8")
@@ -318,16 +362,21 @@ def build_parser() -> argparse.ArgumentParser:
         "--top-unique", type=int, default=8,
         help="Top-M genes by global uniqueness per program, excluding the top-loading N.",
     )
+    parser.add_argument('--regulator-condition-file', action='append', default=[])
+    parser.add_argument('--mask-regulator', action='append', default=[])
     return parser
 
 
 def main() -> None:
     args = build_parser().parse_args()
     profile = ContextProfile.from_yaml(Path(args.profile)) if args.profile else ContextProfile.liver_demo()
+    from gpi.evidence_context import parse_condition_path_args
     written = build_all_bundles(
         args.gene_loading,
         profile,
         ncbi_context_json=args.ncbi_context,
+        regulator_files=parse_condition_path_args(args.regulator_condition_file),
+        masked_regulators=args.mask_regulator,
         out_dir=args.out_dir,
         program_ids=_parse_programs(args.programs),
         top_loading=args.top_loading,

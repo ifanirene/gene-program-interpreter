@@ -173,3 +173,33 @@ def test_pipeline_forwards_global_and_legacy_masks_to_upstream_step(
     argv = calls[0]
     masked = [argv[index + 1] for index, value in enumerate(argv) if value == "--mask-regulator"]
     assert masked == ["GlobalMask", "LegacyMask"]
+
+
+def test_condition_prompt_does_not_repeat_excluded_names():
+    from gpi.evidence_context import format_condition_regulator_analysis_context
+    frame = pd.DataFrame([
+        dict(program_id=1,target_gene='GlobalActivator',grna_target='GlobalActivator',
+             log_2_fold_change=-2,adj_p_value=.001,p_value=.001,significant=True),
+        dict(program_id=1,target_gene='SpecificActivator',grna_target='SpecificActivator',
+             log_2_fold_change=-1,adj_p_value=.002,p_value=.002,significant=True),
+    ])
+    prompt = format_condition_regulator_analysis_context({'young':{1:frame}}, {}, 1,
+        top_positive_regulators=1,masked_regulators=['GlobalActivator'])
+    assert 'GlobalActivator' not in prompt
+    assert 'SpecificActivator' in prompt
+
+
+def test_publication_rejects_reintroduced_excluded_regulator(tmp_path):
+    import pytest
+    from gpi.annotation_validation import finalize_regulator_annotations
+    (tmp_path/'topic_1_annotation.md').write_text('''## Regulator analysis
+
+```
+GlobalActivator (activator, log2FC=measured): [Confidence: Low]
+Mechanistic hypothesis: A proposed response.
+```
+''')
+    with pytest.raises(ValueError,match='validation failed'):
+        finalize_regulator_annotations(tmp_path,{}, {}, masked_regulators=['globalactivator'])
+    audit=json.loads((tmp_path/'regulator_validation.json').read_text())
+    assert audit['errors'][0]['issue']=='Excluded regulator reintroduced in annotation'

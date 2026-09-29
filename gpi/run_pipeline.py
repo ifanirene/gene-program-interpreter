@@ -39,6 +39,7 @@ import importlib
 import json
 import logging
 import os
+import re
 import shutil
 import shlex
 import subprocess
@@ -167,11 +168,11 @@ STEP_EXECUTOR: Dict[str, str] = {
 STEP_MODULES: Dict[str, List[str]] = {
     "string_enrichment": ["gpi.enrichment"],
     "gene_summaries": ["gpi.gene_summaries"],
-    "bundle": ["research.bundle"],
+    "bundle": ["research.bundle", "gpi.regulator_evidence"],
     "research": ["research.research_parallel"],
     "verify": ["research.verify"],
     "theme": ["gpi.theme_representation"],
-    "annotate": ["gpi.evidence_context", "gpi.anthropic_batch", "gpi.parse_results"],
+    "annotate": ["gpi.evidence_context", "gpi.anthropic_batch", "gpi.parse_results", "gpi.annotation_validation"],
     "presentation": ["gpi.presentation"],
     "html_report": ["gpi.html_report"],
 }
@@ -527,6 +528,8 @@ def run_gene_summaries(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[
         "--top-unique", cfg.setting("top_unique", 8),
         *_topics_args(cfg),
     )
+    if cfg.setting("gene_summary_cache"):
+        argv += ["--gene-summary-cache", str(cfg.setting("gene_summary_cache"))]
     if cfg.regulators:
         argv += ["--regulator-file", str(cfg.regulators)]
     # Condition-keyed regulators -> regulator_validation_by_condition (bundle
@@ -569,6 +572,8 @@ def run_bundle(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
         top_loading=int(cfg.setting("top_loading", 15)),
         top_unique=int(cfg.setting("top_unique", 8)),
         top_enrichment=int(cfg.setting("top_enrichment", 7)),
+        regulator_files=cfg.regulators_by_condition,
+        masked_regulators=cfg.masked_regulators,
     )
     return {"n_bundles": len(written), "bundles": [str(p) for p in written]}
 
@@ -616,19 +621,33 @@ def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         emitter.emit(RESEARCH_START, {"n_programs": len(bundle_paths),
                                       "concurrency": concurrency, "auth": auth})
     try:
-        written = asyncio.run(
-            _run_research(
-                bundle_paths,
-                out_dir=paths.research_dir,
-                audit_dir=paths.audit_dir,
-                concurrency=concurrency,
-                model=cfg.research.get("model", "claude-sonnet-4-6"),
-                max_turns=int(cfg.research.get("max_turns", 30)),
-                max_budget_usd=float(cfg.research.get("max_budget_usd", 1.0)),
-                per_program_timeout=float(cfg.research.get("per_program_timeout", 600)),
-                progress_cb=(emitter.emit if emitter is not None else None),
-            )
-        )
+        gene_first = cfg.profile.interpretation_mode == 'gene_first'
+        kwargs = dict(concurrency=concurrency, model=cfg.research.get('model','claude-sonnet-4-6'),
+                      max_turns=int(cfg.research.get('max_turns',30)),
+                      max_budget_usd=float(cfg.research.get('max_budget_usd',1.0)) / (2 if gene_first else 1),
+                      per_program_timeout=float(cfg.research.get('per_program_timeout',600)),
+                      progress_cb=(emitter.emit if emitter is not None else None))
+        if gene_first:
+            from gpi.gene_first_synthesis import functional_bundle
+            support_root = cfg.output_dir / 'regulator_research'
+            asyncio.run(_run_research(bundle_paths, out_dir=support_root/'research_results',
+                                     audit_dir=support_root/'research_audit', **kwargs))
+            function_dir = cfg.output_dir / 'functional_bundles'
+            function_dir.mkdir(exist_ok=True)
+            for bundle_path in bundle_paths:
+                (function_dir/bundle_path.name).write_text(json.dumps(functional_bundle(json.loads(bundle_path.read_text())),indent=2))
+            written = asyncio.run(_run_research(sorted(function_dir.glob('*.json')),
+                out_dir=paths.research_dir, audit_dir=paths.audit_dir, **kwargs))
+            for path in written:
+                data = json.loads(path.read_text())
+                support_path = support_root/'research_results'/path.name
+                support = json.loads(support_path.read_text())
+                data['regulator_coverage'] = support.get('regulator_coverage',[])
+                data['meta']['regulator_research_path'] = str(support_path)
+                path.write_text(json.dumps(data,indent=2))
+        else:
+            written = asyncio.run(_run_research(bundle_paths, out_dir=paths.research_dir,
+                                               audit_dir=paths.audit_dir, **kwargs))
     finally:
         if saved_key is not None:
             os.environ["ANTHROPIC_API_KEY"] = saved_key
@@ -654,6 +673,40 @@ def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
 
     emit_step_progress(None, None, "verifying citations")
     summary = verify_directory(paths.research_dir, audit_dir=paths.audit_dir)
+    support_root = cfg.output_dir / 'regulator_research'
+    if (support_root/'research_results').exists():
+        support_summary = verify_directory(support_root/'research_results',
+                                           audit_dir=support_root/'research_audit')
+        verification_path = support_summary.get('verification_summary')
+        if verification_path and Path(verification_path).exists():
+            support_summary.update(json.loads(Path(verification_path).read_text()))
+        (paths.audit_dir/'regulator_citation_verification.json').write_text(json.dumps(support_summary,indent=2))
+        if support_summary.get('verification_complete') is False:
+            logger.warning('Regulator citation verification incomplete; see regulator_research/research_audit')
+    from gpi.regulator_evidence import audit_research_coverage
+    coverage_audit = {}
+    for bundle_path in sorted(paths.bundles_dir.glob('P*.json')):
+        result_path = paths.research_dir / bundle_path.name
+        if not result_path.exists():
+            continue
+        result = json.loads(result_path.read_text())
+        coverage = audit_research_coverage(json.loads(bundle_path.read_text()), result)
+        coverage_audit[bundle_path.stem] = coverage
+        missing = [r['gene'] for r in coverage if r['status'] != 'retrieved_support']
+        if missing:
+            gap = 'Regulators without documented retrieved support: ' + ', '.join(missing)
+            gap_path, gap_result = result_path, result
+            if cfg.profile.interpretation_mode == 'gene_first':
+                # Functional evidence gaps now reach synthesis. Keep regulator
+                # identities in the separate supplement, including missing coverage.
+                gap_path = support_root / 'research_results' / bundle_path.name
+                if not gap_path.exists():
+                    continue  # Missing coverage is still retained in coverage_audit.
+                gap_result = json.loads(gap_path.read_text())
+            if gap not in gap_result.setdefault('evidence_gaps', []):
+                gap_result['evidence_gaps'].append(gap)
+            gap_path.write_text(json.dumps(gap_result, indent=2))
+    (paths.audit_dir / 'regulator_coverage.json').write_text(json.dumps(coverage_audit, indent=2))
 
     # Say out loud when verification did not fully run. The whole point of this step is the
     # promise that no unverified citation reaches the report; a run that quietly could not keep
@@ -773,7 +826,40 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
             "--max-tokens", cfg.annotation.get("max_tokens", 8192),
             "--concurrency", cfg.annotation.get("concurrency", 4),
         )
+    gene_first = cfg.profile.interpretation_mode == 'gene_first'
+    full_requests = None
+    if gene_first and not flags.dry_run:
+        from gpi.gene_first_synthesis import core_requests
+        full_requests = json.loads(paths.batch_request.read_text())
+        (cfg.output_dir/'full_annotation_requests.json').write_text(json.dumps(full_requests,indent=2))
+        paths.batch_request.write_text(json.dumps(core_requests(full_requests),indent=2))
     _run_subprocess(synthesize, flags.dry_run)
+    if not flags.dry_run:
+        from gpi.annotation_contract import validate_batch_contract
+        validate_batch_contract(paths.batch_request, paths.batch_results)
+    if gene_first and not flags.dry_run:
+        from gpi.gene_first_synthesis import supplement_requests, merge_supplements
+        core_path = cfg.output_dir/'functional_annotation_results.jsonl'
+        shutil.copy2(paths.batch_results,core_path)
+        shutil.copy2(paths.batch_request,cfg.output_dir/'functional_annotation_requests.json')
+        requests = supplement_requests(full_requests,core_path,cfg.output_dir/'regulator_research'/'research_results')
+        # Apply hard identity masking to the second prompt too, including retrieved prose.
+        for request in requests['requests']:
+            content = request['params']['messages'][0]['content']
+            for gene in cfg.masked_regulators:
+                content = re.sub(r'(?<![\w])'+re.escape(gene)+r'(?![\w])','[excluded gene]',content,flags=re.I)
+            request['params']['messages'][0]['content'] = content
+        paths.batch_request.write_text(json.dumps(requests,indent=2))
+        shutil.copy2(paths.batch_request,cfg.output_dir/'regulator_annotation_requests.json')
+        _run_subprocess(synthesize,False)
+        supplement_path = cfg.output_dir/'regulator_annotation_results.jsonl'
+        shutil.copy2(paths.batch_results,supplement_path)
+        merge_supplements(core_path,supplement_path,paths.batch_results)
+        paths.batch_request.write_text(json.dumps(full_requests,indent=2))
+
+    if not flags.dry_run:
+        from gpi.annotation_contract import validate_batch_contract
+        validate_batch_contract(paths.batch_request, paths.batch_results)
 
     # (c) parse results -> per-topic markdown + summary CSV (uses parse_final_results)
     parse = _pymod(
@@ -785,6 +871,28 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
     )
     emit_step_progress(None, None, "parsing results")
     _run_subprocess(parse, flags.dry_run)
+    if not flags.dry_run:
+        # A parser warning or truncated/missing response must not publish a partial run.
+        requests = json.loads(paths.batch_request.read_text())["requests"]
+        expected = {int(re.search(r'topic_(\d+)', r['custom_id']).group(1)) for r in requests}
+        missing = [pid for pid in expected if not (paths.annotations_dir / f'topic_{pid}_annotation.json').exists()]
+        if missing:
+            raise StepError(f'Annotation JSON contract missing/invalid for programs: {missing}')
+        import pandas as pd
+        from gpi.evidence_context import load_condition_regulator_data
+        from gpi.column_mapper import standardize_gene_loading, extract_program_id
+        from gpi.annotation_validation import finalize_regulator_annotations
+        data = load_condition_regulator_data(cfg.regulators_by_condition,
+                                             masked_regulators=cfg.masked_regulators)
+        if not cfg.regulators_by_condition and cfg.regulators:
+            from gpi.evidence_context import load_regulator_data
+            data = {'all': load_regulator_data(cfg.regulators, masked_regulators=cfg.masked_regulators)}
+        genes = standardize_gene_loading(pd.read_csv(cfg.gene_loading))
+        genes['program_id'] = genes['program_id'].map(extract_program_id)
+        from gpi.evidence_context import select_program_genes
+        program_genes = {pid: [g for group in select_program_genes(genes, pid, int(cfg.setting('top_loading',15)), int(cfg.setting('top_unique',8))) for g in group] for pid in expected}
+        finalize_regulator_annotations(paths.annotations_dir, data, program_genes, cfg.masked_regulators)
+        _run_subprocess(parse + ["--no-parse"], False)
     return {"annotations_dir": str(paths.annotations_dir), "summary_csv": str(paths.summary_csv)}
 
 

@@ -36,3 +36,31 @@ Propose a mechanistic hypothesis: HNF4A may coordinate the hepatocyte identity g
             "mechanism": "HNF4A may coordinate the hepatocyte identity genes.",
         }
     ]
+
+
+def test_report_preserves_explicit_descriptive_role_from_live_annotation():
+    annotation = '''## Regulator analysis
+
+```
+Dgat2 (role: Master rate-limiting activator of triglyceride synthesis, log2FC=-3.303 to -5.270): [Confidence: High]
+Propose a mechanistic hypothesis: Feedback may affect the program.
+```
+
+```
+Insig1 (role: Metabolic repressor of lipogenesis, log2FC=+1.238): [Confidence: High]
+Propose a mechanistic hypothesis: A candidate feedback relationship.
+```
+'''
+    cards = parse_regulators_detailed(annotation)
+    assert [(r['gene'], r['role']) for r in cards] == [('Dgat2', 'activator'), ('Insig1', 'repressor')]
+
+
+def test_report_does_not_choose_between_opposing_explicit_roles():
+    annotation = '''## Regulator analysis
+
+```
+GeneA (role: activator or repressor depending on condition, log2FC=N/A): [Confidence: Low]
+Propose a mechanistic hypothesis: Direction is unresolved.
+```
+'''
+    assert parse_regulators_detailed(annotation)[0]['role'] == 'inferred'

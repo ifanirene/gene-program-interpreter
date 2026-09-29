@@ -504,6 +504,7 @@ def resolve_gene_summaries(
     ncbi_client: NcbiClient,
     harmonizome_client: Optional[HarmonizomeClient] = None,
     use_full_summaries: bool = False,
+    cached_summaries: Optional[Dict[str, str]] = None,
 ) -> Dict[int, Dict[str, str]]:
     """
     @description
@@ -530,6 +531,20 @@ def resolve_gene_summaries(
 
     if not all_drivers:
         return {pid: {} for pid in program_ids}
+
+    if cached_summaries:
+        cached = {g: text for g, text in cached_summaries.items()
+                  if g in all_drivers and isinstance(text, str) and text.strip()}
+        missing = {pid: {"drivers": [g for g in programs[pid]["drivers"] if g not in cached]}
+                   for pid in program_ids}
+        logger.info("Reusing %d cached gene descriptions; fetching %d missing genes",
+                    len(cached), len(all_drivers - cached.keys()))
+        fetched = resolve_gene_summaries(source, missing, program_ids, ncbi_client,
+                                         harmonizome_client, use_full_summaries)
+        return {pid: {g: cached.get(g, fetched[pid].get(g))
+                      for g in programs[pid]["drivers"]
+                      if g in cached or g in fetched[pid]}
+                for pid in program_ids}
 
     if source == "ncbi":
         logger.info(
@@ -1553,6 +1568,7 @@ def main():
     parser.add_argument("--all-significant", action="store_true", help="Validate ALL significant regulators (not just top N). Fast with STRING.")
     parser.add_argument("--max-regulators", type=int, default=20, help="Maximum regulators per category when using --all-significant (default 20)")
     
+    parser.add_argument("--gene-summary-cache", help="JSON cache with source, species_taxid, full_summaries and gene_summaries fields")
     args = parser.parse_args()
     config = load_config(args.config)
     cli_overrides = get_cli_overrides(sys.argv)
@@ -1621,12 +1637,21 @@ def main():
 
     gene_summary_source = args.gene_summary_source
     use_full_summaries = getattr(args, "full_summaries", False)
+    cached_summaries = None
+    if args.gene_summary_cache:
+        cache_data = json.loads(Path(args.gene_summary_cache).read_text())
+        if (cache_data.get("source") != gene_summary_source
+                or cache_data.get("species_taxid") != args.species
+                or cache_data.get("full_summaries") != use_full_summaries):
+            raise ValueError("Gene description cache source/species/summary mode does not match this run")
+        cached_summaries = cache_data["gene_summaries"]
     program_gene_summaries = resolve_gene_summaries(
         source=gene_summary_source,
         programs=programs,
         program_ids=program_ids,
         ncbi_client=client,
         use_full_summaries=use_full_summaries,
+        cached_summaries=cached_summaries,
     )
 
     # =========================================================================

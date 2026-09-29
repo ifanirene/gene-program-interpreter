@@ -443,10 +443,10 @@ _JS = r"""
 
   /* the "executor" field is an execution-substrate CODE, not a worker count — surface it as a word
      (with the full meaning in a tooltip) so "executor 4" no longer misreads as "4 executors". */
-  var EXEC_LABELS = { "import": "preflight", "4": "deterministic", "2": "agents", "3": "batch", "3/4": "LLM" };
+  var EXEC_LABELS = { "import": "preflight", "4": "deterministic", "2": "agents", "3": "API", "3/4": "LLM" };
   var EXEC_TITLES = {
     "import": "preflight import step", "4": "deterministic Python (no model call)",
-    "2": "parallel research agents (Agent SDK)", "3": "Anthropic Batch API",
+    "2": "parallel research agents (Agent SDK)", "3": "Anthropic API (live or batch)",
     "3/4": "LLM with deterministic fallback"
   };
 
@@ -652,7 +652,6 @@ _JS = r"""
   }
 
   function reportReady(snap) {
-    if (snap.status === "done") return true;
     return (snap.steps || []).some(function (s) { return s.name === "html_report" && s.status === "completed"; });
   }
 
