@@ -131,6 +131,13 @@ NOT wired into the active pipeline — see `docs/FUTURE_claim_verification.md`.
 - **HTML report per-program card dict (`05` `generate_design_a_html`):** keys `id,name,label,summary,
   lead_html,tags,module_short,presentation_source,top_loading[],unique[],celltype,modules[],
   distinctive,regulators[],pathways[],annotation_text,kegg_fig,process_fig,volcano,condition_volcano`.
+  Each measured regulator carries `effects[]`: condition, numeric log2fc,
+  significance, representative guide, P value and its source column. The regulator
+  section renders these as a table heatmap with a symmetric per-program color
+  scale and significance markers. Missing values remain distinct from zero.
+  Mechanisms appear on hover, click or keyboard focus of the information button;
+  confidence stays beside the gene. Model-written numeric prose is not parsed to
+  populate the heatmap. Single-file screens use an `all` column.
   Each `modules[]`: `{title,summary,key_genes[],pmids[],evidence,mechanism}`. **Extend for evidence
   status:** add DOI links (recon: current renderer does PMID-only) and visually separate
   supported/partial/contradictory/missing (spec §10), driven by mechanism `status`/`contradictions`/`evidence_gaps`.
@@ -163,6 +170,10 @@ selects or consolidates candidates into at most three report categories, enforce
 The primary functional request carries the shared `OUTPUT_CONTRACT` and an API JSON
 schema; the separate regulator request carries its own schema. The user removed
 identity-review and model-repair calls from the working runner on 2026-09-24.
+Following the user's 2026-09-28 implementation request, gene-first regulator research
+and the existing regulator explanation pass run only for programs with selected
+regulators. Functional research and annotation remain required. This is a per-program
+decision, including mixed runs; omitted required supplements still fail validation.
 The contract requires at least two distinct supplied genes per module but has no
 gene-count ceiling; at most three final modules remain. One unambiguous JSON code
 fence can still be decoded for saved responses; multiple objects are rejected.

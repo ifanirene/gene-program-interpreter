@@ -440,14 +440,26 @@ def measured_regulator_cards(cards, condition_frames):
     for original in cards:
         card = dict(original)
         effects = []
+        heatmap_effects = []
         observations = []
         for condition, frame in condition_frames.items():
             matches = frame[frame.target_gene.str.casefold() == card['gene'].casefold()]
             if matches.empty:
                 effects.append(f"{condition}: unavailable")
+                heatmap_effects.append(dict(condition=condition, log2fc=None,
+                                            significant=None, guide=None, p_value=None,
+                                            p_kind=None))
                 continue
             row = matches.iloc[0]
             sig = bool(row.significant)
+            p_kind = 'adj_p_value' if 'adj_p_value' in frame.columns else 'p_value'
+            p_value = row.get(p_kind)
+            heatmap_effects.append(dict(
+                condition=condition, log2fc=float(row.log_2_fold_change),
+                significant=sig, guide=str(row.grna_target),
+                p_value=float(p_value) if pd.notna(p_value) else None,
+                p_kind=p_kind,
+            ))
             direction = ('increased' if row.log_2_fold_change > 0 else
                          'decreased' if row.log_2_fold_change < 0 else 'unchanged')
             observations.append(f"{condition}: knockdown {direction} program activity" if sig else
@@ -467,6 +479,7 @@ def measured_regulator_cards(cards, condition_frames):
         elif condition_frames:
             card['role'] = 'unmeasured'
             card['fc'] = '; '.join(effects)
+        card['effects'] = heatmap_effects
         result.append(card)
     return result
 
@@ -1054,6 +1067,13 @@ def generate_report(
     )
     
     measured_frames = {}
+    if volcano_df is not None and not volcano_condition_csvs:
+        from .column_mapper import strip_guide_suffix
+
+        single_frame = volcano_df.assign(
+            target_gene=volcano_df.grna_target.map(strip_guide_suffix)
+        )
+        measured_frames['all'] = collapse_regulator_guides(single_frame, significant_only=False)
     for condition, path in (volcano_condition_csvs or {}).items():
         if Path(path).exists():
             measured_frames[condition] = collapse_regulator_guides(
@@ -1390,6 +1410,30 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         .reg .rbody { padding: 0 14px 10px; }
         .reg .rbody details { margin: 0; }
         .reg .rbody p { font-size: 13.5px; color: var(--text-soft); line-height: 1.6; margin-top: 6px; }
+        .regmap-wrap { overflow-x: auto; }
+        .regmap { width: 100%; border-spacing: 5px; table-layout: fixed; }
+        .regmap th { font-size: 12px; color: var(--muted); font-weight: 600; padding: 7px 8px; }
+        .regmap th:first-child { width: 265px; text-align: left; }
+        .regmap td { padding: 0; }
+        .regmap .reg-label { display: flex; align-items: center; gap: 8px; padding: 4px 8px; }
+        .regmap .rgene { min-width: 66px; }
+        .regmap .role { min-width: 47px; font-size: 10px; }
+        .regmap .conf { font-size: 10px; padding: 1px 5px; }
+        .reg-info { margin-left: auto; flex-shrink: 0; border: 1px solid var(--border-strong); border-radius: 50%;
+            width: 22px; height: 22px; padding: 0; background: var(--surface); color: var(--accent-text); cursor: help; }
+        .reg-effect { display: block; border-radius: 5px; padding: 9px 5px; text-align: center; color: #17242b;
+            font-size: 13px; font-weight: 650; font-variant-numeric: tabular-nums; cursor: help; }
+        .reg-effect sup { margin-left: 2px; }
+        .reg-effect.missing { background: var(--surface-sunk); color: var(--muted); }
+        [data-reg-tip]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .reg-legend { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 0 5px 14px;
+            font-size: 11px; color: var(--muted); }
+        .reg-scale { display: inline-flex; align-items: center; gap: 6px; }
+        .reg-gradient { width: 120px; height: 9px; border-radius: 5px; background: linear-gradient(90deg,#78aed5,#f3f4f5,#e89791); }
+        #reg-tooltip { position: fixed; z-index: 1000; max-width: min(460px,calc(100vw - 24px)); padding: 12px 15px;
+            background: var(--surface); color: var(--text); border: 1px solid var(--border-strong); border-radius: 8px;
+            box-shadow: 0 8px 30px #0003; font-size: 13px; line-height: 1.6; white-space: pre-line; }
+        @media (max-width: 700px) { .regmap { min-width: 650px; } }
 
         .pwsort { display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: var(--muted); margin: 18px 0 8px; font-weight: 600; }
         .pw { padding: 8px 0; border-bottom: 1px solid var(--border); }
@@ -1454,9 +1498,73 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
     var DATASET_CRUMB = __DATASET_CRUMB_JSON__;
     </script>
     <script>
-    const esc = s => String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    const esc = s => String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
     const mdItalic = s => esc(s).replace(/\*(.+?)\*/g, "<i>$1</i>");
     const roleCls = r => r === "activator" ? "act" : (r === "repressor" ? "rep" : "inf");
+
+    function regulatorTable(regs){
+        if(!regs.length) return `<p class="note">No measured regulator data or inferred candidates are available.</p>`;
+        const conditions = [...new Set(regs.flatMap(r => (r.effects||[]).map(e => e.condition)))];
+        const values = regs.flatMap(r => (r.effects||[]).filter(e => e.log2fc != null).map(e => Math.abs(e.log2fc)));
+        const limit = Math.max(0.01, ...values);
+        const signed = n => (n>=0?"+":"") + n.toFixed(3);
+        const color = n => {
+            const end = n < 0 ? [120,174,213] : [232,151,145];
+            const t = Math.min(1, Math.abs(n)/limit);
+            return `rgb(${end.map((v,i) => Math.round([243,244,245][i]*(1-t)+v*t)).join(",")})`;
+        };
+        const label = r => `<div class="reg reg-label" style="border:0;margin:0">
+            <span class="rgene ${roleCls(r.role)}">${esc(r.gene)}</span>
+            <span class="role ${roleCls(r.role)}">${esc(r.role)}</span>
+            ${r.confidence && r.confidence!=="—" ? `<span class="conf ${esc(String(r.confidence).toLowerCase())}">${esc(r.confidence)}</span>` : ""}
+            ${r.mechanism ? `<button class="reg-info" aria-label="Mechanistic hypothesis for ${esc(r.gene)}" aria-describedby="reg-tooltip"
+                data-reg-tip="${esc('Mechanistic hypothesis · '+r.gene+'\n'+(r.confidence||'Unrated')+' confidence\n\n'+r.mechanism)}">i</button>` : ""}
+            </div>`;
+        if(!conditions.length) return regs.map(r => label(r)).join("");
+        const cell = (r,c) => {
+            const e = (r.effects||[]).find(e => e.condition===c);
+            const missing = !e || e.log2fc == null;
+            const tip = missing ? `${r.gene} · ${c}\nNo measured value available.` :
+                `${r.gene} · ${c}\nlog₂FC: ${signed(e.log2fc)}\n${e.significant?'Significant':'Not significant'}\nGuide: ${e.guide}`
+                + (e.p_value==null ? "" : `\n${e.p_kind==='adj_p_value'?'Adjusted P':'P'}: ${e.p_value.toExponential(3)}`);
+            return `<td><span tabindex="0" class="reg-effect ${missing?'missing':''}" aria-describedby="reg-tooltip"
+                data-reg-tip="${esc(tip)}" aria-label="${esc(tip)}" ${missing?'':`style="background:${color(e.log2fc)}"`}>
+                ${missing?'—':signed(e.log2fc)}${!missing&&e.significant?'<sup aria-hidden="true">*</sup>':''}</span></td>`;
+        };
+        return `<div class="reg-legend"><span>Knockdown response · log₂FC</span>
+            <span class="reg-scale">−${limit.toFixed(2)} <span class="reg-gradient"></span> +${limit.toFixed(2)}</span>
+            <span>* significant</span><span>— unavailable</span><span>i mechanism · confidence beside gene</span></div>
+            <div class="regmap-wrap"><table class="regmap" aria-label="Regulator knockdown effects by condition">
+            <thead><tr><th scope="col">Regulator</th>${conditions.map(c=>`<th scope="col">${esc(c)}</th>`).join("")}</tr></thead>
+            <tbody>${regs.map(r=>`<tr><th scope="row">${label(r)}</th>${conditions.map(c=>cell(r,c)).join("")}</tr>`).join("")}</tbody>
+            </table></div>`;
+    }
+
+    // A viewport-positioned tooltip stays visible outside a scrolling heatmap.
+    const regTooltip = document.createElement("div");
+    regTooltip.id = "reg-tooltip";
+    regTooltip.setAttribute("role", "tooltip");
+    regTooltip.hidden = true;
+    document.body.appendChild(regTooltip);
+    function showRegTip(el){
+        regTooltip.textContent = el.dataset.regTip;
+        regTooltip.hidden = false;
+        const box = el.getBoundingClientRect();
+        regTooltip.style.left = Math.max(12,Math.min(box.left,innerWidth-regTooltip.offsetWidth-12))+"px";
+        regTooltip.style.top = Math.max(12,Math.min(box.bottom+8,innerHeight-regTooltip.offsetHeight-12))+"px";
+    }
+    document.addEventListener("mouseover", e => { const el=e.target.closest("[data-reg-tip]"); if(el) showRegTip(el); });
+    document.addEventListener("mouseout", e => {
+        if(e.target.closest("[data-reg-tip]") && !e.relatedTarget?.closest("[data-reg-tip],#reg-tooltip")) regTooltip.hidden=true;
+    });
+    regTooltip.addEventListener("mouseleave", () => { regTooltip.hidden=true; });
+    document.addEventListener("focusin", e => { const el=e.target.closest("[data-reg-tip]"); if(el) showRegTip(el); });
+    document.addEventListener("focusout", e => { if(e.target.closest("[data-reg-tip]")) regTooltip.hidden=true; });
+    document.addEventListener("keydown", e => { if(e.key==="Escape") regTooltip.hidden=true; });
+    document.addEventListener("click", e => {
+        const el=e.target.closest("[data-reg-tip]"); if(el) showRegTip(el); else regTooltip.hidden=true;
+    });
+    window.addEventListener("scroll", () => { regTooltip.hidden=true; }, true);
     const negLog = fdr => { const v = -Math.log10(parseFloat(fdr)); return isFinite(v) ? v : 0; };
     const cid = c => String(c).replace(/[^a-z0-9]/gi, "_");
     // Unify the two ways perturbation data reaches a program: condition-keyed runs populate
@@ -1679,17 +1787,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 <span class="htitle">${hasMeasuredRegs ? "Top regulators" : "Inferred regulator candidates"}</span>
                 <span class="hmeta">${hasMeasuredRegs ? `top perturbations that move this program &middot; <span class="kkey rep">repressor</span> / <span class="kkey act">activator</span>` : "no perturbation file &middot; hypotheses only"}</span>
                 <span class="chev">\u203a</span></button>
-            <div class="body">${hasMeasuredRegs ? `<p class="note">Roles describe the knockdown response, not direct regulation. Effects include every supplied condition; significance is assessed separately in each. Cards use the guide with the strongest adjusted-p support; volcano plots use the largest absolute effect.</p>` : ""}${regs.length ? regs.map(r => `
-                <div class="reg">
-                    <div class="rhead">
-                        <span class="rgene ${roleCls(r.role)}">${esc(r.gene)}</span>
-                        <span class="role ${roleCls(r.role)}">${esc(r.role)}</span>
-                        ${(r.confidence && r.confidence!=="\u2014") ? `<span class="conf ${String(r.confidence).toLowerCase()}">${esc(r.confidence)} confidence</span>` : ""}
-                        ${r.fc ? `<span class="fc">log\u2082FC <b>${esc(r.fc)}</b></span>` : ""}
-                    </div>
-                    ${r.observation ? `<div class="rbody"><p><b>Measured response:</b> ${esc(r.observation)}</p></div>` : ""}
-                    ${r.mechanism ? `<div class="rbody"><details><summary>Mechanistic hypothesis</summary><p>${esc(r.mechanism)}</p></details></div>` : ""}
-                </div>`).join("") : `<p class="note">No measured regulator data or inferred candidates are available.</p>`}</div>
+            <div class="body">${regulatorTable(regs)}${hasMeasuredRegs ? `<p class="note">Roles summarize knockdown responses. Heatmap rows use the guide with strongest P support per condition; volcano plots use the largest absolute effect. Significance is assessed within each condition; these responses do not establish direct regulation or an age/sex interaction.</p>` : ""}</div>
         </section>
 
         <section class="section collapsed" id="sec-pw">

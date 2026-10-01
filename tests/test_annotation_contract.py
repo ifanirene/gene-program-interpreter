@@ -306,7 +306,7 @@ def test_gene_first_annotation_skips_review_and_repair(tmp_path, monkeypatch, in
     monkeypatch.setattr(rp, "_run_subprocess", subprocess)
     with pytest.raises(ValueError if invalid_core else ReachedParser):
         rp.run_annotate(cfg, paths, rp.Flags())
-    assert len(calls) == (1 if invalid_core else 2)
+    assert len(calls) == 1  # No selected regulators: no empty supplement call.
     assert not list(tmp_path.glob("functional_identity_review_*"))
     assert not list(tmp_path.glob("annotation_contract_repair_*"))
     if not invalid_core:
@@ -326,7 +326,19 @@ def test_primary_request_enforces_json_shape_without_gene_cap():
     request = build_annotation_requests([1], genes, ContextProfile.liver_demo())[0]
     fmt = request["params"]["output_config"]["format"]
     assert fmt["type"] == "json_schema"
-    assert fmt["schema"]["properties"]["label"]["pattern"] == r"^\S+(\s+\S+){0,5}$"
+    label_schema = fmt["schema"]["properties"]["label"]
+    assert "six" in label_schema["description"]
+    assert "pattern" not in label_schema  # Rejected by the live schema compiler.
+    for count in range(1, 7):
+        value = payload()
+        value["label"] = " ".join(["word"] * count)
+        assert parse_annotation(json.dumps(value), 1).label == value["label"]
+    value["label"] = "one two three four five six seven"
+    with pytest.raises(ValueError, match="exceeds six words"):
+        parse_annotation(json.dumps(value), 1)
+    value["label"] = "  \t "
+    with pytest.raises(ValueError, match="at least one word"):
+        parse_annotation(json.dumps(value), 1)
     assert "maxItems" not in fmt["schema"]["$defs"]["Module"]["properties"]["key_genes"]
 
 

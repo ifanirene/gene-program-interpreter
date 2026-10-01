@@ -49,9 +49,11 @@ def output_format(model):
 
     schema = transform_schema(model.model_json_schema())
     if model is Annotation:
-        # The API supports this simple pattern, while the word limit remains
-        # independently checked by parse_annotation for saved/legacy responses.
-        schema["properties"]["label"]["pattern"] = r"^\S+(\s+\S+){0,5}$"
+        # The service rejects the bounded word regex (and its expanded form).
+        # Like transform_schema's handling of unsupported length constraints,
+        # describe the rule here and enforce it in parse_annotation before
+        # supplementation/publication. Do not weaken the local six-word check.
+        schema["properties"]["label"]["description"] = "One to six whitespace-separated words."
     return {"type": "json_schema", "schema": schema}
 
 
@@ -77,6 +79,8 @@ def parse_annotation(text, program_id):
     result = Annotation.model_validate(load_model_json(text))
     if result.program_id != program_id:
         raise ValueError("Annotation program ID differs from request")
+    if not result.label.split():
+        raise ValueError("Program label must contain at least one word")
     if len(result.label.split()) > 6:
         raise ValueError(
             f"Program label exceeds six words: found {len(result.label.split())} tokens {result.label.split()!r}; remove at least {len(result.label.split()) - 6} words"

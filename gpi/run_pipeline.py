@@ -628,22 +628,33 @@ def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
                       per_program_timeout=float(cfg.research.get('per_program_timeout',600)),
                       progress_cb=(emitter.emit if emitter is not None else None))
         if gene_first:
-            from gpi.gene_first_synthesis import functional_bundle
+            from gpi.gene_first_synthesis import functional_bundle, selected_regulators
+            bundles = {path: json.loads(path.read_text()) for path in bundle_paths}
+            regulator_paths = [path for path, bundle in bundles.items() if selected_regulators(bundle)]
             support_root = cfg.output_dir / 'regulator_research'
-            asyncio.run(_run_research(bundle_paths, out_dir=support_root/'research_results',
-                                     audit_dir=support_root/'research_audit', **kwargs))
+            logger.info('Regulator research: %d requested, %d skipped (no selected regulators)',
+                        len(regulator_paths), len(bundle_paths) - len(regulator_paths))
+            if regulator_paths:
+                asyncio.run(_run_research(regulator_paths, out_dir=support_root/'research_results',
+                                         audit_dir=support_root/'research_audit', **kwargs))
             function_dir = cfg.output_dir / 'functional_bundles'
             function_dir.mkdir(exist_ok=True)
-            for bundle_path in bundle_paths:
-                (function_dir/bundle_path.name).write_text(json.dumps(functional_bundle(json.loads(bundle_path.read_text())),indent=2))
-            written = asyncio.run(_run_research(sorted(function_dir.glob('*.json')),
+            for bundle_path, bundle in bundles.items():
+                (function_dir/bundle_path.name).write_text(json.dumps(functional_bundle(bundle),indent=2))
+            written = asyncio.run(_run_research([function_dir/path.name for path in bundle_paths],
                 out_dir=paths.research_dir, audit_dir=paths.audit_dir, **kwargs))
+            regulator_names = {path.name for path in regulator_paths}
             for path in written:
                 data = json.loads(path.read_text())
-                support_path = support_root/'research_results'/path.name
-                support = json.loads(support_path.read_text())
-                data['regulator_coverage'] = support.get('regulator_coverage',[])
-                data['meta']['regulator_research_path'] = str(support_path)
+                if path.name in regulator_names:
+                    support_path = support_root/'research_results'/path.name
+                    support = json.loads(support_path.read_text())
+                    data['regulator_coverage'] = support.get('regulator_coverage',[])
+                    data['meta']['regulator_research_path'] = str(support_path)
+                else:
+                    data['regulator_coverage'] = []
+                    data['meta'].pop('regulator_research_path', None)
+                    data['meta']['regulator_research_status'] = 'skipped_no_selected_regulators'
                 path.write_text(json.dumps(data,indent=2))
         else:
             written = asyncio.run(_run_research(bundle_paths, out_dir=paths.research_dir,
@@ -653,7 +664,11 @@ def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
             os.environ["ANTHROPIC_API_KEY"] = saved_key
     if emitter is not None:
         emitter.emit(RESEARCH_DONE, {"n_results": len(written)})
-    return {"n_results": len(written)}
+    info = {"n_results": len(written)}
+    if gene_first:
+        info.update(n_regulator_programs=len(regulator_paths),
+                    n_regulator_skipped=len(bundle_paths) - len(regulator_paths))
+    return info
 
 
 def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
@@ -851,10 +866,17 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
             request['params']['messages'][0]['content'] = content
         paths.batch_request.write_text(json.dumps(requests,indent=2))
         shutil.copy2(paths.batch_request,cfg.output_dir/'regulator_annotation_requests.json')
-        _run_subprocess(synthesize,False)
         supplement_path = cfg.output_dir/'regulator_annotation_results.jsonl'
-        shutil.copy2(paths.batch_results,supplement_path)
-        merge_supplements(core_path,supplement_path,paths.batch_results)
+        expected_supplements = {request['custom_id'] for request in requests['requests']}
+        logger.info('Regulator annotation: %d requested, %d skipped (no selected regulators)',
+                    len(expected_supplements), len(full_requests['requests']) - len(expected_supplements))
+        if expected_supplements:
+            _run_subprocess(synthesize,False)
+            shutil.copy2(paths.batch_results,supplement_path)
+        else:
+            supplement_path.write_text('')
+        merge_supplements(core_path,supplement_path,paths.batch_results,
+                          expected_ids=expected_supplements)
         paths.batch_request.write_text(json.dumps(full_requests,indent=2))
 
     if not flags.dry_run:

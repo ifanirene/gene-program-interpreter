@@ -32,7 +32,27 @@ def test_measured_cards_override_wrong_prose_and_preserve_all_conditions():
     assert out['role'] == 'activator'
     assert 'young_M: -1.690' in out['fc']
     assert 'aged_M: -1.470 (not significant)' in out['fc']
+    assert [e['condition'] for e in out['effects']] == ['young_F', 'young_M', 'aged_F', 'aged_M']
+    assert out['effects'][-1] == dict(condition='aged_M', log2fc=-1.47,
+        significant=False, guide='Mlxipl', p_value=0.5, p_kind='adj_p_value')
     assert cards[0]['fc'] == 'female only'
+
+
+def test_heatmap_keeps_missing_separate_from_zero_and_uses_supported_guide():
+    from gpi.column_mapper import collapse_regulator_guides
+
+    guides = pd.concat([
+        frame('X', -9).assign(grna_target='X_1', adj_p_value=0.04),
+        frame('X', 0).assign(grna_target='X_2', adj_p_value=0.001),
+    ])
+    out = measured_regulator_cards([dict(gene='X')], {
+        'female': collapse_regulator_guides(guides, significant_only=False),
+        'male': frame('Y', -3),
+    })[0]
+    assert out['effects'][0]['log2fc'] == 0
+    assert out['effects'][0]['guide'] == 'X_2'
+    assert out['effects'][1]['log2fc'] is None
+    assert out['effects'][1]['significant'] is None
 
 
 def test_opposing_significant_directions_are_mixed():

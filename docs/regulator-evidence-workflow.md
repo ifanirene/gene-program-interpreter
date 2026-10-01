@@ -78,9 +78,11 @@ Fresh runs are required when changing interpretation inputs.
 A prompt-only repair still produced a regulator-led P50 research candidate. Gene-first
 runs now separate both research and synthesis. Functional research sees an allowlisted
 bundle containing biological identity and program/distinctive genes, with no regulator
-fields. Supporting regulator research is stored separately. Each research session has
-half the configured per-program budget; the two passes retain the previous combined
-per-program budget. The current runner's existing retry policy is unchanged.
+fields. Supporting regulator research is stored separately and runs only for programs
+with selected regulators after masking. Each retained research session keeps half the
+configured per-program budget; skipping the regulator pass leaves that share unspent.
+The current runner's existing retry policy is unchanged. Functional research runs for
+every current bundle; stale functional-bundle files are not added to the request set.
 
 The functional annotation call receives no measured regulator block. Its label, overview,
 modules and distinctive features are fixed before the regulator supplement call. That
@@ -88,8 +90,13 @@ call returns only regulator objects, and a strict schema rejects attempts to cha
 functional fields. Only the regulator list is merged. Both original request/result pairs
 are retained for inspection. The full 80-program run used a separate exact-gene
 identity review before the regulator supplement, making three annotation calls per
-program plus possible repair calls. The working runner now uses two calls: functional
-annotation and regulator mechanisms. The combined
+program plus possible repair calls. The working runner now uses one functional
+annotation call and, only when selected regulators exist, one regulator explanation
+call. That explanation remains the basic step-7 prototype; its prompt is unchanged.
+Mixed runs retain a functional annotation for every program and request supplements
+only for selected programs. Empty supplement request/result files record a wholly
+skipped stage. Missing, failed or truncated requested supplements still stop publication.
+The combined
 artifact omits misleading single-call usage; original files retain the per-call usage.
 
 Regulator research coverage may remain `not_researched` or `searched_no_support`; the

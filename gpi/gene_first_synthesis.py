@@ -44,6 +44,13 @@ def core_requests(requests):
     return result
 
 
+def selected_regulators(bundle):
+    """Use the selected, already-masked bundle inputs to gate regulator work."""
+    return sorted(
+        {r["gene"] for rows in bundle.get("perturbation_regulators", {}).values() for r in rows}
+    )
+
+
 def supplement_requests(full_requests, core_results, support_dir):
     cores = {}
     for line in Path(core_results).read_text().splitlines():
@@ -56,17 +63,16 @@ def supplement_requests(full_requests, core_results, support_dir):
             raise ValueError(f"Functional pass introduced regulators for {pid}")
         cores[row["custom_id"]] = core
     result = json.loads(json.dumps(full_requests))
+    selected_requests = []
     for request in result["requests"]:
         core = cores[request["custom_id"]]
         support = Path(support_dir) / f"P{core.program_id}.json"
-        evidence = (
-            support.read_text() if support.exists() else "No separate regulator research available."
-        )
         root = Path(support_dir).parent.parent
         bundle = json.loads((root / "program_bundles" / f"P{core.program_id}.json").read_text())
-        selected = sorted(
-            {r["gene"] for rows in bundle.get("perturbation_regulators", {}).values() for r in rows}
-        )
+        selected = selected_regulators(bundle)
+        if not selected:
+            continue
+        evidence = "No separate regulator research available."
         responses = []
         for effect in bundle.get("regulator_effects_all_conditions", []):
             if not effect.get("available"):
@@ -117,11 +123,19 @@ or gap/contradiction lists in the annotation. Keep relevant uncertainty concise.
         config = dict(request["params"].get("output_config", {}))
         config["format"] = output_format(RegulatorSupplement)
         request["params"]["output_config"] = config
+        selected_requests.append(request)
+    result["requests"] = selected_requests
     return result
 
 
-def merge_supplements(core_path, supplement_path, output_path):
+def merge_supplements(core_path, supplement_path, output_path, *, expected_ids=None):
     core_rows = [json.loads(line) for line in Path(core_path).read_text().splitlines()]
+    core_ids = {row["custom_id"] for row in core_rows}
+    # The caller must explicitly declare skipped programs. Missing responses for
+    # requested supplements remain an error, including in mixed runs.
+    expected = core_ids if expected_ids is None else set(expected_ids)
+    if not expected <= core_ids:
+        raise ValueError("Regulator request has no functional annotation")
     extras = {}
     for line in Path(supplement_path).read_text().splitlines():
         row = json.loads(line)
@@ -134,12 +148,16 @@ def merge_supplements(core_path, supplement_path, output_path):
             raise ValueError("Regulator synthesis incomplete")
         text = "".join(b.get("text", "") for b in message["content"] if b.get("type") == "text")
         extras[row["custom_id"]] = RegulatorSupplement.model_validate(load_model_json(text))
-    if set(extras) != {row["custom_id"] for row in core_rows}:
+    if set(extras) != expected:
         raise ValueError("Missing or unexpected regulator supplement")
     for row in core_rows:
         message = row["result"]["message"]
         text = "".join(b.get("text", "") for b in message["content"] if b.get("type") == "text")
         a = parse_annotation(text, int(re.search(r"topic_(\d+)", row["custom_id"]).group(1)))
+        if a.regulators:
+            raise ValueError("Functional pass introduced regulators")
+        if row["custom_id"] not in expected:
+            continue  # Preserve the original functional response, including usage.
         a.regulators = extras[row["custom_id"]].regulators
         message["content"] = [{"type": "text", "text": a.model_dump_json()}]
         # Raw per-call usage remains in the separate original result files.
