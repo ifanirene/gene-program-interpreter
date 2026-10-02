@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Turn weighted gene programs into a biological story where every claim links to a real paper.</strong>
+  <strong>Turn weighted gene programs into biological interpretations with traceable literature evidence.</strong>
 </p>
 
 <p align="center">
@@ -17,9 +17,10 @@
 </p>
 
 GPI interprets programs from cNMF, NMF, single-cell, or Perturb-seq data. It runs parallel
-Claude literature research, verifies every PMID/DOI, and produces an interactive HTML
-report. Citations that fail verification are marked unsupported rather than presented as
-evidence.
+Claude literature research, checks PMID/DOI identifiers, and produces an interactive HTML
+report. Invalid or unresolved citations retain explicit evidence-status labels. Identifier
+verification establishes that a paper exists; assessing whether it supports a biological
+claim still requires reading the evidence.
 
 The biology is tissue-agnostic: organism, tissue, cell type, and conditions live in a small
 context profile instead of in the code.
@@ -175,7 +176,7 @@ Create a `.env` file in the directory where you will run the analysis (see
 [`.env.example`](.env.example)):
 
 ```dotenv
-ANTHROPIC_API_KEY=...          # Anthropic Batch: themes, annotation, presentation
+ANTHROPIC_API_KEY=...          # Anthropic API: annotation, themes, presentation
 PUBMED_EMAIL=you@example.com   # required courtesy contact for NCBI/Crossref
 OPENALEX_API_KEY=...           # recommended; full OpenAlex verification coverage
 NCBI_API_KEY=...               # recommended; higher PubMed rate limit
@@ -184,7 +185,10 @@ NCBI_API_KEY=...               # recommended; higher PubMed rate limit
 Authentication is intentionally split:
 
 - Parallel literature agents use your **Claude login/subscription**.
-- Batch synthesis uses **`ANTHROPIC_API_KEY`**.
+- Annotation, themes, and presentation use **`ANTHROPIC_API_KEY`**. Annotation uses Batch
+  by default; themes and ordinary presentation use live API calls.
+
+Research can instead use API billing with `research.auth: api` in the run config.
 
 No external MCP server is required — PubMed, OpenAlex, and Crossref tools run inside the
 pipeline. The same `.env` serves the standalone CLI.
@@ -213,9 +217,10 @@ Claude then:
 4. **asks for your approval before starting any paid work**;
 5. monitors the run and opens the cited HTML report with you.
 
-The context terms in step 2 are the highest-leverage control you have over research quality.
-Use 6–10 phrases describing the cell type's *normal* biology, and keep disease or
-perturbation emphasis in `conditions`.
+In `context_guided` mode, use short `context_terms` describing the cell type's *normal*
+biology, and keep disease or perturbation emphasis in `conditions`. In `gene_first` mode
+(used by the supplied example), these configured terms and conditions are retained for
+provenance and excluded from functional discovery. See [Gene-first interpretation](#gene-first-interpretation).
 
 For a first run, start with 3–5 representative programs — research cost scales with program
 count.
@@ -269,8 +274,9 @@ gpi --emit-config --context-file context.yaml \
 ```
 
 Scope a first pass with the config's `programs:` key, or with `--programs 9,48,70` when
-emitting one. Useful flags for the run itself: `--no-research` (deterministic enrichment
-only, no spend) and `--progress plain`.
+emitting one. Use `--stop-after bundle` for preparation without literature agents or model
+synthesis. `--no-research` skips literature agents, but later model stages can still incur
+API charges. `--progress plain` gives terminal progress without the rich display.
 
 Outputs land in the config's `output_dir`. Interrupted runs resume from
 `pipeline_state.json`; `--start-from`, `--stop-after`, and `--force-restart` control where a
@@ -296,40 +302,101 @@ Merge this illustrative fragment into your dataset's config, retaining its actua
 and settings. Gene-first requires a nonempty tissue or cell type. It excludes **all free-text
 profile conditions**, `context_terms`, and the explicit `annotation_role`,
 `annotation_context`, `keyword_query`, `condition_context`, and `functional_context`
-overrides from research and core annotation. Organism, taxid, tissue, cell type, gene sets,
-and supplied measured evidence remain available. Condition-specific regulator labels and
-values are experimental data and remain intact. Diseases/processes supported by gene
+overrides from research and core annotation. Organism, taxid, tissue, cell type, and gene
+sets remain available. Measured regulator evidence is held for separate supporting research
+and regulator explanations; the functional pass withholds it. Condition-specific regulator
+labels and values are experimental data and remain intact. Diseases/processes supported by gene
 summaries, papers, enrichment, or measurements may still appear in the interpretation.
 The original configuration and report/assay metadata remain recorded for provenance.
 
 Use a **new output directory** for the first gene-first run. Completed stages can be reused
 on resume; a code update or `--start-from` alone does not invalidate them. Check your actual
-config with `gpi --config YOUR_CONFIG.yaml --dry-run` before running. No model stages or
-per-program limits are added, although different searches within existing caps can change
-total spend. Offline input isolation does not establish improved biological accuracy.
+config with `gpi --config YOUR_CONFIG.yaml --dry-run` before running. Gene-first splits the
+research budget equally between the regulator and functional passes; programs without
+selected regulators skip the regulator pass. Programs with selected regulators also get a
+second annotation request for their regulator explanations. These choices can change total
+spend. Offline input isolation does not establish improved biological accuracy.
 
 ## How it works
 
+The supplied example uses **gene-first** interpretation: discover program functions, then
+explain the selected perturbation regulators against the finalized interpretation.
+
+<p align="center">
+  <a href="docs/images/gpi-workflow.png">
+    <img src="docs/images/gpi-workflow.png" alt="Gene-first workflow: Python prepares evidence, orchestrates separate parallel research passes, verifies citations, calls functional and conditional regulator synthesis, then validates and renders the report." width="1000">
+  </a>
+</p>
+
+[Open the full-size diagram](docs/images/gpi-workflow.png) ·
+[Edit the Excalidraw source](docs/images/gpi-workflow.excalidraw)
+
 | Layer | Role |
 |---|---|
-| Claude skill | Collects inputs, builds context, previews cost, launches and monitors |
-| Python pipeline | Runs deterministic processing, caching, verification, and reporting |
-| Claude Agent SDK | Runs one isolated literature-research session per program |
-| Anthropic Batch | Synthesizes themes, labels, and presentation text |
+| Claude skill | Collects inputs, confirms context and spend approval, launches and monitors |
+| Python runner | Owns stage order, resume state, concurrency, validation, and saved artifacts |
+| Claude Agent SDK | Runs isolated per-program sessions; agents choose read-only literature queries |
+| Anthropic model API | Synthesizes shared themes, functional annotations, regulator explanations, and presentation text |
+
+The runner's exact stage order is:
+
+```text
+string_enrichment → gene_summaries → bundle → research → verify
+→ theme → annotate → presentation → html_report
+```
+
+Within that sequence, gene-first makes these handoffs:
+
+1. **Code prepares evidence.** Gene weights, STRING enrichment, NCBI summaries, and optional
+   measured inputs become per-program JSON files in `program_bundles/`.
+2. **Code launches research agents.** Regulator research runs first for programs with
+   selected regulators. Functional research follows for every program, using the allowlisted
+   fields `program_id`, `organism`, `tissue`, `cell_type`, `program_genes`, and
+   `distinctive_genes`. Python bounds parallel sessions **within each pass**; the two passes
+   run sequentially. Agents query PubMed, OpenAlex, and Crossref through in-process tools
+   and return structured evidence via `submit_result`. Functional results and audits are
+   saved in `research_results/` and `research_audit/`; regulator evidence is saved separately
+   under `regulator_research/`.
+3. **Code verifies; a model optionally organizes.** Citation checks cover identifiers and
+   metadata, with unresolved evidence kept labeled. An optional live API call extracts
+   shared themes (`theme.enabled: false` skips it). Identifier checks do not establish that
+   a paper supports a particular claim.
+4. **Models interpret; code checks each handoff.** Functional annotation withholds measured
+   regulator evidence and must return an empty regulator list. After validating that result,
+   a separate request explains regulators only for programs with selected regulators.
+   Code merges only the regulator objects: the finalized functional fields cannot be
+   rewritten. Both passes use Batch by default, or live API with `annotation.batch: false`;
+   original requests and results are retained.
+5. **Code validates and publishes the report.** Measured effects, conditions, and significance
+   come from input tables. Code checks gene membership, regulator sets, citations, and output
+   contracts; invalid, missing, or truncated annotations stop report generation. Presentation
+   normally uses a live API call with a deterministic fallback; `--deterministic-presentation`
+   skips that model call. Python renders the final `report.html`.
+
+Configs without an interpretation mode use `context_guided`: one context-framed research
+pass and combined annotation. The separate passes above are specific to `gene_first`.
+
+**For agents operating GPI:** follow [`skills/interpret/SKILL.md`](skills/interpret/SKILL.md)
+for input, context, and paid-run approval gates. Use
+[`configs/example_generic.yaml`](configs/example_generic.yaml) as the runnable example.
+The implementation entry points are [`gpi/run_pipeline.py`](gpi/run_pipeline.py),
+[`gpi/gene_first_synthesis.py`](gpi/gene_first_synthesis.py), and
+[`research/research_parallel.py`](research/research_parallel.py). Data contracts and further
+details live in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and
+[`docs/regulator-evidence-workflow.md`](docs/regulator-evidence-workflow.md).
 
 ```text
 .claude-plugin/   plugin and marketplace manifests
 skills/           distributable Claude skill
 bin/gpi           plugin runtime wrapper
-gpi/              deterministic pipeline and Anthropic Batch steps
+gpi/              deterministic processing, model API steps, and reporting
 research/         parallel research agents, protocol, and citation verification
 configs/          example run configurations
 tests/            offline regression tests and fixtures
 ```
 
-The [pipeline walkthrough](https://ifanirene.github.io/gene-program-interpreter/) illustrates
-these six stages end to end. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for data
-contracts and the complete module map.
+The [interactive pipeline walkthrough](https://ifanirene.github.io/gene-program-interpreter/)
+also illustrates the project with a worked biological example.
 
 ## Development
 
