@@ -170,16 +170,32 @@ selects or consolidates candidates into at most three report categories, enforce
 The primary functional request carries the shared `OUTPUT_CONTRACT` and an API JSON
 schema; the separate regulator request carries its own schema. The user removed
 identity-review and model-repair calls from the working runner on 2026-09-24.
-Following the user's 2026-09-28 implementation request, gene-first regulator research
-and the existing regulator explanation pass run only for programs with selected
-regulators. Functional research and annotation remain required. This is a per-program
-decision, including mixed runs; omitted required supplements still fail validation.
+Following the user's 2026-10-02 clarification, every requested program gets one
+research session. `annotation.include_regulators` (boolean, default true) controls
+regulator visibility independently of `context.interpretation_mode`. With supplied
+tables and regulator use enabled, research includes program genes and eligible
+regulators together, and program annotation can use both. Without tables or with
+the flag false, research and annotation withhold measured regulator information;
+regulator explanations are skipped. Supplied tables still reach report heatmaps
+and perturbation plots. In gene-first aware mode, the existing explanation pass
+reuses the shared research and may add only regulator objects after program fields
+are fixed. Programs with no eligible hits skip that request; all program annotation
+remains required. Context-guided aware annotation retains its combined request.
+Missing required supplements still fail validation.
 The contract requires at least two distinct supplied genes per module but has no
 gene-count ceiling; at most three final modules remain. One unambiguous JSON code
 fence can still be decoded for saved responses; multiple objects are rejected.
 All publication checks still run, and unresolved failures block report generation.
-In gene-first mode, regulator-only coverage gaps stay in the regulator supplement,
-so retaining evidence qualifications does not expose those identities to functional synthesis.
+Aware research retains regulator coverage qualifications in the shared evidence.
+Blind research has empty regulator coverage and no perturbation fields. The full
+per-program research budget applies to its one session in either mode. Results
+record `meta.regulator_mode`; blind verification/theme/annotation reject saved
+research without matching blinded provenance. Validated annotation records its mode
+in `annotation_mode.json`; blinded presentation/report also require that record.
+Legacy separate regulator research
+directories remain historical evidence and are not consumed by the new workflow.
+Mode/method changes require a fresh output variant. A gene that is also a supplied
+program member is retained as a program gene when perturbation evidence is blinded.
 
 ## Verification expectations (every component)
 Actually exercise it: import it, run its CLI on a fixture (`tests/fixtures/`), or unit-test it.

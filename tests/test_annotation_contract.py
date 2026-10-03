@@ -345,7 +345,7 @@ def test_primary_request_enforces_json_shape_without_gene_cap():
 def test_mechanism_request_omits_numeric_effects_and_biased_research_candidates(tmp_path):
     from gpi.gene_first_synthesis import supplement_requests
 
-    support = tmp_path / "regulator_research" / "research_results"
+    support = tmp_path / "research_results"
     support.mkdir(parents=True)
     (tmp_path / "program_bundles").mkdir()
     (tmp_path / "program_bundles" / "P1.json").write_text(

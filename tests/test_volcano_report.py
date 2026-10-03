@@ -65,3 +65,45 @@ def test_single_regulator_read_sniffs_the_separator(tmp_path) -> None:
     pd.read_csv(REGULATORS_CSV, sep=None, engine="python").to_csv(tsv, sep="\t", index=False)
     html = _render(tmp_path, tsv)
     assert _nonempty_volcano_count(html) >= 1, "tab-separated regulators rendered empty"
+
+
+@pytest.mark.parametrize('condition_keyed', [False, True])
+def test_blinded_report_keeps_measured_heatmap_and_volcano_without_model_mechanisms(tmp_path, condition_keyed):
+    import json
+
+    (tmp_path / 'summary.csv').write_text('Topic,Name\n1,Nitrogen handling\n')
+    (tmp_path / 'genes.csv').write_text('Name,Score,program_id\nGlul,2,1\nRhbg,1,1\n')
+    (tmp_path / 'ann').mkdir()
+    (tmp_path / 'enr').mkdir()
+    # A stale regulator block must not add model mechanisms to a display-only report.
+    (tmp_path / 'ann' / 'topic_1_annotation.md').write_text('''## Regulator analysis
+```
+Mlxipl (role: repressor, log2FC=99): [Confidence: High]
+Propose a mechanistic hypothesis: STALE MODEL MECHANISM.
+```
+''')
+    table = tmp_path / 'regulators.csv'
+    pd.DataFrame([
+        dict(program_id=1, target_gene='Mlxipl', log_2_fold_change=1.25,
+             adj_p_value=0.001, p_value=0.001, significant=True),
+        dict(program_id=1, target_gene='Mttp', log_2_fold_change=-0.75,
+             adj_p_value=0.002, p_value=0.002, significant=True),
+    ]).to_csv(table, index=False)
+    output = tmp_path / 'report.html'
+    generate_report(
+        summary_csv=str(tmp_path / 'summary.csv'), annotations_dir=str(tmp_path / 'ann'),
+        enrichment_dir=str(tmp_path / 'enr'), gene_loading_csv=str(tmp_path / 'genes.csv'),
+        output_html=str(output), volcano_csv=None if condition_keyed else str(table),
+        volcano_condition_csvs={'female': table} if condition_keyed else None,
+        regulators_display_only=True,
+    )
+    html = output.read_text()
+    programs = json.loads(re.search(r'window.PROGRAMS = (.*);', html).group(1))
+    program = programs['1']
+    assert program['regulators_display_only'] is True
+    assert {r['gene'] for r in program['regulators']} == {'Mlxipl', 'Mttp'}
+    cards = {r['gene']: r for r in program['regulators']}
+    assert cards['Mlxipl']['effects'][0]['log2fc'] == 1.25
+    assert cards['Mttp']['effects'][0]['log2fc'] == -0.75
+    assert all(not r['mechanism'] and not r['confidence'] for r in cards.values())
+    assert len(program['condition_volcano']['female'] if condition_keyed else program['volcano']) == 2

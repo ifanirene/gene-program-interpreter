@@ -170,8 +170,7 @@ def _build_research_brief(
     subject = rp.cell_type or rp.tissue or rp.organism or "cell"
 
     reg_clause = (
-        ". Then research `perturbation_regulators` as supporting evidence separately from the "
-        "program genes"
+        " together with `perturbation_regulators` as supporting evidence in this same session"
         if has_regulators
         else ""
     )

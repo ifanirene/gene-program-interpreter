@@ -676,7 +676,7 @@
       "y": 440,
       "width": 250,
       "height": 90,
-      "text": "Isolated agents\nwithin each pass\nrun in parallel",
+      "text": "One session\nper program\nin parallel",
       "fontSize": 22,
       "strokeColor": "#64748b",
       "angle": 0,
@@ -700,7 +700,7 @@
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Isolated agents\nwithin each pass\nrun in parallel",
+      "originalText": "One session\nper program\nin parallel",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -732,10 +732,6 @@
         {
           "id": "support_label",
           "type": "text"
-        },
-        {
-          "id": "research_pass_order",
-          "type": "arrow"
         }
       ],
       "link": null,
@@ -748,7 +744,7 @@
       "y": 410,
       "width": 335,
       "height": 58,
-      "text": "Regulator research\nselected programs only",
+      "text": "Mode 1: regulator-aware\ngenes + regulators",
       "fontSize": 22,
       "strokeColor": "#374151",
       "containerId": "support_model",
@@ -772,67 +768,18 @@
       "locked": false,
       "backgroundColor": "transparent",
       "fontFamily": 3,
-      "originalText": "Regulator research\nselected programs only",
+      "originalText": "Mode 1: regulator-aware\ngenes + regulators",
       "lineHeight": 1.25,
       "autoResize": false
     },
     {
-      "id": "research_pass_order",
-      "type": "arrow",
-      "x": 782,
-      "y": 440,
-      "width": 156,
-      "height": 0,
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          156,
-          0
-        ]
-      ],
-      "strokeColor": "#6d28d9",
-      "startBinding": {
-        "elementId": "support_model",
-        "focus": 0,
-        "gap": 7
-      },
-      "endBinding": {
-        "elementId": "functional_model",
-        "focus": 0,
-        "gap": 7
-      },
-      "angle": 0,
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 0,
-      "opacity": 100,
-      "seed": 200021,
-      "version": 1,
-      "versionNonce": 400021,
-      "isDeleted": false,
-      "groupIds": [],
-      "frameId": null,
-      "roundness": null,
-      "boundElements": [],
-      "link": null,
-      "locked": false,
-      "backgroundColor": "transparent",
-      "startArrowhead": null,
-      "endArrowhead": "arrow",
-      "elbowed": false
-    },
-    {
       "id": "research_then",
       "type": "text",
-      "x": 800,
-      "y": 410,
+      "x": 840,
+      "y": 426,
       "width": 125,
       "height": 28,
-      "text": "next pass",
+      "text": "OR",
       "fontSize": 20,
       "strokeColor": "#64748b",
       "angle": 0,
@@ -856,7 +803,7 @@
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "next pass",
+      "originalText": "OR",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -886,10 +833,6 @@
       },
       "boundElements": [
         {
-          "id": "research_pass_order",
-          "type": "arrow"
-        },
-        {
           "id": "functional_label",
           "type": "text"
         }
@@ -904,7 +847,7 @@
       "y": 410,
       "width": 355,
       "height": 58,
-      "text": "Functional research\nall programs; genes only",
+      "text": "Mode 2: regulator-blinded\nprogram genes only",
       "fontSize": 22,
       "strokeColor": "#374151",
       "containerId": "functional_model",
@@ -928,7 +871,7 @@
       "locked": false,
       "backgroundColor": "transparent",
       "fontFamily": 3,
-      "originalText": "Functional research\nall programs; genes only",
+      "originalText": "Mode 2: regulator-blinded\nprogram genes only",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -1140,7 +1083,7 @@
       "y": 544,
       "width": 335,
       "height": 28,
-      "text": "one per selected program",
+      "text": "include_regulators: true",
       "fontSize": 20,
       "strokeColor": "#64748b",
       "angle": 0,
@@ -1164,7 +1107,7 @@
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "one per selected program",
+      "originalText": "include_regulators: true",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -1376,7 +1319,7 @@
       "y": 544,
       "width": 310,
       "height": 28,
-      "text": "one per program",
+      "text": "include_regulators: false",
       "fontSize": 20,
       "strokeColor": "#64748b",
       "angle": 0,
@@ -1400,7 +1343,7 @@
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "one per program",
+      "originalText": "include_regulators: false",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -1821,7 +1764,7 @@
       "y": 809,
       "width": 295,
       "height": 60,
-      "text": "Functional annotation\nregulators withheld",
+      "text": "Program annotation\nuses chosen inputs",
       "fontSize": 22,
       "strokeColor": "#374151",
       "containerId": "functional_annotation_model",
@@ -1845,7 +1788,7 @@
       "locked": false,
       "backgroundColor": "transparent",
       "fontFamily": 3,
-      "originalText": "Functional annotation\nregulators withheld",
+      "originalText": "Program annotation\nuses chosen inputs",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -2100,7 +2043,7 @@
       "y": 809,
       "width": 343,
       "height": 60,
-      "text": "Regulator explanation\nselected programs only",
+      "text": "Regulator explanation\nwhen enabled + hits exist",
       "fontSize": 22,
       "strokeColor": "#374151",
       "containerId": "regulator_supplement_model",
@@ -2124,7 +2067,7 @@
       "locked": false,
       "backgroundColor": "transparent",
       "fontFamily": 3,
-      "originalText": "Regulator explanation\nselected programs only",
+      "originalText": "Regulator explanation\nwhen enabled + hits exist",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -2285,7 +2228,7 @@
       "y": 900,
       "width": 395,
       "height": 28,
-      "text": "Skipped when none selected",
+      "text": "Disabled / no hits → skip",
       "fontSize": 20,
       "strokeColor": "#64748b",
       "angle": 0,
@@ -2309,7 +2252,7 @@
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Skipped when none selected",
+      "originalText": "Disabled / no hits → skip",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -2320,7 +2263,7 @@
       "y": 934,
       "width": 415,
       "height": 28,
-      "text": "Functional fields stay fixed",
+      "text": "Program fields stay fixed",
       "fontSize": 20,
       "strokeColor": "#64748b",
       "angle": 0,
@@ -2344,7 +2287,7 @@
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Functional fields stay fixed",
+      "originalText": "Program fields stay fixed",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -2452,7 +2395,7 @@
       "y": 1022,
       "width": 665,
       "height": 55,
-      "text": "Measured effects from input tables\n→ presentation → report.html",
+      "text": "Input tables → measured plots in both modes\n→ presentation → report.html",
       "fontSize": 22,
       "strokeColor": "#64748b",
       "angle": 0,
@@ -2476,7 +2419,7 @@
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Measured effects from input tables\n→ presentation → report.html",
+      "originalText": "Input tables → measured plots in both modes\n→ presentation → report.html",
       "lineHeight": 1.25,
       "autoResize": false
     },
@@ -2602,7 +2545,7 @@
       "y": 1110,
       "width": 910,
       "height": 28,
-      "text": "Shown: gene_first mode (the supplied example config)",
+      "text": "Shown: gene_first; regulator choice is independent of framing",
       "fontSize": 22,
       "strokeColor": "#64748b",
       "angle": 0,
@@ -2626,7 +2569,7 @@
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "Shown: gene_first mode (the supplied example config)",
+      "originalText": "Shown: gene_first; regulator choice is independent of framing",
       "lineHeight": 1.25,
       "autoResize": false
     },

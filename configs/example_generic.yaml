@@ -71,6 +71,10 @@ research:
   per_program_timeout: 600
 
 annotation:
+  # true: research/annotate program genes and eligible regulators together.
+  # false: blind all research/annotation; keep the tables for report plots.
+  # With no regulator tables, the pipeline automatically uses the blinded mode.
+  include_regulators: true
   model: claude-sonnet-4-6
   max_tokens: 8192
   batch: true

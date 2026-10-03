@@ -201,6 +201,7 @@ def default_config_blocks() -> Dict[str, Dict[str, Any]]:
             "per_program_timeout": 600,
         },
         "annotation": {
+            "include_regulators": True,
             "model": "claude-sonnet-4-6",
             "max_tokens": 8192,
             "batch": True,
@@ -271,6 +272,21 @@ class PipelineConfig:
     raw: Dict[str, Any] = field(default_factory=dict)
     config_path: Optional[Path] = None
     base_dir: Path = field(default_factory=Path.cwd)
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.annotation.get("include_regulators", True), bool):
+            raise ValueError("annotation.include_regulators must be true or false")
+
+    @property
+    def include_regulators(self) -> bool:
+        """Regulator visibility in research/annotation, independent of report inputs."""
+        return self.annotation.get("include_regulators", True) and bool(
+            self.regulators or self.regulators_by_condition
+        )
+
+    @property
+    def regulator_mode(self) -> str:
+        return "regulator_aware" if self.include_regulators else "regulator_blind"
 
     # ---- convenience accessors on the settings block ----
     def setting(self, key: str, default: Any = None) -> Any:
@@ -530,11 +546,11 @@ def run_gene_summaries(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[
     )
     if cfg.setting("gene_summary_cache"):
         argv += ["--gene-summary-cache", str(cfg.setting("gene_summary_cache"))]
-    if cfg.regulators:
+    if cfg.include_regulators and cfg.regulators:
         argv += ["--regulator-file", str(cfg.regulators)]
     # Condition-keyed regulators -> regulator_validation_by_condition (bundle
     # perturbation_regulators). One repeatable --regulator-condition-file cond=path.
-    for cond, path in cfg.regulators_by_condition.items():
+    for cond, path in (cfg.regulators_by_condition if cfg.include_regulators else {}).items():
         argv += ["--regulator-condition-file", f"{cond}={path}"]
     # Apply pipeline-wide exclusions before STRING validation. The resulting
     # ncbi_context feeds program bundles, so research receives next-best hits.
@@ -572,9 +588,14 @@ def run_bundle(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
         top_loading=int(cfg.setting("top_loading", 15)),
         top_unique=int(cfg.setting("top_unique", 8)),
         top_enrichment=int(cfg.setting("top_enrichment", 7)),
-        regulator_files=cfg.regulators_by_condition,
+        regulator_files=cfg.regulators_by_condition if cfg.include_regulators else {},
         masked_regulators=cfg.masked_regulators,
     )
+    if not cfg.include_regulators:
+        from gpi.gene_first_synthesis import functional_bundle
+        for path in written:
+            bundle = functional_bundle(json.loads(path.read_text()), profile=cfg.profile)
+            path.write_text(json.dumps(bundle, indent=2))
     return {"n_bundles": len(written), "bundles": [str(p) for p in written]}
 
 
@@ -621,54 +642,53 @@ def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         emitter.emit(RESEARCH_START, {"n_programs": len(bundle_paths),
                                       "concurrency": concurrency, "auth": auth})
     try:
-        gene_first = cfg.profile.interpretation_mode == 'gene_first'
         kwargs = dict(concurrency=concurrency, model=cfg.research.get('model','claude-sonnet-4-6'),
                       max_turns=int(cfg.research.get('max_turns',30)),
-                      max_budget_usd=float(cfg.research.get('max_budget_usd',1.0)) / (2 if gene_first else 1),
+                      max_budget_usd=float(cfg.research.get('max_budget_usd',1.0)),
                       per_program_timeout=float(cfg.research.get('per_program_timeout',600)),
                       progress_cb=(emitter.emit if emitter is not None else None))
-        if gene_first:
-            from gpi.gene_first_synthesis import functional_bundle, selected_regulators
-            bundles = {path: json.loads(path.read_text()) for path in bundle_paths}
-            regulator_paths = [path for path, bundle in bundles.items() if selected_regulators(bundle)]
-            support_root = cfg.output_dir / 'regulator_research'
-            logger.info('Regulator research: %d requested, %d skipped (no selected regulators)',
-                        len(regulator_paths), len(bundle_paths) - len(regulator_paths))
-            if regulator_paths:
-                asyncio.run(_run_research(regulator_paths, out_dir=support_root/'research_results',
-                                         audit_dir=support_root/'research_audit', **kwargs))
+        from gpi.gene_first_synthesis import functional_bundle, selected_regulators
+        bundles = {path: json.loads(path.read_text()) for path in bundle_paths}
+        n_regulator_programs = sum(bool(selected_regulators(b)) for b in bundles.values()) if cfg.include_regulators else 0
+        research_paths = bundle_paths
+        if not cfg.include_regulators:
             function_dir = cfg.output_dir / 'functional_bundles'
-            function_dir.mkdir(exist_ok=True)
+            function_dir.mkdir(parents=True, exist_ok=True)
             for bundle_path, bundle in bundles.items():
-                (function_dir/bundle_path.name).write_text(json.dumps(functional_bundle(bundle),indent=2))
-            written = asyncio.run(_run_research([function_dir/path.name for path in bundle_paths],
-                out_dir=paths.research_dir, audit_dir=paths.audit_dir, **kwargs))
-            regulator_names = {path.name for path in regulator_paths}
-            for path in written:
-                data = json.loads(path.read_text())
-                if path.name in regulator_names:
-                    support_path = support_root/'research_results'/path.name
-                    support = json.loads(support_path.read_text())
-                    data['regulator_coverage'] = support.get('regulator_coverage',[])
-                    data['meta']['regulator_research_path'] = str(support_path)
-                else:
-                    data['regulator_coverage'] = []
-                    data['meta'].pop('regulator_research_path', None)
-                    data['meta']['regulator_research_status'] = 'skipped_no_selected_regulators'
-                path.write_text(json.dumps(data,indent=2))
-        else:
-            written = asyncio.run(_run_research(bundle_paths, out_dir=paths.research_dir,
-                                               audit_dir=paths.audit_dir, **kwargs))
+                (function_dir/bundle_path.name).write_text(json.dumps(
+                    functional_bundle(bundle, profile=cfg.profile), indent=2))
+            research_paths = [function_dir/path.name for path in bundle_paths]
+        logger.info('Research: one session per program, %s; %d programs have regulator evidence',
+                    cfg.regulator_mode, n_regulator_programs)
+        written = asyncio.run(_run_research(research_paths, out_dir=paths.research_dir,
+                                           audit_dir=paths.audit_dir, **kwargs))
+        for path in written:
+            data = json.loads(path.read_text())
+            data.setdefault('meta', {})['regulator_mode'] = cfg.regulator_mode
+            data['meta'].pop('regulator_research_path', None)
+            if not cfg.include_regulators:
+                data['regulator_coverage'] = []
+            path.write_text(json.dumps(data, indent=2))
     finally:
         if saved_key is not None:
             os.environ["ANTHROPIC_API_KEY"] = saved_key
     if emitter is not None:
         emitter.emit(RESEARCH_DONE, {"n_results": len(written)})
-    info = {"n_results": len(written)}
-    if gene_first:
-        info.update(n_regulator_programs=len(regulator_paths),
-                    n_regulator_skipped=len(bundle_paths) - len(regulator_paths))
-    return info
+    return {"n_results": len(written), "regulator_mode": cfg.regulator_mode,
+            "n_regulator_programs": n_regulator_programs}
+
+
+def _check_research_mode(cfg: PipelineConfig, paths: Paths) -> None:
+    if cfg.include_regulators:
+        return
+    # Partial-stage invocations must also respect the user-selected blindness.
+    for path in paths.research_dir.glob('P*.json'):
+        if cfg.programs is not None and int(path.stem[1:]) not in cfg.programs:
+            continue
+        meta = json.loads(path.read_text()).get('meta', {})
+        if meta.get('regulator_mode') != 'regulator_blind':
+            raise StepError(f'Blinded interpretation cannot reuse unconfirmed or regulator-aware research: {path}. '
+                            'Use a fresh output directory and rerun research, or omit research evidence.')
 
 
 def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
@@ -678,6 +698,7 @@ def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
     )
     if flags.dry_run:
         return {}
+    _check_research_mode(cfg, paths)
     if not paths.research_dir.is_dir() or not any(paths.research_dir.glob("*.json")):
         logger.warning(
             "verify: no research results in %s — skipping (literature incomplete).",
@@ -688,16 +709,6 @@ def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
 
     emit_step_progress(None, None, "verifying citations")
     summary = verify_directory(paths.research_dir, audit_dir=paths.audit_dir)
-    support_root = cfg.output_dir / 'regulator_research'
-    if (support_root/'research_results').exists():
-        support_summary = verify_directory(support_root/'research_results',
-                                           audit_dir=support_root/'research_audit')
-        verification_path = support_summary.get('verification_summary')
-        if verification_path and Path(verification_path).exists():
-            support_summary.update(json.loads(Path(verification_path).read_text()))
-        (paths.audit_dir/'regulator_citation_verification.json').write_text(json.dumps(support_summary,indent=2))
-        if support_summary.get('verification_complete') is False:
-            logger.warning('Regulator citation verification incomplete; see regulator_research/research_audit')
     from gpi.regulator_evidence import audit_research_coverage
     coverage_audit = {}
     for bundle_path in sorted(paths.bundles_dir.glob('P*.json')):
@@ -705,22 +716,14 @@ def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
         if not result_path.exists():
             continue
         result = json.loads(result_path.read_text())
-        coverage = audit_research_coverage(json.loads(bundle_path.read_text()), result)
+        coverage = audit_research_coverage(json.loads(bundle_path.read_text()), result) if cfg.include_regulators else []
         coverage_audit[bundle_path.stem] = coverage
         missing = [r['gene'] for r in coverage if r['status'] != 'retrieved_support']
         if missing:
             gap = 'Regulators without documented retrieved support: ' + ', '.join(missing)
-            gap_path, gap_result = result_path, result
-            if cfg.profile.interpretation_mode == 'gene_first':
-                # Functional evidence gaps now reach synthesis. Keep regulator
-                # identities in the separate supplement, including missing coverage.
-                gap_path = support_root / 'research_results' / bundle_path.name
-                if not gap_path.exists():
-                    continue  # Missing coverage is still retained in coverage_audit.
-                gap_result = json.loads(gap_path.read_text())
-            if gap not in gap_result.setdefault('evidence_gaps', []):
-                gap_result['evidence_gaps'].append(gap)
-            gap_path.write_text(json.dumps(gap_result, indent=2))
+            if gap not in result.setdefault('evidence_gaps', []):
+                result['evidence_gaps'].append(gap)
+            result_path.write_text(json.dumps(result, indent=2))
     (paths.audit_dir / 'regulator_coverage.json').write_text(json.dumps(coverage_audit, indent=2))
 
     # Say out loud when verification did not fully run. The whole point of this step is the
@@ -746,6 +749,8 @@ def run_verify(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any
 
 
 def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
+    if not flags.dry_run:
+        _check_research_mode(cfg, paths)
     argv = _pymod(
         "gpi.theme_representation",
         "--gene-file", cfg.gene_loading,
@@ -769,7 +774,7 @@ def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]
         argv += ["--ncbi-file", str(paths.ncbi_context)]
     if paths.enrichment_filtered.exists():
         argv += ["--enrichment-file", str(paths.enrichment_filtered)]
-    if cfg.regulators:
+    if cfg.include_regulators and cfg.regulators:
         argv += ["--regulator-file", str(cfg.regulators)]
     if paths.research_dir.exists():
         argv += ["--research-evidence-dir", str(paths.research_dir)]
@@ -779,6 +784,8 @@ def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]
 
 
 def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
+    if not flags.dry_run and not cfg.include_regulators:
+        _check_research_mode(cfg, paths)
     # (a) assemble one annotation request per program (evidence_context prepare)
     profile_yaml = write_profile_yaml(cfg, paths, flags.dry_run)
     prepare = _pymod(
@@ -808,11 +815,11 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         prepare += ["--ncbi-file", str(paths.ncbi_context)]
     if paths.theme_dict.exists():
         prepare += ["--theme-dictionary-file", str(paths.theme_dict)]
-    if cfg.regulators:
+    if cfg.include_regulators and cfg.regulators:
         prepare += ["--regulator-file", str(cfg.regulators)]
     # Condition-keyed regulators -> the annotation prompt's "Regulator perturbation
     # evidence" section (evidence_context supports --regulator-condition-file cond=path).
-    for cond, path in cfg.regulators_by_condition.items():
+    for cond, path in (cfg.regulators_by_condition if cfg.include_regulators else {}).items():
         prepare += ["--regulator-condition-file", f"{cond}={path}"]
     # Defensive repeat: inputs are reloaded for prompt assembly, so apply the same
     # pipeline-wide mask before annotation selection too.
@@ -843,21 +850,23 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         )
     gene_first = cfg.profile.interpretation_mode == 'gene_first'
     full_requests = None
-    if gene_first and not flags.dry_run:
+    if (gene_first or not cfg.include_regulators) and not flags.dry_run:
         from gpi.gene_first_synthesis import core_requests
         full_requests = json.loads(paths.batch_request.read_text())
         (cfg.output_dir/'full_annotation_requests.json').write_text(json.dumps(full_requests,indent=2))
-        paths.batch_request.write_text(json.dumps(core_requests(full_requests),indent=2))
+        paths.batch_request.write_text(json.dumps(core_requests(
+            full_requests, include_regulators=cfg.include_regulators), indent=2))
     _run_subprocess(synthesize, flags.dry_run)
     if not flags.dry_run:
         from gpi.annotation_contract import validate_batch_contract
         validate_batch_contract(paths.batch_request, paths.batch_results)
-    if gene_first and not flags.dry_run:
-        from gpi.gene_first_synthesis import supplement_requests, merge_supplements
+    if (gene_first or not cfg.include_regulators) and not flags.dry_run:
         core_path = cfg.output_dir/'functional_annotation_results.jsonl'
         shutil.copy2(paths.batch_results,core_path)
         shutil.copy2(paths.batch_request,cfg.output_dir/'functional_annotation_requests.json')
-        requests = supplement_requests(full_requests,core_path,cfg.output_dir/'regulator_research'/'research_results')
+    if gene_first and cfg.include_regulators and not flags.dry_run:
+        from gpi.gene_first_synthesis import supplement_requests, merge_supplements
+        requests = supplement_requests(full_requests, core_path, paths.research_dir)
         # Apply hard identity masking to the second prompt too, including retrieved prose.
         for request in requests['requests']:
             content = request['params']['messages'][0]['content']
@@ -868,7 +877,7 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         shutil.copy2(paths.batch_request,cfg.output_dir/'regulator_annotation_requests.json')
         supplement_path = cfg.output_dir/'regulator_annotation_results.jsonl'
         expected_supplements = {request['custom_id'] for request in requests['requests']}
-        logger.info('Regulator annotation: %d requested, %d skipped (no selected regulators)',
+        logger.info('Regulator explanation: %d requested, %d skipped (no eligible regulator evidence)',
                     len(expected_supplements), len(full_requests['requests']) - len(expected_supplements))
         if expected_supplements:
             _run_subprocess(synthesize,False)
@@ -904,9 +913,9 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         from gpi.evidence_context import load_condition_regulator_data
         from gpi.column_mapper import standardize_gene_loading, extract_program_id
         from gpi.annotation_validation import finalize_regulator_annotations
-        data = load_condition_regulator_data(cfg.regulators_by_condition,
+        data = load_condition_regulator_data(cfg.regulators_by_condition if cfg.include_regulators else {},
                                              masked_regulators=cfg.masked_regulators)
-        if not cfg.regulators_by_condition and cfg.regulators:
+        if cfg.include_regulators and not cfg.regulators_by_condition and cfg.regulators:
             from gpi.evidence_context import load_regulator_data
             data = {'all': load_regulator_data(cfg.regulators, masked_regulators=cfg.masked_regulators)}
         genes = standardize_gene_loading(pd.read_csv(cfg.gene_loading))
@@ -915,10 +924,23 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         program_genes = {pid: [g for group in select_program_genes(genes, pid, int(cfg.setting('top_loading',15)), int(cfg.setting('top_unique',8))) for g in group] for pid in expected}
         finalize_regulator_annotations(paths.annotations_dir, data, program_genes, cfg.masked_regulators)
         _run_subprocess(parse + ["--no-parse"], False)
+        (cfg.output_dir/'annotation_mode.json').write_text(json.dumps(
+            {"regulator_mode": cfg.regulator_mode, "program_ids": sorted(expected)}, indent=2))
     return {"annotations_dir": str(paths.annotations_dir), "summary_csv": str(paths.summary_csv)}
 
 
+def _check_annotation_mode(cfg: PipelineConfig) -> None:
+    if cfg.include_regulators:
+        return
+    record = cfg.output_dir/'annotation_mode.json'
+    if not record.exists() or json.loads(record.read_text()).get('regulator_mode') != 'regulator_blind':
+        raise StepError('Blinded presentation/report requires annotations recorded as regulator_blind. '
+                        'Use a fresh output directory and rerun annotation.')
+
+
 def run_presentation(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
+    if not flags.dry_run:
+        _check_annotation_mode(cfg)
     argv = _pymod(
         "gpi.presentation",
         "--annotations-dir", paths.annotations_dir,
@@ -936,6 +958,8 @@ def run_presentation(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[st
 
 
 def run_html_report(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
+    if not flags.dry_run:
+        _check_annotation_mode(cfg)
     argv = _pymod(
         "gpi.html_report",
         "--summary-csv", paths.summary_csv,
@@ -965,6 +989,8 @@ def run_html_report(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str
     # plots (one panel per condition). Without these the section renders empty.
     for cond, path in cfg.regulators_by_condition.items():
         argv += ["--volcano-condition-csv", f"{cond}={path}"]
+    if not cfg.include_regulators:
+        argv += ["--regulators-display-only"]
     _run_subprocess(argv, flags.dry_run)
     return {"report_html": str(paths.report_html)}
 
@@ -1116,6 +1142,9 @@ def _print_framing(cfg: PipelineConfig) -> None:
     p = cfg.profile.for_interpretation()
     print("Resolved ContextProfile framing:")
     print(f"  interpretation_mode: {cfg.profile.interpretation_mode}")
+    print(f"  regulator_mode     : {cfg.regulator_mode}")
+    print(f"  include_regulators : {cfg.annotation.get('include_regulators', True)}")
+    print("  regulator plots    : supplied tables retained in either mode")
     print(f"  organism / taxid : {p.organism} / {p.species_taxid}")
     print(f"  tissue           : {p.tissue or '(none)'}")
     print(f"  cell_type        : {p.cell_type or '(none)'}")

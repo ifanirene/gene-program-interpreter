@@ -74,7 +74,7 @@ each file buys them* — a bare filename means nothing to someone deciding wheth
 | Input | Buys | Without it |
 |---|---|---|
 | **gene loading** (required) | the programs themselves | nothing runs |
-| **regulators** | the report's regulator section is grounded in the user's own perturbation data | that section is the model's **inference** — a plausible guess presented next to real data |
+| **regulators** | measured heatmaps and perturbation plots; optional supporting research and explanations | program-only research and annotation; no inferred regulator objects |
 | **cell-type enrichment** | which cell types each program is on *and off* in; **depletion** often names a program better than enrichment does | the model has no idea which cells express the program |
 
 Then **ask**: which of these to include, and *"do you have a file I did not find?"* Never
@@ -85,6 +85,17 @@ per-condition files** (e.g. normoxia vs. hypoxia)? A single merged file renders 
 panel automatically; separate per-condition files each get their own panel in the report's
 "Perturbation effects" section (pass them as `regulators_by_condition`). This is the difference
 between one combined view and a per-condition comparison — worth a five-second question.
+
+**Confirm how the user wants to use the tables:** use them in research and annotation
+(`annotation.include_regulators: true`, default), or blind interpretation while retaining
+measured report plots (`false`). Honor an already stated preference without asking again.
+No tables automatically means blinded interpretation. In either mode, every requested
+program gets one research session. Regulator-aware sessions research program genes and
+eligible regulator hits together; blinded sessions omit perturbation identities/effects
+and skip regulator explanations. The context's `gene_first`/`context_guided` choice controls
+disease/process framing independently. A regulator that is also a supplied program gene
+remains available as a program gene. Record the choice in the annotation block after
+emitting the config, and show its resolved mode at the existing spend gate.
 
 Validate everything the user names (free, read-only):
 

@@ -1,4 +1,4 @@
-"""Keep functional discovery and synthesis independent of perturbation identities."""
+"""Control regulator visibility and attach explanations without rewriting program fields."""
 
 import json
 import re
@@ -12,9 +12,17 @@ from .annotation_contract import (
 )
 
 
-def functional_bundle(bundle):
+def functional_bundle(bundle, *, profile=None):
     keys = ("program_id", "organism", "tissue", "cell_type", "program_genes", "distinctive_genes")
     result = {k: bundle[k] for k in keys if k in bundle}
+    if profile is not None and profile.interpretation_mode == 'context_guided':
+        from research.bundle import _build_research_brief
+        for key in ('conditions', 'functions_to_consider'):
+            if key in bundle:
+                result[key] = bundle[key]
+        result['research_brief'] = _build_research_brief(bundle['program_id'], profile, False)
+        result['research_brief'] += ' No perturbation evidence is supplied. Do not infer perturbation regulators. Return an empty regulator_coverage list.'
+        return result
     result["research_brief"] = (
         "Determine the shared function of the leading program genes and distinctive genes. "
         "Explore hypotheses without a fixed count. Retain distinct supported mechanisms with "
@@ -27,19 +35,23 @@ def functional_bundle(bundle):
     return result
 
 
-def core_requests(requests):
+def core_requests(requests, *, include_regulators=False):
     result = json.loads(json.dumps(requests))
     for request in result["requests"]:
         prompt = request["params"]["messages"][0]["content"]
         # The regulator block is last in Supporting evidence; remove it before the
         # interpretation rules. The NCBI formatter already selects program-gene summaries.
-        prompt = re.sub(
-            r"#### Regulator perturbation evidence.*?(?=### Interpretation rules)",
-            "",
-            prompt,
-            flags=re.S,
-        )
-        prompt += "\nFUNCTIONAL PASS: Regulator evidence is intentionally withheld. Return regulators: []. Do not infer any regulators.\n"
+        if not include_regulators:
+            prompt = re.sub(
+                r"#### Regulator perturbation evidence.*?(?=### Interpretation rules)",
+                "", prompt, flags=re.S,
+            )
+            prompt += "\nFUNCTIONAL PASS: Regulator evidence is intentionally withheld. Return regulators: []. Do not infer any regulators.\n"
+        else:
+            prompt += ("\nPROGRAM ANNOTATION: Use program genes and supplied regulator research together. "
+                       "Regulator evidence may support or qualify gene-supported functions, but cannot replace "
+                       "program-gene support. Return regulators: [] in this response; the following explanation "
+                       "request supplies regulator objects without changing these program fields.\n")
         request["params"]["messages"][0]["content"] = prompt
     return result
 
@@ -67,12 +79,12 @@ def supplement_requests(full_requests, core_results, support_dir):
     for request in result["requests"]:
         core = cores[request["custom_id"]]
         support = Path(support_dir) / f"P{core.program_id}.json"
-        root = Path(support_dir).parent.parent
+        root = Path(support_dir).parent
         bundle = json.loads((root / "program_bundles" / f"P{core.program_id}.json").read_text())
         selected = selected_regulators(bundle)
         if not selected:
             continue
-        evidence = "No separate regulator research available."
+        evidence = "No program research available."
         responses = []
         for effect in bundle.get("regulator_effects_all_conditions", []):
             if not effect.get("available"):
@@ -118,7 +130,7 @@ or gap/contradiction lists in the annotation. Keep relevant uncertainty concise.
 """
         prompt += "\nFINALIZED PROGRAM:\n" + core.model_dump_json(indent=2)
         prompt += "\nSELECTED REGULATORS AND QUALITATIVE RESPONSES:\n" + regulator_context
-        prompt += "\nSUPPORTING REGULATOR RESEARCH:\n" + evidence
+        prompt += "\nPROGRAM AND REGULATOR RESEARCH:\n" + evidence
         request["params"]["messages"][0]["content"] = prompt
         config = dict(request["params"].get("output_config", {}))
         config["format"] = output_format(RegulatorSupplement)

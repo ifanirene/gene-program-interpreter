@@ -2,6 +2,39 @@
 
 Program genes determine names and functional modules. Perturbation targets provide supporting evidence about program responses. A strong or recurrent perturbation does not establish a direct target, a rate-limiting step, or a distinct functional module.
 
+## Current regulator modes — 2026-10-02
+
+Direct user clarification: supplied regulator/test tables should inform research
+and annotation together with program genes unless the user chooses to blind them.
+Tables can remain available for report plots while their information is withheld
+from interpretation. This supersedes the automatic two-research-pass design below.
+
+- **Regulator-aware:** `annotation.include_regulators: true` (default) and at least
+  one regulator input table. One research session per program covers program genes
+  and eligible regulator hits together. Program annotation receives both. In
+  gene-first mode, the existing regulator explanation request reuses that evidence
+  after program fields are finalized; it returns only regulator objects.
+- **Regulator-blinded:** the setting is false, or no regulator table is supplied.
+  One session per program researches genes without measured perturbation fields.
+  Annotation is blinded and regulator explanations are skipped. Supplied tables
+  still produce measured heatmaps and perturbation plots, with no model mechanisms
+  or confidence labels. Program genes are retained even if independently tested
+  as regulators.
+
+Both modes cover every requested program. Eligible hits are the existing ranked,
+significant, already-masked input targets, not a hand-picked subset of programs.
+No eligible hits means no explanation request; it does not skip program annotation.
+The context's `gene_first`/`context_guided` setting independently controls configured
+disease/process framing. Context-guided aware annotation keeps its combined request.
+
+Research results/audits use `research_results/` and `research_audit/`. The full
+configured per-program budget applies to the single session; retry limits are
+unchanged. Legacy `regulator_research/` artifacts are preserved but not consumed.
+Results record the regulator mode, and blind interpretation refuses literature
+without matching blinded provenance. Use a fresh output directory after changing
+mode or software. Schema, gene-membership, citation and measured-effect checks
+remain required; the explanation still cannot rewrite finalized program fields.
+
 ## Selection and complete condition coverage
 
 Select three significant activators and three significant repressors per supplied condition, ranked by adjusted P after collapsing guides. The union of those genes is the research target set. Each selected gene also carries its estimates, significance calls and representative guide in **every** supplied condition, including conditions where it was not a top hit or was not significant. Missing measurements are explicit. Research bundles and annotation prompts both receive this coverage.
@@ -73,10 +106,10 @@ are retained; schema or evidence-rule failures stop publication. The earlier run
 allowed bounded model repair; the working runner removed that call on 2026-09-24.
 Fresh runs are required when changing interpretation inputs.
 
-### Structural isolation in gene-first mode
+### Historical structural isolation in gene-first mode (superseded 2026-10-02)
 
-A prompt-only repair still produced a regulator-led P50 research candidate. Gene-first
-runs now separate both research and synthesis. Functional research sees an allowlisted
+A prompt-only repair still produced a regulator-led P50 research candidate. The earlier gene-first
+implementation separated both research and synthesis. Functional research saw an allowlisted
 bundle containing biological identity and program/distinctive genes, with no regulator
 fields. Supporting regulator research is stored separately and runs only for programs
 with selected regulators after masking. Each retained research session keeps half the
@@ -94,7 +127,7 @@ program plus possible repair calls. The working runner now uses one functional
 annotation call and, only when selected regulators exist, one regulator explanation
 call. That explanation remains the basic step-7 prototype; its prompt is unchanged.
 Mixed runs retain a functional annotation for every program and request supplements
-only for selected programs. Empty supplement request/result files record a wholly
+only for programs with eligible regulator hits. Empty supplement request/result files recorded a wholly
 skipped stage. Missing, failed or truncated requested supplements still stop publication.
 The combined
 artifact omits misleading single-call usage; original files retain the per-call usage.

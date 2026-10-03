@@ -484,6 +484,21 @@ def measured_regulator_cards(cards, condition_frames):
     return result
 
 
+def display_only_regulator_cards(condition_frames, program_id):
+    """Select measured heatmap rows without requiring model regulator annotations."""
+    from .evidence_context import select_top_condition_regulators
+
+    selected = select_top_condition_regulators(
+        {condition: {program_id: frame} for condition, frame in condition_frames.items()},
+        program_id,
+    )
+    genes = sorted({r['gene'] for groups in selected.values() for rows in groups.values() for r in rows})
+    return measured_regulator_cards(
+        [dict(gene=gene, role='', fc='', confidence='', mechanism='') for gene in genes],
+        condition_frames,
+    )
+
+
 def parse_pathways(annotation_md: str) -> list[dict[str, object]]:
     """Parse the Pathway Enrichment block into structured, sortable terms."""
     _, section_md = split_pathway_enrichment(annotation_md)
@@ -1007,6 +1022,7 @@ def generate_report(
     top_unique: int = 8,
     enrichment_filtered_csv: str | None = None,
     celltype_file: str | None = None,
+    regulators_display_only: bool = False,
 ):
     """Generate the Program Explorer HTML report."""
 
@@ -1118,6 +1134,11 @@ def generate_report(
         top_loading_str = stats.get('top_loading') or fallback_stats.get('top_loading', '')
         unique_str = stats.get('unique') or fallback_stats.get('unique', '')
 
+        condition_frames = {c: df[df.program_id == topic_id] for c, df in measured_frames.items()}
+        regulators = (
+            display_only_regulator_cards(condition_frames, topic_id) if regulators_display_only else
+            measured_regulator_cards(parse_regulators_detailed(annotation_md), condition_frames)
+        )
         programs_data.append({
             'id': topic_id,
             'name': topic_name,
@@ -1133,10 +1154,8 @@ def generate_report(
             'celltype_detail': celltype_by_program.get(topic_id, []),
             'modules': final_modules,
             'distinctive': extract_distinctive(annotation_md),
-            'regulators': measured_regulator_cards(
-                parse_regulators_detailed(annotation_md),
-                {c: df[df.program_id == topic_id] for c, df in measured_frames.items()},
-            ),
+            'regulators': regulators,
+            'regulators_display_only': regulators_display_only,
             'pathways': pathways_by_program.get(topic_id) or parse_pathways(annotation_md),
             'annotation_text': annotation_md,  # For full-text search
             'kegg_fig': f"{enr_rel}/program_{topic_id}_kegg_enrichment.png",
@@ -1533,7 +1552,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         };
         return `<div class="reg-legend"><span>Knockdown response · log₂FC</span>
             <span class="reg-scale">−${limit.toFixed(2)} <span class="reg-gradient"></span> +${limit.toFixed(2)}</span>
-            <span>* significant</span><span>— unavailable</span><span>i mechanism · confidence beside gene</span></div>
+            <span>* significant</span><span>— unavailable</span>${regs.some(r=>r.mechanism)?'<span>i mechanism · confidence beside gene</span>':''}</div>
             <div class="regmap-wrap"><table class="regmap" aria-label="Regulator knockdown effects by condition">
             <thead><tr><th scope="col">Regulator</th>${conditions.map(c=>`<th scope="col">${esc(c)}</th>`).join("")}</tr></thead>
             <tbody>${regs.map(r=>`<tr><th scope="row">${label(r)}</th>${conditions.map(c=>cell(r,c)).join("")}</tr>`).join("")}</tbody>
@@ -1787,7 +1806,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 <span class="htitle">${hasMeasuredRegs ? "Top regulators" : "Inferred regulator candidates"}</span>
                 <span class="hmeta">${hasMeasuredRegs ? `top perturbations that move this program &middot; <span class="kkey rep">repressor</span> / <span class="kkey act">activator</span>` : "no perturbation file &middot; hypotheses only"}</span>
                 <span class="chev">\u203a</span></button>
-            <div class="body">${regulatorTable(regs)}${hasMeasuredRegs ? `<p class="note">Roles summarize knockdown responses. Heatmap rows use the guide with strongest P support per condition; volcano plots use the largest absolute effect. Significance is assessed within each condition; these responses do not establish direct regulation or an age/sex interaction.</p>` : ""}</div>
+            <div class="body">${p.regulators_display_only ? '<p class="note">Regulator information was excluded from research and annotation. These are measured responses only.</p>' : ''}${regulatorTable(regs)}${hasMeasuredRegs ? `<p class="note">Roles summarize knockdown responses. Heatmap rows use the guide with strongest P support per condition; volcano plots use the largest absolute effect. Significance is assessed within each condition; these responses do not establish direct regulation or an age/sex interaction.</p>` : ""}</div>
         </section>
 
         <section class="section collapsed" id="sec-pw">
@@ -1997,6 +2016,8 @@ if __name__ == '__main__':
     parser.add_argument("--annotations-dir")
     parser.add_argument("--enrichment-dir")
     parser.add_argument("--volcano-csv")
+    parser.add_argument("--regulators-display-only", action="store_true",
+                        help="Show measured heatmaps and perturbation plots without regulator explanations")
     parser.add_argument(
         "--volcano-condition-csv",
         action="append",
@@ -2067,4 +2088,5 @@ if __name__ == '__main__':
         top_unique=int(getattr(args, "top_unique", 8) or 8),
         enrichment_filtered_csv=getattr(args, "enrichment_filtered_csv", None),
         celltype_file=getattr(args, "celltype_file", None),
+        regulators_display_only=args.regulators_display_only,
     )

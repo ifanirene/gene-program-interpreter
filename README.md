@@ -261,6 +261,8 @@ gpi --config configs/example_generic.yaml                  # full pipeline (paid
 
 - `inputs.gene_loading` — required weighted gene-program CSV;
 - `inputs.regulators` or `inputs.regulators_by_condition` — optional Perturb-seq effects;
+- `annotation.include_regulators` — use those effects in research/annotation (`true`,
+  default), or blind interpretation while retaining report plots (`false`);
 - `mask_regulators` — optional pipeline-wide gene list excluded before regulator ranking,
   STRING validation, research bundling, and annotation; next-best regulators fill the top-N;
 - `context` — organism, tissue, cell type, conditions, and normal cell functions;
@@ -303,28 +305,53 @@ and settings. Gene-first requires a nonempty tissue or cell type. It excludes **
 profile conditions**, `context_terms`, and the explicit `annotation_role`,
 `annotation_context`, `keyword_query`, `condition_context`, and `functional_context`
 overrides from research and core annotation. Organism, taxid, tissue, cell type, and gene
-sets remain available. Measured regulator evidence is held for separate supporting research
-and regulator explanations; the functional pass withholds it. Condition-specific regulator
-labels and values are experimental data and remain intact. Diseases/processes supported by gene
+sets remain available. Regulator visibility is controlled separately by
+`annotation.include_regulators`, described below. Condition-specific regulator labels and
+values are experimental data and remain intact. Diseases/processes supported by gene
 summaries, papers, enrichment, or measurements may still appear in the interpretation.
 The original configuration and report/assay metadata remain recorded for provenance.
 
 Use a **new output directory** for the first gene-first run. Completed stages can be reused
 on resume; a code update or `--start-from` alone does not invalidate them. Check your actual
-config with `gpi --config YOUR_CONFIG.yaml --dry-run` before running. Gene-first splits the
-research budget equally between the regulator and functional passes; programs without
-selected regulators skip the regulator pass. Programs with selected regulators also get a
-second annotation request for their regulator explanations. These choices can change total
-spend. Offline input isolation does not establish improved biological accuracy.
+config with `gpi --config YOUR_CONFIG.yaml --dry-run` before running. Each program now gets
+one research session with the full configured per-program budget. Regulator-aware gene-first
+runs also make an explanation request when that program has eligible regulator hits.
+Offline input isolation does not establish improved biological accuracy.
+
+### Regulator-aware or regulator-blinded interpretation
+
+| Mode | Research and annotation | Final report |
+|---|---|---|
+| **1. Regulator-aware**: tables supplied and `annotation.include_regulators: true` (default) | Research program genes and eligible regulators together in one session per program. Use regulator evidence to support or qualify gene-supported functions. In gene-first mode, an additional explanation request reuses that research and adds regulator mechanisms. | Program interpretation, regulator explanations, measured heatmap and perturbation plots. |
+| **2. Regulator-blinded**: `annotation.include_regulators: false`, or no tables supplied | Research and annotate program genes without measured regulator information. Skip regulator explanations. | Program interpretation, plus measured heatmap and perturbation plots whenever tables were supplied. No model regulator mechanisms or confidence claims. |
+
+To keep your tables for display while blinding interpretation, retain the input paths and set:
+
+```yaml
+annotation:
+  include_regulators: false
+```
+
+This setting works with both `gene_first` and `context_guided`; the context mode controls
+disease/process framing, not regulator visibility. Blinding withholds perturbation identities
+and effects; a gene that is itself a loading or distinctive program gene remains a program
+gene. Every requested program is researched and annotated in either mode.
+
+The existing regulator ranking selects up to three significant hits in each direction per
+condition after guide collapse and masking. “Eligible regulators” refers to those input hits,
+not a manually chosen subset of programs. Empty hit lists skip only the explanation request.
+Display-only heatmaps use the same ranking on the original tables; perturbation plots retain
+the tested points. Use a fresh output directory when changing mode. Blinded interpretation
+rejects saved literature whose blinded provenance is absent or incompatible.
 
 ## How it works
 
-The supplied example uses **gene-first** interpretation: discover program functions, then
-explain the selected perturbation regulators against the finalized interpretation.
+The supplied example uses **gene-first, regulator-aware** interpretation: research program
+genes and regulators together, annotate program functions, then explain the regulator links.
 
 <p align="center">
   <a href="docs/images/gpi-workflow.png">
-    <img src="docs/images/gpi-workflow.png" alt="Gene-first workflow: Python prepares evidence, orchestrates separate parallel research passes, verifies citations, calls functional and conditional regulator synthesis, then validates and renders the report." width="1000">
+    <img src="docs/images/gpi-workflow.png" alt="Python chooses regulator-aware or blinded inputs, runs one parallel research session per program, verifies evidence, annotates programs, optionally explains regulators, and renders measured plots in either mode." width="1000">
   </a>
 </p>
 
@@ -349,32 +376,34 @@ Within that sequence, gene-first makes these handoffs:
 
 1. **Code prepares evidence.** Gene weights, STRING enrichment, NCBI summaries, and optional
    measured inputs become per-program JSON files in `program_bundles/`.
-2. **Code launches research agents.** Regulator research runs first for programs with
-   selected regulators. Functional research follows for every program, using the allowlisted
-   fields `program_id`, `organism`, `tissue`, `cell_type`, `program_genes`, and
-   `distinctive_genes`. Python bounds parallel sessions **within each pass**; the two passes
-   run sequentially. Agents query PubMed, OpenAlex, and Crossref through in-process tools
-   and return structured evidence via `submit_result`. Functional results and audits are
-   saved in `research_results/` and `research_audit/`; regulator evidence is saved separately
-   under `regulator_research/`.
+2. **Code launches research agents.** Each program gets one session. With regulator use
+   enabled, its bundle contains program genes and available regulator evidence together.
+   Blinded sessions receive program genes and biological identity without perturbation fields;
+   context-guided sessions also retain their configured framing. Python bounds parallel
+   sessions. Agents query PubMed, OpenAlex, and Crossref through in-process tools and return
+   structured evidence via `submit_result`. All results and audits go to `research_results/`
+   and `research_audit/`; new runs do not create a separate regulator research pass.
 3. **Code verifies; a model optionally organizes.** Citation checks cover identifiers and
    metadata, with unresolved evidence kept labeled. An optional live API call extracts
    shared themes (`theme.enabled: false` skips it). Identifier checks do not establish that
    a paper supports a particular claim.
-4. **Models interpret; code checks each handoff.** Functional annotation withholds measured
-   regulator evidence and must return an empty regulator list. After validating that result,
-   a separate request explains regulators only for programs with selected regulators.
-   Code merges only the regulator objects: the finalized functional fields cannot be
-   rewritten. Both passes use Batch by default, or live API with `annotation.batch: false`;
+4. **Models interpret; code checks each handoff.** Program annotation uses regulator evidence
+   when enabled and withholds it when blinded. In gene-first mode, the first response fixes
+   program fields and returns an empty regulator list. When regulator use is enabled and
+   eligible hits exist, an explanation request reuses the same research. Code merges only
+   regulator objects; that request cannot rewrite finalized program fields. Blinded runs
+   skip it. Both requests use Batch by default, or live API with `annotation.batch: false`;
    original requests and results are retained.
 5. **Code validates and publishes the report.** Measured effects, conditions, and significance
    come from input tables. Code checks gene membership, regulator sets, citations, and output
    contracts; invalid, missing, or truncated annotations stop report generation. Presentation
    normally uses a live API call with a deterministic fallback; `--deterministic-presentation`
-   skips that model call. Python renders the final `report.html`.
+   skips that model call. Supplied tables reach measured report plots in both modes.
+   Python renders the final `report.html`.
 
-Configs without an interpretation mode use `context_guided`: one context-framed research
-pass and combined annotation. The separate passes above are specific to `gene_first`.
+Configs without a context interpretation mode use `context_guided`: context-framed research
+and combined annotation when regulator use is enabled. Blinding still excludes regulator
+inputs and explanations. The separate explanation request above belongs to `gene_first`.
 
 **For agents operating GPI:** follow [`skills/interpret/SKILL.md`](skills/interpret/SKILL.md)
 for input, context, and paid-run approval gates. Use
