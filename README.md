@@ -16,51 +16,15 @@
   <a href="https://ifanirene.github.io/gene-program-interpreter/"><strong>View the pipeline</strong></a>
 </p>
 
-GPI interprets programs from cNMF, NMF, single-cell, or Perturb-seq data. It runs parallel
-Claude literature research, checks PMID/DOI identifiers, and produces an interactive HTML
-report. Invalid or unresolved citations retain explicit evidence-status labels. Identifier
-verification establishes that a paper exists; assessing whether it supports a biological
-claim still requires reading the evidence.
-
-The biology is tissue-agnostic: organism, tissue, cell type, and conditions live in a small
-context profile instead of in the code.
+GPI interprets gene programs from cNMF, NMF, single-cell, or Perturb-seq data. It runs
+parallel Claude literature research, checks every PMID/DOI, and produces an interactive HTML
+report; unresolved citations stay labeled. A verified identifier shows that a paper exists,
+not that it supports the claim — that still requires reading the evidence. Organism, tissue,
+cell type, and conditions live in a small context profile, so the biology is tissue-agnostic.
 
 > **GPI is a Claude Code plugin.** Claude checks your data, builds the biological context,
-> previews the cost, runs the pipeline, and walks you through the report. The skill is the
-> user interface; the Python pipeline is the engine — this is not a choice between them.
-> A [standalone CLI](#standalone-cli) is available for scripted workflows.
-
-**Contents** — [Demo](#see-gpi-in-action) · [What you get](#what-you-get) · [What you provide](#what-you-provide) ·
-[Install](#install) · [Use it in Claude](#use-it-in-claude) · [Cost and safety](#cost-and-safety) ·
-[Standalone CLI](#standalone-cli) · [How it works](#how-it-works)
-
-## See GPI in action
-
-<p align="center">
-  <a href="https://www.youtube.com/watch?v=51G7lQjjJHc">
-    <img src="docs/images/gpi-youtube-demo.jpg" alt="Watch the narrated GPI pipeline demo on YouTube" width="720">
-  </a>
-</p>
-
-<p align="center">
-  <strong><a href="https://www.youtube.com/watch?v=51G7lQjjJHc">▶ GPI pipeline narrated</a></strong><br>
-  <sub>See how weighted gene programs become grounded, cited biological interpretations.</sub>
-</p>
-
-<table>
-  <tr>
-    <td align="center" width="50%">
-      <strong>Explore the output</strong><br>
-      <sub>Open a real three-program Brain EC analysis.</sub><br><br>
-      <a href="https://ifanirene.github.io/gene-program-interpreter/brain_ec_demo/report.html">Interactive report →</a>
-    </td>
-    <td align="center" width="50%">
-      <strong>Follow the workflow</strong><br>
-      <sub>Walk through research, verification, and synthesis.</sub><br><br>
-      <a href="https://ifanirene.github.io/gene-program-interpreter/">Pipeline walkthrough →</a>
-    </td>
-  </tr>
-</table>
+> previews the cost, runs the pipeline, and walks you through the report. A
+> [standalone CLI](#standalone-cli) is available for scripted workflows.
 
 ## What you get
 
@@ -73,48 +37,31 @@ mechanistic modules, enriched pathways, regulators, and linked evidence.
   </a>
 </p>
 
-<p align="center">
-  <strong>Program overview</strong><br>
-  <sub>Plain-language identity, marker genes, pathways, modules, and regulators in one view.</sub>
-</p>
-
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="docs/images/report_evidence.png" alt="A module with resolvable citations and its evidence trail" width="400">
-    </td>
-    <td width="50%" valign="top">
-      <img src="docs/images/report_perturbation.png" alt="Perturbation effects across conditions" width="400">
-    </td>
-  </tr>
-  <tr>
-    <td valign="top">
+      <img src="docs/images/report_evidence.png" alt="A module with resolvable citations and its evidence trail" width="400"><br>
       <strong>Auditable evidence</strong><br>
       <sub>Every mechanistic claim links its genes, verified PMIDs/DOIs, and deterministic evidence.</sub>
     </td>
-    <td valign="top">
+    <td width="50%" valign="top">
+      <img src="docs/images/report_perturbation.png" alt="Perturbation effects across conditions" width="400"><br>
       <strong>Perturbation effects</strong><br>
       <sub>See which regulators move each program, including condition-specific comparisons.</sub>
     </td>
   </tr>
 </table>
 
-The live report source and enrichment figures are included in
-[`examples/brain_endothelial_demo/`](examples/brain_endothelial_demo).
-
 ## What you provide
 
-The minimum input is one gene-loading CSV with one row per gene per program:
+The minimum input is one gene-loading CSV — your **gene programs** — with one row per gene
+per program. Common column names are detected automatically:
 
 ```csv
 Name,Score,RowID
 Npepps,0.00165,1
 Myo9a,0.00159,1
-Nfat5,0.00149,1
 ```
-
-Common column names are detected automatically — the `RowID` above is recognised as the
-program column, so you rarely need to rename anything:
 
 | Required value | Accepted examples |
 |---|---|
@@ -122,30 +69,15 @@ program column, so you rarely need to rename anything:
 | loading | `Score`, `Loading`, `Weight`, `Value`, `gene_score` |
 | program | `program_id`, `RowID`, `topic`, `factor`, `component` |
 
-Optional inputs add Perturb-seq regulator effects (`program_id, target_gene, log2_fc,
-significant`) or cell-type enrichment (`cell_type, program, log2_fc`, plus `direction` and/or
-`fdr`). Claude validates every column before anything is spent.
+Two inputs are optional: a **regulator table** of measured Perturb-seq effects, and a
+**cell-type enrichment** table that helps separate cell-type identity programs from
+cross-cell-type functional ones ([formats](docs/GUIDE.md#inputs)). Claude validates every
+column before anything is spent.
 
-Cell-type enrichment is worth supplying: its signed log2FC values reach the annotation model
-directly, and they are what let it distinguish a **cell-type identity** program from a
-**cross-cell-type functional** one. Strong depletion in a lineage is as informative as
-enrichment.
-
-### Demo dataset
-
-[`examples/brain_endothelial_demo/`](examples/brain_endothelial_demo) ships a real dataset you
-can run end to end: a mouse brain endothelial Perturb-seq screen (cNMF, k=100) from postnatal
-brain, targeting 166 vascular signalling regulators.
-
-| File | Role |
-|---|---|
-| `FB_moi15_seq2_loading_gene_k100_top300.csv` | gene loadings — 100 programs × 300 genes |
-| `Discovery_FP_moi15_seq2_thresh10_k100_default.csv` | regulator effects — 16,200 tested pairs |
-| `FP_moi15_seq2_cnmf_program_markers_celltype_l2_top10_enriched_depleted.csv` | cell-type enrichment — signed log2FC per lineage |
-
-[`configs/example_generic.yaml`](configs/example_generic.yaml) is a runnable config for this
-dataset, wiring up all three files and scoped to three programs (9, 48, 70) with contrasting
-cell-type signals.
+**Demo data.** [`examples/brain_endothelial_demo/`](examples/brain_endothelial_demo) is a
+mouse brain endothelial Perturb-seq screen (cNMF, k=100) with all three inputs, and
+[`configs/example_generic.yaml`](configs/example_generic.yaml) runs it on three programs
+([file details](docs/GUIDE.md#demo-dataset)).
 
 ## Install
 
@@ -170,262 +102,133 @@ claude plugin install gene-program-interpreter@gpi
 Restart Claude Code, or run `/reload-plugins`. The first use builds the isolated Python
 environment; later runs reuse it.
 
-### 3. Configure credentials
+### 3. Add credentials
 
 Create a `.env` file in the directory where you will run the analysis (see
 [`.env.example`](.env.example)):
 
 ```dotenv
-ANTHROPIC_API_KEY=...          # Anthropic API: annotation, themes, presentation
+ANTHROPIC_API_KEY=...          # required; Anthropic API: annotation, themes, presentation
 PUBMED_EMAIL=you@example.com   # required courtesy contact for NCBI/Crossref
 OPENALEX_API_KEY=...           # recommended; full OpenAlex verification coverage
 NCBI_API_KEY=...               # recommended; higher PubMed rate limit
 ```
 
-Authentication is intentionally split:
-
-- Parallel literature agents use your **Claude login/subscription**.
-- Annotation, themes, and presentation use **`ANTHROPIC_API_KEY`**. Annotation uses Batch
-  by default; themes and ordinary presentation use live API calls.
-
-Research can instead use API billing with `research.auth: api` in the run config.
-
+Parallel literature agents use your **Claude login/subscription** (or API billing with
+`research.auth: api`). Annotation, themes, and presentation use **`ANTHROPIC_API_KEY`**.
 No external MCP server is required — PubMed, OpenAlex, and Crossref tools run inside the
-pipeline. The same `.env` serves the standalone CLI.
+pipeline.
 
 ## Use it in Claude
 
-Start Claude Code in the directory containing your data, then invoke the skill:
+Start Claude Code in the directory containing your data, then invoke the skill — or just ask,
+and it triggers on its own:
 
 ```text
 /gene-program-interpreter:interpret path/to/gene_loading.csv
-```
-
-Or just ask, and the skill triggers on its own:
-
-```text
-Interpret these cNMF programs in mouse brain endothelial cells:
-examples/brain_endothelial_demo/FB_moi15_seq2_loading_gene_k100_top300.csv
 ```
 
 Claude then:
 
 1. checks the installation and validates your input columns;
 2. proposes the biological context — organism, tissue, cell type, conditions — for you to
-   review and correct;
+   review and correct, and asks whether to use or blind any regulator tables;
 3. shows a dry-run plan and cost scope;
 4. **asks for your approval before starting any paid work**;
 5. monitors the run and opens the cited HTML report with you.
 
-In `context_guided` mode, use short `context_terms` describing the cell type's *normal*
-biology, and keep disease or perturbation emphasis in `conditions`. In `gene_first` mode
-(used by the supplied example), these configured terms and conditions are retained for
-provenance and excluded from functional discovery. See [Gene-first interpretation](#gene-first-interpretation).
-
 For a first run, start with 3–5 representative programs — research cost scales with program
-count.
+count ([budgets and resuming](docs/GUIDE.md#cost-resume-and-failures)).
 
-## Cost and safety
+## Choose how GPI interprets
 
-- Input validation, dry runs, and installation checks make **no paid API calls**.
-- Claude asks for explicit approval before starting paid work.
-- Literature research has a configurable budget and concurrency limit. `max_budget_usd` is a
-  cap **per program**, not per run — the worst case for a run is `max_budget_usd × len(programs)`.
-- Runs cache completed steps in `pipeline_state.json`, so a network failure is resumable
-  rather than repaid.
-- A failed research step degrades gracefully: the report still renders, with the affected
-  literature marked incomplete.
+Two independent settings control what the research agents and annotation model see. The
+defaults suit most runs; in Claude, say what you want and the skill sets them.
+
+| | **Regulator-aware**<br><sub>`include_regulators: true` (default) <b>and</b> a regulator table</sub> | **Regulator-blinded**<br><sub>`include_regulators: false`, <b>or</b> no regulator table</sub> |
+|---|---|---|
+| **Gene-first**<br><sub>`interpretation_mode: gene_first`</sub> | Genes and eligible regulators are researched together. The program annotation is written first; a separate **regulator explanation** then adds mechanisms without changing it. | Program genes and their evidence, without regulator data. No regulator explanation. |
+| **Context-guided**<br><sub>default when `interpretation_mode` is omitted</sub> | Genes and eligible regulators are researched together and interpreted in one program annotation, with your configured framing. | Program genes and their evidence, without regulator data, with your configured framing. |
+
+Whenever a regulator table is supplied, the report shows its measured plots — blinded or not.
+Use a new output directory when you change either setting. What each setting withholds,
+which regulators are eligible, and how reruns behave: [settings in detail](docs/GUIDE.md#choose-how-gpi-interprets).
 
 ## Standalone CLI
 
-Everything above runs through Claude. Use the CLI directly if you want a scriptable workflow
-outside Claude Code. It reads the same [`.env`](#3-configure-credentials).
-
-**Install:**
+For scripted workflows outside Claude Code. It reads the same `.env`.
 
 ```bash
 uv tool install "gene-program-interpreter[progress] @ git+https://github.com/ifanirene/gene-program-interpreter.git"
-gpi doctor    # read-only check of login and configuration
-```
-
-**Try the demo.** [`configs/example_generic.yaml`](configs/example_generic.yaml) runs the
-[demo dataset](#demo-dataset) as-is. Validating and previewing spend nothing:
-
-```bash
-gpi --check-inputs --config configs/example_generic.yaml   # validate columns
-gpi --config configs/example_generic.yaml --dry-run        # preview plan and scope
+gpi doctor                                                 # read-only check of login and configuration
+gpi --check-inputs --config configs/example_generic.yaml   # validate columns (free)
+gpi --config configs/example_generic.yaml --dry-run        # preview plan and scope (free)
 gpi --config configs/example_generic.yaml                  # full pipeline (paid)
 ```
 
-**Author a config for your own data.** Copy `configs/example_generic.yaml` and change:
-
-- `inputs.gene_loading` — required weighted gene-program CSV;
-- `inputs.regulators` or `inputs.regulators_by_condition` — optional Perturb-seq effects;
-- `annotation.include_regulators` — use those effects in research/annotation (`true`,
-  default), or blind interpretation while retaining report plots (`false`);
-- `mask_regulators` — optional pipeline-wide gene list excluded before regulator ranking,
-  STRING validation, research bundling, and annotation; next-best regulators fill the top-N;
-- `context` — organism, tissue, cell type, conditions, and normal cell functions;
-- `output_dir`, and an optional `programs` subset.
-
-Or let the CLI assemble one from a context stub and your input paths:
-
-```bash
-gpi --emit-config --context-file context.yaml \
-    --gene-loading genes.csv --output-dir runs/my_run -o runs/my_run.yaml
-```
-
-Scope a first pass with the config's `programs:` key, or with `--programs 9,48,70` when
-emitting one. Use `--stop-after bundle` for preparation without literature agents or model
-synthesis. `--no-research` skips literature agents, but later model stages can still incur
-API charges. `--progress plain` gives terminal progress without the rich display.
-
-Outputs land in the config's `output_dir`. Interrupted runs resume from
-`pipeline_state.json`; `--start-from`, `--stop-after`, and `--force-restart` control where a
-rerun picks up. Run `gpi --help` for the full flag list.
-
-### Gene-first interpretation
-
-Set `context.interpretation_mode: gene_first` to discover program functions from genes and
-biological identity without configured disease/process framing. Configs that omit the mode
-retain the existing `context_guided` behavior; `configs/example_generic.yaml` opts in.
-
-```yaml
-context:
-  interpretation_mode: gene_first
-  organism: mouse
-  species_taxid: 10090
-  tissue: brain
-  cell_type: brain endothelial cell
-output_dir: runs/brain_gene_first_fresh
-```
-
-Merge this illustrative fragment into your dataset's config, retaining its actual inputs
-and settings. Gene-first requires a nonempty tissue or cell type. It excludes **all free-text
-profile conditions**, `context_terms`, and the explicit `annotation_role`,
-`annotation_context`, `keyword_query`, `condition_context`, and `functional_context`
-overrides from research and core annotation. Organism, taxid, tissue, cell type, and gene
-sets remain available. Regulator visibility is controlled separately by
-`annotation.include_regulators`, described below. Condition-specific regulator labels and
-values are experimental data and remain intact. Diseases/processes supported by gene
-summaries, papers, enrichment, or measurements may still appear in the interpretation.
-The original configuration and report/assay metadata remain recorded for provenance.
-
-Use a **new output directory** for the first gene-first run. Completed stages can be reused
-on resume; a code update or `--start-from` alone does not invalidate them. Check your actual
-config with `gpi --config YOUR_CONFIG.yaml --dry-run` before running. Each program now gets
-one research session with the full configured per-program budget. Regulator-aware gene-first
-runs also make an explanation request when that program has eligible regulator hits.
-Offline input isolation does not establish improved biological accuracy.
-
-### Regulator-aware or regulator-blinded interpretation
-
-| Mode | Research and annotation | Final report |
-|---|---|---|
-| **1. Regulator-aware**: tables supplied and `annotation.include_regulators: true` (default) | Research program genes and eligible regulators together in one session per program. Use regulator evidence to support or qualify gene-supported functions. In gene-first mode, an additional explanation request reuses that research and adds regulator mechanisms. | Program interpretation, regulator explanations, measured heatmap and perturbation plots. |
-| **2. Regulator-blinded**: `annotation.include_regulators: false`, or no tables supplied | Research and annotate program genes without measured regulator information. Skip regulator explanations. | Program interpretation, plus measured heatmap and perturbation plots whenever tables were supplied. No model regulator mechanisms or confidence claims. |
-
-To keep your tables for display while blinding interpretation, retain the input paths and set:
-
-```yaml
-annotation:
-  include_regulators: false
-```
-
-This setting works with both `gene_first` and `context_guided`; the context mode controls
-disease/process framing, not regulator visibility. Blinding withholds perturbation identities
-and effects; a gene that is itself a loading or distinctive program gene remains a program
-gene. Every requested program is researched and annotated in either mode.
-
-The existing regulator ranking selects up to three significant hits in each direction per
-condition after guide collapse and masking. “Eligible regulators” refers to those input hits,
-not a manually chosen subset of programs. Empty hit lists skip only the explanation request.
-Display-only heatmaps use the same ranking on the original tables; perturbation plots retain
-the tested points. Use a fresh output directory when changing mode. Blinded interpretation
-rejects saved literature whose blinded provenance is absent or incompatible.
+To write a config for your own data, scope a run, or resume one, see the
+[CLI guide](docs/GUIDE.md#standalone-cli) or `gpi --help`.
 
 ## How it works
 
-The supplied example uses **gene-first, regulator-aware** interpretation: research program
-genes and regulators together, annotate program functions, then explain the regulator links.
+The Claude skill gathers inputs and approval; a Python runner then moves every gene program
+through five steps.
 
-<p align="center">
-  <a href="docs/images/gpi-workflow.png">
-    <img src="docs/images/gpi-workflow.png" alt="Python chooses regulator-aware or blinded inputs, runs one parallel research session per program, verifies evidence, annotates programs, optionally explains regulators, and renders measured plots in either mode." width="1000">
-  </a>
-</p>
+```mermaid
+flowchart TD
+    G["Gene programs<br/>weighted gene CSV"]
+    C["Context<br/>organism · tissue · cell type<br/>conditions"]
+    E["Cell-type enrichment<br/>optional"]
+    R["Regulator table<br/>optional measured effects"]
 
-[Open the full-size diagram](docs/images/gpi-workflow.png) ·
-[Edit the Excalidraw source](docs/images/gpi-workflow.excalidraw)
+    P["<b>1 · Prepare</b><br/>evidence per program<br/>string_enrichment<br/>gene_summaries · bundle"]
+    S["<b>2 · Research</b><br/>one agent per program<br/>literature search<br/>research"]
+    V["<b>3 · Verify</b><br/>check citation identifiers<br/>verify · optional theme"]
+    A["<b>4 · Annotate</b><br/>program annotation<br/>+ regulator explanation*<br/>contract-checked<br/>annotate"]
+    O["<b>5 · Report</b><br/>plots + interpretation<br/>presentation · html_report"]
+    OUT[("report.html<br/>+ saved evidence and audits")]
 
-| Layer | Role |
+    G --> P
+    C --> P
+    E --> P
+    R -. "regulator-aware only" .-> P
+    P -- "program_bundles/" --> S
+    S -- "research_results/" --> V
+    V --> A
+    A --> O
+    R -. "measured plots, even if blinded" .-> O
+    O --> OUT
+
+    classDef input fill:#F1F5F9,stroke:#475569,color:#0F172A
+    classDef code fill:#DBEAFE,stroke:#1D4ED8,color:#0F172A
+    classDef agent fill:#EDE9FE,stroke:#6D28D9,color:#0F172A
+    classDef model fill:#FEF3C7,stroke:#B45309,color:#0F172A
+    classDef output fill:#D1FAE5,stroke:#047857,color:#0F172A
+    class G,C,E,R input
+    class P,V,O code
+    class S agent
+    class A model
+    class OUT output
+```
+
+<sub>Colour marks each step's main actor — grey: inputs · blue: Python code · purple: Claude
+agents · amber: model API · green: output; `theme` and `presentation` also call the model API.
+Dotted lines are the regulator table's two uses. \*Regulator explanation: gene-first,
+regulator-aware programs with eligible regulators only.</sub>
+
+Measured effects, conditions, and significance always come from your input tables, never from
+a model. What each step and runner stage does: [pipeline steps and stages](docs/GUIDE.md#pipeline-steps-and-stages).
+
+## Documentation
+
+| Read | For |
 |---|---|
-| Claude skill | Collects inputs, confirms context and spend approval, launches and monitors |
-| Python runner | Owns stage order, resume state, concurrency, validation, and saved artifacts |
-| Claude Agent SDK | Runs isolated per-program sessions; agents choose read-only literature queries |
-| Anthropic model API | Synthesizes shared themes, functional annotations, regulator explanations, and presentation text |
-
-The runner's exact stage order is:
-
-```text
-string_enrichment → gene_summaries → bundle → research → verify
-→ theme → annotate → presentation → html_report
-```
-
-Within that sequence, gene-first makes these handoffs:
-
-1. **Code prepares evidence.** Gene weights, STRING enrichment, NCBI summaries, and optional
-   measured inputs become per-program JSON files in `program_bundles/`.
-2. **Code launches research agents.** Each program gets one session. With regulator use
-   enabled, its bundle contains program genes and available regulator evidence together.
-   Blinded sessions receive program genes and biological identity without perturbation fields;
-   context-guided sessions also retain their configured framing. Python bounds parallel
-   sessions. Agents query PubMed, OpenAlex, and Crossref through in-process tools and return
-   structured evidence via `submit_result`. All results and audits go to `research_results/`
-   and `research_audit/`; new runs do not create a separate regulator research pass.
-3. **Code verifies; a model optionally organizes.** Citation checks cover identifiers and
-   metadata, with unresolved evidence kept labeled. An optional live API call extracts
-   shared themes (`theme.enabled: false` skips it). Identifier checks do not establish that
-   a paper supports a particular claim.
-4. **Models interpret; code checks each handoff.** Program annotation uses regulator evidence
-   when enabled and withholds it when blinded. In gene-first mode, the first response fixes
-   program fields and returns an empty regulator list. When regulator use is enabled and
-   eligible hits exist, an explanation request reuses the same research. Code merges only
-   regulator objects; that request cannot rewrite finalized program fields. Blinded runs
-   skip it. Both requests use Batch by default, or live API with `annotation.batch: false`;
-   original requests and results are retained.
-5. **Code validates and publishes the report.** Measured effects, conditions, and significance
-   come from input tables. Code checks gene membership, regulator sets, citations, and output
-   contracts; invalid, missing, or truncated annotations stop report generation. Presentation
-   normally uses a live API call with a deterministic fallback; `--deterministic-presentation`
-   skips that model call. Supplied tables reach measured report plots in both modes.
-   Python renders the final `report.html`.
-
-Configs without a context interpretation mode use `context_guided`: context-framed research
-and combined annotation when regulator use is enabled. Blinding still excludes regulator
-inputs and explanations. The separate explanation request above belongs to `gene_first`.
-
-**For agents operating GPI:** follow [`skills/interpret/SKILL.md`](skills/interpret/SKILL.md)
-for input, context, and paid-run approval gates. Use
-[`configs/example_generic.yaml`](configs/example_generic.yaml) as the runnable example.
-The implementation entry points are [`gpi/run_pipeline.py`](gpi/run_pipeline.py),
-[`gpi/gene_first_synthesis.py`](gpi/gene_first_synthesis.py), and
-[`research/research_parallel.py`](research/research_parallel.py). Data contracts and further
-details live in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and
-[`docs/regulator-evidence-workflow.md`](docs/regulator-evidence-workflow.md).
-
-```text
-.claude-plugin/   plugin and marketplace manifests
-skills/           distributable Claude skill
-bin/gpi           plugin runtime wrapper
-gpi/              deterministic processing, model API steps, and reporting
-research/         parallel research agents, protocol, and citation verification
-configs/          example run configurations
-tests/            offline regression tests and fixtures
-```
-
-The [interactive pipeline walkthrough](https://ifanirene.github.io/gene-program-interpreter/)
-also illustrates the project with a worked biological example.
+| [`docs/GUIDE.md`](docs/GUIDE.md) | Input formats, settings in detail, CLI configs and reruns, cost and resuming, step/stage reference |
+| [`CONTEXT.md`](CONTEXT.md) | The terms used across these docs |
+| [`skills/interpret/SKILL.md`](skills/interpret/SKILL.md) | Agents operating GPI: input, context, and paid-run approval gates |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Architecture and data contracts |
+| [`docs/regulator-evidence-workflow.md`](docs/regulator-evidence-workflow.md) | How regulator evidence is selected, researched, and rendered |
+| [Pipeline walkthrough](https://ifanirene.github.io/gene-program-interpreter/) | The pipeline illustrated with a worked biological example |
 
 ## Development
 
