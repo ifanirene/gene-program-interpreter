@@ -1184,7 +1184,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
 
     Ports the polished ``Program Detail`` mockup: a left program rail, a hero
     (kicker + label + highlighted lead + context chips), an at-a-glance strip
-    (top regulators / functional modules / top pathway), and collapsible
+    (top regulators / functional modules / top pathway, plus optional ridge age data), and collapsible
     sections for marker genes, functional modules, distinctive features,
     regulators, pathway enrichment, and per-condition volcano plots.
 
@@ -1336,6 +1336,12 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
 
         .glance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);
             border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 24px 0 30px; box-shadow: var(--shadow-soft); }
+        .glance.has-ridge { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .ridge-row { display: flex; justify-content: space-between; gap: 12px; margin: 4px 0; font-variant-numeric: tabular-nums; }
+        .ridge-row span { font-size: 12px; font-weight: 500; }
+        .aging-note { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+        .aging-note h4 { margin: 0 0 7px; font-size: 12px; color: var(--muted); }
+        .aging-note p { font-size: 13px; line-height: 1.6; margin: 5px 0; }
         .glance .cell { background: var(--surface); padding: 14px 16px; }
         .glance .cell .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; margin-bottom: 7px; }
         .glance .cell .v { font-size: 15px; font-weight: 650; line-height: 1.35; }
@@ -1484,7 +1490,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         @media (max-width: 880px) {
             .shell { grid-template-columns: 1fr; }
             .rail { display: none; }
-            .glance { grid-template-columns: 1fr; }
+            .glance, .glance.has-ridge { grid-template-columns: 1fr; }
             .figgrid, .volgrid { grid-template-columns: 1fr; }
             .topbar { flex-wrap: wrap; }
             .search-input { width: 100%; }
@@ -1655,6 +1661,37 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         return `FDR ${parts[0]}\u00d710\u207b${sup}`;
     }
 
+    function ridgeAgeCell(p){
+        const age = p.ridge_age;
+        if(!age || !['F','M'].some(sex => age[sex])) return '';
+        const number = (v,digits) => v!==null && v!==undefined && Number.isFinite(Number(v))
+            ? (Number(v)>0?'+':'')+Number(v).toFixed(digits) : '—';
+        return `<div class="cell ridge-age" aria-label="Ridge age score">
+            <div class="k">Ridge age score</div><div class="v">
+            <div class="ridge-row"><span>Sex</span><span>Weight · Δshare</span></div>
+            ${['F','M'].map(sex => {
+                const a=age[sex]||{};
+                const delta=a.age_difference===null||a.age_difference===undefined ? null : 100*Number(a.age_difference);
+                return `<div class="ridge-row"><span>${sex==='F'?'Female':'Male'}</span><span>${number(a.std_weight,3)} · ${number(delta,2)}</span></div>`;
+            }).join('')}
+            <small>Weight per program standard deviation; Δshare in percentage points. Descriptive, not causal.</small>
+            </div></div>`;
+    }
+
+    function moduleAging(m){
+        const a=m.aging;
+        if(!a || !a.finding) return '';
+        const pmids=(a.supporting_pmids||[]).map(String).filter(pmid => /^\d+$/.test(pmid));
+        return `<div class="aging-note"><h4>Aging findings</h4>
+            <p>${esc(a.finding)}</p>
+            ${a.evidence_scope?`<p>${esc(a.evidence_scope)}</p>`:''}
+            ${a.interpretation?`<p>${esc(a.interpretation)}</p>`:''}
+            ${a.intervention_benefit?`<p><b>Potential benefit.</b> ${esc(a.intervention_benefit)}</p>`:''}
+            ${a.main_limit?`<p><b>Limit.</b> ${esc(a.main_limit)}</p>`:''}
+            ${pmids.length?`<div class="pmids">${pmids.map(pmid => `<a href="https://pubmed.ncbi.nlm.nih.gov/${pmid}/" target="_blank" rel="noopener">${pmid}</a>`).join('')}</div>`:''}
+            </div>`;
+    }
+
     const IDS = PROGRAM_LIST.map(x => x[0]);
     let currentId = null;
 
@@ -1722,6 +1759,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             ? regs.map(r => `<span class="rg" style="color:var(--${r.role==="activator"?"down":(r.role==="repressor"?"up":"accent-text")})">${esc(r.gene)}</span>`).join("")
             : `<span class="rg" style="color:var(--muted)">\u2014</span>`;
         const modGlance = pres.moduleShort.map((m,i) => `<span><b>${i+1}</b>${esc(m)}</span>`).join("");
+        const ridgeGlance = ridgeAgeCell(p);
         const crumbHtml = DATASET_CRUMB ? `<span class="crumb">${esc(DATASET_CRUMB)}</span>` : "";
 
         const volCards = conds.map(c => `<div class="volcard"><div class="vtitle">${esc(c)}<span class="dotc" id="vc-${cid(c)}"></span></div><div id="vol-${cid(c)}" class="volplot"></div></div>`).join("");
@@ -1734,7 +1772,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             ${pres.tags.length ? `<div class="ctx">${pres.tags.map(c => `<span class="chip">${esc(c)}</span>`).join("")}</div>` : ""}
         </header>
 
-        <section class="glance" aria-label="At a glance">
+        <section class="glance${ridgeGlance ? " has-ridge" : ""}" aria-label="At a glance">
             <div class="cell">
                 <div class="k">${hasMeasuredRegs ? "Top regulators" : "Regulator candidates"}</div>
                 <div class="v"><div class="reglist">${regGlance}</div>
@@ -1748,6 +1786,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 <div class="k">Top pathway</div>
                 <div class="v">${topPw ? `${esc(topPw.term)}<small>${fmtFDR(topPw.fdr)}</small>` : `<span style="color:var(--muted)">No enrichment</span>`}</div>
             </div>
+            ${ridgeGlance}
         </section>
 
         <section class="section open" id="sec-genes">
@@ -1787,6 +1826,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                     ${m.summary ? `<p class="msum">${esc(m.summary)}</p>` : ""}
                     ${(m.key_genes||[]).length ? `<div class="genes">${m.key_genes.map(g => `<span class="gene">${esc(g)}</span>`).join("")}</div>` : ""}
                     ${ev.pmids.length ? `<div class="pmidrow"><span class="pmidlabel">PMID</span><div class="pmids">${ev.pmids.map(x => `<a href="https://pubmed.ncbi.nlm.nih.gov/${esc(x)}/" target="_blank" rel="noopener">${esc(x)}</a>`).join("")}</div></div>` : ""}
+                    ${moduleAging(m)}
                     ${m.evidence ? `<details><summary>Evidence used</summary><div class="disc">
                         <div class="field"><p>${esc(m.evidence)}</p></div>
                     </div></details>` : ""}

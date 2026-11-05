@@ -163,6 +163,20 @@ automatic downgrade.
 | 4. Annotate | `annotate` | The model writes each program annotation — Batch by default, live with `annotation.batch: false` — and code checks it against the annotation contract. Any regulator explanation follows and may add only regulator objects. |
 | 5. Report | `presentation` · `html_report` | Presentation text comes from a live call with a deterministic fallback (`--deterministic-presentation` skips the call). Code checks gene membership, citations, and measured effects, then renders `report.html`; invalid, missing, or truncated annotations stop the report. |
 
+The Program Explorer page generator also accepts optional existing age-model data:
+`ridge_age` maps `F`/`M` to `std_weight` and `age_difference`. It adds a fourth
+summary block with signed ridge weights per program standard deviation and
+aged-minus-young share changes in percentage points. It does not fit a model or
+interpret the coefficients as causal effects. Without this input, the existing
+three-block summary remains.
+
+A module may carry an optional `aging` object with `finding`, `evidence_scope`,
+`supporting_pmids`, `interpretation`, `intervention_benefit` and `main_limit`.
+The renderer shows no aging paragraph for a null or absent object. This is an
+optional page-data interface; it does not change the standard annotation contract
+or infer aging from a module title. Dataset-owned pilots can reuse the normal
+presentation layer and supply reviewed aging notes after function synthesis.
+
 Stage names are exactly what `--start-from` and `--stop-after` accept. Measured effects,
 conditions, and significance always come from your input tables, never from a model.
 
