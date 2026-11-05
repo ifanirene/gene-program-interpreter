@@ -309,6 +309,8 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
     meta: dict = {"normalized_from_agent": True}
     return ResearchResult(
         program_id=agent.program_id,
+        aging_annotation=agent.aging_annotation,
+        key_gene_evidence=agent.key_gene_evidence,
         regulator_coverage=agent.regulator_coverage,
         queries=agent.queries,
         candidate_mechanisms=mechanisms,

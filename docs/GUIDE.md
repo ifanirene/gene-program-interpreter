@@ -120,11 +120,22 @@ rerun picks up. Run `gpi --help` for the full flag list.
 - Input validation, dry runs, and installation checks make **no paid API calls**.
 - In Claude, the skill asks for explicit approval before starting paid work.
 - Literature research has a configurable budget and concurrency limit. `max_budget_usd` is a
-  cap **per program**, not per run — the worst case for a run is `max_budget_usd × len(programs)`.
+  cap **per session attempt**, not per run. The standalone research runner accepts
+  `--max-attempts` (default 2); use 1 for one capped attempt per program. Report actual
+  usage separately because a response can finish as a budget stop is triggered.
 - Runs cache completed stages in `pipeline_state.json`, so a network failure is resumable
   rather than repaid.
 - A failed research stage degrades gracefully: the report still renders, with the affected
   literature marked incomplete.
+
+The standalone research runner accepts `--protocol /absolute/path/protocol.md`
+to use an explicit task protocol and `--cli-path /absolute/path/claude` when the
+installed command-line executable supports a model newer than the SDK's bundled
+version. The Python `run_research`/`dry_run` interfaces expose the same optional
+arguments; defaults retain the packaged function protocol and bundled executable.
+Each program still receives a fresh session with its own bundle and read-only
+literature tools. Public SDK messages are saved per attempt; the final audit
+retains session identity, returned assistant model names, usage and cost.
 
 ## Pipeline steps and stages
 
@@ -138,7 +149,7 @@ rerun picks up. Run `gpi --help` for the full flag list.
 | Step | Runner stages | What happens |
 |---|---|---|
 | 1. Prepare | `string_enrichment` · `gene_summaries` · `bundle` | Gene weights, STRING enrichment, NCBI summaries, and any regulator evidence become one JSON per program in `program_bundles/`. Cell-type enrichment is formatted here for the annotation prompt; research agents do not see it. |
-| 2. Research | `research` | One agent session per program, run in parallel, queries PubMed, OpenAlex, and Crossref through in-process tools and returns structured evidence via `submit_result` to `research_results/` and `research_audit/`. |
+| 2. Research | `research` | One agent session per program, run in parallel, queries PubMed, OpenAlex, and Crossref and can read available Europe PMC full text through in-process tools and returns structured evidence via `submit_result` to `research_results/` and `research_audit/`. |
 | 3. Verify | `verify` · `theme` | Code checks citation identifiers and metadata, keeping unresolved evidence labeled. An optional model call extracts shared themes (`theme.enabled: false` skips it). |
 | 4. Annotate | `annotate` | The model writes each program annotation — Batch by default, live with `annotation.batch: false` — and code checks it against the annotation contract. Any regulator explanation follows and may add only regulator objects. |
 | 5. Report | `presentation` · `html_report` | Presentation text comes from a live call with a deterministic fallback (`--deterministic-presentation` skips the call). Code checks gene membership, citations, and measured effects, then renders `report.html`; invalid, missing, or truncated annotations stop the report. |

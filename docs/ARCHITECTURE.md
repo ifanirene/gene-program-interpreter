@@ -147,6 +147,28 @@ NOT wired into the active pipeline — see `docs/FUTURE_claim_verification.md`.
   literature_summary, status}`. `research_evidence_adapter.py` maps each `ResearchResult`
   `candidate_mechanism` (reading `mechanism.status` directly) + its linked `evidence` into this shape.
 
+### Task-specific research and execution records
+
+The standalone SDK runner can receive an explicit protocol file and compatible
+Claude Code executable. These do not change the default function-only pipeline.
+`AgentResearchResult` optionally carries an `aging_annotation` with separate
+mechanism and benefit judgments and `key_gene_evidence` for single-gene leads;
+normalization preserves both fields. Detailed paper access/population/intervention
+fields remain in the original `raw_payload.json`, while canonical evidence retains
+the shared verifier contract. A task-specific report must read that raw submission
+when it needs the full paper context rather than assume normalization preserves it.
+
+PubMed retrieval includes authors and available PubMed Central identifiers. A
+read-only `fetch_pmc_fulltext` tool accepts only a PMC identifier and returns body
+sections from Europe PMC; failed access is reported to the agent. Identity checks
+do not establish that a passage entails a claim.
+
+Every attempt saves public SDK messages to its own JSON Lines transcript. Audit
+records include the session identifier, returned assistant models, terminal model
+usage and cost. Attempts can be limited explicitly. Captured terminal errors remain
+available even when the SDK raises after yielding its error result. No resume or
+continued conversation is used by the per-program runner.
+
 ### Evidence qualifications and report scope (2026-09-22)
 
 At the user's explicit request, PubMed retrieval retains the complete available

@@ -44,6 +44,7 @@ import json
 import logging
 import os
 import shutil
+from dataclasses import asdict, is_dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -236,6 +237,7 @@ def build_options(
     max_turns: int,
     max_budget_usd: float,
     literature_client: Optional[LiteratureClient] = None,
+    cli_path: Optional[str] = None,
 ) -> ClaudeAgentOptions:
     """Construct the per-program ``ClaudeAgentOptions`` (one isolated session).
 
@@ -268,6 +270,7 @@ def build_options(
         max_turns=max_turns,
         max_budget_usd=max_budget_usd,      # per-session cost cap (spec 8 gate)
         model=model,
+        cli_path=cli_path,
         cwd=str(workspace),
     )
 
@@ -413,12 +416,18 @@ def _write_audit(
     stop_reason: Optional[str] = None,
     duration_ms: Optional[int] = None,
     usage: Optional[Dict[str, Any]] = None,
+    session_id: Optional[str] = None,
+    assistant_models: Optional[List[str]] = None,
+    model_usage: Optional[Dict[str, Any]] = None,
 ) -> Path:
     audit_path = audit_dir / f"{program_id}.audit.json"
     _write_json(
         audit_path,
         {
             "program_id": program_id,
+            "session_id": session_id,
+            "assistant_models": assistant_models,
+            "model_usage": model_usage,
             "prompt": prompt,
             "model": model,
             "mcp_servers": sorted(mcp_server_names),
@@ -466,6 +475,7 @@ async def _drive_once(
     per_program_timeout: float,
     program_id: str = "",
     progress_cb: Optional[Callable[[str, dict], None]] = None,
+    transcript_path: Optional[Path] = None,
 ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     """Run ONE query() session to completion (or timeout). Returns (tool_trace, result_info).
 
@@ -483,7 +493,14 @@ async def _drive_once(
 
     async def _run() -> None:
         async for msg in query(prompt=_prompt_stream(prompt), options=options):
+            if transcript_path is not None:
+                transcript_path.parent.mkdir(parents=True, exist_ok=True)
+                with transcript_path.open("a", encoding="utf-8") as stream:
+                    stream.write(json.dumps({"type": type(msg).__name__, "message": asdict(msg) if is_dataclass(msg) else str(msg)}, default=str) + "\n")
             if isinstance(msg, AssistantMessage):
+                models = result_info.setdefault("assistant_models", [])
+                if msg.model not in models:
+                    models.append(msg.model)
                 for block in msg.content:
                     if isinstance(block, ToolUseBlock):
                         tool_trace.append(
@@ -508,6 +525,8 @@ async def _drive_once(
             elif isinstance(msg, ResultMessage):
                 result_info.update(
                     {
+                        "session_id": msg.session_id,
+                        "model_usage": getattr(msg, "model_usage", None),
                         "subtype": msg.subtype,
                         "is_error": msg.is_error,
                         "num_turns": msg.num_turns,
@@ -527,7 +546,7 @@ async def _drive_once(
     try:
         await asyncio.wait_for(_run(), timeout=per_program_timeout)
     except Exception as exc:
-        if submit_holder.get("payload") is None:
+        if submit_holder.get("payload") is None and not result_info.get("session_id"):
             raise
         # Validate below as usual, but do not discard a completed submission
         # merely because the SDK failed while ending its session.
@@ -549,6 +568,7 @@ async def _handle_one_program(
     literature_client: Optional[LiteratureClient] = None,
     progress_cb: Optional[Callable[[str, dict], None]] = None,
     max_attempts: int = 2,
+    cli_path: Optional[str] = None,
 ) -> Path:
     """Drive one program end-to-end: prepare workspace, run the session (retry once on
     transient failure), persist the raw submit_result payload, validate it, and always write a
@@ -581,6 +601,7 @@ async def _handle_one_program(
                 max_turns=max_turns,
                 max_budget_usd=max_budget_usd,
                 literature_client=literature_client,
+                cli_path=cli_path,
             )
             tool_trace, result_info = await _drive_once(
                 prompt=prompt,
@@ -589,6 +610,7 @@ async def _handle_one_program(
                 per_program_timeout=per_program_timeout,
                 program_id=program_id,
                 progress_cb=progress_cb,
+                transcript_path=audit_dir / f"{program_id}.attempt{attempt}.messages.jsonl",
             )
             last_trace, last_result_info = tool_trace, result_info
 
@@ -596,7 +618,9 @@ async def _handle_one_program(
             if payload is None:
                 # No submit_result -> could be max_turns / budget / model just didn't call it.
                 subtype = result_info.get("subtype", "")
-                if subtype == "error_max_turns" or (result_info.get("num_turns") or 0) >= max_turns:
+                if result_info.get("is_error"):
+                    last_error = str(result_info.get("result") or result_info.get("session_error") or "SDK error result")
+                elif subtype == "error_max_turns" or (result_info.get("num_turns") or 0) >= max_turns:
                     last_error = "max_turns reached without submit_result"
                 elif "budget" in str(subtype).lower():
                     last_error = "budget exceeded without submit_result"
@@ -704,6 +728,9 @@ async def _handle_one_program(
                 stop_reason=result_info.get("stop_reason"),
                 duration_ms=result_info.get("duration_ms"),
                 usage=result_info.get("usage"),
+                session_id=result_info.get("session_id"),
+                assistant_models=result_info.get("assistant_models"),
+                model_usage=result_info.get("model_usage"),
             )
             logger.info(
                 "Program %s: ok (turns=%s, cost=%s, mechanisms=%d, evidence=%d)",
@@ -760,6 +787,9 @@ async def _handle_one_program(
         stop_reason=last_result_info.get("stop_reason"),
         duration_ms=last_result_info.get("duration_ms"),
         usage=last_result_info.get("usage"),
+        session_id=last_result_info.get("session_id"),
+        assistant_models=last_result_info.get("assistant_models"),
+        model_usage=last_result_info.get("model_usage"),
     )
     logger.error("Program %s: fallback written (reason: %s)", program_id, last_error)
     if progress_cb is not None:
@@ -787,6 +817,9 @@ async def run_research(
     max_turns: int = 30,
     max_budget_usd: float = 1.0,
     per_program_timeout: float = 600,
+    protocol_path: Optional[Path] = None,
+    max_attempts: int = 2,
+    cli_path: Optional[str] = None,
     progress_cb: Optional[Callable[[str, dict], None]] = None,
 ) -> List[Path]:
     """Run per-program research sessions concurrently, bounded by ``Semaphore(concurrency)``.
@@ -816,7 +849,7 @@ async def run_research(
     audit_dir.mkdir(parents=True, exist_ok=True)
     workspaces_root = out_dir.parent / "workspaces"
 
-    system_prompt = read_protocol()
+    system_prompt = read_protocol(protocol_path) if protocol_path is not None else read_protocol()
 
     # One shared literature client for the whole run so per-service rate limiters coordinate
     # across concurrent sessions. Closed in the finally below.
@@ -850,6 +883,8 @@ async def run_research(
                 per_program_timeout=per_program_timeout,
                 literature_client=lit_client,
                 progress_cb=progress_cb,
+                max_attempts=max_attempts,
+                cli_path=cli_path,
             )
 
     try:
@@ -869,6 +904,8 @@ def dry_run(
     model: str = "claude-sonnet-4-6",
     max_turns: int = 30,
     max_budget_usd: float = 1.0,
+    protocol_path: Optional[Path] = None,
+    cli_path: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Build + validate the full launch config for each bundle WITHOUT launching sessions.
 
@@ -878,7 +915,7 @@ def dry_run(
     Returns a summary dict.
     """
     load_env_file()
-    system_prompt = read_protocol()
+    system_prompt = read_protocol(protocol_path) if protocol_path is not None else read_protocol()
     schema = submit_result_tool_schema()
     workspaces_root = Path(out_dir).parent / "workspaces"
 
@@ -893,6 +930,7 @@ def dry_run(
             model=model,
             max_turns=max_turns,
             max_budget_usd=max_budget_usd,
+            cli_path=cli_path,
         )
         per_program.append(
             {
@@ -951,6 +989,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-turns", type=int, default=30, help="SDK max_turns per session.")
     parser.add_argument("--max-budget-usd", type=float, default=1.0, help="SDK per-session cost cap (USD).")
     parser.add_argument("--per-program-timeout", type=float, default=600, help="Wall-clock timeout per program (s).")
+    parser.add_argument("--cli-path", help="Optional compatible Claude Code executable; otherwise SDK bundled CLI.")
+    parser.add_argument("--protocol", type=Path, help="Explicit research system protocol; defaults to packaged function protocol.")
+    parser.add_argument("--max-attempts", type=int, default=2, choices=range(1, 4), help="Attempts per program, each subject to the session cap.")
     parser.add_argument("--dry-run", action="store_true", help="Build+validate config only; no sessions, no spend.")
     return parser
 
@@ -966,6 +1007,8 @@ def main(argv: Optional[List[str]] = None) -> None:
             model=args.model,
             max_turns=args.max_turns,
             max_budget_usd=args.max_budget_usd,
+            protocol_path=args.protocol,
+            cli_path=args.cli_path,
         )
         print(json.dumps(summary, indent=2))
         return
@@ -980,6 +1023,9 @@ def main(argv: Optional[List[str]] = None) -> None:
             max_turns=args.max_turns,
             max_budget_usd=args.max_budget_usd,
             per_program_timeout=args.per_program_timeout,
+            protocol_path=args.protocol,
+            cli_path=args.cli_path,
+            max_attempts=args.max_attempts,
         )
     )
     logger.info("Wrote %d result file(s) to %s", len(paths), args.out_dir)

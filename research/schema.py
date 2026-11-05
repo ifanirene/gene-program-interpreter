@@ -48,6 +48,22 @@ MechanismStatus = Literal["supported", "partial", "unsupported"]
 # =====================================================================================
 
 
+class AgingAnnotation(BaseModel):
+    """Optional task-specific assessment; function-only runs leave this unset."""
+    summary: str
+    direction_interpretation: str
+    display_modules: List[str]
+    mechanism_priority: Literal["pursue", "comparator", "unresolved"]
+    mechanism_reason: str
+    benefit_priority: Literal["actionable_candidate", "context_dependent", "unresolved", "not_indicated"]
+    benefit_reason: str
+    potential_action: str
+    driver_status: str
+    functional_question: str
+    distinguishing_test: str
+    key_limit: str
+
+
 class Evidence(BaseModel):
     """One paper in the deduplicated evidence pool. ``evidence_id`` (e.g. "EV-001") is
     referenced by each mechanism's ``evidence_ids``.
@@ -134,6 +150,9 @@ class ResearchResult(BaseModel):
     """
 
     program_id: str
+    aging_annotation: Optional[AgingAnnotation] = None
+    key_gene_evidence: List[dict] = Field(default_factory=list,
+        description="Single-gene aging leads: gene, summary, and inline papers with source context; do not promote a single gene into a multi-gene mechanism.")
     regulator_coverage: List[RegulatorCoverage] = Field(default_factory=list)
     queries: List[str] = Field(default_factory=list)
     candidate_mechanisms: List[CandidateMechanism] = Field(
@@ -185,6 +204,16 @@ class AgentPaper(BaseModel):
         default="indirect", description="How directly this paper fits the cell-type context."
     )
     note: Optional[str] = Field(default=None, description="Why this paper supports the mechanism.")
+    authors: Optional[str] = None
+    url: Optional[str] = None
+    access: Optional[str] = Field(default=None, description="abstract_only or full_text; state what was actually read.")
+    support_location: Optional[str] = None
+    species: Optional[str] = None
+    sex: Optional[str] = None
+    age_context: Optional[str] = None
+    intervention: Optional[str] = None
+    endpoint: Optional[str] = None
+
 
 
 class AgentMechanism(BaseModel):
@@ -208,6 +237,9 @@ class AgentResearchResult(BaseModel):
     the final program label."""
 
     program_id: str
+    aging_annotation: Optional[AgingAnnotation] = None
+    key_gene_evidence: List[dict] = Field(default_factory=list,
+        description="Single-gene aging leads: gene, summary, and inline papers with source context; do not promote a single gene into a multi-gene mechanism.")
     regulator_coverage: List[RegulatorCoverage] = Field(default_factory=list,
         description='One record per selected regulator, including those not researched. '
                     'Retrieved support requires actual search queries and tool-returned identifiers.')

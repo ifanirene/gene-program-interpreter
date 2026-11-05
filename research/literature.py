@@ -143,6 +143,7 @@ class LiteratureClient:
             "ncbi": _RateLimiter(ncbi_rps),
             "openalex": _RateLimiter(5.0),
             "crossref": _RateLimiter(5.0),
+            "europepmc": _RateLimiter(3.0),
         }
 
     async def aclose(self) -> None:
@@ -213,6 +214,20 @@ class LiteratureClient:
             as_json=False,
         )
         return _parse_pubmed_xml(str(xml_text))
+
+    async def fetch_pmc_fulltext(self, pmcid: str) -> Dict[str, Any]:
+        pmcid = str(pmcid).strip().upper()
+        if not re.fullmatch(r"PMC\d{1,12}", pmcid):
+            raise ValueError("Expected a PMC identifier returned by fetch_pubmed")
+        xml = await self._get("europepmc", f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextXML", as_json=False)
+        root = ET.fromstring(xml)
+        sections = []
+        for node in root.findall(".//body//sec"):
+            # Direct paragraphs avoid repeating nested sections.
+            paragraphs = [" ".join(p.itertext()) for p in node.findall("p")]
+            if paragraphs:
+                sections.append({"title": _node_text(node.find("title")), "text": "\n".join(paragraphs)})
+        return {"pmcid": pmcid, "source_url": f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/", "sections": sections}
 
     # -- OpenAlex ---------------------------------------------------------------------
 
@@ -307,6 +322,8 @@ def _parse_pubmed_xml(xml_text: str) -> List[Dict[str, Any]]:
         abstract = " ".join(abstract_parts) or None
         records.append({
             "source": "pubmed",
+            "pmcid": ids.get("pmc"),
+            "authors": [" ".join(filter(None, [_node_text(a.find("ForeName")), _node_text(a.find("LastName")), _node_text(a.find("CollectiveName"))])) for a in article.findall("AuthorList/Author")],
             "pmid": pmid,
             "doi": normalize_doi(ids.get("doi")),
             "title": _node_text(article.find("ArticleTitle")) or "",
@@ -379,7 +396,7 @@ def _tool_result(payload: Any) -> Dict[str, List[Dict[str, str]]]:
 
 
 LITERATURE_SERVER_NAME = "literature"
-LITERATURE_TOOL_NAMES = ("search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi")
+LITERATURE_TOOL_NAMES = ("search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi", "fetch_pmc_fulltext")
 
 
 def build_literature_mcp_server(
@@ -443,10 +460,17 @@ def build_literature_mcp_server(
         except Exception as exc:  # noqa: BLE001
             return _tool_result({"error": str(exc)})
 
+    @tool("fetch_pmc_fulltext", "Read open-access primary-paper body sections from Europe PMC using a tool-returned PMCID. Unavailable full text is an access gap, not evidence.", {"pmcid": str})
+    async def fetch_pmc_fulltext_tool(args: Mapping[str, Any]) -> Any:
+        try:
+            return _tool_result(await client.fetch_pmc_fulltext(str(args.get("pmcid", ""))))
+        except Exception as exc:
+            return _tool_result({"error": str(exc), "sections": []})
+
     server = create_sdk_mcp_server(
         name=LITERATURE_SERVER_NAME,
         version="0.1.0",
-        tools=[search_pubmed_tool, fetch_pubmed_tool, search_openalex_tool, resolve_doi_tool],
+        tools=[search_pubmed_tool, fetch_pubmed_tool, search_openalex_tool, resolve_doi_tool, fetch_pmc_fulltext_tool],
     )
     return server
 

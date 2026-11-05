@@ -144,7 +144,7 @@ def test_inprocess_literature_server_tool_surface():
     )
 
     assert set(LITERATURE_TOOL_NAMES) == {
-        "search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi"
+        "search_pubmed", "fetch_pubmed", "search_openalex", "resolve_doi", "fetch_pmc_fulltext"
     }
     server = build_literature_mcp_server()  # builds without any network call or external dep
     assert server is not None
