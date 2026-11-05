@@ -163,9 +163,17 @@ read-only `fetch_pmc_fulltext` tool accepts only a PMC identifier and returns bo
 sections from Europe PMC; failed access is reported to the agent. Identity checks
 do not establish that a passage entails a claim.
 
-Every attempt saves public SDK messages to its own JSON Lines transcript. Audit
-records include the session identifier, returned assistant models, terminal model
-usage and cost. Attempts can be limited explicitly. Captured terminal errors remain
+Every attempt saves public SDK messages to its own JSON Lines transcript. API
+streaming events contribute only stop-reason/category metadata; partial content
+and reasoning deltas are excluded from the archive. A `refusal` event remains
+visible even if subsequent agent prose ends normally, and the runner preserves
+partial public payloads while stopping automatic retries. Refused partial data
+cannot become a successful result.
+
+Audit records include the session identifier, returned assistant models, API stop
+events, terminal usage and cost. Task callers can require a non-null typed aging
+assessment with `require_aging_annotation`; the function-only schema remains
+unchanged. Attempts can be limited explicitly. Captured terminal errors remain
 available even when the SDK raises after yielding its error result. No resume or
 continued conversation is used by the per-program runner.
 

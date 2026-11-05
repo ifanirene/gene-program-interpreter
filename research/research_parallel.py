@@ -54,12 +54,13 @@ from claude_agent_sdk import (
     PermissionResultAllow,
     PermissionResultDeny,
     ResultMessage,
+    StreamEvent,
     ToolUseBlock,
     create_sdk_mcp_server,
     query,
     tool,
 )
-from pydantic import ValidationError
+from pydantic import ValidationError, create_model
 
 from gpi.log_redaction import install_log_redaction
 from research.literature import (
@@ -67,7 +68,7 @@ from research.literature import (
     LiteratureClient,
     build_literature_mcp_server,
 )
-from research.schema import AgentResearchResult, ResearchResult, submit_result_tool_schema
+from research.schema import AgingAnnotation, AgentResearchResult, ResearchResult, submit_result_tool_schema
 
 # Imported at MODULE SCOPE on purpose: a broken install (this used to load
 # literature-review/kernel.py by path — a file no wheel contains) must fail at process start,
@@ -157,7 +158,17 @@ def load_env_file(
 
 # ------------------------------------------------------------------- submit_result tool
 
-def _make_submit_tool(holder: Dict[str, Any]):
+_AgingResearchResult = create_model(
+    "AgingResearchResult", __base__=AgentResearchResult,
+    aging_annotation=(AgingAnnotation, ...),
+)
+
+
+def _result_type(require_aging_annotation: bool):
+    return _AgingResearchResult if require_aging_annotation else AgentResearchResult
+
+
+def _make_submit_tool(holder: Dict[str, Any], *, require_aging_annotation: bool = False):
     """Build a fresh ``submit_result`` SDK MCP tool that captures the agent's payload.
 
     ``holder`` is a per-program mutable dict; the tool writes the raw ``ResearchResult``
@@ -170,7 +181,7 @@ def _make_submit_tool(holder: Dict[str, Any]):
           "the papers that establish each mechanism inline in that mechanism's papers[]; do not "
           "assign evidence ids or status. Retain distinct supported research candidates without a fixed count; "
           "the final report is consolidated into at most 3 categories downstream.",
-          submit_result_tool_schema())
+          _result_type(require_aging_annotation).model_json_schema())
     async def submit_result(args: Dict[str, Any]) -> Dict[str, Any]:
         # Backup capture; the authoritative payload is read from the ToolUseBlock stream in
         # _drive_once (works even under a mocked query() with no live tool bridge).
@@ -238,6 +249,7 @@ def build_options(
     max_budget_usd: float,
     literature_client: Optional[LiteratureClient] = None,
     cli_path: Optional[str] = None,
+    require_aging_annotation: bool = False,
 ) -> ClaudeAgentOptions:
     """Construct the per-program ``ClaudeAgentOptions`` (one isolated session).
 
@@ -249,7 +261,7 @@ def build_options(
     the deny callback. Also applies the read-only allowlist, a side-effect denylist, and the
     SDK-native turn/budget caps.
     """
-    submit_tool = _make_submit_tool(submit_holder)
+    submit_tool = _make_submit_tool(submit_holder, require_aging_annotation=require_aging_annotation)
     gpi_server = create_sdk_mcp_server(name=SUBMIT_SERVER_NAME, version="1.0.0", tools=[submit_tool])
 
     mcp_servers: Dict[str, Any] = {
@@ -270,6 +282,7 @@ def build_options(
         max_turns=max_turns,
         max_budget_usd=max_budget_usd,      # per-session cost cap (spec 8 gate)
         model=model,
+        include_partial_messages=True,
         cli_path=cli_path,
         cwd=str(workspace),
     )
@@ -419,6 +432,8 @@ def _write_audit(
     session_id: Optional[str] = None,
     assistant_models: Optional[List[str]] = None,
     model_usage: Optional[Dict[str, Any]] = None,
+    provider_refusal: bool = False,
+    api_stop_events: Optional[List[Dict[str, Any]]] = None,
 ) -> Path:
     audit_path = audit_dir / f"{program_id}.audit.json"
     _write_json(
@@ -428,6 +443,8 @@ def _write_audit(
             "session_id": session_id,
             "assistant_models": assistant_models,
             "model_usage": model_usage,
+            "provider_refusal": provider_refusal,
+            "api_stop_events": api_stop_events or [],
             "prompt": prompt,
             "model": model,
             "mcp_servers": sorted(mcp_server_names),
@@ -493,6 +510,27 @@ async def _drive_once(
 
     async def _run() -> None:
         async for msg in query(prompt=_prompt_stream(prompt), options=options):
+            if isinstance(msg, StreamEvent):
+                # Final API stop metadata can arrive after the AssistantMessage.
+                # Never archive partial text, tool arguments or thinking deltas:
+                # a subsequent refusal may withhold that content.
+                delta = msg.event.get("delta") or {}
+                reason = delta.get("stop_reason")
+                if reason:
+                    stop = {"stop_reason": reason, "session_id": msg.session_id}
+                    details = delta.get("stop_details") or msg.event.get("stop_details") or {}
+                    if details.get("category"):
+                        stop["category"] = details["category"]
+                    result_info.setdefault("api_stop_events", []).append(stop)
+                    if reason == "refusal":
+                        result_info["provider_refusal"] = True
+                    if transcript_path is not None:
+                        transcript_path.parent.mkdir(parents=True, exist_ok=True)
+                        with transcript_path.open("a", encoding="utf-8") as stream:
+                            stream.write(json.dumps({"type": "ApiStopMetadata", "message": stop}) + "\n")
+                continue
+            if isinstance(msg, AssistantMessage) and getattr(msg, "stop_reason", None) == "refusal":
+                result_info["provider_refusal"] = True
             if transcript_path is not None:
                 transcript_path.parent.mkdir(parents=True, exist_ok=True)
                 with transcript_path.open("a", encoding="utf-8") as stream:
@@ -569,6 +607,7 @@ async def _handle_one_program(
     progress_cb: Optional[Callable[[str, dict], None]] = None,
     max_attempts: int = 2,
     cli_path: Optional[str] = None,
+    require_aging_annotation: bool = False,
 ) -> Path:
     """Drive one program end-to-end: prepare workspace, run the session (retry once on
     transient failure), persist the raw submit_result payload, validate it, and always write a
@@ -602,6 +641,7 @@ async def _handle_one_program(
                 max_budget_usd=max_budget_usd,
                 literature_client=literature_client,
                 cli_path=cli_path,
+                require_aging_annotation=require_aging_annotation,
             )
             tool_trace, result_info = await _drive_once(
                 prompt=prompt,
@@ -616,6 +656,9 @@ async def _handle_one_program(
 
             payload = submit_holder.get("payload")
             if payload is None:
+                if result_info.get("provider_refusal"):
+                    last_error = "Provider refusal interrupted research; no automatic retry."
+                    break
                 # No submit_result -> could be max_turns / budget / model just didn't call it.
                 subtype = result_info.get("subtype", "")
                 if result_info.get("is_error"):
@@ -643,6 +686,10 @@ async def _handle_one_program(
                     program_id, raw_payload_path, exc,
                 )
 
+            if result_info.get("provider_refusal"):
+                last_error = "Provider refusal interrupted submit_result; partial payload preserved; no automatic retry."
+                break
+
             # Belt-and-suspenders: warn on a LEGACY payload shape (claims[]/inline citations).
             # Pydantic ignores unknown keys, so a legacy submission would silently normalize to
             # empty evidence — surface it instead of failing silently.
@@ -667,7 +714,7 @@ async def _handle_one_program(
             #     Retrying cannot fix it and only doubles the bill, so stop after recording it.
             #     The raw payload is already on disk (above) and can be re-normalized for free.
             try:
-                rr = normalize_agent_result(AgentResearchResult.model_validate(payload))
+                rr = normalize_agent_result(_result_type(require_aging_annotation).model_validate(payload))
             except ValidationError as ve:
                 last_error = f"submit_result payload failed schema validation: {ve}"
                 continue
@@ -695,6 +742,9 @@ async def _handle_one_program(
                 {
                     "status": "recovered_after_session_error" if result_info.get("session_error") else "ok",
                     "session_error": result_info.get("session_error"),
+                    "provider_refusal": False,
+                    "api_stop_events": result_info.get("api_stop_events", []),
+                    "require_aging_annotation": require_aging_annotation,
                     "model": model,
                     "cost_usd": result_info.get("total_cost_usd"),
                     "num_turns": result_info.get("num_turns"),
@@ -731,6 +781,8 @@ async def _handle_one_program(
                 session_id=result_info.get("session_id"),
                 assistant_models=result_info.get("assistant_models"),
                 model_usage=result_info.get("model_usage"),
+                provider_refusal=bool(result_info.get("provider_refusal")),
+                api_stop_events=result_info.get("api_stop_events"),
             )
             logger.info(
                 "Program %s: ok (turns=%s, cost=%s, mechanisms=%d, evidence=%d)",
@@ -763,6 +815,9 @@ async def _handle_one_program(
     rr = _fallback_result(
         program_id,
         reason=last_error or "unknown failure",
+        provider_refusal=bool(last_result_info.get("provider_refusal")),
+        api_stop_events=last_result_info.get("api_stop_events", []),
+        require_aging_annotation=require_aging_annotation,
         model=model,
         attempts=attempts,
         cost_usd=last_result_info.get("total_cost_usd"),
@@ -781,7 +836,7 @@ async def _handle_one_program(
         tool_trace=last_trace,
         cost_usd=last_result_info.get("total_cost_usd"),
         num_turns=last_result_info.get("num_turns"),
-        status="incomplete", attempts=attempts, error=last_error,
+        status="provider_refusal" if last_result_info.get("provider_refusal") else "incomplete", attempts=attempts, error=last_error,
         subtype=last_result_info.get("subtype"),
         is_error=last_result_info.get("is_error"),
         stop_reason=last_result_info.get("stop_reason"),
@@ -790,6 +845,8 @@ async def _handle_one_program(
         session_id=last_result_info.get("session_id"),
         assistant_models=last_result_info.get("assistant_models"),
         model_usage=last_result_info.get("model_usage"),
+        provider_refusal=bool(last_result_info.get("provider_refusal")),
+        api_stop_events=last_result_info.get("api_stop_events"),
     )
     logger.error("Program %s: fallback written (reason: %s)", program_id, last_error)
     if progress_cb is not None:
@@ -820,6 +877,7 @@ async def run_research(
     protocol_path: Optional[Path] = None,
     max_attempts: int = 2,
     cli_path: Optional[str] = None,
+    require_aging_annotation: bool = False,
     progress_cb: Optional[Callable[[str, dict], None]] = None,
 ) -> List[Path]:
     """Run per-program research sessions concurrently, bounded by ``Semaphore(concurrency)``.
@@ -885,6 +943,7 @@ async def run_research(
                 progress_cb=progress_cb,
                 max_attempts=max_attempts,
                 cli_path=cli_path,
+                require_aging_annotation=require_aging_annotation,
             )
 
     try:
@@ -906,6 +965,7 @@ def dry_run(
     max_budget_usd: float = 1.0,
     protocol_path: Optional[Path] = None,
     cli_path: Optional[str] = None,
+    require_aging_annotation: bool = False,
 ) -> Dict[str, Any]:
     """Build + validate the full launch config for each bundle WITHOUT launching sessions.
 
@@ -916,7 +976,7 @@ def dry_run(
     """
     load_env_file()
     system_prompt = read_protocol(protocol_path) if protocol_path is not None else read_protocol()
-    schema = submit_result_tool_schema()
+    schema = _result_type(require_aging_annotation).model_json_schema()
     workspaces_root = Path(out_dir).parent / "workspaces"
 
     per_program: List[Dict[str, Any]] = []
@@ -931,6 +991,7 @@ def dry_run(
             max_turns=max_turns,
             max_budget_usd=max_budget_usd,
             cli_path=cli_path,
+            require_aging_annotation=require_aging_annotation,
         )
         per_program.append(
             {
@@ -946,6 +1007,7 @@ def dry_run(
                 "max_turns": options.max_turns,
                 "max_budget_usd": options.max_budget_usd,
                 "model": options.model,
+                "require_aging_annotation": require_aging_annotation,
                 "options_ok": isinstance(options, ClaudeAgentOptions),
             }
         )
@@ -989,6 +1051,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--max-turns", type=int, default=30, help="SDK max_turns per session.")
     parser.add_argument("--max-budget-usd", type=float, default=1.0, help="SDK per-session cost cap (USD).")
     parser.add_argument("--per-program-timeout", type=float, default=600, help="Wall-clock timeout per program (s).")
+    parser.add_argument("--require-aging-annotation", action="store_true", help="Require the typed aging assessment in both the tool schema and saved-result validation.")
     parser.add_argument("--cli-path", help="Optional compatible Claude Code executable; otherwise SDK bundled CLI.")
     parser.add_argument("--protocol", type=Path, help="Explicit research system protocol; defaults to packaged function protocol.")
     parser.add_argument("--max-attempts", type=int, default=2, choices=range(1, 4), help="Attempts per program, each subject to the session cap.")
@@ -1009,6 +1072,7 @@ def main(argv: Optional[List[str]] = None) -> None:
             max_budget_usd=args.max_budget_usd,
             protocol_path=args.protocol,
             cli_path=args.cli_path,
+            require_aging_annotation=args.require_aging_annotation,
         )
         print(json.dumps(summary, indent=2))
         return
@@ -1025,6 +1089,7 @@ def main(argv: Optional[List[str]] = None) -> None:
             per_program_timeout=args.per_program_timeout,
             protocol_path=args.protocol,
             cli_path=args.cli_path,
+            require_aging_annotation=args.require_aging_annotation,
             max_attempts=args.max_attempts,
         )
     )

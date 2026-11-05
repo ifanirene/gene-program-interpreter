@@ -134,8 +134,17 @@ installed command-line executable supports a model newer than the SDK's bundled
 version. The Python `run_research`/`dry_run` interfaces expose the same optional
 arguments; defaults retain the packaged function protocol and bundled executable.
 Each program still receives a fresh session with its own bundle and read-only
-literature tools. Public SDK messages are saved per attempt; the final audit
-retains session identity, returned assistant model names, usage and cost.
+literature tools. `--require-aging-annotation` makes the aging assessment required
+and non-null in both the submit tool schema and saved-result validation; ordinary
+function-only runs retain their existing contract.
+
+Public SDK messages are saved per attempt. Streaming capture retains API stop
+metadata only, excluding partial text, tool arguments and reasoning deltas. The
+audit preserves provider refusals even if a later terminal message says `end_turn`.
+A refusal stops automatic retries and is recorded as `provider_refusal`, never
+accepted as a complete result. Session identity, returned model names, usage and
+cost are retained. Model changes are explicit operator choices; there is no hidden
+automatic downgrade.
 
 ## Pipeline steps and stages
 
