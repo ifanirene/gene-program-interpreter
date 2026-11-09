@@ -1306,6 +1306,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         .iconbtn { font: inherit; font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px;
             border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
         .iconbtn:hover { border-color: var(--border-strong); }
+        .iconbtn[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent-text); border-color: var(--accent); }
 
         .shell { display: grid; grid-template-columns: 250px minmax(0, 1fr); }
         .rail { position: sticky; top: 53px; align-self: start; height: calc(100vh - 53px); overflow-y: auto;
@@ -1486,6 +1487,14 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         .volcard .vtitle .dotc { font-size: 11px; font-weight: 600; color: var(--muted); margin-left: auto; }
         .volplot { width: 100%; height: 340px; min-width: 0; }
         .note { font-size: 11.5px; color: var(--muted); margin-top: 10px; }
+        .aging-overall .body { padding: 18px 24px; line-height: 1.65; }
+        .aging-overall p { margin: 0 0 12px; }
+        .aging-overall a { color: var(--accent-text); }
+        .aging-overall .aging-cites { font-size: 12px; }
+        .aging-overall .aging-cites a { white-space: nowrap; }
+        .aging-overall .aging-literature { margin: 16px 0 12px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 12px; }
+        .aging-literature ol { margin: 5px 0; padding-left: 20px; }
+        .aging-literature li { margin-bottom: 4px; }
 
         @media (max-width: 880px) {
             .shell { grid-template-columns: 1fr; }
@@ -1501,16 +1510,17 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
     <header class="topbar">
         <div class="brand"><span class="dot"></span>Gene Programs<span class="sub">__DATASET_SUB__</span></div>
         <input type="text" class="search-input" id="search" placeholder="Search programs, genes, pathways&hellip;" oninput="filterRail()">
+        <button class="iconbtn" id="aging-filter" aria-pressed="false" onclick="toggleAgingFilter()" hidden>Aging</button>
         <div class="spacer"></div>
         <span class="metacount">__NUM_PROGRAMS__ programs &middot; __GENERATED_ON__</span>
-        <button class="iconbtn" onclick="prev()" title="Previous program">&larr;</button>
-        <button class="iconbtn" onclick="next()" title="Next program">&rarr;</button>
+        <button class="iconbtn" onclick="prev()" title="Previous program" aria-label="Previous program">&larr;</button>
+        <button class="iconbtn" onclick="next()" title="Next program" aria-label="Next program">&rarr;</button>
         <button class="iconbtn" id="themebtn" onclick="toggleTheme()">Dark</button>
     </header>
 
     <div class="shell">
         <aside class="rail">
-            <h2>__NUM_PROGRAMS__ programs</h2>
+            <h2 id="rail-count">__NUM_PROGRAMS__ programs</h2>
             <nav id="rail"></nav>
         </aside>
         <main class="canvas"><div class="wrap" id="main"></div></main>
@@ -1692,8 +1702,44 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             </div>`;
     }
 
+    function programAging(p){
+        const a = p.aging_addendum;
+        if(!a) return '';
+        const papers = new Map((a.papers || []).filter(ref => /^\d+$/.test(String(ref.pmid)))
+            .map(ref => [String(ref.pmid), ref]));
+        const paperLink = (id, label) =>
+            `<a href="https://pubmed.ncbi.nlm.nih.gov/${id}/" target="_blank" rel="noopener">${esc(label)}</a>`;
+        const paragraph = (f, label) => {
+            if(!f?.text) return '';
+            const cites = (f.supporting_pmids || []).map(String).filter(id => papers.has(id))
+                .map(id => paperLink(id, papers.get(id).short_citation)).join('; ');
+            return `<p>${label ? `<strong>${label}.</strong> ` : ''}${esc(f.text)}
+                ${cites ? `<span class="aging-cites">${cites}</span>` : ''}</p>`;
+        };
+        const evidenceLink = a.evidence_href && /^(?:\.\.\/|\.\/|https:\/\/)/.test(a.evidence_href)
+            ? `<p><a href="${esc(a.evidence_href)}">Full aging evidence →</a></p>` : '';
+        return `<section class="section open aging-overall" id="sec-aging">
+            <button class="head" onclick="toggleSection('sec-aging')"><span class="htitle">Aging findings</span>
+                <span class="hmeta">${esc(a.evidence_focus || '')}</span><span class="chev">›</span></button>
+            <div class="body">
+                ${paragraph(a.overall_findings, '')}
+                ${paragraph(a.informative_mechanism, 'Informative mechanism')}
+                ${paragraph(a.potential_intervention_benefit, 'Potential intervention benefit')}
+                ${papers.size ? `<div class="aging-literature"><strong>Supporting literature</strong><ol>
+                    ${Array.from(papers, ([id, ref]) => `<li>${esc(ref.short_citation)}. ${paperLink(id, ref.title)}</li>`).join('')}
+                    </ol></div>` : ''}
+                ${evidenceLink}
+            </div>
+        </section>`;
+    }
+
     const IDS = PROGRAM_LIST.map(x => x[0]);
     let currentId = null;
+    const AGING_IDS = new Set(IDS.filter(id => (PROGRAMS[id]?.tags || []).includes('Aging')));
+    const agingFilter = document.getElementById("aging-filter");
+    agingFilter.hidden = AGING_IDS.size === 0;
+    let agingOnly = false;
+    let visibleIds = IDS;
 
     // Build a lowercased full-text search index per program.
     const SEARCH_INDEX = {};
@@ -1705,7 +1751,8 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             ...(p.modules||[]).flatMap(m => [m.title, m.summary, (m.key_genes||[]).join(" "), (m.pmids||[]).join(" "), (m.dois||[]).join(" "), m.status, m.evidence, m.mechanism]),
             ...(p.regulators||[]).flatMap(r => [r.gene, r.role, r.mechanism]),
             ...(p.pathways||[]).flatMap(pw => [pw.term, pw.source, (pw.genes||[]).join(" ")]),
-            p.distinctive, p.annotation_text
+            p.distinctive, p.annotation_text, p.aging_addendum?.overall_findings?.text,
+            p.aging_addendum?.informative_mechanism?.text, p.aging_addendum?.potential_intervention_benefit?.text
         ];
         SEARCH_INDEX[id] = parts.filter(Boolean).join(" ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").toLowerCase();
     });
@@ -1727,10 +1774,22 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
 
     function filterRail(){
         const q = (document.getElementById("search").value || "").toLowerCase().trim();
+        visibleIds = IDS.filter(id => (!agingOnly || AGING_IDS.has(id)) && (!q || SEARCH_INDEX[id].includes(q)));
+        const visible = new Set(visibleIds);
         document.querySelectorAll(".rail a").forEach(a => {
-            const hay = SEARCH_INDEX[a.dataset.id] || "";
-            a.style.display = (!q || hay.includes(q)) ? "" : "none";
+            a.style.display = visible.has(+a.dataset.id) ? "" : "none";
         });
+        document.getElementById("rail-count").textContent = visible.size + (visible.size === 1 ? " program" : " programs");
+    }
+
+    function toggleAgingFilter(){
+        agingOnly = !agingOnly;
+        agingFilter.setAttribute("aria-pressed", String(agingOnly));
+        filterRail();
+        if(agingOnly && !AGING_IDS.has(currentId)){
+            const first = visibleIds[0] ?? AGING_IDS.values().next().value;
+            if(first !== undefined) render(first);
+        }
     }
 
     function render(id){
@@ -1788,6 +1847,8 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             </div>
             ${ridgeGlance}
         </section>
+
+        ${programAging(p)}
 
         <section class="section open" id="sec-genes">
             <button class="head" onclick="toggleSection('sec-genes')">
@@ -1937,8 +1998,15 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         document.getElementById("themebtn").textContent = d ? "Dark" : "Light";
         if(currentId!=null && document.getElementById("sec-volcano").classList.contains("open")) drawVolcanoes(PROGRAMS[currentId]);
     }
-    function prev(){ const i = IDS.indexOf(currentId); if(i > 0) render(IDS[i-1]); }
-    function next(){ const i = IDS.indexOf(currentId); if(i >= 0 && i < IDS.length-1) render(IDS[i+1]); }
+    function moveProgram(offset){
+        const ids = agingOnly ? visibleIds : IDS;
+        const i = ids.indexOf(currentId);
+        if(i < 0){ if(ids.length) render(ids[0]); return; }
+        const target = ids[i+offset];
+        if(target !== undefined) render(target);
+    }
+    function prev(){ moveProgram(-1); }
+    function next(){ moveProgram(1); }
     document.addEventListener("keydown", e => {
         if(e.target && /input|textarea|select/i.test(e.target.tagName)) return;
         if(e.key==="ArrowLeft") prev();

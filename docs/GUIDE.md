@@ -170,6 +170,14 @@ aged-minus-young share changes in percentage points. It does not fit a model or
 interpret the coefficients as causal effects. Without this input, the existing
 three-block summary remains.
 
+A program can provide an `aging_addendum` with `evidence_focus`, the optional
+`overall_findings`, `informative_mechanism` and `potential_intervention_benefit`
+text objects, a `papers` list and an `evidence_href` link. Each text object
+has `text` and `supporting_pmids`. Paper rows have `pmid`, `short_citation`
+and `title`. The page appends the selected papers below the findings. Add
+`Aging` to the program's `tags` to include it in the toolbar's Aging filter,
+which works together with program search.
+
 A module may carry an optional `aging` object with `finding`, `evidence_scope`,
 `supporting_pmids`, `interpretation`, `intervention_benefit` and `main_limit`.
 The renderer shows no aging paragraph for a null or absent object. This is an
