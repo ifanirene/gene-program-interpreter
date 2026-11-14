@@ -190,9 +190,10 @@ target for that program. The parser reads only the Regulator analysis section; m
 headings cannot become regulators. The Markdown publication gate rejects unmeasured
 regulator names, in addition to the structured annotation guard.
 
-The report selects unmasked measured top hits and retains measured annotated targets.
-The pipeline restores `mask_regulators` for display only, in the banner and regulator
-table. Research and annotation remain masked. Restored targets with no significant
-response are labeled not significant; no mechanism is invented for them.
+The report selects significant top hits from the full unmasked table: up to three
+per effect direction and condition, ranked by adjusted P using the existing selector.
+Only these targets appear in both the banner and regulator table. Annotation masks
+apply to research and annotation, not display ranking. Masked targets return only if
+they qualify in this unmasked selection. Annotation prose cannot add extra targets.
 Cell-type enrichment appears in the overview with signed effects. Pathway member
 genes and enrichment figures are expandable, and the regulator effect table is compact.

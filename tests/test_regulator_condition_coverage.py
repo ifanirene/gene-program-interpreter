@@ -203,13 +203,22 @@ def test_unmeasured_regulator_is_never_a_screen_card():
     assert [r['gene'] for r in measured_regulator_cards(cards, {'all': frame('Ogdh', -1)})] == ['Ogdh']
 
 
-def test_display_restores_masked_targets_without_invented_mechanisms():
+def test_display_mask_cannot_force_nonsignificant_targets():
     from gpi.html_report import report_regulator_cards
     genes = ['Tgfbr1', 'Eng', 'Tgfbr2', 'Smad4']
     frames = {'all': pd.concat([frame(g, -.1, False) for g in genes])}
-    cards = report_regulator_cards('', frames, 1, genes + ['NotMeasured'])
-    assert {r['gene'] for r in cards} == set(genes)
-    assert all(r['role'] == 'not significant' and not r['mechanism'] for r in cards)
+    assert report_regulator_cards('', frames, 1, genes) == []
+
+
+def test_display_uses_only_unmasked_significant_top_three_per_direction():
+    from gpi.html_report import report_regulator_cards
+    genes = ['Tgfbr1', 'Eng', 'Tgfbr2', 'Smad4', 'Other']
+    frames = {'all': pd.concat([frame(g, -.1).assign(adj_p_value=.001*(i+1))
+                               for i,g in enumerate(genes)])}
+    annotation = "## Regulator analysis\n```\nOther (activator): [Confidence: Low]\nMechanistic hypothesis: Example.\n```\n"
+    cards = report_regulator_cards(annotation, frames, 1, genes)
+    assert {c['gene'] for c in cards} == {'Tgfbr1', 'Eng', 'Tgfbr2'}
+    assert all(e['significant'] for c in cards for e in c['effects'])
 
 
 def test_markdown_validator_rejects_untested_regulator(tmp_path):

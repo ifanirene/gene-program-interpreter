@@ -1076,8 +1076,6 @@ def run_html_report(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str
     # plots (one panel per condition). Without these the section renders empty.
     for cond, path in cfg.regulators_by_condition.items():
         argv += ["--volcano-condition-csv", f"{cond}={path}"]
-    for gene in cfg.masked_regulators:
-        argv += ["--restore-display-regulator", gene]
     if not cfg.include_regulators:
         argv += ["--regulators-display-only"]
     _run_subprocess(argv, flags.dry_run)

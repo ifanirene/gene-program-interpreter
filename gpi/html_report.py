@@ -501,18 +501,18 @@ def display_only_regulator_cards(condition_frames, program_id):
 
 
 def report_regulator_cards(annotation_md, condition_frames, program_id, restored_regulators=()):
-    """Measured display selection is independent of the annotation identity mask."""
+    """Display only significant top hits selected from the unmasked screen.
+
+    Annotation prose may enrich an already-selected card, never add a target.
+    restored_regulators is retained for CLI compatibility; it does not force inclusion.
+    """
     annotated = parse_regulators_detailed(annotation_md)
     if not condition_frames:
         return annotated
     selected = display_only_regulator_cards(condition_frames, program_id)
-    by_gene = {card['gene'].casefold(): card for card in selected}
-    for card in annotated:
-        by_gene[card['gene'].casefold()] = card
-    for gene in restored_regulators:
-        by_gene.setdefault(gene.casefold(), dict(gene=gene, role='', fc='',
-                                               confidence='', mechanism=''))
-    return measured_regulator_cards(list(by_gene.values()), condition_frames)
+    prose = {card['gene'].casefold(): card for card in annotated}
+    cards = [prose.get(card['gene'].casefold(), card) for card in selected]
+    return measured_regulator_cards(cards, condition_frames)
 
 
 def parse_pathways(annotation_md: str) -> list[dict[str, object]]:
