@@ -1205,10 +1205,15 @@ def load_or_run_theme_extraction(
     if llm_backend == "none":
         raise RuntimeError(
             "No theme extraction response exists. Provide --extraction-response-file "
-            "or set --llm-backend to anthropic."
+            "or set --llm-backend to anthropic or claude_cli."
         )
     if llm_backend == "anthropic":
         raw_text = call_anthropic(prompt, llm_model, llm_max_tokens)
+    elif llm_backend == "claude_cli":
+        # Claude subscription via the local Claude Code CLI; no API-billed call.
+        from .claude_cli import complete
+
+        raw_text = complete(prompt, model=llm_model)["text"]
     else:
         raise ValueError(f"Unsupported LLM backend for theme extraction: {llm_backend}")
 
@@ -1418,8 +1423,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--llm-backend",
-        choices=["anthropic", "none"],
+        choices=["anthropic", "claude_cli", "none"],
         default="anthropic",
+        help=(
+            "anthropic = Anthropic Messages API (bills API credit); "
+            "claude_cli = local Claude Code CLI on the Claude subscription (no API call); "
+            "none = require a cached extraction response."
+        ),
     )
     parser.add_argument("--llm-model", default="claude-sonnet-4-6")
     parser.add_argument("--llm-max-tokens", type=int, default=8192)

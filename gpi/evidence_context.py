@@ -45,9 +45,11 @@ import pandas as pd
 from .column_mapper import (
     apply_program_id_offset,
     collapse_regulator_guides,
+    extract_program_id,
     filter_masked_regulators,
     sort_regulator_rows_by_significance,
     standardize_condition_regulator_results,
+    standardize_gene_loading,
     standardize_regulator_results,
 )
 from .context_profile import ContextProfile
@@ -248,6 +250,46 @@ def select_program_genes(
     return select_program_gene_sets(
         gene_df, program_id, top_loading=top_loading, top_unique=top_unique
     )
+
+
+def program_membership_genes(
+    gene_df: pd.DataFrame,
+    program_id: int,
+    n_top_genes: Optional[int] = None,
+) -> List[str]:
+    """Every gene the loading table supplies for ``program_id``, highest score first.
+
+    This is the authoritative MEMBERSHIP set for one program: the genes the factorization
+    actually assigns to it (the supplied top-N loadings, 300 per program in this project).
+    It is deliberately wider than :func:`select_program_genes`, which returns the much
+    smaller top-loading + program-unique EMPHASIS shortlist used to focus the prompt.
+
+    Membership and emphasis are different questions. A gene such as ``Rhoc`` (P48 loading
+    rank 32) is a real member of its program even though it falls outside the 23-gene
+    emphasis shortlist, and the STRING enrichment member-gene lists shown in the prompt are
+    drawn from this same membership set. Validating module genes against the emphasis
+    shortlist therefore rejects genuine program members; validate against this instead.
+
+    Args:
+        gene_df: loading table in any layout ``standardize_gene_loading`` accepts; it is
+            normalized here to ``Name`` / ``Score`` / ``program_id``.
+        program_id: the program to read.
+        n_top_genes: optional cap, applied after sorting by score. ``None`` keeps every
+            supplied row for the program, which is the correct default because the table is
+            already the top-N export.
+
+    Returns:
+        Gene symbols for that program, ordered by descending loading score.
+    """
+    frame = standardize_gene_loading(gene_df)
+    frame = frame[frame["program_id"].map(extract_program_id) == int(program_id)]
+    frame = frame.sort_values("Score", ascending=False)
+    genes = [str(g) for g in frame["Name"].tolist()]
+    if n_top_genes is not None:
+        genes = genes[: int(n_top_genes)]
+    # Preserve score order while removing any duplicate symbol.
+    seen: set = set()
+    return [g for g in genes if not (g in seen or seen.add(g))]
 
 
 # =============================================================================
@@ -1472,6 +1514,11 @@ You are a {annotation_role}. Interpret Program {program_id}, {annotation_context
 
 ### Interpretation rules
 - Cite genes and supplied evidence for biological claims.
+- The genes listed under "Program genes" are this program's EMPHASIS shortlist, not the whole
+  program. This program's full membership is its supplied loading set, and the enrichment
+  member-gene lists below are drawn from that same set. A module may be built on any gene of
+  this program, emphasised or not; weight the emphasised genes more heavily. Never introduce
+  a gene that is absent from this program's supplied evidence.
 - Use the cell-type log2FC values to judge whether this is a cell-type identity program or a cross-cell-type functional program. Strong depletion in a lineage is as informative as enrichment.
 - Treat research-evidence modules as candidate modules, not fixed final boundaries.
 - Add de novo functional theme candidates only when supported by at least two program genes. Regulators and enrichments may qualify these themes, but cannot establish a module on their own.

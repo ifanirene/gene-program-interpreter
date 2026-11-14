@@ -739,6 +739,38 @@ def run_presentation_live(programs: dict[int, dict[str, Any]], lexicon: dict[str
     return texts
 
 
+def run_presentation_claude_cli(programs: dict[int, dict[str, Any]], lexicon: dict[str, Any],
+                                *, model: str, max_tokens: int, effort: Optional[str],
+                                thinking: Optional[str], concurrency: int,
+                                usage_path: Optional[Path] = None) -> dict[int, str]:
+    """Presentation on the Claude subscription via the local Claude Code CLI.
+
+    Builds the same requests as the Batch path (:func:`build_batch_requests`) and runs them
+    through ``gpi.claude_cli``, which makes **no API-billed call**. Returns the same
+    ``{program_id: assistant_text}`` mapping, so :func:`build_presentation` is unchanged.
+    A per-program failure leaves that id out, and ``build_presentation`` renders it
+    deterministically -- identical degradation to the live path.
+    """
+    from .claude_cli import run_requests, write_results
+
+    requests = build_batch_requests(programs, lexicon, model, max_tokens, effort, thinking)
+    results, report = run_requests(
+        requests, model=model, concurrency=concurrency, progress_label="presentation (cli)"
+    )
+    if usage_path is not None:
+        write_results(results, Path(usage_path), report)
+    texts: dict[int, str] = {}
+    for row in results:
+        match = re.search(r"topic_(\d+)", str(row.get("custom_id", "")))
+        outcome = row.get("result", {})
+        if match and outcome.get("type") == "succeeded":
+            blocks = outcome.get("message", {}).get("content", [])
+            text = "\n".join(b.get("text", "") for b in blocks if isinstance(b, dict))
+            if text.strip():
+                texts[int(match.group(1))] = text
+    return texts
+
+
 def build_presentation(programs: dict[int, dict[str, Any]], lexicon: dict[str, Any],
                        model: str, results_texts: Optional[dict[int, str]],
                        cache: dict[str, Any], force: bool) -> dict[str, Any]:
@@ -829,6 +861,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--batch", action="store_true",
                         help="Use the Anthropic Batch API (cheaper, but minutes-to-hours of "
                              "queue latency) instead of the default live per-program calls.")
+    parser.add_argument("--claude-cli", action="store_true",
+                        help="Run presentation on the Claude subscription through the local "
+                             "Claude Code CLI (no API-billed call). Falls back to the "
+                             "deterministic path exactly like the other model paths.")
+    parser.add_argument("--cli-concurrency", type=int, default=3,
+                        help="Parallel Claude CLI sessions for --claude-cli (default 3)")
     parser.add_argument("--model", default="",
                         help="Model recorded in metadata / used in batch requests "
                              f"(batch default: {DEFAULT_BATCH_MODEL})")
@@ -885,6 +923,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     # Decide the source of agent text:
     #   --deterministic  -> None (④ deterministic, no model)
     #   --results FILE   -> fold pre-fetched batch results
+    #   --claude-cli     -> Claude subscription via the local CLI; no API-billed call
     #   --batch          -> submit/poll an Anthropic Batch (③); cheap but slow, falls back
     #   otherwise        -> LIVE per-program calls (default): fast, falls back on failure
     results_texts: Optional[dict[int, str]]
@@ -894,6 +933,21 @@ def main(argv: Optional[list[str]] = None) -> int:
     elif args.results:
         results_texts = read_results(Path(args.results))
         model = args.model or DEFAULT_BATCH_MODEL
+    elif args.claude_cli:
+        model = args.model or DEFAULT_BATCH_MODEL
+        try:
+            results_texts = run_presentation_claude_cli(
+                programs, lexicon, model=model, max_tokens=args.max_tokens,
+                effort=args.effort, thinking=args.thinking,
+                concurrency=args.cli_concurrency,
+                usage_path=output_path.with_name(
+                    f"{output_path.stem}_claude_cli_results.jsonl"),
+            )
+        except Exception as exc:  # noqa: BLE001 - fall back to deterministic ④
+            print(f"Claude CLI presentation path failed ({exc!r}); falling back to the "
+                  "deterministic presentation.", file=sys.stderr)
+            results_texts = None
+            model = args.model  # deterministic metadata
     elif args.batch:
         model = args.model or DEFAULT_BATCH_MODEL
         results_path = output_path.with_name(

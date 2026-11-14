@@ -17,8 +17,23 @@ _STAT = re.compile(r"log[₂]?2?FC|adj(?:usted)?[ _-]*p(?:val(?:ue)?)?\s*[=<>≤
 
 
 def finalize_regulator_annotations(
-    directory, regulator_data, program_genes, masked_regulators=None
+    directory, regulator_data, program_genes, masked_regulators=None, program_membership=None
 ):
+    """Publish annotations only when they satisfy every content guard.
+
+    ``program_genes`` is the top-loading + program-unique EMPHASIS shortlist. It drives
+    symbol canonicalization, where a small, high-confidence symbol list is what you want.
+
+    ``program_membership`` is the authoritative MEMBERSHIP set per program -- every gene the
+    loading table supplies for that program (300 here), from
+    ``gpi.evidence_context.program_membership_genes``. Module ``key_genes`` are checked
+    against it. Validating module genes against the emphasis shortlist instead rejects real
+    program members: P48's Rhoc (loading rank 32), Pfn1 (38) and Fscn1 (46) are all genuine
+    members that fall outside the 23-gene shortlist, and the STRING enrichment member-gene
+    lists shown in the prompt are drawn from this same membership set. When
+    ``program_membership`` is omitted the check falls back to ``program_genes``, preserving
+    the older behaviour for callers that do not supply it.
+    """
     errors = []
     updates = {}
     for path in sorted(Path(directory).glob("topic_*_annotation.md")):
@@ -68,13 +83,22 @@ def finalize_regulator_annotations(
                     )
                 )
             for module in annotation.modules:
-                allowed_members = set(program_genes.get(pid, []))
-                if len(set(module.key_genes)) < 2 or not set(module.key_genes) <= allowed_members:
+                # Membership, not emphasis. Genes outside THIS program's supplied loading
+                # set are still rejected, including a gene that belongs only to another
+                # program and a gene absent from the loading table altogether.
+                allowed_members = set(
+                    (program_membership or {}).get(pid) or program_genes.get(pid, [])
+                )
+                distinct = set(module.key_genes)
+                outside = sorted(distinct - allowed_members)
+                if len(distinct) < 2 or outside:
                     errors.append(
                         dict(
                             program_id=pid,
-                            issue="Module genes must be distinct supplied program genes",
+                            issue="Module genes must be at least 2 distinct genes of this program",
                             module=module.name,
+                            n_distinct_genes=len(distinct),
+                            genes_outside_program=outside,
                         )
                     )
             source_path = Path(directory).parent / "research_results" / f"P{pid}.json"
@@ -168,15 +192,22 @@ def finalize_regulator_annotations(
                     )
                 )
         _, modules = split_final_modules(text)
-        allowed = {g.casefold() for g in program_genes.get(pid, [])}
+        # Markdown-level repeat of the module-gene rule, read back from the rendered report.
+        # It must use the SAME membership universe as the JSON-level check above, or a module
+        # built on real program genes outside the emphasis shortlist would pass one and fail
+        # the other.
+        allowed = {
+            g.casefold()
+            for g in ((program_membership or {}).get(pid) or program_genes.get(pid, []))
+        }
         for module in modules:
-            # Report parser exposes member genes; require genuine program genes.
+            # Report parser exposes member genes; require genuine genes of this program.
             members = module.get("key_genes", [])
             if len({g.casefold() for g in members} & allowed) < 2:
                 errors.append(
                     dict(
                         program_id=pid,
-                        issue="Module has fewer than two program genes",
+                        issue="Module has fewer than two genes of this program",
                         module=module.get("title", ""),
                     )
                 )

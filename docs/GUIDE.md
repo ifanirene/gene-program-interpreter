@@ -165,3 +165,20 @@ research/         parallel research agents, protocol, and citation verification
 configs/          example run configurations
 tests/            offline regression tests and fixtures
 ```
+
+## Claude subscription synthesis
+
+Set `annotation.backend: claude_cli` and `theme.backend: claude_cli` to use the
+logged-in Claude Code subscription for these stages. Set
+`presentation.backend: claude_cli` for presentation synthesis, and retain
+`research.auth: subscription` for literature research. Set each stage's model
+explicitly. The CLI adapter removes API credentials from child processes and
+records the resolved model. Its dollar usage values are list-price estimates,
+not invoices; API `max_tokens` is not an enforced CLI output cap.
+
+Module gene membership uses each program's top `settings.n_top_genes` loading
+genes (300 by default in the example). The top-loading and unique-gene shortlist
+still emphasizes leading evidence. Every module must list at least two distinct
+members of its own program; enrichment evidence does not permit outside genes.
+Cell-type enrichment reaches annotation as signed enrichment/depletion values.
+Missing entries in the selected marker table do not establish no enrichment.

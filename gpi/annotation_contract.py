@@ -155,14 +155,21 @@ Return exactly one JSON object; no Markdown wrapper, tables, headings, or extra 
   "brief_summary": "1-2 sentences",
   "overview": "at most 120 words; explain the strongest leading program genes first",
   "modules": [{"name": "module name", "summary": "2-4 sentences",
-    "key_genes": ["supplied program gene", "another supplied program gene"],
+    "key_genes": ["a gene of this program", "another, different gene of this program"],
     "pmids": ["digits-only supplied PMID"], "evidence": "specific support and limits"}],
   "distinctive": "1-2 sentences explaining distinctive program genes",
   "regulators": [{"gene": "exact supplied symbol", "confidence": "Low",
     "mechanism": "1-2 sentences on a possible mechanism and its uncertainty"}]
 }
 Select or consolidate research candidates into 1-3 final modules; three is a maximum,
-not a target. Each module needs at least 2 distinct supplied program genes. A gene must support
+not a target. Each module needs at least 2 distinct genes of THIS program, and every
+key_gene must be a gene of this program. Its genes are the supplied loading set: the
+top-loading and program-unique genes listed under "Program genes", PLUS every gene that
+appears in this program's enrichment member-gene lists. Those are emphasis and membership,
+not two different programs - you may build a module on a member gene that is not in the
+emphasised shortlist. You may NOT add a gene that is absent from this program's supplied
+evidence, however canonical it is for the pathway, and you may NOT repeat the same gene to
+reach two. A gene must support
 that actual function, not merely supply generic carbon, ATP or nitrogen. Do not
 invent a biosynthetic or secretory module from upstream substrates or regulators.
 The title and overview must explain the leading gene pattern even without regulators.

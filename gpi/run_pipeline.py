@@ -102,6 +102,14 @@ def env_search_candidates() -> List[Path]:
     return candidates
 
 
+#: Model-credential keys that this build NEVER loads from a ``.env`` file. GPI's synthesis
+#: steps run on the Claude subscription through ``gpi.claude_cli``; a dotenv-supplied
+#: ``ANTHROPIC_API_KEY`` would both re-enable API billing on any residual API code path and
+#: make the Claude CLI prefer API auth over the subscription. The literature keys
+#: (NCBI/OpenALex/PUBMED) still load normally -- they are not model credentials.
+DOTENV_MODEL_CREDENTIAL_SKIP = frozenset({"ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN"})
+
+
 def load_env_file(path: Optional[Path] = None) -> Optional[Path]:
     """Populate ``os.environ`` from ``.env`` (only keys not already set). Return the file used.
 
@@ -129,6 +137,10 @@ def load_env_file(path: Optional[Path] = None) -> Optional[Path]:
         key, _, val = line.partition("=")
         key = key.strip()
         val = val.strip().strip('"').strip("'")
+        if key in DOTENV_MODEL_CREDENTIAL_SKIP:
+            logger.info("Ignoring %s from %s: this build runs synthesis on the Claude "
+                        "subscription and makes no API-billed model call.", key, chosen)
+            continue
         if key and key not in os.environ:
             os.environ[key] = val
     return chosen
@@ -172,7 +184,7 @@ STEP_MODULES: Dict[str, List[str]] = {
     "research": ["research.research_parallel"],
     "verify": ["research.verify"],
     "theme": ["gpi.theme_representation"],
-    "annotate": ["gpi.evidence_context", "gpi.anthropic_batch", "gpi.parse_results", "gpi.annotation_validation"],
+    "annotate": ["gpi.evidence_context", "gpi.anthropic_batch", "gpi.claude_cli", "gpi.parse_results", "gpi.annotation_validation"],
     "presentation": ["gpi.presentation"],
     "html_report": ["gpi.html_report"],
 }
@@ -448,6 +460,9 @@ class Flags:
     dry_run: bool = False
     no_research: bool = False
     deterministic_presentation: bool = False
+    # Revalidate saved annotation results instead of calling the model again. Every
+    # validation still executes; only the synthesis calls are skipped. See run_annotate.
+    reuse_synthesis: bool = False
     progress: str = "auto"  # auto | rich | plain | off (see gpi.progress)
 
 
@@ -608,7 +623,10 @@ def run_research(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         f"model={cfg.research.get('model')}, max_turns={cfg.research.get('max_turns', 30)}, "
         f"max_budget_usd={cfg.research.get('max_budget_usd', 1.0)}, "
         f"per_program_timeout={cfg.research.get('per_program_timeout', 600)}))  "
-        "[LIVE Agent SDK; in-process literature MCP; spends money]"
+        "[LIVE Agent SDK; in-process literature MCP; "
+        + ("auth=api — spends API credit]"
+           if str(cfg.research.get("auth", "subscription")).lower() == "api"
+           else "auth=subscription — counts against Claude subscription usage, not API credit]")
     )
     if flags.dry_run:
         return {}
@@ -760,7 +778,9 @@ def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]
         "--top-enrichment", cfg.setting("top_enrichment", 7),
         "--enrichment-gene-count", cfg.setting("n_top_genes", 300),
         "--min-generic-program-count", cfg.theme.get("min_generic_program_count", 4),
-        "--llm-backend", "anthropic",
+        # backend: "claude_cli" runs theme extraction on the Claude subscription through
+        # the local Claude Code CLI; "anthropic" keeps the API-billed Messages call.
+        "--llm-backend", cfg.theme.get("backend", "anthropic"),
         "--llm-model", cfg.theme.get("model", "claude-sonnet-4-6"),
         "--evidence-source-dir", paths.out,
         "--evidence-pack-output", paths.theme_dir / "evidence_pack.json",
@@ -781,6 +801,19 @@ def run_theme(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]
     emit_step_progress(None, None, "generating theme")
     _run_subprocess(argv, flags.dry_run)
     return {"theme_dictionary": str(paths.theme_dict)}
+
+
+def _preserve_usage_sidecar(results_path: Path, stage_copy: Path) -> None:
+    """Copy ``<results>.usage.json`` (claude_cli backend) next to a stage's saved JSONL.
+
+    The annotate step runs the synthesis command twice (core annotation, then the
+    regulator supplement) into the same ``batch_results`` path, so the second run would
+    otherwise overwrite the first run's usage record. No-op for the API backends, which
+    write no sidecar.
+    """
+    source = results_path.with_name(f"{results_path.name}.usage.json")
+    if source.exists():
+        shutil.copy2(source, stage_copy.with_name(f"{stage_copy.name}.usage.json"))
 
 
 def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, Any]:
@@ -826,11 +859,23 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
     for gene in cfg.masked_regulators:
         prepare += ["--mask-regulator", str(gene)]
     emit_step_progress(None, None, "assembling requests")
-    _run_subprocess(prepare, flags.dry_run)
+    if not flags.reuse_synthesis:
+        _run_subprocess(prepare, flags.dry_run)
 
-    # (b) synthesize annotations. Batch mode is cheaper but asynchronous; live mode
-    # uses direct Messages API calls with bounded concurrency and writes the same JSONL.
-    if bool(cfg.annotation.get("batch", True)):
+    # (b) synthesize annotations. Three backends write the SAME batch-compatible JSONL:
+    #   claude_cli -> local Claude Code CLI on the Claude subscription (no API-billed call)
+    #   batch      -> Anthropic Message Batches API (cheaper, asynchronous, API-billed)
+    #   live       -> direct Messages API calls with bounded concurrency (API-billed)
+    annotation_backend = str(cfg.annotation.get("backend", "")).lower()
+    if annotation_backend == "claude_cli":
+        synthesize = _pymod(
+            "gpi.claude_cli", paths.batch_request,
+            "--output", paths.batch_results,
+            "--model", cfg.annotation.get("model", "claude-sonnet-4-6"),
+            "--max-tokens", cfg.annotation.get("max_tokens", 8192),
+            "--concurrency", cfg.annotation.get("concurrency", 3),
+        )
+    elif bool(cfg.annotation.get("batch", True)):
         # anthropic_batch emits: submitted → processing k/n → fetching.
         synthesize = _pymod(
             "gpi.anthropic_batch", "submit", paths.batch_request,
@@ -850,21 +895,48 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         )
     gene_first = cfg.profile.interpretation_mode == 'gene_first'
     full_requests = None
-    if (gene_first or not cfg.include_regulators) and not flags.dry_run:
+
+    if flags.reuse_synthesis and not flags.dry_run:
+        # Revalidation path: no model call. Restore the saved request/result pair and fall
+        # through to the SAME validation chain the live path runs -- batch contract, JSON
+        # contract, regulator set, citation guard and module-gene membership. This never
+        # marks the step successful on its own; the guards below still decide.
+        saved_requests = cfg.output_dir / 'full_annotation_requests.json'
+        if not saved_requests.exists():
+            saved_requests = paths.batch_request
+        missing = [p for p in (saved_requests, paths.batch_results) if not p.exists()]
+        if missing:
+            raise StepError(
+                '--reuse-synthesis needs saved annotation results in the output directory; '
+                f'missing: {[str(p) for p in missing]}'
+            )
+        full_requests = json.loads(saved_requests.read_text())
+        paths.batch_request.write_text(json.dumps(full_requests, indent=2))
+        logger.info(
+            'Reusing saved annotation synthesis: %d requests from %s, results from %s. '
+            'No model call is made; all validation still runs.',
+            len(full_requests.get('requests', [])), saved_requests, paths.batch_results,
+        )
+        emit_step_progress(None, None, 'reusing saved results')
+    elif (gene_first or not cfg.include_regulators) and not flags.dry_run:
         from gpi.gene_first_synthesis import core_requests
         full_requests = json.loads(paths.batch_request.read_text())
         (cfg.output_dir/'full_annotation_requests.json').write_text(json.dumps(full_requests,indent=2))
         paths.batch_request.write_text(json.dumps(core_requests(
             full_requests, include_regulators=cfg.include_regulators), indent=2))
-    _run_subprocess(synthesize, flags.dry_run)
+    if not flags.reuse_synthesis:
+        _run_subprocess(synthesize, flags.dry_run)
     if not flags.dry_run:
         from gpi.annotation_contract import validate_batch_contract
         validate_batch_contract(paths.batch_request, paths.batch_results)
-    if (gene_first or not cfg.include_regulators) and not flags.dry_run:
+    if (gene_first or not cfg.include_regulators) and not flags.dry_run and not flags.reuse_synthesis:
         core_path = cfg.output_dir/'functional_annotation_results.jsonl'
         shutil.copy2(paths.batch_results,core_path)
         shutil.copy2(paths.batch_request,cfg.output_dir/'functional_annotation_requests.json')
-    if gene_first and cfg.include_regulators and not flags.dry_run:
+        # The claude_cli backend writes a usage sidecar beside its JSONL; the regulator
+        # supplement below reuses the same output path, so preserve this stage's record.
+        _preserve_usage_sidecar(paths.batch_results, core_path)
+    if gene_first and cfg.include_regulators and not flags.dry_run and not flags.reuse_synthesis:
         from gpi.gene_first_synthesis import supplement_requests, merge_supplements
         requests = supplement_requests(full_requests, core_path, paths.research_dir)
         # Apply hard identity masking to the second prompt too, including retrieved prose.
@@ -882,6 +954,7 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
         if expected_supplements:
             _run_subprocess(synthesize,False)
             shutil.copy2(paths.batch_results,supplement_path)
+            _preserve_usage_sidecar(paths.batch_results, supplement_path)
         else:
             supplement_path.write_text('')
         merge_supplements(core_path,supplement_path,paths.batch_results,
@@ -920,9 +993,18 @@ def run_annotate(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[str, A
             data = {'all': load_regulator_data(cfg.regulators, masked_regulators=cfg.masked_regulators)}
         genes = standardize_gene_loading(pd.read_csv(cfg.gene_loading))
         genes['program_id'] = genes['program_id'].map(extract_program_id)
-        from gpi.evidence_context import select_program_genes
+        from gpi.evidence_context import program_membership_genes, select_program_genes
+        # Emphasis shortlist (top-loading + program-unique): drives symbol canonicalization.
         program_genes = {pid: [g for group in select_program_genes(genes, pid, int(cfg.setting('top_loading',15)), int(cfg.setting('top_unique',8))) for g in group] for pid in expected}
-        finalize_regulator_annotations(paths.annotations_dir, data, program_genes, cfg.masked_regulators)
+        # Membership (every supplied loading gene for that program, n_top_genes = 300 here):
+        # the set module key_genes are validated against. See program_membership_genes.
+        program_membership = {pid: program_membership_genes(genes, pid, cfg.setting('n_top_genes')) for pid in expected}
+        logger.info('Module-gene validation uses full program membership: %s',
+                    ', '.join(f'P{pid}={len(program_membership[pid])} genes '
+                              f'({len(program_genes[pid])} emphasised)' for pid in sorted(expected)))
+        finalize_regulator_annotations(paths.annotations_dir, data, program_genes,
+                                       cfg.masked_regulators,
+                                       program_membership=program_membership)
         _run_subprocess(parse + ["--no-parse"], False)
         (cfg.output_dir/'annotation_mode.json').write_text(json.dumps(
             {"regulator_mode": cfg.regulator_mode, "program_ids": sorted(expected)}, indent=2))
@@ -950,6 +1032,11 @@ def run_presentation(cfg: PipelineConfig, paths: Paths, flags: Flags) -> Dict[st
     lexicon = cfg.base_dir / "configs" / "presentation_lexicon.json"
     if lexicon.exists():
         argv += ["--lexicon", str(lexicon)]
+    # backend: "claude_cli" runs presentation on the Claude subscription through the local
+    # Claude Code CLI; the default keeps the API-billed live Messages path.
+    if str(cfg.presentation.get("backend", "")).lower() == "claude_cli":
+        argv += ["--claude-cli",
+                 "--cli-concurrency", str(cfg.presentation.get("concurrency", 3))]
     # CLI --deterministic-presentation forces the ④ deterministic renderer (no LLM).
     if flags.deterministic_presentation:
         argv += ["--deterministic"]
@@ -1202,6 +1289,21 @@ def print_plan(
         for k in ("ANTHROPIC_API_KEY", "PUBMED_EMAIL", "OPENALEX_API_KEY", "NCBI_API_KEY")
     )
     print(f"{'credentials':<20}: {cred}")
+    # Which model-calling step runs where. A subscription-only plan must make no API-billed
+    # call at all, so state the routing explicitly before the run is authorized.
+    subscription_steps = subscription_only_steps(cfg)
+    print(f"{'research auth':<20}: {cfg.research.get('auth', 'subscription')} "
+          f"(model {cfg.research.get('model', '(default)')}, "
+          f"max_budget_usd {cfg.research.get('max_budget_usd', 1.0)} per program)")
+    for step, block in (("theme", cfg.theme), ("annotate", cfg.annotation),
+                        ("presentation", cfg.presentation)):
+        backend = str(block.get("backend", "")).lower() or (
+            "batch" if step == "annotate" and block.get("batch", True) else "anthropic_api")
+        print(f"{step + ' backend':<20}: {backend} (model {block.get('model', '(default)')})")
+    if ({"theme", "annotate", "presentation"} <= set(subscription_steps)
+            and str(cfg.research.get("auth", "subscription")).lower() != "api"):
+        print(f"{'spend':<20}: NO API-billed model call. Every model step runs on the "
+              "Claude subscription; usage figures are estimates, not invoices.")
     print("-" * 78)
     _print_framing(cfg)
     print("-" * 78)
@@ -1229,6 +1331,42 @@ def print_plan(
 # ---------------------------------------------------------------------------
 
 
+def subscription_only_steps(cfg: PipelineConfig) -> List[str]:
+    """Steps this config routes to the Claude subscription (``backend: claude_cli``)."""
+    return [
+        step
+        for step, block in (("theme", cfg.theme), ("annotate", cfg.annotation),
+                            ("presentation", cfg.presentation))
+        if str(block.get("backend", "")).lower() == "claude_cli"
+    ]
+
+
+def enforce_subscription_only(cfg: PipelineConfig) -> List[str]:
+    """Remove model API credentials from this process when synthesis is subscription-only.
+
+    When every model-calling step runs on the Claude subscription, an ``ANTHROPIC_API_KEY``
+    inherited from the launching shell would be a live spending route: any residual API
+    code path (``gpi.anthropic_batch``, ``gpi.anthropic_live``, the theme/presentation API
+    paths) would silently succeed and bill. Dropping the key makes those paths fail loudly
+    instead, and keeps the Claude CLI on subscription auth. Returns the names removed.
+    """
+    research_on_api = str(cfg.research.get("auth", "subscription")).lower() == "api"
+    subscription_steps = set(subscription_only_steps(cfg))
+    if research_on_api or not {"theme", "annotate", "presentation"} <= subscription_steps:
+        return []
+    removed = [k for k in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN") if k in os.environ]
+    for key in removed:
+        os.environ.pop(key, None)
+    logger.info(
+        "Subscription-only run: theme/annotate/presentation use backend 'claude_cli' and "
+        "research uses auth '%s'. Model API credentials removed from this process (%s); "
+        "no API-billed model call can be made.",
+        cfg.research.get("auth", "subscription"),
+        ", ".join(removed) or "none were set",
+    )
+    return removed
+
+
 def run_pipeline(
     cfg: PipelineConfig,
     flags: Flags,
@@ -1238,8 +1376,10 @@ def run_pipeline(
     force_restart: bool = False,
 ) -> int:
     # Load the repo .env FIRST so every step (including a resume that starts after the
-    # research step) inherits ANTHROPIC_API_KEY / NCBI_API_KEY / OPENALEX_API_KEY.
+    # research step) inherits the literature keys (NCBI_API_KEY / OPENALEX_API_KEY /
+    # PUBMED_EMAIL). Model credentials in DOTENV_MODEL_CREDENTIAL_SKIP are never loaded.
     load_env_file()
+    enforce_subscription_only(cfg)
     paths = Paths(cfg.output_dir)
     active_steps = _slice_steps(start_from, stop_after)
     state = _load_or_init_state(cfg, paths, force_restart)
@@ -1376,6 +1516,16 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--no-research", action="store_true",
         help="Skip the ② research step (no Agent SDK / MCP / spend); literature marked incomplete.",
+    )
+    parser.add_argument(
+        "--reuse-synthesis", action="store_true",
+        help=(
+            "Annotate step only: reuse the saved annotation results in the output directory "
+            "instead of calling the model again, and run every validation against them "
+            "(batch contract, JSON contract, regulator and citation guards, module-gene "
+            "membership). Fails if the saved request/result files are absent. Use after a "
+            "validator fix to revalidate existing annotations without new model spend."
+        ),
     )
     parser.add_argument(
         "--deterministic-presentation", action="store_true",
@@ -1605,9 +1755,20 @@ def cmd_doctor(argv: Optional[List[str]] = None) -> int:
         report("warn", f"no .env file found (searched {searched}, and parent dirs)")
         warnings.append("no .env file found")
 
+    # This build routes every synthesis step through the Claude subscription
+    # (backend: claude_cli), so an API key is not required and is deliberately never
+    # loaded from .env. Reporting it as a hard failure would train the user to add a
+    # live spending credential this run must not have.
+    if os.environ.get("ANTHROPIC_API_KEY"):
+        report("warn", "ANTHROPIC_API_KEY is set in this shell; a subscription-only run "
+                       "removes it from the pipeline process before any step starts")
+        warnings.append("ANTHROPIC_API_KEY present but unused")
+    else:
+        report("ok", "ANTHROPIC_API_KEY is absent (expected: synthesis runs on the "
+                     "Claude subscription, backend 'claude_cli'; no API-billed call)")
+
     # (key, purpose, example value for the fix hint).
     required_env = [
-        ("ANTHROPIC_API_KEY", "Anthropic Batch synthesis", "sk-ant-…"),
         ("PUBMED_EMAIL", "NCBI/Crossref polite access", "you@example.com"),
     ]
     for key, purpose, example in required_env:
@@ -1684,6 +1845,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         dry_run=args.dry_run,
         no_research=args.no_research,
         deterministic_presentation=args.deterministic_presentation,
+        reuse_synthesis=args.reuse_synthesis,
         progress=args.progress,
     )
     return run_pipeline(
