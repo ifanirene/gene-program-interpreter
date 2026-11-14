@@ -120,7 +120,15 @@ def resolve_pmids(pmids: list[str]) -> dict[str, dict]:
             out[p] = {"resolved": None, "error": f"json: {e}"}
         return out
 
-    result = data.get("result", {}) if isinstance(data, dict) else {}
+    result = data.get("result") if isinstance(data, dict) else None
+    # A response-level error or empty/malformed batch says nothing about any PMID.
+    # NCBI can return these bodies with HTTP 200. Only a usable batch response
+    # permits a missing/per-record-error UID to count as an authoritative negative.
+    if (not isinstance(data, dict) or data.get("error")
+            or not isinstance(result, dict)
+            or not any(isinstance(result.get(p), dict) for p in ids)):
+        return {p: {"resolved": None, "error": "PubMed batch response has no usable requested records"}
+                for p in ids}
     for p in ids:
         item = result.get(p)
         # Missing UID (absent from result) or an explicit per-record error ->

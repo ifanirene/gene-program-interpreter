@@ -164,3 +164,43 @@ def test_an_import_error_is_not_reported_as_a_schema_error() -> None:
         "research.verify is imported inside a try/except again. An infrastructure failure there "
         "gets reported as an agent schema error and triggers a paid retry that cannot help."
     )
+
+
+@pytest.mark.parametrize("body", [
+    {}, {"error": "API rate limit exceeded"}, {"result": {}},
+    {"result": {"uids": []}}, {"result": []},
+])
+def test_empty_or_failed_pubmed_batch_does_not_refute_identifiers(monkeypatch, body):
+    from types import SimpleNamespace
+    from research import verify
+    monkeypatch.setattr(verify, "_ncbi_api_key", lambda: None)
+    monkeypatch.setattr(verify.time, "sleep", lambda _: None)
+    monkeypatch.setattr(verify.requests, "get", lambda *a, **k:
+                        SimpleNamespace(status_code=200, json=lambda: body))
+    result = verify.resolve_pmids(["21364893", "32665638"])
+    assert all(item["resolved"] is None for item in result.values())
+
+
+def test_pubmed_partial_valid_batch_still_refutes_a_missing_uid(monkeypatch):
+    from types import SimpleNamespace
+    from research import verify
+    body = {"result": {"uids": ["21364893"], "21364893": {
+        "title": "Identification and characterization of RBM44", "pubdate": "2011"}}}
+    monkeypatch.setattr(verify, "_ncbi_api_key", lambda: None)
+    monkeypatch.setattr(verify.time, "sleep", lambda _: None)
+    monkeypatch.setattr(verify.requests, "get", lambda *a, **k:
+                        SimpleNamespace(status_code=200, json=lambda: body))
+    result = verify.resolve_pmids(["21364893", "99999999999"])
+    assert result["21364893"]["resolved"] is True
+    assert result["99999999999"]["resolved"] is False
+
+
+def test_explicit_pubmed_record_error_still_refutes_identifier(monkeypatch):
+    from types import SimpleNamespace
+    from research import verify
+    body = {"result": {"uids": ["99999999999"], "99999999999": {"error": "Invalid uid"}}}
+    monkeypatch.setattr(verify, "_ncbi_api_key", lambda: None)
+    monkeypatch.setattr(verify.time, "sleep", lambda _: None)
+    monkeypatch.setattr(verify.requests, "get", lambda *a, **k:
+                        SimpleNamespace(status_code=200, json=lambda: body))
+    assert verify.resolve_pmids(["99999999999"])["99999999999"]["resolved"] is False
