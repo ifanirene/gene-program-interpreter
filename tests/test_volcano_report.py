@@ -107,3 +107,49 @@ Propose a mechanistic hypothesis: STALE MODEL MECHANISM.
     assert cards['Mttp']['effects'][0]['log2fc'] == -0.75
     assert all(not r['mechanism'] and not r['confidence'] for r in cards.values())
     assert len(program['condition_volcano']['female'] if condition_keyed else program['volcano']) == 2
+
+
+def test_program_without_significant_regulators_replaces_previous_content(tmp_path):
+    """Execute the emitted render function across hit -> no-hit program navigation."""
+    import json
+    import shutil
+    import subprocess
+
+    node = shutil.which('node')
+    if not node:
+        pytest.skip('Node is required to execute the report JavaScript')
+    table = tmp_path / 'regulators.csv'
+    pd.DataFrame([
+        dict(program_id=1, target_gene='Eng', log_2_fold_change=0.5,
+             adj_p_value=0.01, p_value=0.01, significant=True),
+        dict(program_id=2, target_gene='Eng', log_2_fold_change=0.01,
+             adj_p_value=0.9, p_value=0.9, significant=False),
+    ]).to_csv(table, index=False)
+    html = _render(tmp_path, table)
+    programs = json.loads(re.search(r'window.PROGRAMS = (.*);', html).group(1))
+    assert programs['1']['regulators']
+    assert programs['2']['regulators'] == []
+    render = re.search(r'    function render\(id\)\{.*?(?=\n    function cssv)', html, re.S).group(0)
+    # Small DOM surface: the actual emitted function must replace the main content.
+    setup = r'''
+const main = {innerHTML:''};
+const document = {getElementById:id=>id==='main'?main:null,
+                  querySelectorAll:()=>[],querySelector:()=>null};
+const history={replaceState:()=>{}},window={scrollTo:()=>{}};
+const DATASET_CRUMB='';let currentId=null;
+const esc=s=>String(s??'');
+const asArray=x=>Array.isArray(x)?x:[];
+const resolvePres=p=>({moduleShort:[],leadHtml:p.summary||'',tags:[]});
+const condVolcanoOf=p=>({all:p.volcano||[]});
+const regulatorTable=()=>'';
+const cid=s=>s;
+'''
+    script = 'const PROGRAMS=' + json.dumps(programs) + ';\n' + setup + render + r'''
+render(1);
+if(!main.innerHTML.includes('Program 1')) throw Error('First program did not render');
+render(2);
+if(!main.innerHTML.includes('Program 2')) throw Error('Previous program remains visible');
+if(!main.innerHTML.includes('No significant regulators')) throw Error('Missing empty state');
+console.log('PASS');
+'''
+    assert subprocess.check_output([node, '-e', script], text=True).strip() == 'PASS'

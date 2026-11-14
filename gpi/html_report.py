@@ -1758,7 +1758,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
 
         const regGlance = regs.length
             ? regs.map(r => `<span class="rg" title="${esc(r.role)}" style="color:var(--${r.role==="activator"?"down":(r.role==="repressor"?"up":"muted")})">${esc(r.gene)}</span>`).join("")
-            : `<span class="rg" title="${esc(r.role)}" style="color:var(--muted)">\u2014</span>`;
+            : `<span class="rg" title="No significant regulators" style="color:var(--muted)">\u2014</span>`;
         const modGlance = pres.moduleShort.map((m,i) => `<span><b>${i+1}</b>${esc(m)}</span>`).join("");
         const crumbHtml = DATASET_CRUMB ? `<span class="crumb">${esc(DATASET_CRUMB)}</span>` : "";
 
