@@ -19,7 +19,7 @@ from gpi.gene_summaries import (
     select_top_condition_regulators,
     validate_program_regulators,
 )
-from gpi.run_pipeline import Flags, Paths, PipelineConfig, run_gene_summaries
+from gpi.run_pipeline import Flags, Paths, PipelineConfig, run_gene_summaries, run_html_report
 from research.bundle import build_all_bundles
 
 
@@ -173,6 +173,11 @@ def test_pipeline_forwards_global_and_legacy_masks_to_upstream_step(
     argv = calls[0]
     masked = [argv[index + 1] for index, value in enumerate(argv) if value == "--mask-regulator"]
     assert masked == ["GlobalMask", "LegacyMask"]
+    run_html_report(cfg, Paths(tmp_path), Flags(dry_run=True))
+    report_argv = calls[1]
+    restored = [report_argv[index + 1] for index, value in enumerate(report_argv)
+                if value == "--restore-display-regulator"]
+    assert restored == ["GlobalMask", "LegacyMask"]
 
 
 def test_condition_prompt_does_not_repeat_excluded_names():

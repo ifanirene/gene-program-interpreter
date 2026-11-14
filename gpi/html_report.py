@@ -486,15 +486,27 @@ def measured_regulator_cards(cards, condition_frames):
     return result
 
 
-def display_only_regulator_cards(condition_frames, program_id):
-    """Select measured heatmap rows without requiring model regulator annotations."""
+def display_only_regulator_cards(condition_frames, program_id, restored_regulators=()):
+    """Keep masked-selection top hits and restore significant masked targets.
+
+    Masked targets do not consume top-three slots. Restoration never bypasses
+    the measured significance calls or adds an unmeasured target.
+    """
     from .evidence_context import select_top_condition_regulators
 
     selected = select_top_condition_regulators(
         {condition: {program_id: frame} for condition, frame in condition_frames.items()},
         program_id,
+        masked_regulators=restored_regulators,
     )
-    genes = sorted({r['gene'] for groups in selected.values() for rows in groups.values() for r in rows})
+    genes = {r['gene'] for groups in selected.values() for rows in groups.values() for r in rows}
+    masked = {str(gene).strip().casefold() for gene in restored_regulators}
+    for frame in condition_frames.values():
+        if frame.empty:
+            continue
+        restored = frame[frame.significant & frame.target_gene.str.casefold().isin(masked)]
+        genes.update(restored.target_gene)
+    genes = sorted(genes)
     return measured_regulator_cards(
         [dict(gene=gene, role='', fc='', confidence='', mechanism='') for gene in genes],
         condition_frames,
@@ -502,15 +514,15 @@ def display_only_regulator_cards(condition_frames, program_id):
 
 
 def report_regulator_cards(annotation_md, condition_frames, program_id, restored_regulators=()):
-    """Display only significant top hits selected from the unmasked screen.
+    """Display masked-selection top hits plus significant masked targets.
 
     Annotation prose may enrich an already-selected card, never add a target.
-    restored_regulators is retained for CLI compatibility; it does not force inclusion.
+    Both report locations consume this same measured card list.
     """
     annotated = parse_regulators_detailed(annotation_md)
     if not condition_frames:
         return annotated
-    selected = display_only_regulator_cards(condition_frames, program_id)
+    selected = display_only_regulator_cards(condition_frames, program_id, restored_regulators)
     prose = {card['gene'].casefold(): card for card in annotated}
     cards = [prose.get(card['gene'].casefold(), card) for card in selected]
     return measured_regulator_cards(cards, condition_frames)
@@ -1154,7 +1166,7 @@ def generate_report(
 
         condition_frames = {c: df[df.program_id == topic_id] for c, df in measured_frames.items()}
         regulators = (
-            display_only_regulator_cards(condition_frames, topic_id) if regulators_display_only else
+            display_only_regulator_cards(condition_frames, topic_id, restored_regulators) if regulators_display_only else
             report_regulator_cards(annotation_md, condition_frames, topic_id, restored_regulators)
         )
         programs_data.append({
@@ -2048,7 +2060,8 @@ if __name__ == '__main__':
     parser.add_argument("--annotations-dir")
     parser.add_argument("--enrichment-dir")
     parser.add_argument("--volcano-csv")
-    parser.add_argument("--restore-display-regulator", action="append", default=[])
+    parser.add_argument("--restore-display-regulator", action="append", default=[],
+                        help="Exclude this target before top-hit selection, then display it if significant")
     parser.add_argument("--regulators-display-only", action="store_true",
                         help="Show measured heatmaps and perturbation plots without regulator explanations")
     parser.add_argument(

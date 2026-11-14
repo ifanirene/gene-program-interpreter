@@ -210,14 +210,15 @@ def test_display_mask_cannot_force_nonsignificant_targets():
     assert report_regulator_cards('', frames, 1, genes) == []
 
 
-def test_display_uses_only_unmasked_significant_top_three_per_direction():
+def test_display_keeps_masked_selection_and_restores_all_significant_masks():
     from gpi.html_report import report_regulator_cards
     genes = ['Tgfbr1', 'Eng', 'Tgfbr2', 'Smad4', 'Other']
     frames = {'all': pd.concat([frame(g, -.1).assign(adj_p_value=.001*(i+1))
                                for i,g in enumerate(genes)])}
     annotation = "## Regulator analysis\n```\nOther (activator): [Confidence: Low]\nMechanistic hypothesis: Example.\n```\n"
     cards = report_regulator_cards(annotation, frames, 1, genes)
-    assert {c['gene'] for c in cards} == {'Tgfbr1', 'Eng', 'Tgfbr2'}
+    assert {c['gene'] for c in cards} == set(genes)
+    assert next(c for c in cards if c['gene'] == 'Other')['mechanism'] == 'Example.'
     assert all(e['significant'] for c in cards for e in c['effects'])
 
 
@@ -254,3 +255,21 @@ def test_condition_loader_coerces_explicit_string_flags_and_uses_default_only_if
     assert standardize_condition_regulator_results(raw,condition='all').significant.tolist() == [True,False]
     assert standardize_condition_regulator_results(raw.drop(columns='significant'),condition='all').significant.tolist() == [True,True]
     assert standardize_condition_regulator_results(raw.drop(columns='significant'),condition='all', significance_threshold=0.05).significant.tolist() == [False,True]
+
+
+def test_display_union_preserves_top_three_per_direction_across_conditions():
+    from gpi.html_report import display_only_regulator_cards, report_regulator_cards
+    records = [frame(g, -.2).assign(adj_p_value=.001*(i+1))
+               for i, g in enumerate(['Tgfbr1', 'Notch1', 'Tek', 'Itgb1', 'Creb3l2'])]
+    records += [frame('Smad4', .1, False)]
+    female = pd.concat(records)
+    male = pd.concat([frame('Tek', .1), frame('Eng', .1), frame('Tgfbr1', -.1, False)])
+    masks = ['tgfbr1', 'ENG', 'Smad4']
+    frames = {'female': female, 'male': male}
+    expected = {'Tgfbr1', 'Notch1', 'Tek', 'Itgb1', 'Eng'}
+    cards = report_regulator_cards('', frames, 1, masks)
+    assert {c['gene'] for c in cards} == expected
+    assert cards == display_only_regulator_cards(frames, 1, masks)
+    assert next(c for c in cards if c['gene'] == 'Tek')['role'] == 'mixed'
+    assert next(c for c in cards if c['gene'] == 'Tgfbr1')['effects'][1]['significant'] is False
+    assert {c['gene'] for c in report_regulator_cards('', {'female': female}, 1)} == {'Tgfbr1', 'Notch1', 'Tek'}
