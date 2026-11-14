@@ -252,4 +252,5 @@ def test_condition_loader_coerces_explicit_string_flags_and_uses_default_only_if
         log2FC=[-1.0,1.0], p_value=[0.001,0.001], adj_pvalue=[0.08,0.01],
         significant=['True','False']))
     assert standardize_condition_regulator_results(raw,condition='all').significant.tolist() == [True,False]
-    assert standardize_condition_regulator_results(raw.drop(columns='significant'),condition='all').significant.tolist() == [False,True]
+    assert standardize_condition_regulator_results(raw.drop(columns='significant'),condition='all').significant.tolist() == [True,True]
+    assert standardize_condition_regulator_results(raw.drop(columns='significant'),condition='all', significance_threshold=0.05).significant.tolist() == [False,True]

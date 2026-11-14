@@ -22,6 +22,7 @@ import numpy as np
 import pandas as pd
 from markdown import markdown
 from .column_mapper import (
+    DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     collapse_regulator_guides,
     standardize_condition_regulator_results,
     standardize_gene_loading,
@@ -684,14 +685,14 @@ def build_pathways_by_program(
 
 def build_condition_volcano_by_program(
     volcano_condition_csvs: dict[str, Path],
-    regulator_significance_threshold: float = 0.05,
+    regulator_significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
 ) -> dict[int, dict[str, list[dict]]]:
     """Build per-program, per-condition volcano data with duplicate guides collapsed."""
     volcano_by_program: dict[int, dict[str, list[dict]]] = {}
     fallback_threshold = (
         regulator_significance_threshold
         if regulator_significance_threshold > 0
-        else 0.05
+        else DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD
     )
     for condition, path in volcano_condition_csvs.items():
         if not path.exists():
@@ -1030,7 +1031,7 @@ def generate_report(
     volcano_condition_csvs: dict[str, Path] | None,
     gene_loading_csv: str,
     output_html: str,
-    regulator_significance_threshold: float = 0.05,
+    regulator_significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     presentation_json: str | None = None,
     dataset_crumb: str = "",
     research_results_dir: str | None = None,
@@ -1071,7 +1072,7 @@ def generate_report(
             else 'p_value'
         )
         pvalues = pd.to_numeric(volcano_df[pvalue_col], errors='coerce')
-        fallback_threshold = regulator_significance_threshold if regulator_significance_threshold > 0 else 0.05
+        fallback_threshold = regulator_significance_threshold if regulator_significance_threshold > 0 else DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD
         fallback_pvalues = pd.Series(
             np.where(volcano_df['significant'], fallback_threshold, 1.0),
             index=volcano_df.index,
@@ -2086,8 +2087,8 @@ if __name__ == '__main__':
     parser.add_argument(
         "--regulator-significance-threshold",
         type=float,
-        default=0.05,
-        help="Adjusted p-value threshold used when the regulator table has no explicit significance column",
+        default=DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
+        help="Significance cutoff when no flag is supplied (default: q < 0.1; raw P if q absent)",
     )
     args = parser.parse_args()
 

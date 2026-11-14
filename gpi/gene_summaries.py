@@ -52,6 +52,7 @@ from .string_api import (
     batch_validate_regulators,
 )
 from .column_mapper import (
+    DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     apply_program_id_offset,
     collapse_regulator_guides,
     filter_masked_regulators,
@@ -710,7 +711,7 @@ PUBTATOR_RATE_LIMIT = 0.1  # 10 requests per second
 
 def load_regulator_data(
     csv_path: Path,
-    significance_threshold: float = 0.05,
+    significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     masked_regulators: Optional[List[str]] = None,
 ) -> Dict[int, pd.DataFrame]:
     """Load significant regulators from SCEPTRE results CSV.
@@ -775,7 +776,7 @@ def coerce_optional_bool(value: object) -> object:
 def load_condition_regulator_data(
     regulator_files: Dict[str, Path],
     regulator_qc_files: Optional[Dict[str, Path]] = None,
-    significance_threshold: float = 0.05,
+    significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     program_id_offset: int = 0,
     masked_regulators: Optional[List[str]] = None,
 ) -> Dict[str, Dict[int, pd.DataFrame]]:
@@ -1563,7 +1564,11 @@ def main():
     parser.add_argument("--top-regulators", type=int, default=3, help="Backward-compatible default for positive/negative regulator counts")
     parser.add_argument("--top-positive-regulators", type=int, help="Number of top positive regulators to validate")
     parser.add_argument("--top-negative-regulators", type=int, help="Number of top negative regulators to validate")
-    parser.add_argument("--regulator-significance-threshold", type=float, default=0.05, help="Adjusted p-value threshold used when the regulator file has no 'significant' column (default 0.05)")
+    parser.add_argument(
+        "--regulator-significance-threshold", type=float,
+        default=DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
+        help="Significance cutoff when no flag is supplied (default: q < 0.1; raw P if q absent)",
+    )
     parser.add_argument("--regulator-pmids", type=int, default=50, help="Number of PMIDs to fetch per regulator (default 50)")
     parser.add_argument("--all-significant", action="store_true", help="Validate ALL significant regulators (not just top N). Fast with STRING.")
     parser.add_argument("--max-regulators", type=int, default=20, help="Maximum regulators per category when using --all-significant (default 20)")

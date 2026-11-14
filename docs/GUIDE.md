@@ -197,3 +197,15 @@ apply to research and annotation, not display ranking. Masked targets return onl
 they qualify in this unmasked selection. Annotation prose cannot add extra targets.
 Cell-type enrichment appears in the overview with signed effects. Pathway member
 genes and enrichment figures are expandable, and the regulator effect table is compact.
+
+### Default regulator significance
+
+When an input regulator table has no explicit `significant` column, GPI defaults
+to **adjusted P (q) < 0.1**, with a strict boundary: q=0.1 is excluded. This default
+is shared by gene summaries, research bundles, theme evidence, annotation context,
+and report cards and volcano plots, for both single and condition-specific tables.
+If adjusted P values are absent, GPI uses raw P < 0.1 as a fallback; this does not
+apply a multiple-testing correction. Supplied significance flags remain authoritative,
+including upstream QC exclusions. Standalone commands accept
+`--regulator-significance-threshold` to override the fallback cutoff. This regulator
+cutoff is separate from cell-type and pathway enrichment thresholds.

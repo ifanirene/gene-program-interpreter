@@ -20,7 +20,10 @@ import sys
 import pandas as pd
 import yaml
 
-from gpi.column_mapper import collapse_regulator_guides, standardize_condition_regulator_results
+from gpi.column_mapper import (
+    DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD, collapse_regulator_guides,
+    standardize_condition_regulator_results,
+)
 from gpi.html_report import generate_design_a_html, measured_regulator_cards
 
 
@@ -56,7 +59,7 @@ def main():
     text = (source / 'report.html').read_text()
     programs = extract_json(text, 'PROGRAMS')
     crumb = extract_json(text, 'DATASET_CRUMB')
-    threshold = float(config.get('settings', {}).get('regulator_significance_threshold', 0.05))
+    threshold = float(config.get('settings', {}).get('regulator_significance_threshold', DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD))
     frames = {}
     for condition, path in config['inputs']['regulators_by_condition'].items():
         inputs.append(describe(path, 'measured regulator input'))

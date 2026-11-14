@@ -43,6 +43,7 @@ import numpy as np
 import pandas as pd
 
 from .column_mapper import (
+    DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     apply_program_id_offset,
     collapse_regulator_guides,
     extract_program_id,
@@ -785,7 +786,7 @@ def format_ncbi_context(
 # =============================================================================
 def load_regulator_data(
     csv_path: Optional[Path],
-    significance_threshold: float = 0.05,
+    significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     masked_regulators: Optional[Iterable[str]] = None,
 ) -> Dict[int, pd.DataFrame]:
     """Load significant regulators from SCEPTRE results CSV.
@@ -849,7 +850,7 @@ def coerce_optional_bool(value: object) -> object:
 def load_condition_regulator_data(
     regulator_files: Dict[str, Path],
     regulator_qc_files: Optional[Dict[str, Path]] = None,
-    significance_threshold: float = 0.05,
+    significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     program_id_offset: int = 0,
     masked_regulators: Optional[Iterable[str]] = None,
 ) -> Dict[str, Dict[int, pd.DataFrame]]:
@@ -1748,7 +1749,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Regulator gene already excluded from upstream evidence selection; repeatable. "
              "Applied again defensively before annotation top-N selection.",
     )
-    p.add_argument("--regulator-significance-threshold", type=float, default=0.05)
+    p.add_argument(
+        "--regulator-significance-threshold", type=float,
+        default=DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
+        help="Significance cutoff when no flag is supplied (default: q < 0.1; raw P if q absent)",
+    )
     p.set_defaults(func=cmd_prepare)
     return parser
 

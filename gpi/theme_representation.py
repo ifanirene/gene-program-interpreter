@@ -52,7 +52,9 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence
 import numpy as np
 import pandas as pd
 
-from .column_mapper import extract_program_id, standardize_regulator_results
+from .column_mapper import (
+    DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD, extract_program_id, standardize_regulator_results,
+)
 from .enrichment import (
     add_global_uniqueness_scores,
     rank_program_genes_by_loading,
@@ -422,7 +424,7 @@ def build_evidence_pack(
     top_unique: int = 10,
     enrichment_gene_count: int = 300,
     top_enrichment: int = 3,
-    regulator_significance_threshold: float = 0.05,
+    regulator_significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     fetch_missing_gene_descriptions: bool = False,
     gene_description_cache: Optional[Path] = None,
 ) -> Dict[str, Any]:
@@ -1400,7 +1402,11 @@ def build_parser() -> argparse.ArgumentParser:
             f"theme (default: {MIN_GENERIC_PROGRAM_COUNT})."
         ),
     )
-    parser.add_argument("--regulator-significance-threshold", type=float, default=0.05)
+    parser.add_argument(
+        "--regulator-significance-threshold", type=float,
+        default=DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
+        help="Significance cutoff when no flag is supplied (default: q < 0.1; raw P if q absent)",
+    )
     parser.add_argument(
         "--fetch-missing-gene-descriptions",
         action="store_true",

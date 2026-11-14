@@ -25,6 +25,9 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
+# Shared default for measured perturbation regulators throughout the pipeline.
+DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD = 0.1
+
 
 class ColumnMapper:
     """
@@ -413,7 +416,7 @@ def _coerce_boolean_series(series: pd.Series) -> pd.Series:
 
 def standardize_regulator_results(
     df: pd.DataFrame,
-    significance_threshold: float = 0.05,
+    significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
 ) -> pd.DataFrame:
     """Standardize regulator-result columns and derive significance when needed.
 
@@ -428,6 +431,8 @@ def standardize_regulator_results(
     includes ``adj_p_value`` and uses it for derived significance if no explicit
     ``significant`` column is present. Inputs with an explicit ``significant``
     column may omit p-values when they are already thresholded upstream.
+    Without explicit flags, the default is strictly adjusted P < 0.1 (raw P
+    only if adjusted values are absent).
     """
     mapper = ColumnMapper(df)
     cols = mapper.get_columns(
@@ -490,9 +495,9 @@ def standardize_regulator_results(
     if significant_col is not None:
         standardized['significant'] = _coerce_boolean_series(standardized[significant_col])
     elif adj_p_col is not None:
-        standardized['significant'] = standardized['adj_p_value'].le(significance_threshold)
+        standardized['significant'] = standardized['adj_p_value'].lt(significance_threshold)
     else:
-        standardized['significant'] = standardized['p_value'].le(significance_threshold)
+        standardized['significant'] = standardized['p_value'].lt(significance_threshold)
 
     return standardized
 
@@ -500,7 +505,7 @@ def standardize_regulator_results(
 def standardize_condition_regulator_results(
     df: pd.DataFrame,
     condition: str,
-    significance_threshold: float = 0.05,
+    significance_threshold: float = DEFAULT_REGULATOR_SIGNIFICANCE_THRESHOLD,
     program_id_offset: int = 0,
 ) -> pd.DataFrame:
     """Standardize per-program condition regulator matrices.
@@ -564,9 +569,9 @@ def standardize_condition_regulator_results(
     if significant_col is not None:
         standardized["significant"] = _coerce_boolean_series(standardized[significant_col])
     elif adj_p_col is not None:
-        standardized["significant"] = standardized["adj_p_value"].le(significance_threshold)
+        standardized["significant"] = standardized["adj_p_value"].lt(significance_threshold)
     else:
-        standardized["significant"] = standardized["p_value"].le(significance_threshold)
+        standardized["significant"] = standardized["p_value"].lt(significance_threshold)
     return standardized
 
 
