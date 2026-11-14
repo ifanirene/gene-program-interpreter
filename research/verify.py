@@ -298,6 +298,24 @@ def normalize_agent_result(agent: AgentResearchResult) -> ResearchResult:
         for m in agent.candidate_mechanisms
     ]
 
+    # Regulator-only references also need identifier/retraction verification.
+    # Keep them in the shared pool without adding support to a gene-function
+    # candidate: only that candidate's own papers define its evidence_ids.
+    for coverage in agent.regulator_coverage:
+        for identifier in coverage.identifiers:
+            raw = identifier.strip()
+            pmid = re.sub(r"^PMID:\s*", "", raw, flags=re.I)
+            pmid = re.sub(r"^https?://pubmed\.ncbi\.nlm\.nih\.gov/", "", pmid, flags=re.I).strip("/")
+            note = f"Reference cited in regulator coverage for {coverage.gene}; see that coverage for program-specific qualifications."
+            if re.fullmatch(r"\d{1,9}", pmid):
+                _intern(AgentPaper(pmid=pmid, context_match="indirect", note=note))
+            else:
+                doi = _norm_doi(raw)
+                if doi and re.fullmatch(r"10\.\d{4,9}/\S+", doi, flags=re.I):
+                    _intern(AgentPaper(doi=doi, context_match="indirect", note=note))
+                else:
+                    raise ValueError(f"Unrecognized regulator reference identifier: {raw!r}")
+
     # Collapse any records unified mid-build: drop the aliased pool entries and remap every
     # mechanism's evidence_ids onto their canonical id (order-preserving, deduped).
     if alias:
