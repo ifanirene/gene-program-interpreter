@@ -233,3 +233,23 @@ Mechanistic hypothesis: X dosage.
     with pytest.raises(ValueError, match='validation failed'):
         finalize_regulator_annotations(tmp_path, {'all': {1: frame('Ogdh', -1)}}, {1: []})
     assert 'not a measured perturbation target' in (tmp_path/'regulator_validation.json').read_text()
+
+
+
+def test_condition_loader_preserves_explicit_upstream_significance():
+    from gpi.column_mapper import standardize_condition_regulator_results
+    raw = pd.DataFrame(dict(program_id=[1,1], grna_target=['Eligible','Excluded'],
+        log2FC=[-1.0,1.0], p_value=[0.001,0.0001], adj_pvalue=[0.08,0.01],
+        significant=[True,False]))
+    result = standardize_condition_regulator_results(raw,condition='all')
+    assert result.significant.tolist() == [True,False]
+    assert raw.significant.tolist() == [True,False]
+
+
+def test_condition_loader_coerces_explicit_string_flags_and_uses_default_only_if_absent():
+    from gpi.column_mapper import standardize_condition_regulator_results
+    raw = pd.DataFrame(dict(program_id=[1,1], grna_target=['A','B'],
+        log2FC=[-1.0,1.0], p_value=[0.001,0.001], adj_pvalue=[0.08,0.01],
+        significant=['True','False']))
+    assert standardize_condition_regulator_results(raw,condition='all').significant.tolist() == [True,False]
+    assert standardize_condition_regulator_results(raw.drop(columns='significant'),condition='all').significant.tolist() == [False,True]

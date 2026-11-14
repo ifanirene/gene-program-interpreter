@@ -508,7 +508,8 @@ def standardize_condition_regulator_results(
     Expected input columns are the screen-matrix shape used by the mouse
     hepatocyte data: target_name, program_name, log2FC, p-value, adj_pval.
     The returned rows retain all rows, including non-significant points for
-    volcano plotting.
+    volcano plotting. An explicit significant column is authoritative; otherwise
+    significance is derived with significance_threshold.
     """
     mapper = ColumnMapper(df)
     cols = mapper.get_columns(
@@ -517,6 +518,7 @@ def standardize_condition_regulator_results(
     )
     raw_p_col = mapper.get_column("raw_p_value", required=False)
     adj_p_col = mapper.get_column("adj_p_value", required=False)
+    significant_col = mapper.get_column("significant", required=False)
     if raw_p_col is None and adj_p_col is None:
         raise ValueError("Condition regulator matrix must include p-value or adj_pval.")
 
@@ -556,13 +558,15 @@ def standardize_condition_regulator_results(
         standardized["adj_p_value"] = pd.to_numeric(
             standardized[adj_p_col], errors="coerce"
         )
-        standardized["significant"] = standardized["adj_p_value"].le(
-            significance_threshold
-        )
+    # An explicit upstream decision may use a different FDR or include QC.
+    # Preserve it, as standardize_regulator_results does. The default threshold
+    # is only a fallback for matrices without a supplied significance flag.
+    if significant_col is not None:
+        standardized["significant"] = _coerce_boolean_series(standardized[significant_col])
+    elif adj_p_col is not None:
+        standardized["significant"] = standardized["adj_p_value"].le(significance_threshold)
     else:
-        standardized["significant"] = standardized["p_value"].le(
-            significance_threshold
-        )
+        standardized["significant"] = standardized["p_value"].le(significance_threshold)
     return standardized
 
 
