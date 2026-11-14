@@ -181,3 +181,46 @@ def test_retrieved_coverage_requires_search_and_identifiers():
     record=RegulatorCoverage(gene='X',status='retrieved_support',queries=['X function'],identifiers=['PMID:123'])
     result=normalize_agent_result(AgentResearchResult(program_id='P1',regulator_coverage=[record]))
     assert result.regulator_coverage[0].identifiers==['PMID:123']
+
+
+def test_module_heading_cannot_be_parsed_as_regulator():
+    text = '''## Functional modules
+```
+X-inactivation / X-linked dosage state (Xist-Tsix-Kdm6a)
+A real module, not a perturbation target.
+```
+## Regulator analysis
+```
+Ogdh (activator, log2FC=-1): [Confidence: Low]
+Mechanistic hypothesis: Metabolism.
+```
+'''
+    assert [r['gene'] for r in parse_regulators_detailed(text)] == ['Ogdh']
+
+
+def test_unmeasured_regulator_is_never_a_screen_card():
+    cards = [dict(gene='X-inactivation'), dict(gene='Xist'), dict(gene='Ogdh')]
+    assert [r['gene'] for r in measured_regulator_cards(cards, {'all': frame('Ogdh', -1)})] == ['Ogdh']
+
+
+def test_display_restores_masked_targets_without_invented_mechanisms():
+    from gpi.html_report import report_regulator_cards
+    genes = ['Tgfbr1', 'Eng', 'Tgfbr2', 'Smad4']
+    frames = {'all': pd.concat([frame(g, -.1, False) for g in genes])}
+    cards = report_regulator_cards('', frames, 1, genes + ['NotMeasured'])
+    assert {r['gene'] for r in cards} == set(genes)
+    assert all(r['role'] == 'not significant' and not r['mechanism'] for r in cards)
+
+
+def test_markdown_validator_rejects_untested_regulator(tmp_path):
+    import pytest
+    from gpi.annotation_validation import finalize_regulator_annotations
+    (tmp_path/'topic_1_annotation.md').write_text('''## Regulator analysis
+```
+Xist (activator): [Confidence: Low]
+Mechanistic hypothesis: X dosage.
+```
+''')
+    with pytest.raises(ValueError, match='validation failed'):
+        finalize_regulator_annotations(tmp_path, {'all': {1: frame('Ogdh', -1)}}, {1: []})
+    assert 'not a measured perturbation target' in (tmp_path/'regulator_validation.json').read_text()

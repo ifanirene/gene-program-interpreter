@@ -170,6 +170,14 @@ def finalize_regulator_annotations(
             )
             for c, d in regulator_data.items()
         }
+        if regulator_data:
+            measured_targets = {str(g).casefold() for frame in frames.values()
+                                for g in frame.target_gene}
+            for card in cards:
+                if card["gene"].casefold() not in measured_targets:
+                    errors.append(dict(program_id=pid,
+                                       issue="Regulator is not a measured perturbation target",
+                                       gene=card["gene"]))
         measured = measured_regulator_cards(cards, frames)
         genes = {r["gene"] for r in cards}
         # A model may supply arbitrary role/range header text; only data-driven

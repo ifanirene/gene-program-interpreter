@@ -426,7 +426,8 @@ def parse_regulators_detailed(annotation_md: str) -> list[dict[str, str]]:
     fenced blocks first, then fall back to bold-header blocks scoped to the
     "Regulator analysis" section (so module/pathway prose is never misread).
     """
-    blocks = [b for b in _fenced_blocks(annotation_md) if _REG_HEAD_RE.match(b.strip().splitlines()[0] if b.strip() else "")]
+    section = _extract_section_body(annotation_md, "Regulator analysis")
+    blocks = [b for b in _fenced_blocks(section) if _REG_HEAD_RE.match(b.strip().splitlines()[0] if b.strip() else "")]
     if not blocks:
         section = _extract_section_body(annotation_md, "Regulator analysis")
         if section:
@@ -477,8 +478,8 @@ def measured_regulator_cards(cards, condition_frames):
             card['fc'] = '; '.join(effects)
             card['observation'] = '; '.join(observations) + '. These are program responses, not direct molecular regulation.'
         elif condition_frames:
-            card['role'] = 'unmeasured'
-            card['fc'] = '; '.join(effects)
+            # A mechanism or untested gene cannot be a measured screen regulator.
+            continue
         card['effects'] = heatmap_effects
         result.append(card)
     return result
@@ -497,6 +498,21 @@ def display_only_regulator_cards(condition_frames, program_id):
         [dict(gene=gene, role='', fc='', confidence='', mechanism='') for gene in genes],
         condition_frames,
     )
+
+
+def report_regulator_cards(annotation_md, condition_frames, program_id, restored_regulators=()):
+    """Measured display selection is independent of the annotation identity mask."""
+    annotated = parse_regulators_detailed(annotation_md)
+    if not condition_frames:
+        return annotated
+    selected = display_only_regulator_cards(condition_frames, program_id)
+    by_gene = {card['gene'].casefold(): card for card in selected}
+    for card in annotated:
+        by_gene[card['gene'].casefold()] = card
+    for gene in restored_regulators:
+        by_gene.setdefault(gene.casefold(), dict(gene=gene, role='', fc='',
+                                               confidence='', mechanism=''))
+    return measured_regulator_cards(list(by_gene.values()), condition_frames)
 
 
 def parse_pathways(annotation_md: str) -> list[dict[str, object]]:
@@ -1023,6 +1039,7 @@ def generate_report(
     enrichment_filtered_csv: str | None = None,
     celltype_file: str | None = None,
     regulators_display_only: bool = False,
+    restored_regulators=(),
 ):
     """Generate the Program Explorer HTML report."""
 
@@ -1137,7 +1154,7 @@ def generate_report(
         condition_frames = {c: df[df.program_id == topic_id] for c, df in measured_frames.items()}
         regulators = (
             display_only_regulator_cards(condition_frames, topic_id) if regulators_display_only else
-            measured_regulator_cards(parse_regulators_detailed(annotation_md), condition_frames)
+            report_regulator_cards(annotation_md, condition_frames, topic_id, restored_regulators)
         )
         programs_data.append({
             'id': topic_id,
@@ -1334,7 +1351,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         .ctx .chip { font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 999px;
             background: var(--accent-soft); color: var(--accent-text); }
 
-        .glance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border);
+        .glance { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--border);
             border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin: 24px 0 30px; box-shadow: var(--shadow-soft); }
         .glance .cell { background: var(--surface); padding: 14px 16px; }
         .glance .cell .k { font-size: 10.5px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; margin-bottom: 7px; }
@@ -1489,6 +1506,27 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             .topbar { flex-wrap: wrap; }
             .search-input { width: 100%; }
         }
+
+        /* Compact evidence overview and quantitative tables. */
+        .glance .cell { padding: 10px 12px; min-width: 0; }
+        .glance .cell .v { font-size: 12px; }
+        .glance .cell .v small { font-size: 10px; }
+        .glance .ctrow { padding: 2px 5px; gap: 5px; font-size: 11px; }
+        .glance .ctname { min-width: 0; }
+        .glance .ctfc { margin-left: auto; white-space: nowrap; }
+        .regmap { width: auto; max-width: 100%; border-spacing: 2px; table-layout: auto; }
+        .regmap th { padding: 2px 4px; }
+        .regmap th:first-child { width: auto; }
+        .regmap .reg-label { padding: 2px 4px; gap: 5px; }
+        .reg-effect { padding: 3px 10px; min-width: 76px; }
+        .reg-legend { margin-bottom: 5px; font-size: 10px; }
+        .pw { padding: 4px 0; }
+        .pw .pwtop { margin-bottom: 3px; }
+        .pw .track { height: 3px; margin-bottom: 2px; }
+        .pw .members { font-size: 10px; }
+        .enrichment-figures { margin-bottom: 8px; }
+        @media (max-width: 1100px) { .glance { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 700px) { .glance { grid-template-columns: 1fr; } .regmap { min-width: 0; } }
     </style>
 </head>
 <body>
@@ -1719,8 +1757,8 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
         const conds = Object.keys(condVolcanoOf(p)).sort();
 
         const regGlance = regs.length
-            ? regs.map(r => `<span class="rg" style="color:var(--${r.role==="activator"?"down":(r.role==="repressor"?"up":"accent-text")})">${esc(r.gene)}</span>`).join("")
-            : `<span class="rg" style="color:var(--muted)">\u2014</span>`;
+            ? regs.map(r => `<span class="rg" title="${esc(r.role)}" style="color:var(--${r.role==="activator"?"down":(r.role==="repressor"?"up":"muted")})">${esc(r.gene)}</span>`).join("")
+            : `<span class="rg" title="${esc(r.role)}" style="color:var(--muted)">\u2014</span>`;
         const modGlance = pres.moduleShort.map((m,i) => `<span><b>${i+1}</b>${esc(m)}</span>`).join("");
         const crumbHtml = DATASET_CRUMB ? `<span class="crumb">${esc(DATASET_CRUMB)}</span>` : "";
 
@@ -1738,7 +1776,7 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             <div class="cell">
                 <div class="k">${hasMeasuredRegs ? "Top regulators" : "Regulator candidates"}</div>
                 <div class="v"><div class="reglist">${regGlance}</div>
-                    <small>${hasMeasuredRegs ? `<span class="kkey rep">repressor</span> &middot; <span class="kkey act">activator</span>` : "gene-content + literature inference"}</small></div>
+                    <small>${hasMeasuredRegs ? `<span class="kkey rep">repressor</span> &middot; <span class="kkey act">activator</span> · gray: not significant` : "gene-content + literature inference"}</small></div>
             </div>
             <div class="cell">
                 <div class="k">Functional modules</div>
@@ -1747,6 +1785,11 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
             <div class="cell">
                 <div class="k">Top pathway</div>
                 <div class="v">${topPw ? `${esc(topPw.term)}<small>${fmtFDR(topPw.fdr)}</small>` : `<span style="color:var(--muted)">No enrichment</span>`}</div>
+            </div>
+            <div class="cell">
+                <div class="k">Cell-type enrichment</div>
+                <div class="v"><div class="cttable">${(p.celltype_detail||[]).length ? p.celltype_detail.map(celltypeRow).join("") : '<span class="note">Not available</span>'}</div>
+                <small title="Only cell types where this program is a top-10 marker are supplied. Missing types do not establish absence of enrichment.">Signed log₂FC · top-10 marker selection</small></div>
             </div>
         </section>
 
@@ -1760,19 +1803,6 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 ${uniq.map(g => `<span class="gene uniq">${esc(g)}</span>`).join("")}
             </div></div>
         </section>
-
-        ${(p.celltype_detail||[]).length ? `<section class="section open" id="sec-celltype">
-            <button class="head" onclick="toggleSection('sec-celltype')">
-                <span class="htitle">Cell-type enrichment</span>
-                <span class="hmeta">log₂FC of program score, cells of that type vs. all others</span>
-                <span class="chev">›</span></button>
-            <div class="body">
-                <div class="cttable">${p.celltype_detail.map(celltypeRow).join("")}</div>
-                <p class="ctnote">Only cell types for which this program ranked in the top 10 markers are
-                    listed. A type that is absent was not tested into that top 10 — which is not
-                    evidence of absence.</p>
-            </div>
-        </section>` : ""}
 
         <section class="section open" id="sec-modules">
             <button class="head" onclick="toggleSection('sec-modules')">
@@ -1815,16 +1845,17 @@ def generate_design_a_html(programs_data, num_programs, generated_on, dataset_cr
                 <span class="hmeta">ranked by \u2212log\u2081\u2080(FDR)</span>
                 <span class="chev">\u203a</span></button>
             <div class="body">
-                <div class="figgrid">
+                <details class="enrichment-figures"><summary>Enrichment figures</summary><div class="figgrid">
                     <div class="figbox"><div class="figcap">KEGG pathway enrichment<span class="figopen">open full size \u2197</span></div><a href="${esc(p.kegg_fig)}" target="_blank" rel="noopener"><img src="${esc(p.kegg_fig)}" alt="KEGG enrichment" onerror="this.parentNode.outerHTML='<div class=figmiss>Figure not found</div>'"></a></div>
                     <div class="figbox"><div class="figcap">Biological process enrichment<span class="figopen">open full size \u2197</span></div><a href="${esc(p.process_fig)}" target="_blank" rel="noopener"><img src="${esc(p.process_fig)}" alt="Process enrichment" onerror="this.parentNode.outerHTML='<div class=figmiss>Figure not found</div>'"></a></div>
                 </div>
-                ${sortedPw.length ? `<div class="pwsort">Enriched terms (annotation) \u00b7 bar length = \u2212log\u2081\u2080(FDR)</div>
+                </details>
+                ${sortedPw.length ? `<div class="pwsort">Enriched terms (STRING) \u00b7 bar length = \u2212log\u2081\u2080(FDR)</div>
                 ${sortedPw.map(pw => `
                     <div class="pw">
                         <div class="pwtop"><span class="src">${esc(pw.source)}</span><span class="pwname">${esc(pw.term)}</span><span class="pwfdr">${fmtFDR(pw.fdr)}</span></div>
                         <div class="track"><div class="fill" style="width:${(negLog(pw.fdr)/maxNl*100).toFixed(1)}%"></div></div>
-                        <div class="members">${(pw.genes||[]).map(esc).join(", ")}</div>
+                        <details class="members"><summary>${(pw.genes||[]).length} member genes</summary>${(pw.genes||[]).map(esc).join(", ")}</details>
                     </div>`).join("")}` : ""}
             </div>
         </section>
@@ -2016,6 +2047,7 @@ if __name__ == '__main__':
     parser.add_argument("--annotations-dir")
     parser.add_argument("--enrichment-dir")
     parser.add_argument("--volcano-csv")
+    parser.add_argument("--restore-display-regulator", action="append", default=[])
     parser.add_argument("--regulators-display-only", action="store_true",
                         help="Show measured heatmaps and perturbation plots without regulator explanations")
     parser.add_argument(
@@ -2089,4 +2121,5 @@ if __name__ == '__main__':
         enrichment_filtered_csv=getattr(args, "enrichment_filtered_csv", None),
         celltype_file=getattr(args, "celltype_file", None),
         regulators_display_only=args.regulators_display_only,
+        restored_regulators=args.restore_display_regulator,
     )

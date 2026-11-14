@@ -182,3 +182,17 @@ still emphasizes leading evidence. Every module must list at least two distinct
 members of its own program; enrichment evidence does not permit outside genes.
 Cell-type enrichment reaches annotation as signed enrichment/depletion values.
 Missing entries in the selected marker table do not establish no enrichment.
+
+### Measured regulator display
+
+When perturbation tables are supplied, report regulator cards must match a measured
+target for that program. The parser reads only the Regulator analysis section; module
+headings cannot become regulators. The Markdown publication gate rejects unmeasured
+regulator names, in addition to the structured annotation guard.
+
+The report selects unmasked measured top hits and retains measured annotated targets.
+The pipeline restores `mask_regulators` for display only, in the banner and regulator
+table. Research and annotation remain masked. Restored targets with no significant
+response are labeled not significant; no mechanism is invented for them.
+Cell-type enrichment appears in the overview with signed effects. Pathway member
+genes and enrichment figures are expandable, and the regulator effect table is compact.
